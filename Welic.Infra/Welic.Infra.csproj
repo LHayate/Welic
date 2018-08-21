@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{434B42F2-13D5-4FB9-A973-C6D8342A8784}</ProjectGuid>
+    <ProjectGuid>{F0003DA5-1307-44D9-A6CC-69F2CDBC1FC3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Welic.Dominio</RootNamespace>
-    <AssemblyName>Welic.Dominio</AssemblyName>
+    <RootNamespace>Welic.Infra</RootNamespace>
+    <AssemblyName>Welic.Infra</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,15 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Login\Entidades\Login.cs" />
+    <Compile Include="Contextos\WelicContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Login\Dtos\" />
-    <Folder Include="Models\Login\Enums\" />
-    <Folder Include="Models\Login\Mapeamentos\" />
-    <Folder Include="Models\Login\Repositorios\" />
-    <Folder Include="Models\Login\Servicos\" />
+    <Folder Include="Mapeamentos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
