@@ -12,32 +12,37 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
 
+    <link rel="shortcut icon" href="~/Imagem/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
 </head>
 
 <body>
     <div>
+
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="@Url.Action("Index")" class="brand-logo right"><i class="material-icons right"><img src="@Url.Action("GetIconWelic")"/></i>Welic</a>
+                <a id="logo-container" href="@Url.Action("Index")" class="brand-logo right"><i class="material-icons right"><img src="@Url.Action("GetIconWelic")" /></i>Welic</a>
 
                 <ul class="left hide-on-med-and-down">
-                    @*<li class="cyan lighten-2"><a href="@Url.Action("login")"">Login</a></li>*@
-                    @*<li><a href="@Url.Action("Index")">Agendas</a></li>*@
+                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
                     <li><a class="waves-effect waves-light modal-trigger " href="#modal1">Sobre o Welic</a></li>   @*href="@Url.Action("About")"*@
+                    @*<li class="waves-effect waves-light"><a href="@Url.Action("Contact")">Contato</a></li>*@
+                    @*<li class="waves-effect waves-light"><a href="@Url.Action("Live")">Live</a></li>*@
                 </ul>
 
 
 
                 <ul id="nav-mobile" class="side-nav">
-                    @*<li class="cyan lighten-2"><a href="@Url.Action("login")"">Login</a></li>*@
-                    @*<li><a href="@Url.Action("Index")">Agendas</a></li>*@
+                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
                     <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre a Welic</a></li>
+                    @*<li class="waves-effect waves-light"><a href="@Url.Action("Contact")">Contato</a></li>*@
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
         @RenderBody()
+
+
     </div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal">
@@ -50,48 +55,122 @@
         </div>
     </div>
 
-
-
     <footer class="page-footer blue-grey darken-4">
         <div class="container">
             <div class="row">
                 <div class="col l3 s3 m3">
-                    <h5 class=" teal-text lighten-3">CEO Welic</h5>
-                    <h5 class="white-text">Joel Serrano</h5>
-                    <ul>
-                        <li><a class="blue-text darken-4" href="">Facebook</a></li>
-                        <li><a class="cyan-text lighten-1" href="">LinkedIn</a></li>
-                    </ul>
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilJoel" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Joel Serrano </h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">Perfil </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">                        
+                        <div class="circle">                           
+                            <div class="container">
+                                <img src="~/Imagem/Logo Welic - Perfil.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilJoel" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">  
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CEO</h6></li>
+                                    
+                                    <li><a class="blue-text darken-4" href="https://www.facebook.com/joelfpserrano">Facebook</a> - <a class="cyan-text lighten-1" href="">LinkedIn</a> </li>                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col l3 s3 m3">
-                    <h5 class=" teal-text lighten-3">Dev. Welic</h5>
-                    <h5 class="white-text">Lucas Ranuzi</h5>
-                    <ul>
-                        <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha">Facebook</a></li>
-                        <li><a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/">LinkedIn</a></li>
-                    </ul>
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilLucas" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Lucas Ranuzi Rocha</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">Perfil </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagem/Logo Welic - Perfil.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilLucas" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CTO</h6></li>                                    
+                                    <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/">LinkedIn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col l3 s3 m3">
-                    <h5 class=" teal-text lighten-3">DevOps Welic</h5>
-                    <h5 class="white-text">André Luiz</h5>
-                    <ul>
-                        <li><a class="blue-text darken-4" href="">Facebook</a></li>
-                        <li><a class="cyan-text lighten-1" href="">LinkedIn</a></li>
-                    </ul>
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilAndre" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">André Luiz</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">Perfil </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagem/Logo Welic - Perfil.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilAndre" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CIO</h6></li>                                    
+                                    <li><a class="blue-text darken-4" href="">Facebook</a> - <a class="cyan-text lighten-1" href="">LinkedIn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col l3 s3 m3">
-                    <h5 class=" teal-text lighten-3">Marketing Welic</h5>
-                    <h5 class="white-text">Ederson Esc</h5>
-                    <ul>
-                        <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha">Facebook</a></li>
-                        <li><a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/">LinkedIn</a></li>
-                    </ul>
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilEderson" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Ederson Esch Aguiar</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">Perfil </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>                    
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagem/Logo Welic - Perfil.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilEderson" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CFO/CCO</h6></li>
+                                    <li><a class="blue-text darken-4" href="https://www.facebook.com/ederson.eschaguiar">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/edersoneschaguiar">LinkedIn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>
+             </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
+            <div class="center-align">
                 Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: <a class="brown-text text-lighten-3" href="http://welic.app/">Welic.App</a>
             </div>
         </div>
@@ -110,6 +189,11 @@
     <script>
         $('.carousel.carousel-slider').carousel({ fullWidth: true });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.slider').slider();
+        });
     </script>
     <script>
         $(document).ready(function () {

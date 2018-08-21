@@ -4,28 +4,39 @@
 }
 
 <!-- Inicio Carousel -->
-<div class="carousel carousel-slider center" data-indicators="true">
-    <div class="carousel-fixed-item center">
-        @* <a class="btn waves-effect white grey-text darken-text-2">button</a>*@
-    </div>
-    <div class="carousel-item white-text" href="#one!">
-        <img src="@Url.Action("GetImagemBannerTop")">
-        <p class="white-text">This is your first panel</p>
-    </div>
-    <div class="carousel-item amber white-text" href="#two!">
-        <img src="@Url.Action("GetImagemBannerTop")">
-        <p class="white-text">This is your second panel</p>
-    </div>
-    <div class="carousel-item green white-text" href="#three!">
-        <img src="@Url.Action("GetImagemBannerTop")">
-        <p class="white-text">This is your third panel</p>
-    </div>
-    <div class="carousel-item blue white-text" href="#four!">
-        <img src="@Url.Action("GetImagemBannerTop")">
-        <p class="white-text">This is your fourth panel</p>
-    </div>
+<div class="slider">
+    <ul class="slides">
+        <li>
+            <img src="@Url.Action("GetImagemBannerTop")">
+            <div class="caption center-align">
+                <h3>This is our big Tagline!</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        <li>
+            <img src="@Url.Action("GetImagemBannerTop")">
+            <div class="caption left-align">
+                <h3>Left Aligned Caption</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        <li>
+            <img src="@Url.Action("GetImagemBannerTop")">
+            <div class="caption right-align">
+                <h3>Right Aligned Caption</h3>
+                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+            </div>
+        </li>
+        <li>
+            <img src="@Url.Action("GetImagemBannerTop")">
+            <div class="caption center-align">
+
+            </div>
+        </li>
+    </ul>
 </div>
 <!-- Fim Carousel -->
+
 <!-- Inicio da Agenda -->
 <div class="container">
     <div class="section">
@@ -36,92 +47,289 @@
             </div>
             <br>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="section">
         <!--   Icon Section   -->
         <div class="row">
             <div class="col s6 m3">
                 <div class="icon-block">
-                    <!--<div class="card small">
-        <!-- Card Content -->
-                    <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator small" src="@Url.Action("GetImagemCalendar")">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Social Media ‘18<br />17/09 a 19/09 <i class="material-icons right">more_vert</i></span>
-                            @*<p><a href="#">This is a link</a></p>*@
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4 "><i class="material-icons right">close</i>Social Media Word </span>
-                            <p>Grande Lançamento da Plataforma Welic Social Media Word </p>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"> <i class="material-icons right">more_vert</i></span>
+                        <!-- Modal Structure -->
+                        <div id="modalAgenda1" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Welic</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaPOne</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDayOne</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDaytwo</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDaytree</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaPtree</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
                         </div>
                     </div>
-                @*</div>*@
+
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="@Url.Action("GetImagemCalendar")">
+
+                            <a class="btn-floating halfway-fab waves-effect waves-light welic modal-trigger " href="#modalAgenda1"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title truncate">Social Media ‘18 - 17/09 a 19/09</span>
+                            
+
+                        </div>
+
+
+                    </div>
+
                 </div>
             </div>
 
             <div class="col s6 m3">
                 <div class="icon-block">
-                    <!-- <div class="card small">
-         <!-- Card Content -->
-                    <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="@Url.Action("GetImagemCalendar")">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">E-Learning ‘18<br />24/09 a 26/09<i class="material-icons right">more_vert</i></span>
-                            @*<p><a href="#">This is a link</a></p>*@
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>Social Media Word</span>
-                            <p>Grande Lançamento da Plataforma Welic Social Media Word </p>
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"> <i class="material-icons right">more_vert</i></span>
+                        <!-- Modal Structure -->
+                        <div id="modalAgenda2" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Agenda</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Com um crescimento exponencial a nível mundial, o e-Learning é uma ferramenta considerada por muitas empresas e pessoas, essecial. A utilização de Treinamento online ajuda em muito as empresas em capacitar os seus empregados e criar um engajamento entre a empresa e o colaborador. No entanto, técnicas de Ensino à distância estão a mudar, para melhor, e fazendo cada vez mais uso da tecnologia existente. </p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">O Summit Digital: e-Learning World ’18 é a primeira edição de um evento internacional único, que tem como objetivo mostra-lhe as tendências para o ensino à distância moderno. Este fantástico evento, permitir-lhe-á colocar em prática as técnicas e utilizar as ferramentas apresentadas logo após. É um evento que conta com a presença de oradores internacionais e de experiência comprovada em Ensino à Distância.</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Temáticas abordadas:</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 1 – 24.09.2018 – O ead como fator diferenciador no Treinamento</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 2 – 25.09.2018 – Técnicas para ajudara sua empresa ou negócio com ead</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 3 – 26.09.2018 – Ferramentas que ajudam a impulsionar a sua empresa já com ead</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">O evento será gratuito e será cobrado um valor para usuários premium que desejarem rever o conteúdo mais tarde através da App Welic.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
                         </div>
                     </div>
-                @*</div>*@
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="@Url.Action("GetImagemCalendar")">
+                            <a class="btn-floating halfway-fab waves-effect waves-light welic modal-trigger " href="#modalAgenda2"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title truncate">E-Learning ‘18 24/09 a 26/09</span>
+                            @*<p>Summit: E-Learning World '18. Evento gratuito durante apresentação.</p>*@
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="col s6 m3">
                 <div class="icon-block">
-                    <!--<div class="card small">
-        <!-- Card Content -->
-                    <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator" src="@Url.Action("GetImagemCalendar")">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Social Media ‘18<br />06/10 e 07/10<i class="material-icons right">more_vert</i></span>
-                            @*<p><a href="#">This is a link</a></p>*@
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>Social Media ‘18</span>
-                            <p>Seminário Presencial no Hotel Sun Shine em Luanda (Angola): Social Media ‘18 ( de 06/10 e 07/10 ) </p>
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"> <i class="material-icons right">more_vert</i></span>
+                        <!-- Modal Structure -->
+                        <div id="modalAgenda3" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Agenda</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned ">
+                                    Seminário presencial, com utilização de tecnologias avançadas, suporte de grupo no facebook, utilização de videos e participação da assistência. Haverá dois tipos de inscrição NORMAL e PREMIUM.
+                                    A diferença entre as duas é que a inscrição PREMIUM oferecerá a esses participantes um melhor contato com os facilitadores da sessão, bem como uma sessão de networking no sábado à noite no Hotel.
+                                    O Pós treinamento será garantido com Sessões online personalizadas para os participantes e sessões privadas 1 para 1 também online.
+                                </p>
+                                <h6 lass="blue-text text-darken-1  accent-1 right-aligned ">Local:</h6>
+                                <a id="logo-container" href="https://goo.gl/maps/YDyPtVakjvK2" class="brand-logo left-align" target="_blank"><i class="material-icons left-align">map</i>Rua Lar do Patriota s/nº, Zona 3, Talatona-benfica, Municipio de Belas, Luanda, Angola</a>
+
+                                <br />
+                                <h5 class="blue-text text-darken-1  accent-1 center-align">Programação:</h5>
+                                <h6 class="blue-text text-darken-1  accent-1 right-aligned"><i class="material-icons prefix">announcement</i><u> 06/10 - Sábado Manhã: Bases do Negócio Digital do Século XXI</u></h6>
+                                <div class="container">
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" class="small" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Quais os tipos de negócios online</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Marketing Online e Marketing Offline</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Networking Digital – As suas potencialidades</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Validação da idéia de negócio</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Checklist para idéia de negócio</label>
+                                    </p>
+                                </div>
+                                <br />
+                                <h6 class="blue-text text-darken-1  accent-1 right-aligned"><i class="material-icons prefix">announcement</i><u> 06/10 - Sábado Tarde: Ferramentas a utilizar</u></h6>
+                                <div class="container">
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Linkedin</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Facebook / Instagram</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Chatbots</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Hosting/Server/Wordpress</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">RD Station</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Chat Online</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Email Listing – Procura de Emails para gerar listas de email</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Sistema Cloud</label>
+                                    </p>
+                                </div>
+                                <br />
+                                <h6 class="blue-text text-darken-1  accent-1 right-aligned"><i class="material-icons prefix">announcement</i><u> 07/10 Domingo Manhã: Estratégia Online</u></h6>
+                                <div class="container">
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Validação da ideia de negócio II</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Definição de Marca e design</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Comunicação</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Marketing de Conteúdo e geração de valor aos clientes e lista</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Criar Valor – Por quê e as suas utilidades?</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Webinares e Podcasting</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Sessões lives</label>
+                                    </p>
+                                </div>
+                                <br />
+                                <h6 class="blue-text text-darken-1  accent-1 right-aligned"><i class="material-icons prefix">announcement</i><u> 07/10 Domingo Tarde: Sessão prática na qual os participantes irão iniciar os seus próprios negócios online</u></h6>
+                                <div class="container">
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" class="center-align" />
+                                        <label class="blue-text text-darken-1  accent-1 right-align" for="SItem1">Validação da Checklist para inicio de negócio digital</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Integração das ferramentas e estratégia</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Esclarecimentos de dúvidas individuais a todos os participantes</label>
+                                    </p>
+                                </div>
+                                <br />
+                                <h5 class="blue-text text-darken-1  accent-1 center-align">Objetivos do Seminário:</h5>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned"><u> No final do Seminário os participantes estarão aptos a: </u></p>
+                                <div class="container">
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Identificar e validar ideias de negócio digital</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Criar marca digital e a sua presença online</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Criar e gerir ferramentas online</label>
+                                    </p>
+                                    <p>
+                                        <input type="checkbox" id="SItem1" checked="checked" disabled="disabled" />
+                                        <label class="blue-text text-darken-1  accent-1 right-aligned" for="SItem1">Começar a vender no máximo em 48 horas após passos dados</label>
+                                    </p>
+                                </div>
+                                <br />
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
                         </div>
                     </div>
-                @*</div>*@
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="@Url.Action("GetImagemCalendar")">
+                            <a class="btn-floating halfway-fab waves-effect waves-light welic modal-trigger " href="#modalAgenda3"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title truncate">Social Media ‘18 06/10 e 07/10</span>
+                            @*<p>Seminário Presencial Social Media ‘18 (Angola).</p>*@
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="col s6 m3">
                 <div class="icon-block">
-                    <!--<div class="card small">
-        <!-- Card Content -->
-                    <div class="card">
-                        <div class="card-image waves-effect waves-block waves-light">
-                            <img class="activator small" src="@Url.Action("GetImagemCalendar")">
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Social Media ‘18<br />Definindo.<i class="material-icons right">more_vert</i></span>
-                            @*<p><a href="#">This is a link</a></p>*@
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>Social Media ‘18</span>
-                            <p>Seminário Presencial em Belo Horizonte (Brasil): Social Media ‘18 ( em Novembro pendente definir data e Local ) </p>
+                    <!-- Card Content -->
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4"> <i class="material-icons right">more_vert</i></span>
+                        <!-- Modal Structure -->
+                        <div id="modalAgenda4" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Agenda</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">A Definir... </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
                         </div>
                     </div>
-                @*</div>*@
+
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="@Url.Action("GetImagemCalendar")">
+                            
+                            <a class="btn-floating halfway-fab waves-effect waves-light welic modal-trigger " href="#modalAgenda4"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title truncate">Social Media ‘18  Ainda Definindo.</span>
+                            @*<p class="flow-text">Seminário Presencial Social Media ‘18 (Brasil).</p>*@
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Fim da Agenda -->
+
+
