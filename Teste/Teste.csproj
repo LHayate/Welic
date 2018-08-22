@@ -280,8 +280,10 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Imagem\bannerdatamanagement.jpg" />
     <Content Include="Imagem\calendario-2018.png" />
+    <Content Include="Imagem\Ederson.jpg" />
     <Content Include="Imagem\elearning.jpg" />
     <Content Include="Imagem\JJMC1582.JPG" />
+    <Content Include="Imagem\Joel.jpg" />
     <Content Include="Imagem\Logo Welic - Perfil 2.png" />
     <Content Include="Imagem\Logo Welic - Perfil 3.png" />
     <Content Include="Imagem\Logo Welic - Perfil.png" />
@@ -294,6 +296,7 @@
     <Content Include="Imagem\LogoWelic32x32.png" />
     <Content Include="Imagem\LogoWelic600x600.png" />
     <Content Include="Imagem\LogoWelic72x72.png" />
+    <Content Include="Imagem\Lucas.jpg" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
