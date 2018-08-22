@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Login\Entidades\Login.cs" />
+    <Compile Include="Models\Login\Servicos\IServicoLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,7 +49,6 @@
     <Folder Include="Models\Login\Enums\" />
     <Folder Include="Models\Login\Mapeamentos\" />
     <Folder Include="Models\Login\Repositorios\" />
-    <Folder Include="Models\Login\Servicos\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
