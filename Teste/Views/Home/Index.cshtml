@@ -1,4 +1,4 @@
-﻿
+﻿@model  Teste.Models.MailModel
 @{
     ViewBag.Title = "Welic";
 }
@@ -10,7 +10,7 @@
             <img src="@Url.Action("GetImagemBannerTop")">
             <div class="caption center-align">
                 <h3>This is our big Tagline!</h3>
-                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                <h5 class="light grey-text text-lighten-3">Assita seus Webinars ao vivo de casa.</h5>
             </div>
         </li>
         <li>
@@ -36,7 +36,6 @@
     </ul>
 </div>
 <!-- Fim Carousel -->
-
 <!-- Inicio da Agenda -->
 <div class="container">
     <div class="section">
@@ -82,7 +81,7 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title truncate">Social Media ‘18 - 17/09 a 19/09</span>
-                            
+
 
                         </div>
 
@@ -317,7 +316,7 @@
                     <div class="card">
                         <div class="card-image">
                             <img src="@Url.Action("GetImagemCalendar")">
-                            
+
                             <a class="btn-floating halfway-fab waves-effect waves-light welic modal-trigger " href="#modalAgenda4"><i class="material-icons">add</i></a>
                         </div>
                         <div class="card-content">
@@ -331,5 +330,54 @@
     </div>
 </div>
 <!-- Fim da Agenda -->
+<!--Newsletter-->
+<div class="">
+    <div class="section ">
+
+        <div class="container ">
+            <h1 class="header center  black-text "> Receba Nossas Noticias </h1>
+            <div class="row center font-descricao-welic">
+                <h5 class="header black-text col s12 light ">Se Você deseja receber nossas ultimas noticias ou ficar antenado sobre nossos proximos eventos, se cadastre abaixo </h5>
+            </div>
 
 
+
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                <div class="row black-text">
+                    <form class="col s12">
+                        <div class="row ">
+                            <div class="input-field col s6 ">
+                                @Html.TextBoxFor(m => m.Nome, new { htmlAttributes = new { @class = "Validate black-text", id = "first_name", @type = "text", placeholder = "Placeholder" } })
+                                @Html.LabelFor(m => m.Nome, new { htmlAttributes = new { @for = "first_name", @class = "black-text" } })
+                            </div>
+                            <div class="input-field col s6">
+                                @Html.TextBoxFor(m => m.LastName, new { htmlAttributes = new { @class = "Validate", id = "last_name", @type = "text" } })
+                                @Html.LabelFor(m => m.LastName, new { htmlAttributes = new { @for = "last_name" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                @Html.TextBoxFor(m => m.Email, new { htmlAttributes = new { @class = "Validate", id = "email", @type = "email" } })
+                                @Html.LabelFor(m => m.Email, new { htmlAttributes = new { @for = "email" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 center-align">
+                                <button class="btn waves-effect waves-light" type="submit" name="action" value="Send">
+                                    Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            }
+
+            <br>
+        </div>
+    </div>
+</div>
+<!--Newsletter-->
