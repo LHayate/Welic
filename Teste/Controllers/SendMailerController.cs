@@ -23,7 +23,7 @@ namespace Teste.Controllers
             {
                 //Instância classe email
                 MailMessage mail = new MailMessage();
-                mail.To.Add("contato@welic.app");
+                mail.To.Add("welic@welic.app");
                 mail.From = new MailAddress("contato@welic.app");
                 mail.Subject = $"Olá Welic! Quero seguir suas notícias";
                 string Body = $"Meu Nome é {_objModelMail.Nome} {_objModelMail.LastName} e meu e-mail: {_objModelMail.Email}. Gostaria de Receber suas noticias. Aguardo seu contato! Obrigado";
@@ -33,11 +33,11 @@ namespace Teste.Controllers
                 //Instância smtp do servidor, neste caso o gmail.
                 SmtpClient smtp = new SmtpClient
                 {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
+                    Host = "smtp.zoho.com",
+                    Port = 465,
                     UseDefaultCredentials = false,
                     Credentials = new System.Net.NetworkCredential
-                    ("contato@welic.app", "@CW22082018elic"),// Login e senha do e-mail.
+                    ("welic@welic.app", "!EUsouwelic"),// Login e senha do e-mail.
                     EnableSsl = true
                 };
                 smtp.Send(mail);

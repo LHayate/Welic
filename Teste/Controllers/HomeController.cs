@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Teste.Models;
 
 namespace Teste.Controllers
 {
@@ -24,6 +27,54 @@ namespace Teste.Controllers
             ViewBag.AgendaDayTree = "Dia 3 – 19.09.2018 – Ferramentas que ajudam a impulsionar a sua empresa;";
             ViewBag.AgendaPTree = " O evento será gratuito e será cobrado um valor para usuários premium que desejarem rever o conteúdo mais tarde através da App Welic.";
             return View();
+        }
+
+        [HttpPost]
+        public ViewResult Index(MailModel _objModelMail)
+        {
+            if (ModelState.IsValid)
+            {
+                string Body = $"Meu Nome é {_objModelMail.Nome} {_objModelMail.LastName} e meu e-mail: {_objModelMail.Email}. Gostaria de Receber suas noticias. Aguardo seu contato! Obrigado";
+                //Instância classe email
+                MailMessage mail = new MailMessage
+                {
+                    Priority = MailPriority.High,
+                    From = new MailAddress("welic@welic.app"),
+                    Subject = $"Olá Welic! Quero seguir suas notícias",
+                    Body = Body,
+                    IsBodyHtml = true,
+                    SubjectEncoding = Encoding.GetEncoding("UTF-8"),
+                    BodyEncoding = Encoding.GetEncoding("UTF-8")
+                };
+                mail.To.Add("contato@welic.app");                
+
+                //Instância smtp do servidor, neste caso o gmail.
+                SmtpClient smtp = new SmtpClient("smtp.zoho.com",465)
+                {
+                    UseDefaultCredentials = false,
+                    Timeout = 100000,
+                    Credentials = new System.Net.NetworkCredential("welic@welic.app", "!EUsouwelic"),// Login e senha do e-mail.
+                    EnableSsl = true
+                };
+
+                try
+                {
+                    smtp.Send(mail);
+                    Response.Write("<script>alert('Cadastrado com Sucesso, Obrigado');</script>");
+                    return View("Index", _objModelMail);
+                    
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('Erro ao cadastrar!');</script>");
+                    return View();
+                    
+                }                
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult About()

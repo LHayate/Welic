@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0">
+    @* CSS PErsonalizado *@
+    <link href="~/Content/custom.css" rel="stylesheet" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />
+
+    <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
+    <title>@ViewBag.Title</title>
+
+</head>
+<body>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4 class="blue-text text-darken-1 center-align">Welic</h4>
+            <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.Message</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
+    </div>
+
+    <!-- Navibar-->
+    <div>
+        <nav class="welic z-depth-2" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="@Url.Action("Index")" class="brand-logo right"><i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>Welic</a>
+
+                <ul class="left hide-on-med-and-down">
+                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
+                    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre o Welic</a></li>
+
+                    @using Microsoft.AspNet.Identity
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            </ul>
+                        }
+                    }
+                    else
+                    {
+                        
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        
+                    }
+
+                </ul>
+
+                <ul id="nav-mobile" class="side-nav">
+                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
+                    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre a Welic</a></li>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+
+    <!--Footer-->
+    <div>
+        @RenderBody()
+        <hr />
+        <footer class="page-footer blue-grey darken-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col l3 s3 m3">
+                        <!-- Modal Structure -->
+                        <div id="modalPerfilJoel" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Joel Serrano </h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned"> </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                        </div>
+                        <div class="card transparent">
+                            <div class="circle">
+                                <div class="container">
+                                    <img src="~/Imagens/Joel.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilJoel" class="circle responsive-img  modal-trigger tooltipped">
+                                </div>
+                            </div>
+                            <div class="card-stacked center-align">
+                                <div>
+                                    <ul>
+                                        <li><h6 class="blue-grey-text darken-4">CEO</h6></li>
+
+                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/joelfpserrano">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/joelfpserrano/">LinkedIn</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l3 s3 m3">
+                        <!-- Modal Structure -->
+                        <div id="modalPerfilLucas" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Lucas Ranuzi Rocha</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                    Bacharel em analise e desenvolvimento de sistemas na Uniube - Universidade de Uberaba, Brasil. Experiencia na area de desenvolvimento mobile e desktop.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                        </div>
+                        <div class="card transparent">
+                            <div class="circle">
+                                <div class="container">
+                                    <img src="~/Imagens/Lucas.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilLucas" class="circle responsive-img  modal-trigger tooltipped">
+                                </div>
+                            </div>
+                            <div class="card-stacked center-align">
+                                <div>
+                                    <ul>
+                                        <li><h6 class="blue-grey-text darken-4">CTO</h6></li>
+                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/">LinkedIn</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l3 s3 m3">
+                        <!-- Modal Structure -->
+                        <div id="modalPerfilAndre" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">André Luiz</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Perfil </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                        </div>
+                        <div class="card transparent">
+                            <div class="circle">
+                                <div class="container">
+                                    <img src="~/Imagens/Logo Welic - Perfil.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilAndre" class="circle responsive-img  modal-trigger tooltipped">
+                                </div>
+                            </div>
+                            <div class="card-stacked center-align">
+                                <div>
+                                    <ul>
+                                        <li><h6 class="blue-grey-text darken-4">CIO</h6></li>
+                                        <li><a class="blue-text darken-4" href="">Facebook</a> - <a class="cyan-text lighten-1" href="">LinkedIn</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l3 s3 m3">
+                        <!-- Modal Structure -->
+                        <div id="modalPerfilEderson" class="modal">
+                            <div class="modal-content">
+                                <h4 class="blue-text text-darken-1 center-align">Ederson Esch Aguiar</h4>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                    Profissional com Pós-Graduação em Engenharia de Software pela UFMG - Universidade Federal de Minas
+                                    Gerais e com Graduação em Tecnologia da Informação pelo Centro Universitário Newton Paiva.
+                                </p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                    Possui 21 anos de experiência em grandes projetos de TI e startups, atuando nas áreas comercial e técnica para clientes do Setor
+                                    Público e Setor Privado. Na área comercial atuou como Executivo de Clientes, Pré-vendas e Consultor de
+                                    Negócios para oportunidades de Aplicações, Infraestrutura e Produtos durante o ciclo completo de Vendas
+                                    utilizando sistemas de CRM, prospectando clientes/negócios, criando funil das oportunidades e fechando
+                                    negócios.
+                                </p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                    Na área técnica, atuou em delivery como Gerente de Projetos e Sustentação, Coordenador, Analista
+                                    de Sistemas e Desenvolvedor, visando a execução de projetos/sustentação de aplicações em ambiente Web e
+                                    Cliente/Servidor. No ambiente acadêmico, atuou como Palestrante e Professor de TI em Universidades, Cursos
+                                    Técnicos e Preparatórios.
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                            </div>
+                        </div>
+                        <div class="card transparent">
+                            <div class="circle">
+                                <div class="container">
+                                    <img src="~/Imagens/Ederson.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilEderson" class="circle responsive-img  modal-trigger tooltipped">
+                                </div>
+                            </div>
+                            <div class="card-stacked center-align">
+                                <div>
+                                    <ul>
+                                        <li><h6 class="blue-grey-text darken-4">CFO/CCO</h6></li>
+                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/ederson.eschaguiar">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/edersoneschaguiar">LinkedIn</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="center-align">
+                    Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: <a class="brown-text text-lighten-3" href="http://welic.app/">Welic.App</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!--Scripts-->
+    <!-- Jquery Importado via CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    @* Scripts de ação *@
+
+    
+    <script>
+        $(".button-collapse").sideNav();
+    </script>
+    <script>
+        $('.carousel.carousel-slider').carousel({ fullWidth: true });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.slider').slider();
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal({
+                dismissible: true, // Modal can be dismissed by clicking outside of the modal
+                opacity: .3, // Opacity of modal background
+                inDuration: 300, // Transition in duration
+                outDuration: 200, // Transition out duration
+                startingTop: '4%', // Starting top style attribute
+                endingTop: '10%', // Ending top style attribute
+            });
+        });
+
+    </script>
+
+    <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js"></script>
+</body>
+</html>
