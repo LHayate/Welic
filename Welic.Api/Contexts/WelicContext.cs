@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using Welic.Dominio.Models.Login.Mapeamentos;
+using Welic.Infra.Mapeamentos;
 
 namespace Welic.Api.Contexts
 {
@@ -12,13 +10,15 @@ namespace Welic.Api.Contexts
             :base("WelicConectionString")
         {
 
-        }       
+        }
         //public DbSet<Autor> Autores { get; set; }      
+        public DbSet<LoginMap> Login { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Configurations.Add(new AutorMap());
-            
+            modelBuilder.Configurations.Add(new MapeamentoLogin());
+
 
         }
     }

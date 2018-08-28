@@ -1,5 +1,6 @@
 ﻿@using Welic.WebSite.Models
 @model LoginViewModel
+
 @{
     ViewBag.Title = "Log in";
 }
@@ -20,22 +21,24 @@
                         
                                 @*@Html.LabelFor(m => m.Nome, new { htmlAttributes = new { @for = "first_name", @class = "black-text" } })*@
 
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control black-text", id = "first_name", @type = "text", placeholder = "Placeholder" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control black-text", id = "first_name", @type = "text", placeholder = "Email" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                            <p>                                                         
+                                @Html.CheckBoxFor(m => m.RememberMe, new { @type = "checkbox", id = "ChkRemenber"})
+                                @Html.LabelFor(m => m.RememberMe)
+                            </p>
                         </div>
                     </div>
                 </div>

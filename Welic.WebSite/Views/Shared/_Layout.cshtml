@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,
     initial-scale=1.0">
-    @* CSS PErsonalizado *@
+    @* CSS Personalizado *@
     <link href="~/Content/custom.css" rel="stylesheet" />
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -32,10 +32,10 @@
     <div>
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="@Url.Action("Index")" class="brand-logo right"><i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>Welic</a>
+                <a> <i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>@Html.ActionLink("Welic", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "brand - logo right", @id = "logo-container" })</a>
 
                 <ul class="left hide-on-med-and-down">
-                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
+                    <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
                     <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre o Welic</a></li>
 
                     @using Microsoft.AspNet.Identity
@@ -43,14 +43,11 @@
                     {
                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
-                            @Html.AntiForgeryToken()
-
-                            <ul class="nav navbar-nav navbar-right">
+                            @Html.AntiForgeryToken()                           
                                 <li>
                                     @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                                 </li>
-                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                            </ul>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>                            
                         }
                     }
                     else
@@ -64,9 +61,27 @@
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
-                    <li class="waves-effect waves-light"><a href="@Url.Action("Index")">Inicio</a></li>
+                    <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
                     <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre a Welic</a></li>
-                    @Html.Partial("_LoginPartial")
+                    @using Microsoft.AspNet.Identity
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        }
+                    }
+                    else
+                    {
+
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+                    }
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>

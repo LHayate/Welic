@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Welic.Dominio.Models.Login.Entidades
+namespace Welic.Dominio.Models.Login.Mapeamentos
 {
-    public class Login
+    public class LoginMap
     {
         public string Email { get; set; }
         public string Password { get; set; }        
-        public bool RememberMe { get; set; }
+        public bool RememberMe { get; set; } 
     }
 }

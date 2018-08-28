@@ -41,13 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Login\Entidades\Login.cs" />
+    <Compile Include="Models\Login\Mapeamentos\LoginMap.cs" />
     <Compile Include="Models\Login\Servicos\IServicoLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Login\Dtos\" />
     <Folder Include="Models\Login\Enums\" />
-    <Folder Include="Models\Login\Mapeamentos\" />
     <Folder Include="Models\Login\Repositorios\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
