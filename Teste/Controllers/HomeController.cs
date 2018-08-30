@@ -64,7 +64,7 @@ namespace Teste.Controllers
                     return View("Index", _objModelMail);
                     
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response.Write("<script>alert('Erro ao cadastrar!');</script>");
                     return View();

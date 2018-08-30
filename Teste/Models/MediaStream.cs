@@ -36,7 +36,7 @@ namespace Teste.Models
                     }
                 }
             }
-            catch (HttpException ex)
+            catch (HttpException )
             {
                 return;
             }

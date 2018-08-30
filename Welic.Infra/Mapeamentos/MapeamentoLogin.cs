@@ -4,12 +4,12 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Welic.Dominio.Models.Login.Mapeamentos;
+using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Infra.Mapeamentos
 {
     public class MapeamentoLogin
-        : EntityTypeConfiguration<LoginMap>
+        : EntityTypeConfiguration<UserMap>
     {
         public MapeamentoLogin()
         {
