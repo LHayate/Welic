@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Welic.App.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout  VerticalOptions="Center">
             <Entry Placeholder="Nome de Usuario" />
             <Entry Placeholder="Password" IsPassword="True"/>
         </StackLayout>
