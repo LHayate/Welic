@@ -15,6 +15,7 @@ namespace Welic.App.Views
         public LoginPage()
         {
             InitializeComponent();
-        }
+            BindingContext = new ViewModels.LoginViewModel();
+        }       
     }
 }

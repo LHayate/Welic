@@ -1,5 +1,9 @@
-﻿@{
-    ViewBag.Title = "WELIC";
+﻿@using Resources
+@{
+    /**/
+
+    ViewBag.Title = "Welic";
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
 <!-- Inicio Carousel -->
@@ -9,7 +13,7 @@
             <img src="~/Imagens/bannerdatamanagement.jpg">
             <div class="caption center-align">
                 <h3>Webnars in Live!</h3>
-                <h5 class="light grey-text text-lighten-3">Assita seus Webinars ao vivo de casa.</h5>
+                <h5 class="light grey-text text-lighten-3">Assita seus Webinars ao vivo em casa.</h5>
             </div>
         </li>
         <li>
@@ -25,7 +29,7 @@
                 <h3>Videos on-lines</h3>
                 <h5 class="light grey-text text-lighten-3">Assita aquele webinar ou summit que perdeu.</h5>
             </div>
-        </li>       
+        </li>
     </ul>
 </div>
 <!-- Fim Carousel -->
@@ -53,11 +57,16 @@
                         <div id="modalAgenda1" class="modal">
                             <div class="modal-content">
                                 <h4 class="blue-text text-darken-1 center-align">Welic</h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaPOne</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDayOne</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDaytwo</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaDaytree</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">@ViewBag.AgendaPtree</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                    As mídias sociais são atualmente, fundamentais para o desenvolvimento de qualquer tipo de negócio. A utilização de marketing digital acelera o crescimento da sua empresa, o engajamento das pessoas com o seu negócio e isso aumenta as probabilidades de sucesso da sua empresa ou negócio digital.
+                                    O Summit Digital: Social Media World ’18 é a primeira edição de um evento internacional único, que tem como objetivo mostra-lhe as tendências para o marketing digital moderno. Este fantástico evento, permitirá colocar em prática as técnicas e utilizar as ferramentas apresentadas logo após.
+                                    É um evento que conta com a presença de oradores internacionais e de experiência comprovada em marketing digital.
+                                </p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Temáticasabordadas:</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 1 – 17.09.2018 – Mídias Sociais como fator dinamizador de empresas modernas</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 2 – 18.09.2018 – Técnicas para transformar a sua empresa ou negócio</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 3 – 19.09.2018 – Ferramentas que ajudam a impulsionar a sua empresa</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">O evento será gratuito porém, será cobrado um valor para usuários premium que desejarem rever o conteúdo mais tarde através da App Welic.</p>
                             </div>
                             <div class="modal-footer">
                                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
@@ -93,13 +102,13 @@
                         <div id="modalAgenda2" class="modal">
                             <div class="modal-content">
                                 <h4 class="blue-text text-darken-1 center-align">Agenda</h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">Com um crescimento exponencial a nível mundial, o e-Learning é uma ferramenta considerada por muitas empresas e pessoas, essecial. A utilização de Treinamento online ajuda em muito as empresas em capacitar os seus empregados e criar um engajamento entre a empresa e o colaborador. No entanto, técnicas de Ensino à distância estão a mudar, para melhor, e fazendo cada vez mais uso da tecnologia existente. </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">O Summit Digital: e-Learning World ’18 é a primeira edição de um evento internacional único, que tem como objetivo mostra-lhe as tendências para o ensino à distância moderno. Este fantástico evento, permitir-lhe-á colocar em prática as técnicas e utilizar as ferramentas apresentadas logo após. É um evento que conta com a presença de oradores internacionais e de experiência comprovada em Ensino à Distância.</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Com um crescimento exponencial a nível mundial, o e-Learning, é uma ferramenta considerada por muitas empresas e pessoas, essecial. A utilização de treinamento online ajuda em muito as empresas em capacitar os seus empregados e criar um engajamento entre a empresa e o colaborador. No entanto, técnicas de ensino à distância estão a mudar, para melhor, e fazendo cada vez mais uso da tecnologia existente. </p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">O Summit Digital: e-Learning World ’18 é a primeira edição de um evento internacional único, que tem como objetivo mostra-lhe as tendências para o ensino à distância moderno. Este fantástico evento, permitirá colocar em prática as técnicas e utilizar as ferramentas apresentadas logo após. É um evento que conta com a presença de oradores internacionais e de experiência comprovada em ensino à distância.</p>
                                 <p class="blue-text text-darken-1  accent-1 right-aligned">Temáticas abordadas:</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 1 – 24.09.2018 – O ead como fator diferenciador no Treinamento</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 2 – 25.09.2018 – Técnicas para ajudara sua empresa ou negócio com ead</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 3 – 26.09.2018 – Ferramentas que ajudam a impulsionar a sua empresa já com ead</p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">O evento será gratuito e será cobrado um valor para usuários premium que desejarem rever o conteúdo mais tarde através da App Welic.</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 1 – 24.09.2018 – O EAD como fator diferenciador no treinamento</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 2 – 25.09.2018 – Técnicas para ajudara sua empresa ou negócio com EAD</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">Dia 3 – 26.09.2018 – Ferramentas que ajudam a impulsionar a sua empresa já com EAD</p>
+                                <p class="blue-text text-darken-1  accent-1 right-aligned">O evento será gratuito porém, será cobrado um valor para usuários premium que desejarem rever o conteúdo mais tarde através da App Welic.</p>
 
                             </div>
                             <div class="modal-footer">
@@ -131,11 +140,9 @@
                             <div class="modal-content">
                                 <h4 class="blue-text text-darken-1 center-align">Agenda</h4>
                                 <p class="blue-text text-darken-1  accent-1 right-aligned ">
-                                    Seminário presencial, com utilização de tecnologias avançadas, suporte de grupo no facebook, utilização de videos e participação da assistência. Haverá dois tipos de inscrição NORMAL e PREMIUM.
-                                    A diferença entre as duas é que a inscrição PREMIUM oferecerá a esses participantes um melhor contato com os facilitadores da sessão, bem como uma sessão de networking no sábado à noite no Hotel.
-                                    O Pós treinamento será garantido com Sessões online personalizadas para os participantes e sessões privadas 1 para 1 também online.
+                                    Seminário presencial, utilização de tecnologias avançadas, suporte de grupo no facebook, utilização de vídeos e participação da assistência. Haverá dois tipos de inscrição NORMAL e PREMIUM, a inscrição PREMIUM oferecerá a esses participantes um melhor contato com os facilitadores da sessão, bem como uma sessão de networking no sábado à noite no hotel Luanda – Hotel Sun Shine, onde será o evento.
                                 </p>
-                                <h6 lass="blue-text text-darken-1  accent-1 right-aligned ">Local:</h6>
+                                <h6 lass="blue-text text-darken-1  accent-1 right-aligned ">Local: Luanda – Hotel Sun Shine</h6>
                                 <a id="logo-container" href="https://goo.gl/maps/YDyPtVakjvK2" class="brand-logo left-align" target="_blank"><i class="material-icons left-align">map</i>Rua Lar do Patriota s/nº, Zona 3, Talatona-benfica, Municipio de Belas, Luanda, Angola</a>
 
                                 <br />
@@ -283,7 +290,6 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title truncate">Social Media ‘18 06/10 e 07/10</span>
-                            @*<p>Seminário Presencial Social Media ‘18 (Angola).</p>*@
                         </div>
                     </div>
                 </div>
@@ -314,7 +320,6 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title truncate">Social Media ‘18  Ainda Definindo.</span>
-                            @*<p class="flow-text">Seminário Presencial Social Media ‘18 (Brasil).</p>*@
                         </div>
                     </div>
                 </div>
@@ -323,3 +328,4 @@
     </div>
 </div>
 <!-- Fim da Agenda -->
+

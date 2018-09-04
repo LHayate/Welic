@@ -14,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Welic.WebSite</RootNamespace>
     <AssemblyName>Welic.WebSite</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,6 +73,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -80,8 +82,7 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -100,9 +101,7 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -120,6 +119,7 @@
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -189,12 +189,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Login\AccountViewModels.cs" />
+    <Compile Include="Helpers\CultureHelpers.cs" />
     <Compile Include="Models\Login\IdentityModels.cs" />
     <Compile Include="Models\Login\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -256,10 +257,17 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.eot" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Imagens\Andre.jpeg" />
+    <Content Include="Imagens\background1.jpg" />
+    <Content Include="Imagens\background2.jpg" />
+    <Content Include="Imagens\background3.jpg" />
     <Content Include="Imagens\bannerdatamanagement.jpg" />
     <Content Include="Imagens\calendario-2018.png" />
     <Content Include="Imagens\Ederson.jpg" />
+    <Content Include="Imagens\elearning.jpg" />
+    <Content Include="Imagens\JJMC1582.JPG" />
     <Content Include="Imagens\Joel.jpg" />
     <Content Include="Imagens\Logo Welic - Perfil 2.png" />
     <Content Include="Imagens\Logo Welic - Perfil 3.png" />
@@ -287,7 +295,9 @@
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -324,11 +334,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Desktop\Welic\aspnet-mvc-internationalization\MvcInternationalization\Resources\Resources.csproj">
+      <Project>{251223e9-7f41-4f74-a853-cac5c65fe675}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">
+      <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
+      <Name>Welic.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

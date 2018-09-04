@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Welic.App.Views.LoginPage">
     <ContentPage.Content>
-        <StackLayout  VerticalOptions="Center">
-            <Entry Placeholder="Nome de Usuario" />
-            <Entry Placeholder="Password" IsPassword="True"/>
-        </StackLayout>
+        <Grid>
+            <Image Source="{Binding Background}" Aspect="AspectFill" />
+            <StackLayout Padding="10" VerticalOptions="Center" >
+
+                <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail ou Login"/>
+                <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password"/>
+                <Button Text="Login" Command="{Binding LoginCommand}" />
+
+                <ActivityIndicator x:Name="aguardar" IsRunning="{Binding isBusy}"
+                               VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"
+                               Color="Blue"/>
+            </StackLayout>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

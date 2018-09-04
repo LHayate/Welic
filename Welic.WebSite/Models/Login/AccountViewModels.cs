@@ -64,9 +64,8 @@ namespace Welic.WebSite.Models
 
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required]        
+        [Display(Name = "Email ou Login")]
         public string Email { get; set; }
 
         [Required]
