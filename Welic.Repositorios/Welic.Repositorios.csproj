@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Welic.Repositorios</RootNamespace>
     <AssemblyName>Welic.Repositorios</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,10 +92,6 @@
     <ProjectReference Include="..\Welic.Infra\Welic.Infra.csproj">
       <Project>{F0003DA5-1307-44D9-A6CC-69F2CDBC1FC3}</Project>
       <Name>Welic.Infra</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Welic.WebSite\Welic.WebSite.csproj">
-      <Project>{8a91ca06-2401-430d-a46f-d5a4c815bd4d}</Project>
-      <Name>Welic.WebSite</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

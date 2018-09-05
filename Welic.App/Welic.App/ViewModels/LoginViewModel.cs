@@ -51,11 +51,22 @@ namespace Welic.App.ViewModels
         {
             try
             {
+                if (string.IsNullOrEmpty(userLogin))
+                {
+                    await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar o E-mail", "OK");
+                    return;
+                }
+                if (string.IsNullOrEmpty(Senha))
+                {
+                    await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar a Senha", "OK");
+                    return;
+                }
+
                 if (IsBusy)
                     return;
 
                 this.IsBusy = true;
-
+                
                 UserDto usuario = new UserDto
                 {
                     UserName = UserLogin,

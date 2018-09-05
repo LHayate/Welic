@@ -7,7 +7,7 @@ using Welic.WebSite.Helpers;
 
 namespace Welic.WebSite.Controllers
 {
-    public class HomeController : BaseController 
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
