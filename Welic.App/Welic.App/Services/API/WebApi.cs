@@ -8,19 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Users.Dtos;
 
+
 namespace Welic.App.Services.API
 {
     public class WebApi : IAuthenticate
     {
-        private static Lazy<WebApi> _lazy = new Lazy<WebApi>(() => new WebApi());
-        public static WebApi Current { get { return _lazy.Value; } }
+        private static volatile Lazy<WebApi> _lazy = new Lazy<WebApi>(() => new WebApi());        
+
+        public static WebApi Current
+        {
+            get
+            {
+                if (_lazy == null)
+                {
+                    lock (SyncRoot)
+                    {
+                        if (_lazy == null)
+                        {
+                            new Lazy<WebApi>(() => new WebApi());
+                        }
+                    }
+                }
+                return _lazy.Value;
+            }
+        }
+        
+        private static readonly object SyncRoot = new object();
         class TokenResult
         {
             public string access_token { get; set; }
             public string token_type { get; set; }
 
         }
-        private readonly HttpClient _HttpClient;
+
+        //private readonly HttpClient _HttpClient;
+        public HttpClient _HttpClient { get; private set; }
+
+
         public WebApi()
         {
             _HttpClient = new HttpClient
@@ -29,39 +53,6 @@ namespace Welic.App.Services.API
                 BaseAddress = new Uri("http://192.168.0.14:3000/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        }
-        internal async Task<T> GetAsync<T>(string requestUri)
-        {
-            try
-            {           
-                using (var _response = await _HttpClient.GetAsync(requestUri))
-                {
-                    if (!_response.IsSuccessStatusCode)
-                    {
-                        if (_response.StatusCode == HttpStatusCode.Unauthorized)
-                            throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
-
-                        throw new Exception("Algo de errado não deu certo.");
-                    }
-                    var _result = await _response.Content.ReadAsStringAsync();
-
-                    return JsonConvert.DeserializeObject<T>(_result);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao tentar buscar dados");
-            }
-        }        
-        public async Task PostAsync(object obj, string uri)
-        {
-            string json = JsonConvert.SerializeObject(obj);
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            using (var _response = await _HttpClient.PostAsync(uri, content))
-            {
-                if (!_response.IsSuccessStatusCode)
-                    throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
-            }
         }
 
         public async Task<bool> AuthenticateAsync(UserDto usuario)
@@ -97,5 +88,66 @@ namespace Welic.App.Services.API
 
             }
         }
+
+        internal async Task<T> GetAsync<T>(string requestUri)
+        {
+            try
+            {           
+                using (var _response = await _HttpClient.GetAsync(requestUri))
+                {
+                    if (!_response.IsSuccessStatusCode)
+                    {
+                        if (_response.StatusCode == HttpStatusCode.Unauthorized)
+                            throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
+
+                        throw new Exception("Algo de errado não deu certo.");
+                    }
+                    var _result = await _response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<T>(_result);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao tentar buscar dados");
+            }
+        }
+
+        internal async Task<bool> PostAsync<T>(T obj, string uri)
+        {
+            string json = JsonConvert.SerializeObject(obj);
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            using (var _response = await _HttpClient.PostAsync(uri, content))
+            {
+                if (!_response.IsSuccessStatusCode)
+                    throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
+                return true;
+            }
+            
+        }
+
+        internal async Task<bool> PutAsync<T>(int id, T t, string uri)
+        {
+            var httpClient = new HttpClient();
+
+            var json = JsonConvert.SerializeObject(t);
+
+            HttpContent httpContent = new StringContent(json);
+
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            var result = await httpClient.PutAsync($"{uri}{id}", httpContent);
+
+            return result.IsSuccessStatusCode;
+        }
+
+        internal async Task<bool> DeleteAsync<T>(int id, string uri)
+        {
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.DeleteAsync($"{uri}{id}");
+
+            return response.IsSuccessStatusCode;
+        }             
     }
 }

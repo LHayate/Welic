@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Welic.Dominio</RootNamespace>
     <AssemblyName>Welic.Dominio</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DomainNotificationHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DomainNotificationHelper.1.0.1\lib\DomainNotificationHelper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -45,16 +48,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Eventos\Contratos\IEventoDominio.cs" />
+    <Compile Include="Eventos\EventoDominio.cs" />
+    <Compile Include="Eventos\IContainer.cs" />
+    <Compile Include="Eventos\IManipulador.cs" />
+    <Compile Include="Eventos\IUnidadeTrabalho.cs" />
+    <Compile Include="Eventos\NotificacaoDominio.cs" />
+    <Compile Include="IServico.cs" />
+    <Compile Include="Models\Acesso\Comandos\ComandoRegistroAtividadeUsuario.cs" />
+    <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoConsultaUsuario.cs" />
+    <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoCriaUsuario.cs" />
+    <Compile Include="Models\Acesso\Entidades\Usuario.cs" />
+    <Compile Include="Models\Acesso\Escopos\EscoposUsuario.cs" />
+    <Compile Include="Models\Acesso\Repositorios\IRepositorioUsuario.cs" />
+    <Compile Include="Models\Acesso\Servicos\IServicoUsuario.cs" />
     <Compile Include="Models\Users\Dtos\UserDto.cs" />
     <Compile Include="Models\Users\Entidades\User.cs" />
     <Compile Include="Models\Users\Mapeamentos\UserMap.cs" />
     <Compile Include="Models\Users\Servicos\IServicoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TiposDados\AcaoRegistroBanco.cs" />
+    <Compile Include="TiposDados\ChaveAcessoNfe.cs" />
+    <Compile Include="TiposDados\Cnpj.cs" />
+    <Compile Include="TiposDados\Cpf.cs" />
+    <Compile Include="TiposDados\CpfCnpj.cs" />
+    <Compile Include="TiposDados\DataCalendario.cs" />
+    <Compile Include="TiposDados\Descricao.cs" />
+    <Compile Include="TiposDados\Escopos\EscoposMesAno.cs" />
+    <Compile Include="TiposDados\Historico.cs" />
+    <Compile Include="TiposDados\MesAno.cs" />
+    <Compile Include="TiposDados\TipoFrete.cs" />
+    <Compile Include="Utilitarios\Comandos\ComandoListarMesAno.cs" />
+    <Compile Include="Utilitarios\Comandos\ComandoMesAno.cs" />
+    <Compile Include="Utilitarios\Entidades\Criptografia.cs" />
+    <Compile Include="Utilitarios\Entidades\Extensoes.cs" />
+    <Compile Include="Utilitarios\Entidades\FormatacaoString.cs" />
+    <Compile Include="Utilitarios\Entidades\ListarMesAnoUtil.cs" />
+    <Compile Include="Utilitarios\Entidades\ValidarDocumentos.cs" />
+    <Compile Include="Utilitarios\Escopos\EscoposListaMesAnoUtil.cs" />
+    <Compile Include="Utilitarios\Servicos\IServicoUtilitario.cs" />
+    <Compile Include="Validacao\Validador.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Users\Enums\" />
     <Folder Include="Models\Users\Repositorios\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
+    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
