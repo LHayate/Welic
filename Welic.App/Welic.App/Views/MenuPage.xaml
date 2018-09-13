@@ -1,20 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Welic.App.Views.MenuPage"
-             Title="Menu">
-    <StackLayout VerticalOptions="FillAndExpand">
+             x:Class="Welic.App.Views.MenuPage"             
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             Title="Menu"
+             BackgroundColor="#E9E9EC">
+    <StackLayout >
+        <Grid Margin="0,0,0,0" >
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+            <StackLayout>
+                <!--Source="{Binding Image}"-->
+                <abstractions:CircleImage Source="Logo_Welic_2.png" Aspect="AspectFill" Grid.Column="0" >
+                    <abstractions:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS">120</On>
+                            <On Platform="WinPhone">155</On>
+                        </OnPlatform>
+                    </abstractions:CircleImage.WidthRequest>
+                    <abstractions:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS">120</On>
+                            <On Platform="WinPhone">155</On>
+                        </OnPlatform>
+                    </abstractions:CircleImage.HeightRequest>
+                </abstractions:CircleImage>
+            </StackLayout>
+            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" >
+                <Label Text="Lucas Ranuzi Rocha" TextColor="Black"  HorizontalTextAlignment="Center"/>
+                <Label Text="CPF:XXX.XXX.X89-12" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Grid>
+        <Grid Margin="0,0,0,0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" >
+                <Label Text="Ultimo Acesso" TextColor="Black"  HorizontalTextAlignment="Center"/>
+                <Label Text="XX/XX/XXXX" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
+            </StackLayout>
+        </Grid>
+
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" FontSize="20"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Aqua"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackLayout HorizontalOptions="CenterAndExpand">
+            <Image Source="LogoWelic72x72.png"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="32" />
+                </Grid.ColumnDefinitions>
+                <Image Source="facebook_icon.png"/>
+                <Image Source="twitter_icon.png"/>
+                <Image Source="linkedin_icon.png"/>
+                <Image Source="skype_icon.png"/>
+            </Grid>
+        </StackLayout>
+
+
+
+
     </StackLayout>
 </ContentPage>

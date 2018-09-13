@@ -36,7 +36,14 @@ namespace Welic.App.Services.API
         private static readonly object SyncRoot = new object();
         class TokenResult
         {
-            public string access_token { get; set; }
+            private string _accessToken;
+
+            public string AccessToken
+            {
+                get => _accessToken;
+                set => _accessToken = value;
+            }
+
             public string token_type { get; set; }
 
         }
@@ -77,12 +84,12 @@ namespace Welic.App.Services.API
 
                         var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
 
-                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.access_token);
+                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
                     }
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
 
@@ -107,7 +114,7 @@ namespace Welic.App.Services.API
                     return JsonConvert.DeserializeObject<T>(_result);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Erro ao tentar buscar dados");
             }

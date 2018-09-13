@@ -93,6 +93,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Implements\CustomEntryUwp.cs" />
+    <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -153,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Welic.App\Welic.App.csproj">
-      <Project>{8EE1805D-51F2-4159-92A1-FC875D8E530B}</Project>
+      <Project>{87128651-0de5-410b-aafc-396591865ecb}</Project>
       <Name>Welic.App</Name>
     </ProjectReference>
   </ItemGroup>

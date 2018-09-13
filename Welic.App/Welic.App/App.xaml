@@ -10,6 +10,17 @@
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
                 <Setter Property="BarTextColor" Value="White" />
             </Style>
-        </ResourceDictionary>
+
+            <Color x:Key="ColorTextEntry">#000000</Color>
+            <Style x:Key="TextEntryLogin" TargetType="Entry" >
+                <Setter Property="TextColor" Value="{StaticResource ColorTextEntry}" />
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Opacity" Value="20"/>
+                
+            </Style>
+            </ResourceDictionary>
     </Application.Resources>
 </Application>

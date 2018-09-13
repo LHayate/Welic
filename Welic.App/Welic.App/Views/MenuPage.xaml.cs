@@ -1,5 +1,4 @@
 ﻿using Welic.App.Models;
-using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -11,20 +10,26 @@ namespace Welic.App.Views
     public partial class MenuPage : ContentPage
     {
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        List<HomeMenuItem> menuItems;
+        readonly List<HomeMenuItem> menuItems;
         public MenuPage()
         {
             InitializeComponent();
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Browse, Title="Home", IconMenu = "ihouse.png"},
+                new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = "movie_projector_40.png" },
+                new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = "Notification_icon.png" },
+                new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = "iShopping_Cart.png" },
+                new HomeMenuItem {Id = MenuItemType.Videos, Title="Videos", IconMenu = "iMonitor24.png" },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = "iConfiguracao.png" },
+                new HomeMenuItem {Id = MenuItemType.SignUp, Title="Sign Up", IconMenu = "iVoltar24.png" },
+                new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = "information24.png" }
+
             };
 
             ListViewMenu.ItemsSource = menuItems;
-
-            ListViewMenu.SelectedItem = menuItems[0];
+            
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)

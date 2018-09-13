@@ -1,21 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Welic.App.Views.LoginPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:implements="clr-namespace:Welic.App.Implements"
+             x:Class="Welic.App.Views.LoginPage"        
+             
+             BackgroundImage="Login_BackGround.png">
+<ContentPage.Resources>
+
+</ContentPage.Resources>
+
+
     <ContentPage.Content>
         <Grid>
-            <Image Source="{Binding Background}" Aspect="AspectFill" />
-            <StackLayout Padding="10" VerticalOptions="Center" >
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <StackLayout Padding="10">
 
-                <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail ou Login"/>
-                <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password"/>
-                <Button Text="Login" Command="{Binding LoginCommand}" />
+                    <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail ou Login"  Style="{StaticResource TextEntryLogin}" />
+                    <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password" Style="{StaticResource TextEntryLogin}" />
+                    <implements:GradientColorStack StartColor="#C79D1D" EndColor="#CE7526">
+                        <Button Text="Login" 
+                            Command="{Binding LoginCommand}"  
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"
+                            HeightRequest="37"
+                            WidthRequest="229"
+                            CornerRadius="6"
+                            TextColor="#2F80ED"                            
+                        />
+                    </implements:GradientColorStack>
+                    
 
-                <ActivityIndicator x:Name="aguardar" IsRunning="{Binding isBusy}"
-                               VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand"
-                               Color="Blue"/>
+                    <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
+                                       VerticalOptions="CenterAndExpand" 
+                                       HorizontalOptions="CenterAndExpand"/>
+                    
+                </StackLayout>
+
             </StackLayout>
-
         </Grid>
-    </ContentPage.Content>
+    </ContentPage.Content> 
 </ContentPage>
