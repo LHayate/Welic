@@ -68,6 +68,7 @@
     <Compile Include="Implements\CustomEntryiOS.cs" />
     <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="Implements\GradientColorStackRenderer.cs" />
+    <Compile Include="Implements\LoginPageRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -135,7 +136,13 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Xamarin.Auth">
+      <Version>1.6.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.LiveReload">
+      <Version>0.3.27</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Welic.App\Welic.App.csproj">

@@ -27,16 +27,16 @@ namespace Welic.App.Droid
         protected override void DispatchDraw(global::Android.Graphics.Canvas canvas)
         {
             #region for Vertical Gradient
-            //var gradient = new Android.Graphics.LinearGradient(0, 0, 0, Height,
+            var gradient = new Android.Graphics.LinearGradient(0, 0, 0, Height,
             #endregion
 
             #region for Horizontal Gradient
-            var gradient = new Android.Graphics.LinearGradient(0, 0, Width, 0,
+            //var gradient = new Android.Graphics.LinearGradient(0, 0, Width, 0,
                 #endregion
 
-                this.StartColor.ToAndroid(),
-                this.EndColor.ToAndroid(),
-                Android.Graphics.Shader.TileMode.Mirror);
+            this.StartColor.ToAndroid(),
+            this.EndColor.ToAndroid(),
+            Android.Graphics.Shader.TileMode.Mirror);
 
             var paint = new Android.Graphics.Paint()
             {

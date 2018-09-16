@@ -8,7 +8,7 @@ namespace Welic.App.Services.MessageServices.ServiceViews
 {
     public class MessageServices : IMessageService
     {
-        public async Task ShowAsync(string Message)
+        public async Task ShowOkAsync(string Message)
         {
             await App.Current.MainPage.DisplayAlert("Welic", Message, "OK");
         }

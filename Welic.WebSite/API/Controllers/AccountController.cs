@@ -53,11 +53,11 @@ namespace Welic.WebSite.API.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("login")]
-        public async Task<IHttpActionResult> Login(UserDto model)
+        public async Task<bool> Login(UserDto model)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return false;
             }
 
             // This doesn't count login failures towards account lockout
@@ -66,14 +66,14 @@ namespace Welic.WebSite.API.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return Ok();
+                    return true;
                 case SignInStatus.LockedOut:
-                    return Ok();                
+                    return true;                
                 case SignInStatus.Failure:
-                    return BadRequest();
+                    return false;
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return BadRequest();
+                    return false;
             }
         }
 

@@ -4,28 +4,41 @@
              x:Class="Welic.App.Views.InicioPage"
              BackgroundImage="Login_BackGround.png">
     <ContentPage.Content>
+
         <StackLayout>
-            <!--Topo-->
-            <StackLayout>
-                <!--Logo-->
-                <Image Source="Logo_Welic_2.png" HorizontalOptions="CenterAndExpand"  WidthRequest="100" HeightRequest="140" Margin="0,20,0,0"/>
+            <!--Top-->
 
-                <!--Botão de Login com Email-->
-                <Grid  HorizontalOptions="CenterAndExpand">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="33" />
-                        <ColumnDefinition Width="200" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Image Source="Email_icon.png" Grid.Column="0" HeightRequest="32" WidthRequest="32"   />
-                    <Button Text=" Sign In With Email" Grid.Column="1" TextColor="Black" BackgroundColor="Transparent" />
-                </Grid>
+            <!--Logo-->
+            <Image Source="LogoWelic.png" HorizontalOptions="CenterAndExpand"  WidthRequest="100" HeightRequest="140" Margin="0,20,0,0"/>
+            
+            <!--Botão de Login com Email-->
+            <Grid  HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent" Margin="0,20,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Image Source="Email_icon.png" 
+                       Grid.Column="0" 
+                       Grid.Row="0"
+                       HeightRequest="32" 
+                       WidthRequest="32"   
+                />
+                <Button Text=" Sign In With Email" 
+                        TextColor="Black" 
+                        Grid.Column="1" 
+                        Grid.Row="0" 
+                        BackgroundColor="Transparent" 
+                        
+                        Command="{Binding LoginEmailCommand}"
+                />
+            </Grid>
 
-            </StackLayout>
-            <!--Separador de Tipo de Login--> 
-            <Grid HorizontalOptions="CenterAndExpand" Margin="0,50,0,0">
+            
+            <!--Separador de Tipo de Login-->
+            <Grid HorizontalOptions="CenterAndExpand" Margin="0,50,0,50" BackgroundColor="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="15" />
@@ -40,20 +53,34 @@
             </Grid>
             
             <!--Login com Redes Sociais-->
-            <Grid HorizontalOptions="CenterAndExpand" Margin="0,30,0,0" BackgroundColor="Transparent">
+            <Grid HorizontalOptions="CenterAndExpand" Margin="0,0,0,0" BackgroundColor="Transparent">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="33" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <Image Source="facebook_icon.png" Grid.Column="0" Grid.Row="0"  />
-                <Button Text="Sign in with Facebook" TextColor="Black" Grid.Column="1" Grid.Row="0" BackgroundColor="Transparent"/>
+                <Button Text="Sign in with Facebook" 
+                        TextColor="Black" 
+                        Grid.Column="1" 
+                        Grid.Row="0" 
+                        BackgroundColor="Transparent" 
+                        Command="{Binding LoginFacebookCommand}
+                        "
+                />
 
                 <Image Source="Google_icon.png" Grid.Column="0"  Grid.Row="1"  />
-                <Button Text=" Sign in With Google" TextColor="Black" Grid.Column="1" Grid.Row="1" BackgroundColor="Transparent"/>
+                <Button Text=" Sign in With Google" 
+                        TextColor="Black" 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                        BackgroundColor="Transparent"
+                        Command="{Binding LoginGoogleCommand}"
+                />
             </Grid>
 
             <!--Criar Nova Conta-->
@@ -64,12 +91,18 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Text="New Here?" Grid.Column="0"  VerticalTextAlignment="Center" HorizontalTextAlignment="End" TextColor="Black"/>
-                <Button Text="Create an Account"  Grid.Column="1" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" TextColor="Black"/>
+                <Button Text="Create an Account"  
+                        Grid.Column="1" 
+                        VerticalOptions="CenterAndExpand" 
+                        BackgroundColor="Transparent" 
+                        TextColor="Black"
+                        Command="{Binding CreateAccountCommand}"        
+                />
             </Grid>
 
             <!--Termos de Uso-->
             <StackLayout VerticalOptions="EndAndExpand">
-                <Button Text="Terms of Use" BackgroundColor="Transparent" TextColor="Black"/>
+                <Button Text="Terms of Use" BackgroundColor="Transparent" TextColor="Black" Command="{Binding TermsUseCommand}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

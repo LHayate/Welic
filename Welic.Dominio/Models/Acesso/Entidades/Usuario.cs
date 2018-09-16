@@ -13,8 +13,7 @@ namespace Welic.Dominio.Models.Acesso.Entidade
         public Usuario(string nomeUsuario, string senha)
         {
             NomeUsuario = nomeUsuario;
-            Senha = Criptografia.EncriptarMd5(senha);
-            AutorizaOrdemCompra = false;
+            Senha = Criptografia.EncriptarMd5(senha);            
         }
 
         public string NomeUsuario { get; set; }
@@ -22,9 +21,7 @@ namespace Welic.Dominio.Models.Acesso.Entidade
         public string Situacao { get; private set; }
         public DateTime? UltimoAcesso { get; private set; }
         public int Id { get; private set; }
-        public int IdDepartamento { get; private set; }
-
-        public bool AutorizaOrdemCompra { get; private set; }
+        public int IdDepartamento { get; private set; }        
 
         public bool ValidarNomeUsuarioESenha(string nomeUsuario, string senha)
         {

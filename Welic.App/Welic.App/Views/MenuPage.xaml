@@ -11,45 +11,33 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-            <StackLayout>
-                <!--Source="{Binding Image}"-->
-                <abstractions:CircleImage Source="Logo_Welic_2.png" Aspect="AspectFill" Grid.Column="0" >
-                    <abstractions:CircleImage.WidthRequest>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android, iOS">120</On>
-                            <On Platform="WinPhone">155</On>
-                        </OnPlatform>
-                    </abstractions:CircleImage.WidthRequest>
-                    <abstractions:CircleImage.HeightRequest>
-                        <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android, iOS">120</On>
-                            <On Platform="WinPhone">155</On>
-                        </OnPlatform>
-                    </abstractions:CircleImage.HeightRequest>
-                </abstractions:CircleImage>
-            </StackLayout>
-            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" >
-                <Label Text="Lucas Ranuzi Rocha" TextColor="Black"  HorizontalTextAlignment="Center"/>
-                <Label Text="CPF:XXX.XXX.X89-12" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
-            </StackLayout>
-        </Grid>
-        <Grid Margin="0,0,0,0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
             </Grid.RowDefinitions>
-            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" >
-                <Label Text="Ultimo Acesso" TextColor="Black"  HorizontalTextAlignment="Center"/>
-                <Label Text="XX/XX/XXXX" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
+            <abstractions:CircleImage Source="{Binding Image}" Aspect="AspectFill" Grid.Column="0" >
+                <abstractions:CircleImage.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">120</On>
+                        <On Platform="WinPhone">155</On>
+                    </OnPlatform>
+                </abstractions:CircleImage.WidthRequest>
+                <abstractions:CircleImage.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">120</On>
+                        <On Platform="WinPhone">155</On>
+                    </OnPlatform>
+                </abstractions:CircleImage.HeightRequest>
+            </abstractions:CircleImage>
+            <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" Grid.Row="0" >
+            <Label Text="Lucas Ranuzi Rocha" TextColor="Black"  HorizontalTextAlignment="Center"/>
+            <Label Text="CPF:XXX.XXX.X89-12" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
             </StackLayout>
         </Grid>
-
+        <Grid Margin="0,0,0,0" BackgroundColor="#BDBDBD" Opacity="10">
+            <Image Source=""/>
+        </Grid>
+       
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True">
             <ListView.ItemTemplate>
@@ -61,7 +49,8 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
-                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Aqua"/>
+                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                            
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -70,15 +59,20 @@
 
         <StackLayout HorizontalOptions="CenterAndExpand">
             <Image Source="LogoWelic72x72.png"/>
-            <Grid>
+            <Grid HorizontalOptions="CenterAndExpand">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32" />
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition Width="32" />
+                    <ColumnDefinition Width="32" />
                 </Grid.ColumnDefinitions>
-                <Image Source="facebook_icon.png"/>
-                <Image Source="twitter_icon.png"/>
-                <Image Source="linkedin_icon.png"/>
-                <Image Source="skype_icon.png"/>
+                <Image Source="facebook_icon.png" Grid.Column="0"/>
+                <Image Source="twitter_icon.png" Grid.Column="1"/>
+                <Image Source="linkedin_icon.png" Grid.Column="2"/>
+                <Image Source="skype_icon.png" Grid.Column="3"/>
             </Grid>
+
+            <Label Text="Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: Welic.App" TextColor="Black" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
 

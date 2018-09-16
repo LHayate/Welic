@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security.OAuth;
+﻿using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Welic.Repositorios.Login;
+using Welic.Dominio.Models.Users.Dtos;
+using Welic.WebSite.API.Controllers;
 
 namespace Welic.WebSite.Provider
 {
@@ -15,16 +15,37 @@ namespace Welic.WebSite.Provider
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (AccountController repo = new AccountController())
             {
-                IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+                
+                UserDto usuario = new UserDto
+                {
+                    Email = context.UserName,
+                    Password = context.Password,
+                    UserName = context.UserName,
+                    RememberMe = false
 
-                if (user == null)
+                };
+                
+                if (!(await repo.Login(usuario)))
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
                 }
             }
+
+
+            //using (AuthRepository _repo = new AuthRepository())
+            //{
+            //    //IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+            //    IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+
+            //    if (user == null)
+            //    {
+            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
+            //        return;
+            //    }
+            //}
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("sub", context.UserName));

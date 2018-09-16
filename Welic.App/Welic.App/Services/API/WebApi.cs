@@ -57,7 +57,7 @@ namespace Welic.App.Services.API
             _HttpClient = new HttpClient
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
-                BaseAddress = new Uri("http://192.168.0.14:3000/")
+                BaseAddress = new Uri("http://192.168.0.10:3000/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -75,6 +75,17 @@ namespace Welic.App.Services.API
                         new KeyValuePair<string, string>("password", usuario.Password),
                     };
 
+                    using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
+                    {
+                        if (!_response.IsSuccessStatusCode)
+                            return false;
+
+                        var _result = await _response.Content.ReadAsStringAsync();
+
+                        var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
+
+                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
+                    }
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
                     {
                         if (!_response.IsSuccessStatusCode)

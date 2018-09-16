@@ -8,23 +8,22 @@ using Xamarin.Forms;
 
 namespace Welic.App.Services.MessageServices.ServiceViews
 {
-    public class NavigationServices
+    public class NavigationService : INavigationService
     {
         private readonly IMessageService _messageService;
 
-        public NavigationServices(IMessageService messageService)
-        {
-            _messageService = messageService ?? throw new ArgumentNullException(nameof(messageService));
-        }
-
-        public Task InitializeAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task NavigateToAsync<TViewModel>() where TViewModel : BaseViewModel
         {
-            await Application.Current.MainPage.Navigation.PushAsync(CreatePage(typeof(TViewModel)));
+            try
+            {
+                await Application.Current.MainPage.Navigation.PushAsync(CreatePage(typeof(TViewModel)));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public async Task NavigateToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel
@@ -38,7 +37,8 @@ namespace Welic.App.Services.MessageServices.ServiceViews
             {
                 if (viewModelType.FullName != null)
                 {
-                    var viewName1 = viewModelType.FullName.Replace("Model", string.Empty) + "Page";
+                    //var viewName1 = $"{viewModelType.Namespace.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
+                    var viewName1 = $"{viewModelType.Namespace?.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
                     var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
                     var viewAssemblyName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", viewName1, viewModelAssemblyName);
                     var viewType = Type.GetType(viewAssemblyName);
@@ -47,7 +47,7 @@ namespace Welic.App.Services.MessageServices.ServiceViews
             }
             catch (Exception ex)
             {
-                _messageService.ShowAsync("Erro ao tentar solicitar a pagina. " + ex.Message);
+                _messageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + ex.Message);
                 return null;
             }
             return null;
@@ -55,14 +55,23 @@ namespace Welic.App.Services.MessageServices.ServiceViews
 
         private Page CreatePage(Type viewModelType)
         {
-            Type pageType = GetPageTypeForViewModel(viewModelType);
-            if (pageType == null)
+            try
             {
-                throw new Exception($"Não encontrado a pagina Solicitada {viewModelType}");
-            }
+                Type pageType = GetPageTypeForViewModel(viewModelType);
+                if (pageType == null)
+                {
+                    throw new Exception($"Não encontrado a pagina Solicitada {viewModelType}");
+                }
 
-            Page page = Activator.CreateInstance(pageType) as Page;
-            return page;
+                Page page = Activator.CreateInstance(pageType) as Page;
+                return page;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+           
         }
     }
 }

@@ -11,13 +11,16 @@
 
 
     <ContentPage.Content>
-        <Grid>
+        <Grid >
             <StackLayout VerticalOptions="CenterAndExpand">
-                <StackLayout Padding="10">
+                <StackLayout Padding="10" Margin="20,0,20,0" >
 
                     <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail ou Login"  Style="{StaticResource TextEntryLogin}" />
                     <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password" Style="{StaticResource TextEntryLogin}" />
-                    <implements:GradientColorStack StartColor="#C79D1D" EndColor="#CE7526">
+                    <implements:GradientColorStack StartColor="#C79D1D" 
+                                                   EndColor="#CE7526" 
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   VerticalOptions="CenterAndExpand">
                         <Button Text="Login" 
                             Command="{Binding LoginCommand}"  
                             VerticalOptions="CenterAndExpand" 
@@ -25,7 +28,8 @@
                             HeightRequest="37"
                             WidthRequest="229"
                             CornerRadius="6"
-                            TextColor="#2F80ED"                            
+                            TextColor="#2F80ED"  
+                            BackgroundColor="Transparent"
                         />
                     </implements:GradientColorStack>
                     

@@ -7,6 +7,6 @@ namespace Welic.App.Services.MessageServices.ServicesViewModels
 {
     public interface IMessageService
     {
-        Task ShowAsync(string Message);
+        Task ShowOkAsync(string Message);
     }
 }

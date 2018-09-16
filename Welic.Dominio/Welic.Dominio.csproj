@@ -58,6 +58,7 @@
     <Compile Include="Models\Acesso\Comandos\ComandoRegistroAtividadeUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoConsultaUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoCriaUsuario.cs" />
+    <Compile Include="Models\Acesso\Entidades\DispositivoUsuario.cs" />
     <Compile Include="Models\Acesso\Entidades\Usuario.cs" />
     <Compile Include="Models\Acesso\Escopos\EscoposUsuario.cs" />
     <Compile Include="Models\Acesso\Repositorios\IRepositorioUsuario.cs" />

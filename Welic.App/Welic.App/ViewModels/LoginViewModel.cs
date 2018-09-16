@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Plugin.Connectivity;
 using Welic.App.Services.API;
 using Welic.App.Services.MessageServices.ServicesViewModels;
 using Welic.Dominio.Models.Users.Dtos;
@@ -32,8 +33,6 @@ namespace Welic.App.ViewModels
         {
             _messageService = DependencyService.Get<IMessageService>();
             _navigationService = DependencyService.Get<INavigationService>();
-            UserLogin = "LucasA";
-            senha = "Teste2";
 
             LoginCommand = new Command(async () => await Login());
         }
@@ -54,6 +53,7 @@ namespace Welic.App.ViewModels
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar o E-mail", "OK");
                     return;
                 }
+
                 if (string.IsNullOrEmpty(Senha))
                 {
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar a Senha", "OK");
@@ -64,29 +64,40 @@ namespace Welic.App.ViewModels
                     return;
 
                 this.IsBusy = true;
-                
+
                 UserDto usuario = new UserDto
                 {
                     UserName = UserLogin,
                     Password = Senha
                 };
 
+                if (CrossConnectivity.Current.IsConnected)
+                {
 
-                this.LoginCommand.ChangeCanExecute();
-                if(!await WebApi.Current.AuthenticateAsync(usuario))
-                    throw new Exception("Erro ao Tentar Autenticar o Usuario");
+                    this.LoginCommand.ChangeCanExecute();
+                    if (!await WebApi.Current.AuthenticateAsync(usuario))
+                        throw new Exception("Erro ao Tentar Autenticar o Usuario");
 
-                await App.Current.MainPage.DisplayAlert("Welic", "Logado", "OK");
-                //await _messageService.ShowAsync("Logou");
-                //await _navigationService.NavigateToAsync<T>();
+
+
+                    await App.Current.MainPage.DisplayAlert("Welic", "Logado", "OK");
+                    //await _messageService.ShowAsync("Logou");
+                    //await _navigationService.NavigateToAsync<T>();
+                }
+
+                IsBusy = false;
             }
             catch (InvalidOperationException ex)
             {
-                await _messageService.ShowAsync(ex.Message);
+                await _messageService.ShowOkAsync(ex.Message);
             }
             catch (Exception ex)
             {
-                await _messageService.ShowAsync(ex.Message);
+                await _messageService.ShowOkAsync(ex.Message);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
     }
