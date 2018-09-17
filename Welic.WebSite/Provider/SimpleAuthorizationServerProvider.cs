@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Welic.Dominio.Models.Users.Dtos;
+using Welic.Repositorios.Login;
 using Welic.WebSite.API.Controllers;
 
 namespace Welic.WebSite.Provider
@@ -17,7 +19,7 @@ namespace Welic.WebSite.Provider
 
             using (AccountController repo = new AccountController())
             {
-                
+
                 UserDto usuario = new UserDto
                 {
                     Email = context.UserName,
@@ -26,7 +28,7 @@ namespace Welic.WebSite.Provider
                     RememberMe = false
 
                 };
-                
+
                 if (!(await repo.Login(usuario)))
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");

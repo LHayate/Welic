@@ -21,7 +21,7 @@
                                                    EndColor="#CE7526" 
                                                    HorizontalOptions="CenterAndExpand"
                                                    VerticalOptions="CenterAndExpand">
-                        <Button Text="Login" 
+                        <Button Text="Login"
                             Command="{Binding LoginCommand}"  
                             VerticalOptions="CenterAndExpand" 
                             HorizontalOptions="CenterAndExpand"

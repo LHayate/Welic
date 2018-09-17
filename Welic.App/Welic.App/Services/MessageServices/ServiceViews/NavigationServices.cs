@@ -25,7 +25,7 @@ namespace Welic.App.Services.MessageServices.ServiceViews
             }
             
         }
-
+       
         public async Task NavigateToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel
         {
             await Application.Current.MainPage.Navigation.PushAsync(CreatePage(typeof(TViewModel)));
@@ -36,8 +36,7 @@ namespace Welic.App.Services.MessageServices.ServiceViews
             try
             {
                 if (viewModelType.FullName != null)
-                {
-                    //var viewName1 = $"{viewModelType.Namespace.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
+                {                    
                     var viewName1 = $"{viewModelType.Namespace?.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
                     var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
                     var viewAssemblyName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", viewName1, viewModelAssemblyName);

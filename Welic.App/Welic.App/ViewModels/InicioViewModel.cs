@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Welic.App.Services.MessageServices.ServicesViewModels;
 using Welic.App.Views;
@@ -21,7 +22,21 @@ namespace Welic.App.ViewModels
             _messageService = DependencyService.Get<IMessageService>();
             _navigationService = DependencyService.Get<INavigationService>();
             LoginEmailCommand = new Command(async () => await LoginEmail());
+            LoginFacebookCommand = new Command(async () => await LoginFacebook());
 
+        }
+
+        private async Task LoginFacebook()
+        {
+            try
+            {
+                await _navigationService.NavigateToAsync<LoginExternoViewModel>();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                await _messageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);
+            }
         }
 
         private async Task LoginEmail()

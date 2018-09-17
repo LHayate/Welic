@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Plugin.Connectivity;
+using Plugin.DeviceInfo;
+using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Services.API;
 using Welic.App.Services.MessageServices.ServicesViewModels;
 using Welic.Dominio.Models.Users.Dtos;
@@ -73,10 +75,25 @@ namespace Welic.App.ViewModels
 
                 if (CrossConnectivity.Current.IsConnected)
                 {
-
                     this.LoginCommand.ChangeCanExecute();
                     if (!await WebApi.Current.AuthenticateAsync(usuario))
                         throw new Exception("Erro ao Tentar Autenticar o Usuario");
+
+                    //Informações da plataforma e dispositivo
+                    DispositivoDto dis = new DispositivoDto();
+                    //dis.Plataforma = CrossDeviceInfo.Current.Platform.ToString();
+                    //dis.DeviceName = CrossDeviceInfo.Current.DeviceName;
+                    //dis.Versao = CrossDeviceInfo.Current.Version;
+                    //dis.Id = CrossDeviceInfo.Current.Id;
+
+                    // await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
+
+                    await _navigationService.NavigateToAsync<LoginExternoViewModel>();
+
+
+
+
+
 
 
 

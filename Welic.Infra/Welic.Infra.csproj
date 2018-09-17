@@ -82,7 +82,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
+    <Compile Include="Mapeamentos\MapeamentoDispositivos.cs" />
     <Compile Include="Mapeamentos\MapeamentoLogin.cs" />
+    <Compile Include="Migrations\201809162028366_InitialCreate.cs" />
+    <Compile Include="Migrations\201809162028366_InitialCreate.Designer.cs">
+      <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +100,11 @@
       <Project>{434B42F2-13D5-4FB9-A973-C6D8342A8784}</Project>
       <Name>Welic.Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201809162028366_InitialCreate.resx">
+      <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

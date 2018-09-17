@@ -1,28 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Newtonsoft.Json.Linq;
 using Welic.App.Droid;
-using Welic.App.ViewModels;
 using Welic.App.Views;
 using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(LoginPage), typeof(LoginPageRenderer))]
+[assembly: ExportRenderer(typeof(LoginExternoPage), typeof(LoginPageRenderer))]
 namespace Welic.App.Droid
 {
     public class LoginPageRenderer : PageRenderer
-    {
-        /// <inheritdoc />
+    {        
         public LoginPageRenderer()
         {
             var activity = this.Context as Activity;

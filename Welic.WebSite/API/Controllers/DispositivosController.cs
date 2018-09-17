@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using Welic.Dominio.Models.Acesso.Dtos;
+using Welic.Dominio.Models.Acesso.Servicos;
+
+namespace Welic.WebSite.API.Controllers
+{
+    [Authorize]
+    [RoutePrefix("Dispositivo")]
+    public class DispositivosController : BaseController
+    {
+        private readonly IServicoDispositivo _servico;
+        public DispositivosController(IServicoDispositivo servico)
+        {
+            _servico = servico;
+        }
+
+        [HttpGet]        
+        [Route("GetById/{id:alpha}")]
+        public Task<HttpResponseMessage> GetById(string id)
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.ConsultarPorId(id));
+        }
+
+        [HttpPost]
+        [Route("salvar")]
+        public Task<HttpResponseMessage> salvar([FromBody] DispositivoDto dispositivoDto)
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.Salvar(dispositivoDto));
+
+        }
+
+        [HttpPost]
+        [Route("alterar")]
+        public Task<HttpResponseMessage> Alterar([FromBody]DispositivoDto dispositivoDto)
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.Alterar(dispositivoDto));
+
+        }
+       
+    }
+}

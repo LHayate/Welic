@@ -23,8 +23,7 @@
     <!-- You can also set colorControlNormal, colorControlActivated
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
-
-    <string name="facebook_app_id">528237220950003</string>
+    
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
   </style>
 

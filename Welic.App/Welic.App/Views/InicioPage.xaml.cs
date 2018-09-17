@@ -12,6 +12,11 @@ namespace Welic.App.Views
 		{
 			InitializeComponent ();
 		    BindingContext = new InicioViewModel();
-		}	   
+		}
+
+	    private void Button_OnClicked(object sender, EventArgs e)
+	    {
+	        throw new NotImplementedException();
+	    }
 	}
 }

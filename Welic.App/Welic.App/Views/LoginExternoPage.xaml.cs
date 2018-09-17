@@ -10,12 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace Welic.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class StartPage : ContentPage
+	public partial class LoginExternoPage : ContentPage
 	{
-		public StartPage ()
+		public LoginExternoPage ()
 		{
 			InitializeComponent ();
-		    BindingContext = new StartViewModel();
+            BindingContext = new LoginExternoViewModel();
 		}
 	}
 }

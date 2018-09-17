@@ -57,7 +57,7 @@ namespace Welic.App.Services.API
             _HttpClient = new HttpClient
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
-                BaseAddress = new Uri("http://192.168.0.10:3000/")
+                BaseAddress = new Uri("http://192.168.0.10/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -86,17 +86,17 @@ namespace Welic.App.Services.API
 
                         this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
                     }
-                    using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
-                    {
-                        if (!_response.IsSuccessStatusCode)
-                            return false;
+                    //using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
+                    //{
+                    //    if (!_response.IsSuccessStatusCode)
+                    //        return false;
 
-                        var _result = await _response.Content.ReadAsStringAsync();
+                    //    var _result = await _response.Content.ReadAsStringAsync();
 
-                        var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
+                    //    var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
 
-                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
-                    }
+                    //    this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
+                    //}
                 }
                 return true;
             }
@@ -129,9 +129,9 @@ namespace Welic.App.Services.API
             {
                 throw new Exception("Erro ao tentar buscar dados");
             }
-        }
+        }    
 
-        internal async Task<bool> PostAsync<T>(T obj, string uri)
+        internal async Task<bool> PostAsync<T>(string uri, T obj)
         {
             string json = JsonConvert.SerializeObject(obj);
             HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -141,7 +141,7 @@ namespace Welic.App.Services.API
                     throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
                 return true;
             }
-            
+
         }
 
         internal async Task<bool> PutAsync<T>(int id, T t, string uri)

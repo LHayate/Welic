@@ -58,10 +58,15 @@
     <Compile Include="Models\Acesso\Comandos\ComandoRegistroAtividadeUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoConsultaUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoCriaUsuario.cs" />
+    <Compile Include="Models\Acesso\Dtos\DispositivoDto.cs" />
+    <Compile Include="Models\Acesso\Entidades\Dispositivo.cs" />
     <Compile Include="Models\Acesso\Entidades\DispositivoUsuario.cs" />
     <Compile Include="Models\Acesso\Entidades\Usuario.cs" />
     <Compile Include="Models\Acesso\Escopos\EscoposUsuario.cs" />
+    <Compile Include="Models\Acesso\Mapeamentos\DispositivosMap.cs" />
+    <Compile Include="Models\Acesso\Repositorios\IRepositorioDispositivos.cs" />
     <Compile Include="Models\Acesso\Repositorios\IRepositorioUsuario.cs" />
+    <Compile Include="Models\Acesso\Servicos\IServicoDispositivo.cs" />
     <Compile Include="Models\Acesso\Servicos\IServicoUsuario.cs" />
     <Compile Include="Models\Users\Dtos\UserDto.cs" />
     <Compile Include="Models\Users\Entidades\User.cs" />

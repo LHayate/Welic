@@ -46,6 +46,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DomainNotificationHelper, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin.Cors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Cors.4.0.0\lib\net451\Microsoft.Owin.Cors.dll</HintPath>
@@ -212,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Controllers\AccountController.cs" />
+    <Compile Include="API\Controllers\BaseController.cs" />
     <Compile Include="API\Controllers\testeController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -221,6 +223,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="API\Controllers\DispositivosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,7 +271,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -309,6 +314,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Desktop\Welic\aspnet-mvc-internationalization\MvcInternationalization\Resources\Resources.csproj">
@@ -318,6 +324,10 @@
     <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">
       <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
       <Name>Welic.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Welic.Infra\Welic.Infra.csproj">
+      <Project>{F0003DA5-1307-44D9-A6CC-69F2CDBC1FC3}</Project>
+      <Name>Welic.Infra</Name>
     </ProjectReference>
     <ProjectReference Include="..\Welic.Repositorios\Welic.Repositorios.csproj">
       <Project>{F5045C53-082C-46F3-9277-A1AE37FE34BD}</Project>

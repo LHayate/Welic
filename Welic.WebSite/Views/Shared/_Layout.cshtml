@@ -50,7 +50,7 @@
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
 
-                <a id="logo-container" href="@Url.Action("Index")" class="brand-logo right"><i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>Welic</a>
+                <a>@Html.ActionLink("Welic", "Index", "Home", routeValues: null, htmlAttributes:  new { id = "logo-container", @class = "brand-logo right" })</a><i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>
 
                 <ul class="left hide-on-med-and-down">
                     <li class="waves-effect waves-light"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>

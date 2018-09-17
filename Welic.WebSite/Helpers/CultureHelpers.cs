@@ -30,9 +30,6 @@ namespace Welic.WebSite.Helpers
 
         }
 
-
-
-
         /// <summary>
         /// Returns a valid culture name based on "name" parameter. If "name" is not valid, it returns the default culture "en-US"
         /// </summary>
@@ -88,7 +85,6 @@ namespace Welic.WebSite.Helpers
         {
             return GetNeutralCulture(Thread.CurrentThread.CurrentCulture.Name);
         }
-
 
         public static string GetNeutralCulture(string name)
         {

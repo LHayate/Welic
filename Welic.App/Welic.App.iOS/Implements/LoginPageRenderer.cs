@@ -11,7 +11,7 @@ using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(LoginPage), typeof(Welic.App.iOS.LoginPageRenderer))]
+[assembly: ExportRenderer(typeof(LoginExternoPage), typeof(Welic.App.iOS.LoginPageRenderer))]
 namespace Welic.App.iOS
 {
     public class LoginPageRenderer : PageRenderer
