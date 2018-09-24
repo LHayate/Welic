@@ -13,21 +13,37 @@ namespace Welic.Infra.Mapeamentos
     {
         public MapeamentoLogin()
         {
-            ToTable("Login");
+            ToTable("UserInfo","dbo");
 
-            HasKey(x => x.Email);
-
-            Property(x => x.Email)
-                .HasMaxLength(60)
+            HasKey(x => x.Id);
+            Property(x => x.EmailConfirmed)
                 .IsRequired()
-                .HasColumnType("varchar");
-
+                .HasColumnType("bit");            
+            Property(x => x.Email)                
+                .IsRequired()
+                .HasColumnType("nvarchar");
+            Property(x => x.Cpf)
+                .HasColumnName("Cpf")
+                .HasColumnType("varchar")
+                .IsRequired();
             Property(x => x.Password)
                 .HasMaxLength(20)
                 .IsRequired()
-                .HasColumnType("varchar");            
-            Property(x => x.RememberMe)
-                .HasColumnType("bit");
+                .HasColumnType("nvarchar");
+            Property(x => x.NomeCompleto)
+                .IsRequired()
+                .HasColumnType("varchar")
+                .HasMaxLength(150)
+                .HasColumnName("NameComplete");
+            Property(x => x.ImagemPerfil)
+                .HasColumnName("ImagePerfil")
+                .HasColumnType("image");
+            Property(x => x.PhoneNumber)
+                .IsRequired()
+                .HasColumnName("PhoneNumber")
+                .HasColumnType("varchar");
+            
+
 
         }
         

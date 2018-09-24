@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace Welic.WebSite.Models
 {
@@ -50,6 +51,7 @@ namespace Welic.WebSite.Models
     {
         [Required]
         [Display(Name = "Email / Usuario")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]

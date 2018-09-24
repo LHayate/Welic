@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
+using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Infra.Mapeamentos;
 using Welic.Infra.Migrations;
 
@@ -35,12 +36,15 @@ namespace Welic.Infra.Context
         }
 
         public DbSet<DispositivosMap> Dispositivo { get; set; }
+        public DbSet<UserMap> User { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new MapeamentoDispositivos());
+            modelBuilder.Configurations.Add(new MapeamentoLogin());
+
         }
     }
 }

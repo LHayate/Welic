@@ -1,10 +1,9 @@
 ﻿using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Welic.Dominio.Models.Users.Dtos;
-using Welic.Repositorios.Login;
 using Welic.WebSite.API.Controllers;
+
 
 namespace Welic.WebSite.Provider
 {
@@ -14,19 +13,16 @@ namespace Welic.WebSite.Provider
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             using (AccountController repo = new AccountController())
             {
-
                 UserDto usuario = new UserDto
                 {
                     Email = context.UserName,
                     Password = context.Password,
                     UserName = context.UserName,
                     RememberMe = false
-
                 };
 
                 if (!(await repo.Login(usuario)))
@@ -34,27 +30,13 @@ namespace Welic.WebSite.Provider
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
                 }
-            }
-
-
-            //using (AuthRepository _repo = new AuthRepository())
-            //{
-            //    //IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
-            //    IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
-
-            //    if (user == null)
-            //    {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-            //}
+            }            
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim("sub", context.UserName));
             identity.AddClaim(new Claim("role", "user"));
 
             context.Validated(identity);
-
         }
     }
 }

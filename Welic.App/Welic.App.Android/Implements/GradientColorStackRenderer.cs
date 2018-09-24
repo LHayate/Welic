@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Welic.App.Droid;
+using Welic.App.Exception;
 using Welic.App.Implements;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -61,7 +62,7 @@ namespace Welic.App.Droid
                 this.StartColor = stack.StartColor;
                 this.EndColor = stack.EndColor;
             }
-            catch (Exception ex)
+            catch (ServiceAuthenticationException ex)
             {
                 System.Diagnostics.Debug.WriteLine(@"ERROR:", ex.Message);
             }

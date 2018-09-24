@@ -5,25 +5,27 @@
 <html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,
-    initial-scale=1.0">
+    @*<meta name="viewport" content="width=device-width,
+
+        initial-scale=1.0">*@
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
     @* CSS Personalizado *@
     @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-    @*<link href="" rel="stylesheet" />*@
     <!--Import Google Icon Font-->
-    @*<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">*@
     @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
     <!-- Compiled and minified CSS -->
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" />*@
     @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
 
     <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
 
 </head>
-<body>
-    <!-- Modal Structure -->
+<body class="welic-azul-claro">
+    <!-- Modal Structure Sobre -->
     <div id="modal1" class="modal">
         <div class="modal-content">
             <h4 class="blue-text text-darken-1 center-align">Welic</h4>
@@ -50,11 +52,10 @@
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
 
-                <a>@Html.ActionLink("Welic", "Index", "Home", routeValues: null, htmlAttributes:  new { id = "logo-container", @class = "brand-logo right" })</a><i class="material-icons right"><img src="~/Imagens/LogoWelic32x32.png" /></i>
+                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/Logo_Welic.png" class="container" /></a>
 
-                <ul class="left hide-on-med-and-down">
-                    <li class="waves-effect waves-light"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
-                    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre o Welic</a></li>
+                <ul class="right hide-on-med-and-down ">
+                    <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
 
 
                     @if (Request.IsAuthenticated)
@@ -78,8 +79,7 @@
 
                 <ul id="nav-mobile" class="side-nav">
                     <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
-                    <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Sobre a Welic</a></li>
-                    
+
                     @if (Request.IsAuthenticated)
                     {
                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -108,166 +108,166 @@
     <div>
         @RenderBody()
         <hr />
-        <footer class="page-footer blue-grey darken-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col l3 s3 m3">
-                        <!-- Modal Structure -->
-                        <div id="modalPerfilJoel" class="modal">
-                            <div class="modal-content">
-                                <h4 class="blue-text text-darken-1 center-align">Joel Serrano </h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Joel Serrano é empreendedor há mais de 16 anos. Formado em Tecnologias de Informação e com especialização em e-learning. Ainda, é um profissional com elevada experiência em Consultoria e Formação de Jovens e Adultos.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Durante a sua carreira profissional, fundou várias empresas em países como, Portugal, Holanda e Alemanha.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Neste momento Coordena um projeto europeu, em 5 países europeus, no qual estimula o empreendedorismo em jovens na Europa.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Além disso, possui Marketplaces na Internet e especializa-se neste momento em Marketing Digital. Ainda É o CEO da Welic.
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                            </div>
-                        </div>
-                        <div class="card transparent">
-                            <div class="circle">
-                                <div class="container">
-                                    <img src="~/Imagens/Joel.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilJoel" class="circle responsive-img  modal-trigger tooltipped">
-                                </div>
-                            </div>
-                            <div class="card-stacked center-align">
-                                <div>
-                                    <ul>
-                                        <li><h6 class="blue-grey-text darken-4">CEO</h6></li>
 
-                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/joelfpserrano">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/joelfpserrano/">LinkedIn</a> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l3 s3 m3">
-                        <!-- Modal Structure -->
-                        <div id="modalPerfilLucas" class="modal">
-                            <div class="modal-content">
-                                <h4 class="blue-text text-darken-1 center-align">Lucas Ranuzi Rocha</h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Bacharel em analise e desenvolvimento de sistemas na Uniube - Universidade de Uberaba, Brasil. Especialista em desenvolvimento Mobile e Desktop atuando na área desde 2015.
-                                    Participante da comunidade .Net em busca de sempre ajudar a melhorar este universo de desenvolvimento.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Empreendedor membro fundador da Welic como CTO.
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                            </div>
-                        </div>
-                        <div class="card transparent">
-                            <div class="circle">
-                                <div class="container">
-                                    <img src="~/Imagens/Lucas.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilLucas" class="circle responsive-img  modal-trigger tooltipped">
-                                </div>
-                            </div>
-                            <div class="card-stacked center-align">
-                                <div>
-                                    <ul>
-                                        <li><h6 class="blue-grey-text darken-4">CTO</h6></li>
-                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/">LinkedIn</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l3 s3 m3">
-                        <!-- Modal Structure -->
-                        <div id="modalPerfilAndre" class="modal">
-                            <div class="modal-content">
-                                <h4 class="blue-text text-darken-1 center-align">André Luiz</h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Bacharel em Sistemas de Informação (PUC-Minas/Uniube), técnico em eletrônica (Escola Estadual Técnico Industrial Professor Fontes).
-                                    Como IT Specialist a minha formação académica, humana e laboral focou-se no desenvolvimento e implementação de grandes projetos.
-                                    Tenho experiência no contato com empresas internacionais. Sou um profissional comprometido com a inovação, liderança e trabalho de equipe.
-                                    Reconhecido ao longo de minha carreira pelo profissionalismo, íngreme curva de aprendizado, bem como, pelos resultados obtidos.
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                            </div>
-                        </div>
-                        <div class="card transparent">
-                            <div class="circle">
-                                <div class="container">
-                                    <img src="~/Imagens/Andre.jpeg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilAndre" class="circle responsive-img  modal-trigger tooltipped">
-                                </div>
-                            </div>
-                            <div class="card-stacked center-align">
-                                <div>
-                                    <ul>
-                                        <li><h6 class="blue-grey-text darken-4">CIO</h6></li>
-                                        <li><a class="blue-text darken-4" href="">Facebook</a> - <a class="cyan-text lighten-1" href="">LinkedIn</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l3 s3 m3">
-                        <!-- Modal Structure -->
-                        <div id="modalPerfilEderson" class="modal">
-                            <div class="modal-content">
-                                <h4 class="blue-text text-darken-1 center-align">Ederson Esch Aguiar</h4>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Profissional com Pós-Graduação em Engenharia de Software pela UFMG - Universidade Federal de Minas
-                                    Gerais e com Graduação em Tecnologia da Informação pelo Centro Universitário Newton Paiva.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Possui 21 anos de experiência em grandes projetos de TI e startups, atuando nas áreas comercial e técnica para clientes do Setor
-                                    Público e Setor Privado. Na área comercial atuou como Executivo de Clientes, Pré-vendas e Consultor de
-                                    Negócios para oportunidades de Aplicações, Infraestrutura e Produtos durante o ciclo completo de Vendas
-                                    utilizando sistemas de CRM, prospectando clientes/negócios, criando funil das oportunidades e fechando
-                                    negócios.
-                                </p>
-                                <p class="blue-text text-darken-1  accent-1 right-aligned">
-                                    Na área técnica, atuou em delivery como Gerente de Projetos e Sustentação, Coordenador, Analista
-                                    de Sistemas e Desenvolvedor, visando a execução de projetos/sustentação de aplicações em ambiente Web e
-                                    Cliente/Servidor. No ambiente acadêmico, atuou como Palestrante e Professor de TI em Universidades, Cursos
-                                    Técnicos e Preparatórios.
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                            </div>
-                        </div>
-                        <div class="card transparent">
-                            <div class="circle">
-                                <div class="container">
-                                    <img src="~/Imagens/Ederson.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilEderson" class="circle responsive-img  modal-trigger tooltipped">
-                                </div>
-                            </div>
-                            <div class="card-stacked center-align">
-                                <div>
-                                    <ul>
-                                        <li><h6 class="blue-grey-text darken-4">CFO/CCO</h6></li>
-                                        <li><a class="blue-text darken-4" href="https://www.facebook.com/ederson.eschaguiar">Facebook</a> - <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/edersoneschaguiar">LinkedIn</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="center container">
-                    Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: <a class="brown-text text-lighten-3" href="http://welic.app/">Welic.App</a>
-                </div>
-            </div>
-        </footer>
     </div>
+    <footer class="page-footer blue-grey darken-4 ">
+        <div class="container">
+            <div class="row">
+                <div class="col l3 s3 m3">
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilJoel" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Joel Serrano </h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Joel Serrano é empreendedor há mais de 16 anos. Formado em Tecnologias de Informação e com especialização em e-learning. Ainda, é um profissional com elevada experiência em Consultoria e Formação de Jovens e Adultos.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Durante a sua carreira profissional, fundou várias empresas em países como, Portugal, Holanda e Alemanha.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Neste momento Coordena um projeto europeu, em 5 países europeus, no qual estimula o empreendedorismo em jovens na Europa.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Além disso, possui Marketplaces na Internet e especializa-se neste momento em Marketing Digital. Ainda É o CEO da Welic.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagens/Joel.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilJoel" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CEO</h6></li>
 
+                                    <li> <a class="blue-text darken-4" href="https://www.facebook.com/joelfpserrano"><i><img src="~/Imagens/Icon_Facebook.png" /></i></a>  <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/joelfpserrano/"><i><img src="~/Imagens/icon_likedin.png" /></i></a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l3 s3 m3">
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilLucas" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Lucas Ranuzi Rocha</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Bacharel em analise e desenvolvimento de sistemas na Uniube - Universidade de Uberaba, Brasil. Especialista em desenvolvimento Mobile e Desktop atuando na área desde 2015.
+                                Participante da comunidade .Net em busca de sempre ajudar a melhorar este universo de desenvolvimento.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Empreendedor membro fundador da Welic como CTO.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagens/Lucas.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilLucas" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CTO</h6></li>
+                                    <li><a class="blue-text darken-4" href="https://www.facebook.com/lucasranzui.rocha"><i><img src="~/Imagens/Icon_Facebook.png" /></i></a>  <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/lucas-ranuzi-rocha-84b26a92/"><i><img src="~/Imagens/icon_likedin.png" /></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l3 s3 m3">
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilAndre" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">André Luiz</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Bacharel em Sistemas de Informação (PUC-Minas/Uniube), técnico em eletrônica (Escola Estadual Técnico Industrial Professor Fontes).
+                                Como IT Specialist a minha formação académica, humana e laboral focou-se no desenvolvimento e implementação de grandes projetos.
+                                Tenho experiência no contato com empresas internacionais. Sou um profissional comprometido com a inovação, liderança e trabalho de equipe.
+                                Reconhecido ao longo de minha carreira pelo profissionalismo, íngreme curva de aprendizado, bem como, pelos resultados obtidos.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagens/Andre.png" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilAndre" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CIO</h6></li>
+                                    <li><a class="blue-text darken-4" href=""><i><img src="~/Imagens/Icon_Facebook.png" /></i></a>  <a class="cyan-text lighten-1" href=""><i><img src="~/Imagens/icon_likedin.png" /></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l3 s3 m3">
+                    <!-- Modal Structure -->
+                    <div id="modalPerfilEderson" class="modal">
+                        <div class="modal-content">
+                            <h4 class="blue-text text-darken-1 center-align">Ederson Esch Aguiar</h4>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Profissional com Pós-Graduação em Engenharia de Software pela UFMG - Universidade Federal de Minas
+                                Gerais e com Graduação em Tecnologia da Informação pelo Centro Universitário Newton Paiva.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Possui 21 anos de experiência em grandes projetos de TI e startups, atuando nas áreas comercial e técnica para clientes do Setor
+                                Público e Setor Privado. Na área comercial atuou como Executivo de Clientes, Pré-vendas e Consultor de
+                                Negócios para oportunidades de Aplicações, Infraestrutura e Produtos durante o ciclo completo de Vendas
+                                utilizando sistemas de CRM, prospectando clientes/negócios, criando funil das oportunidades e fechando
+                                negócios.
+                            </p>
+                            <p class="blue-text text-darken-1  accent-1 right-aligned">
+                                Na área técnica, atuou em delivery como Gerente de Projetos e Sustentação, Coordenador, Analista
+                                de Sistemas e Desenvolvedor, visando a execução de projetos/sustentação de aplicações em ambiente Web e
+                                Cliente/Servidor. No ambiente acadêmico, atuou como Palestrante e Professor de TI em Universidades, Cursos
+                                Técnicos e Preparatórios.
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card transparent">
+                        <div class="circle">
+                            <div class="container">
+                                <img src="~/Imagens/Ederson.jpg" data-tooltip="Clique para conhecer" data-position="top" data-delay="50" href="#modalPerfilEderson" class="circle responsive-img  modal-trigger tooltipped">
+                            </div>
+                        </div>
+                        <div class="card-stacked center-align">
+                            <div>
+                                <ul>
+                                    <li><h6 class="blue-grey-text darken-4">CFO/CCO</h6></li>
+                                    <li><a class="blue-text darken-4" href="https://www.facebook.com/ederson.eschaguiar"><i><img src="~/Imagens/Icon_Facebook.png" /></i></a>  <a class="cyan-text lighten-1" href="https://www.linkedin.com/in/edersoneschaguiar"><i><img src="~/Imagens/icon_likedin.png" /></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="center container">
+                Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: <a class="brown-text text-lighten-3" href="http://welic.app/">Welic.App</a>
+            </div>
+        </div>
+    </footer>
     <!--Scripts-->
     <!-- Jquery Importado via CDN -->
     @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
@@ -299,6 +299,13 @@
             $('.slider').slider({ fullWidth: true });
         });
     </script><!--Slider-->
+    <!--Parallax-->
+    <script>
+        $(document).ready(function () {
+            $('.parallax').parallax();
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -316,18 +323,20 @@
     <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js">
 
     </script><!--RD-Station-->
+    <script src="~/Scripts/custom.js">
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
+    </script>
 
-        <script type="text/javascript">
-            (function ($) {
-                $("input[type = 'radio']").click(function () {
-                    $(this).parents("form").submit(); // post form
-                });
 
-            })(jQuery);
-        </script>
+
+    <script type="text/javascript">
+        (function ($) {
+            $("input[type = 'radio']").click(function () {
+                $(this).parents("form").submit(); // post form
+            });
+
+        })(jQuery);
+    </script>
     }
 
 </body>

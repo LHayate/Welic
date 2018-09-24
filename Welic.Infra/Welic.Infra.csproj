@@ -84,6 +84,7 @@
     <Compile Include="Context\AuthContext.cs" />
     <Compile Include="Mapeamentos\MapeamentoDispositivos.cs" />
     <Compile Include="Mapeamentos\MapeamentoLogin.cs" />
+    <Compile Include="Mapeamentos\MapeamentoMenu.cs" />
     <Compile Include="Migrations\201809162028366_InitialCreate.cs" />
     <Compile Include="Migrations\201809162028366_InitialCreate.Designer.cs">
       <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>

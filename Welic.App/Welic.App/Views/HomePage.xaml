@@ -2,11 +2,19 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:Welic.App.Views"
-            x:Class="Welic.App.Views.HomePage">
-  <!--Pages can be added as references or inline-->
-    <local:FavoritesPage />
-    <local:SearchPage />
-    <local:StartPage />
-    <local:EventsPage />
-    <local:NewsPage />
+            x:Class="Welic.App.Views.HomePage"
+            Title="Welic"
+            BackgroundColor="#F7F0F0"
+            >
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Name="MenuItemRefresh" Order="Primary" Icon="LogoWelic72x72.png" />
+    </TabbedPage.ToolbarItems>
+    <!--Pages can be added as references or inline-->
+
+    <local:FavoritesPage  Icon="star_icon.png" />
+    <local:SearchPage Icon="iEncontrar32.png"/>
+    <local:StartPage  Icon="ihouse.png"/>
+    <local:EventsPage Icon="Schedule_icon.png"/>
+    <local:NewsPage Icon="News_Icon.png"/>
+    
 </TabbedPage>

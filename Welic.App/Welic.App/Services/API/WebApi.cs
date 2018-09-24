@@ -6,7 +6,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Welic.Dominio.Models.Users.Dtos;
+using Welic.App.Models.Usuario;
+using Welic.App.Services.ServicesViewModels;
 
 
 namespace Welic.App.Services.API
@@ -31,8 +32,8 @@ namespace Welic.App.Services.API
                 }
                 return _lazy.Value;
             }
-        }
-        
+        }       
+
         private static readonly object SyncRoot = new object();
         class TokenResult
         {
@@ -57,6 +58,7 @@ namespace Welic.App.Services.API
             _HttpClient = new HttpClient
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
+                //BaseAddress = new Uri("http://192.168.0.10:3000/")
                 BaseAddress = new Uri("http://192.168.0.10/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -86,21 +88,11 @@ namespace Welic.App.Services.API
 
                         this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
                     }
-                    //using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
-                    //{
-                    //    if (!_response.IsSuccessStatusCode)
-                    //        return false;
-
-                    //    var _result = await _response.Content.ReadAsStringAsync();
-
-                    //    var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
-
-                    //    this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
-                    //}
+                  
                 }
                 return true;
             }
-            catch (Exception)
+            catch (System.Exception)
             {
                 return false;
 
@@ -118,16 +110,16 @@ namespace Welic.App.Services.API
                         if (_response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
 
-                        throw new Exception("Algo de errado não deu certo.");
+                        throw new System.Exception("Algo de errado não deu certo.");
                     }
                     var _result = await _response.Content.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<T>(_result);
                 }
             }
-            catch (Exception)
+            catch (System.Exception)
             {
-                throw new Exception("Erro ao tentar buscar dados");
+                throw new System.Exception("Erro ao tentar buscar dados");
             }
         }    
 

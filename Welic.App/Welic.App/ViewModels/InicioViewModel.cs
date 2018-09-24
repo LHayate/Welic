@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Welic.App.Services.MessageServices.ServicesViewModels;
+using Welic.App.Exception;
+using Welic.App.Models.Usuario;
+using Welic.App.Services;
+using Welic.App.Services.ServicesViewModels;
+using Welic.App.Services.ServiceViews;
+using Welic.App.ViewModels.Base;
 using Welic.App.Views;
 using Xamarin.Forms;
 
@@ -15,12 +21,10 @@ namespace Welic.App.ViewModels
         public Command CreateAccountCommand { get; set; }
         public Command TermsUseCommand { get; set; }
 
-        private readonly IMessageService _messageService;
-        private readonly INavigationService _navigationService;
+
         public InicioViewModel()
         {
-            _messageService = DependencyService.Get<IMessageService>();
-            _navigationService = DependencyService.Get<INavigationService>();
+
             LoginEmailCommand = new Command(async () => await LoginEmail());
             LoginFacebookCommand = new Command(async () => await LoginFacebook());
 
@@ -30,12 +34,12 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                await _navigationService.NavigateToAsync<LoginExternoViewModel>();
+                await NavigationService.NavigateToAsync<LoginExternoViewModel>();
             }
-            catch (Exception e)
+            catch (ServiceAuthenticationException e)
             {
                 Console.WriteLine(e);
-                await _messageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);
+                await MessageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);
             }
         }
 
@@ -44,14 +48,22 @@ namespace Welic.App.ViewModels
             try
             {
                 
-                await _navigationService.NavigateToAsync<LoginViewModel>();
+                await NavigationService.NavigateToAsync<LoginViewModel>();
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await _messageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);
+                await MessageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);
             }
            
-        }       
+        }
+        public List<UserDto> LoadAsync()
+        {
+            DatabaseManager dbManager = new DatabaseManager();
+            var usu = dbManager.database.Table<UserDto>()
+                .Where(x => x.Conectado == true)
+                .ToList();
+            return usu;
+        }
     }
 }

@@ -29,8 +29,9 @@
                     </OnPlatform>
                 </abstractions:CircleImage.HeightRequest>
             </abstractions:CircleImage>
+            <Button Command="{Binding AddNewPicture}"/>
             <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" Grid.Row="0" >
-            <Label Text="Lucas Ranuzi Rocha" TextColor="Black"  HorizontalTextAlignment="Center"/>
+            <Label Text="{Binding NomeCompleto}" TextColor="Black"  HorizontalTextAlignment="Center"/>
             <Label Text="CPF:XXX.XXX.X89-12" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
             </StackLayout>
         </Grid>
@@ -74,9 +75,6 @@
 
             <Label Text="Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: Welic.App" TextColor="Black" HorizontalTextAlignment="Center"/>
         </StackLayout>
-
-
-
 
     </StackLayout>
 </ContentPage>

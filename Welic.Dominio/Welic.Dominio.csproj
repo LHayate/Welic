@@ -68,9 +68,16 @@
     <Compile Include="Models\Acesso\Repositorios\IRepositorioUsuario.cs" />
     <Compile Include="Models\Acesso\Servicos\IServicoDispositivo.cs" />
     <Compile Include="Models\Acesso\Servicos\IServicoUsuario.cs" />
+    <Compile Include="Models\Menu\Dtos\MenuDto.cs" />
+    <Compile Include="Models\Menu\Entidades\Menu.cs" />
+    <Compile Include="Models\Menu\Enums\MenuItemType.cs" />
+    <Compile Include="Models\Menu\Mapeamentos\MenuMap.cs" />
+    <Compile Include="Models\Menu\Repositorios\IRepositorioMenu.cs" />
+    <Compile Include="Models\Menu\Servicos\IServicoMenu.cs" />
     <Compile Include="Models\Users\Dtos\UserDto.cs" />
     <Compile Include="Models\Users\Entidades\User.cs" />
     <Compile Include="Models\Users\Mapeamentos\UserMap.cs" />
+    <Compile Include="Models\Users\Repositorios\IRepositorioUser.cs" />
     <Compile Include="Models\Users\Servicos\IServicoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiposDados\AcaoRegistroBanco.cs" />
@@ -97,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Users\Enums\" />
-    <Folder Include="Models\Users\Repositorios\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

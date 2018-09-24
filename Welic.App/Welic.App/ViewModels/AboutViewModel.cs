@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-
+using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels

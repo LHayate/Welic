@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Login\AuthRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Menu\RepositorioMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">

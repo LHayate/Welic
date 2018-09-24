@@ -1,6 +1,6 @@
 ﻿using Welic.App.Models;
 using System.Collections.Generic;
-
+using Welic.App.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +14,7 @@ namespace Welic.App.Views
         public MenuPage()
         {
             InitializeComponent();
+            BindingContext = new MainViewModel();
 
             menuItems = new List<HomeMenuItem>
             {
@@ -25,7 +26,6 @@ namespace Welic.App.Views
                 new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = "iConfiguracao.png" },
                 new HomeMenuItem {Id = MenuItemType.SignUp, Title="Sign Up", IconMenu = "iVoltar24.png" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = "information24.png" }
-
             };
 
             ListViewMenu.ItemsSource = menuItems;

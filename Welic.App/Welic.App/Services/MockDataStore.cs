@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Welic.App.Models;
+using Welic.App.Services.ServicesViewModels;
 
 namespace Welic.App.Services
 {

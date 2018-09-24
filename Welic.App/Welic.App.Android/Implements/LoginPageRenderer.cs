@@ -2,6 +2,7 @@
 using Android.App;
 using Newtonsoft.Json.Linq;
 using Welic.App.Droid;
+using Welic.App.Models.Usuario;
 using Welic.App.Views;
 using Xamarin.Auth;
 using Xamarin.Forms;
@@ -35,8 +36,16 @@ namespace Welic.App.Droid
 
                     var id = obj["id"].ToString().Replace("\"", "");
                     var name = obj["name"].ToString().Replace("\"", "");
+                    var email = obj["email"].ToString().Replace("\"", "");
 
-                    await App.NavigateToProfile();
+                    UserDto userDto = new UserDto
+                    {
+                        Conectado = true,
+                        Email = email,
+                        UserName = name,
+
+                    };
+                    await App.NavigateToProfile(userDto);
                 }
                 else
                 {

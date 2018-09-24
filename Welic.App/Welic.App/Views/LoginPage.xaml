@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:implements="clr-namespace:Welic.App.Implements"
              x:Class="Welic.App.Views.LoginPage"        
-             
+             NavigationPage.HasNavigationBar="False"
              BackgroundImage="Login_BackGround.png">
 <ContentPage.Resources>
 
