@@ -9,10 +9,10 @@ using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Infra.Mapeamentos
 {
-    public class MapeamentoUser
+    public class MapeamentoLogin
         : EntityTypeConfiguration<UserMap>
     {
-        public MapeamentoUser()
+        public MapeamentoLogin()
         {
             ToTable("UserInfo","dbo");
             HasKey(x => x.Id);

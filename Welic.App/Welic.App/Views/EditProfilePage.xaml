@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
+             xmlns:converts="clr-namespace:Welic.App.Implements.Converts;assembly=Welic.App"
+
+             x:Class="Welic.App.Views.EditProfilePage"
+             NavigationPage.HasNavigationBar="True"
+             BackgroundImage="Login_BackGround.png">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converts:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                
+                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
+                                   VerticalOptions="CenterAndExpand" 
+                                   HorizontalOptions="CenterAndExpand"/>
+                <Button Text="X" HorizontalOptions="EndAndExpand" Command="{Binding ReturnToMenuCommand}" BackgroundColor="Transparent" TextColor="DimGray"/>
+                <abstractions:CircleImage Source="{Binding SelectedPollItem.Image, Converter={StaticResource ByteArrayToImage}} "                 
+                                          Aspect="AspectFill" 
+                                          x:Name="CircleImage" 
+                                          >
+                    <abstractions:CircleImage.WidthRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS">120</On>
+                        </OnPlatform>
+                    </abstractions:CircleImage.WidthRequest>
+                    <abstractions:CircleImage.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android, iOS">120</On>
+                        </OnPlatform>
+                    </abstractions:CircleImage.HeightRequest>
+                </abstractions:CircleImage>
+                <Button Text="Edit" FontSize="10"  
+                        HorizontalOptions="CenterAndExpand" 
+                        Command="{Binding AlterPhotoCommand}" 
+                        BackgroundColor="Transparent" 
+                        TextColor="DimGray"/>
+                <StackLayout Margin="20,0,20,0">
+                    <Entry Placeholder="First Name" Text="{Binding FirstName}" />
+                    <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
+                    <Entry Placeholder="Identity" Text="{Binding Identity}"/>
+                    <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}"/>
+                    <Entry Placeholder="E-mail" Text="{Binding Email}"/>
+                    <Entry Placeholder="Password" Text="{Binding Password}"/>
+                    <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}"/>
+                    
+                    <implements:GradientColorStack StartColor="#C79D1D" 
+                                                   EndColor="#CE7526" 
+                                                   HorizontalOptions="CenterAndExpand"
+                                                   VerticalOptions="CenterAndExpand">
+                        <Button Text="Save" 
+                                HorizontalOptions="CenterAndExpand" 
+                                Command="{Binding SaveInfosCommand}" 
+                                BackgroundColor="Transparent" 
+                                HeightRequest="37"
+                                WidthRequest="229"
+                                CornerRadius="6"
+                                TextColor="DimGray"/>
+                        
+                    </implements:GradientColorStack>
+                    
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
