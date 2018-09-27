@@ -9,7 +9,7 @@ using Welic.App.ViewModels.Base;
 using Welic.App.Views;
 using Xamarin.Forms;
 
-namespace Welic.App.Services.ServiceViews
+namespace Welic.App.Services.Navigation
 {
     public class NavigationService : INavigationService
     {        
@@ -39,6 +39,11 @@ namespace Welic.App.Services.ServiceViews
             }            
         }
 
+        public async  Task ReturnToAsync(bool animation = false) 
+        {
+            await Application.Current.MainPage.Navigation.PopAsync(animation);
+        }
+
         public async Task NavigateModalToAsync<TViewModel>() where TViewModel : BaseViewModel
         {
             try
@@ -53,6 +58,11 @@ namespace Welic.App.Services.ServiceViews
 
         }
 
+        public async Task ReturnModalToAsync(bool animation = false) 
+        {
+            await Application.Current.MainPage.Navigation.PopModalAsync(animation);
+        }
+
         public async Task NavigateModalToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel
         {
             await Application.Current.MainPage.Navigation.PushModalAsync(CreatePage(typeof(TViewModel), parameter));
@@ -65,9 +75,7 @@ namespace Welic.App.Services.ServiceViews
 
         public Task RemoveLastFromBackStackAsync()
         {
-            var mainPage = Application.Current.MainPage as CustomNavigationView;
-
-            if (mainPage != null)
+            if (Application.Current.MainPage is CustomNavigationView mainPage)
             {
                 mainPage.Navigation.RemovePage(
                     mainPage.Navigation.NavigationStack[mainPage.Navigation.NavigationStack.Count - 2]);
