@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -8,24 +9,31 @@ using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Infra.Mapeamentos
 {
-    public class MapeamentoLogin
+    public class MapeamentoUser
         : EntityTypeConfiguration<UserMap>
     {
-        public MapeamentoLogin()
+        public MapeamentoUser()
         {
-            ToTable("UserInfo","dbo");
-
+            ToTable("UserInfo", "dbo");
             HasKey(x => x.Id);
+
+            Property(x => x.Id)
+                .HasColumnName("Id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)
+                .IsRequired()
+                .HasColumnType("int");
+
+            Property(x => x.Guid)
+                .HasColumnName("Guid")
+                .HasColumnType("uniqueidentifier")
+                .IsRequired();
             Property(x => x.EmailConfirmed)
                 .IsRequired()
-                .HasColumnType("bit");            
-            Property(x => x.Email)                
+                .HasColumnType("bit");
+            Property(x => x.Email)
                 .IsRequired()
                 .HasColumnType("nvarchar");
-            Property(x => x.Cpf)
-                .HasColumnName("Cpf")
-                .HasColumnType("varchar")
-                .IsRequired();
+
             Property(x => x.Password)
                 .HasMaxLength(20)
                 .IsRequired()
@@ -42,10 +50,10 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnName("PhoneNumber")
                 .HasColumnType("varchar");
-            
+
 
 
         }
-        
+
     }
 }

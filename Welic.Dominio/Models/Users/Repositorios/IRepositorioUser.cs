@@ -9,8 +9,9 @@ namespace Welic.Dominio.Models.Users.Repositorios
 {
     public interface IRepositorioUser
     {
-        UserMap Save(UserMap userDto);
-        UserMap GetById(UserMap userDto);
-        void Delete(string id);
+        void Save(UserMap userMap);
+        UserMap GetById(int id);
+        void Delete(int id);
+        UserMap GetByEmail(string email);
     }
 }

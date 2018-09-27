@@ -12,6 +12,7 @@ namespace Welic.Dominio.Models.User.Servicos
         UserDto Save(UserDto userDto);
         UserDto GetById(int id);
         void Delete(int id);
+        UserDto GetByEmail(string email);
 
     }
 }

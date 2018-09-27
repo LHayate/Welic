@@ -43,7 +43,7 @@ namespace Welic.Infra.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new MapeamentoDispositivos());
-            modelBuilder.Configurations.Add(new MapeamentoLogin());
+            modelBuilder.Configurations.Add(new MapeamentoUser());
 
         }
     }

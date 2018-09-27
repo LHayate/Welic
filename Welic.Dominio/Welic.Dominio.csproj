@@ -74,6 +74,7 @@
     <Compile Include="Models\Menu\Mapeamentos\MenuMap.cs" />
     <Compile Include="Models\Menu\Repositorios\IRepositorioMenu.cs" />
     <Compile Include="Models\Menu\Servicos\IServicoMenu.cs" />
+    <Compile Include="Models\Users\Adapter\AdapterUser.cs" />
     <Compile Include="Models\Users\Dtos\UserDto.cs" />
     <Compile Include="Models\Users\Entidades\User.cs" />
     <Compile Include="Models\Users\Mapeamentos\UserMap.cs" />
