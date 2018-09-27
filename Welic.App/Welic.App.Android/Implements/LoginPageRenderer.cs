@@ -40,7 +40,7 @@ namespace Welic.App.Droid
 
                     UserDto userDto = new UserDto
                     {
-                        Conectado = true,
+                        RememberMe = true,
                         Email = email,
                         UserName = name,
 

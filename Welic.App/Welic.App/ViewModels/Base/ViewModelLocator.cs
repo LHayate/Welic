@@ -6,6 +6,7 @@ using System.Text;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.Services.ServiceViews;
 using Unity;
+using Welic.App.Services.Navigation;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels.Base

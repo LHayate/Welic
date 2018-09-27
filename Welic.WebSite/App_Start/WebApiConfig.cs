@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace Welic.WebSite
 {
@@ -12,6 +13,15 @@ namespace Welic.WebSite
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            MediaTypeFormatterCollection formatters = config.Formatters;
+            //Habilitar xml
+            formatters.Remove(formatters.XmlFormatter);
+
+            JsonSerializerSettings jsonSettings = formatters.JsonFormatter.SerializerSettings;
+            jsonSettings.Formatting = Formatting.Indented;
+            jsonSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -20,10 +30,7 @@ namespace Welic.WebSite
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-            );
-
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            );            
         }
     }
 }

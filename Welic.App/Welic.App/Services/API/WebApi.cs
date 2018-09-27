@@ -58,8 +58,8 @@ namespace Welic.App.Services.API
             _HttpClient = new HttpClient
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
-                //BaseAddress = new Uri("http://192.168.0.10:3000/")
-                BaseAddress = new Uri("http://192.168.0.10/")
+                BaseAddress = new Uri("http://192.168.0.10:3000/api/")
+                //BaseAddress = new Uri("http://192.168.0.10/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -76,7 +76,7 @@ namespace Welic.App.Services.API
                         new KeyValuePair<string, string>("username", usuario.UserName),
                         new KeyValuePair<string, string>("password", usuario.Password),
                     };
-
+                    
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
                     {
                         if (!_response.IsSuccessStatusCode)
@@ -125,14 +125,23 @@ namespace Welic.App.Services.API
 
         internal async Task<bool> PostAsync<T>(string uri, T obj)
         {
-            string json = JsonConvert.SerializeObject(obj);
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            using (var _response = await _HttpClient.PostAsync(uri, content))
+            try
             {
-                if (!_response.IsSuccessStatusCode)
-                    throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
-                return true;
+                string json = JsonConvert.SerializeObject(obj);
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                using (var _response = await _HttpClient.PostAsync(uri, content))
+                {
+                    if (!_response.IsSuccessStatusCode)
+                        throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
+                    return true;
+                }
             }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
 
         }
 

@@ -1,5 +1,10 @@
-﻿using Welic.App.Models;
+﻿using System;
+using Welic.App.Models;
 using System.Collections.Generic;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Welic.App.Models.Usuario;
+using Welic.App.Services.API;
 using Welic.App.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,7 +19,7 @@ namespace Welic.App.Views
         public MenuPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel();
+            BindingContext = new MenuViewModel();
 
             menuItems = new List<HomeMenuItem>
             {
@@ -38,6 +43,45 @@ namespace Welic.App.Views
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
+        }
+
+        private async void Button_OnClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                await CrossMedia.Current.Initialize();
+
+                if (!CrossMedia.Current.IsTakePhotoSupported || !CrossMedia.Current.IsCameraAvailable)
+                {
+                    await App.Current.MainPage.DisplayAlert("Ops", "Nenhuma câmera detectada.", "OK");
+
+                    return;
+                }
+
+                var file = await CrossMedia.Current.TakePhotoAsync(
+                    new StoreCameraMediaOptions
+                    {
+                        Directory = "Resources",
+                        Name = "Perfil.png"
+                    });
+
+                if (file == null)
+                    return;
+
+                var user = new UserDto();
+                                
+                if(await user.RegisterPhoto(file))
+                    CircleImage.Source = ImageSource.FromStream(() =>
+                    {
+                        var stream = file.GetStream();
+                        file.Dispose();
+                        return stream;
+                    });
+            }
+            catch (System.Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
+            }
         }
     }
 }

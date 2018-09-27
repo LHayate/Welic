@@ -11,7 +11,7 @@ using Welic.Dominio.Models.Acesso.Servicos;
 namespace Welic.WebSite.API.Controllers
 {
     [Authorize]
-    [RoutePrefix("Dispositivo")]
+    [RoutePrefix("api/Dispositivo")]
     public class DispositivosController : BaseController
     {
         private readonly IServicoDispositivo _servico;

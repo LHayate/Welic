@@ -8,17 +8,17 @@ namespace Servicos
     public class Servico : IServico
     {
         private readonly IUnidadeTrabalho _unidadeTrabalho;
-       // private readonly IManipulador<NotificacaoDominio> _notificacoes;
+        private readonly IManipulador<NotificacaoDominio> _notificacoes;
 
         protected Servico(IUnidadeTrabalho unidadeTrabalho)
         {
             _unidadeTrabalho = unidadeTrabalho;
             //_notificacoes = EventoDominio.Container.ObterServico<IManipulador<NotificacaoDominio>>();
-        }
+        }      
 
         public void Rollback(string valor)
         {
-           // EventoDominio.Disparar(new NotificacaoDominio("Erro", valor));
+            //EventoDominio.Disparar(new NotificacaoDominio("Erro", valor));
             _unidadeTrabalho.Rollback();
         }
 
@@ -29,7 +29,8 @@ namespace Servicos
 
         public bool Valido()
         {
-            return false; //!_notificacoes.PossuiNotificacoes();
+            //TODO: Implementar Validações
+            return true; //!_notificacoes.PossuiNotificacoes();
         }
 
         public void BeginTran()
@@ -44,8 +45,17 @@ namespace Servicos
             //    return false;
             //}
 
-            _unidadeTrabalho.Commit();
-            return true;
+            try
+            {
+                _unidadeTrabalho.Commit();
+                return true;
+            }
+            catch (System.Exception)
+            {
+
+                return false;
+            }
+           
         }
     }
 }

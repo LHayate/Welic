@@ -61,7 +61,7 @@ namespace Welic.App.ViewModels
         {
             DatabaseManager dbManager = new DatabaseManager();
             var usu = dbManager.database.Table<UserDto>()
-                .Where(x => x.Conectado == true)
+                .Where(x => x.RememberMe == true)
                 .ToList();
             return usu;
         }

@@ -9,9 +9,10 @@ namespace Welic.Dominio.Models.User.Servicos
 {
     public interface IServicoLogin
     {
-        UserDto Save(UserDto userDto);
+        UserDto Save(UserDto userDto);        
         UserDto GetById(int id);
         void Delete(int id);
+        UserDto GetByEmail(string email);
 
     }
 }

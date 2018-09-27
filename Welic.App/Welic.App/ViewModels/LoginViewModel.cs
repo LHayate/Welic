@@ -32,9 +32,9 @@ namespace Welic.App.ViewModels
             set { SetProperty(ref senha, value); }
         }
 
-        private ISettingsService _settingsService;
-        private IOpenUrlService _openUrlService;
-        private IIdentityService _identityService;
+        private readonly ISettingsService _settingsService;
+        private readonly IOpenUrlService _openUrlService;
+        private readonly IIdentityService _identityService;
 
         public LoginViewModel()
         {
@@ -78,8 +78,7 @@ namespace Welic.App.ViewModels
                 {
                     UserName = UserLogin,
                     Password = Senha,
-                    Email = UserLogin,
-                    Conectado = true,
+                    Email = UserLogin,                    
                     ConfirmPassword = Senha,
                     RememberMe = true
                 };
@@ -90,7 +89,7 @@ namespace Welic.App.ViewModels
 
                     if (await WebApi.Current.AuthenticateAsync(usuario))
                     {
-                        usuario.RegistrarUsuario();
+                        usuario.AtualizaUsuario(usuario);
                         //Informações da plataforma e dispositivo
                         DispositivoDto dis = new DispositivoDto();
                         dis.Plataforma = CrossDeviceInfo.Current.Platform.ToString();

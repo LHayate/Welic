@@ -15,24 +15,33 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="1" />
             </Grid.RowDefinitions>
-            <abstractions:CircleImage Source="{Binding Image}" Aspect="AspectFill" Grid.Column="0" >
+            <abstractions:CircleImage Source="{Binding Image}" 
+                                      Aspect="AspectFill" 
+                                      Grid.Column="0" 
+                                      x:Name="CircleImage" >
                 <abstractions:CircleImage.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="Android, iOS">120</On>
-                        <On Platform="WinPhone">155</On>
                     </OnPlatform>
                 </abstractions:CircleImage.WidthRequest>
                 <abstractions:CircleImage.HeightRequest>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="Android, iOS">120</On>
-                        <On Platform="WinPhone">155</On>
+                        
                     </OnPlatform>
                 </abstractions:CircleImage.HeightRequest>
             </abstractions:CircleImage>
-            <Button Command="{Binding AddNewPicture}"/>
+            <Button Grid.Row="0" Grid.Column="0" Clicked="Button_OnClicked" 
+                     BackgroundColor="Transparent"                              
+                     BorderColor="Transparent"                                                                     
+                     />
+            
             <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" Grid.Row="0" >
-            <Label Text="{Binding NomeCompleto}" TextColor="Black"  HorizontalTextAlignment="Center"/>
-            <Label Text="CPF:XXX.XXX.X89-12" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding NomeCompleto}" TextColor="Black"  HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding Cpf}" TextColor="Black" FontSize="10"  HorizontalTextAlignment="Center"/>
+                <Label Text="{Binding Email}" TextColor="Black" FontSize="10" HorizontalOptions="Center"/>
+                <Button x:Name="EditProfile" Text="Edit Profile" FontSize="10" BackgroundColor="Transparent" Command="{Binding EditProfileCommand}"/>
+                
             </StackLayout>
         </Grid>
         <Grid Margin="0,0,0,0" BackgroundColor="#BDBDBD" Opacity="10">

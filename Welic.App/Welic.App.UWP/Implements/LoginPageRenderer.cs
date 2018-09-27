@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Newtonsoft.Json.Linq;
+using Welic.App.Models.Usuario;
 using Welic.App.UWP;
 using Welic.App.Views;
 using Xamarin.Auth;
@@ -57,8 +58,16 @@ namespace Welic.App.UWP
 
                         var id = obj["id"].ToString().Replace("\"", "");
                         var name = obj["name"].ToString().Replace("\"", "");
+                        var email = obj["email"].ToString().Replace("\"", "");
+                        UserDto userDto = new UserDto
+                        {
+                            RememberMe = true,
+                            Email = email,
+                            UserName = name,
 
-                        await Welic.App.App.NavigateToProfile();
+                        };
+
+                        await Welic.App.App.NavigateToProfile(userDto);
                         //AuthInfo.Token = eventArgs.Account.Properties["access_token"].ToString();
                         //AuthInfo.UserID = eventArgs.Account.Properties["user_id"].ToString();
                     }

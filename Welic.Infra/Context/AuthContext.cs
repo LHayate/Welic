@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿    using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -43,7 +43,7 @@ namespace Welic.Infra.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Configurations.Add(new MapeamentoDispositivos());
-            modelBuilder.Configurations.Add(new MapeamentoLogin());
+            modelBuilder.Configurations.Add(new MapeamentoUser());
 
         }
     }

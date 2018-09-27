@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using Welic.App.Models;
 using Welic.App.Services;
+using Welic.App.Services.Navigation;
 using Welic.App.Services.ServicesViewModels;
 
 namespace Welic.App.ViewModels.Base
