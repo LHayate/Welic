@@ -96,6 +96,7 @@
     <Compile Include="Implements\CustomEntryUwp.cs" />
     <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="Implements\LoginPageRenderer.cs" />
+    <Compile Include="Implements\ResizePicture.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -111,26 +112,27 @@
     <Content Include="Image\Email_icon.png" />
     <Content Include="Image\facebook_icon.png" />
     <Content Include="Image\Google_icon.png" />
-    <Content Include="Image\iConfiguracao.png" />
-    <Content Include="Image\iEncontrar32.png" />
-    <Content Include="Image\ihouse.png" />
-    <Content Include="Image\iMonitor24.png" />
-    <Content Include="Image\information24.png" />
-    <Content Include="Image\iShopping_Cart.png" />
-    <Content Include="Image\iVoltar24.png" />
+    <Content Include="Image\iAbout.png" />
+    <Content Include="Image\iExit.png" />
+    <Content Include="Image\iFind.png" />
+    <Content Include="Image\iGalery.png" />
+    <Content Include="Image\iHome.png" />
+    <Content Include="Image\iNew.png" />
+    <Content Include="Image\iNotification.png" />
+    <Content Include="Image\iSchedule.png" />
+    <Content Include="Image\iSettings.png" />
+    <Content Include="Image\iStar.png" />
+    <Content Include="Image\iTicket.png" />
+    <Content Include="Image\iVideos.png" />
     <Content Include="Image\LineHorizontal.png" />
     <Content Include="Image\LineHorizontalMenu.png" />
     <Content Include="Image\linkedin_icon.png" />
     <Content Include="Image\Login_BackGround.png" />
     <Content Include="Image\LogoWelic.png" />
     <Content Include="Image\LogoWelic72x72.png" />
-    <Content Include="Image\movie_projector_40.png" />
-    <Content Include="Image\News_Icon.png" />
-    <Content Include="Image\Notification_icon.png" />
-    <Content Include="Image\Schedule_icon.png" />
+    <Content Include="Image\perfil_Padrao.png" />
     <Content Include="Image\skype_icon.png" />
     <Content Include="Image\Splash.png" />
-    <Content Include="Image\star_icon.png" />
     <Content Include="Image\twitter_icon.png" />
     <Content Include="Image\xamarin_logo.png" />
     <Content Include="Properties\Default.rd.xml" />

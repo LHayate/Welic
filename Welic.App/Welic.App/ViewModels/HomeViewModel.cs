@@ -1,9 +1,12 @@
-﻿using Welic.App.Services;
+﻿using System;
+using Welic.App.Services;
+using Welic.App.Services.Timing;
 using Welic.App.ViewModels.Base;
+using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
 {
-    public class HomeViewModel:BaseViewModel
+    public class HomeViewModel : BaseViewModel
     {
         #region Propriedades
         #region Icons
@@ -20,7 +23,7 @@ namespace Welic.App.ViewModels
         public string Search
         {
             get => _search;
-            set => SetProperty(ref _search , value);
+            set => SetProperty(ref _search, value);
         }
 
         private string _home;
@@ -28,7 +31,7 @@ namespace Welic.App.ViewModels
         public string Home
         {
             get => _home;
-            set => _home = value;
+            set => SetProperty(ref _home , value);
         }
 
         private string _schedule;
@@ -44,7 +47,7 @@ namespace Welic.App.ViewModels
         public string News
         {
             get => _news;
-            set => SetProperty(ref _news , value);
+            set => SetProperty(ref _news, value);
         }
 
 
@@ -52,18 +55,49 @@ namespace Welic.App.ViewModels
 
         #endregion
 
+        private readonly ITiming _timing;
+        public HomeViewModel(ITiming timing)
+        {
+            try
+            {
+                _timing = timing;
+                _star = Util.ImagePorSistema("iStar");
+                _search = Util.ImagePorSistema("iFind");
+                _home = Util.ImagePorSistema("iHome");
+                _schedule = Util.ImagePorSistema("iSchedule");
+                _news = Util.ImagePorSistema("iNew");
 
+                Device.StartTimer(TimeSpan.FromMinutes(25),
+                    Callback);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
 
         public HomeViewModel()
         {
-            _star = Util.ImagePorSistema("star_icon");
-            _search = Util.ImagePorSistema("iEncontrar32");
-            _home = Util.ImagePorSistema("ihouse");
-            _schedule = Util.ImagePorSistema("Schedule_icon");
-            _news = Util.ImagePorSistema("News_Icon");
-
-
+            
         }
 
+        private bool Callback()
+        {
+            try
+            {
+                if (_timing.ConsultDataNoTiming())
+                {
+                    _timing.SincDatas();
+                }
+            }
+            catch
+            {
+                //TODO: Immplementar caso der erro de atualizar informações 
+            }
+
+            return true;
+        }
     }
 }

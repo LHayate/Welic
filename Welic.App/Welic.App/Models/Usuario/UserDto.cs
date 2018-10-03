@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Token;
 using Welic.App.Services.API;
 using Welic.App.Services.ServiceViews;
-using Xamarin.Forms;
 
 namespace Welic.App.Models.Usuario
 {
@@ -26,66 +26,95 @@ namespace Welic.App.Models.Usuario
         public byte[] ImagemPerfil { get; set; }
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }
+        public bool Sinced { get; set; } //false to not sinced - true sinced
 
+        private DatabaseManager _dbManager;
         public UserDto()
         {
             
         }
 
-        public bool RegistrarUsuario(/*string userName, string password, string email*/)
-        {            
-            //Insere o registro
-            DatabaseManager dbManager = new DatabaseManager();
-           
+        public async Task<bool> RegisterUser(UserDto user )
+        {           
             try
             {
-                dbManager.database.InsertOrReplace(this);
-                dbManager.database.Close();
-                return true;
+                var userDto = await WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={user.Email}");
+            
+                Id = userDto.Id == null ? user.Id : userDto.Id;
+                Guid = userDto.Guid != null ? userDto.Guid : user.Guid;
+                UserName = userDto.UserName;
+                Email = userDto.Email?? user.Email ;
+                NomeCompleto = userDto.NomeCompleto?? user.NomeCompleto;
+                NomeImage = userDto.NomeImage??user.NomeImage;
+                Password = userDto.Password?? user.Password;
+                ConfirmPassword = userDto.ConfirmPassword??user.ConfirmPassword;
+                EmailConfirmed = userDto.EmailConfirmed ? user.EmailConfirmed: userDto.EmailConfirmed;
+                ImagemPerfil = userDto.ImagemPerfil??user.ImagemPerfil;
+                PhoneNumberConfirmed = userDto.PhoneNumberConfirmed??user.PhoneNumberConfirmed;
+                RememberMe = true;
+                UltimoAcesso = DateTime.Now;
+                
+                //Insere o registro                
+                _dbManager = new DatabaseManager();
+
+                try
+                {
+                    _dbManager.database.InsertOrReplace(this);
+                    _dbManager.database.Close();
+                    
+                    //await WebApi.Current.PostAsync<UserDto>("user/save", userDto);
+                    return true;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw new System.Exception("Erro ao Gravar o Usuario no SQLite");
+                }
             }
             catch (System.Exception e)
             {
+
+                _dbManager = new DatabaseManager();
+                _dbManager.database.InsertOrReplace(this);
+                _dbManager.database.Close();
+
+                Console.WriteLine(e);
+                return false;
+            }                           
+        }
+
+        public async Task<bool> SyncedUser(UserDto user)
+        {
+            try
+            {
+
+                //Insere o registro                
+                _dbManager = new DatabaseManager();
+
+                try
+                {
+                    _dbManager.database.Update(user);
+                    _dbManager.database.Close();
+
+                    await WebApi.Current.PostAsync<UserDto>("user/save", user);
+                    return true;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+            }
+            catch (System.Exception e)
+            {
+
+                _dbManager = new DatabaseManager();
+                _dbManager.database.InsertOrReplace(this);
+                _dbManager.database.Close();
+
                 Console.WriteLine(e);
                 return false;
             }
-           
-        }
-
-        public async void AtualizaUsuario(UserDto user)
-        {
-            var userDto = await WebApi.Current.GetAsync<UserDto>($"getbyemail/{user.Email}");
-
-            if (userDto != null)
-            {
-                Id = userDto.Id;
-                Guid = userDto.Guid;
-                Email = userDto.Email;
-                NomeCompleto = userDto.NomeCompleto;
-                NomeImage = userDto.NomeImage;
-                Password = userDto.Password;
-                ConfirmPassword = userDto.ConfirmPassword;                
-                EmailConfirmed = userDto.EmailConfirmed;
-                ImagemPerfil = userDto.ImagemPerfil;
-                PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
-                RememberMe = userDto.RememberMe;
-                EmailConfirmed = userDto.EmailConfirmed;
-                UltimoAcesso = DateTime.Now;
-                UserName = userDto.UserName;
-            }
-            else
-            {
-
-            }
-
-            try
-            {
-                RegistrarUsuario();
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }                           
         }
 
 
@@ -93,13 +122,16 @@ namespace Welic.App.Models.Usuario
         {
             try
             {
-                DatabaseManager dbManager = new DatabaseManager();
-                var usuarios = dbManager.database.Table<UserDto>()
+                
+                _dbManager = new DatabaseManager();
+                var usuarios = _dbManager.database.Table<UserDto>()
                     .Where(x => x.RememberMe)
                     .ToList();
                 foreach (var usuario in usuarios)
                     usuario.RememberMe = false;
-                dbManager.database.UpdateAll(usuarios);
+                _dbManager.database.UpdateAll(usuarios);
+
+                _dbManager.database.DeleteAll<UserToken>();
                 return true;
             }
             catch { return false; }
@@ -107,30 +139,13 @@ namespace Welic.App.Models.Usuario
 
         public UserDto LoadAsync()
         {
-            DatabaseManager dbManager = new DatabaseManager();
-            var usu = dbManager.database.Table<UserDto>()
-                .Where(x => x.RememberMe)
+            _dbManager = new DatabaseManager();
+            var usu = _dbManager.database.Table<UserDto>()
+                .Where(x => x.RememberMe) 
+                .OrderByDescending(c => c.UltimoAcesso)
                 .ToList();
             return usu[0];
-        }
-
-        public bool RegisterPhoto(byte[] photo)
-        {
-            //Insere o registro
-            DatabaseManager dbManager = new DatabaseManager();
-
-            try
-            {
-                dbManager.database.InsertOrReplace(this);
-                dbManager.database.Close();
-                return true;
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                return false;
-            }
-        }
+        }        
 
         internal async Task<bool> RegisterPhoto(MediaFile file)
         {
@@ -141,16 +156,25 @@ namespace Welic.App.Models.Usuario
                 file.Dispose();
                 user.ImagemPerfil =  memoryStream.ToArray();                
             }
-            
+
             //Insere o registro
-            DatabaseManager dbManager = new DatabaseManager();
+            _dbManager = new DatabaseManager();
 
             try
             {
-                await WebApi.Current.PostAsync<UserDto>("user/save", user);
 
-                dbManager.database.InsertOrReplace(user);
-                dbManager.database.Close();
+                try
+                {
+                    user.Sinced = true;
+                    await WebApi.Current.PostAsync<UserDto>("user/save", user);
+                }
+                catch
+                {
+                    user.Sinced = false;
+                }
+
+                _dbManager.database.InsertOrReplace(user);
+                _dbManager.database.Close();
                 return true;
             }
             catch (System.Exception e)
@@ -159,6 +183,7 @@ namespace Welic.App.Models.Usuario
                 return false;
             }
         }
+        
     }
 
 

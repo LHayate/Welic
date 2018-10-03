@@ -3,68 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
-             xmlns:converts="clr-namespace:Welic.App.Implements.Converts;assembly=Welic.App"
-
              x:Class="Welic.App.Views.EditProfilePage"
              NavigationPage.HasNavigationBar="True"
-             BackgroundImage="Login_BackGround.png">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converts:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             BackgroundColor="#0F5682"
+             >
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                
-                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
-                                   VerticalOptions="CenterAndExpand" 
-                                   HorizontalOptions="CenterAndExpand"/>
-                <Button Text="X" HorizontalOptions="EndAndExpand" Command="{Binding ReturnToMenuCommand}" BackgroundColor="Transparent" TextColor="DimGray"/>
-                <abstractions:CircleImage Source="{Binding SelectedPollItem.Image, Converter={StaticResource ByteArrayToImage}} "                 
+
+                <abstractions:CircleImage Source="{Binding Image} "                 
                                           Aspect="AspectFill" 
-                                          x:Name="CircleImage" 
-                                          >
+                                          x:Name="CircleImage"
+                                          MinimumHeightRequest="150"
+                                          MinimumWidthRequest="150">
                     <abstractions:CircleImage.WidthRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android, iOS">120</On>
+                            <On Platform="Android, iOS">160</On>
                         </OnPlatform>
                     </abstractions:CircleImage.WidthRequest>
                     <abstractions:CircleImage.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double">
-                            <On Platform="Android, iOS">120</On>
+                            <On Platform="Android, iOS">160</On>
                         </OnPlatform>
                     </abstractions:CircleImage.HeightRequest>
                 </abstractions:CircleImage>
                 <Button Text="Edit" FontSize="10"  
                         HorizontalOptions="CenterAndExpand" 
-                        Command="{Binding AlterPhotoCommand}" 
+                        Clicked="Button_OnClicked"                        
                         BackgroundColor="Transparent" 
                         TextColor="DimGray"/>
                 <StackLayout Margin="20,0,20,0">
-                    <Entry Placeholder="First Name" Text="{Binding FirstName}" />
-                    <Entry Placeholder="Last Name" Text="{Binding LastName}"/>
-                    <Entry Placeholder="Identity" Text="{Binding Identity}"/>
-                    <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}"/>
-                    <Entry Placeholder="E-mail" Text="{Binding Email}"/>
-                    <Entry Placeholder="Password" Text="{Binding Password}"/>
-                    <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}"/>
-                    
-                    <implements:GradientColorStack StartColor="#C79D1D" 
-                                                   EndColor="#CE7526" 
-                                                   HorizontalOptions="CenterAndExpand"
-                                                   VerticalOptions="CenterAndExpand">
-                        <Button Text="Save" 
-                                HorizontalOptions="CenterAndExpand" 
-                                Command="{Binding SaveInfosCommand}" 
-                                BackgroundColor="Transparent" 
-                                HeightRequest="37"
-                                WidthRequest="229"
-                                CornerRadius="6"
-                                TextColor="DimGray"/>
-                        
-                    </implements:GradientColorStack>
-                    
+                    <Entry Placeholder="First Name" Text="{Binding FirstName}" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Last Name" Text="{Binding LastName}" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Identity" Text="{Binding Identity}" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Numeric" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="E-mail" Text="{Binding Email}" Keyboard="Email" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" PlaceholderColor="AntiqueWhite"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <implements:GradientColorStack StartColor="#C79D1D" 
+                                                       EndColor="#CE7526" 
+                                                       HorizontalOptions="CenterAndExpand"
+                                                       VerticalOptions="CenterAndExpand"
+                                                       Grid.Column ="0" 
+                                                       Margin="0,0,0,10">
+                            <Button Text="Return"                                     
+                                    HorizontalOptions="CenterAndExpand"                                     
+                                    Command="{Binding ReturnToMenuCommand}" 
+                                    TextColor="Red"
+                                    HeightRequest="37"
+                                    WidthRequest="229"
+                                    CornerRadius="6"
+                                    BackgroundColor="Transparent"/>
+                        </implements:GradientColorStack>
+
+                        <implements:GradientColorStack StartColor="#C79D1D" 
+                                                       EndColor="#CE7526" 
+                                                       HorizontalOptions="CenterAndExpand"
+                                                       VerticalOptions="CenterAndExpand"
+                                                       Grid.Column="1"
+                                                       Margin="0,0,0,10">
+                            <Button Text="Save" 
+                                    HorizontalOptions="CenterAndExpand" 
+                                    Command="{Binding SaveInfosCommand}" 
+                                    BackgroundColor="Transparent" 
+                                    HeightRequest="37"
+                                    WidthRequest="229"
+                                    CornerRadius="6"
+                                    TextColor="#0F5682"
+                                    />
+
+                        </implements:GradientColorStack>
+                       
+
+                    </Grid>
+                    <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="#CE7526"
+                                       VerticalOptions="CenterAndExpand" 
+                                       HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
 
 

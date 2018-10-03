@@ -19,7 +19,7 @@ namespace Welic.App.Services
                 case Device.Android:
                     return nmImage;
                 case Device.UWP:
-                    return "Imagens/" + nmImage + ".png";
+                    return "Image/" + nmImage + ".png";
                 default:
                     return null;
             }

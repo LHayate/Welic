@@ -239,8 +239,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Controllers\AccountController.cs" />
     <Compile Include="API\Controllers\BaseController.cs" />
+    <Compile Include="API\Controllers\LiveController.cs" />
     <Compile Include="API\Controllers\testeController.cs" />
     <Compile Include="API\Controllers\UserController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -305,6 +305,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Imagens\backgroundParallax.jpg" />
+    <Content Include="LVJZ0375.MP4" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -349,6 +350,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Live\LiveView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Desktop\Welic\aspnet-mvc-internationalization\MvcInternationalization\Resources\Resources.csproj">

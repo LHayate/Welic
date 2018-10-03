@@ -86,9 +86,7 @@ namespace Welic.App.Services.Navigation
 
         public Task RemoveBackStackAsync()
         {
-            var mainPage = Application.Current.MainPage as CustomNavigationView;
-
-            if (mainPage != null)
+            if (Application.Current.MainPage is CustomNavigationView mainPage)
             {
                 for (int i = 0; i < mainPage.Navigation.NavigationStack.Count - 1; i++)
                 {
@@ -110,8 +108,7 @@ namespace Welic.App.Services.Navigation
             }
             else
             {
-                var navigationPage = Application.Current.MainPage as CustomNavigationView;
-                if (navigationPage != null)
+                if (Application.Current.MainPage is CustomNavigationView navigationPage)
                 {
                     await navigationPage.PushAsync(page);
                 }
@@ -126,12 +123,21 @@ namespace Welic.App.Services.Navigation
         private Type GetPageTypeForViewModel(Type viewModelType)
         {
             if (viewModelType.FullName != null)
-            {                    
-                var viewName1 = $"{viewModelType.Namespace?.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
-                var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
-                var viewAssemblyName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", viewName1, viewModelAssemblyName);
-                var viewType = Type.GetType(viewAssemblyName);
-                return viewType;
+            {
+                try
+                {
+                    var viewName1 = $"{viewModelType.Namespace?.Replace("Model", string.Empty)}.{viewModelType.Name.Replace("ViewModel", string.Empty)}Page";
+                    var viewModelAssemblyName = viewModelType.GetTypeInfo().Assembly.FullName;
+                    var viewAssemblyName = string.Format(CultureInfo.InvariantCulture, "{0}, {1}", viewName1, viewModelAssemblyName);
+                    var viewType = Type.GetType(viewAssemblyName);
+                    return viewType;
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+               
             }
 
             return null;

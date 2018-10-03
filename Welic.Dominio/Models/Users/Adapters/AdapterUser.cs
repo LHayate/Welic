@@ -38,6 +38,38 @@ namespace Welic.Dominio.Models.Users.Adapters
             return userDto;
         }
 
+        public static Entidades.User ConverterDtoParEntidade(UserDto userMap)
+        {
+
+            if (userMap == null)
+            {
+                return null;
+            }
+
+            Entidades.User user = new Entidades.User
+            {
+                Id = userMap.Id,
+                Guid = userMap.Guid,
+                Password = userMap.Password,
+                Email = userMap.Email,
+                ImagemPerfil = userMap.ImagemPerfil,
+                RememberMe = userMap.RememberMe,
+                EmailConfirmed = userMap.EmailConfirmed,
+                UserName = userMap.UserName,
+                NomeCompleto = userMap.NomeCompleto,
+                PhoneNumber = userMap.PhoneNumber,
+                ConfirmPassword = userMap.ConfirmPassword,
+
+
+                NomeImage = userMap.NomeImage,
+                PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
+                UltimoAcesso = userMap.UltimoAcesso
+            };
+
+
+            return user;
+        }
+
         public static List<UserDto> ConverterMapParaDto(List<UserMap> listaMap)
         {
             if (listaMap == null)

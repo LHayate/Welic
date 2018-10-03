@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -14,10 +11,23 @@ namespace Welic.WebSite.API.Controllers
     [RoutePrefix("api/User")]
     public class UserController : BaseController
     {
-        public readonly IServicoLogin _servico;
-        public UserController(IServicoLogin servico)
+        public readonly IServiceUser _servico;
+        public UserController(IServiceUser servico)
         {
             _servico = servico;
+        }
+        [HttpGet]
+        [Route("getall")]
+        public Task<HttpResponseMessage> GetAll()
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.GetAll());
+        }
+
+        [HttpGet]
+        //[Route("GetByName/user")]
+        public Task<HttpResponseMessage> GetByEmail([FromUri]UserDto user)
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(user.Email));
         }
 
         [HttpGet]
@@ -27,12 +37,6 @@ namespace Welic.WebSite.API.Controllers
             return CriaResposta(HttpStatusCode.OK, _servico.GetById(id));
         }
 
-        [HttpGet]
-        [Route("getbyemail/{email:alpha}")]
-        public Task<HttpResponseMessage> GetByEmail(string email)
-        {
-            return CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(email));
-        }
 
         [HttpPost]
         [Route("save")]

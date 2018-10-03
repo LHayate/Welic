@@ -16,13 +16,12 @@ namespace Welic.Infra.Mapeamentos
         {
             ToTable("UserInfo","dbo");
             HasKey(x => x.Id);
+            HasKey(x => x.Email);
 
             Property(x => x.Id)
-                .HasColumnName("Id")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Computed)                
+                .HasColumnName("Id")          
                 .IsRequired()                
                 .HasColumnType("int");
-
             Property(x => x.Guid)
                 .HasColumnName("Guid")
                 .HasColumnType("uniqueidentifier")

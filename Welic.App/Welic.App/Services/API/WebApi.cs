@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
 
@@ -32,22 +33,9 @@ namespace Welic.App.Services.API
                 }
                 return _lazy.Value;
             }
-        }       
-
-        private static readonly object SyncRoot = new object();
-        class TokenResult
-        {
-            private string _accessToken;
-
-            public string AccessToken
-            {
-                get => _accessToken;
-                set => _accessToken = value;
-            }
-
-            public string token_type { get; set; }
-
         }
+
+        private static readonly object SyncRoot = new object();       
 
         //private readonly HttpClient _HttpClient;
         public HttpClient _HttpClient { get; private set; }
@@ -55,13 +43,20 @@ namespace Welic.App.Services.API
 
         public WebApi()
         {
+            
             _HttpClient = new HttpClient
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
-                BaseAddress = new Uri("http://192.168.0.10:3000/api/")
-                //BaseAddress = new Uri("http://192.168.0.10/")
+                //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
+                BaseAddress = new Uri("http://192.168.0.10/api/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var token = new UserToken();
+            token = token.LoadAsync();
+            if(token!= null)
+                _HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
+           
         }
 
         public async Task<bool> AuthenticateAsync(UserDto usuario)
@@ -74,7 +69,7 @@ namespace Welic.App.Services.API
                     {
                         new KeyValuePair<string, string>("grant_type", "password"),
                         new KeyValuePair<string, string>("username", usuario.UserName),
-                        new KeyValuePair<string, string>("password", usuario.Password),
+                        new KeyValuePair<string, string>("password", Criptografia.Criptografia.Decriptar(usuario.Password)),
                     };
                     
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
@@ -82,17 +77,18 @@ namespace Welic.App.Services.API
                         if (!_response.IsSuccessStatusCode)
                             return false;
 
-                        var _result = await _response.Content.ReadAsStringAsync();
+                        var result = await _response.Content.ReadAsStringAsync();
 
-                        var _tokenResult = JsonConvert.DeserializeObject<TokenResult>(_result);
+                        var tokenResult = JsonConvert.DeserializeObject<UserToken>(result);
 
-                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_tokenResult.token_type, _tokenResult.AccessToken);
-                    }
-                  
+                        tokenResult.RegisterToken(tokenResult);
+
+                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenResult.TokenType, tokenResult.AccessToken);
+                    }                  
                 }
                 return true;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 return false;
 
@@ -103,21 +99,21 @@ namespace Welic.App.Services.API
         {
             try
             {           
-                using (var _response = await _HttpClient.GetAsync(requestUri))
+                using (var response = await _HttpClient.GetAsync(requestUri))
                 {
-                    if (!_response.IsSuccessStatusCode)
+                    if (!response.IsSuccessStatusCode)
                     {
-                        if (_response.StatusCode == HttpStatusCode.Unauthorized)
+                        if (response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
 
                         throw new System.Exception("Algo de errado não deu certo.");
                     }
-                    var _result = await _response.Content.ReadAsStringAsync();
+                    var _result = await response.Content.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<T>(_result);
                 }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 throw new System.Exception("Erro ao tentar buscar dados");
             }

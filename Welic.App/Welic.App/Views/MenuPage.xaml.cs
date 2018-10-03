@@ -1,11 +1,16 @@
 ﻿using System;
 using Welic.App.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Menu;
 using Welic.App.Models.Usuario;
+using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.ViewModels;
+using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,25 +20,39 @@ namespace Welic.App.Views
     public partial class MenuPage : ContentPage
     {
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
-        readonly List<HomeMenuItem> menuItems;
+        private readonly List<HomeMenuItem> menuItems;
+        private readonly ObservableCollection<GroupHomeMenuItem> GroupMenu;
+        private UserDto _userdto;
         public MenuPage()
         {
             InitializeComponent();
-            BindingContext = new MenuViewModel();
+            BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
+
+            //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
+            //{                
+            //    new GroupHomeMenuItem { Id = MenuItemType.Browse, Title="Home", _iconMenu = Util.ImagePorSistema("iHome")},
+            //    new GroupHomeMenuItem("My Products",Util.ImagePorSistema("iGalery"))
+            //    {
+            //        new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+            //    },
+
+
+            //};
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Home", IconMenu = "ihouse.png"},
-                new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = "movie_projector_40.png" },
-                new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = "Notification_icon.png" },
-                new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = "iShopping_Cart.png" },
-                new HomeMenuItem {Id = MenuItemType.Videos, Title="Videos", IconMenu = "iMonitor24.png" },
-                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = "iConfiguracao.png" },
-                new HomeMenuItem {Id = MenuItemType.SignUp, Title="Sign Up", IconMenu = "iVoltar24.png" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = "information24.png" }
+                new HomeMenuItem {Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
+                new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+                new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+                new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },
+                new HomeMenuItem {Id = MenuItemType.Videos, Title="Videos", IconMenu = Util.ImagePorSistema("iVideos") },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },
+                new HomeMenuItem {Id = MenuItemType.SignUp, Title="Exit", IconMenu = Util.ImagePorSistema("iExit") },
+                new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout") }
             };
 
             ListViewMenu.ItemsSource = menuItems;
+            //ListViewMenu.ItemsSource = menuItems;
             
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
@@ -43,6 +62,29 @@ namespace Welic.App.Views
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
+        }
+
+        private void LoadingImage()
+        {
+            try
+            {
+                _userdto = (new UserDto()).LoadAsync();
+
+                if (_userdto.ImagemPerfil != null)
+                {
+                    CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(_userdto.ImagemPerfil));
+                }
+                else
+                {
+                    CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"));
+                }
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
 
         private async void Button_OnClicked(object sender, EventArgs e)

@@ -7,6 +7,7 @@ using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.API;
+using Welic.App.Services.Criptografia;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.ViewModels.Base;
 using Welic.App.Views;
@@ -14,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
 {
-    public class LoginViewModel :BaseViewModel
+    public class LoginViewModel : BaseViewModel
     {
         private string userLogin;
 
@@ -36,23 +37,29 @@ namespace Welic.App.ViewModels
         private readonly IOpenUrlService _openUrlService;
         private readonly IIdentityService _identityService;
 
+        public LoginViewModel(ISettingsService settingsService, IOpenUrlService openUrlService,
+            IIdentityService identityService)
+        {
+            _settingsService = settingsService;
+            _openUrlService = openUrlService;
+            _identityService = identityService;
+        }
+
         public LoginViewModel()
         {
-            //_settingsService = settingsService;
-            //_openUrlService = openUrlService;
-            //_identityService = identityService;            
+
         }
 
         private string _authUrl;
         public string LoginUrl
         {
             get => _authUrl;
-            set => SetProperty(ref _authUrl , value);
+            set => SetProperty(ref _authUrl, value);
         }
 
         public Command LoginCommand => new Command(async () => await Login());
-        
-        
+
+
         private async Task Login()
         {
             try
@@ -76,35 +83,41 @@ namespace Welic.App.ViewModels
 
                 UserDto usuario = new UserDto
                 {
+                    Id = 1,
                     UserName = UserLogin,
-                    Password = Senha,
-                    Email = UserLogin,                    
-                    ConfirmPassword = Senha,
+                    Password = Criptografia.Encriptar(Senha),
+                    Email = UserLogin,
+                    ConfirmPassword = Criptografia.Encriptar(Senha),
                     RememberMe = true
                 };
 
                 if (CrossConnectivity.Current.IsConnected)
                 {
-                    this.LoginCommand.ChangeCanExecute();                    
+                    this.LoginCommand.ChangeCanExecute();
 
                     if (await WebApi.Current.AuthenticateAsync(usuario))
                     {
-                        usuario.AtualizaUsuario(usuario);
-                        //Informações da plataforma e dispositivo
-                        DispositivoDto dis = new DispositivoDto();
-                        dis.Plataforma = CrossDeviceInfo.Current.Platform.ToString();
-                        dis.DeviceName = CrossDeviceInfo.Current.DeviceName;
-                        dis.Versao = CrossDeviceInfo.Current.Version;
-                        dis.Id = CrossDeviceInfo.Current.Id;
+                        //usuario.RegistrarUsuario();
+                        if (await usuario.RegisterUser(usuario))
+                        {
+                            //Informações da plataforma e dispositivo
+                            var dis = new DispositivoDto
+                            {
+                                Plataforma = CrossDeviceInfo.Current.Platform.ToString(),
+                                DeviceName = CrossDeviceInfo.Current.DeviceName,
+                                Versao = CrossDeviceInfo.Current.Version,
+                                Id = CrossDeviceInfo.Current.Id
+                            };
 
-                        await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
+                            //await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
 
-                        await NavigationService.NavigateModalToAsync<MainViewModel>();                        
+                            await NavigationService.NavigateModalToAsync<MainViewModel>();
+                        }
                     }
                     else
                     {
                         throw new ServiceAuthenticationException("Erro ao Tentar Autenticar o Usuario");
-                    }                                                          
+                    }
                 }
 
                 IsBusy = false;
@@ -122,6 +135,6 @@ namespace Welic.App.ViewModels
                 IsBusy = false;
             }
         }
-        
+
     }
 }

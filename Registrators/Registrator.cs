@@ -19,12 +19,12 @@ namespace Welic.Registrators
             RegisterUser(container);
             RegistrarUnidadeDeTrabalho(container);
             RegistrarServico(container);
-            RegistrarNotificacaoDominio(container);
+            RegistrarNotificacaoDominio(container);            
         }
 
         private static void RegisterUser(UnityContainer conteiner)
         {
-            conteiner.RegisterType<IServicoLogin, ServiceUser>(new HierarchicalLifetimeManager());
+            conteiner.RegisterType<IServiceUser, ServiceUser>(new HierarchicalLifetimeManager());
             conteiner.RegisterType<IRepositorioUser, RepositoryUser>(new HierarchicalLifetimeManager());
         }
         private static void RegistrarUnidadeDeTrabalho(UnityContainer container)
@@ -39,6 +39,6 @@ namespace Welic.Registrators
         {
             container.RegisterType<IManipulador<NotificacaoDominio>, ManipuladorNotificacaoDominio>(
                 new HierarchicalLifetimeManager());
-        }
+        }       
     }
 }

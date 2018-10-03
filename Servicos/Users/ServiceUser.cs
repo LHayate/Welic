@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using Welic.Dominio;
 using Welic.Dominio.Models.User.Servicos;
 using Welic.Dominio.Models.Users.Adapters;
+using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Entidades;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Utilitarios.Entidades;
 
 namespace Servicos.Users
 {
-    public class ServiceUser : Servico, IServicoLogin
+    public class ServiceUser : Servico, IServiceUser
     {
         private readonly IRepositorioUser _repositorioUser;
         private readonly IUnidadeTrabalho _unidadeTrabalho;
@@ -33,8 +35,8 @@ namespace Servicos.Users
                 userMap.Email = userDto.Email;
                 userMap.NomeCompleto = userDto.NomeCompleto;
                 userMap.NomeImage = userDto.NomeImage;
-                userMap.Password = userDto.Password;
-                userMap.ConfirmPassword = userDto.ConfirmPassword;
+                userMap.Password = Criptografia.Encriptar(userDto.Password);
+                userMap.ConfirmPassword = Criptografia.Encriptar(userDto.ConfirmPassword);
                 userMap.Id = userDto.Id;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
                 userMap.ImagemPerfil = userDto.ImagemPerfil;
@@ -49,7 +51,7 @@ namespace Servicos.Users
             {
                 userMap = new UserMap
                 {
-                    Password = userDto.Password,
+                    Password = Criptografia.Encriptar(userDto.Password),
                     Email = userDto.Email,
                     ImagemPerfil = userDto.ImagemPerfil,
                     RememberMe = userDto.RememberMe,
@@ -57,7 +59,7 @@ namespace Servicos.Users
                     UserName = userDto.UserName,
                     NomeCompleto = userDto.NomeCompleto,
                     PhoneNumber = userDto.PhoneNumber,
-                    ConfirmPassword = userDto.ConfirmPassword,
+                    ConfirmPassword = Criptografia.Encriptar(userDto.ConfirmPassword),
                     Id = userDto.Id,
                     Guid = userDto.Guid,
                     NomeImage = userDto.NomeImage,
@@ -81,6 +83,11 @@ namespace Servicos.Users
             return  AdapterUser.ConverterMapParaDto(_repositorioUser.GetById(id));
         }
 
+        public List<UserDto> GetAll()
+        {
+            return AdapterUser.ConverterMapParaDto(_repositorioUser.GetAll());
+        }
+
         public void Delete(int id)
         {
             if (id > 0)
@@ -92,5 +99,16 @@ namespace Servicos.Users
         {
             return AdapterUser.ConverterMapParaDto(_repositorioUser.GetByEmail(email));
         }
+
+        public UserDto GetByName(string name)
+        {
+            return AdapterUser.ConverterMapParaDto(_repositorioUser.GetByName(name));
+        }
+
+        public User Autenticar(ComandUser comando)
+        {
+            User user = AdapterUser.ConverterDtoParEntidade(GetByEmail(comando.NomeUsuario));
+            return user.ValidarNomeUsuarioESenha(comando.NomeUsuario, comando.Senha) ? user : null;
+        }                   
     }
 }

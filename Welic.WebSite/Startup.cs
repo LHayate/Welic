@@ -6,6 +6,8 @@ using System.Web.Http;
 using Unity;
 using Unity.Lifetime;
 using Welic.Dominio.Eventos;
+using Welic.Dominio.Models.Acesso.Servicos;
+using Welic.Dominio.Models.User.Servicos;
 using Welic.Registrators;
 using Welic.WebSite.Helpers;
 using Welic.WebSite.Provider;
@@ -17,14 +19,14 @@ namespace Welic.WebSite
     {
         public void Configuration(IAppBuilder app)  
         {
-                                          
+           
 
             HttpConfiguration config = new HttpConfiguration();
             UnityContainer container = new UnityContainer();
             
 
             ConfigureDependencyInjection(config, container);
-            ConfigureOAuth(app);
+            ConfigureOAuth(app, container.Resolve<IServiceUser>());
             ConfigureAuth(app);
 
             WebApiConfig.Register(config);
@@ -32,14 +34,14 @@ namespace Welic.WebSite
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);            
             app.UseWebApi(config);
         }
-        public void ConfigureOAuth(IAppBuilder app)
+        public void ConfigureOAuth(IAppBuilder app, IServiceUser servico)
         {
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new SimpleAuthorizationServerProvider()
+                Provider = new SimpleAuthorizationServerProvider(servico)
             };
 
             // Token Generation

@@ -69,6 +69,7 @@
     <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="Implements\GradientColorStackRenderer.cs" />
     <Compile Include="Implements\LoginPageRenderer.cs" />
+    <Compile Include="Implements\ResizePicture.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />

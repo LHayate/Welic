@@ -23,9 +23,9 @@ namespace Welic.App.Views
 	        if (ViewModel != null)
 	        {
 	            //Verifica se o dispositivo já está registrado e habilitado
-                List<UserDto> Usuario = ViewModel.LoadAsync();
-	            if (Usuario.Count == 1)
-	                App.Current.MainPage = new MainPage(Usuario[0]);
+                var usuario = ViewModel.LoadAsync();
+	            if (usuario)
+	                App.Current.MainPage = new MainPage();
 	        }
         }
 	}

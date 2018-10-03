@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using ImageCircle.Forms.Plugin.Abstractions;
 using Plugin.Connectivity;
-using Plugin.DeviceInfo;
-using Plugin.Media;
-using Plugin.Media.Abstractions;
-using Welic.App.Exception;
-using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
-using Welic.App.Services.API;
+using Welic.App.Services.Criptografia;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -21,8 +13,7 @@ namespace Welic.App.ViewModels
     public class EditProfileViewModel: BaseViewModel
     {
         public Command ReturnToMenuCommand => new Command(async () => await ReturnToMenu());
-        public Command SaveInfosCommand => new Command(async () => await SaveInfos());
-        public Command AlterPhotoCommand => new Command(async () => await PictureNewPhoto());
+        public Command SaveInfosCommand => new Command(async () => await SaveInfos());        
 
         
 
@@ -94,44 +85,43 @@ namespace Welic.App.ViewModels
 
         public EditProfileViewModel()
         {
-            var user = LoadingUser();
-            Email = user.Email;
-            FirstName = Util.BuscaPrimeiroNome(user.NomeCompleto);
-            LastName = user.NomeCompleto;
-            Identity = user.Id.ToString();
-            PhoneNumber = user.PhoneNumber;
-            Password = user.Password;
-            ConfirmPassword = user.ConfirmPassword;
-
-            try
-            {                
-                if (user.ImagemPerfil != null)
-                {
-                    _image = new Image();
-                    Stream stream = new MemoryStream(user.ImagemPerfil);
-                    _image = new Image { Source = ImageSource.FromStream(() => stream) };
-                }
-                else
-                {
-
-                    _image = new Image { Source = ImageSource.FromResource(Util.ImagePorSistema("perfil")) };
-                    //Stream stream = new MemoryStream(img.Source);
-                    //_image = new Image { Source = ImageSource.FromStream(() => stream) };                                    
-                }
-            }
-            catch (System.Exception e)
+            if (LoadingUser())
             {
-                Console.WriteLine(e);
-                throw;
+                try
+                {
+                    Email = UserDto.Email;
+                    FirstName = Util.BuscaPrimeiroNome(UserDto.NomeCompleto);
+                    LastName = UserDto.NomeCompleto;
+                    Identity = UserDto.Id.ToString();
+                    PhoneNumber = UserDto.PhoneNumber;
+                    Password = Criptografia.Decriptar(UserDto.Password);
+                    ConfirmPassword = Criptografia.Decriptar(UserDto.ConfirmPassword);
+                
+                    //if (UserDto.ImagemPerfil != null)
+                    //{                                                            
+                    //    _image = new Image {Source = ImageSource.FromStream(() => new MemoryStream(UserDto.ImagemPerfil))};
+                    //}
+                    //else
+                    //{
+                    //    _image = new Image {Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"))};
+                    //    Stream stream = new MemoryStream(Util.ImagePorSistema("perfil"));
+                    //    _image = new Image { Source = ImageSource.FromStream(() => new MemoryStream(UserDto.ImagemPerfil)) };
+                    //}
+                }
+                catch (System.Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
             }
-           
+
         }        
 
-        private UserDto LoadingUser()
+        private bool LoadingUser()
         {
             UserDto = new UserDto();
-
-            return UserDto.LoadAsync();            
+            UserDto = UserDto.LoadAsync();
+            return UserDto.Email != null;
         }
 
         private async Task ReturnToMenu()
@@ -144,54 +134,25 @@ namespace Welic.App.ViewModels
                 return;
 
             this.IsBusy = true;
-
             
             if (CrossConnectivity.Current.IsConnected)
-            {                               
-                    UserDto.RegistrarUsuario();
-          
-            }
-
-            IsBusy = false;
-
-        }
-        private async Task PictureNewPhoto()
-        {
-            try
             {
-                await CrossMedia.Current.Initialize();
+                SaveInfosCommand.ChangeCanExecute();
 
-                if (!CrossMedia.Current.IsTakePhotoSupported || !CrossMedia.Current.IsCameraAvailable)
-                {
-                    await App.Current.MainPage.DisplayAlert("Ops", "Nenhuma câmera detectada.", "OK");
+                UserDto.Email = _email;
+                UserDto.NomeCompleto = $"{FirstName} {LastName}";
+                UserDto.Id = int.Parse(Identity);
+                UserDto.PhoneNumber = PhoneNumber;
+                UserDto.Password = Password;
+                UserDto.ConfirmPassword = ConfirmPassword;
+                UserDto.UserName = Email;       
+                //TODO: Salvar Imagem quando Tirar uma Nova. 
 
-                    return;
-                }
+                await UserDto.SyncedUser(UserDto);
 
-                var file = await CrossMedia.Current.TakePhotoAsync(
-                    new StoreCameraMediaOptions
-                    {
-                        Directory = "Resources",
-                        Name = "Perfil.png"
-                    });
-
-                if (file == null)
-                    return;
-
-                var user = new UserDto();
-
-                if (await user.RegisterPhoto(file))
-                    _image.Source = ImageSource.FromStream(() =>
-                    {
-                        var stream = file.GetStream();
-                        file.Dispose();
-                        return stream;
-                    });
             }
-            catch (System.Exception ex)
-            {
-                await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
-            }
-        }
+
+            IsBusy = false;            
+        }        
     }
 }

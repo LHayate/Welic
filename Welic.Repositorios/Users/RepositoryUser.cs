@@ -23,7 +23,7 @@ namespace Welic.Repositorios.Users
 
         public void Save(UserMap userMap)
         {
-            var user = _contexto.User.Find(userMap.Id);
+            var user = GetByEmail(userMap.Email);
             if (user != null)
                 _contexto.Entry(userMap).State = EntityState.Modified;
             else
@@ -48,6 +48,13 @@ namespace Welic.Repositorios.Users
             return _contexto.User.FirstOrDefault(x => x.Id == id);
         }
 
+
+
+        public List<UserMap> GetAll()
+        {
+            return _contexto.User.OrderBy(c => c.Id).ToList();
+        }
+
         public void Delete(int id)
         {
             var userMap = GetById(id);
@@ -59,6 +66,11 @@ namespace Welic.Repositorios.Users
         public UserMap GetByEmail(string email)
         {
             return _contexto.User.FirstOrDefault(x => x.Email == email);
+        }
+
+        public UserMap GetByName(string name)
+        {
+            return _contexto.User.FirstOrDefault(x => x.NomeCompleto.Contains(name));
         }
     }
 }

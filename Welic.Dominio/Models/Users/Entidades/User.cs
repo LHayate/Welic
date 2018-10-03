@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Users.Scope;
+using Welic.Dominio.Utilitarios.Entidades;
 
 namespace Welic.Dominio.Models.Users.Entidades
 {
@@ -23,6 +25,10 @@ namespace Welic.Dominio.Models.Users.Entidades
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }
 
+        public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)
+        {
+            return this.ValidarEscopoNomeUsuarioESenha(nomeUsuario, Criptografia.Encriptar(password));
+        }
 
     }
 }

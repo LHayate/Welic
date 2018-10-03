@@ -11,7 +11,7 @@ namespace Welic.WebSite.API.Controllers
 {
     public class BaseController : ApiController
     {
-        public readonly IManipulador<NotificacaoDominio> Notificacoes;
+        //public readonly IManipulador<NotificacaoDominio> Notificacoes;
         public HttpResponseMessage Resposta;
         public BaseController()
         {
