@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Welic.App.Models.Location;
 using Welic.App.Models.Usuario;
+using Welic.App.Services.Navigation;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.Services.ServiceViews;
 using Welic.App.ViewModels.Base;
@@ -27,15 +28,10 @@ namespace Welic.App
 
             if (Device.RuntimePlatform == Device.UWP)
             {
-                InitNavigation();
+                MainPage = new NavigationPage(new InicioPage());
             }                     
         }
-
-        private Task InitNavigation()
-        {
-            var navigationService = ViewModelLocator.Resolve<INavigationService>();
-            return navigationService.InitializeAsync();
-        }
+        
         private void RegisterService()
         {
             _settingsService = ViewModelLocator.Resolve<ISettingsService>();
@@ -76,7 +72,7 @@ namespace Welic.App
         }
         public static async Task NavigateToProfile(UserDto userDto, string message = null)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new MainPage(userDto));
+            await App.Current.MainPage.Navigation.PushAsync(new MainPage());
         }
         public static Action HideLoginView
         {

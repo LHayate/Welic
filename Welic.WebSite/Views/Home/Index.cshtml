@@ -2,37 +2,18 @@
 @{
     /**/
 
-    ViewBag.Title = "Welic";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Welic";    
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
 
 
 <!-- Inicio Carousel -->
-<div class="slider">
-    <ul class="slides">
-        <li>
-            <img src="~/Imagens/bannerdatamanagement.jpg">
-            <div class="caption left-align">
-                <h3>Webnars in Live!</h3>
-                <h5 class="light grey-text text-lighten-3">Assita seus Webinars ao vivo em casa.</h5>
-            </div>
-        </li>
-        <li>
-            <img src="~/Imagens/background2.jpg">
-            <div class="caption right-align black-text">
-                <h3>Coaching On-Lines</h3>
-                <h5 class="light grey-text text-lighten-3">Busque alunos de qualquer lugar do mundo. </h5>
-            </div>
-        </li>
-        <li>
-            <img src="~/Imagens/background3.jpg">
-            <div class="caption Rigth-align black-text">
-                <h3>Videos on-lines</h3>
-                <h5 class="light grey-text text-lighten-3">Assita aquele webinar ou summit que perdeu.</h5>
-            </div>
-        </li>
-    </ul>
+
+
+<div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img src="~/Imagens/Banner2 03.png"></a>
+    <a class="carousel-item" href="#two!"><img src="~/Imagens/Banner2 02.png"></a>
+    <a class="carousel-item" href="#three!"><img src="~/Imagens/Banner2 03.png"></a>    
 </div>
 <!-- Fim Carousel -->
 <!--Estrutura Parallax -->

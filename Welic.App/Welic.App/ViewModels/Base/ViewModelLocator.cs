@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using CommonServiceLocator;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.Services.ServiceViews;
 using Unity;
+using Unity.ServiceLocation;
+using Welic.App.Services.Navigation;
+using Welic.App.Services.Timing;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels.Base
@@ -32,7 +36,7 @@ namespace Welic.App.ViewModels.Base
         static ViewModelLocator()
         {
             _container = new UnityContainer();
-
+            
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
             _container.RegisterType<AboutViewModel>();
             _container.RegisterType<HomeViewModel>();
@@ -54,7 +58,10 @@ namespace Welic.App.ViewModels.Base
             _container.RegisterType<IDependencyService, Welic.App.Services.ServiceViews.DependencyService>();
             _container.RegisterType<ISettingsService, SettingsService>();            
             _container.RegisterType<ILocationService, LocationService>();
-                                                     
+            _container.RegisterType<ITiming, Timing>();
+
+            var unityServiceLocator = new UnityServiceLocator(_container);
+            ServiceLocator.SetLocatorProvider((() => unityServiceLocator));
         }
 
         public static void UpdateDependencies(bool useMockServices)
@@ -80,7 +87,15 @@ namespace Welic.App.ViewModels.Base
 
         public static T Resolve<T>() where T : class
         {
-            return _container.Resolve<T>();
+            try
+            {
+                return _container.Resolve<T>();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }            
         }
 
         private static void OnAutoWireViewModelChanged(BindableObject bindable, object oldValue, object newValue)

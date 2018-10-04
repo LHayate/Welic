@@ -11,7 +11,9 @@ namespace Welic.Dominio.Models.Users.Repositorios
     {
         void Save(UserMap userMap);
         UserMap GetById(int id);
+        List<UserMap> GetAll();
         void Delete(int id);
         UserMap GetByEmail(string email);
+        UserMap GetByName(string name);
     }
 }

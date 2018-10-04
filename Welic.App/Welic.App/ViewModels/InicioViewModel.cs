@@ -57,13 +57,16 @@ namespace Welic.App.ViewModels
             }
            
         }
-        public List<UserDto> LoadAsync()
+        public bool LoadAsync()
         {
+            (new UserDto()).SyncedUser();
+
+
             DatabaseManager dbManager = new DatabaseManager();
             var usu = dbManager.database.Table<UserDto>()
-                .Where(x => x.Conectado == true)
+                .Where(x => x.RememberMe == true)
                 .ToList();
-            return usu;
+            return usu.Count > 0;
         }
     }
 }

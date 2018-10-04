@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Welic.App.ViewModels;
+using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +16,7 @@ namespace Welic.App.Views
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = new ViewModels.LoginViewModel();
+            BindingContext = ViewModelLocator.Resolve<LoginViewModel>();// new ViewModels.LoginViewModel();
         }       
     }
 }

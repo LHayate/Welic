@@ -18,7 +18,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public bool RememberMe { get; set; }
-        public string NomeCompleto { get; set; }
+        public string NomeCompleto { get; set; }        
         public byte[] ImagemPerfil { get; set; }
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }

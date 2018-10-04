@@ -24,15 +24,14 @@ namespace Welic.WebSite.API.Controllers
             Resposta = Notificacoes.PossuiNotificacoes()
                 ? Request.CreateResponse(HttpStatusCode.BadRequest, new { errors = Notificacoes.Notificar() })
                 : Request.CreateResponse(code, result);
+            Resposta =  Request.CreateResponse(code, result);
 
             return Task.FromResult(Resposta);
         }
 
         public Task<HttpResponseMessage> CriaResposta(HttpStatusCode code)
         {
-            Resposta = Notificacoes.PossuiNotificacoes()
-                ? Request.CreateResponse(HttpStatusCode.BadRequest, new { errors = Notificacoes.Notificar() })
-                : Request.CreateResponse(code);
+            Resposta = Request.CreateResponse(code);
 
             return Task.FromResult(Resposta);
         }

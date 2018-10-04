@@ -8,7 +8,7 @@
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Page Level Resources: Compatibile with Xamarin Live Player -->
@@ -17,7 +17,6 @@
             <Color x:Key="LightTextColor">#999999</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -72,6 +71,21 @@
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+                <Image Source="LogoWelic72x72.png"/>
+                <Grid HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="32" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="facebook_icon.png" Grid.Column="0"/>
+                    <Image Source="twitter_icon.png" Grid.Column="1"/>
+                    <Image Source="linkedin_icon.png" Grid.Column="2"/>
+                    <Image Source="skype_icon.png" Grid.Column="3"/>
+                </Grid>
+
+                <Label Text="Copyright (c) 2018 - Todos os Direitos Reservados Lei 9610/98 - Desenvolvido por: Welic.App" TextColor="Black" HorizontalTextAlignment="Center"/>
             </StackLayout>
         </ScrollView>
     </Grid>

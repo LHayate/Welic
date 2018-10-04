@@ -36,6 +36,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Web">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Web.dll</HintPath>
@@ -55,6 +59,7 @@
     <Compile Include="Eventos\IUnidadeTrabalho.cs" />
     <Compile Include="Eventos\NotificacaoDominio.cs" />
     <Compile Include="IServico.cs" />
+    <Compile Include="Models\Acesso\Adaptador\AdapterDispositivos.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandoRegistroAtividadeUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoConsultaUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoCriaUsuario.cs" />
@@ -68,17 +73,24 @@
     <Compile Include="Models\Acesso\Repositorios\IRepositorioUsuario.cs" />
     <Compile Include="Models\Acesso\Servicos\IServicoDispositivo.cs" />
     <Compile Include="Models\Acesso\Servicos\IServicoUsuario.cs" />
+    <Compile Include="Models\Home\Dtos\StartDto.cs" />
+    <Compile Include="Models\Home\Entidade\Start.cs" />
+    <Compile Include="Models\Home\Map\StartMap.cs" />
+    <Compile Include="Models\Home\Servico\IServiceStart.cs" />
+    <Compile Include="Models\Lives\Entitys\DescriptionLive.cs" />
     <Compile Include="Models\Menu\Dtos\MenuDto.cs" />
     <Compile Include="Models\Menu\Entidades\Menu.cs" />
     <Compile Include="Models\Menu\Enums\MenuItemType.cs" />
     <Compile Include="Models\Menu\Mapeamentos\MenuMap.cs" />
     <Compile Include="Models\Menu\Repositorios\IRepositorioMenu.cs" />
     <Compile Include="Models\Menu\Servicos\IServicoMenu.cs" />
-    <Compile Include="Models\Users\Adapter\AdapterUser.cs" />
+    <Compile Include="Models\Users\Adapters\AdapterUser.cs" />
+    <Compile Include="Models\Users\Comandos\ComandUser.cs" />
     <Compile Include="Models\Users\Dtos\UserDto.cs" />
     <Compile Include="Models\Users\Entidades\User.cs" />
     <Compile Include="Models\Users\Mapeamentos\UserMap.cs" />
     <Compile Include="Models\Users\Repositorios\IRepositorioUser.cs" />
+    <Compile Include="Models\Users\Scope\UserScope.cs" />
     <Compile Include="Models\Users\Servicos\IServicoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TiposDados\AcaoRegistroBanco.cs" />
@@ -104,15 +116,17 @@
     <Compile Include="Validacao\Validador.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Models\Lives\Adapters\" />
+    <Folder Include="Models\Lives\Dtos\" />
+    <Folder Include="Models\Lives\Maps\" />
+    <Folder Include="Models\Lives\Repositoryes\" />
+    <Folder Include="Models\Lives\Scopos\" />
+    <Folder Include="Models\Lives\Services\" />
     <Folder Include="Models\Users\Enums\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\cs\Microsoft.DependencyValidation.Analyzers.resources.dll" />
-    <Analyzer Include="..\packages\Microsoft.DependencyValidation.Analyzers.0.9.0\analyzers\dotnet\Microsoft.DependencyValidation.Analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

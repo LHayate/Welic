@@ -5,10 +5,10 @@
 <html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
 <head>
     <meta charset="utf-8" />
-    @*<meta name="viewport" content="width=device-width,
+    <meta name="viewport" content="width=device-width,
 
-        initial-scale=1.0">*@
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+        initial-scale=1.0">
+    @*<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">*@
 
     @* CSS Personalizado *@
     @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
@@ -18,7 +18,7 @@
     <!-- Compiled and minified CSS -->
     @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    @*<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">*@
 
     <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
@@ -106,8 +106,7 @@
 
     <!--Footer-->
     <div>
-        @RenderBody()
-        <hr />
+        @RenderBody()        
 
     </div>
     <footer class="page-footer blue-grey darken-4 ">
@@ -323,9 +322,9 @@
     <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js">
 
     </script><!--RD-Station-->
-    <script src="~/Scripts/custom.js">
+    @*<script src="~/Scripts/custom.js">
 
-    </script>
+    </script>*@
 
 
 

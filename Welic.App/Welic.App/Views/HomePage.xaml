@@ -4,17 +4,18 @@
             xmlns:local="clr-namespace:Welic.App.Views"
             x:Class="Welic.App.Views.HomePage"
             Title="Welic"
-            BackgroundColor="#F7F0F0"
+            BackgroundColor="#0F5682"    
+            
             >
     <TabbedPage.ToolbarItems>
         <ToolbarItem Name="MenuItemRefresh" Order="Primary" Icon="LogoWelic72x72.png" />
     </TabbedPage.ToolbarItems>
     <!--Pages can be added as references or inline-->
 
-    <local:FavoritesPage  Icon="star_icon.png" />
-    <local:SearchPage Icon="iEncontrar32.png"/>
-    <local:StartPage  Icon="ihouse.png"/>
-    <local:EventsPage Icon="Schedule_icon.png"/>
-    <local:NewsPage Icon="News_Icon.png"/>
+    <local:FavoritesPage  Icon="{Binding Stars}" />
+    <local:SearchPage Icon="{Binding Search }"/>
+    <local:StartPage  Icon="{Binding Home}"/>
+    <local:EventsPage Icon="{Binding Schedule}"/>
+    <local:NewsPage Icon="{Binding News}"/>
     
 </TabbedPage>

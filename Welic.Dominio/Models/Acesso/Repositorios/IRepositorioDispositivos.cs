@@ -9,8 +9,8 @@ namespace Welic.Dominio.Models.Acesso.Repositorios
 {
     public interface IRepositorioDispositivos
     {
-        DispositivosMap Gravar(DispositivosMap dispositivoMap);
-        DispositivosMap Alterar(DispositivosMap dispositivoMap);
+        void Gravar(DispositivosMap dispositivoMap);
+        void Alterar(DispositivosMap dispositivoMap);
         DispositivosMap BuscarPorId(string Id);
     }
 }

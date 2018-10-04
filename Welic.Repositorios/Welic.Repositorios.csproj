@@ -81,9 +81,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dispositives\RepositoryDispositivos.cs" />
     <Compile Include="Login\AuthRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Menu\RepositorioMenu.cs" />
+    <Compile Include="Users\RepositoryUser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">

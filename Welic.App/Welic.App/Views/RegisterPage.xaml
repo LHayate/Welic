@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Welic.App.Views.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Full Name" Text="{Binding FullName}"/>
+            <Entry Placeholder="Email Adress" Text="{Binding EmailAdress}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}"/>
+            <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}"/>
+            <Entry Placeholder="Localization" Text="{Binding Localization}"/>
+            <Button Text="Login"
+                    Command="{Binding RegisterCommand}"  
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand"
+                    HeightRequest="37"
+                    WidthRequest="229"
+                    CornerRadius="6"
+                    TextColor="#2F80ED"  
+                    BackgroundColor="Transparent"
+            />
+
+            <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
+                               VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

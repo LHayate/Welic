@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Plugin.Media;
 using Xamarin.Forms;
 
 namespace Welic.App.Services
@@ -16,7 +20,7 @@ namespace Welic.App.Services
                 case Device.Android:
                     return nmImage;
                 case Device.UWP:
-                    return "Imagens/" + nmImage + ".png";
+                    return "Image/" + nmImage + ".png";
                 default:
                     return null;
             }
@@ -28,6 +32,15 @@ namespace Welic.App.Services
 
             string[] Nm = nome.Split(' ');
             return Nm[0];
+
+        }
+        public static string ReturnLastName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return null;
+
+            string[] Nm = name.Split(' ');
+            return Nm.Last();
 
         }
 
@@ -59,6 +72,35 @@ namespace Welic.App.Services
             str = str.Replace("\\s+", " ");
 
             return str;
+        }        
+
+        private byte[] GetImageStreamAsBytes(Stream input)
+        {
+            var buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+
+        public async Task<byte[]> ImageToByteArray(Image imgSource)
+        {     
+            Stream imageStream = null;
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                    { Name = "pic.jpg" });
+                if (file == null)
+                    return null;
+
+            
+                 
+            imageStream = file.GetStream();
+            BinaryReader br = new BinaryReader(imageStream);
+            return br.ReadBytes((int) imageStream.Length);
         }
     }
 }

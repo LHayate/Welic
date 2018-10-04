@@ -18,8 +18,8 @@ namespace Welic.WebSite
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            HttpConfiguration config = new HttpConfiguration();
-            WebApiConfig.Register(config);            
+           // HttpConfiguration config = new HttpConfiguration();
+            //WebApiConfig.Register(config);            
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
         {

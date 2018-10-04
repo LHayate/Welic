@@ -15,8 +15,8 @@
             <StackLayout VerticalOptions="CenterAndExpand">
                 <StackLayout Padding="10" Margin="20,0,20,0" >
 
-                    <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail ou Login"  Style="{StaticResource TextEntryLogin}" />
-                    <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password" Style="{StaticResource TextEntryLogin}" />
+                    <Entry Text="{Binding UserLogin}"  Placeholder="E-Mail"  Style="{StaticResource TextEntryLogin}"  Keyboard="Email"/>
+                    <Entry IsPassword="True" Text="{Binding Senha}"  Placeholder="password" Style="{StaticResource TextEntryLogin}"/>
                     <implements:GradientColorStack StartColor="#C79D1D" 
                                                    EndColor="#CE7526" 
                                                    HorizontalOptions="CenterAndExpand"

@@ -96,10 +96,12 @@
     <Compile Include="Implements\CustomEntryUwp.cs" />
     <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="Implements\LoginPageRenderer.cs" />
+    <Compile Include="Implements\ResizePicture.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\SQLite.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -107,6 +109,32 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Image\Email_icon.png" />
+    <Content Include="Image\facebook_icon.png" />
+    <Content Include="Image\Google_icon.png" />
+    <Content Include="Image\iAbout.png" />
+    <Content Include="Image\iExit.png" />
+    <Content Include="Image\iFind.png" />
+    <Content Include="Image\iGalery.png" />
+    <Content Include="Image\iHome.png" />
+    <Content Include="Image\iNew.png" />
+    <Content Include="Image\iNotification.png" />
+    <Content Include="Image\iSchedule.png" />
+    <Content Include="Image\iSettings.png" />
+    <Content Include="Image\iStar.png" />
+    <Content Include="Image\iTicket.png" />
+    <Content Include="Image\iVideos.png" />
+    <Content Include="Image\LineHorizontal.png" />
+    <Content Include="Image\LineHorizontalMenu.png" />
+    <Content Include="Image\linkedin_icon.png" />
+    <Content Include="Image\Login_BackGround.png" />
+    <Content Include="Image\LogoWelic.png" />
+    <Content Include="Image\LogoWelic72x72.png" />
+    <Content Include="Image\perfil_Padrao.png" />
+    <Content Include="Image\skype_icon.png" />
+    <Content Include="Image\Splash.png" />
+    <Content Include="Image\twitter_icon.png" />
+    <Content Include="Image\xamarin_logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
