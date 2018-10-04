@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Plugin.Media;
@@ -31,6 +32,15 @@ namespace Welic.App.Services
 
             string[] Nm = nome.Split(' ');
             return Nm[0];
+
+        }
+        public static string ReturnLastName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return null;
+
+            string[] Nm = name.Split(' ');
+            return Nm.Last();
 
         }
 

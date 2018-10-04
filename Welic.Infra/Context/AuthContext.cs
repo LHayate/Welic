@@ -10,23 +10,16 @@ using Welic.Infra.Migrations;
 
 namespace Welic.Infra.Context
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
-    {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }
-    }
+    
 
-    public class AuthContext : IdentityDbContext<ApplicationUser>
+    public class AuthContext : DbContext// IdentityDbContext<ApplicationUser>
     {
         public AuthContext()
-            : base("WelicDbContext",throwIfV1Schema: false)
+            : base("WelicDbContext")
+            //: base("WelicDbContext",throwIfV1Schema: false)
         {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
         }
             

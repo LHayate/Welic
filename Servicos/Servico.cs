@@ -10,15 +10,15 @@ namespace Servicos
         private readonly IUnidadeTrabalho _unidadeTrabalho;
         private readonly IManipulador<NotificacaoDominio> _notificacoes;
 
-        protected Servico(IUnidadeTrabalho unidadeTrabalho)
+        protected Servico(IUnidadeTrabalho unidadeTrabalho )
         {
             _unidadeTrabalho = unidadeTrabalho;
-            //_notificacoes = EventoDominio.Container.ObterServico<IManipulador<NotificacaoDominio>>();
+            _notificacoes = EventoDominio.Container.ObterServico<IManipulador<NotificacaoDominio>>();
         }      
 
         public void Rollback(string valor)
         {
-            //EventoDominio.Disparar(new NotificacaoDominio("Erro", valor));
+            EventoDominio.Disparar(new NotificacaoDominio("Erro", valor));
             _unidadeTrabalho.Rollback();
         }
 
@@ -30,7 +30,7 @@ namespace Servicos
         public bool Valido()
         {
             //TODO: Implementar Validações
-            return true; //!_notificacoes.PossuiNotificacoes();
+            return !_notificacoes.PossuiNotificacoes();
         }
 
         public void BeginTran()
@@ -40,10 +40,10 @@ namespace Servicos
 
         public bool Commit()
         {
-            //if (_notificacoes.PossuiNotificacoes())
-            //{
-            //    return false;
-            //}
+            if (_notificacoes.PossuiNotificacoes())
+            {
+                return false;
+            }
 
             try
             {

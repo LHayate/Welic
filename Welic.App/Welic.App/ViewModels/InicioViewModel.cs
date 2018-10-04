@@ -59,6 +59,9 @@ namespace Welic.App.ViewModels
         }
         public bool LoadAsync()
         {
+            (new UserDto()).SyncedUser();
+
+
             DatabaseManager dbManager = new DatabaseManager();
             var usu = dbManager.database.Table<UserDto>()
                 .Where(x => x.RememberMe == true)

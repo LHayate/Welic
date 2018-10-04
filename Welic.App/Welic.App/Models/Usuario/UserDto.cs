@@ -26,7 +26,7 @@ namespace Welic.App.Models.Usuario
         public byte[] ImagemPerfil { get; set; }
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }
-        public bool Sinced { get; set; } //false to not sinced - true sinced
+        public bool Synced { get; set; } //false to not sinced - true sinced        
 
         private DatabaseManager _dbManager;
         public UserDto()
@@ -37,32 +37,28 @@ namespace Welic.App.Models.Usuario
         public async Task<bool> RegisterUser(UserDto user )
         {           
             try
-            {
-                var userDto = await WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={user.Email}");
-            
-                Id = userDto.Id == null ? user.Id : userDto.Id;
-                Guid = userDto.Guid != null ? userDto.Guid : user.Guid;
-                UserName = userDto.UserName;
-                Email = userDto.Email?? user.Email ;
-                NomeCompleto = userDto.NomeCompleto?? user.NomeCompleto;
-                NomeImage = userDto.NomeImage??user.NomeImage;
-                Password = userDto.Password?? user.Password;
-                ConfirmPassword = userDto.ConfirmPassword??user.ConfirmPassword;
-                EmailConfirmed = userDto.EmailConfirmed ? user.EmailConfirmed: userDto.EmailConfirmed;
-                ImagemPerfil = userDto.ImagemPerfil??user.ImagemPerfil;
-                PhoneNumberConfirmed = userDto.PhoneNumberConfirmed??user.PhoneNumberConfirmed;
+            {                
+                Id = user.Id;
+                Guid = user.Guid;
+                UserName = user.UserName;
+                Email = user.Email;
+                NomeCompleto = user.NomeCompleto;
+                NomeImage = user.NomeImage;
+                Password = user.Password;
+                ConfirmPassword = user.ConfirmPassword;
+                EmailConfirmed = user.EmailConfirmed;
+                ImagemPerfil = user.ImagemPerfil;
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed;
                 RememberMe = true;
+                Synced = false;
                 UltimoAcesso = DateTime.Now;
                 
                 //Insere o registro                
-                _dbManager = new DatabaseManager();
-
+                
                 try
                 {
-                    _dbManager.database.InsertOrReplace(this);
-                    _dbManager.database.Close();
-                    
-                    //await WebApi.Current.PostAsync<UserDto>("user/save", userDto);
+                   SaveUser(this);
+                                        
                     return true;
                 }
                 catch (System.Exception e)
@@ -73,56 +69,50 @@ namespace Welic.App.Models.Usuario
             }
             catch (System.Exception e)
             {
-
-                _dbManager = new DatabaseManager();
-                _dbManager.database.InsertOrReplace(this);
-                _dbManager.database.Close();
-
                 Console.WriteLine(e);
                 return false;
             }                           
         }
 
-        public async Task<bool> SyncedUser(UserDto user)
+        public async Task<UserDto> GetUserbyServer(string email)
         {
+            //Faço a atualização do Servidor para Atualizar o Mando SQLite
+            var userDto = await WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={email}");
+            return userDto;
+        }
+
+        public async Task<bool> SyncedUser()
+        {                               
+            _dbManager = new DatabaseManager();
             try
-            {
+            {                
+                //Verifico se existe alguma alteração a ser sincronizada com o Servidor
+                var usu = _dbManager.database.Table<UserDto>()
+                    .Where(x => x.RememberMe && x.Synced == false)                        
+                    .ToList();
 
-                //Insere o registro                
-                _dbManager = new DatabaseManager();
-
-                try
+                if (usu == null) return true;
+                foreach (var item in usu)
                 {
-                    _dbManager.database.Update(user);
-                    _dbManager.database.Close();
-
-                    await WebApi.Current.PostAsync<UserDto>("user/save", user);
-                    return true;
+                    var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
+                    
+                    Synced = true;
+                    SaveUser(user);                    
                 }
-                catch (System.Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
+               
+                return true;
             }
             catch (System.Exception e)
             {
-
-                _dbManager = new DatabaseManager();
-                _dbManager.database.InsertOrReplace(this);
-                _dbManager.database.Close();
-
                 Console.WriteLine(e);
-                return false;
-            }
+               throw new System.Exception("Error: In Synced this User");
+            }           
         }
-
 
         public bool DesconectarUsuario()
         {
             try
-            {
-                
+            {                
                 _dbManager = new DatabaseManager();
                 var usuarios = _dbManager.database.Table<UserDto>()
                     .Where(x => x.RememberMe)
@@ -158,23 +148,19 @@ namespace Welic.App.Models.Usuario
             }
 
             //Insere o registro
-            _dbManager = new DatabaseManager();
-
+           
+            SaveUser(user);
             try
             {
+                //try
+                //{ 
+                //    await SyncedUser();                    
+                //}
+                //catch
+                //{
+                    user.Synced = false;
+                //}
 
-                try
-                {
-                    user.Sinced = true;
-                    await WebApi.Current.PostAsync<UserDto>("user/save", user);
-                }
-                catch
-                {
-                    user.Sinced = false;
-                }
-
-                _dbManager.database.InsertOrReplace(user);
-                _dbManager.database.Close();
                 return true;
             }
             catch (System.Exception e)
@@ -183,9 +169,13 @@ namespace Welic.App.Models.Usuario
                 return false;
             }
         }
-        
-    }
 
+        private void SaveUser(UserDto user)
+        {
+            _dbManager = new DatabaseManager();
 
-  
+            _dbManager.database.InsertOrReplace(user);
+            _dbManager.database.Close();
+        }
+    }  
 }

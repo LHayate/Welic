@@ -53,7 +53,7 @@ namespace Welic.WebSite
         {
             Registrator.Register(container);
             config.DependencyResolver = new UnityResolverHelper(container);
-            //EventoDominio.Container = new DomainEventsContainer(config.DependencyResolver);
+            EventoDominio.Container = new DomainEventsContainer(config.DependencyResolver);
         }
     }
 }

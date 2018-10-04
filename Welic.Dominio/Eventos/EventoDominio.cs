@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Welic.Dominio.Eventos.Contratos;
+﻿using Welic.Dominio.Eventos.Contratos;
 
 namespace Welic.Dominio.Eventos
 {

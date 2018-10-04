@@ -11,9 +11,10 @@ namespace Welic.App.Models
         Galery,
         Notifications,
         Videos,
-        Settings,
+        Settings,        
+        Tickets,
         SignUp,
-        Tickets
+
 
 
     }

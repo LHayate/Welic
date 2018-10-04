@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Models.Dispositivos.Dto;
+using Welic.App.Models.Usuario;
+using Welic.App.Services.ServiceViews;
 
 namespace Welic.App.Services.Timing
 {
     public class Timing : ITiming
     {
+        private DatabaseManager _dbManager;
         public Task<bool> SendNewData()
         {
             throw new NotImplementedException();
@@ -14,12 +19,19 @@ namespace Welic.App.Services.Timing
 
         public bool ConsultDataNoTiming()
         {
-            throw new NotImplementedException();
+            _dbManager = new DatabaseManager();            
+
+            return DateTime.Now.AddHours(-24) <= _dbManager.database.Table<DispositivoDto>().ToList().FirstOrDefault().DateLastSynced;
         }
 
-        public Task SincDatas()
+        public async  Task SincDatas()
         {
-            throw new NotImplementedException();
+            _dbManager = new DatabaseManager();
+           
+                if (_dbManager.database.Table<UserDto>().Where(dto => dto.Synced == false).ToList().Count > 0)
+                    if(!await (new UserDto()).SyncedUser())
+                        throw  new System.Exception("Dados de Usuario não Sincronizados");                        
+            
         }
     }
 }

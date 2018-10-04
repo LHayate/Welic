@@ -14,8 +14,7 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.Id)                
                 .IsRequired()
                 .HasColumnType("varchar");
-            Property(x => x.Sharedkey)
-                .IsRequired()
+            Property(x => x.Sharedkey)                
                 .HasColumnType("varchar");
             Property(x => x.Plataforma)
                 .IsRequired()
@@ -23,22 +22,21 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.DeviceName)
                 .IsRequired()
                 .HasColumnType("varchar");
-            Property(x => x.Versao)
+            Property(x => x.Version)
                 .IsRequired()
                 .HasColumnType("varchar");
-            Property(x => x.NomeUsuario)
-                .IsRequired()
+            Property(x => x.NameUser)                
                 .HasColumnType("varchar");
-            Property(x => x.Dt_Sincronismo)
+            Property(x => x.DateSynced)
                 .IsRequired()
                 .HasColumnType("datetime");
-            Property(x => x.Dt_UltimoEnvio)
+            Property(x => x.DateLastSynced)
                 .IsRequired()
                 .HasColumnType("datetime");
-            Property(x => x.Situacao)
+            Property(x => x.Status)
                 .IsRequired()
                 .HasColumnType("varchar");
-            Property(x => x.IdUsuario)
+            Property(x => x.EmailUsuario)
                 .IsRequired()
                 .HasColumnType("varchar");
         }

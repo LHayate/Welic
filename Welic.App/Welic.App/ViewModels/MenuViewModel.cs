@@ -53,22 +53,18 @@ namespace Welic.App.ViewModels
 
         public MenuViewModel()
         {
-            try
-            {
-                _userDto = new UserDto();
-                _userDto = _userDto.LoadAsync();
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                throw new System.Exception("Erro ao Buscar Informações de Usuario.");
-            }
+           
+            
+            _userDto = (new UserDto()).LoadAsync();
 
 
+           
             _nomeCompleto = _userDto.NomeCompleto;
             _cpf = _userDto.Id.ToString();
             _email = _userDto.Email ?? _userDto.UserName;
-            _image = Util.ImagePorSistema("perfil_Padrao");
+            
+
+            
         }
         private async Task SendToEditProfile()
         {

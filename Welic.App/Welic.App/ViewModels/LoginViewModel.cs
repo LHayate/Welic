@@ -43,12 +43,7 @@ namespace Welic.App.ViewModels
             _settingsService = settingsService;
             _openUrlService = openUrlService;
             _identityService = identityService;
-        }
-
-        public LoginViewModel()
-        {
-
-        }
+        }        
 
         private string _authUrl;
         public string LoginUrl
@@ -97,19 +92,22 @@ namespace Welic.App.ViewModels
 
                     if (await WebApi.Current.AuthenticateAsync(usuario))
                     {
+                        var userBanco = (new UserDto()).GetUserbyServer(usuario.Email);
                         //usuario.RegistrarUsuario();
-                        if (await usuario.RegisterUser(usuario))
+                        if (await usuario.RegisterUser(userBanco.Result))
                         {
                             //Informações da plataforma e dispositivo
                             var dis = new DispositivoDto
                             {
                                 Plataforma = CrossDeviceInfo.Current.Platform.ToString(),
                                 DeviceName = CrossDeviceInfo.Current.DeviceName,
-                                Versao = CrossDeviceInfo.Current.Version,
-                                Id = CrossDeviceInfo.Current.Id
+                                Version = CrossDeviceInfo.Current.Version,
+                                Id = CrossDeviceInfo.Current.Id,
+                                EmailUsuario = usuario.Email,
+                                Status = "ATIVO"
                             };
-
-                            //await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
+                            
+                            await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
 
                             await NavigationService.NavigateModalToAsync<MainViewModel>();
                         }

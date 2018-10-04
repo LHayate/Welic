@@ -11,19 +11,19 @@ namespace Welic.WebSite.API.Controllers
 {
     public class BaseController : ApiController
     {
-        //public readonly IManipulador<NotificacaoDominio> Notificacoes;
+        public readonly IManipulador<NotificacaoDominio> Notificacoes;
         public HttpResponseMessage Resposta;
         public BaseController()
         {
-            //Notificacoes = EventoDominio.Container.ObterServico<IManipulador<NotificacaoDominio>>();
+            Notificacoes = EventoDominio.Container.ObterServico<IManipulador<NotificacaoDominio>>();
             Resposta = new HttpResponseMessage();
         }
 
         public Task<HttpResponseMessage> CriaResposta(HttpStatusCode code, object result)
         {
-            //Resposta = Notificacoes.PossuiNotificacoes()
-            //    ? Request.CreateResponse(HttpStatusCode.BadRequest, new { errors = Notificacoes.Notificar() })
-            //    : Request.CreateResponse(code, result);
+            Resposta = Notificacoes.PossuiNotificacoes()
+                ? Request.CreateResponse(HttpStatusCode.BadRequest, new { errors = Notificacoes.Notificar() })
+                : Request.CreateResponse(code, result);
             Resposta =  Request.CreateResponse(code, result);
 
             return Task.FromResult(Resposta);

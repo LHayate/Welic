@@ -55,20 +55,18 @@ namespace Welic.App.ViewModels
 
         #endregion
 
-        private readonly ITiming _timing;
-        public HomeViewModel(ITiming timing)
+        
+        public HomeViewModel()
         {
             try
-            {
-                _timing = timing;
+            {               
                 _star = Util.ImagePorSistema("iStar");
                 _search = Util.ImagePorSistema("iFind");
                 _home = Util.ImagePorSistema("iHome");
                 _schedule = Util.ImagePorSistema("iSchedule");
                 _news = Util.ImagePorSistema("iNew");
 
-                Device.StartTimer(TimeSpan.FromMinutes(25),
-                    Callback);
+              
             }
             catch (System.Exception e)
             {
@@ -76,28 +74,8 @@ namespace Welic.App.ViewModels
                 throw;
             }
             
-        }
+        }        
 
-        public HomeViewModel()
-        {
-            
-        }
-
-        private bool Callback()
-        {
-            try
-            {
-                if (_timing.ConsultDataNoTiming())
-                {
-                    _timing.SincDatas();
-                }
-            }
-            catch
-            {
-                //TODO: Immplementar caso der erro de atualizar informações 
-            }
-
-            return true;
-        }
+        
     }
 }

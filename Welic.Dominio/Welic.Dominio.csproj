@@ -59,6 +59,7 @@
     <Compile Include="Eventos\IUnidadeTrabalho.cs" />
     <Compile Include="Eventos\NotificacaoDominio.cs" />
     <Compile Include="IServico.cs" />
+    <Compile Include="Models\Acesso\Adaptador\AdapterDispositivos.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandoRegistroAtividadeUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoConsultaUsuario.cs" />
     <Compile Include="Models\Acesso\Comandos\ComandosUsuario\ComandoCriaUsuario.cs" />

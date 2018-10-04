@@ -1,13 +1,17 @@
 ﻿using Registrators;
 using Servicos;
+using Servicos.Acesso;
 using Servicos.Users;
 using Unity;
 using Unity.Lifetime;
 using Welic.Dominio;
 using Welic.Dominio.Eventos;
+using Welic.Dominio.Models.Acesso.Repositorios;
+using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.User.Servicos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Infra;
+using Welic.Repositorios.Dispositives;
 using Welic.Repositorios.Users;
 
 namespace Welic.Registrators
@@ -19,7 +23,8 @@ namespace Welic.Registrators
             RegisterUser(container);
             RegistrarUnidadeDeTrabalho(container);
             RegistrarServico(container);
-            RegistrarNotificacaoDominio(container);            
+            RegistrarNotificacaoDominio(container);     
+            RegisterDispositivos(container);
         }
 
         private static void RegisterUser(UnityContainer conteiner)
@@ -39,6 +44,12 @@ namespace Welic.Registrators
         {
             container.RegisterType<IManipulador<NotificacaoDominio>, ManipuladorNotificacaoDominio>(
                 new HierarchicalLifetimeManager());
-        }       
+        }
+
+        private static void RegisterDispositivos(UnityContainer container)
+        {
+            container.RegisterType<IRepositorioDispositivos, RepositoryDispositivos>();
+            container.RegisterType<IServicoDispositivo, ServicoDispositivo>();
+        }
     }
 }

@@ -3,6 +3,7 @@ using Welic.App.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Menu;
@@ -27,6 +28,7 @@ namespace Welic.App.Views
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
+            LoadingImage();
 
             //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
             //{                
@@ -76,7 +78,7 @@ namespace Welic.App.Views
                 }
                 else
                 {
-                    CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"));
+                    CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil_Padrao"));
                 }
             }
             catch (System.Exception e)
@@ -110,19 +112,49 @@ namespace Welic.App.Views
                 if (file == null)
                     return;
 
-                var user = new UserDto();
-                                
-                if(await user.RegisterPhoto(file))
-                    CircleImage.Source = ImageSource.FromStream(() =>
-                    {
-                        var stream = file.GetStream();
-                        file.Dispose();
-                        return stream;
-                    });
+                await (new UserDto()).RegisterPhoto(file);
+
+
+                CircleImage.Source = ImageSource.FromStream(() =>
+                {
+                    var stream = file.GetStream();
+                    file.Dispose();
+                    return stream;
+                });
+
+
+                //var memoryStream = new MemoryStream();
+
+                //file.GetStream().CopyTo(memoryStream);
+                //file.Dispose();
+                //CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
             }
             catch (System.Exception ex)
             {
                 await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
+            }
+        }        
+        private async void ListViewMenu_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = (HomeMenuItem)e.SelectedItem;
+            int menu = (int)item.Id;
+            ListViewMenu.SelectedItem = null;
+
+            //Ação de Desconectar o Usuario
+            if (menu.Equals(7))
+            {
+                //Pergunta ao Usuario se pode efetuar a troca
+                var resposta = await DisplayAlert("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar");
+                if (!resposta)
+                {
+                    ListViewMenu.SelectedItem = null;
+                }
+                else
+                {
+                    if ((new UserDto()).DesconectarUsuario())
+                        App.Current.MainPage = new InicioPage();
+                }
+                return;
             }
         }
     }

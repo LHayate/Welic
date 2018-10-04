@@ -36,8 +36,7 @@ namespace Welic.App.Views
 	            if (_userdto.ImagemPerfil != null)
 	            {
 	                CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(
-	                    _userdto.ImagemPerfil
-                        //DependencyService.Get<IResizePicture>().ResizeImage(_userdto.ImagemPerfil, 100,100)	                    	                    
+	                    _userdto.ImagemPerfil                       
 	                    ));
                 }
                 else

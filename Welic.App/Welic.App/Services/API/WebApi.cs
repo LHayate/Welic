@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -15,8 +16,8 @@ namespace Welic.App.Services.API
 {
     public class WebApi : IAuthenticate
     {
-        private static volatile Lazy<WebApi> _lazy = new Lazy<WebApi>(() => new WebApi());        
-
+        private static volatile Lazy<WebApi> _lazy = new Lazy<WebApi>(() => new WebApi());
+        public HttpResponseMessage Resposta;
         public static WebApi Current
         {
             get
@@ -119,7 +120,7 @@ namespace Welic.App.Services.API
             }
         }    
 
-        internal async Task<bool> PostAsync<T>(string uri, T obj)
+        internal async Task<T> PostAsync<T>(string uri, T obj)
         {
             try
             {
@@ -129,8 +130,10 @@ namespace Welic.App.Services.API
                 {
                     if (!_response.IsSuccessStatusCode)
                         throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
-                    return true;
-                }
+                    var result =  await _response.Content.ReadAsStringAsync();                    
+                    
+                    return JsonConvert.DeserializeObject<T>(result);
+                }              
             }
             catch (System.Exception e)
             {
@@ -140,7 +143,7 @@ namespace Welic.App.Services.API
             
 
         }
-
+     
         internal async Task<bool> PutAsync<T>(int id, T t, string uri)
         {
             var httpClient = new HttpClient();
@@ -163,6 +166,7 @@ namespace Welic.App.Services.API
             var response = await httpClient.DeleteAsync($"{uri}{id}");
 
             return response.IsSuccessStatusCode;
-        }             
+        }
+       
     }
 }

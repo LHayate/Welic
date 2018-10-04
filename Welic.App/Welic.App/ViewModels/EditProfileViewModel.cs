@@ -81,8 +81,6 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _image, value);
         }
 
-
-
         public EditProfileViewModel()
         {
             if (LoadingUser())
@@ -91,22 +89,11 @@ namespace Welic.App.ViewModels
                 {
                     Email = UserDto.Email;
                     FirstName = Util.BuscaPrimeiroNome(UserDto.NomeCompleto);
-                    LastName = UserDto.NomeCompleto;
+                    LastName = Util.ReturnLastName(UserDto.NomeCompleto);
                     Identity = UserDto.Id.ToString();
                     PhoneNumber = UserDto.PhoneNumber;
-                    Password = Criptografia.Decriptar(UserDto.Password);
-                    ConfirmPassword = Criptografia.Decriptar(UserDto.ConfirmPassword);
-                
-                    //if (UserDto.ImagemPerfil != null)
-                    //{                                                            
-                    //    _image = new Image {Source = ImageSource.FromStream(() => new MemoryStream(UserDto.ImagemPerfil))};
-                    //}
-                    //else
-                    //{
-                    //    _image = new Image {Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"))};
-                    //    Stream stream = new MemoryStream(Util.ImagePorSistema("perfil"));
-                    //    _image = new Image { Source = ImageSource.FromStream(() => new MemoryStream(UserDto.ImagemPerfil)) };
-                    //}
+                    Password = UserDto.Password;
+                    ConfirmPassword = UserDto.ConfirmPassword;                                   
                 }
                 catch (System.Exception e)
                 {
@@ -114,7 +101,6 @@ namespace Welic.App.ViewModels
                     throw;
                 }
             }
-
         }        
 
         private bool LoadingUser()
@@ -145,10 +131,9 @@ namespace Welic.App.ViewModels
                 UserDto.PhoneNumber = PhoneNumber;
                 UserDto.Password = Password;
                 UserDto.ConfirmPassword = ConfirmPassword;
-                UserDto.UserName = Email;       
-                //TODO: Salvar Imagem quando Tirar uma Nova. 
+                UserDto.UserName = Email;                
 
-                await UserDto.SyncedUser(UserDto);
+                await UserDto.RegisterUser(UserDto);
 
             }
 

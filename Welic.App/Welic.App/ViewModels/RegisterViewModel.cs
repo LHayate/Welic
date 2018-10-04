@@ -71,7 +71,6 @@ namespace Welic.App.ViewModels
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Full Name", "OK");
                     return;
                 }
-
                 if (string.IsNullOrEmpty(EmailAdress))
                 {
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessary inform the E-mail Adress", "OK");
@@ -108,11 +107,7 @@ namespace Welic.App.ViewModels
                     ConfirmPassword = Password,
                     NomeCompleto = FullName,
                     PhoneNumber = PhoneNumber,
-                    PhoneNumberConfirmed = PhoneNumber,
-                    EmailConfirmed = true,
-                    Guid = new Guid(),
-                    UltimoAcesso = DateTime.Now,
-                    RememberMe = true,
+                    PhoneNumberConfirmed = PhoneNumber,                    
 
                 };
 
@@ -125,19 +120,23 @@ namespace Welic.App.ViewModels
                         await usuario.RegisterUser(usuario);
 
                         //Informações da plataforma e dispositivo
-                        DispositivoDto dis = new DispositivoDto();
-                        dis.Plataforma = CrossDeviceInfo.Current.Platform.ToString();
-                        dis.DeviceName = CrossDeviceInfo.Current.DeviceName;
-                        dis.Versao = CrossDeviceInfo.Current.Version;
-                        dis.Id = CrossDeviceInfo.Current.Id;
+                        var dis = new DispositivoDto
+                        {
+                            Plataforma = CrossDeviceInfo.Current.Platform.ToString(),
+                            DeviceName = CrossDeviceInfo.Current.DeviceName,
+                            Version = CrossDeviceInfo.Current.Version,
+                            Id = CrossDeviceInfo.Current.Id,
+                            EmailUsuario = usuario.Email,
+                            Status = "ATIVO"
+                        };
 
-                        //await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
+                        await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
 
 
                         //Criar Usuario
                         //await WebApi.Current.PostAsync<UserDto>($"Account/Register", usuario);
 
-                        var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);                       
+                        var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);
 
                         await NavigationService.NavigateModalToAsync<MainViewModel>();
                     }
