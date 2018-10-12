@@ -9,30 +9,48 @@
                 <StackLayout Margin="10">
                     <SearchBar x:Name="searchBar" 
                                Placeholder="Enter your search term here" 
+                               TextChanged="SearchBar_OnTextChanged"
+                               BackgroundColor="#FFFFFF"
                                SearchCommand="{Binding SearchCommand}" 
                                SearchCommandParameter="{Binding Source={x:Reference searchBar}, Path=Text}"
                                 />
                     <Button TextColor="Black" Text="Categories" VerticalOptions="Start" HorizontalOptions="Start" BackgroundColor="Transparent"/>
-                    <ListView ItemsSource="{Binding Monkeys}" HasUnevenRows="true" ItemTapped="OnListViewItemTapped" ItemSelected="OnListViewItemSelected" >
+                    <Label Text="No data found" 
+                           IsVisible="{Binding IsBusy}" 
+                           HorizontalOptions="CenterAndExpand"/>
+                    
+                    <ListView ItemsSource="{Binding SearchFind}" 
+                              HasUnevenRows="true" 
+                              ItemTapped="OnListViewItemTapped" 
+                              ItemSelected="OnListViewItemSelected" >
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Grid Padding="10">
+                                    <Grid Padding="10" BackgroundColor="#EBEBEB" Margin="1" >
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions >
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <Image Grid.RowSpan="2" 
+                                               Grid.Column="0"
                                                Source="{Binding ImageUrl}" 
-                                               Aspect="AspectFill" 
-                                               HeightRequest="60" 
-                                               WidthRequest="60" />
-                                        <Label Grid.Column="1" Text="{Binding Name}" Style="{DynamicResource TitleStyle}" />
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Location}" VerticalOptions="End" Style="{DynamicResource SubtitleTextStyle}" />
+                                               Aspect="AspectFill"                                                
+                                               />
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding Name}" 
+                                               Style="{DynamicResource TitleStyle}" 
+                                               TextColor="#0C4F7B"
+                                               />
+                                        <Label Grid.Row="1" 
+                                               Grid.Column="1" 
+                                               Text="{Binding Description}" 
+                                               VerticalOptions="End" 
+                                               TextColor="#0C4F7B"                                               
+                                               Style="{DynamicResource SubtitleTextStyle}" />
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

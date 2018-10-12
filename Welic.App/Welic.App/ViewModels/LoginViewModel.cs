@@ -2,15 +2,12 @@
 using System.Threading.Tasks;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
-using Welic.App.Exception;
 using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
-using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.Services.Criptografia;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.ViewModels.Base;
-using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
@@ -92,9 +89,10 @@ namespace Welic.App.ViewModels
 
                     if (await WebApi.Current.AuthenticateAsync(usuario))
                     {
-                        var userBanco = (new UserDto()).GetUserbyServer(usuario.Email);
+                        var userBanco = await (new UserDto()).GetUserbyServer(usuario.Email);
+
                         //usuario.RegistrarUsuario();
-                        if (await usuario.RegisterUser(userBanco.Result))
+                        if (await usuario.RegisterUser(userBanco))
                         {
                             //Informações da plataforma e dispositivo
                             var dis = new DispositivoDto
@@ -114,7 +112,7 @@ namespace Welic.App.ViewModels
                     }
                     else
                     {
-                        throw new ServiceAuthenticationException("Erro ao Tentar Autenticar o Usuario");
+                        throw new System.Exception("Erro ao Tentar Autenticar o Usuario");
                     }
                 }
 

@@ -37,10 +37,24 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.4.1\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.5.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6\System.Web.dll</HintPath>
     </Reference>
@@ -77,7 +91,13 @@
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />
     <Compile Include="Models\Home\Servico\IServiceStart.cs" />
+    <Compile Include="Models\Lives\Adapters\AdapterLive.cs" />
+    <Compile Include="Models\Lives\Dtos\LiveDto.cs" />
     <Compile Include="Models\Lives\Entitys\DescriptionLive.cs" />
+    <Compile Include="Models\Lives\Entitys\Live.cs" />
+    <Compile Include="Models\Lives\Maps\LiveMap.cs" />
+    <Compile Include="Models\Lives\Repositoryes\IRepositoryLive.cs" />
+    <Compile Include="Models\Lives\Services\IServiceLive.cs" />
     <Compile Include="Models\Menu\Dtos\MenuDto.cs" />
     <Compile Include="Models\Menu\Entidades\Menu.cs" />
     <Compile Include="Models\Menu\Enums\MenuItemType.cs" />
@@ -116,12 +136,9 @@
     <Compile Include="Validacao\Validador.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Lives\Adapters\" />
-    <Folder Include="Models\Lives\Dtos\" />
-    <Folder Include="Models\Lives\Maps\" />
-    <Folder Include="Models\Lives\Repositoryes\" />
+    <Folder Include="Models\Index\Dto\" />
+    <Folder Include="Models\Index\Entity\" />
     <Folder Include="Models\Lives\Scopos\" />
-    <Folder Include="Models\Lives\Services\" />
     <Folder Include="Models\Users\Enums\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>

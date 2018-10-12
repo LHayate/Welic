@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Token;
 using Welic.App.Services.API;
+using Welic.App.Services.Criptografia;
 using Welic.App.Services.ServiceViews;
 
 namespace Welic.App.Models.Usuario
@@ -37,7 +39,11 @@ namespace Welic.App.Models.Usuario
         public async Task<bool> RegisterUser(UserDto user )
         {           
             try
-            {                
+            {
+
+               
+                //user = userBanco.Result;
+
                 Id = user.Id;
                 Guid = user.Guid;
                 UserName = user.UserName;
@@ -77,7 +83,7 @@ namespace Welic.App.Models.Usuario
         public async Task<UserDto> GetUserbyServer(string email)
         {
             //Faço a atualização do Servidor para Atualizar o Mando SQLite
-            var userDto = await WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={email}");
+            var userDto = await  WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={email}");
             return userDto;
         }
 
@@ -94,10 +100,15 @@ namespace Welic.App.Models.Usuario
                 if (usu == null) return true;
                 foreach (var item in usu)
                 {
-                    var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
-                    
-                    Synced = true;
-                    SaveUser(user);                    
+                    if (!item.Synced)
+                    {
+                        item.ConfirmPassword = Criptografia.Decriptar(item.ConfirmPassword);
+                        item.Password = Criptografia.Decriptar(item.Password);
+                        var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
+
+                        Synced = true;
+                        SaveUser(user);
+                    }
                 }
                
                 return true;
@@ -134,7 +145,7 @@ namespace Welic.App.Models.Usuario
                 .Where(x => x.RememberMe) 
                 .OrderByDescending(c => c.UltimoAcesso)
                 .ToList();
-            return usu[0];
+            return usu.FirstOrDefault();
         }        
 
         internal async Task<bool> RegisterPhoto(MediaFile file)

@@ -62,7 +62,7 @@ namespace Welic.App.Droid
                 this.StartColor = stack.StartColor;
                 this.EndColor = stack.EndColor;
             }
-            catch (ServiceAuthenticationException ex)
+            catch (System.Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(@"ERROR:", ex.Message);
             }

@@ -40,7 +40,7 @@ namespace Welic.WebSite
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(5),
                 Provider = new SimpleAuthorizationServerProvider(servico)
             };
 

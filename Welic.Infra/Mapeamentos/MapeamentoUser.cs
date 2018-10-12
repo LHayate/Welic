@@ -14,7 +14,7 @@ namespace Welic.Infra.Mapeamentos
     {
         public MapeamentoUser()
         {
-            ToTable("UserInfo","dbo");
+            ToTable("Users","dbo");
             HasKey(x => x.Id);
             HasKey(x => x.Email);
 
@@ -31,8 +31,7 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnType("bit");            
             Property(x => x.Email)                
                 .IsRequired()
-                .HasColumnType("nvarchar");
-           
+                .HasColumnType("nvarchar");           
             Property(x => x.Password)
                 .HasMaxLength(20)
                 .IsRequired()

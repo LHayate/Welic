@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -53,11 +54,35 @@ namespace Welic.App.Services.API
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+            VerificaToken();
+            //var token = new UserToken();
+            //token = token.LoadAsync();
+            //if(token!= null)
+            //    _HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
+           
+        }
+
+        private async void VerificaToken()
+        {
             var token = new UserToken();
             token = token.LoadAsync();
-            if(token!= null)
-                _HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
-           
+            try
+            {
+                if (token != null)
+                    _HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
+                else
+                {
+                    var user = (new UserDto()).LoadAsync();
+                    if (user != null)
+                        await AuthenticateAsync(user);
+                }
+            }
+            catch (System.Exception)
+            {
+                return;
+            }
+            
+
         }
 
         public async Task<bool> AuthenticateAsync(UserDto usuario)
@@ -92,14 +117,38 @@ namespace Welic.App.Services.API
             catch (System.Exception ex)
             {
                 return false;
-
             }
         }
 
         internal async Task<T> GetAsync<T>(string requestUri)
         {
             try
-            {           
+            {                
+                using (var response = await _HttpClient.GetAsync(requestUri))
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        if (response.StatusCode == HttpStatusCode.Unauthorized)
+                            throw new InvalidOperationException(
+                                "Acesso negado, você precisa estar autenticado para realizar essa requisição.");
+
+                        throw new System.Exception("Algo de errado não deu certo.");
+                    }
+
+                    var _result = await response.Content.ReadAsStringAsync();
+
+                    return JsonConvert.DeserializeObject<T>(_result);
+                }                                    
+            }
+            catch (System.Exception ex)
+            {
+                throw new System.Exception("Erro ao tentar buscar dados");
+            }
+        }
+        internal async Task<ObservableCollection<T>> GetListAsync<T>(string requestUri)
+        {
+            try
+            {
                 using (var response = await _HttpClient.GetAsync(requestUri))
                 {
                     if (!response.IsSuccessStatusCode)
@@ -109,16 +158,21 @@ namespace Welic.App.Services.API
 
                         throw new System.Exception("Algo de errado não deu certo.");
                     }
-                    var _result = await response.Content.ReadAsStringAsync();
 
-                    return JsonConvert.DeserializeObject<T>(_result);
+                    using (var responseStrean = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
+                    {
+                        return JsonConvert.DeserializeObject<ObservableCollection<T>>(await new StreamReader(responseStrean).ReadToEndAsync().ConfigureAwait(true));
+                    }
+                    //var _result = await response.Content.ReadAsStringAsync().ContinueWith(true);
+
+                    //return JsonConvert.DeserializeObject<ObservableCollection<T>>(_result);
                 }
             }
             catch (System.Exception ex)
             {
                 throw new System.Exception("Erro ao tentar buscar dados");
             }
-        }    
+        }
 
         internal async Task<T> PostAsync<T>(string uri, T obj)
         {
@@ -130,8 +184,7 @@ namespace Welic.App.Services.API
                 {
                     if (!_response.IsSuccessStatusCode)
                         throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
-                    var result =  await _response.Content.ReadAsStringAsync();                    
-                    
+                    var result =  await _response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<T>(result);
                 }              
             }

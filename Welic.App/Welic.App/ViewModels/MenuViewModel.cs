@@ -72,5 +72,19 @@ namespace Welic.App.ViewModels
                 await NavigationService.NavigateModalToAsync<EditProfileViewModel>();
         }
 
+        public async Task<bool> Deslogar()
+        {
+            try
+            {
+                //Pergunta ao Usuario se pode efetuar a troca
+                //var resposta = await MessageService.ShowOkAsync("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar");
+                return  (new UserDto()).DesconectarUsuario() ;
+            }
+            catch (System.Exception)
+            {
+                return false;                
+            }
+        }
+
     }
 }

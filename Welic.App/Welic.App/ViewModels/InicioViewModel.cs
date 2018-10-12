@@ -36,7 +36,7 @@ namespace Welic.App.ViewModels
             {
                 await NavigationService.NavigateToAsync<LoginExternoViewModel>();
             }
-            catch (ServiceAuthenticationException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao tentar solicitar a pagina. " + e.Message);

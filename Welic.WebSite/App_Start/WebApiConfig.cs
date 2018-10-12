@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using Newtonsoft.Json;
+using JsonSerializer = Microsoft.ApplicationInsights.Extensibility.Implementation.JsonSerializer;
 
 namespace Welic.WebSite
 {
@@ -16,7 +17,7 @@ namespace Welic.WebSite
             MediaTypeFormatterCollection formatters = config.Formatters;
             //Habilitar xml
             formatters.Remove(formatters.XmlFormatter);
-
+            
             JsonSerializerSettings jsonSettings = formatters.JsonFormatter.SerializerSettings;
             jsonSettings.Formatting = Formatting.Indented;
             jsonSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

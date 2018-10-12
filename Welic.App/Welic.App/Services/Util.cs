@@ -16,9 +16,9 @@ namespace Welic.App.Services
             switch (Device.RuntimePlatform)
             {
                 case Device.iOS:
-                    return nmImage + ".png";
+                    return $"{nmImage}.png";
                 case Device.Android:
-                    return nmImage;
+                    return $"{nmImage}.png";
                 case Device.UWP:
                     return "Image/" + nmImage + ".png";
                 default:
