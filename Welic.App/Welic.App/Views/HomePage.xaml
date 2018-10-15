@@ -13,8 +13,8 @@
     <!--Pages can be added as references or inline-->
 
     <local:FavoritesPage  Icon="{Binding Stars}" />
-    <local:SearchPage Icon="{Binding Search }"/>
-    <local:StartPage  Icon="{Binding Home}"/>
+    <local:SearchPage Icon="iFind.png"/>
+    <local:StartPage  Icon="iHome.png"/>
     <local:EventsPage Icon="{Binding Schedule}"/>
     <local:NewsPage Icon="{Binding News}"/>
     

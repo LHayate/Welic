@@ -64,9 +64,7 @@ namespace Welic.App.ViewModels
                 _search = Util.ImagePorSistema("iFind");
                 _home = Util.ImagePorSistema("iHome");
                 _schedule = Util.ImagePorSistema("iSchedule");
-                _news = Util.ImagePorSistema("iNew");
-
-              
+                _news = Util.ImagePorSistema("iNew");              
             }
             catch (System.Exception e)
             {

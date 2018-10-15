@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
     <Compile Include="Mapeamentos\MapeamentoDispositivos.cs" />
+    <Compile Include="Mapeamentos\MapeamentoLive.cs" />
     <Compile Include="Mapeamentos\MapeamentoUser.cs" />
     <Compile Include="Mapeamentos\MapeamentoMenu.cs" />
     <Compile Include="Migrations\201809162028366_InitialCreate.cs" />
@@ -102,18 +103,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">
-      <Project>{434B42F2-13D5-4FB9-A973-C6D8342A8784}</Project>
-      <Name>Welic.Dominio</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201809162028366_InitialCreate.resx">
       <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809271906536_Alters.resx">
       <DependentUpon>201809271906536_Alters.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">
+      <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
+      <Name>Welic.Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

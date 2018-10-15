@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Merq;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
-using Welic.App.Exception;
 using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.API;
@@ -142,7 +138,7 @@ namespace Welic.App.ViewModels
                     }
                     else
                     {
-                        throw new ServiceAuthenticationException("Erro ao Tentar Autenticar o Usuario");
+                        throw new System.Exception("Erro ao Tentar Autenticar o Usuario");
                     }
                 }
 

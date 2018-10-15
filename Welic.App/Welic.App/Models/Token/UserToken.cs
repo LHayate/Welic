@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Welic.App.Services.ServiceViews;
 
 namespace Welic.App.Models.Token
@@ -20,12 +21,15 @@ namespace Welic.App.Models.Token
         [JsonProperty("refresh_token")]
         public string RefreshToken { get; set; }
 
+        public DateTime DataExpir { get; set; }
+
         private DatabaseManager _dbManager;
 
 
         public bool RegisterToken(UserToken userToken)
         {
-            _dbManager = new DatabaseManager();            
+            _dbManager = new DatabaseManager();  
+            userToken.DataExpir = DateTime.Now.AddSeconds(userToken.ExpiresIn);
             _dbManager.database.InsertOrReplace(userToken);
             _dbManager.database.Close();
             return true;
@@ -52,9 +56,10 @@ namespace Welic.App.Models.Token
         public UserToken LoadAsync()
         {
             _dbManager = new DatabaseManager();
-            var token = _dbManager.database.Table<UserToken>()
-                .Where(x => x.AccessToken != null);
+            var token = _dbManager.database
+                .Table<UserToken>()
+                .Where(x => x.AccessToken != null && x.DataExpir >= DateTime.Now);
             return token.FirstOrDefault();
         }
-    }   
+    }
 }

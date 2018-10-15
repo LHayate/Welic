@@ -32,7 +32,7 @@ namespace Welic.App.Services.Navigation
             {
                 await Application.Current.MainPage.Navigation.PushAsync(CreatePage(typeof(TViewModel)));
             }
-            catch (ServiceAuthenticationException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -50,7 +50,7 @@ namespace Welic.App.Services.Navigation
             {
                 await Application.Current.MainPage.Navigation.PushModalAsync(CreatePage(typeof(TViewModel)));
             }
-            catch (ServiceAuthenticationException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 throw;

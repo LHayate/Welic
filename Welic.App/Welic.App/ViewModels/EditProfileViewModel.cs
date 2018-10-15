@@ -130,7 +130,7 @@ namespace Welic.App.ViewModels
                 UserDto.Id = int.Parse(Identity);
                 UserDto.PhoneNumber = PhoneNumber;
                 UserDto.Password = Password;
-                UserDto.ConfirmPassword = ConfirmPassword;
+                UserDto.ConfirmPassword = Criptografia.Encriptar(ConfirmPassword);
                 UserDto.UserName = Email;                
 
                 await UserDto.RegisterUser(UserDto);

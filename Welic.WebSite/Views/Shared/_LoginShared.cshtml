@@ -1,0 +1,110 @@
+﻿@using Welic.WebSite.Helpers
+@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    @* CSS Personalizado *@
+    @Styles.Render("~/Content/customLogin.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!--Import Google Icon Font-->
+    @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <!-- Compiled and minified CSS -->
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+
+    <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
+    <title>@ViewBag.Title</title>
+
+</head>
+<body class="welic-azul-claro">
+    <!-- Navibar-->
+    <div>
+        <nav class="welic z-depth-2" role="navigation">
+            <div class="nav-wrapper container">
+
+                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/Logo_Welic.png" class="container" /></a>
+
+                <ul class="right hide-on-med-and-down ">
+                    <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    }
+
+                </ul>
+
+                <ul id="nav-mobile" class="side-nav">
+                    <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li>
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                            </li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                        }
+                    }
+                    else
+                    {
+
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
+                    }
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+    </div>
+
+    @RenderBody()
+
+    <!--Scripts-->
+    <!-- Jquery Importado via CDN -->
+    @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <!-- Compiled and minified JavaScript -->
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124613610-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-124613610-1');
+    </script>
+
+    @* Scripts de ação *@
+
+    <!--Side NavBar-->
+    <script>
+        $(".button-collapse").sideNav();
+    </script>    
+    
+</body>
+</html>

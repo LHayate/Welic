@@ -19,8 +19,6 @@ namespace Welic.App.Models.Dispositivos.Dto
         public DateTime DateLastSynced { get; set; }
         public string EmailUsuario { get; set; }
 
-        private DatabaseManager _dbManager;
-
         public DispositivoDto()
         {
             

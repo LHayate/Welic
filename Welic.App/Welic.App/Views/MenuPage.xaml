@@ -50,7 +50,8 @@
 
             <ListView x:Name="ListViewMenu"
                         HasUnevenRows="True"
-                      ItemSelected="ListViewMenu_OnItemSelected">
+                      ItemSelected="ListViewMenu_OnItemSelected"
+                      ItemTapped="ListViewMenu_OnItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

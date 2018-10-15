@@ -136,26 +136,30 @@ namespace Welic.App.Views
         }        
         private async void ListViewMenu_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = (HomeMenuItem)e.SelectedItem;
-            int menu = (int)item.Id;
             ListViewMenu.SelectedItem = null;
+        }
 
-            //Ação de Desconectar o Usuario
-            if (menu.Equals(7))
+        private async void ListViewMenu_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            try
             {
-                //Pergunta ao Usuario se pode efetuar a troca
-                var resposta = await DisplayAlert("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar");
-                if (!resposta)
+                var item = (HomeMenuItem)e.Item;
+                int menu = (int)item.Id;
+
+                //Ação de Desconectar o Usuario
+                if (menu.Equals(7) || item.Title.Equals("Exit"))
                 {
-                    ListViewMenu.SelectedItem = null;
-                }
-                else
-                {
-                    if ((new UserDto()).DesconectarUsuario())
+                    if (await (BindingContext as MenuViewModel).Deslogar())
                         App.Current.MainPage = new InicioPage();
                 }
+
+            }
+            catch (System.Exception exception)
+            {
+                Console.WriteLine(exception);
                 return;
             }
+            
         }
     }
 }

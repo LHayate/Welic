@@ -104,7 +104,7 @@
       <Name>Welic.Servicos</Name>
     </ProjectReference>
     <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">
-      <Project>{434B42F2-13D5-4FB9-A973-C6D8342A8784}</Project>
+      <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
       <Name>Welic.Dominio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Welic.Infra\Welic.Infra.csproj">
@@ -112,7 +112,7 @@
       <Name>Welic.Infra</Name>
     </ProjectReference>
     <ProjectReference Include="..\Welic.Repositorios\Welic.Repositorios.csproj">
-      <Project>{F5045C53-082C-46F3-9277-A1AE37FE34BD}</Project>
+      <Project>{f5045c53-082c-46f3-9277-a1ae37fe34bd}</Project>
       <Name>Welic.Repositorios</Name>
     </ProjectReference>
   </ItemGroup>
