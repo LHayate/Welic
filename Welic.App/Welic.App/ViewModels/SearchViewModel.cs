@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Welic.App.Models.Search;
+using Welic.App.Services;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -14,9 +15,11 @@ namespace Welic.App.ViewModels
 
         public ObservableCollection<SearchDto> SearchFind { get; private set; }
 
-                
+        public string ISearch{get ;}
+
         public SearchViewModel()
         {
+            ISearch = Util.ImagePorSistema("iFind");
             SearchCommand = new Command<string>(async (text) => await Search(text));
             SearchFind = new ObservableCollection<SearchDto>();
         }

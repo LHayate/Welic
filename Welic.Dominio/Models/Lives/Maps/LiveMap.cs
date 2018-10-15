@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Schedule.Maps;
 
 namespace Welic.Dominio.Models.Lives.Maps
 {
@@ -16,5 +17,8 @@ namespace Welic.Dominio.Models.Lives.Maps
         public bool Chat { get; set; }
         public byte[] Print { get; set; }
         public string UrlDestino { get; set; }
+
+
+        //public ScheduleMap Lives { get; set; }
     }
 }

@@ -232,5 +232,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\iNew.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\iScheduleList.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

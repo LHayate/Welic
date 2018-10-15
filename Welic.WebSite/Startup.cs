@@ -3,12 +3,12 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
 using System.Web.Http;
+using Registrators;
 using Unity;
 using Unity.Lifetime;
 using Welic.Dominio.Eventos;
 using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.User.Servicos;
-using Welic.Registrators;
 using Welic.WebSite.Helpers;
 using Welic.WebSite.Provider;
 

@@ -13,9 +13,9 @@
     <!--Pages can be added as references or inline-->
 
     <local:FavoritesPage  Icon="{Binding Stars}" />
-    <local:SearchPage Icon="iFind.png"/>
-    <local:StartPage  Icon="iHome.png"/>
-    <local:EventsPage Icon="{Binding Schedule}"/>
+    <local:SearchPage />
+    <local:StartPage />
+    <local:EventsPage />
     <local:NewsPage Icon="{Binding News}"/>
     
 </TabbedPage>

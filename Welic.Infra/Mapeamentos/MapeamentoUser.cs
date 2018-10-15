@@ -15,13 +15,13 @@ namespace Welic.Infra.Mapeamentos
         public MapeamentoUser()
         {
             ToTable("Users","dbo");
-            HasKey(x => x.Id);
-            HasKey(x => x.Email);
+            HasKey(x => x.Id);            
 
             Property(x => x.Id)
                 .HasColumnName("Id")          
                 .IsRequired()                
-                .HasColumnType("int");
+                .HasColumnType("int")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.Guid)
                 .HasColumnName("Guid")
                 .HasColumnType("uniqueidentifier")
@@ -31,7 +31,8 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnType("bit");            
             Property(x => x.Email)                
                 .IsRequired()
-                .HasColumnType("nvarchar");           
+                .HasColumnType("nvarchar")
+                .HasColumnName("Email");           
             Property(x => x.Password)
                 .HasMaxLength(20)
                 .IsRequired()

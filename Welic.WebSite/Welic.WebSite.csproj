@@ -254,6 +254,8 @@
   <ItemGroup>
     <Compile Include="API\Controllers\BaseController.cs" />
     <Compile Include="API\Controllers\LiveController.cs" />
+    <Compile Include="API\Controllers\NewsController.cs" />
+    <Compile Include="API\Controllers\ScheduleController.cs" />
     <Compile Include="API\Controllers\testeController.cs" />
     <Compile Include="API\Controllers\UserController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

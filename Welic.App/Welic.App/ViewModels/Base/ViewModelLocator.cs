@@ -46,7 +46,9 @@ namespace Welic.App.ViewModels.Base
             _container.RegisterType<LoginExternoViewModel>();
             _container.RegisterType<MenuViewModel>();
             _container.RegisterType<SearchViewModel>();
-            _container.RegisterType<StartViewModel>();            
+            _container.RegisterType<StartViewModel>();
+            _container.RegisterType<EventsViewModel>();
+            _container.RegisterType<NewsViewModel>();
 
             // Services - by default, TinyIoC will register interface registrations as singletons.
 
@@ -69,13 +71,10 @@ namespace Welic.App.ViewModels.Base
             // Change injected dependencies
             if (useMockServices)
             {
-
                 UseMockService = true;
             }
             else
-            {
-                
-
+            {                
                 UseMockService = false;
             }
         }

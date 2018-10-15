@@ -48,7 +48,8 @@ namespace Welic.App.iOS
                     var id = obj["id"].ToString().Replace("\"", "");
                     var name = obj["name"].ToString().Replace("\"", "");
 
-                    await App.NavigateToProfile();
+                    //TODO: Resolver problema com Login via Facebook
+                    //await App.NavigateToProfile();
                 }
                 else
                 {

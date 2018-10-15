@@ -38,32 +38,32 @@ namespace Welic.Dominio.Models.Users.Adapters
             return userDto;
         }
 
-        public static Entidades.User ConverterDtoParEntidade(UserDto userMap)
+        public static Entidades.User ConverterDtoParEntidade(UserDto userDto)
         {
 
-            if (userMap == null)
+            if (userDto == null)
             {
                 return null;
             }
 
             Entidades.User user = new Entidades.User
             {
-                Id = userMap.Id,
-                Guid = userMap.Guid,
-                Password = userMap.Password,
-                Email = userMap.Email,
-                ImagemPerfil = userMap.ImagemPerfil,
-                RememberMe = userMap.RememberMe,
-                EmailConfirmed = userMap.EmailConfirmed,
-                UserName = userMap.UserName,
-                NomeCompleto = userMap.NomeCompleto,
-                PhoneNumber = userMap.PhoneNumber,
-                ConfirmPassword = userMap.ConfirmPassword,
+                Id = userDto.Id,
+                Guid = userDto.Guid,
+                Password = userDto.Password,
+                Email = userDto.Email,
+                ImagemPerfil = userDto.ImagemPerfil,
+                RememberMe = userDto.RememberMe,
+                EmailConfirmed = userDto.EmailConfirmed,
+                UserName = userDto.UserName,
+                NomeCompleto = userDto.NomeCompleto,
+                PhoneNumber = userDto.PhoneNumber,
+                ConfirmPassword = userDto.ConfirmPassword,
 
 
-                NomeImage = userMap.NomeImage,
-                PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
-                UltimoAcesso = userMap.UltimoAcesso
+                NomeImage = userDto.NomeImage,
+                PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
+                UltimoAcesso = userDto.UltimoAcesso
             };
 
 

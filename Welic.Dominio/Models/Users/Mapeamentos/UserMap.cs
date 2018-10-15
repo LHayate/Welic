@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Schedule.Maps;
 
 namespace Welic.Dominio.Models.Users.Mapeamentos
 {
     public class UserMap
     {
+        [Key]
         public int Id { get; set; }
         public Guid Guid { get; set; }
         public string Email { get; set; }
@@ -22,5 +25,9 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public byte[] ImagemPerfil { get; set; }
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }
+
+
+        //public ScheduleMap SchedulesTeacher { get; set; }
+        public ICollection<ScheduleMap> SchedulesClass { get; set; }
     }
 }

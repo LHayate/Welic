@@ -46,7 +46,9 @@
     <Compile Include="Acesso\ServicoUsuario.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="Menu\ServicoMenu.cs" />
+    <Compile Include="News\ServiceNews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule\ServiceSchedule.cs" />
     <Compile Include="Servico.cs" />
     <Compile Include="Users\ServiceUser.cs" />
   </ItemGroup>
