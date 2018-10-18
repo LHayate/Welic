@@ -28,28 +28,25 @@ namespace Welic.App.Views
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
-            LoadingImage();
+            //LoadingImage();
 
-            //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
-            //{                
-            //    new GroupHomeMenuItem { Id = MenuItemType.Browse, Title="Home", _iconMenu = Util.ImagePorSistema("iHome")},
-            //    new GroupHomeMenuItem("My Products",Util.ImagePorSistema("iGalery"))
-            //    {
-            //        new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
-            //    },
-
-
-            //};
+            GroupMenu = new ObservableCollection<GroupHomeMenuItem>
+            {                
+                new GroupHomeMenuItem("My Products",Util.ImagePorSistema("iGalery"))
+                {
+                    new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+                },
+            };
 
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
                 new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+                new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
                 new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                 new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },
                 new HomeMenuItem {Id = MenuItemType.Videos, Title="Videos", IconMenu = Util.ImagePorSistema("iVideos") },
-                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },
-                new HomeMenuItem {Id = MenuItemType.SignUp, Title="Exit", IconMenu = Util.ImagePorSistema("iExit") },
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },                
                 new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout") }
             };
 
@@ -60,10 +57,28 @@ namespace Welic.App.Views
             {
                 if (e.SelectedItem == null)
                     return;
+                
+                var id = (int)((HomeMenuItem)e.SelectedItem).Id;               
+                    await RootPage.NavigateFromMenu(id);
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-                await RootPage.NavigateFromMenu(id);
             };
+
+            //ListViewMenuGroup.ItemsSource = GroupMenu;
+            ////ListViewMenu.ItemsSource = menuItems;
+
+            //ListViewMenuGroup.ItemSelected += async (sender, e) =>
+            //{
+            //    if (e.SelectedItem == null)
+            //        return;
+
+            //    //var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+            //    //await RootPage.NavigateFromMenu(id);
+
+            //};
+
+
+
+
         }
 
         private void LoadingImage()
@@ -106,7 +121,11 @@ namespace Welic.App.Views
                     new StoreCameraMediaOptions
                     {
                         Directory = "Resources",
-                        Name = "Perfil.png"
+                        Name = "Perfil.png",
+                        PhotoSize = PhotoSize.Small,
+                        CompressionQuality = 50,
+                        DefaultCamera = CameraDevice.Front,
+                        AllowCropping = true,
                     });
 
                 if (file == null)
@@ -114,7 +133,7 @@ namespace Welic.App.Views
 
                 await (new UserDto()).RegisterPhoto(file);
 
-
+               
                 CircleImage.Source = ImageSource.FromStream(() =>
                 {
                     var stream = file.GetStream();
@@ -140,26 +159,25 @@ namespace Welic.App.Views
         }
 
         private async void ListViewMenu_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {            
+        }
+
+        private async void LogOff_OnClicked(object sender, EventArgs e)
         {
             try
             {
-                var item = (HomeMenuItem)e.Item;
-                int menu = (int)item.Id;
-
-                //Ação de Desconectar o Usuario
-                if (menu.Equals(7) || item.Title.Equals("Exit"))
+                //Pergunta ao Usuario se pode efetuar a troca
+                var resposta = await Application.Current.MainPage.DisplayAlert("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar").ConfigureAwait(true);
+                if (resposta)
                 {
-                    if (await (BindingContext as MenuViewModel).Deslogar())
-                        App.Current.MainPage = new InicioPage();
+                    await(new UserDto()).DesconectarUsuario();
+                    App.Current.MainPage = new NavigationPage(new InicioPage());
                 }
-
             }
-            catch (System.Exception exception)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(exception);
                 return;
             }
-            
         }
     }
 }

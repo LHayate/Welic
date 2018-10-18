@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Welic.App.Services.API;
+using static Welic.App.Services.API.WebApi;
 
 namespace Welic.App.Models.News
 {
@@ -15,19 +17,28 @@ namespace Welic.App.Models.News
         public DateTime Date { get; set; }
         public string Url { get; set; }
 
-        public async Task<ObservableCollection<NewsDto>> GetListLive()
+       
+        private List<NewsDto> _listItem;
+
+        private List<NewsDto> ListItem
+        {
+            get => _listItem;
+            set => _listItem = value;
+        }
+
+        public async Task<List<NewsDto>> GetList(int pageIndex, int pageSize)
         {
             try
             {
-                var list = await WebApi.Current.GetListAsync<NewsDto>("News/GetList");
-                return list;
+                _listItem = await Current?.GetAsync<List<NewsDto>>("live/GetListLive");
+                return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+
             }
             catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-
         }
     }
 }

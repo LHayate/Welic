@@ -11,7 +11,7 @@ namespace Welic.App.Services.Navigation
         Task NavigateToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel;
 
         Task NavigateModalToAsync<TViewModel>() where TViewModel : BaseViewModel;
-        Task ReturnModalToAsync(bool animation);
+        Task ReturnModalToAsync(bool animation);        
         Task NavigateModalToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel;
         Task RemoveLastFromBackStackAsync();
 

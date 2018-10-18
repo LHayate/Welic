@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Users.Dtos;
 
 namespace Welic.Dominio.Models.Lives.Dtos
 {
@@ -16,5 +17,6 @@ namespace Welic.Dominio.Models.Lives.Dtos
         public bool Chat { get; set; }
         public byte[] Print { get; set; }
         public string UrlDestino { get; set; }
+        public UserDto Author { get; set; }
     }
 }

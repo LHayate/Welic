@@ -17,7 +17,7 @@ namespace Welic.Dominio.Models.Users.Adapters
             UserDto userDto = new UserDto
             {
                 Id = userMap.Id,
-                Guid = userMap.Guid,
+                IdGuid = userMap.Guid,
                 Password = userMap.Password,
                 Email = userMap.Email,
                 ImagemPerfil = userMap.ImagemPerfil,
@@ -49,7 +49,7 @@ namespace Welic.Dominio.Models.Users.Adapters
             Entidades.User user = new Entidades.User
             {
                 Id = userDto.Id,
-                Guid = userDto.Guid,
+                Guid = userDto.IdGuid,
                 Password = userDto.Password,
                 Email = userDto.Email,
                 ImagemPerfil = userDto.ImagemPerfil,

@@ -21,12 +21,18 @@ namespace Welic.Repositorios.Live
         public void Save(LiveMap liveMap)
         {
             var live = GetById(liveMap.Id);
+            
             if (live != null)
             {
+                liveMap.Author = _context.User.FirstOrDefault(x => x.Id == live.Author.Id);
                 _context.Entry(liveMap).State = EntityState.Modified;
             }
             else
-                _context.Live.Add(liveMap);
+            {
+                liveMap.Author = _context.User.FirstOrDefault(x => x.Id == liveMap.Author.Id);               
+                _context.Live.Add(liveMap);                                 
+            }
+                
 
             _context.SaveChanges();
         }

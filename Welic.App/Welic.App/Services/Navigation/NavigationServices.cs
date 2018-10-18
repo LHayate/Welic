@@ -62,6 +62,7 @@ namespace Welic.App.Services.Navigation
         {
             await Application.Current.MainPage.Navigation.PopModalAsync(animation);
         }
+        
 
         public async Task NavigateModalToAsync<TViewModel>(object[] parameter) where TViewModel : BaseViewModel
         {
@@ -154,7 +155,7 @@ namespace Welic.App.Services.Navigation
                     throw new System.Exception($"Não encontrado a pagina Solicitada {viewModelType}");
                 }
 
-                Page page = Activator.CreateInstance(pageType) as Page;
+                Page page = Activator.CreateInstance(pageType,parameter) as Page;                
                 return page;
             }
             catch (System.Exception e)
@@ -164,5 +165,6 @@ namespace Welic.App.Services.Navigation
             }
            
         }
+        
     }    
 }

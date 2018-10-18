@@ -14,9 +14,7 @@ namespace Welic.App.ViewModels
     {
         public Command ReturnToMenuCommand => new Command(async () => await ReturnToMenu());
         public Command SaveInfosCommand => new Command(async () => await SaveInfos());        
-
         
-
         private string _firstName;
 
         public string FirstName

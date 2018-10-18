@@ -25,8 +25,7 @@ namespace Welic.App.ViewModels
             get => _news;
             set => SetProperty(ref _news, value);
         }
-
-
+        
         #endregion
 
         #endregion

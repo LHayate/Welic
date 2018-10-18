@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Welic.App.Services.API;
+using static Welic.App.Services.API.WebApi;
 
 namespace Welic.App.Models.Schedule
 {
@@ -22,6 +24,13 @@ namespace Welic.App.Models.Schedule
             
         }
 
+        private List<ScheduleDto> _listItem;
+
+        private List<ScheduleDto> ListItem
+        {
+            get => _listItem;
+            set => _listItem = value;
+        }
         public async Task<ObservableCollection<ScheduleDto>> GetListLive()
         {
             try
@@ -37,7 +46,20 @@ namespace Welic.App.Models.Schedule
         }
 
 
+        public async Task<List<ScheduleDto>> GetList(int pageIndex, int pageSize)
+        {
+            try
+            {
+                _listItem = await Current?.GetAsync<List<ScheduleDto>>("Schedule/GetList");
+                return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
     }

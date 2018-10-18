@@ -15,8 +15,8 @@ namespace Welic.App.ViewModels.Base
     public class BaseViewModel :  INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
-        protected readonly INavigationService NavigationService;
-        protected readonly IMessageService MessageService;
+        public readonly INavigationService NavigationService;
+        public readonly IMessageService MessageService;
 
        
 
@@ -60,9 +60,7 @@ namespace Welic.App.ViewModels.Base
         #endregion
 
         public BaseViewModel()
-        {
-            
-
+        {            
             NavigationService = ViewModelLocator.Resolve<INavigationService>();
             MessageService = ViewModelLocator.Resolve<IMessageService>();
             GlobalSetting.Instance.BaseEndpoint = ViewModelLocator.Resolve<ISettingsService>().UrlBase;

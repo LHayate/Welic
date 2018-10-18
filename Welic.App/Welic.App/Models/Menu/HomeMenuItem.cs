@@ -13,7 +13,8 @@ namespace Welic.App.Models
         Videos,
         Settings,        
         Tickets,
-        SignUp,
+        SignOff,
+        NewLive
 
 
 

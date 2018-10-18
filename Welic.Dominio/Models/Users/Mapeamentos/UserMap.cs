@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Schedule.Maps;
 
 namespace Welic.Dominio.Models.Users.Mapeamentos
@@ -27,7 +25,10 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public DateTime UltimoAcesso { get; set; }
 
 
-        //public ScheduleMap SchedulesTeacher { get; set; }
+        public ICollection<ScheduleMap> SchedulesTeacher { get; set; }
+
         public ICollection<ScheduleMap> SchedulesClass { get; set; }
+
+        public ICollection<LiveMap> Lives { get; set; }
     }
 }

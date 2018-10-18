@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
+using Welic.App.Services.ServicesViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -34,12 +36,20 @@ namespace Welic.App.ViewModels
             get => _email;
             set => SetProperty(ref _email, value);
         }
-        private string _image;
+        private byte[] _image;
 
-        public string Image
+        public byte[] Image
         {
             get => _image;
             set => SetProperty(ref _image, value);
+        }
+
+        private string _lastAcess;
+
+        public string LastAcess
+        {
+            get => _lastAcess;
+            set => SetProperty(ref _lastAcess, value);
         }
 
 
@@ -50,21 +60,16 @@ namespace Welic.App.ViewModels
             get => _userDto;
             set => _userDto = value;
         }
-
+        
         public MenuViewModel()
-        {
-           
-            
+        {                      
             _userDto = (new UserDto()).LoadAsync();
 
-
-           
+            _image = _userDto.ImagemPerfil;
             _nomeCompleto = _userDto.NomeCompleto;
             _cpf = _userDto.Id.ToString();
             _email = _userDto.Email ?? _userDto.UserName;
-            
-
-            
+            _lastAcess = _userDto.UltimoAcesso.ToString(CultureInfo.InvariantCulture);
         }
         private async Task SendToEditProfile()
         {
@@ -77,10 +82,11 @@ namespace Welic.App.ViewModels
             try
             {
                 //Pergunta ao Usuario se pode efetuar a troca
-                //var resposta = await MessageService.ShowOkAsync("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar");
-                return  (new UserDto()).DesconectarUsuario() ;
+                var resposta = await  MessageService.ShowOkAsync("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar").ConfigureAwait(true);
+                //return await (new UserDto()).DesconectarUsuario();
+                return true;
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 return false;                
             }

@@ -16,6 +16,6 @@ namespace Welic.Dominio.Models.Lives.Entitys
         public bool Chat { get; set; }
         public byte[] Print { get; set; }
         public string UrlDestino { get; set; }
-
+        public Users.Entidades.User Author { get; set; }
     }
 }

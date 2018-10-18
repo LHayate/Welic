@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Schedule.Maps;
+using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Dominio.Models.Lives.Maps
 {
@@ -17,7 +19,8 @@ namespace Welic.Dominio.Models.Lives.Maps
         public bool Chat { get; set; }
         public byte[] Print { get; set; }
         public string UrlDestino { get; set; }
-
+                
+        public UserMap Author { get; set; }
 
         //public ScheduleMap Lives { get; set; }
     }

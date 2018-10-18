@@ -61,7 +61,7 @@ namespace Servicos.Users
                     PhoneNumber = userDto.PhoneNumber,
                     ConfirmPassword = Criptografia.Encriptar(userDto.ConfirmPassword),
                     Id = userDto.Id,
-                    Guid = userDto.Guid,
+                    Guid = new Guid(),
                     NomeImage = userDto.NomeImage,
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
                     UltimoAcesso = DateTime.Now

@@ -88,14 +88,6 @@
     <Compile Include="Mapeamentos\MapeamentoUser.cs" />
     <Compile Include="Mapeamentos\MapeamentoMenu.cs" />
     <Compile Include="Mapeamentos\MappingNews.cs" />
-    <Compile Include="Migrations\201809162028366_InitialCreate.cs" />
-    <Compile Include="Migrations\201809162028366_InitialCreate.Designer.cs">
-      <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809271906536_Alters.cs" />
-    <Compile Include="Migrations\201809271906536_Alters.Designer.cs">
-      <DependentUpon>201809271906536_Alters.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnidadeTrabalho.cs" />
@@ -103,14 +95,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809162028366_InitialCreate.resx">
-      <DependentUpon>201809162028366_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809271906536_Alters.resx">
-      <DependentUpon>201809271906536_Alters.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Welic.Dominio\Welic.Dominio.csproj">

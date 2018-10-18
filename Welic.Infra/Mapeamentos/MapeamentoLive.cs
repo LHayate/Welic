@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace Welic.Infra.Mapeamentos
         {
             ToTable("Lives");
             HasKey(x => x.Id);
+            
 
             Property(x => x.Id)
                 .IsRequired()
@@ -33,7 +35,7 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnType("decimal")
                 .HasColumnName("Prince");
             Property(x => x.Print)
-                .IsRequired()
+                .IsOptional()
                 .HasColumnType("image")
                 .HasColumnName("Print");
             Property(x => x.Themes)
@@ -48,6 +50,12 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasColumnName("UrlDestino");
+
+            //One to Many
+            HasRequired(c1 => c1.Author)
+                .WithMany(c2 => c2.Lives)
+                .WillCascadeOnDelete();
+
         }
     }
 }

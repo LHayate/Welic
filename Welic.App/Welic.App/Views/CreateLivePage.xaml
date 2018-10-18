@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Extends="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
+             x:Class="Welic.App.Views.CreateLivePage"
+             BackgroundColor="#0F5682"
+             Icon="LogoWelic72x72.png"
+             Title="Create">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <BoxView HeightRequest="1" BackgroundColor="Black" Margin="0,1,0,1"/>
+                <Label Text="Title" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding Title}"                                                                                       
+                       BackgroundColor="Transparent"
+                       ReturnType="Next"
+                       IsSpellCheckEnabled="True">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeWord</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                        
+                    </Entry.Keyboard>
+                </Entry>
+                <!--<BoxView HeightRequest="1" BackgroundColor="Transparent" Margin="0,1,0,1"/>-->
+                <Label Text="Descrição" HorizontalTextAlignment="Center" />
+                <Editor Text="{Binding Description}"  
+                        BackgroundColor="Transparent"
+                        HeightRequest="170"
+                        IsSpellCheckEnabled="True"
+                        AutoSize="TextChanges"  
+                        MaxLength="200"
+                    >
+                    <Editor.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>Suggestions,CapitalizeSentence,Spellcheck</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Editor.Keyboard>
+                </Editor>
+                
+                <Entry Placeholder="Price $" BackgroundColor="Transparent" 
+                       Keyboard="Numeric" 
+                       Text="{Binding Price}"
+                       />
+                <!--<BoxView HeightRequest="1" BackgroundColor="#BDBDBD" Margin="0,1,0,1"/>-->
+                <Entry Placeholder="Themes" BackgroundColor="Transparent" 
+                       Keyboard="Text" 
+                       Text="{Binding Themes}"
+
+                />
+                <Extends:CheckBox DefaultText="Chat"
+                                  HorizontalOptions="FillAndExpand"
+                                  Checked="{Binding Chat}"
+                                  />
+                <implements:GradientColorStack StartColor="#C79D1D" 
+                                               EndColor="#CE7526" 
+                                               HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="CenterAndExpand">
+                    <Button Text="{Binding TextButton}"
+                            Command="{Binding CreatCommand}"  
+                            VerticalOptions="CenterAndExpand" 
+                            HorizontalOptions="CenterAndExpand"                                                        
+                            TextColor="#0C4F7B"  
+                            BackgroundColor="Transparent"
+                    />
+                </implements:GradientColorStack>
+                <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
+                                   VerticalOptions="CenterAndExpand" 
+                                   HorizontalOptions="CenterAndExpand"/>
+
+
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

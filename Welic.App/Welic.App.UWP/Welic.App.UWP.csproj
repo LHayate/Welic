@@ -97,6 +97,7 @@
     <Compile Include="Implements\EntryFocusEffect.cs" />
     <Compile Include="Implements\LoginPageRenderer.cs" />
     <Compile Include="Implements\ResizePicture.cs" />
+    <Compile Include="Implements\VideoPlayerRenderer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -179,10 +180,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Plugin.MediaManager">
+      <Version>0.4.5</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.MediaManager.Forms">
+      <Version>0.4.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.7" />
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
+      <Version>1.0.0-preview2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.LiveReload">
       <Version>0.3.27</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.Forms">
+      <Version>2.0.5782</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

@@ -68,7 +68,7 @@ namespace Servicos.Schedule
                     {
                         Id = userDto.Id,
                         Email = userDto.Email,
-                        Guid = userDto.Guid,
+                        Guid = userDto.IdGuid,
                         NomeCompleto = userDto.NomeCompleto,
                         PhoneNumber = userDto.PhoneNumber,
                         UserName = userDto.UserName
@@ -101,7 +101,7 @@ namespace Servicos.Schedule
                         {
                             Id = userDto.Id,
                             Email = userDto.Email,
-                            Guid = userDto.Guid,
+                            Guid = userDto.IdGuid,
                             NomeCompleto = userDto.NomeCompleto,
                             PhoneNumber = userDto.PhoneNumber,
                             UserName = userDto.UserName

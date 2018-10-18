@@ -192,9 +192,7 @@ namespace Welic.App.Services.API
             {
                 Console.WriteLine(e);
                 throw;
-            }
-            
-
+            }            
         }
      
         internal async Task<bool> PutAsync<T>(int id, T t, string uri)

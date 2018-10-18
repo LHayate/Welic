@@ -50,8 +50,16 @@ namespace Welic.Infra.Mapeamentos
                     .MapLeftKey("ScheduleId")
                     .MapRightKey("Id"));
 
-            //HasRequired(c1 => c1.UserTeacher).WithRequiredPrincipal(c2 => c2.SchedulesTeacher);
-            //HasRequired(c1 => c1.Live).WithRequiredPrincipal(c2 => c2.Lives);
+            //One to Many
+            //HasRequired(c1 => c1.UserTeacher)
+            //    .WithMany(c2 => c2.SchedulesTeacher)
+            //    .WillCascadeOnDelete();
+
+            //One to One
+            //HasRequired(s => s.Live)
+            //    .WithRequiredPrincipal(c => c.Lives);
+            
+                        
 
 
         }

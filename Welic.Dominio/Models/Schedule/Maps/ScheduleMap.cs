@@ -15,6 +15,7 @@ namespace Welic.Dominio.Models.Schedule.Maps
         public DateTime DateEvent { get; set; }
         public bool Private { get; set; }
         public bool Ativo { get; set; }
+
         public UserMap UserTeacher { get; set; }
         public ICollection<UserMap> UserClass { get; set; }
         public LiveMap Live { get; set; }

@@ -3,9 +3,8 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:Welic.App.Views"
             x:Class="Welic.App.Views.HomePage"
-            Title="Welic"
-            BackgroundColor="#0F5682"    
-            
+            Title="{Binding Title}"
+            BackgroundColor="#0F5682"                
             >
     <TabbedPage.ToolbarItems>
         <ToolbarItem Name="MenuItemRefresh" Order="Primary" Icon="LogoWelic72x72.png" />
@@ -14,8 +13,8 @@
 
     <local:FavoritesPage  Icon="{Binding Stars}" />
     <local:SearchPage />
-    <local:StartPage />
-    <local:EventsPage />
-    <local:NewsPage Icon="{Binding News}"/>
+    <local:ListLivePage />
+    <local:ListEventsPage />
+    <local:ListNewsPage Icon="{Binding News}"/>
     
 </TabbedPage>

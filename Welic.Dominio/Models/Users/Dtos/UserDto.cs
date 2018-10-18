@@ -10,7 +10,7 @@ namespace Welic.Dominio.Models.Users.Dtos
     public class UserDto
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid IdGuid { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
         public string PhoneNumber { get; set; }
@@ -23,5 +23,17 @@ namespace Welic.Dominio.Models.Users.Dtos
         public byte[] ImagemPerfil { get; set; }
         public string NomeImage { get; set; }
         public DateTime UltimoAcesso { get; set; }
+
+        public UserDto( int id, Guid guid, string email)
+        {
+            Id = id;
+            IdGuid = guid;
+            Email = email;
+        }
+
+        public UserDto()
+        {
+            
+        }
     }
 }

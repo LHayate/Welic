@@ -70,6 +70,8 @@
     <Compile Include="Implements\GradientColorStackRenderer.cs" />
     <Compile Include="Implements\LoginPageRenderer.cs" />
     <Compile Include="Implements\ResizePicture.cs" />
+    <Compile Include="Implements\VIdeoPlayer\VideoPicker.cs" />
+    <Compile Include="Implements\VIdeoPlayer\VideoPlayerRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -137,9 +139,21 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Plugin.MediaManager">
+      <Version>0.4.5</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.MediaManager.Forms">
+      <Version>0.4.5</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+    <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
+      <Version>1.0.0-preview2</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.LiveReload">
       <Version>0.3.27</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.Forms">
+      <Version>2.0.5782</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

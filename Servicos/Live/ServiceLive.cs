@@ -1,57 +1,69 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Welic.Dominio;
 using Welic.Dominio.Models.Lives.Adapters;
 using Welic.Dominio.Models.Lives.Dtos;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
+using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Servicos.Live
 {
     public class ServiceLive : Servico, IServiceLive
     {
-        private readonly IRepositoryLive _repositoryLive;
-        private readonly IUnidadeTrabalho _unidadeTrabalho;
-
+        private readonly IRepositoryLive _repositoryLive;        
         public ServiceLive(IRepositoryLive repositoryLive, IUnidadeTrabalho unidadeTrabalho) : base(unidadeTrabalho)
         {
-            _repositoryLive = repositoryLive;
-            _unidadeTrabalho = unidadeTrabalho;
+            _repositoryLive = repositoryLive;            
         }
 
-        public LiveDto Save(LiveDto liveMap)
+        public LiveDto Save(LiveDto liveDto)
         {
-            var liveEncontrada = _repositoryLive.GetById(liveMap.Id);
+            var liveEncontrada = _repositoryLive.GetById(liveDto.Id);
 
             if (liveEncontrada != null)
             {
-                liveEncontrada.Id = liveMap.Id;
-                liveEncontrada.Title = liveMap.Title;
-                liveEncontrada.Print = liveMap.Print;
-                liveEncontrada.Themes = liveMap.Themes;
-                liveEncontrada.UrlDestino = liveMap.UrlDestino;
-                liveEncontrada.Prince = liveMap.Prince;
-                liveEncontrada.Description = liveMap.Description;
-                liveEncontrada.Chat = liveMap.Chat;                
+                liveEncontrada.Id = liveDto.Id;
+                liveEncontrada.Title = liveDto.Title;
+                liveEncontrada.Print = liveDto.Print;
+                liveEncontrada.Themes = liveDto.Themes;
+                liveEncontrada.UrlDestino = liveDto.UrlDestino;
+                liveEncontrada.Prince = liveDto.Prince;
+                liveEncontrada.Description = liveDto.Description;
+                liveEncontrada.Chat = liveDto.Chat;
+
+                if (liveDto.Author == null)
+                    throw new System.Exception("É obrigatório o autor");
+
+                liveEncontrada.Author = new UserMap
+                {
+                    Id = liveDto.Author.Id,
+                    Email = liveDto.Author.Email
+                };                 
             }
             else
             {
                 liveEncontrada = new LiveMap
                 {
-                    Id = liveMap.Id,
-                    Title = liveMap.Title,
-                    Print = liveMap.Print,
-                    Themes = liveMap.Themes,
-                    UrlDestino = liveMap.UrlDestino,
-                    Prince = liveMap.Prince,
-                    Description = liveMap.Description,
-                    Chat = liveMap.Chat
+                    Id = liveDto.Id,
+                    Title = liveDto.Title,
+                    Print = liveDto.Print,
+                    Themes = liveDto.Themes,
+                    UrlDestino = liveDto.UrlDestino,
+                    Prince = liveDto.Prince,
+                    Description = liveDto.Description,
+                    Chat = liveDto.Chat
                 };
+
+                if (liveDto.Author == null)
+                    throw  new System.Exception("É obrigatório o autor");
+               
+                liveEncontrada.Author = new UserMap
+                {
+                    Id = liveDto.Author.Id,
+                    Email = liveDto.Author.Email
+                };                    
+                
             }
 
             _repositoryLive.Save(liveEncontrada);

@@ -120,22 +120,20 @@ namespace Welic.App.Models.Usuario
             }           
         }
 
-        public bool DesconectarUsuario()
+        public async Task<bool> DesconectarUsuario()
         {
             try
-            {                
+            {
                 _dbManager = new DatabaseManager();
-                var usuarios = _dbManager.database.Table<UserDto>()
-                    .Where(x => x.RememberMe)
-                    .ToList();
-                foreach (var usuario in usuarios)
-                    usuario.RememberMe = false;
-                _dbManager.database.UpdateAll(usuarios);
-
+               
+                _dbManager.database.DeleteAll<UserDto>();
                 _dbManager.database.DeleteAll<UserToken>();
                 return true;
             }
-            catch { return false; }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
         }
 
         public UserDto LoadAsync()
@@ -150,6 +148,9 @@ namespace Welic.App.Models.Usuario
 
         internal async Task<bool> RegisterPhoto(MediaFile file)
         {
+
+            
+
             var user = this.LoadAsync();
             using (var memoryStream = new MemoryStream())
             {
@@ -158,8 +159,10 @@ namespace Welic.App.Models.Usuario
                 user.ImagemPerfil =  memoryStream.ToArray();                
             }
 
+
+            
             //Insere o registro
-           
+
             SaveUser(user);
             try
             {

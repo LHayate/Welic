@@ -6,12 +6,12 @@ using Xamarin.Forms.Xaml;
 namespace Welic.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EventsPage : ContentPage
+	public partial class ListEventsPage : ContentPage
 	{
-		public EventsPage ()
+		public ListEventsPage ()
 		{
 			InitializeComponent ();
-		    BindingContext = ViewModelLocator.Resolve<EventsViewModel>();
+		    BindingContext = ViewModelLocator.Resolve<ListEventsViewModel>();
 		}
 	}
 }

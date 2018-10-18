@@ -16,18 +16,12 @@ namespace Welic.App.Views
         public HomePage ()
         {
             InitializeComponent();
-            BarBackgroundColor = Color.FromHex("#DFDDDD");
-            
-            try
-            {
-                BindingContext = ViewModelLocator.Resolve<HomeViewModel>();
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
+            BarBackgroundColor = Color.FromHex("#DFDDDD");            
+            BindingContext = ViewModelLocator.Resolve<HomeViewModel>();
+
+            this.CurrentPageChanged += CurrentPageHasChanged;
+                                      
         }
+        protected void CurrentPageHasChanged(object sender, EventArgs e) { this.Title = this.CurrentPage.Title; }
     }
 }

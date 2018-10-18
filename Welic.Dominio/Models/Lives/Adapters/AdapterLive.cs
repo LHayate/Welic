@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Welic.Dominio.Models.Lives.Dtos;
 using Welic.Dominio.Models.Lives.Entitys;
 using Welic.Dominio.Models.Lives.Maps;
+using Welic.Dominio.Models.Users.Adapters;
 
 namespace Welic.Dominio.Models.Lives.Adapters
 {
@@ -29,7 +30,8 @@ namespace Welic.Dominio.Models.Lives.Adapters
                 Prince = map.Prince,
                 Print = map.Print,
                 Themes = map.Themes,
-                UrlDestino = map.UrlDestino
+                UrlDestino = map.UrlDestino,
+                Author = AdapterUser.ConverterMapParaDto(map.Author)
                 
             };
 
@@ -53,7 +55,9 @@ namespace Welic.Dominio.Models.Lives.Adapters
                 UrlDestino =  dto.UrlDestino,
                 Prince =  dto.Prince,
                 Description = dto.Description,
-                Chat = dto.Chat               
+                Chat = dto.Chat,
+                Author = AdapterUser.ConverterDtoParEntidade(dto.Author)
+                
             };
 
             return entity;

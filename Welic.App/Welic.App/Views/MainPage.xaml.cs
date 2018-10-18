@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Welic.App.Models.Usuario;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Welic.App.Services.ServicesViewModels;
 
 namespace Welic.App.Views
 {
@@ -41,13 +42,19 @@ namespace Welic.App.Views
                         MenuPages.Add(id, new NavigationPage(new TicketPage()));
                         break;
                     case (int)MenuItemType.Videos:
-                        MenuPages.Add(id, new NavigationPage(new VideoPage()));
+                        MenuPages.Add(id, new NavigationPage(new LivePage()));
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new ConfigPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
+                        break;
+                    case (int)MenuItemType.SignOff:
+                        await Deslogar();
+                        break;
+                    case (int)MenuItemType.NewLive:
+                        MenuPages.Add(id, new NavigationPage(new CreateLivePage()));
                         break;
                 }
             }
@@ -62,6 +69,23 @@ namespace Welic.App.Views
                     await Task.Delay(100);
 
                 IsPresented = false;
+            }
+        }
+        public async Task Deslogar()
+        {
+            try
+            {
+                //Pergunta ao Usuario se pode efetuar a troca
+                var resposta = await Application.Current.MainPage.DisplayAlert("Desconectar?", "Será necessário logar novamente", "OK", "Cancelar").ConfigureAwait(true);
+                if (resposta)
+                {
+                    await (new UserDto()).DesconectarUsuario();
+                    App.Current.MainPage = new NavigationPage(new InicioPage());
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return;
             }
         }
     }

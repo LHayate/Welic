@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Welic.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewsPage : ContentPage
+	public partial class ListNewsPage : ContentPage
 	{
-		public NewsPage ()
+		public ListNewsPage ()
 		{
 			InitializeComponent ();
-		    BindingContext = ViewModelLocator.Resolve<NewsViewModel>();
+		    BindingContext = ViewModelLocator.Resolve<ListNewsViewModel>();
 		}
 	}
 }
