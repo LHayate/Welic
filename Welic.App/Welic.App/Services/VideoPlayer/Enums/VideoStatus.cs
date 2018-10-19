@@ -8,6 +8,9 @@ namespace Welic.App.Services.VideoPlayer
     {
         NotReady,
         Playing,
-        Paused
+        Paused,
+        Loading,
+        Buffering,
+        Failed
     }
 }

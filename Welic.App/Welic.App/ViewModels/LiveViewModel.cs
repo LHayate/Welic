@@ -13,6 +13,9 @@ namespace Welic.App.ViewModels
     public class LiveViewModel : BaseViewModel
     {
         public Command PlayCommand => new Command(async () => await PlayVideo());
+        public Command AspectFillCommand => new Command(async () => await AspectFill());
+
+       
 
         public string Title { get; set; }
         public string Description { get; set; }
@@ -54,10 +57,15 @@ namespace Welic.App.ViewModels
             UrlDestino = SourceVideo(); 
 
         }
-
         public VideoSource SourceVideo()
         {
             return VideoSource.FromUri(_liveDto.UrlDestino);
+        }
+
+        private async Task AspectFill()
+        {
+            object[] args = new[] {UrlDestino};
+            await NavigationService.NavigateModalToAsync<AspectFillLiveViewModel>(args);
         }
     }
 }

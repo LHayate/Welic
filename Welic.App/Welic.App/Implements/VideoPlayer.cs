@@ -1,12 +1,25 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Welic.App.Implements.Converts;
 using Welic.App.Services.VideoPlayer;
+using Welic.App.Services.VideoPlayer.Enums;
 using Xamarin.Forms;
 
 namespace Welic.App.Implements
 {
     public class VideoPlayer : View, IVideoPlayerController
     {
+        public static readonly BindableProperty AspectModeProperty =
+            BindableProperty.Create(nameof(VideoPlayer),
+                typeof(VideoAspectMode),
+                typeof(VideoPlayer),
+                VideoAspectMode.AspectFill);
+
+        public VideoAspectMode AspectMode
+        {
+            get { return (VideoAspectMode)GetValue(AspectModeProperty); }
+            set { SetValue(AspectModeProperty, value); }
+        }
 
         public event EventHandler UpdateStatus;
 
@@ -18,6 +31,7 @@ namespace Welic.App.Implements
                 return true;
             });
         }
+
 
         // AreTransportControlsEnabled property
         public static readonly BindableProperty AreTransportControlsEnabledProperty =
@@ -114,7 +128,7 @@ namespace Welic.App.Implements
         }
 
         // Methods handled by renderers
-        public event EventHandler PlayRequested;
+        public event EventHandler PlayRequested;        
 
         public void Play()
         {

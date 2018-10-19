@@ -11,6 +11,7 @@ using Foundation;
 using UIKit;
 using Welic.App.Implements;
 using Welic.App.Services.VideoPlayer;
+using Welic.App.Services.VideoPlayer.Enums;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -21,8 +22,8 @@ namespace Welic.App.iOS
 {
     public class VideoPlayerRenderer : ViewRenderer<VideoPlayer, UIView>
     {
-        AVPlayer player;
-        AVPlayerItem playerItem;
+        AVPlayer _player;
+        AVPlayerItem _playerItem;
         AVPlayerViewController _playerViewController;       // solely for ViewController property
 
         public override UIViewController ViewController => _playerViewController;
@@ -39,8 +40,8 @@ namespace Welic.App.iOS
                     _playerViewController = new AVPlayerViewController();
 
                     // Set Player property to AVPlayer
-                    player = new AVPlayer();
-                    _playerViewController.Player = player;
+                    _player = new AVPlayer();
+                    _playerViewController.Player = _player;
 
                     var x = _playerViewController.View;
 
@@ -50,11 +51,12 @@ namespace Welic.App.iOS
 
                 SetAreTransportControlsEnabled();
                 SetSource();
+                SetAspectModel();
 
                 args.NewElement.UpdateStatus += OnUpdateStatus;
                 args.NewElement.PlayRequested += OnPlayRequested;
                 args.NewElement.PauseRequested += OnPauseRequested;
-                args.NewElement.StopRequested += OnStopRequested;
+                args.NewElement.StopRequested += OnStopRequested;                
             }
 
             if (args.OldElement != null)
@@ -70,9 +72,9 @@ namespace Welic.App.iOS
         {
             base.Dispose(disposing);
 
-            if (player != null)
+            if (_player != null)
             {
-                player.ReplaceCurrentItemWithPlayerItem(null);
+                _player.ReplaceCurrentItemWithPlayerItem(null);
             }
         }
 
@@ -90,13 +92,25 @@ namespace Welic.App.iOS
             }
             else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
             {
-                TimeSpan controlPosition = ConvertTime(player.CurrentTime);
+                TimeSpan controlPosition = ConvertTime(_player.CurrentTime);
 
                 if (Math.Abs((controlPosition - Element.Position).TotalSeconds) > 1)
                 {
-                    player.Seek(CMTime.FromSeconds(Element.Position.TotalSeconds, 1));
+                    _player.Seek(CMTime.FromSeconds(Element.Position.TotalSeconds, 1));
                 }
             }
+            else if (args.PropertyName == VideoPlayer.AspectModeProperty.PropertyName)
+            {
+                SetAspectModel();
+            }
+        }
+
+        void SetAspectModel()
+        {
+            if (Element.AspectMode.Equals(VideoAspectMode.AspectFill))
+                ((AVPlayerViewController) ViewController).EntersFullScreenWhenPlaybackBegins = true;                
+            else
+                ((AVPlayerViewController)ViewController).ExitsFullScreenWhenPlaybackEnds = true;          
         }
 
         void SetAreTransportControlsEnabled()
@@ -142,18 +156,18 @@ namespace Welic.App.iOS
 
             if (asset != null)
             {
-                playerItem = new AVPlayerItem(asset);
+                _playerItem = new AVPlayerItem(asset);
             }
             else
             {
-                playerItem = null;
+                _playerItem = null;
             }
 
-            player.ReplaceCurrentItemWithPlayerItem(playerItem);
+            _player.ReplaceCurrentItemWithPlayerItem(_playerItem);
 
-            if (playerItem != null && Element.AutoPlay)
+            if (_playerItem != null && Element.AutoPlay)
             {
-                player.Play();
+                _player.Play();
             }
         }
 
@@ -162,10 +176,10 @@ namespace Welic.App.iOS
         {
             VideoStatus videoStatus = VideoStatus.NotReady;
 
-            switch (player.Status)
+            switch (_player.Status)
             {
                 case AVPlayerStatus.ReadyToPlay:
-                    switch (player.TimeControlStatus)
+                    switch (_player.TimeControlStatus)
                     {
                         case AVPlayerTimeControlStatus.Playing:
                             videoStatus = VideoStatus.Playing;
@@ -179,10 +193,10 @@ namespace Welic.App.iOS
             }
             ((IVideoPlayerController)Element).Status = videoStatus;
 
-            if (playerItem != null)
+            if (_playerItem != null)
             {
-                ((IVideoPlayerController)Element).Duration = ConvertTime(playerItem.Duration);
-                ((IElementController)Element).SetValueFromRenderer(VideoPlayer.PositionProperty, ConvertTime(playerItem.CurrentTime));
+                ((IVideoPlayerController)Element).Duration = ConvertTime(_playerItem.Duration);
+                ((IElementController)Element).SetValueFromRenderer(VideoPlayer.PositionProperty, ConvertTime(_playerItem.CurrentTime));
             }
         }
 
@@ -195,18 +209,19 @@ namespace Welic.App.iOS
         // Event handlers to implement methods
         void OnPlayRequested(object sender, EventArgs args)
         {
-            player.Play();
+            _player.Play();
         }
 
+      
         void OnPauseRequested(object sender, EventArgs args)
         {
-            player.Pause();
+            _player.Pause();
         }
 
         void OnStopRequested(object sender, EventArgs args)
         {
-            player.Pause();
-            player.Seek(new CMTime(0, 1));
+            _player.Pause();
+            _player.Seek(new CMTime(0, 1));
         }
     }
 }

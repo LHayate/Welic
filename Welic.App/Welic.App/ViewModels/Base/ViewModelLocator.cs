@@ -50,6 +50,7 @@ namespace Welic.App.ViewModels.Base
             _container.RegisterType<ListEventsViewModel>();
             _container.RegisterType<ListNewsViewModel>();
             _container.RegisterType<LiveViewModel>();
+            _container.RegisterType<AspectFillLiveViewModel>();
             
 
             // Services - by default, TinyIoC will register interface registrations as singletons.

@@ -14,9 +14,11 @@ namespace Welic.App.Services.Navigation
     public class NavigationService : INavigationService
     {        
         private readonly ISettingsService _settingsService;
-        public NavigationService(ISettingsService settingsService)
+        private readonly IMessageService _messageService;
+        public NavigationService(ISettingsService settingsService, IMessageService messageService)
         {
             _settingsService = settingsService;
+            _messageService = messageService;
         }
         public Task InitializeAsync()
         {
@@ -140,9 +142,7 @@ namespace Welic.App.Services.Navigation
                 }
                
             }
-
             return null;
-
         }
 
         private Page CreatePage(Type viewModelType, object parameter = null)
@@ -160,7 +160,7 @@ namespace Welic.App.Services.Navigation
             }
             catch (System.Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e);                
                 throw;
             }
            

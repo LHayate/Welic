@@ -1,13 +1,17 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using Android.Content;
+using Android.Graphics;
+using Android.Media;
+using Android.Views;
 using Android.Widget;
 using Welic.App.Implements;
 using Welic.App.Services.VideoPlayer;
+using Welic.App.Services.VideoPlayer.Enums;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using ARelativeLayout = Android.Widget.RelativeLayout;
+using Path = System.IO.Path;
 
 
 [assembly: ExportRenderer(typeof(VideoPlayer),
@@ -19,6 +23,7 @@ namespace Welic.App.Droid
     {
         VideoView _videoView;
         MediaController _mediaController;    // Used to display transport controls
+        
         bool _isPrepared;
 
         public VideoPlayerRenderer(Context context) : base(context)
@@ -36,7 +41,7 @@ namespace Welic.App.Droid
                     // Save the VideoView for future reference
                     _videoView = new VideoView(Context);
 
-                    // Put the VideoView in a RelativeLayout
+                    // Put the VideoView in a RelativeLayout                    
                     ARelativeLayout relativeLayout = new ARelativeLayout(Context);
                     relativeLayout.AddView(_videoView);
 
@@ -44,6 +49,8 @@ namespace Welic.App.Droid
                     ARelativeLayout.LayoutParams layoutParams =
                         new ARelativeLayout.LayoutParams(LayoutParams.MatchParent, LayoutParams.MatchParent);
                     layoutParams.AddRule(LayoutRules.CenterInParent);
+                    layoutParams.AddRule(LayoutRules.CenterInParent);
+
                     _videoView.LayoutParameters = layoutParams;
 
                     // Handle a VideoView event
@@ -54,6 +61,7 @@ namespace Welic.App.Droid
 
                 SetAreTransportControlsEnabled();
                 SetSource();
+                SetFullScreen();
 
                 args.NewElement.UpdateStatus += OnUpdateStatus;
                 args.NewElement.PlayRequested += OnPlayRequested;
@@ -102,6 +110,10 @@ namespace Welic.App.Droid
             {
                 SetSource();
             }
+            else if (args.PropertyName == VideoPlayer.AspectModeProperty.PropertyName)
+            {
+                SetFullScreen();
+            }
             else if (args.PropertyName == VideoPlayer.PositionProperty.PropertyName)
             {
                 if (Math.Abs(_videoView.CurrentPosition - Element.Position.TotalMilliseconds) > 1000)
@@ -110,6 +122,47 @@ namespace Welic.App.Droid
                 }
             }
         }
+       
+        void  SetFullScreen()
+        {
+            if (Element.AspectMode == VideoAspectMode.None)
+            {
+                Control.Layout(0, 0, Width, Height);
+                return;
+            }
+
+            // assume video size = view size if the player has not been loaded yet
+            var videoWidth = _videoView.Width;
+            var videoHeight = _videoView.Height;
+
+            var scaleWidth = (double)Width / (double)videoWidth;
+            var scaleHeight = (double)Height / (double)videoHeight;
+
+            double scale;
+            switch (Element.AspectMode)
+            {
+                case VideoAspectMode.AspectFit:
+                    scale = Math.Min(scaleWidth, scaleHeight);
+                    break;
+                case VideoAspectMode.AspectFill:
+                    scale = Math.Max(scaleWidth, scaleHeight);
+                    break;
+                default:
+                    // should not happen
+                    scale = 1;
+                    break;
+            }
+
+            var scaledWidth = (int)Math.Round(videoWidth * scale);
+            var scaledHeight = (int)Math.Round(videoHeight * scale);
+
+            // center the video
+            var l = (Width - scaledWidth) / 2;
+            var t = (Height - scaledHeight) / 2;
+            var r = l + scaledWidth;
+            var b = t + scaledHeight;
+            Control.Layout(l, t, r, b);
+        }        
 
         void SetAreTransportControlsEnabled()
         {
