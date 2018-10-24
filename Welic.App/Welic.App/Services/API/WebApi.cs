@@ -50,7 +50,8 @@ namespace Welic.App.Services.API
             {
                 //BaseAddress = new Uri("http://localhost:16954/")
                 //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
-                BaseAddress = new Uri("http://192.168.0.10/api/")
+                //BaseAddress = new Uri("https://welic.app/api/")
+                BaseAddress = new Uri("https://192.168.0.10/api/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

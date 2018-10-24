@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Welic.Dominio.Models.Acesso.Entidade;
-using Welic.Dominio.Validacao;
+﻿using Welic.Dominio.Validacao;
 
 namespace Welic.Dominio.Models.Users.Scope
 {

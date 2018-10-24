@@ -1,3 +1,6 @@
+using Welic.Dominio.Models.Users.Enums;
+using Welic.Dominio.Models.Users.Mapeamentos;
+using Welic.Dominio.Utilitarios.Enums;
 using Welic.Infra.Context;
 
 namespace Welic.Infra.Migrations
@@ -21,6 +24,8 @@ namespace Welic.Infra.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            context.GroupUser.SeedEnumValues<GroupUserMap, GroupUserEnum>(genum => genum);
+            context.SaveChanges();
         }
     }
 }

@@ -42,8 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acesso\ServicoDispositivo.cs" />
-    <Compile Include="Acesso\ServicoUsuario.cs" />
+    <Compile Include="Dispositivos\ServicoDispositivo.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="Menu\ServicoMenu.cs" />
     <Compile Include="News\ServiceNews.cs" />

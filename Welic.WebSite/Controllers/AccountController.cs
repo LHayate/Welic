@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -12,8 +14,10 @@ using Welic.Dominio.Models.User.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Entidades;
+using Welic.Dominio.Models.Users.Enums;
 using Welic.Infra.Context;
 using Welic.WebSite.Models;
+using GroupUserDto = Welic.Dominio.Models.Users.Dtos.GroupUserDto;
 
 namespace Welic.WebSite.Controllers
 {
@@ -23,18 +27,18 @@ namespace Welic.WebSite.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IServiceUser _servico;
-
-        public AccountController()
+        
+        public AccountController(IServiceUser servico)
         {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IServiceUser servico)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
             _servico = servico;
-
         }
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IServiceUser servico)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //    _servico = servico;
+
+        //}
 
         public ApplicationSignInManager SignInManager
         {
@@ -82,15 +86,19 @@ namespace Welic.WebSite.Controllers
             }
 
 
-            ComandUser usuarioComando = new ComandUser(model.Email.ToLower(), model.Password);
+            ComandUser usuarioComando = new ComandUser(model.Email.ToLower(), model.Password, model.Email);            
             User user = _servico.Autenticar(usuarioComando);
+
             if (user == null)
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
             }
-           
-            return RedirectToLocal(returnUrl);
+
+            var login = user.Email ?? user.NickName;
+            FormsAuthentication.SetAuthCookie(login, true);
+            return RedirectToAction("Admin","Admin");
+            //return RedirectToLocal(returnUrl);
 
             //// This doesn't count login failures towards account lockout
             //// To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -157,6 +165,18 @@ namespace Welic.WebSite.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+            var GroupUser = new List<GroupUserDto>
+            {
+                new GroupUserDto(GroupUserEnum.None),
+                new GroupUserDto(GroupUserEnum.Teacher),
+                new GroupUserDto(GroupUserEnum.Student),
+                new GroupUserDto(GroupUserEnum.TeacherStudent),
+            };
+            
+
+
+            ViewBag.Categorias = new SelectList(GroupUser, "Id", "Description");
             return View();
         }
 
@@ -172,20 +192,25 @@ namespace Welic.WebSite.Controllers
                 UserDto usuarioComando = new UserDto
                 {
                     Email = model.Email,
-                    Password = model.Password,
-                    ConfirmPassword = model.ConfirmPassword
+                    Password = model.Password,   
+                    NickName = model.Email,
+                    GroupUser = new GroupUserDto(GroupUserEnum.None),
+
                 } ;
 
 
-                var user = _servico.Save(usuarioComando);
+                var user =  _servico.Save(usuarioComando);
                 if (user == null)
                 {
                     ModelState.AddModelError("", "Invalid Register attempt.");
                     return View(model);
                 }
 
-                return RedirectToAction("Index", "Home");
-                
+                var login = user.Email ?? user.NickName;
+                FormsAuthentication.SetAuthCookie(login, true);
+                return RedirectToAction("Admin", "Admin");
+                //return RedirectToAction("Index", "Home");
+
                 //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 //var result = await UserManager.CreateAsync(user, model.Password);
                 //if (result.Succeeded)
@@ -426,6 +451,7 @@ namespace Welic.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            FormsAuthentication.SignOut();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
@@ -487,7 +513,7 @@ namespace Welic.WebSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
+        public class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)

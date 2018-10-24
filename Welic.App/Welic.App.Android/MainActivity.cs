@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Plugin.CurrentActivity;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Distribute;
 
 namespace Welic.App.Droid
 {
@@ -50,6 +52,12 @@ namespace Welic.App.Droid
                     PickImageTaskCompletionSource.SetResult(null);
                 }
             }
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            AppCenter.Start("android=c5af2cb6-5d85-4121-b124-601deccc544e;", typeof(Distribute));
         }
     }
 }

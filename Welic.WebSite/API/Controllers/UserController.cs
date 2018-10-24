@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 
 namespace Welic.WebSite.API.Controllers
@@ -16,6 +17,7 @@ namespace Welic.WebSite.API.Controllers
         {
             _servico = servico;
         }
+
         [HttpGet]
         [Route("getall")]
         public Task<HttpResponseMessage> GetAll()
@@ -53,5 +55,12 @@ namespace Welic.WebSite.API.Controllers
             return CriaResposta(HttpStatusCode.OK,"Sucess Delete");
 
         }
+
+        //[HttpGet]
+        //[Route("ListGroupUser")]
+        //public Task<HttpResponseMessage> ListGroupUser()
+        //{            
+        //    return CriaResposta(HttpStatusCode.OK, _servico.GetGroupUser());
+        //}
     }
 }

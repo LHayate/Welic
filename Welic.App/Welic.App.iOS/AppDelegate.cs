@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Distribute;
 
 namespace Welic.App.iOS
 {
@@ -25,7 +27,13 @@ namespace Welic.App.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            Distribute.DontCheckForUpdatesInDebug();
+            AppCenter.Start("{Your Xamarin iOS App Secret}", typeof(Distribute));
+
             return base.FinishedLaunching(app, options);
         }
+
+        
+
     }
 }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Users.Comandos;
+using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Infra.Context;
@@ -23,6 +25,7 @@ namespace Welic.Repositorios.Users
 
         public void Save(UserMap userMap)
         {
+            userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
             var user = GetByEmail(userMap.Email);
             if (user != null)
                 _contexto.Entry(userMap).State = EntityState.Modified;
@@ -70,7 +73,12 @@ namespace Welic.Repositorios.Users
 
         public UserMap GetByName(string name)
         {
-            return _contexto.User.FirstOrDefault(x => x.NomeCompleto.Contains(name));
+            return _contexto.User.FirstOrDefault(x => x.FullName.Contains(name));
+        }
+
+        public List<GroupUserMap> GetGroupUser()
+        {
+            return _contexto.GroupUser.OrderBy(x=> x.Nivel).ToList();
         }
     }
 }

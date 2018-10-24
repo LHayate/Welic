@@ -1,0 +1,77 @@
+﻿@using Welic.WebSite.Helpers
+@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+
+        initial-scale=1.0">
+
+    @* CSS Personalizado *@
+    @Styles.Render("~/Content/semi-dark-menu/materialize.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Styles.Render("~/Content/semi-dark-menu/style.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    @Styles.Render("~/Content/perfect-scrollbar/perfect-scrollbar.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Styles.Render("~/Content/jvectormap/jquery-jvectormap.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Styles.Render("~/Content/flag-icon/css/flag-icon.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    
+
+    <!-- Compiled and minified CSS -->
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <!--Import Google Icon Font-->
+    @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+
+
+    <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
+    <title>@ViewBag.Title</title>
+
+</head>
+<body class="welic-azul-claro">
+
+    <div>
+        @RenderBody()
+
+    </div>
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- START FOOTER -->
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                <span>
+                    Copyright ©
+                    <script type="text/javascript">
+                        document.write(new Date().getFullYear());
+                    </script> <a class="grey-text text-darken-2" href="https://welic.app" target="_blank">Welic App</a> All rights reserved.
+                </span>
+                <span class="right hide-on-small-only"> Design and Developed by <a class="grey-text text-darken-2" href="https://welic.app">Welic App</a></span>
+            </div>
+        </div>
+    </footer>
+<!-- END FOOTER -->
+
+    <!--Scripts
+    ================================================-->
+    <!-- Jquery Importado via CDN -->
+    @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!-- Compiled and minified JavaScript -->
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!--prism-->
+    @Scripts.Render("~/Scripts/vendors/prism/prism.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!--scrollbar-->
+    @Scripts.Render("~/Scripts/vendors/perfect-scrollbar/perfect-scrollbar.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!-- chartjs -->
+    @Scripts.Render("~/Scripts/vendors/chartjs/chart.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    @Scripts.Render("~/Scripts/js/plugins.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <!--custom-script.js - Add your own theme custom JS-->
+    @Scripts.Render("~/Scripts/js/custom-script.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    @Scripts.Render("~/Scripts/js/scripts/dashboard-ecommerce.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))        
+</body>
+</html>

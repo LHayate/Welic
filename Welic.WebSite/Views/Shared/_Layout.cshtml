@@ -17,7 +17,7 @@
     <!-- Compiled and minified CSS -->
     @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))    
 
-    <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
+    <link rel="shortcut icon" href="~/Imagens/logo/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
 
 </head>
@@ -27,7 +27,7 @@
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
 
-                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/Logo_Welic.png" class="container" /></a>
+                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
 
                 <ul class="right hide-on-med-and-down ">
                     <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
@@ -38,10 +38,16 @@
                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
+
+                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
                             <li>
                                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
+
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                            </li>
                         }
                     }
                     else
@@ -63,13 +69,17 @@
                             <li>
                                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                            <li>
+                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                            </li>
                         }
                     }
                     else
                     {
                         <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
                         <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+
                     }
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -301,21 +311,7 @@
 
     <!--RD-Station-->
     <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js"></script>
-
-
-
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-
-        <script type="text/javascript">
-            (function ($) {
-                $("input[type = 'radio']").click(function () {
-                    $(this).parents("form").submit(); // post form
-                });
-
-            })(jQuery);
-        </script>
-    }
+    
 
 </body>
 </html>

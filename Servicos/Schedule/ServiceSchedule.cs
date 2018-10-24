@@ -69,9 +69,9 @@ namespace Servicos.Schedule
                         Id = userDto.Id,
                         Email = userDto.Email,
                         Guid = userDto.IdGuid,
-                        NomeCompleto = userDto.NomeCompleto,
+                        FullName = userDto.FullName,
                         PhoneNumber = userDto.PhoneNumber,
-                        UserName = userDto.UserName
+                        NickName = userDto.NickName
                         
                     };
 
@@ -102,9 +102,9 @@ namespace Servicos.Schedule
                             Id = userDto.Id,
                             Email = userDto.Email,
                             Guid = userDto.IdGuid,
-                            NomeCompleto = userDto.NomeCompleto,
+                            FullName = userDto.FullName,
                             PhoneNumber = userDto.PhoneNumber,
-                            UserName = userDto.UserName
+                            NickName = userDto.NickName
                         };
 
                         scheduleFinding.UserClass.Add(userMap);                    

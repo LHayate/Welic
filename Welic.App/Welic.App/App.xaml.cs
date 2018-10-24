@@ -12,6 +12,12 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Welic.App.Views;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using Microsoft.AppCenter.Distribute;
+using Device = Xamarin.Forms.Device;
+
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Welic.App
 {
@@ -43,6 +49,15 @@ namespace Welic.App
         {
             base.OnStart();
 
+            Distribute.ReleaseAvailable = OnReleaseAvailable;
+            AppCenter.Start("android=c5af2cb6-5d85-4121-b124-601deccc544e;" +
+                            "uwp={Your UWP App secret here};" +
+                            "ios={Your iOS App secret here}",
+                typeof(Analytics), typeof(Crashes), typeof(Distribute));
+
+           
+            
+
             if (Device.RuntimePlatform != Device.UWP)
             {
                 MainPage = new NavigationPage(new InicioPage());
@@ -57,6 +72,7 @@ namespace Welic.App
                 await SendCurrentLocation();
             }
 
+            
             base.OnResume();
             // Handle when your app starts
         }
@@ -117,6 +133,47 @@ namespace Welic.App
 
             var locationService = ViewModelLocator.Resolve<ILocationService>();
             await locationService.UpdateUserLocation(location, _settingsService.AuthAccessToken);
+        }
+
+        bool OnReleaseAvailable(ReleaseDetails releaseDetails)
+        {
+            // Look at releaseDetails public properties to get version information, release notes text or release notes URL
+            string versionName = releaseDetails.ShortVersion;
+            string versionCodeOrBuildNumber = releaseDetails.Version;
+            string releaseNotes = releaseDetails.ReleaseNotes;
+            Uri releaseNotesUrl = releaseDetails.ReleaseNotesUrl;
+
+            // custom dialog
+            var title = "Version " + versionName + " available!";
+            Task answer;
+
+            // On mandatory update, user cannot postpone
+            if (releaseDetails.MandatoryUpdate)
+            {
+                answer = Current.MainPage.DisplayAlert(title, releaseNotes, "Download and Install");
+            }
+            else
+            {
+                answer = Current.MainPage.DisplayAlert(title, releaseNotes, "Download and Install", "Maybe tomorrow...");
+            }
+            answer.ContinueWith((task) =>
+            {
+                // If mandatory or if answer was positive
+                if (releaseDetails.MandatoryUpdate || (task as Task<bool>).Result)
+                {
+                    // Notify SDK that user selected update
+                    Distribute.NotifyUpdateAction(UpdateAction.Update);
+                }
+                else
+                {
+                    // Notify SDK that user selected postpone (for 1 day)
+                    // Note that this method call is ignored by the SDK if the update is mandatory
+                    Distribute.NotifyUpdateAction(UpdateAction.Postpone);
+                }
+            });
+
+            // Return true if you are using your own dialog, false otherwise
+            return true;
         }
     }
 }

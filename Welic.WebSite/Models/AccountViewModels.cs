@@ -79,6 +79,10 @@ namespace Welic.WebSite.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public GroupUserDto GroupUser { get; set; }
+        public virtual IEnumerable<Dominio.Models.Users.Dtos.GroupUserDto> GroupUserEnum { get; set; }        
+
     }
 
     public class ResetPasswordViewModel

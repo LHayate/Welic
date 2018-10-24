@@ -11,21 +11,9 @@ using Welic.WebSite.Helpers;
 namespace Welic.WebSite.Controllers
 {
     public class BaseController : Controller
-    {
-        private static Lazy<AccountController> _lazy = new Lazy<AccountController>(() => new AccountController());
-        public static AccountController Current { get { return _lazy.Value; } }
-       
-
-        public readonly HttpClient _HttpClient;
-
+    {       
         public BaseController()
-        {
-            _HttpClient = new HttpClient
-            {
-                //BaseAddress = new Uri("http://localhost:16954/")
-                BaseAddress = new Uri("http://192.168.0.14:3000/")
-            };
-            _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        {            
         }
      
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)

@@ -29,36 +29,36 @@
         <nav class="welic z-depth-2" role="navigation">
             <div class="nav-wrapper container">
 
-                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/Logo_Welic.png" class="container" /></a>
+                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
 
                 <ul class="right hide-on-med-and-down ">
                     <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
 
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        using (Html.BeginForm(@Resources.LogOff, "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
                             <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                @Html.ActionLink("Hello" + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
                             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                         }
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     }
 
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
-                    <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
+                    <li class="waves-effect waves-light"><a> @Html.ActionLink(@Resources.Inicio, "Index", "Home")</a></li>
 
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        using (Html.BeginForm(@Resources.LogOff, "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
                         {
                             @Html.AntiForgeryToken()
                             <li>
@@ -70,8 +70,8 @@
                     else
                     {
 
-                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 
                     }
                 </ul>

@@ -2,13 +2,17 @@
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Cookies;
 using Registrators;
 using Unity;
-using Unity.Lifetime;
+using Unity.AspNet.Mvc;
 using Welic.Dominio.Eventos;
-using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.User.Servicos;
+using Welic.Infra.Context;
 using Welic.WebSite.Helpers;
 using Welic.WebSite.Provider;
 
@@ -17,15 +21,15 @@ namespace Welic.WebSite
 {
     public partial class Startup
     {
-        public void Configuration(IAppBuilder app)  
-        {
-           
 
+
+        public void Configuration(IAppBuilder app)
+        {            
             HttpConfiguration config = new HttpConfiguration();
-            UnityContainer container = new UnityContainer();
+            UnityContainer container = new UnityContainer();  
             
-
             ConfigureDependencyInjection(config, container);
+            
             ConfigureOAuth(app, container.Resolve<IServiceUser>());
             ConfigureAuth(app);
 
@@ -52,7 +56,13 @@ namespace Welic.WebSite
         public static void ConfigureDependencyInjection(HttpConfiguration config, UnityContainer container)
         {
             Registrator.Register(container);
+            FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
+            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
+
+            
             config.DependencyResolver = new UnityResolverHelper(container);
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
             EventoDominio.Container = new DomainEventsContainer(config.DependencyResolver);
         }
     }

@@ -10,7 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="3.10.0" />
+    <PackageReference Include="IdentityModel" Version="3.10.1" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
@@ -20,7 +23,7 @@
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.2" />
     <PackageReference Include="Xamarin.Auth.XamarinForms" Version="1.6.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
+    <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
     <PackageReference Include="XLabs.Forms" Version="2.0.5782" />

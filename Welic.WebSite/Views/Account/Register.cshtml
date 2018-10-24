@@ -1,11 +1,13 @@
-﻿@model Welic.WebSite.Models.RegisterViewModel
+﻿
+@model Welic.WebSite.Models.RegisterViewModel
+
 @{
     ViewBag.Title = @Resources.Register;
     Layout = "~/Views/Shared/_LoginShared.cshtml";
 }
 
 <div class="  cont">
-    <div class ="demo">
+    <div class="demo">
         <div class="login">
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "login__form", role = "form" }))
             {
@@ -18,17 +20,22 @@
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.Email, new { @type = "text", @class = "login__input name", placeholder = @Resources.Email })
                 </div>
-                
+
                 @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
                 <div class="col-md-10">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = @Resources.Password })
                 </div>
-                        
+
                 @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })*@
                 <div class="col-md-10">
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = @Resources.Confirm_Pass })
                 </div>
                 
+                <div class="col-md-10">
+                    
+                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.Categorias, new { @class = "form-control" })                    
+                </div>
+
                 @Html.ValidationSummary("", new { @class = "text-danger " })
 
                 <button class="login__submit" type="submit" name="action" value="Register">

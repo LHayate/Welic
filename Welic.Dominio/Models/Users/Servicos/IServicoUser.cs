@@ -17,6 +17,7 @@ namespace Welic.Dominio.Models.User.Servicos
         UserDto GetByEmail(string email);
         UserDto GetByName(string name);
         Users.Entidades.User Autenticar(ComandUser comando);
+        //IEnumerable<GroupUserDto> GetGroupUser();        
 
     }
 }

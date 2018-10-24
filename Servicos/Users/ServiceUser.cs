@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Welic.Dominio;
 using Welic.Dominio.Models.User.Servicos;
 using Welic.Dominio.Models.Users.Adapters;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Entidades;
+using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Dominio.Utilitarios.Entidades;
+using Welic.Dominio.Utilitarios.Enums;
 
 namespace Servicos.Users
 {
     public class ServiceUser : Servico, IServiceUser
     {
-        private readonly IRepositorioUser _repositorioUser;
-        private readonly IUnidadeTrabalho _unidadeTrabalho;
+        private readonly IRepositorioUser _repositorioUser;        
 
         public ServiceUser(IUnidadeTrabalho unidadeTrabalho, IRepositorioUser repositorioUser) : base(unidadeTrabalho)
         {            
-            _repositorioUser = repositorioUser;
-            _unidadeTrabalho = unidadeTrabalho;
-
+            _repositorioUser = repositorioUser;            
         }
         public UserDto Save(UserDto userDto)
         {
@@ -33,18 +29,16 @@ namespace Servicos.Users
             if (userMap != null)
             {
                 userMap.Email = userDto.Email;
-                userMap.NomeCompleto = userDto.NomeCompleto;
-                userMap.NomeImage = userDto.NomeImage;
-                userMap.Password = Criptografia.Encriptar(userDto.Password);
-                userMap.ConfirmPassword = Criptografia.Encriptar(userDto.ConfirmPassword);
+                userMap.FullName = userDto.FullName;                
+                userMap.Password = Criptografia.Encriptar(userDto.Password);                
                 userMap.Id = userDto.Id;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
                 userMap.ImagemPerfil = userDto.ImagemPerfil;
-                userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
-                userMap.RememberMe = userDto.RememberMe;
+                userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;                
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
-                userMap.UltimoAcesso = DateTime.Now; 
-                userMap.UserName = userDto.UserName;
+                userMap.LastAcess = DateTime.Now; 
+                userMap.NickName = userDto.NickName;
+                userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
 
             }
             else
@@ -53,19 +47,18 @@ namespace Servicos.Users
                 {
                     Password = Criptografia.Encriptar(userDto.Password),
                     Email = userDto.Email,
-                    ImagemPerfil = userDto.ImagemPerfil,
-                    RememberMe = userDto.RememberMe,
+                    ImagemPerfil = userDto.ImagemPerfil,                    
                     EmailConfirmed = userDto.EmailConfirmed,
-                    UserName = userDto.UserName,
-                    NomeCompleto = userDto.NomeCompleto,
-                    PhoneNumber = userDto.PhoneNumber,
-                    ConfirmPassword = Criptografia.Encriptar(userDto.ConfirmPassword),
+                    NickName = userDto.NickName,
+                    FullName = userDto.FullName,
+                    PhoneNumber = userDto.PhoneNumber,                   
                     Id = userDto.Id,
-                    Guid = new Guid(),
-                    NomeImage = userDto.NomeImage,
+                    Guid = new Guid(),   
+                                        
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
-                    UltimoAcesso = DateTime.Now
-            };
+                    LastAcess = DateTime.Now,
+                    GroupUserMap = new GroupUserMap(GroupUserEnum.None)
+                };
 
 
             }
@@ -107,8 +100,14 @@ namespace Servicos.Users
 
         public User Autenticar(ComandUser comando)
         {
-            User user = AdapterUser.ConverterDtoParEntidade(GetByEmail(comando.NomeUsuario));
-            return user.ValidarNomeUsuarioESenha(comando.NomeUsuario, comando.Senha) ? user : null;
-        }                   
+            User user = AdapterUser.ConverterDtoParEntidade(GetByEmail(comando.NickName));
+            return user.ValidarNomeUsuarioESenha(comando.NickName, comando.Senha) ? user : null;
+        }
+
+        public IEnumerable<GroupUserDto> GetGroupUser()
+        {
+            return null;
+            //AdapterUser.ConvertMapToDto(_repositorioUser.GetGroupUser());
+        }
     }
 }

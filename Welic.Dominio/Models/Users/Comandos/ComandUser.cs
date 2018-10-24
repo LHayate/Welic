@@ -8,7 +8,8 @@ namespace Welic.Dominio.Models.Users.Comandos
 {
     public class ComandUser
     {
-        public string NomeUsuario { get; set; }
+        public string Email { get; set; }
+        public string NickName { get; set; }
         public string Senha { get; set; }
 
         public ComandUser()
@@ -16,9 +17,9 @@ namespace Welic.Dominio.Models.Users.Comandos
             
         }
 
-        public ComandUser(string nomeUsuario, string senha)
+        public ComandUser(string nickName, string senha, string email)
         {
-            NomeUsuario = nomeUsuario;
+            NickName = nickName;
             Senha = senha;
         }
     }

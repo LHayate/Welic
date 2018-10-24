@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Mapeamentos;
 
@@ -20,21 +21,19 @@ namespace Welic.Dominio.Models.Users.Adapters
                 IdGuid = userMap.Guid,
                 Password = userMap.Password,
                 Email = userMap.Email,
-                ImagemPerfil = userMap.ImagemPerfil,
-                RememberMe = userMap.RememberMe,
+                ImagemPerfil = userMap.ImagemPerfil,                
                 EmailConfirmed = userMap.EmailConfirmed,
-                UserName = userMap.UserName,
-                NomeCompleto = userMap.NomeCompleto,
-                PhoneNumber = userMap.PhoneNumber,
-                ConfirmPassword = userMap.ConfirmPassword,
-               
-               
-                NomeImage = userMap.NomeImage,
+                NickName = userMap.NickName,
+                FullName = userMap.FullName,
+                PhoneNumber = userMap.PhoneNumber,               
                 PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
-                UltimoAcesso = userMap.UltimoAcesso
+                LastAcess = userMap.LastAcess,
+                FirstName = userMap.FirstName,
+                LastName = userMap.LastName,
+                Identity = userMap.Identity
+                
             };
            
-
             return userDto;
         }
 
@@ -52,22 +51,34 @@ namespace Welic.Dominio.Models.Users.Adapters
                 Guid = userDto.IdGuid,
                 Password = userDto.Password,
                 Email = userDto.Email,
-                ImagemPerfil = userDto.ImagemPerfil,
-                RememberMe = userDto.RememberMe,
+                ImagemPerfil = userDto.ImagemPerfil,                
                 EmailConfirmed = userDto.EmailConfirmed,
-                UserName = userDto.UserName,
-                NomeCompleto = userDto.NomeCompleto,
-                PhoneNumber = userDto.PhoneNumber,
-                ConfirmPassword = userDto.ConfirmPassword,
-
-
-                NomeImage = userDto.NomeImage,
+                NickName = userDto.NickName,
+                FullName = userDto.FullName,
+                PhoneNumber = userDto.PhoneNumber,                
                 PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
-                UltimoAcesso = userDto.UltimoAcesso
+                LastAcess = userDto.LastAcess,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Identity = userDto.Identity
+                
             };
 
-
             return user;
+        }
+
+        public static GroupUserDto ConvertMapToDto(GroupUserMap map)
+        {
+            if (map != null)
+                return null;
+
+            return new GroupUserDto
+            {
+                Id = map.Id,
+                Description = map.Description,
+                Nivel = map.Nivel
+            };
+
         }
 
         public static List<UserDto> ConverterMapParaDto(List<UserMap> listaMap)
@@ -82,6 +93,21 @@ namespace Welic.Dominio.Models.Users.Adapters
             foreach (UserMap map in listaMap)
             {
                 listaDto.Add(ConverterMapParaDto(map));
+            }
+            return listaDto;
+        }
+        public static List<GroupUserDto> ConvertMapToDto(List<GroupUserMap> listaMap)
+        {
+            if (listaMap == null)
+            {
+                return null;
+            }
+
+            List<GroupUserDto> listaDto = new List<GroupUserDto>();
+
+            foreach (GroupUserMap map in listaMap)
+            {
+                listaDto.Add(ConvertMapToDto(map));
             }
             return listaDto;
         }

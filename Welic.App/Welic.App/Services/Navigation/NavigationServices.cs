@@ -165,6 +165,26 @@ namespace Welic.App.Services.Navigation
             }
            
         }
-        
+        private Page CreatePage(Type viewModelType)
+        {
+            try
+            {
+                Type pageType = GetPageTypeForViewModel(viewModelType);
+                if (pageType == null)
+                {
+                    throw new System.Exception($"Não encontrado a pagina Solicitada {viewModelType}");
+                }
+
+                Page page = Activator.CreateInstance(pageType) as Page;
+                return page;
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+        }
+
     }    
 }

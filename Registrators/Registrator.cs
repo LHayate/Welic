@@ -1,6 +1,7 @@
 ﻿using Servicos;
 using Servicos.Acesso;
 using Servicos.Live;
+using Servicos.Menu;
 using Servicos.News;
 using Servicos.Schedule;
 using Servicos.Users;
@@ -12,6 +13,8 @@ using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
+using Welic.Dominio.Models.Menu.Repositorios;
+using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.News.Repositoryes;
 using Welic.Dominio.Models.News.Services;
 using Welic.Dominio.Models.Schedule.Repositoryes;
@@ -24,6 +27,7 @@ using Welic.Repositorios.Live;
 using Welic.Repositorios.News;
 using Welic.Repositorios.Schedule;
 using Welic.Repositorios.Users;
+
 
 namespace Registrators
 {
@@ -39,8 +43,13 @@ namespace Registrators
             RegisterLive(container);
             RegisterSchedule(container);
             RegisterNews(container);
+            RegisterMenu(container);
         }
-
+        private static void RegisterMenu(UnityContainer container)
+        {
+            container.RegisterType<IServicoMenu, ServicoMenu>();
+            container.RegisterType<IRepositorioMenu, IRepositorioMenu>();
+        }
         private static void RegisterNews(UnityContainer container)
         {
             container.RegisterType<IServiceNews, ServiceNews>();
@@ -48,22 +57,21 @@ namespace Registrators
         }
         private static void RegisterSchedule(UnityContainer container)
         {
-            container.RegisterType<IServiceSchedule, ServiceSchedule>(new HierarchicalLifetimeManager());
+            container.RegisterType<IServiceSchedule, ServiceSchedule>();
             container.RegisterType<IRepositorySchedule, RepositorySchedule>();
-        }
-
+        }        
         private static void RegisterUser(UnityContainer conteiner)
         {
-            conteiner.RegisterType<IServiceUser, ServiceUser>(new HierarchicalLifetimeManager());
-            conteiner.RegisterType<IRepositorioUser, RepositoryUser>(new HierarchicalLifetimeManager());
+            conteiner.RegisterType<IServiceUser, ServiceUser>();
+            conteiner.RegisterType<IRepositorioUser, RepositoryUser>();
         }
         private static void RegistrarUnidadeDeTrabalho(UnityContainer container)
         {
-            container.RegisterType<IUnidadeTrabalho, UnidadeTrabalho>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUnidadeTrabalho, UnidadeTrabalho>();
         }
         private static void RegistrarServico(UnityContainer container)
         {
-            container.RegisterType<IServico, Servico>(new HierarchicalLifetimeManager());
+            container.RegisterType<IServico, Servico>();
         }
         private static void RegistrarNotificacaoDominio(UnityContainer container)
         {

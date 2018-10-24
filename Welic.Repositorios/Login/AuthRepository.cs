@@ -23,7 +23,7 @@ namespace Welic.Repositorios.Login
         {
             IdentityUser user = new IdentityUser
             {
-                UserName = userDto.UserName
+                UserName = userDto.NickName
             };
 
             var result = await _userManager.CreateAsync(user, userDto.Password);
