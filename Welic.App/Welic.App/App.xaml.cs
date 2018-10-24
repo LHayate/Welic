@@ -26,7 +26,7 @@ namespace Welic.App
         ISettingsService _settingsService;
         public App()
         {
-            LiveReload.Init();
+            //LiveReload.Init();
             
             InitializeComponent();
 

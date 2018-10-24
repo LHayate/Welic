@@ -26,6 +26,25 @@ namespace Welic.App.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast = global::Welic.App.Droid.Resource.String.appcenter_distribute_dialog_actioned_on_disabled_toast;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_download_progress_number_format = global::Welic.App.Droid.Resource.String.appcenter_distribute_download_progress_number_format;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_downloading_mandatory_update = global::Welic.App.Droid.Resource.String.appcenter_distribute_downloading_mandatory_update;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install = global::Welic.App.Droid.Resource.String.appcenter_distribute_install;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_message = global::Welic.App.Droid.Resource.String.appcenter_distribute_install_ready_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_install_ready_title = global::Welic.App.Droid.Resource.String.appcenter_distribute_install_ready_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_notification_category = global::Welic.App.Droid.Resource.String.appcenter_distribute_notification_category;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_message = global::Welic.App.Droid.Resource.String.appcenter_distribute_unknown_sources_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_unknown_sources_dialog_settings = global::Welic.App.Droid.Resource.String.appcenter_distribute_unknown_sources_dialog_settings;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_download = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_download;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_mandatory = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_message_mandatory;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_message_optional = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_message_optional;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_postpone = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_postpone;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_title = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_title;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_dialog_view_release_notes = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_dialog_view_release_notes;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_ignore = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_ignore;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_message = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_message;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_reinstall = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_reinstall;
+			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_title = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_title;
 			global::PCLCrypto.Resource.String.ApplicationName = global::Welic.App.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::Welic.App.Droid.Resource.String.Hello;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Welic.App.Droid.Resource.Animation.slide_in_right;
@@ -8016,6 +8035,63 @@ namespace Welic.App.Droid
 			
 			// aapt resource value: 0x7f09003b
 			public const int appbar_scrolling_view_behavior = 2131296315;
+			
+			// aapt resource value: 0x7f090044
+			public const int appcenter_distribute_dialog_actioned_on_disabled_toast = 2131296324;
+			
+			// aapt resource value: 0x7f090045
+			public const int appcenter_distribute_download_progress_number_format = 2131296325;
+			
+			// aapt resource value: 0x7f090046
+			public const int appcenter_distribute_downloading_mandatory_update = 2131296326;
+			
+			// aapt resource value: 0x7f090047
+			public const int appcenter_distribute_install = 2131296327;
+			
+			// aapt resource value: 0x7f090048
+			public const int appcenter_distribute_install_ready_message = 2131296328;
+			
+			// aapt resource value: 0x7f090049
+			public const int appcenter_distribute_install_ready_title = 2131296329;
+			
+			// aapt resource value: 0x7f09004a
+			public const int appcenter_distribute_notification_category = 2131296330;
+			
+			// aapt resource value: 0x7f09004b
+			public const int appcenter_distribute_unknown_sources_dialog_message = 2131296331;
+			
+			// aapt resource value: 0x7f09004c
+			public const int appcenter_distribute_unknown_sources_dialog_settings = 2131296332;
+			
+			// aapt resource value: 0x7f09004d
+			public const int appcenter_distribute_update_dialog_download = 2131296333;
+			
+			// aapt resource value: 0x7f09004e
+			public const int appcenter_distribute_update_dialog_message_mandatory = 2131296334;
+			
+			// aapt resource value: 0x7f09004f
+			public const int appcenter_distribute_update_dialog_message_optional = 2131296335;
+			
+			// aapt resource value: 0x7f090050
+			public const int appcenter_distribute_update_dialog_postpone = 2131296336;
+			
+			// aapt resource value: 0x7f090051
+			public const int appcenter_distribute_update_dialog_title = 2131296337;
+			
+			// aapt resource value: 0x7f090052
+			public const int appcenter_distribute_update_dialog_view_release_notes = 2131296338;
+			
+			// aapt resource value: 0x7f090053
+			public const int appcenter_distribute_update_failed_dialog_ignore = 2131296339;
+			
+			// aapt resource value: 0x7f090054
+			public const int appcenter_distribute_update_failed_dialog_message = 2131296340;
+			
+			// aapt resource value: 0x7f090055
+			public const int appcenter_distribute_update_failed_dialog_reinstall = 2131296341;
+			
+			// aapt resource value: 0x7f090056
+			public const int appcenter_distribute_update_failed_dialog_title = 2131296342;
 			
 			// aapt resource value: 0x7f09003c
 			public const int bottom_sheet_behavior = 2131296316;
