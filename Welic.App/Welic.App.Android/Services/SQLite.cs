@@ -13,7 +13,7 @@ namespace Welic.App.Droid.Services
         public SQLiteConnection GetConnection()
         {
             SQLitePCL.Batteries.Init();
-            var sqliteFilename = "Welic.db3";
+            var sqliteFilename = "WelicDb.db3";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsPath, sqliteFilename);
             var conn = new SQLiteConnection(path);

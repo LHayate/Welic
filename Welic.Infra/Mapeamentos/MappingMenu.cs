@@ -33,9 +33,11 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnName("IconMenu")
                 .HasColumnType("varchar");
 
-            Property(x => x.MenuDadId).HasColumnName("DadId");
+            Property(x => x.DadId).HasColumnName("DadId");
             Property(x => x.Nivel).HasColumnName("Nivel");            
-            Property(x => x.ComandoDeAcesso).HasColumnName("ComandoDeAcesso");
+            Property(x => x.Action).HasColumnName("Action");
+            Property(x => x.Controller).HasColumnName("Controller");
+
 
             HasMany(e => e.Usuarios).WithMany(p => p.Menus).Map(ep =>
             {

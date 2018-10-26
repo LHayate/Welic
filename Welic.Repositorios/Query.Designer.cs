@@ -61,15 +61,18 @@ namespace Welic.Repositorios {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT M.IdMenu Id
-        ///      ,M.MenuPaiId
-        ///      ,M.Nivel
-        ///      ,M.Descricao DescricaoMenu
-        ///      ,M.ComandoDeAcesso
-        ///  FROM MenusUsuario Mu
-        ///  JOIN Menu M ON M.IdMenu = MU.IdMenu
-        /// WHERE Mu.IdUsuario = @IdUsuario
-        /// ORDER BY M.Nivel.
+        ///   Looks up a localized string similar to  SELECT mu.IdMenu as Id,
+        ///	                 m.Title,
+        ///	                 m.IconMenu,
+        ///	                 m.Nivel, 
+        ///	                 m.DadId,
+        ///	                 m.Action,
+        ///	                 m.Controller
+        ///                FROM dbo.MenusUser mu
+        ///                join dbo.MasterMenus m on (m.IdMenu = mu.IdMenu) 
+        ///               WHERE Mu.IdUser = @IdUser
+        ///               ORDER BY M.Nivel
+        ///    .
         /// </summary>
         internal static string Q001 {
             get {

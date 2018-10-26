@@ -19,16 +19,19 @@ namespace Welic.Dominio.Models.Menu.Dtos
 
         public int? MenuDadId { get; set; }
 
-        public string ComandoDeAcesso { get; private set; }
+        public string Action { get; set; }
+        public string Controller { get; set; }
 
         public static Func<MenuMap, MenuDto> Map()
         {
             return m => new MenuDto
             {
                 Id = m.Id,
-                MenuDadId = m.MenuDadId,
+                MenuDadId = m.DadId,
                 Title = m.Title,
-                ComandoDeAcesso = m.ComandoDeAcesso,
+                Action = m.Action,
+                Controller = m.Controller,                
+                IconMenu = m.IconMenu,
                 Nivel = m.Nivel
             };
         }
@@ -39,7 +42,9 @@ namespace Welic.Dominio.Models.Menu.Dtos
                 Id = m.Id,
                 MenuDadId = m.MenuDadId,
                 Title = m.Title,
-                ComandoDeAcesso = m.ComandoDeAcesso,
+                Action = m.Action,
+                Controller = m.Controller,
+                IconMenu = m.IconMenu,
                 Nivel = m.Nivel
             };
         }

@@ -81,5 +81,7 @@ namespace Welic.Infra.Context
 
 
         }
+
+        public System.Data.Entity.DbSet<Welic.Dominio.Models.Menu.Dtos.MenuDto> MenuDtoes { get; set; }
     }
 }

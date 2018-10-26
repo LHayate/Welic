@@ -63,7 +63,7 @@ namespace Welic.App.UWP
                         {
                             RememberMe = true,
                             Email = email,
-                            UserName = name,
+                            NickName = name,
 
                         };
 

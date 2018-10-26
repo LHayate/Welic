@@ -74,7 +74,7 @@ namespace Welic.App.Services
             return str;
         }        
 
-        private byte[] GetImageStreamAsBytes(Stream input)
+        public static byte[] GetImageStreamAsBytes(Stream input)
         {
             var buffer = new byte[16 * 1024];
             using (MemoryStream ms = new MemoryStream())
@@ -88,7 +88,7 @@ namespace Welic.App.Services
             }
         }
 
-        public async Task<byte[]> ImageToByteArray(Image imgSource)
+        public static async Task<byte[]> ImageToByteArray(Image imgSource)
         {     
             Stream imageStream = null;
             var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
@@ -101,6 +101,15 @@ namespace Welic.App.Services
             imageStream = file.GetStream();
             BinaryReader br = new BinaryReader(imageStream);
             return br.ReadBytes((int) imageStream.Length);
+        }
+
+        public static byte[] SetImageDefault()
+        {
+            var img = new Image();
+
+            img.Source = ImagePorSistema("perfil_Padrao");
+
+            return ImageToByteArray(img).Result;
         }
     }
 }

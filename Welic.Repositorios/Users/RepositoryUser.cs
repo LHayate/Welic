@@ -27,13 +27,16 @@ namespace Welic.Repositorios.Users
         {
             userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
             var user = GetByEmail(userMap.Email);
-            if (user != null)
+
+            if (user != null && user.Id == 0)
+                throw new Exception("Usuario já existe dentro de nosso sistema");
+
+
+            if (user != null )
                 _contexto.Entry(userMap).State = EntityState.Modified;
             else
                 //_contexto.Entry(userMap).State = EntityState.Added; //   User.Add(userMap);}
-                _contexto.User.Add(userMap);
-            
-
+                _contexto.User.Add(userMap);            
             try
             {
                 _contexto.SaveChanges();

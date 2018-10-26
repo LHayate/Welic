@@ -25,6 +25,7 @@ namespace Welic.Dominio.Models.Users.Adapters
                 EmailConfirmed = userMap.EmailConfirmed,
                 NickName = userMap.NickName,
                 FullName = userMap.FullName,
+                Profession = userMap.Profession,
                 PhoneNumber = userMap.PhoneNumber,               
                 PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
                 LastAcess = userMap.LastAcess,
@@ -60,7 +61,8 @@ namespace Welic.Dominio.Models.Users.Adapters
                 LastAcess = userDto.LastAcess,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
-                Identity = userDto.Identity
+                Identity = userDto.Identity,
+                Profession = userDto.Profession
                 
             };
 

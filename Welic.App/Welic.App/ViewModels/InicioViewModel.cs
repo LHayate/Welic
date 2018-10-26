@@ -18,7 +18,13 @@ namespace Welic.App.ViewModels
         public Command LoginEmailCommand { get; set; }
         public Command LoginFacebookCommand { get; set; }
         public Command LoginGoogleCommand { get; set; }
-        public Command CreateAccountCommand { get; set; }
+        public Command CreateAccountCommand => new Command(() => CreateAccount());
+
+        private void CreateAccount()
+        {
+            NavigationService.NavigateToAsync<RegisterViewModel>();
+        }
+
         public Command TermsUseCommand { get; set; }
 
 

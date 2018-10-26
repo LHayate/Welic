@@ -15,11 +15,11 @@ namespace Welic.Dominio.Models.Menu.Mapeamentos
         public string Title { get; set; }
         public string IconMenu { get; set; }
 
-        public string Nivel { get; private set; }
+        public string Nivel { get;  set; }
 
-        public string ComandoDeAcesso { get; private set; }
-
-        public int? MenuDadId { get; private set; }
+        public string Action { get; set; }
+        public string Controller { get; set; }
+        public int? DadId { get; set; }
         public MenuMap Dad { get; private set; }
 
         private ICollection<UserMap> _usuarios;

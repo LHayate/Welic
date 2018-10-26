@@ -51,16 +51,11 @@ namespace Welic.App.Services.API
                 //BaseAddress = new Uri("http://localhost:16954/")
                 //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
                 //BaseAddress = new Uri("https://welic.app/api/")
-                BaseAddress = new Uri("https://192.168.0.10/api/")
+                BaseAddress = new Uri("http://192.168.0.10/api/")
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            VerificaToken();
-            //var token = new UserToken();
-            //token = token.LoadAsync();
-            //if(token!= null)
-            //    _HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
-           
+            VerificaToken();                       
         }
 
         private async void VerificaToken()
@@ -95,7 +90,7 @@ namespace Welic.App.Services.API
                     var _args = new List<KeyValuePair<string, string>>()
                     {
                         new KeyValuePair<string, string>("grant_type", "password"),
-                        new KeyValuePair<string, string>("username", usuario.UserName),
+                        new KeyValuePair<string, string>("username", usuario.NickName),
                         new KeyValuePair<string, string>("password", Criptografia.Criptografia.Decriptar(usuario.Password)),
                     };
                     

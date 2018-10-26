@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminShared.cshtml";
+}
+
+<!--breadcrumbs start-->
+<div id="breadcrumbs-wrapper">
+    <!-- Search for small screen -->
+    <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s10 m6 l6">
+                <h5 class="breadcrumbs-title">eCommerce Products Page</h5>
+                <ol class="breadcrumbs">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li class="active">eCommerce Products Page</li>
+                </ol>
+            </div>
+            <div class="col s2 m6 l6">
+                <a class="btn dropdown-settings waves-effect waves-light breadcrumbs-btn right gradient-45deg-light-blue-cyan gradient-shadow" href="#!" data-activates="dropdown1">
+                    <i class="material-icons hide-on-med-and-up">settings</i>
+                    <span class="hide-on-small-onl">Settings</span>
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!" class="grey-text text-darken-2">Access<span class="badge">1</span></a>
+                    </li>
+                    <li><a href="#!" class="grey-text text-darken-2">Profile<span class="new badge">2</span></a>
+                    </li>
+                    <li><a href="#!" class="grey-text text-darken-2">Notifications</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs end-->
+<div class="item product">
+    <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light teal accent-4">$189</a>
+            <a href="#">
+                <img src="../../images/gallary/10.png" alt="item-img">
+            </a>
+        </div>
+        <ul class="card-action-buttons">
+            <li>
+                <a class="btn-floating waves-effect waves-light cyan">
+                    <i class="material-icons">add_shopping_cart</i>
+                </a>
+            </li>
+            <li>
+                <a class="btn-floating waves-effect waves-light red accent-2">
+                    <i class="material-icons">favorite</i>
+                </a>
+            </li>
+            <li>
+                <a class="btn-floating waves-effect waves-light deep-orange accent-2">
+                    <i class="material-icons activator">info_outline</i>
+                </a>
+            </li>
+        </ul>
+        <div class="card-content">
+            <div class="row">
+                <div class="col s12">
+                    <p class="card-title grey-text text-darken-4">
+                        <a href="#" class="grey-text text-darken-4">Apple MacBook Pro A1278 13"</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+                <i class="material-icons right">close</i> Apple MacBook Pro A1278 13"
+            </span>
+            <p>Here is some more information about this item that is only revealed once clicked on.</p>
+        </div>
+    </div>
+</div>

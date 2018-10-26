@@ -76,9 +76,6 @@ namespace Welic.App.Views
 
             //};
 
-
-
-
         }
 
         private void LoadingImage()

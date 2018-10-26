@@ -11,7 +11,7 @@ using Registrators;
 using Unity;
 using Unity.AspNet.Mvc;
 using Welic.Dominio.Eventos;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.Infra.Context;
 using Welic.WebSite.Helpers;
 using Welic.WebSite.Provider;

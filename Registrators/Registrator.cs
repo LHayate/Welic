@@ -19,11 +19,12 @@ using Welic.Dominio.Models.News.Repositoryes;
 using Welic.Dominio.Models.News.Services;
 using Welic.Dominio.Models.Schedule.Repositoryes;
 using Welic.Dominio.Models.Schedule.Services;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Infra;
 using Welic.Repositorios.Dispositives;
 using Welic.Repositorios.Live;
+using Welic.Repositorios.Menu;
 using Welic.Repositorios.News;
 using Welic.Repositorios.Schedule;
 using Welic.Repositorios.Users;
@@ -48,7 +49,7 @@ namespace Registrators
         private static void RegisterMenu(UnityContainer container)
         {
             container.RegisterType<IServicoMenu, ServicoMenu>();
-            container.RegisterType<IRepositorioMenu, IRepositorioMenu>();
+            container.RegisterType<IRepositorioMenu, RepositorioMenu>();
         }
         private static void RegisterNews(UnityContainer container)
         {

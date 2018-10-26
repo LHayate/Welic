@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Welic.Dominio;
-using Welic.Dominio.Models.User.Servicos;
 using Welic.Dominio.Models.Users.Adapters;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
@@ -9,8 +8,8 @@ using Welic.Dominio.Models.Users.Entidades;
 using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Utilitarios.Entidades;
-using Welic.Dominio.Utilitarios.Enums;
 
 namespace Servicos.Users
 {
@@ -27,19 +26,23 @@ namespace Servicos.Users
             var userMap = _repositorioUser.GetByEmail(userDto.Email);
 
             if (userMap != null)
-            {
+            {                
+                userMap.Password = Criptografia.Encriptar(userDto.Password);
                 userMap.Email = userDto.Email;
-                userMap.FullName = userDto.FullName;                
-                userMap.Password = Criptografia.Encriptar(userDto.Password);                
-                userMap.Id = userDto.Id;
-                userMap.EmailConfirmed = userDto.EmailConfirmed;
                 userMap.ImagemPerfil = userDto.ImagemPerfil;
-                userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;                
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
-                userMap.LastAcess = DateTime.Now; 
                 userMap.NickName = userDto.NickName;
-                userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
-
+                userMap.FullName = userDto.FullName;
+                userMap.PhoneNumber = userDto.PhoneNumber;
+                userMap.Id = userDto.Id;
+                userMap.Guid = new Guid();
+                userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
+                userMap.LastAcess = DateTime.Now;
+                userMap.Profession = userDto.Profession;
+                userMap.FirstName = userDto.FirstName;
+                userMap.Identity = userDto.Identity;
+                userMap.LastName = userDto.LastName;
+                userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
             }
             else
             {
@@ -53,20 +56,18 @@ namespace Servicos.Users
                     FullName = userDto.FullName,
                     PhoneNumber = userDto.PhoneNumber,                   
                     Id = userDto.Id,
-                    Guid = new Guid(),   
-                                        
+                    Guid = new Guid(),                                           
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
                     LastAcess = DateTime.Now,
+                    Profession = userDto.Profession,
+                    FirstName = userDto.FirstName,
+                    Identity = userDto.Identity,
+                    LastName = userDto.LastName,
                     GroupUserMap = new GroupUserMap(GroupUserEnum.None)
                 };
-
-
             }
 
-            _repositorioUser.Save(userMap);
-
-            if (!Commit())
-                return null;
+            _repositorioUser.Save(userMap);            
 
             return GetById(userMap.Id);
         }
@@ -106,8 +107,7 @@ namespace Servicos.Users
 
         public IEnumerable<GroupUserDto> GetGroupUser()
         {
-            return null;
-            //AdapterUser.ConvertMapToDto(_repositorioUser.GetGroupUser());
+            return AdapterUser.ConvertMapToDto(_repositorioUser.GetGroupUser());
         }
     }
 }

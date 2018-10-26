@@ -15,16 +15,21 @@ namespace Welic.App.ViewModels
         public Command ReturnToMenuCommand => new Command(async () => await ReturnToMenu());
         public Command SaveInfosCommand => new Command(async () => await SaveInfos());        
         
-        private string _firstName;
+        private string _nickName;
+        public string NickName
+        {
+            get => _nickName;
+            set => SetProperty(ref _nickName, value);
+        }
 
+        private string _firstName;
         public string FirstName
         {
             get => _firstName;
-            set => SetProperty(ref _firstName , value);
+            set => SetProperty(ref _firstName, value);
         }
 
         private string _lastName;
-
         public string LastName
         {
             get => _lastName;
@@ -32,7 +37,6 @@ namespace Welic.App.ViewModels
         }
 
         private string _identity;
-
         public string Identity
         {
             get => _identity;
@@ -40,14 +44,13 @@ namespace Welic.App.ViewModels
         }
 
         private string _phoneNumber;
-
         public string PhoneNumber
         {
             get => _phoneNumber;
             set => SetProperty(ref _phoneNumber , value);
         }
-        private string _email;
 
+        private string _email;
         public string Email
         {
             get => _email;
@@ -55,14 +58,13 @@ namespace Welic.App.ViewModels
         }
 
         private string _password;
-
         public string Password
         {
             get { return _password; }
             set { _password = value; }
         }
-        private string _confirmPassword;
 
+        private string _confirmPassword;
         public string ConfirmPassword
         {
             get { return _confirmPassword; }
@@ -71,9 +73,8 @@ namespace Welic.App.ViewModels
 
         private UserDto UserDto { get; set; }
 
-        private Image _image;
-
-        public Image Image
+        private byte[] _image;
+        public byte[] Image
         {
             get => _image;
             set => SetProperty(ref _image, value);
@@ -85,13 +86,16 @@ namespace Welic.App.ViewModels
             {
                 try
                 {
+                    _image = UserDto.ImagemPerfil;
+                    Identity = $"Id: {UserDto.Id}";
                     Email = UserDto.Email;
-                    FirstName = Util.BuscaPrimeiroNome(UserDto.NomeCompleto);
-                    LastName = Util.ReturnLastName(UserDto.NomeCompleto);
-                    Identity = UserDto.Id.ToString();
+                    FirstName = UserDto.FirstName;
+                    LastName = UserDto.LastName;                    
                     PhoneNumber = UserDto.PhoneNumber;
+                    Email = UserDto.Email;
                     Password = UserDto.Password;
-                    ConfirmPassword = UserDto.ConfirmPassword;                                   
+                    ConfirmPassword = UserDto.Password;
+                    NickName = UserDto.NickName;
                 }
                 catch (System.Exception e)
                 {
@@ -103,8 +107,7 @@ namespace Welic.App.ViewModels
 
         private bool LoadingUser()
         {
-            UserDto = new UserDto();
-            UserDto = UserDto.LoadAsync();
+            UserDto = (new UserDto()).LoadAsync();            
             return UserDto.Email != null;
         }
 
@@ -124,15 +127,14 @@ namespace Welic.App.ViewModels
                 SaveInfosCommand.ChangeCanExecute();
 
                 UserDto.Email = _email;
-                UserDto.NomeCompleto = $"{FirstName} {LastName}";
-                UserDto.Id = int.Parse(Identity);
+                UserDto.FullName = $"{FirstName} {LastName}";                
                 UserDto.PhoneNumber = PhoneNumber;
-                UserDto.Password = Password;
-                UserDto.ConfirmPassword = Criptografia.Encriptar(ConfirmPassword);
-                UserDto.UserName = Email;                
-
-                await UserDto.RegisterUser(UserDto);
-
+                UserDto.Password = Password;                
+                UserDto.NickName = NickName;
+                UserDto.FirstName = _firstName;
+                UserDto.LastName = _lastName;
+                
+                await UserDto.RegisterUserManager(UserDto);
             }
 
             IsBusy = false;            

@@ -60,6 +60,10 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnType("datetime")
                 .HasColumnName("LastAcess");
+            Property(x => x.Profession)
+                .HasColumnName("Profession")
+                .HasColumnType("varchar");
+
 
             HasRequired(x => x.GroupUserMap)
                 .WithMany(p => p.Users)                

@@ -42,7 +42,7 @@ namespace Welic.App.Droid
                     {
                         RememberMe = true,
                         Email = email,
-                        UserName = name,
+                        NickName = name,
 
                     };
                     await App.NavigateToProfile(userDto);

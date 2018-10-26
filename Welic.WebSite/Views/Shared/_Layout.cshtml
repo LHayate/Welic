@@ -39,7 +39,7 @@
                         {
                             @Html.AntiForgeryToken()
 
-                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new { email = User.Identity.GetUserName()}, htmlAttributes: new { id = "admin" }) </li>
                             <li>
                                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
@@ -52,8 +52,8 @@
                     }
                     else
                     {
-                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>*@
                     }
 
                 </ul>
@@ -69,16 +69,16 @@
                             <li>
                                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
-                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new { email = User.Identity.GetUserName() }, htmlAttributes: new { email = User.Identity.GetUserName(), id = "loginLink" }) </li>
                             <li>
                                 <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                             </li>
                         }
                     }
                     else
-                    {
-                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    {//TODO: TIrar comentario antes de publicar real
+                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
 
                     }
                 </ul>

@@ -10,6 +10,7 @@ using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.ResizePcture;
 using Welic.App.ViewModels;
+using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,8 +24,8 @@ namespace Welic.App.Views
 		public EditProfilePage ()
 		{
 			InitializeComponent ();
-            BindingContext = new EditProfileViewModel();
-            LoadingImage();
+            BindingContext = ViewModelLocator.Resolve<EditProfileViewModel>();
+            //LoadingImage();
 		}
 
 	    private void LoadingImage()
@@ -69,13 +70,19 @@ namespace Welic.App.Views
 	                new StoreCameraMediaOptions
 	                {
 	                    Directory = "Resources",
-	                    Name = "Perfil.png"
-	                });
+	                    Name = "Perfil.png",
+	                    PhotoSize = PhotoSize.Small,
+	                    CompressionQuality = 50,
+	                    DefaultCamera = CameraDevice.Front,
+	                    AllowCropping = true,
+                    });
 
 	            if (file == null)
 	                return;
-	                           
-	            CircleImage.Source = ImageSource.FromStream(() =>
+
+                await (new UserDto()).RegisterPhoto(file);
+
+                CircleImage.Source = ImageSource.FromStream(() =>
 	            {
 	                var stream = file.GetStream();
 	                file.Dispose();

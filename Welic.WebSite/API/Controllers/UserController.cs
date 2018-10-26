@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 
@@ -41,6 +41,7 @@ namespace Welic.WebSite.API.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("save")]
         public Task<HttpResponseMessage> Save([FromBody] UserDto dispositivoDto)
         {

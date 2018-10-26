@@ -26,8 +26,9 @@ namespace Welic.Dominio.Models.Menu.Adapter
                 Title = map.Title,
                 Nivel = map.Nivel,
                 IconMenu = map.IconMenu,
-                MenuDadId = map.Dad.Id
-                
+                MenuDadId = map.DadId,
+                Controller = map.Controller,
+                Action = map.Action                
             };            
             return dto;
         }
@@ -45,8 +46,7 @@ namespace Welic.Dominio.Models.Menu.Adapter
                 Id = dto.Id,
                 Title = dto.Title,
                 IconMenu = dto.IconMenu,
-                
-
+                Controller = dto.Controller,                
             };
             
             return entity;

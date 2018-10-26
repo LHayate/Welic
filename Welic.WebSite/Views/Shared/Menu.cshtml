@@ -1,0 +1,156 @@
+﻿
+
+@using Microsoft.AspNet.Identity
+@model IEnumerable<Welic.Dominio.Models.Menu.Dtos.MenuDto>
+
+<!-- START LEFT SIDEBAR NAV-->
+<aside id="left-sidebar-nav" class="nav-expanded nav-lock nav-collapsible">
+    <div class="brand-sidebar">
+        <h1 class="logo-wrapper">
+
+            <a href="@Url.Action("Index", "Home")" class="brand-logo darken-1">
+                <img src="~/Imagens/logo/LogoWelic72x72.png" alt="Welic logo">
+                <span class="logo-text hide-on-med-and-down">Welic</span>
+            </a>
+            <a href="#" class="navbar-toggler">
+                <i class="material-icons">radio_button_checked</i>
+            </a>
+        </h1>
+    </div>
+
+    <ul id="slide-out" class="side-nav fixed leftside-navigation">
+        <li class="no-padding">
+            <ul class="collapsible" data-collapsible="accordion">
+
+                @foreach (var item in Model.Where(x => x.Nivel.Equals("1")).ToList())
+                {
+
+                    if (!Model.Where(x => x.MenuDadId == item.Id).ToList().Any())
+                    {
+                        <li>
+                            <a href="@Url.Action(item.Action, item.Controller)">
+                                <i class="material-icons">@item.IconMenu</i>
+                                <span class="nav-text">@item.Title</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="bold">
+                            <a class="collapsible-header waves-effect waves-cyan active">
+                                <i class="material-icons">@item.IconMenu</i>
+                                <span class="nav-text">@item.Title</span>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    @foreach (var subnivel in Model.Where(x => x.MenuDadId == item.Id).ToList())
+                                    {
+
+                                        <li class="active">
+                                            <a href="@Url.Action(subnivel.Action, subnivel.Controller)">
+                                                <i class="material-icons">keyboard_arrow_right</i>
+                                                <span> @subnivel.Title</span>
+                                            </a>
+                                        </li>
+
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                    }
+
+                }
+
+            </ul>
+        </li>
+        <li class="li-hover">
+            <p class="ultra-small margin more-text">MORE</p>
+        </li>
+        <li>
+            <a href="angular-ui.html">
+                <i class="material-icons">verified_user</i>
+                <span class="nav-text">Angular UI</span>
+            </a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible" data-collapsible="accordion">
+                <li class="bold">
+                    <a class="collapsible-header  waves-effect waves-cyan">
+                        <i class="material-icons">photo_filter</i>
+                        <span class="nav-text">Menu Levels</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible" data-collapsible="accordion">
+                            <li>
+                                <a href="ui-basic-buttons.html">
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                    <span>Second level</span>
+                                </a>
+                            </li>
+                            <li class="bold">
+                                <a class="collapsible-header  waves-effect waves-cyan">
+                                    <i class="material-icons">keyboard_arrow_right</i>
+                                    <span class="nav-text">Second level child</span>
+                                </a>
+                                <div class="collapsible-body">
+                                    <ul class="collapsible" data-collapsible="accordion">
+                                        <li>
+                                            <a href="ui-basic-buttons.html">
+                                                <i class="material-icons">keyboard_arrow_right</i>
+                                                <span>Third level</span>
+                                            </a>
+                                        </li>
+                                        <li class="bold">
+                                            <a class="collapsible-header  waves-effect waves-cyan">
+                                                <i class="material-icons">keyboard_arrow_right</i>
+                                                <span class="nav-text">Third level child</span>
+                                            </a>
+                                            <div class="collapsible-body">
+                                                <ul class="collapsible" data-collapsible="accordion">
+                                                    <li>
+                                                        <a href="ui-basic-buttons.html">
+                                                            <i class="material-icons">keyboard_arrow_right</i>
+                                                            <span>Forth level</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="ui-extended-buttons.html">
+                                                            <i class="material-icons">keyboard_arrow_right</i>
+                                                            <span>Forth level</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="changelogs.html">
+                <i class="material-icons">track_changes</i>
+                <span class="nav-text">Changelogs</span>
+            </a>
+        </li>
+        <li>
+            <a href="../documentation" target="_blank">
+                <i class="material-icons">import_contacts</i>
+                <span class="nav-text">Documentation</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://pixinvent.ticksy.com" target="_blank">
+                <i class="material-icons">help_outline</i>
+                <span class="nav-text">Support</span>
+            </a>
+        </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only gradient-45deg-light-blue-cyan gradient-shadow">
+        <i class="material-icons">menu</i>
+    </a>
+</aside>
+<!-- END LEFT SIDEBAR NAV-->

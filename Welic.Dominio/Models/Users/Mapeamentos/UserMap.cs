@@ -21,6 +21,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
+        public string Profession { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public byte[] ImagemPerfil { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 
 namespace Welic.WebSite.Provider
 {

@@ -4,7 +4,7 @@ using Servicos.Users;
 using System;
 
 using Unity;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 
 namespace Welic.WebSite
 {

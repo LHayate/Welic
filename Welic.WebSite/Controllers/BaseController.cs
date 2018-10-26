@@ -6,16 +6,35 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Welic.Dominio.Models.Menu.Servicos;
+using Welic.Dominio.Models.Users.Comandos;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.WebSite.Helpers;
 
 namespace Welic.WebSite.Controllers
 {
     public class BaseController : Controller
-    {       
-        public BaseController()
-        {            
+    {
+        private readonly IServicoMenu _servicoMenu;
+        private readonly IServiceUser _serviceUser;
+        public BaseController(IServicoMenu servicoMenu, IServiceUser serviceUser)
+        {
+            _servicoMenu = servicoMenu;
+            _serviceUser = serviceUser;
         }
-     
+
+        public BaseController()
+        {
+            
+        }
+        
+        public ActionResult Menu(string email)
+        {            
+            var list = _servicoMenu.GetMenuByUser(email);
+            return PartialView(list);
+
+        }
+
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
 

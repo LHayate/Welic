@@ -18,7 +18,8 @@ namespace Welic.Dominio.Models.Menu.Entidades
                     
         public string Nivel { get; private set; }
 
-        public string ComandoDeAcesso { get; private set; }
+        public string Action { get; private set; }
+        public string Controller { get; set; }
 
         public int? MenuDadId { get; private set; }
         
@@ -34,9 +35,11 @@ namespace Welic.Dominio.Models.Menu.Entidades
             return m => new Menu
             {
                 Id = m.Id,
-                MenuDadId = m.MenuDadId,
+                MenuDadId = m.DadId,
                 Title = m.Title,
-                ComandoDeAcesso = m.ComandoDeAcesso,
+                Action = m.Action,
+                Controller = m.Controller,
+                IconMenu = m.IconMenu,
                 Nivel = m.Nivel
             };
         }

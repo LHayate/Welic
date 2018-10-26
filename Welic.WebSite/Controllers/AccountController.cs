@@ -10,7 +10,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Welic.Dominio.Models.User.Servicos;
+using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Entidades;
@@ -86,8 +86,8 @@ namespace Welic.WebSite.Controllers
             }
 
 
-            ComandUser usuarioComando = new ComandUser(model.Email.ToLower(), model.Password, model.Email);            
-            User user = _servico.Autenticar(usuarioComando);
+            ComandUser comandUser = new ComandUser(model.Email.ToLower(), model.Password, model.Email);            
+            User user = _servico.Autenticar(comandUser);
 
             if (user == null)
             {
@@ -95,26 +95,11 @@ namespace Welic.WebSite.Controllers
                 return View(model);
             }
 
-            var login = user.Email ?? user.NickName;
-            FormsAuthentication.SetAuthCookie(login, true);
-            return RedirectToAction("Admin","Admin");
-            //return RedirectToLocal(returnUrl);
-
-            //// This doesn't count login failures towards account lockout
-            //// To enable password failures to trigger account lockout, change to shouldLockout: true
-            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            //switch (result)
-            //{
-                
-            //    case SignInStatus.LockedOut:
-            //        return View("Lockout");
-            //    case SignInStatus.RequiresVerification:
-            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
-            //    case SignInStatus.Failure:
-            //    default:
-            //        ModelState.AddModelError("", "Invalid login attempt.");
-            //        return View(model);
-            //}
+            var email = user.Email ?? user.NickName;
+            FormsAuthentication.SetAuthCookie(email, true);
+            comandUser.Senha = null;
+            return RedirectToAction("Admin","Admin");            
+            //return RedirectToAction("Admin","Admin", comandUser);            
         }
 
         //
@@ -483,7 +468,7 @@ namespace Welic.WebSite.Controllers
 
             base.Dispose(disposing);
         }
-
+        
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

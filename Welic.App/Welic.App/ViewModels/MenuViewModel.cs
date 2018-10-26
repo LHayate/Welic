@@ -66,10 +66,10 @@ namespace Welic.App.ViewModels
             _userDto = (new UserDto()).LoadAsync();
 
             _image = _userDto.ImagemPerfil;
-            _nomeCompleto = _userDto.NomeCompleto;
+            _nomeCompleto = _userDto.FullName;
             _cpf = _userDto.Id.ToString();
-            _email = _userDto.Email ?? _userDto.UserName;
-            _lastAcess = _userDto.UltimoAcesso.ToString(CultureInfo.InvariantCulture);
+            _email = _userDto.Email ?? _userDto.NickName;
+            _lastAcess = _userDto.LastAcess.ToString(CultureInfo.InvariantCulture);
         }
         private async Task SendToEditProfile()
         {

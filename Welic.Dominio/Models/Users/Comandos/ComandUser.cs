@@ -21,6 +21,7 @@ namespace Welic.Dominio.Models.Users.Comandos
         {
             NickName = nickName;
             Senha = senha;
+            Email = email;
         }
     }
 }

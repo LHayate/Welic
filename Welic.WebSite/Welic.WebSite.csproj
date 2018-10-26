@@ -84,10 +84,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Servicos, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Bin\Servicos.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
@@ -261,6 +257,7 @@
   <ItemGroup>
     <Compile Include="API\Controllers\BaseController.cs" />
     <Compile Include="API\Controllers\LiveController.cs" />
+    <Compile Include="API\Controllers\MarketplaceController.cs" />
     <Compile Include="API\Controllers\MenuController.cs" />
     <Compile Include="API\Controllers\NewsController.cs" />
     <Compile Include="API\Controllers\ScheduleController.cs" />
@@ -299,6 +296,8 @@
   <ItemGroup>
     <Content Include="Content\custom.css" />
     <Content Include="Content\customLogin.css" />
+    <Content Include="Content\custom\custom.css" />
+    <Content Include="Content\custom\custom.min.css" />
     <Content Include="Content\flag-icon\css\flag-icon.css" />
     <Content Include="Content\flag-icon\css\flag-icon.min.css" />
     <Content Include="Content\flag-icon\flags\1x1\ad.svg" />
@@ -813,8 +812,19 @@
     <Content Include="Content\flag-icon\flags\4x3\za.svg" />
     <Content Include="Content\flag-icon\flags\4x3\zm.svg" />
     <Content Include="Content\flag-icon\flags\4x3\zw.svg" />
+    <Content Include="Content\semi-dark-menu\landing-style.css" />
+    <Content Include="Content\jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Content\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Content\jvectormap\jquery-jvectormap.css" />
+    <Content Include="Content\jvectormap\vectormap-script.js" />
+    <Content Include="Content\layouts\page-center.css" />
+    <Content Include="Content\layouts\style-fullscreen.css" />
+    <Content Include="Content\layouts\style-fullscreen.min.css" />
+    <Content Include="Content\layouts\style-horizontal.css" />
+    <Content Include="Content\layouts\style-horizontal.min.css" />
     <Content Include="Content\perfect-scrollbar\perfect-scrollbar.css" />
     <Content Include="Content\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <Content Include="Content\plugins\media-hover-effects.css" />
     <Content Include="Content\semi-dark-menu\materialize.css" />
     <Content Include="Content\semi-dark-menu\style.css" />
     <Content Include="favicon.ico" />
@@ -1911,6 +1921,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".bin\git.cmd" />
@@ -2038,6 +2050,9 @@
     <Content Include="Scripts\vendors\translator\translate-fr.json" />
     <Content Include="Scripts\vendors\xcharts\LICENSE" />
     <Content Include="Scripts\vendors\xcharts\README.md" />
+    <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Marketplace\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Desktop\Welic\aspnet-mvc-internationalization\MvcInternationalization\Resources\Resources.csproj">

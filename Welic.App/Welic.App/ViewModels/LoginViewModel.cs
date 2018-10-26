@@ -76,10 +76,9 @@ namespace Welic.App.ViewModels
                 UserDto usuario = new UserDto
                 {
                     Id = 1,
-                    UserName = UserLogin,
+                    NickName = UserLogin,
                     Password = Criptografia.Encriptar(Senha),
-                    Email = UserLogin,
-                    ConfirmPassword = Criptografia.Encriptar(Senha),
+                    Email = UserLogin,                    
                     RememberMe = true
                 };
 
@@ -92,7 +91,7 @@ namespace Welic.App.ViewModels
                         var userBanco = await (new UserDto()).GetUserbyServer(usuario.Email);
 
                         //usuario.RegistrarUsuario();
-                        if (await usuario.RegisterUser(userBanco))
+                        if (await usuario.RegisterUserManager(userBanco))
                         {
                             //Informações da plataforma e dispositivo
                             var dis = new DispositivoDto

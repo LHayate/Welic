@@ -13,21 +13,24 @@ namespace Welic.App.Models.Usuario
 {
     public class UserDto
     {
+               
         [SQLite.PrimaryKey]
-        public string Email { get; set; }
         public int Id { get; set; }
-        public Guid Guid { get; set; }        
+        public Guid Guid { get; set; }
+        public string Email { get; set; }         
         public bool EmailConfirmed { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PhoneNumberConfirmed { get; set; }
-        public string UserName { get; set; }
+        public string NickName { get; set; }
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
-        public bool RememberMe { get; set; }
-        public string NomeCompleto { get; set; }
-        public byte[] ImagemPerfil { get; set; }
-        public string NomeImage { get; set; }
-        public DateTime UltimoAcesso { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get; set; }
+        public string Profession { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PhoneNumberConfirmed { get; set; }                            
+        public byte[] ImagemPerfil { get; set; }        
+        public DateTime LastAcess { get; set; }
+
+        public bool RememberMe { get; set; } //Apenas para Controle de SQLite
         public bool Synced { get; set; } //false to not sinced - true sinced        
 
         private DatabaseManager _dbManager;
@@ -36,28 +39,28 @@ namespace Welic.App.Models.Usuario
             
         }
 
-        public async Task<bool> RegisterUser(UserDto user )
+        public async Task<bool> RegisterUserManager(UserDto user )
         {           
             try
-            {
-
-               
+            {               
                 //user = userBanco.Result;
 
                 Id = user.Id;
                 Guid = user.Guid;
-                UserName = user.UserName;
+                NickName = user.NickName;
                 Email = user.Email;
-                NomeCompleto = user.NomeCompleto;
-                NomeImage = user.NomeImage;
-                Password = user.Password;
-                ConfirmPassword = user.ConfirmPassword;
                 EmailConfirmed = user.EmailConfirmed;
+                FirstName = user.FirstName;
+                LastName = user.LastName;
+                FullName = user.FullName;
+                Profession = user.Profession;                
+                Password = user.Password;                                
                 ImagemPerfil = user.ImagemPerfil;
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed;
-                RememberMe = true;
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed;                  
                 Synced = false;
-                UltimoAcesso = DateTime.Now;
+                LastAcess = DateTime.Now;
+                
+                
                 
                 //Insere o registro                
                 
@@ -94,15 +97,14 @@ namespace Welic.App.Models.Usuario
             {                
                 //Verifico se existe alguma alteração a ser sincronizada com o Servidor
                 var usu = _dbManager.database.Table<UserDto>()
-                    .Where(x => x.RememberMe && x.Synced == false)                        
+                    .Where(x => x.Synced == false)                        
                     .ToList();
 
                 if (usu == null) return true;
                 foreach (var item in usu)
                 {
                     if (!item.Synced)
-                    {
-                        item.ConfirmPassword = Criptografia.Decriptar(item.ConfirmPassword);
+                    {                        
                         item.Password = Criptografia.Decriptar(item.Password);
                         var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
 
@@ -123,11 +125,22 @@ namespace Welic.App.Models.Usuario
         public async Task<bool> DesconectarUsuario()
         {
             try
-            {
-                _dbManager = new DatabaseManager();
-               
-                _dbManager.database.DeleteAll<UserDto>();
-                _dbManager.database.DeleteAll<UserToken>();
+            {                                                                                  
+                _dbManager = new DatabaseManager();                
+                
+                var users = _dbManager.database.Table<UserDto>()
+                    .Where(x => x.RememberMe)
+                    .ToList();
+
+                foreach (var user in users)
+                {
+                    user.RememberMe = false;
+                    _dbManager.database.Delete(user);
+                }
+                    
+
+                         
+                _dbManager.database.DeleteAll<UserToken>();                
                 return true;
             }
             catch (System.Exception ex)
@@ -136,12 +149,13 @@ namespace Welic.App.Models.Usuario
             }
         }
 
+
         public UserDto LoadAsync()
         {
             _dbManager = new DatabaseManager();
             var usu = _dbManager.database.Table<UserDto>()
                 .Where(x => x.RememberMe) 
-                .OrderByDescending(c => c.UltimoAcesso)
+                .OrderByDescending(c => c.LastAcess)
                 .ToList();
             return usu.FirstOrDefault();
         }        
@@ -158,23 +172,13 @@ namespace Welic.App.Models.Usuario
                 file.Dispose();
                 user.ImagemPerfil =  memoryStream.ToArray();                
             }
-
-
             
             //Insere o registro
 
             SaveUser(user);
             try
-            {
-                //try
-                //{ 
-                //    await SyncedUser();                    
-                //}
-                //catch
-                //{
-                    user.Synced = false;
-                //}
-
+            {                
+                user.Synced = false;                
                 return true;
             }
             catch (System.Exception e)
@@ -190,6 +194,24 @@ namespace Welic.App.Models.Usuario
 
             _dbManager.database.InsertOrReplace(user);
             _dbManager.database.Close();
+        }
+
+        public async Task<bool> Register(UserDto userDto)
+        {            
+            try
+            {                                                            
+                var user = await WebApi.Current.PostAsync<UserDto>("user/save", userDto);
+
+                Synced = true;
+                SaveUser(user); 
+
+                return true;
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw new System.Exception("Error: In Register this User");
+            }
         }
     }  
 }

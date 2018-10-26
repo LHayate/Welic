@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 
-namespace Welic.Dominio.Models.User.Servicos
+namespace Welic.Dominio.Models.Users.Servicos
 {
     public interface IServiceUser
     {
@@ -17,7 +17,7 @@ namespace Welic.Dominio.Models.User.Servicos
         UserDto GetByEmail(string email);
         UserDto GetByName(string name);
         Users.Entidades.User Autenticar(ComandUser comando);
-        //IEnumerable<GroupUserDto> GetGroupUser();        
+        IEnumerable<GroupUserDto> GetGroupUser();        
 
     }
 }

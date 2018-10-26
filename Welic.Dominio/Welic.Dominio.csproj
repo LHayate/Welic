@@ -173,6 +173,12 @@
     <Folder Include="Models\Index\Dto\" />
     <Folder Include="Models\Index\Entity\" />
     <Folder Include="Models\Lives\Scopos\" />
+    <Folder Include="Models\Marketplaces\Adapters\" />
+    <Folder Include="Models\Marketplaces\Dtos\" />
+    <Folder Include="Models\Marketplaces\Entityes\" />
+    <Folder Include="Models\Marketplaces\Mapping\" />
+    <Folder Include="Models\Marketplaces\Repository\" />
+    <Folder Include="Models\Marketplaces\Services\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>

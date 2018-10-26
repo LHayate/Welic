@@ -40,9 +40,30 @@ namespace Servicos.Menu
             return menuCompleto;
         }
 
-        public List<MenuDto> GetMenuByUser(string nomeUsuario)
+        public List<MenuDto> GetMenuByUser(string email)
         {
-            var usuario = _repositorioUser.GetByName(nomeUsuario);
+            var usuario = _repositorioUser.GetByEmail(email);
+
+            if (usuario == null)
+            {
+                Rollback("Usuário não identificado.");
+                return null;
+            }
+
+            List<MenuMap> listaMenu = _repositorioMenu.GetbyIdUser(usuario.Id);
+
+            if (listaMenu.Count == 0)
+            {
+                Rollback("Menu de acesso não encontrado.");
+                return null;
+            }
+
+            return AdapterMenu.ConverterMapParaDto(listaMenu);
+        }
+
+        public List<MenuDto> GetMenuByUserId(int id)
+        {
+            var usuario = _repositorioUser.GetById(id);
 
             if (usuario == null)
             {
@@ -63,7 +84,8 @@ namespace Servicos.Menu
 
         public void SaveMenuUser(CommandMenu menuUser)
         {
-            var usuario = _repositorioUser.GetByName(menuUser.NameUser);
+            //TODO: Corrigir para Email
+            var usuario = _repositorioUser.GetByEmail(menuUser.NameUser);
 
             if (usuario == null)
             {
@@ -79,6 +101,44 @@ namespace Servicos.Menu
             }
 
             Commit();
+        }
+
+        public void SaveMenu(MenuDto menuDto)
+        {
+            var found = _repositorioMenu.GetById(menuDto.Id);
+
+            if (found != null)
+            {                
+                found.Id = menuDto.Id;
+                found.Title = menuDto.Title;
+                found.IconMenu = menuDto.IconMenu;
+                found.Nivel = menuDto.Nivel;
+                found.DadId = menuDto.MenuDadId;
+                found.Action = menuDto.Action;
+                found.Controller = menuDto.Controller;
+            }
+            else
+            {
+                found = new MenuMap
+                {
+                    Id = menuDto.Id,
+                    Title = menuDto.Title,
+                    IconMenu = menuDto.IconMenu,
+                    Nivel = menuDto.Nivel,
+                    DadId = menuDto.MenuDadId,
+                    Action = menuDto.Action,
+                    Controller = menuDto.Controller,
+                    
+
+                };
+            }
+
+            _repositorioMenu.Save(found);
+        }
+
+        public MenuDto GetbyId(int id)
+        {
+            return AdapterMenu.ConverterMapParaDto(_repositorioMenu.GetById(id));
         }
     }
 }

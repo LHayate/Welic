@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Models.Menu.Command;
+using Welic.Dominio.Models.Menu.Dtos;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Dtos;
 
@@ -37,10 +38,18 @@ namespace Welic.WebSite.API.Controllers
         }
 
         [HttpPost]        
-        [Route("save")]
-        public Task<HttpResponseMessage> Save([FromBody] CommandMenu commandMenu)
+        [Route("savetouser")]
+        public Task<HttpResponseMessage> SaveMenuUsers([FromBody] CommandMenu commandMenu)
         {
             _servicoMenu.SaveMenuUser(commandMenu);
+            return CriaResposta(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("save")]
+        public Task<HttpResponseMessage> Save([FromBody] MenuDto menuDto)
+        {
+            _servicoMenu.SaveMenu(menuDto);
             return CriaResposta(HttpStatusCode.OK);
         }
 
