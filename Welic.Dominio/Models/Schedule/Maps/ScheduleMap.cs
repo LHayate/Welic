@@ -6,7 +6,7 @@ using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Dominio.Models.Schedule.Maps
 {
-    public class ScheduleMap
+    public class ScheduleMap : Patterns.Pattern.Ef6.Entity
     {
         public int ScheduleId { get; set; }
         public string Title { get; set; }
@@ -16,8 +16,8 @@ namespace Welic.Dominio.Models.Schedule.Maps
         public bool Private { get; set; }
         public bool Ativo { get; set; }
 
-        public UserMap UserTeacher { get; set; }
-        public ICollection<UserMap> UserClass { get; set; }
+        public AspNetUser UserTeacher { get; set; }
+        public ICollection<AspNetUser> UserClass { get; set; }
         public LiveMap Live { get; set; }
     }
 }

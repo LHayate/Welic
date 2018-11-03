@@ -33,8 +33,8 @@ namespace Welic.WebSite.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetById/{id:int}")]
-        public Task<HttpResponseMessage> GetById(int id)
+        [Route("GetById/{id}")]
+        public Task<HttpResponseMessage> GetById(string id)
         {
             return CriaResposta(HttpStatusCode.OK, _servico.GetById(id));
         }
@@ -49,8 +49,8 @@ namespace Welic.WebSite.API.Controllers
 
         }        
         [HttpPost]
-        [Route("delete/{id:int}")]
-        public Task<HttpResponseMessage> Delete(int id)
+        [Route("delete/{id}")]
+        public Task<HttpResponseMessage> Delete(string id)
         {
             _servico.Delete(id);
             return CriaResposta(HttpStatusCode.OK,"Sucess Delete");

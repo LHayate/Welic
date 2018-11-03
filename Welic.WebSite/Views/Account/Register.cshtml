@@ -31,10 +31,10 @@
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = @Resources.Confirm_Pass })
                 </div>
                 
-                <div class="col-md-10">
-                    
-                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.Categorias, new { @class = "form-control" })                    
-                </div>
+                @*<div class="col-md-10">
+
+                    @Html.DropDownList("CategoryId", (SelectList)ViewBag.Categorias, new { @class = "form-control" })
+                </div>*@
 
                 @Html.ValidationSummary("", new { @class = "text-danger " })
 

@@ -59,17 +59,16 @@ namespace Servicos.Schedule
                 scheduleFinding.Prince = scheduleDto.Prince;
                 scheduleFinding.Private = scheduleDto.Private;
                 scheduleFinding.Title = scheduleDto.Title;
-                scheduleFinding.UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id);
+                scheduleFinding.UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.UserId);
                 scheduleFinding.Ativo = true;
 
                 foreach (var userDto in scheduleDto.UserClass)
                 {
-                    var userMap = new UserMap
+                    var userMap = new AspNetUser
                     {
-                        Id = userDto.Id,
+                        Id = userDto.UserId,
                         Email = userDto.Email,
-                        Guid = userDto.IdGuid,
-                        FullName = userDto.FullName,
+                        Guid = userDto.Guid,                        
                         PhoneNumber = userDto.PhoneNumber,
                         NickName = userDto.NickName
                         
@@ -89,7 +88,7 @@ namespace Servicos.Schedule
                     Prince = scheduleDto.Prince,
                     Private = scheduleDto.Private,
                     Title = scheduleDto.Title,
-                    UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id),
+                    UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.UserId),
                     Ativo = true
 
                 };
@@ -97,12 +96,11 @@ namespace Servicos.Schedule
                 if(scheduleDto.UserClass != null)
                     foreach (var userDto in scheduleDto.UserClass)
                     {
-                        var userMap = new UserMap
+                        var userMap = new AspNetUser
                         {
-                            Id = userDto.Id,
+                            Id = userDto.UserId,
                             Email = userDto.Email,
-                            Guid = userDto.IdGuid,
-                            FullName = userDto.FullName,
+                            Guid = userDto.Guid,                            
                             PhoneNumber = userDto.PhoneNumber,
                             NickName = userDto.NickName
                         };

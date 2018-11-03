@@ -21,9 +21,9 @@ namespace Welic.Repositorios.Menu
         public List<MenuMap> GetAllMenu()
         {
             return _context.Menus.OrderBy(x => x.Id).ToList();
-        }
+        }       
 
-        public void SaveMenuUser(int idUser, List<MenuMap> NewMenuUser)
+        public void SaveMenuUser(string idUser, List<MenuMap> NewMenuUser)
         {
             using (DbContextTransaction dbContextTransaction = _context.Database.BeginTransaction())
             {

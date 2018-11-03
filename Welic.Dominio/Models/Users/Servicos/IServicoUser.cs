@@ -11,9 +11,9 @@ namespace Welic.Dominio.Models.Users.Servicos
     public interface IServiceUser
     {
         UserDto Save(UserDto userDto);        
-        UserDto GetById(int id);
+        UserDto GetById(string id);
         List<UserDto> GetAll();
-        void Delete(int id);
+        void Delete(string id);
         UserDto GetByEmail(string email);
         UserDto GetByName(string name);
         Users.Entidades.User Autenticar(ComandUser comando);

@@ -63,10 +63,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -82,17 +84,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Mapeamentos\MappingListingReview.cs" />
+    <Compile Include="Mapeamentos\MappingListingStat.cs" />
+    <Compile Include="Mapeamentos\MappingListingType.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetRole.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetUserClaim.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetUserLogin.cs" />
+    <Compile Include="Mapeamentos\MappingCategory.cs" />
+    <Compile Include="Mapeamentos\MappingCategoryListingType.cs" />
+    <Compile Include="Mapeamentos\MappingCategoryStat.cs" />
+    <Compile Include="Mapeamentos\MappingContentPage.cs" />
+    <Compile Include="Mapeamentos\MappingEmailTemplate.cs" />
     <Compile Include="Mapeamentos\MappingGroupUser.cs" />
-    <Compile Include="Mapeamentos\MapeamentoDispositivos.cs" />
-    <Compile Include="Mapeamentos\MapeamentoLive.cs" />
-    <Compile Include="Mapeamentos\MapeamentoSchedule.cs" />
-    <Compile Include="Mapeamentos\MapeamentoUser.cs" />
+    <Compile Include="Mapeamentos\MappingDispositivos.cs" />
+    <Compile Include="Mapeamentos\MappingLive.cs" />
+    <Compile Include="Mapeamentos\MappingSchedule.cs" />
+    <Compile Include="Mapeamentos\MappingUser.cs" />
+    <Compile Include="Mapeamentos\MappingListing.cs" />
+    <Compile Include="Mapeamentos\MappingListingMeta.cs" />
+    <Compile Include="Mapeamentos\MappingListingPicture.cs" />
     <Compile Include="Mapeamentos\MappingMenu.cs" />
     <Compile Include="Mapeamentos\MappingNews.cs" />
     <Compile Include="Mapeamentos\MappingProgram.cs" />
     <Compile Include="Mapeamentos\MappingProgramUser.cs" />
+    <Compile Include="Mapeamentos\MappingMessage.cs" />
+    <Compile Include="Mapeamentos\MappingMessageParticipant.cs" />
+    <Compile Include="Mapeamentos\MappingMessageReadState.cs" />
+    <Compile Include="Mapeamentos\MappingMessageThread.cs" />
+    <Compile Include="Mapeamentos\MappingMetaCategory.cs" />
+    <Compile Include="Mapeamentos\MappingMetaField.cs" />
+    <Compile Include="Mapeamentos\MappingOrder.cs" />
+    <Compile Include="Mapeamentos\MappingPicture.cs" />
+    <Compile Include="Mapeamentos\MappingSettingDictionary.cs" />
+    <Compile Include="Mapeamentos\MappingSetting.cs" />
+    <Compile Include="Mapeamentos\MappingStripeConnect.cs" />
+    <Compile Include="Mapeamentos\MappingStripeTransaction.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\ConfigurationInstall.cs" />
+    <Compile Include="Migrations\ConnectionStringHelper.cs" />
+    <Compile Include="Migrations\CreateAndMigrateDatabaseInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredProcedures\AuthContext.cs" />
+    <Compile Include="StoredProcedures\IStoredProcedures.cs" />
     <Compile Include="UnidadeTrabalho.cs" />
   </ItemGroup>
   <ItemGroup>

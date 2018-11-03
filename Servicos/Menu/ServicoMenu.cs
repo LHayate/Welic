@@ -61,7 +61,7 @@ namespace Servicos.Menu
             return AdapterMenu.ConverterMapParaDto(listaMenu);
         }
 
-        public List<MenuDto> GetMenuByUserId(int id)
+        public List<MenuDto> GetMenuByUserId(string id)
         {
             var usuario = _repositorioUser.GetById(id);
 

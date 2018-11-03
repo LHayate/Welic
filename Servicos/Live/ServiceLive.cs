@@ -35,9 +35,9 @@ namespace Servicos.Live
                 if (liveDto.Author == null)
                     throw new System.Exception("É obrigatório o autor");
 
-                liveEncontrada.Author = new UserMap
+                liveEncontrada.Author = new AspNetUser
                 {
-                    Id = liveDto.Author.Id,
+                    Id = liveDto.Author.UserId.ToString(),
                     Email = liveDto.Author.Email
                 };                 
             }
@@ -58,9 +58,9 @@ namespace Servicos.Live
                 if (liveDto.Author == null)
                     throw  new System.Exception("É obrigatório o autor");
                
-                liveEncontrada.Author = new UserMap
+                liveEncontrada.Author = new AspNetUser
                 {
-                    Id = liveDto.Author.Id,
+                    Id = liveDto.Author.UserId.ToString(),
                     Email = liveDto.Author.Email
                 };                    
                 

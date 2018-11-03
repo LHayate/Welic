@@ -15,8 +15,7 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.Id)
                 .IsRequired()
                 .HasColumnName("Id")
-                .HasColumnType("int")
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                .HasColumnType("int");
             Property(x => x.Description)
                 .IsRequired()
                 .HasColumnName("Description")

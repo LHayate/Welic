@@ -1,5 +1,12 @@
 ﻿@using Welic.WebSite.Helpers
 @using Microsoft.AspNet.Identity
+@using Registrators
+@using Welic.Core
+@using Welic.WebSite.Extensions
+
+@{
+    
+}
 
 <!DOCTYPE html>
 <html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
@@ -7,7 +14,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,
 
-        initial-scale=1.0">    
+        initial-scale=1.0">
 
     @* CSS Personalizado *@
     @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
@@ -15,8 +22,8 @@
     @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
     <!-- Compiled and minified CSS -->
-    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))    
-
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    
     <link rel="shortcut icon" href="~/Imagens/logo/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
 
@@ -28,22 +35,20 @@
             <div class="nav-wrapper container">
 
                 <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
-
-                <ul class="right hide-on-med-and-down ">
+                                               
+                <ul class="right hide-on-med-and-down ">                                                           
                     <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
-
 
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
                         {
                             @Html.AntiForgeryToken()
 
-                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new { email = User.Identity.GetUserName()}, htmlAttributes: new { id = "admin" }) </li>
+                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new {email = User.Identity.GetUserName()}, htmlAttributes: new {id = "admin"}) </li>
                             <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
                             </li>
-
 
                             <li>
                                 <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
@@ -52,10 +57,11 @@
                     }
                     else
                     {
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>*@
+                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new {id = "loginLink"}) </li>
+                        <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new {id = "marketLink" }) </li>
                     }
-
+                   
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
@@ -76,12 +82,18 @@
                         }
                     }
                     else
-                    {//TODO: TIrar comentario antes de publicar real
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                    {
+                        <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new {id = "marketLink"}) </li>
 
                     }
                 </ul>
+                @*<ul>                        
+                    <form method="get" action="@Url.Action("Search", "Home")">
+                        <input type="text" class="form-control input-lg" placeholder="@CacheHelper.Settings.SearchPlaceHolder" id="SearchText" name="SearchText"><a  class="btn btn-primary btn-lg"><i class="mdi-action-search">search</i> search</a>
+                    </form>
+                </ul>*@
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
@@ -307,9 +319,10 @@
                 endingTop: '10%', // Ending top style attribute
             });
         });
-    </script>
+    </script>   
 
-    <!--RD-Station-->
+
+<!--RD-Station-->
     <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js"></script>
     
 

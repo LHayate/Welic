@@ -9,12 +9,12 @@ namespace Welic.Dominio.Models.Users.Repositorios
 {
     public interface IRepositorioUser
     {
-        void Save(UserMap userMap);
-        UserMap GetById(int id);
-        List<UserMap> GetAll();
-        void Delete(int id);
-        UserMap GetByEmail(string email);
-        UserMap GetByName(string name);
+        void Save(AspNetUser userMap);
+        AspNetUser GetById(string id);
+        List<AspNetUser> GetAll();
+        void Delete(string id);
+        AspNetUser GetByEmail(string email);
+        AspNetUser GetByName(string name);
         List<GroupUserMap> GetGroupUser();
     }
 }

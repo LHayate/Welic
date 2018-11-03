@@ -13,7 +13,7 @@ namespace Welic.Dominio.Models.Menu.Servicos
 
         List<MenuDto> GetMenuComplet();
         List<MenuDto> GetMenuByUser(string email);
-        List<MenuDto> GetMenuByUserId(int id);
+        List<MenuDto> GetMenuByUserId(string id);
         void SaveMenuUser(CommandMenu menuUser);
         void SaveMenu(MenuDto menuDto);
         MenuDto GetbyId(int id);

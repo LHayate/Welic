@@ -29,12 +29,11 @@ namespace Servicos.Users
             {                
                 userMap.Password = Criptografia.Encriptar(userDto.Password);
                 userMap.Email = userDto.Email;
-                userMap.ImagemPerfil = userDto.ImagemPerfil;
+                userMap.ImagePerfil = userDto.ImagemPerfil;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
-                userMap.NickName = userDto.NickName;
-                userMap.FullName = userDto.FullName;
+                userMap.NickName = userDto.NickName;                
                 userMap.PhoneNumber = userDto.PhoneNumber;
-                userMap.Id = userDto.Id;
+                userMap.Id = userDto.UserId;
                 userMap.Guid = new Guid();
                 userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
                 userMap.LastAcess = DateTime.Now;
@@ -42,20 +41,19 @@ namespace Servicos.Users
                 userMap.FirstName = userDto.FirstName;
                 userMap.Identity = userDto.Identity;
                 userMap.LastName = userDto.LastName;
-                userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
+               // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
             }
             else
             {
-                userMap = new UserMap
+                userMap = new AspNetUser
                 {
                     Password = Criptografia.Encriptar(userDto.Password),
                     Email = userDto.Email,
-                    ImagemPerfil = userDto.ImagemPerfil,                    
+                    ImagePerfil = userDto.ImagemPerfil,                    
                     EmailConfirmed = userDto.EmailConfirmed,
-                    NickName = userDto.NickName,
-                    FullName = userDto.FullName,
+                    NickName = userDto.NickName,                    
                     PhoneNumber = userDto.PhoneNumber,                   
-                    Id = userDto.Id,
+                    Id = userDto.UserId,
                     Guid = new Guid(),                                           
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
                     LastAcess = DateTime.Now,
@@ -63,7 +61,7 @@ namespace Servicos.Users
                     FirstName = userDto.FirstName,
                     Identity = userDto.Identity,
                     LastName = userDto.LastName,
-                    GroupUserMap = new GroupUserMap(GroupUserEnum.None)
+                    //GroupUserMap = new GroupUserMap(GroupUserEnum.None)
                 };
             }
 
@@ -72,7 +70,7 @@ namespace Servicos.Users
             return GetById(userMap.Id);
         }
 
-        public UserDto GetById(int id)
+        public UserDto GetById(string id)
         {
             return  AdapterUser.ConverterMapParaDto(_repositorioUser.GetById(id));
         }
@@ -82,9 +80,9 @@ namespace Servicos.Users
             return AdapterUser.ConverterMapParaDto(_repositorioUser.GetAll());
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            if (id > 0)
+            if (id != null)
                 return;
             _repositorioUser.Delete(id);
         }

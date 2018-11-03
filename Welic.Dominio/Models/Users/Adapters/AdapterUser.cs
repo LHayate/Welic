@@ -7,7 +7,7 @@ namespace Welic.Dominio.Models.Users.Adapters
 {
     public class AdapterUser
     {
-        public static UserDto ConverterMapParaDto(UserMap userMap)
+        public static UserDto ConverterMapParaDto(AspNetUser userMap)
         {
 
             if (userMap == null)
@@ -17,14 +17,13 @@ namespace Welic.Dominio.Models.Users.Adapters
 
             UserDto userDto = new UserDto
             {
-                Id = userMap.Id,
-                IdGuid = userMap.Guid,
+                UserId = userMap.Id,
+                Guid = userMap.Guid,
                 Password = userMap.Password,
                 Email = userMap.Email,
-                ImagemPerfil = userMap.ImagemPerfil,                
+                ImagemPerfil = userMap.ImagePerfil,                
                 EmailConfirmed = userMap.EmailConfirmed,
-                NickName = userMap.NickName,
-                FullName = userMap.FullName,
+                NickName = userMap.NickName,                
                 Profession = userMap.Profession,
                 PhoneNumber = userMap.PhoneNumber,               
                 PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
@@ -48,14 +47,13 @@ namespace Welic.Dominio.Models.Users.Adapters
 
             Entidades.User user = new Entidades.User
             {
-                Id = userDto.Id,
-                Guid = userDto.IdGuid,
+                UserId = userDto.UserId,
+                Guid = userDto.Guid,
                 Password = userDto.Password,
                 Email = userDto.Email,
                 ImagemPerfil = userDto.ImagemPerfil,                
                 EmailConfirmed = userDto.EmailConfirmed,
-                NickName = userDto.NickName,
-                FullName = userDto.FullName,
+                NickName = userDto.NickName,                
                 PhoneNumber = userDto.PhoneNumber,                
                 PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
                 LastAcess = userDto.LastAcess,
@@ -83,7 +81,7 @@ namespace Welic.Dominio.Models.Users.Adapters
 
         }
 
-        public static List<UserDto> ConverterMapParaDto(List<UserMap> listaMap)
+        public static List<UserDto> ConverterMapParaDto(List<AspNetUser> listaMap)
         {
             if (listaMap == null)
             {
@@ -92,7 +90,7 @@ namespace Welic.Dominio.Models.Users.Adapters
 
             List<UserDto> listaDto = new List<UserDto>();
 
-            foreach (UserMap map in listaMap)
+            foreach (AspNetUser map in listaMap)
             {
                 listaDto.Add(ConverterMapParaDto(map));
             }

@@ -1,14 +1,16 @@
+using Registrators;
+using Registrators.Plugins;
+using System;
 using System.Linq;
+using System.Reflection;
 using System.Web.Mvc;
 
 using Unity.AspNet.Mvc;
-using Welic.Dominio.Eventos;
-using Welic.WebSite.Helpers;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Welic.WebSite.UnityMvcActivator), nameof(Welic.WebSite.UnityMvcActivator.Start))]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Welic.WebSite.UnityMvcActivator), nameof(Welic.WebSite.UnityMvcActivator.Shutdown))]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Welic.WebSite.App_Start.UnityMvcActivator), nameof(Welic.WebSite.App_Start.UnityMvcActivator.Start))]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(Welic.WebSite.App_Start.UnityMvcActivator), nameof(Welic.WebSite.App_Start.UnityMvcActivator.Shutdown))]
 
-namespace Welic.WebSite
+namespace Welic.WebSite.App_Start
 {
     /// <summary>
     /// Provides the bootstrapping for integrating Unity with ASP.NET MVC.
@@ -20,10 +22,57 @@ namespace Welic.WebSite
         /// </summary>
         public static void Start() 
         {
-            //FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-            //FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(UnityConfig.Container));
-            
-            //DependencyResolver.SetResolver(new UnityDependencyResolver(UnityConfig.Container));            
+            var container = ContainerManager.GetConfiguredContainer();
+
+            //UnityConfig.RegisterTypes(container);
+            Registrator.Register(container);
+
+            FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
+            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            //try
+            //{
+            //    //http://stackoverflow.com/questions/699852/how-to-find-all-the-classes-which-implement-a-given-interface
+            //    foreach (var assembly in assemblies)
+            //    {
+            //        var instances = from t in assembly.GetTypes()
+            //            where t.GetInterfaces().Contains(typeof(IDependencyRegister))
+            //                  && t.GetConstructor(Type.EmptyTypes) != null
+            //            select Activator.CreateInstance(t) as IDependencyRegister;
+
+            //        foreach (var instance in instances.OrderBy(x => x.Order))
+            //        {
+            //            instance.Register(container);
+            //        }
+            //    }
+            //}
+            //catch (ReflectionTypeLoadException ex)
+            //{
+            //    http://stackoverflow.com/questions/1091853/error-message-unable-to-load-one-or-more-of-the-requested-types-retrieve-the-l
+            //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            //    foreach (Exception exSub in ex.LoaderExceptions)
+            //    {
+            //        sb.AppendLine(exSub.Message);
+            //        System.IO.FileNotFoundException exFileNotFound = exSub as System.IO.FileNotFoundException;
+            //        if (exFileNotFound != null)
+            //        {
+            //            if (!string.IsNullOrEmpty(exFileNotFound.FusionLog))
+            //            {
+            //                sb.AppendLine("Fusion Log:");
+            //                sb.AppendLine(exFileNotFound.FusionLog);
+            //            }
+            //        }
+            //        sb.AppendLine();
+            //    }
+            //    string errorMessage = sb.ToString();
+
+            //    throw new Exception(errorMessage, ex);
+            //    //Display or log the error based on your application.
+            //}
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
         }
@@ -33,7 +82,8 @@ namespace Welic.WebSite
         /// </summary>
         public static void Shutdown()
         {
-            UnityConfig.Container.Dispose();
+            var container = ContainerManager.GetConfiguredContainer();
+            container.Dispose();
         }
     }
 }

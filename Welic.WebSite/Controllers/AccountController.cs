@@ -7,16 +7,23 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using i18n;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Registrators;
+using Registrators.Helpers;
+using Welic.Dominio.Enumerables;
+using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
 using Welic.Dominio.Models.Users.Entidades;
 using Welic.Dominio.Models.Users.Enums;
+using Welic.Dominio.ViewModels;
 using Welic.Infra.Context;
 using Welic.WebSite.Models;
+using Welic.WebSite.Utilities;
 using GroupUserDto = Welic.Dominio.Models.Users.Dtos.GroupUserDto;
 
 namespace Welic.WebSite.Controllers
@@ -24,31 +31,23 @@ namespace Welic.WebSite.Controllers
     [Authorize]
     public class AccountController : BaseController
     {
+        #region Fields
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private readonly IServiceUser _servico;
-        
-        public AccountController(IServiceUser servico)
-        {
-            _servico = servico;
-        }
-        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IServiceUser servico)
-        //{
-        //    UserManager = userManager;
-        //    SignInManager = signInManager;
-        //    _servico = servico;
+        private ApplicationRoleManager _roleManager;
+        private readonly IEmailTemplateService _emailTemplateService;
+        #endregion
 
-        //}
-
+        #region Properties
         public ApplicationSignInManager SignInManager
         {
             get
             {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+                return _signInManager ?? System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -56,13 +55,35 @@ namespace Welic.WebSite.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return _userManager ?? System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
                 _userManager = value;
             }
         }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
+        }
+        #endregion
+
+        #region Constructor
+        public AccountController(IEmailTemplateService emailTemplateService)
+        {
+            _emailTemplateService = emailTemplateService;
+        }
+        #endregion
+
+        #region Methods
 
         //
         // GET: /Account/Login
@@ -80,26 +101,57 @@ namespace Welic.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
+            //Todo: Resolver Cache
+            // Require the user to have a confirmed email before they can log on.
+            //if (CacheHelper.Settings.EmailConfirmedRequired)
+            //{
+                var user = await UserManager.FindByNameAsync(model.Email);
+                //if (user != null)
+                //{
+                //    var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+                //    var isAdministrator = user.Roles.Any(x => x.RoleId == roleAdministrator.Id);
 
-            ComandUser comandUser = new ComandUser(model.Email.ToLower(), model.Password, model.Email);            
-            User user = _servico.Autenticar(comandUser);
-
+                //    // Skip email check unless it's an administrator
+                //    if (!isAdministrator && !await UserManager.IsEmailConfirmedAsync(user.Id))
+                //    {
+                //        ModelState.AddModelError("", "[[[You must have a confirmed email to log on.]]]");
+                //        return View(model);
+                //    }
+                //}
+            //}
             if (user == null)
             {
                 ModelState.AddModelError("", "Invalid login attempt.");
                 return View(model);
             }
-
-            var email = user.Email ?? user.NickName;
-            FormsAuthentication.SetAuthCookie(email, true);
-            comandUser.Senha = null;
-            return RedirectToAction("Admin","Admin");            
-            //return RedirectToAction("Admin","Admin", comandUser);            
+            
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, change to shouldLockout: true
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    if (string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToAction("Index", "Manage");
+                    }
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "[[[Invalid login attempt.]]]");
+                    return View(model);
+            }
         }
 
         //
@@ -131,7 +183,7 @@ namespace Welic.WebSite.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -140,7 +192,7 @@ namespace Welic.WebSite.Controllers
                     return View("Lockout");
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid code.");
+                    ModelState.AddModelError("", "[[[Invalid code.]]]");
                     return View(model);
             }
         }
@@ -150,18 +202,6 @@ namespace Welic.WebSite.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-
-            var GroupUser = new List<GroupUserDto>
-            {
-                new GroupUserDto(GroupUserEnum.None),
-                new GroupUserDto(GroupUserEnum.Teacher),
-                new GroupUserDto(GroupUserEnum.Student),
-                new GroupUserDto(GroupUserEnum.TeacherStudent),
-            };
-            
-
-
-            ViewBag.Categorias = new SelectList(GroupUser, "Id", "Description");
             return View();
         }
 
@@ -174,49 +214,82 @@ namespace Welic.WebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                UserDto usuarioComando = new UserDto
-                {
-                    Email = model.Email,
-                    Password = model.Password,   
-                    NickName = model.Email,
-                    GroupUser = new GroupUserDto(GroupUserEnum.None),
+                var result = await RegisterAccount(model);
 
-                } ;
+                // Add errors
+                AddErrors(result);
 
-
-                var user =  _servico.Save(usuarioComando);
-                if (user == null)
-                {
-                    ModelState.AddModelError("", "Invalid Register attempt.");
-                    return View(model);
-                }
-
-                var login = user.Email ?? user.NickName;
-                FormsAuthentication.SetAuthCookie(login, true);
-                return RedirectToAction("Admin", "Admin");
-                //return RedirectToAction("Index", "Home");
-
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await UserManager.CreateAsync(user, model.Password);
-                //if (result.Succeeded)
-                //{
-                //    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                //    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                //    // Send an email with this link
-                //    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                //    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                //    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-
-                //}
-                //AddErrors(result);
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Manage");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
 
+        public async Task<IdentityResult> RegisterAccount(RegisterViewModel model)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                RegisterDate = DateTime.Now,
+                RegisterIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
+                LastAccessDate = DateTime.Now,
+                LastAccessIP = System.Web.HttpContext.Current.Request.GetVisitorIP()
+            };
+
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                // Send Message
+                var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+                var administrator = roleAdministrator.Users.FirstOrDefault();
+
+                var message = new MessageSendModel()
+                {
+                    UserFrom = administrator.UserId,
+                    UserTo = user.Id,
+                    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
+                    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
+
+                };
+
+                await MessageHelper.SendMessage(message);
+
+                // Send an email with this link
+                string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                var urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+                var callbackUrl = urlHelper.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: System.Web.HttpContext.Current.Request.Url.Scheme);
+
+                var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "signup").SelectAsync();
+                var emailTemplate = emailTemplateQuery.FirstOrDefault();
+
+                if (emailTemplate != null)
+                {
+                    dynamic email = new Postal.Email("Email");
+                    email.To = user.Email;
+                    email.From = CacheHelper.Settings.EmailAddress;
+                    email.Subject = emailTemplate.Subject;
+                    email.Body = emailTemplate.Body;
+                    email.CallbackUrl = callbackUrl;
+                    EmailHelper.SendEmail(email);
+                }
+            }
+
+            return result;
+        }
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -248,18 +321,40 @@ namespace Welic.WebSite.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Check if email confirm required
+                if (CacheHelper.Settings.EmailConfirmedRequired && !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                {
+                    return View("ForgotPasswordConfirmation");
+                }
+
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "forgotpassword").SelectAsync();
+                var emailTemplate = emailTemplateQuery.Single();
+
+                dynamic email = new Postal.Email("Email");
+                email.To = user.Email;
+                email.From = CacheHelper.Settings.EmailAddress;
+                email.Subject = emailTemplate.Subject;
+                email.Body = emailTemplate.Body;
+                email.CallbackUrl = callbackUrl;
+                EmailHelper.SendEmail(email);
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -279,7 +374,7 @@ namespace Welic.WebSite.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View("Error") : View(new ResetPasswordViewModel() { Code = code });
         }
 
         //
@@ -305,7 +400,7 @@ namespace Welic.WebSite.Controllers
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);
-            return View();
+            return View(model);
         }
 
         //
@@ -436,8 +531,7 @@ namespace Welic.WebSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
 
@@ -468,7 +562,7 @@ namespace Welic.WebSite.Controllers
 
             base.Dispose(disposing);
         }
-        
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -498,7 +592,7 @@ namespace Welic.WebSite.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public class ChallengeResult : HttpUnauthorizedResult
+        internal class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)
@@ -526,6 +620,7 @@ namespace Welic.WebSite.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        #endregion
         #endregion
     }
 }
