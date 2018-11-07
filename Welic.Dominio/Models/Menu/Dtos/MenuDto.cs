@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Menu.Enums;
 using Welic.Dominio.Models.Menu.Mapeamentos;
+using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Menu.Dtos
 {
-    public class MenuDto
+    public class MenuDto : Entity
     {
         public int Id { get; set; }        
 

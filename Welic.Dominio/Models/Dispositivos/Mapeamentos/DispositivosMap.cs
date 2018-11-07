@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Acesso.Mapeamentos
 {
-    public class DispositivosMap
+    public class DispositivosMap : Entity
     {
 
         public string Id { get; set; }

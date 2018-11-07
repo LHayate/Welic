@@ -75,7 +75,7 @@ namespace Welic.App.ViewModels
 
                 UserDto usuario = new UserDto
                 {
-                    Id = 1,
+                    
                     NickName = UserLogin,
                     Password = Criptografia.Encriptar(Senha),
                     Email = UserLogin,                    

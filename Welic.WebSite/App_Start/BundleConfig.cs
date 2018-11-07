@@ -9,23 +9,23 @@ namespace Welic.WebSite
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
+                "~/Scripts/Market/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval")
-                .Include("~/Scripts/jquery.validate.js")
-                .Include("~/Scripts/jquery.validate.unobtrusive.js")
-                .Include("~/Scripts/jquery.validation.bootstrap.js")
-                .Include("~/Scripts/jquery.validation.init.js"));
+                .Include("~/Scripts/Market/jquery.validate.js")
+                .Include("~/Scripts/Market/jquery.validate.unobtrusive.js")
+                .Include("~/Scripts/Market/jquery.validation.bootstrap.js")
+                .Include("~/Scripts/Market/jquery.validation.init.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"));
+                "~/Scripts/Market/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js",
-                "~/Scripts/app.js"));
+                "~/Scripts/Market/bootstrap.js",
+                "~/Scripts/Market/respond.js",
+                "~/Scripts/Market/app.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                 "~/js/sweet-alert/sweetalert.min.js",

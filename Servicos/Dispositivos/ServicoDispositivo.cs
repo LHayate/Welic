@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Acesso.Dtos;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
 using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Servicos.Acesso
 {
@@ -47,6 +48,7 @@ namespace Servicos.Acesso
                 dtoEncontrado.DeviceName = dispositivoDto.DeviceName;
                 dtoEncontrado.Sharedkey = dispositivoDto.Sharedkey;
                 dtoEncontrado.Plataforma = dispositivoDto.Plataforma;
+                dtoEncontrado.ObjectState = ObjectState.Modified;
 
 
                 _dispositivos.Alterar(dtoEncontrado);
@@ -64,7 +66,8 @@ namespace Servicos.Acesso
                     DateSynced = DateTime.Now,
                     DeviceName = dispositivoDto.DeviceName,
                     Sharedkey = dispositivoDto.Sharedkey,
-                    Plataforma = dispositivoDto.Plataforma
+                    Plataforma = dispositivoDto.Plataforma,
+                    ObjectState = ObjectState.Added,
                 };
 
                 _dispositivos.Gravar(dtoEncontrado);

@@ -7,6 +7,7 @@ using Servicos.MarketPlace;
 using Servicos.Menu;
 using Servicos.News;
 using Servicos.Schedule;
+using Servicos.Uploads;
 using Servicos.Users;
 using Unity;
 using Unity.AspNet.Mvc;
@@ -25,6 +26,8 @@ using Welic.Dominio.Models.News.Repositoryes;
 using Welic.Dominio.Models.News.Services;
 using Welic.Dominio.Models.Schedule.Repositoryes;
 using Welic.Dominio.Models.Schedule.Services;
+using Welic.Dominio.Models.Uploads.Maps;
+using Welic.Dominio.Models.Uploads.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Repositorios;
@@ -76,6 +79,7 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<MessageParticipant>, Repository<MessageParticipant>>()
                 .RegisterType<IRepositoryAsync<MessageReadState>, Repository<MessageReadState>>()
                 .RegisterType<IRepositoryAsync<MessageThread>, Repository<MessageThread>>()
+                .RegisterType<IRepositoryAsync<UploadsMap>, Repository<UploadsMap>>()
 
                 .RegisterType<ICategoryService, CategoryService>()
                 .RegisterType<ICategoryStatService, CategoryStatService>()
@@ -101,6 +105,7 @@ namespace Registrators
                 .RegisterType<IMessageThreadService, MessageThreadService>()
                 .RegisterType<IStoredProcedures, AuthContext>(new PerRequestLifetimeManager())
                 .RegisterType<SqlDbService, SqlDbService>()
+                .RegisterType<IUploadsService, UploadsService>()
                 ;
 
 

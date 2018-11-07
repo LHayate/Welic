@@ -39,7 +39,7 @@ namespace Welic.Dominio.Models.Users.Entidades
 
         public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)
         {
-            return this.ValidarEscopoNomeUsuarioESenha(nomeUsuario, Criptografia.Encriptar(password));
+            return this.ValidarEscopoNomeUsuarioESenha(nomeUsuario, password);
         }
 
         public GroupUser GroupUser { get; set; }

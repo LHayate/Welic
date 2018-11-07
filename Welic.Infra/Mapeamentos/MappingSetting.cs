@@ -18,10 +18,12 @@ namespace Welic.Infra.Mapeamentos
 
             // Properties
             this.Property(t => t.ID)
+                .HasColumnName("ID")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Name)
                 .IsRequired()
+                .HasColumnName("Name")
                 .HasMaxLength(255);
 
             this.Property(t => t.Description)
@@ -85,9 +87,7 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired();
 
             // Table & Column Mappings
-            this.ToTable("Settings");
-            this.Property(t => t.ID).HasColumnName("ID");
-            this.Property(t => t.Name).HasColumnName("Name");
+            this.ToTable("Settings");                    
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.Slogan).HasColumnName("Slogan");
             this.Property(t => t.SearchPlaceHolder).HasColumnName("SearchPlaceHolder");

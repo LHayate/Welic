@@ -27,7 +27,8 @@ namespace Welic.WebSite
                 id = UrlParameter.Optional,
                 culture = "pt-BR"
             },
-            constraints: new { culture = "[a-z]{2}-[A-Z]{2}" }
+            constraints: new { culture = "[a-z]{2}-[A-Z]{2}" },
+            namespaces: new[] { "Welic.WebSite.Controllers" }
             );
             routes.LowercaseUrls = true;
 
@@ -35,7 +36,7 @@ namespace Welic.WebSite
                 name: "Page",
                 url: "page/{id}",
                 defaults: new { controller = "Home", action = "ContentPage", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "BeYourMarket.Web.Controllers" }
+                namespaces: new[] { "Welic.WebSite.Controllers" }
 
             );
 
@@ -43,14 +44,14 @@ namespace Welic.WebSite
                 name: "Listings",
                 url: "listings/{id}",
                 defaults: new { controller = "Listing", action = "Listing", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "BeYourMarket.Web.Controllers" }
+                namespaces: new[] { "Welic.WebSite.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "BeYourMarket.Web.Controllers" }
+                namespaces: new[] { "Welic.WebSite.Controllers" }
             );
 
             //routes.MapHttpRoute(

@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Dominio.Models.Users.Servicos;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Utilitarios.Entidades;
 
 namespace Servicos.Users
@@ -26,8 +27,7 @@ namespace Servicos.Users
             var userMap = _repositorioUser.GetByEmail(userDto.Email);
 
             if (userMap != null)
-            {                
-                userMap.Password = Criptografia.Encriptar(userDto.Password);
+            {                                
                 userMap.Email = userDto.Email;
                 userMap.ImagePerfil = userDto.ImagemPerfil;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
@@ -41,13 +41,14 @@ namespace Servicos.Users
                 userMap.FirstName = userDto.FirstName;
                 userMap.Identity = userDto.Identity;
                 userMap.LastName = userDto.LastName;
-               // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
+                userMap.ObjectState = ObjectState.Modified;
+                // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
             }
             else
             {
                 userMap = new AspNetUser
                 {
-                    Password = Criptografia.Encriptar(userDto.Password),
+                    
                     Email = userDto.Email,
                     ImagePerfil = userDto.ImagemPerfil,                    
                     EmailConfirmed = userDto.EmailConfirmed,
@@ -61,6 +62,7 @@ namespace Servicos.Users
                     FirstName = userDto.FirstName,
                     Identity = userDto.Identity,
                     LastName = userDto.LastName,
+                    ObjectState = ObjectState.Added,
                     //GroupUserMap = new GroupUserMap(GroupUserEnum.None)
                 };
             }

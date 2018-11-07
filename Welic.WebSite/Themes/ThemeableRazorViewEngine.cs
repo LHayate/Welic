@@ -127,8 +127,8 @@ namespace Welic.WebSite.Themes
             var viewPath = GetPath(controllerContext, viewName, "View", useCache, ViewLocationFormats, AreaMasterLocationFormats, out strViewPath);
 
             // Set default layout
-            if (string.IsNullOrEmpty(masterName) && !controllerContext.IsChildAction)
-                masterName = "_Layout";
+            //if (string.IsNullOrEmpty(masterName) && !controllerContext.IsChildAction)
+            //    masterName = "_Layout";
 
             var viewMasterPath = GetPath(controllerContext, masterName, "Master", useCache, MasterLocationFormats, AreaMasterLocationFormats, out strViewMasterPath);
 

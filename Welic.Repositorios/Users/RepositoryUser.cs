@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
 using Exception = System.Exception;
 
@@ -24,19 +25,12 @@ namespace Welic.Repositorios.Users
         }
 
         public void Save(AspNetUser userMap)
-        {
-           // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
-            var user = GetByEmail(userMap.Email);
-
-            if (user != null && !string.IsNullOrEmpty(user.Id))
-                throw new Exception("Usuario já existe dentro de nosso sistema");
-
-
-            if (user != null )
+        {                                   
+            if(userMap.ObjectState == ObjectState.Modified)            
                 _contexto.Entry(userMap).State = EntityState.Modified;
-            else
-                //_contexto.Entry(userMap).State = EntityState.Added; //   User.Add(userMap);}
-                _contexto.User.Add(userMap);            
+            else                
+                _contexto.User.Add(userMap);    
+            
             try
             {
                 _contexto.SaveChanges();

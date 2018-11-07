@@ -30,13 +30,13 @@ namespace Welic.App.Views
             BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
             //LoadingImage();
 
-            GroupMenu = new ObservableCollection<GroupHomeMenuItem>
-            {                
-                new GroupHomeMenuItem("My Products",Util.ImagePorSistema("iGalery"))
-                {
-                    new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
-                },
-            };
+            //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
+            //{                
+            //    new GroupHomeMenuItem("My Products",Util.ImagePorSistema("iGalery"))
+            //    {
+            //        new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+            //    },
+            //};
 
             menuItems = new List<HomeMenuItem>
             {
@@ -149,15 +149,7 @@ namespace Welic.App.Views
             {
                 await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
             }
-        }        
-        private async void ListViewMenu_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            ListViewMenu.SelectedItem = null;
-        }
-
-        private async void ListViewMenu_OnItemTapped(object sender, ItemTappedEventArgs e)
-        {            
-        }
+        }               
 
         private async void LogOff_OnClicked(object sender, EventArgs e)
         {

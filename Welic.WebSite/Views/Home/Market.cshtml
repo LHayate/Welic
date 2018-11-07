@@ -6,7 +6,7 @@
 @{
     ViewBag.Title = "Market";
    
-    Layout = "~/Views/Shared/_MarketLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var imagePath = ImageHelper.GetCommunityImagePath("cover");
     var bgCss = string.Empty;
 
@@ -24,7 +24,7 @@
         <p class="lead">@CacheHelper.Settings.Description</p>
         <form method="get" action="@Url.Action("Search", "Home")">
             <p><input type="text" class="form-control input-lg" placeholder="@CacheHelper.Settings.SearchPlaceHolder" id="SearchText" name="SearchText"></p>
-            <p><button type="submit" class="btn btn-primary btn-lg"><i class="mdi-action-search"></i> [[[Search]]]</button></p>
+            <p><button type="submit" class="btn btn-primary btn-lg"><i class="mdi-action-search"></i> @Resources.Search</button></p>
         </form>
     </div>
 </div>
@@ -32,7 +32,7 @@
 <div class="container-fluid body-content">
     <div class="row">
         <div class="col-md-12 section-title">
-            <h4>[[[Latest Listings]]] <a class="btn btn-default btn-sm pull-right" href="@Url.Action("Search","Home")">[[[See All Listings]]] &raquo;</a></h4>
+            <h4>@Resources.Lasted_Listing <a class="btn btn-default btn-sm pull-right" href="@Url.Action("Search","Home")">@Resources.See_All_Listings &raquo;</a></h4>
         </div>
     </div>
 

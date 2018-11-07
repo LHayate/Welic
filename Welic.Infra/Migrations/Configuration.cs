@@ -4,6 +4,7 @@ using System.Web;
 using Welic.Dominio.Core;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Entityes;
+using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
@@ -19,11 +20,11 @@ namespace Welic.Infra.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed =true;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; ;
             ContextKey = "Welic.Infra.Context.AuthContext";
 
-            //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
+            TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
         }
 
         protected override void Seed(Welic.Infra.Context.AuthContext context)
@@ -36,17 +37,22 @@ namespace Welic.Infra.Migrations
             InstallSettings(context);
             InstallEmailTemplates(context);
             InstallListingTypes(context);
-                      
+
             InstallCategories(context);
             InstallCategoryTypes(context);
             InstallSampleData(context);
             InstallPictures(context);
             InstallStripe(context);
             InstallDisqus(context);
-            
+            //InstallMenu(context);
+
         }
-        
-       
+
+        private void InstallMenu(AuthContext context)
+        {
+            //TODO: Criar Menus Automaticos
+            //context.Menus.Add(new MenuMap(){Title = "MarketPlace",IconMenu = "",});
+        }
 
         private void InstallSettings(AuthContext context)
         {

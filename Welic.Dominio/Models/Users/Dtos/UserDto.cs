@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Welic.Dominio.Models.Users.Enums;
+using Welic.Dominio.Patterns.Pattern.Ef6;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Welic.Dominio.Models.Users.Dtos
 {
-    public class UserDto
+    public class UserDto : Entity
     {
         public string UserId { get; set; }
         public Guid Guid { get; set; }
@@ -43,8 +45,9 @@ namespace Welic.Dominio.Models.Users.Dtos
         }
 
         public UserDto()
-        {            
-        }
+        {
+            ObjectState = ObjectState.Modified;
+        }        
 
         public GroupUserDto GroupUser { get; set; }
 

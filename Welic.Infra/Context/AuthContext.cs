@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Text;
 using Welic.Dominio.Core;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
 using Welic.Dominio.Models.Lives.Maps;
@@ -12,7 +15,7 @@ using Welic.Infra.Mapeamentos;
 using Welic.Infra.Migrations;
 
 namespace Welic.Infra.Context
-{   
+{
     public partial class AuthContext : DataContext
     {
         static AuthContext()
@@ -34,15 +37,17 @@ namespace Welic.Infra.Context
         public AuthContext()
             //: base("WelicDbContext")
             : base("WelicDbContext")
-        {                       
-            
-        }    
+        {
+
+        }
 
         public DbSet<DispositivosMap> Dispositivo { get; set; }
         public DbSet<AspNetUser> User { get; set; }
         public DbSet<LiveMap> Live { get; set; }
         public DbSet<ScheduleMap> Schedule { get; set; }
+
         public DbSet<NewsMap> News { get; set; }
+
         //public DbSet<GroupUserMap> GroupUser { get; set; }
         public DbSet<ProgramsMap> Programs { get; set; }
         public DbSet<MenuMap> Menus { get; set; }
@@ -77,7 +82,8 @@ namespace Welic.Infra.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions
+                .Remove<System.Data.Entity.ModelConfiguration.Conventions.OneToManyCascadeDeleteConvention>();
             modelBuilder.Configurations.Add(new MappingDispositivos());
             modelBuilder.Configurations.Add(new MappingUser());
             modelBuilder.Configurations.Add(new MappingLive());
@@ -117,6 +123,5 @@ namespace Welic.Infra.Context
 
 
         }
-        
     }
 }

@@ -53,11 +53,32 @@ namespace Welic.Dominio.Patterns.Pattern.Ef6
         /// <returns>The number of objects written to the underlying database.</returns>
         public override int SaveChanges()
         {
-            UpdateDate();
-            SyncObjectsStatePreCommit();
-            var changes = base.SaveChanges();
-            SyncObjectsStatePostCommit();
-            return changes;
+            
+
+            try
+            {
+                UpdateDate();
+                SyncObjectsStatePreCommit();
+                var changes = base.SaveChanges();
+                SyncObjectsStatePostCommit();
+                return changes;
+            }
+            catch (DbEntityValidationException e)
+            {
+
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+
+                throw e;
+            }
         }
 
         private void UpdateDate()

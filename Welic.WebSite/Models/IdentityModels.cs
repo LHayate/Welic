@@ -37,13 +37,10 @@ namespace Welic.WebSite.Models
 
         public double Rating { get; set; }
         public Guid Guid { get; set; }
-
-        public string NickName { get; set; }
-        public string Password { get; set; }        
+                
         public string Profession { get; set; }
         public byte[] ImagePerfil { get; set; }
-        public string Identity { get; set; }
-        public DateTime LastAcess { get; set; }
+        public string Identity { get; set; }        
 
 
         [NotMapped]

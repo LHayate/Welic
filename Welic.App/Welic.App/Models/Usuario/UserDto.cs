@@ -15,7 +15,7 @@ namespace Welic.App.Models.Usuario
     {
                
         [SQLite.PrimaryKey]
-        public int Id { get; set; }
+        public string UserId { get; set; }
         public Guid Guid { get; set; }
         public string Email { get; set; }         
         public bool EmailConfirmed { get; set; }
@@ -42,10 +42,10 @@ namespace Welic.App.Models.Usuario
         public async Task<bool> RegisterUserManager(UserDto user )
         {           
             try
-            {               
+            {
                 //user = userBanco.Result;
 
-                Id = user.Id;
+                UserId = user.UserId;
                 Guid = user.Guid;
                 NickName = user.NickName;
                 Email = user.Email;
@@ -53,21 +53,19 @@ namespace Welic.App.Models.Usuario
                 FirstName = user.FirstName;
                 LastName = user.LastName;
                 FullName = user.FullName;
-                Profession = user.Profession;                
-                Password = user.Password;                                
+                Profession = user.Profession;
+                Password = user.Password;
                 ImagemPerfil = user.ImagemPerfil;
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed;                  
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed;
                 Synced = false;
                 LastAcess = DateTime.Now;
-                
-                
-                
-                //Insere o registro                
-                
+                RememberMe = true;
+
+                //Insere o registro                                
                 try
                 {
-                   SaveUser(this);
-                                        
+                    SaveUser(this);
+                    
                     return true;
                 }
                 catch (System.Exception e)
@@ -105,10 +103,10 @@ namespace Welic.App.Models.Usuario
                 {
                     if (!item.Synced)
                     {                        
-                        item.Password = Criptografia.Decriptar(item.Password);
+                        //item.Password = Criptografia.Decriptar(item.Password);
                         var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
 
-                        Synced = true;
+                        Synced = true;                              
                         SaveUser(user);
                     }
                 }
@@ -192,7 +190,26 @@ namespace Welic.App.Models.Usuario
         {
             _dbManager = new DatabaseManager();
 
-            _dbManager.database.InsertOrReplace(user);
+            var usersalvo = new UserDto()
+            {
+                UserId = user.UserId,
+                FirstName = user.FirstName,
+                NickName = user.NickName,
+                RememberMe = true,
+                LastName = user.LastName,
+                LastAcess = user.LastAcess,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                FullName = user.FullName,
+                Guid = user.Guid,
+                ImagemPerfil = user.ImagemPerfil,
+                Password = user.Password,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                Profession = user.Profession,
+                Synced = this.Synced,
+            };                       
+            _dbManager.database.InsertOrReplace(usersalvo);
             _dbManager.database.Close();
         }
 
@@ -213,5 +230,7 @@ namespace Welic.App.Models.Usuario
                 throw new System.Exception("Error: In Register this User");
             }
         }
+
+        
     }  
 }

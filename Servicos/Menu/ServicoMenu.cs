@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Welic.Dominio;
 using Welic.Dominio.Models.Menu.Adapter;
@@ -8,6 +9,7 @@ using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Menu.Repositorios;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Servicos.Menu
 {
@@ -116,6 +118,7 @@ namespace Servicos.Menu
                 found.DadId = menuDto.MenuDadId;
                 found.Action = menuDto.Action;
                 found.Controller = menuDto.Controller;
+                found.ObjectState = ObjectState.Modified;
             }
             else
             {
@@ -128,8 +131,7 @@ namespace Servicos.Menu
                     DadId = menuDto.MenuDadId,
                     Action = menuDto.Action,
                     Controller = menuDto.Controller,
-                    
-
+                    ObjectState = ObjectState.Added                    
                 };
             }
 

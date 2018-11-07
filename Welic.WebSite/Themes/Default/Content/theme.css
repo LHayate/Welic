@@ -332,14 +332,14 @@ html {
   height: 100%;
 }
 body {
-  overflow-x: hidden !important;
-  font-family: 'Questrial', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  background: #ffffff;
-  color: #50505f;
-  position: relative;
-  width: 100%;
-  min-height: 100%;
+    overflow-x: hidden !important;
+    font-family: 'Questrial', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #CDEEF6;
+    color: #50505f;
+    position: relative;
+    width: 100%;
+    min-height: 100%;
 }
 p {
   font-weight: 500;

@@ -6,6 +6,7 @@ using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Servicos.Live
 {
@@ -31,6 +32,7 @@ namespace Servicos.Live
                 liveEncontrada.Prince = liveDto.Prince;
                 liveEncontrada.Description = liveDto.Description;
                 liveEncontrada.Chat = liveDto.Chat;
+                liveEncontrada.ObjectState = ObjectState.Modified;
 
                 if (liveDto.Author == null)
                     throw new System.Exception("É obrigatório o autor");
@@ -52,7 +54,8 @@ namespace Servicos.Live
                     UrlDestino = liveDto.UrlDestino,
                     Prince = liveDto.Prince,
                     Description = liveDto.Description,
-                    Chat = liveDto.Chat
+                    Chat = liveDto.Chat,
+                    ObjectState = ObjectState.Added,
                 };
 
                 if (liveDto.Author == null)
@@ -60,7 +63,7 @@ namespace Servicos.Live
                
                 liveEncontrada.Author = new AspNetUser
                 {
-                    Id = liveDto.Author.UserId.ToString(),
+                    Id = liveDto.Author.UserId,
                     Email = liveDto.Author.Email
                 };                    
                 

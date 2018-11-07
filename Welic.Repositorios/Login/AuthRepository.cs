@@ -33,9 +33,18 @@ namespace Welic.Repositorios.Login
 
         public async Task<IdentityUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await _userManager.FindAsync(userName, password);
+            try
+            {
+                var user = await _userManager.FindAsync(userName, password);
 
-            return user;
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public void Dispose()

@@ -79,8 +79,7 @@
         
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"
-                  ItemSelected="ListViewMenu_OnItemSelected"
-                  ItemTapped="ListViewMenu_OnItemTapped"
+                
                   HeightRequest="50">
             <ListView.ItemTemplate>
                 <DataTemplate>

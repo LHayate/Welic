@@ -13,7 +13,7 @@ namespace Welic.App.ViewModels
     public class EditProfileViewModel: BaseViewModel
     {
         public Command ReturnToMenuCommand => new Command(async () => await ReturnToMenu());
-        public Command SaveInfosCommand => new Command(async () => await SaveInfos());        
+        public Command SaveInfosCommand => new Command(async () => await SaveInfos());
         
         private string _nickName;
         public string NickName
@@ -87,7 +87,7 @@ namespace Welic.App.ViewModels
                 try
                 {
                     _image = UserDto.ImagemPerfil;
-                    Identity = $"Id: {UserDto.Id}";
+                    Identity = $"Id: {UserDto.UserId}";
                     Email = UserDto.Email;
                     FirstName = UserDto.FirstName;
                     LastName = UserDto.LastName;                    
