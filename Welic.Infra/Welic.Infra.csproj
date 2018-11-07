@@ -100,6 +100,7 @@
     <Compile Include="Mapeamentos\MappingDispositivos.cs" />
     <Compile Include="Mapeamentos\MappingLive.cs" />
     <Compile Include="Mapeamentos\MappingSchedule.cs" />
+    <Compile Include="Mapeamentos\MappingUploads.cs" />
     <Compile Include="Mapeamentos\MappingUser.cs" />
     <Compile Include="Mapeamentos\MappingListing.cs" />
     <Compile Include="Mapeamentos\MappingListingMeta.cs" />

@@ -98,15 +98,12 @@ namespace Welic.App.ViewModels
                 {
                     using (var stream = new StreamContent(_mediaFile.GetStream()))
                     {                        
-                        path = $"\\{user.LastName}_{user.UserId}_{_mediaFile.Path.Split('/').LastOrDefault()}";
+                        path = $"\\{user.LastName}_{user.UserId}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
                         content.Add(stream, "file", path);
 
                         await WebApi.Current.UploadAsync("uploads/files", content);
-
-
+                      
                         //await WebApi.Current.UploadAsync("uploads/files", content);
-
-
                         
                         content.Dispose();                        
                     }                    

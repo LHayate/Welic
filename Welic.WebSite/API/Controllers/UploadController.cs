@@ -22,18 +22,16 @@ namespace Welic.WebSite.API.Controllers
     public class UploadController : BaseController
     {
         private IUploadsService _uploadsService;
-        private IServiceUser _serviceUser;
-
-        public UploadController(IUploadsService uploadsService, IServiceUser serviceUser)
+        private IAspNetUserService _serviceUser;
+        public UploadController(IUploadsService uploadsService, IAspNetUserService serviceUser)
         {
-            _uploadsService = uploadsService;
             _serviceUser = serviceUser;
+            _uploadsService = uploadsService;
         }
-
         [HttpPost]
         [Route("files")]       
         public async Task<HttpResponseMessage> Post()
-        {           
+        {            
 
             // Ver se POST é MultiPart? 
             if (!Request.Content.IsMimeMultipartContent())
@@ -49,40 +47,28 @@ namespace Welic.WebSite.API.Controllers
             try
             {
                 // Ler conteúdo da requisição para CustomMultipartFormDataStreamProvider. 
+                
+                await Request.Content.ReadAsMultipartAsync(provider);
 
-                await Request.Content.ReadAsMultipartAsync(provider);                
                 foreach (MultipartFileData file in provider.FileData)
-                {                    
+                {
                     files.Add(Path.GetFileName(file.LocalFileName));
-                    File.Move(file.LocalFileName, 
-                        Path.Combine(
-                            CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName)),
-                            file.LocalFileName
-                            )
-                        );
-
-                    var user = _serviceUser.GetById(file.LocalFileName.Split('_')[2]);
+                    File.Move(file.LocalFileName,
+                        Path.Combine(CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName.Split('.').LastOrDefault())),
+                            file.LocalFileName.Split('\\').LastOrDefault()));
+                    var user = await _serviceUser.FindAsync(
+                        file.LocalFileName.Split('\\').LastOrDefault().Split('_')[1]);
                     _uploadsService.Insert(new UploadsMap
                     {
                         ObjectState = ObjectState.Added,
-                        Path = Path.Combine(
-                                CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName)),
-                                file.LocalFileName ),
-                        UploadId = new Guid(), 
-                        User = new AspNetUser()
-                        {
-                            ObjectState = ObjectState.Unchanged,
-                            FirstName = user.FirstName,
-                            NickName = user.NickName,
-                            Guid = user.Guid,
-                            LastName = user.LastName,
-                            Email = user.Email,                                                        
-                        }
+                        Path = Path.Combine(CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName.Split('.').LastOrDefault())),
+                            file.LocalFileName.Split('\\').LastOrDefault()),
+                        UploadId = new Guid(),
+                        User = user
                     });
                 }
-                                
                 // OK se tudo deu certo.
-                return await CriaResposta(HttpStatusCode.OK, files);
+                return Request.CreateResponse(HttpStatusCode.OK, files);
             }
             catch (System.Exception e)
             {

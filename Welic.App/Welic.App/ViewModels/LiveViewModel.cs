@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Java.Util;
+﻿using System.Threading.Tasks;
 using Welic.App.Models.Live;
 using Welic.App.Services.VideoPlayer;
 using Welic.App.ViewModels.Base;
@@ -17,7 +13,7 @@ namespace Welic.App.ViewModels
 
        
 
-        public string Title { get; set; }
+        public new string Title { get; set; }
         public string Description { get; set; }
 
 

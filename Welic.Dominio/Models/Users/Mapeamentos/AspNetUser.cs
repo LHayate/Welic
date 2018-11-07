@@ -7,6 +7,7 @@ using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Schedule.Maps;
+using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Users.Mapeamentos
@@ -28,6 +29,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
             this.ListingReviewsUserFrom = new List<ListingReview>();
             this.ListingReviewsUserTo = new List<ListingReview>();
             this.AspNetRoles = new List<AspNetRole>();
+            this.Uploads = new List<UploadsMap>();
         }
         
         public string Id { get; set; }
@@ -87,5 +89,6 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<ListingReview> ListingReviewsUserFrom { get; set; }
         public virtual ICollection<ListingReview> ListingReviewsUserTo { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<UploadsMap> Uploads { get; set; }
     }
 }

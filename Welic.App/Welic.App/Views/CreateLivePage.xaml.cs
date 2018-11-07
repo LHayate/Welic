@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Android.Views;
-using Plugin.Media;
 using Plugin.Media.Abstractions;
-using Welic.App.Models.Live;
-using Welic.App.Models.Usuario;
-using Welic.App.Services.API;
 using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
