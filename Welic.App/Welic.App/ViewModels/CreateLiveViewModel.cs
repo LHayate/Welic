@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using Plugin.FileUploader;
-using Plugin.FileUploader.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Live;
@@ -21,12 +16,12 @@ namespace Welic.App.ViewModels
     public class CreateLiveViewModel : BaseViewModel
     {
 
-        public Command CreatCommand => new Command(async () => CreateNew());
+        public Command CreatCommand => new Command(CreateNew);
         public Command PickFileCommand => new Command(async () => await PickFile());
         
 
         private MediaFile _mediaFile;
-        private string path;
+        private string _path;
 
         public string TextButton { get; set; }
         public string TitleNavigation { get; set; }
@@ -34,7 +29,7 @@ namespace Welic.App.ViewModels
 
         private string _title;
 
-        public string Title
+        public new string Title
         {
             get => _title;
             set => SetProperty(ref _title , value);
@@ -98,8 +93,8 @@ namespace Welic.App.ViewModels
                 {
                     using (var stream = new StreamContent(_mediaFile.GetStream()))
                     {                        
-                        path = $"\\{user.LastName}_{user.UserId}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
-                        content.Add(stream, "file", path);
+                        _path = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        content.Add(stream, "file", _path);
 
                         await WebApi.Current.UploadAsync("uploads/files", content);
                       
@@ -108,7 +103,7 @@ namespace Welic.App.ViewModels
                         content.Dispose();                        
                     }                    
                 }
-                this.IsBusy = true;
+                IsBusy = true;
 
                 //var content = new MultipartFormDataContent();
 

@@ -119,6 +119,7 @@ namespace Servicos.Menu
                 found.Action = menuDto.Action;
                 found.Controller = menuDto.Controller;
                 found.ObjectState = ObjectState.Modified;
+                //found.GroupAcess = menuDto.GroupAcess;
             }
             else
             {
@@ -131,7 +132,8 @@ namespace Servicos.Menu
                     DadId = menuDto.MenuDadId,
                     Action = menuDto.Action,
                     Controller = menuDto.Controller,
-                    ObjectState = ObjectState.Added                    
+                    ObjectState = ObjectState.Added ,
+                    //GroupAcess =  menuDto.GroupAcess
                 };
             }
 

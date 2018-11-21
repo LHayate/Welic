@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
@@ -71,7 +72,22 @@ namespace Welic.App.ViewModels
         {
             try
             {
+                if (string.IsNullOrEmpty(Password))
+                {
+                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Password", "OK");
+                    return;
+                }
+                if (!Password.Equals(ConfirmPassword))
+                {
+                    await App.Current.MainPage.DisplayAlert("Welic", "Senhas não Coincidem", "OK");
+                    return;
+                }                
 
+                if (!Util.IsPasswordStrong(Password))
+                {
+                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Senha complexa", "OK");
+                    return;
+                }                    
                 if (string.IsNullOrEmpty(FirstName))
                 {
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the First Name", "OK");
@@ -86,17 +102,7 @@ namespace Welic.App.ViewModels
                 {
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessary inform the E-mail Adress", "OK");
                     return;
-                }
-                if (string.IsNullOrEmpty(Password))
-                {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Password", "OK");
-                    return;
-                }
-                if (!Password.Equals(ConfirmPassword))
-                {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Senhas não Coincidem", "OK");
-                    return;
-                }
+                }                               
                 if (string.IsNullOrEmpty(PhoneNumber))
                 {
                     await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Phone Number", "OK");
@@ -115,11 +121,11 @@ namespace Welic.App.ViewModels
                     Password = Password,
                     Email = EmailAdress,                    
                     FullName = $"{_firstName} {_lastName}" ,
-                    PhoneNumber = PhoneNumber,
-                    PhoneNumberConfirmed = PhoneNumber,   
+                    PhoneNumber = PhoneNumber,                    
                     FirstName = _firstName,
                     LastName = _lastName,
-                    //ImagemPerfil = Util.SetImageDefault(),                    
+                    RegisterDate = DateTime.Now,
+                    LastAccessDate = DateTime.Now,                             
 
                 };
 
@@ -147,7 +153,7 @@ namespace Welic.App.ViewModels
                         //Criar Usuario
                         //await WebApi.Current.PostAsync<UserDto>($"Account/Register", usuario);
 
-                        var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);
+                        //var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);
 
                         await NavigationService.NavigateModalToAsync<MainViewModel>();
                     }

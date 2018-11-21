@@ -11,25 +11,20 @@
 
         initial-scale=1.0">
 
-    @* CSS Personalizado *@
-    @Styles.Render("~/Content/semi-dark-menu/materialize.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-    @Styles.Render("~/Content/semi-dark-menu/style.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-    @Styles.Render("~/Content/Custom/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
 
+    <!-- CORE CSS-->
+    <link href="~/Content/semi-dark-menu/materialize.css" type="text/css" rel="stylesheet">
+    <link href="~/Content/semi-dark-menu/style.css" type="text/css" rel="stylesheet">
+    <!-- Custome CSS-->
+    <link href="~/Content/custom/custom.css" type="text/css" rel="stylesheet">
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-    @Styles.Render("~/Content/perfect-scrollbar/perfect-scrollbar.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-    @Styles.Render("~/Content/jvectormap/jquery-jvectormap.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-    @Styles.Render("~/Content/flag-icon/css/flag-icon.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-
-
-    <!-- Compiled and minified CSS -->
-    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+    <link href="~/Content/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet">
+    <link href="~/Content/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet">
+    <link href="~/Content/flag-icon/css/flag-icon.min.css" type="text/css" rel="stylesheet">
 
     <!--Import Google Icon Font-->
     @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
-
-
 
     <link rel="shortcut icon" href="~/Imagens/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
@@ -45,14 +40,19 @@
     <!-- End Page Loading -->
     <!-- //////////////////////////////////////////////////////////////////////////// -->
     <!-- START HEADER -->
-    <header id="header" class="page-topbar welic">
+    <header id="header" class="page-topbar">
         <!-- start header nav-->
         <div class="navbar-fixed">
-            <nav class="navbar-color">
+            <nav class=" welic-laranja">
                 <div class="nav-wrapper">
                     <div class="header-search-wrapper hide-on-med-and-down sideNav-lock">
-                        <i class="material-icons">search</i>
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize" />
+                        @*<i class="material-icons">search</i>*@
+                        @*<input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Welic" />*@
+                        <form class="form-inline" action="@Url.Action("Dashboard", "Manage")" method="get" role="form">
+                            <i class="material-icons">search</i>
+                            <input type="text" id="searchText" name="searchText" class="header-search-input z-depth-2" placeholder="@Resources.Search_List" value="@Request.QueryString["searchText"]">
+                            @*<button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> @Resources.Search</button>*@
+                        </form>
                     </div>
                     <ul class="right hide-on-med-and-down">
                         <li>

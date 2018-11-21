@@ -18,9 +18,14 @@
     color:#F05923;    
 }
 
+nav.Welic-laranja {
+    background-color: #F58C1E;
+}
+
 .welic-azul {
     background-color: #053c63;
 }
+
 .welic-menu {
     color: linear-gradient( to bottom, #208CCC, #08446D);
 }

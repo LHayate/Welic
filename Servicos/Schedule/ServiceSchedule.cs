@@ -60,7 +60,7 @@ namespace Servicos.Schedule
                 scheduleFinding.Prince = scheduleDto.Prince;
                 scheduleFinding.Private = scheduleDto.Private;
                 scheduleFinding.Title = scheduleDto.Title;
-                scheduleFinding.UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.UserId);
+                scheduleFinding.UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id);
                 scheduleFinding.Ativo = true;
                 scheduleFinding.ObjectState = ObjectState.Modified;
 
@@ -68,7 +68,7 @@ namespace Servicos.Schedule
                 {
                     var userMap = new AspNetUser
                     {
-                        Id = userDto.UserId,
+                        Id = userDto.Id,
                         Email = userDto.Email,
                         Guid = userDto.Guid,                        
                         PhoneNumber = userDto.PhoneNumber,
@@ -90,7 +90,7 @@ namespace Servicos.Schedule
                     Prince = scheduleDto.Prince,
                     Private = scheduleDto.Private,
                     Title = scheduleDto.Title,
-                    UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.UserId),
+                    UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id),
                     Ativo = true,
                     ObjectState = ObjectState.Added,
 
@@ -102,7 +102,7 @@ namespace Servicos.Schedule
                     {
                         var userMap = new AspNetUser
                         {
-                            Id = userDto.UserId,
+                            Id = userDto.Id,
                             Email = userDto.Email,
                             Guid = userDto.Guid,                            
                             PhoneNumber = userDto.PhoneNumber,

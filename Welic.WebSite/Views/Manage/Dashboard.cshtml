@@ -2,7 +2,7 @@
 @model Welic.WebSite.Models.ListingModel
 
 @{
-    ViewBag.Title = "[[[Dashboard]]]";
+    ViewBag.Title = @Resources.Dashboard;
     Layout = "~/Views/Shared/_AdminShared.cshtml";
     var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
 }
@@ -18,13 +18,13 @@
                     <div role="tabpanel" class="tab-pane card-content fade active in" id="listings" aria-labelledby="listings-tab">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                [[[My Listings]]]
+                                @Resources.My_Listting
                             </div>
                             <div class="panel-body">
                                 <div class="pull-left">
                                     <form class="form-inline" action="@Url.Action("Dashboard", "Manage")" method="get" role="form">
-                                        <input type="text" id="searchText" name="searchText" class="input-sm form-control" placeholder="[[[Search your listings...]]]" value="@Request.QueryString["searchText"]">
-                                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> [[[Search]]]</button>
+                                        <input type="text" id="searchText" name="searchText" class="input-sm form-control" placeholder="@Resources.Search_List" value="@Request.QueryString["searchText"]">
+                                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i> @Resources.Search</button>
                                     </form>
                                 </div>
                                 <div class="pull-right">

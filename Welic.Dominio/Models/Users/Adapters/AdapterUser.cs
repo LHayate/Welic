@@ -17,17 +17,17 @@ namespace Welic.Dominio.Models.Users.Adapters
 
             UserDto userDto = new UserDto
             {
-                UserId = userMap.Id,
+                Id = userMap.Id,
                 Guid = userMap.Guid,
                 Password = userMap.Password,
                 Email = userMap.Email,
-                ImagemPerfil = userMap.ImagePerfil,                
+                ImagePerfil = userMap.ImagePerfil,                
                 EmailConfirmed = userMap.EmailConfirmed,
                 NickName = userMap.NickName,                
                 Profession = userMap.Profession,
                 PhoneNumber = userMap.PhoneNumber,               
                 PhoneNumberConfirmed = userMap.PhoneNumberConfirmed,
-                LastAcess = userMap.LastAcess,
+                LastAccessDate = userMap.LastAccessDate,
                 FirstName = userMap.FirstName,
                 LastName = userMap.LastName,
                 Identity = userMap.Identity
@@ -47,16 +47,16 @@ namespace Welic.Dominio.Models.Users.Adapters
 
             Entidades.User user = new Entidades.User
             {
-                UserId = userDto.UserId,
+                Id = userDto.Id,
                 Guid = userDto.Guid,
                 Password = userDto.Password,
                 Email = userDto.Email,
-                ImagemPerfil = userDto.ImagemPerfil,                
+                ImagemPerfil = userDto.ImagePerfil,                
                 EmailConfirmed = userDto.EmailConfirmed,
                 NickName = userDto.NickName,                
                 PhoneNumber = userDto.PhoneNumber,                
                 PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
-                LastAcess = userDto.LastAcess,
+                LastAccessDate = userDto.LastAccessDate,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
                 Identity = userDto.Identity,

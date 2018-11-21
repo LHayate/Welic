@@ -69,7 +69,7 @@ namespace Welic.App.ViewModels
             _nomeCompleto = _userDto.FullName;
             //_cpf = _userDto.Id;
             _email = _userDto.Email ?? _userDto.NickName;
-            _lastAcess = _userDto.LastAcess.ToString(CultureInfo.InvariantCulture);
+            _lastAcess = _userDto.LastAccessDate.ToString(CultureInfo.InvariantCulture);
         }
         private async Task SendToEditProfile()
         {

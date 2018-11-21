@@ -1387,7 +1387,7 @@ header .navbar-form {
   -moz-border-radius: 2px;
   border-radius: 2px;
   background-clip: padding-box;
-  border: 1px solid #D8D1CC;
+  /*border: 1px solid #D8D1CC;*/
 }
 .card .card-title {
   color: #50505f;

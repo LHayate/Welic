@@ -24,10 +24,10 @@ namespace Welic.Infra.Context
             // Check if migrate database to latest version automatically (using automatic migration)
             // AutomaticMigrationDataLossAllowed is disabled by default (can be configred in web.config)
             // reference: http://stackoverflow.com/questions/10646111/entity-framework-migrations-enable-automigrations-along-with-added-migration
+
             if (WelicConfigurationManager.MigrateDatabaseToLatestVersion)
             {
                 Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
-
             }
             else
             {

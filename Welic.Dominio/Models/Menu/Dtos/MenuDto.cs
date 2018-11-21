@@ -22,7 +22,7 @@ namespace Welic.Dominio.Models.Menu.Dtos
 
         public string Action { get; set; }
         public string Controller { get; set; }
-
+        //public int? GroupAcess { get; set; }
         public static Func<MenuMap, MenuDto> Map()
         {
             return m => new MenuDto

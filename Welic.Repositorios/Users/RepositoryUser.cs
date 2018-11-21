@@ -25,7 +25,8 @@ namespace Welic.Repositorios.Users
         }
 
         public void Save(AspNetUser userMap)
-        {                                   
+        {                              
+                        //userMap.Id = new Guid().ToString();
             if(userMap.ObjectState == ObjectState.Modified)            
                 _contexto.Entry(userMap).State = EntityState.Modified;
             else                

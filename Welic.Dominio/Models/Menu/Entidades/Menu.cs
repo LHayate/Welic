@@ -20,7 +20,7 @@ namespace Welic.Dominio.Models.Menu.Entidades
 
         public string Action { get; private set; }
         public string Controller { get; set; }
-
+        //public int? GroupAcess { get; set; }
         public int? MenuDadId { get; private set; }
         
         

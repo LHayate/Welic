@@ -37,6 +37,7 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.Nivel).HasColumnName("Nivel");            
             Property(x => x.Action).HasColumnName("Action");
             Property(x => x.Controller).HasColumnName("Controller");
+            //Property(x => x.GroupAcess).HasColumnName("GroupAcess");
 
 
             HasMany(e => e.Usuarios).WithMany(p => p.Menus).Map(ep =>

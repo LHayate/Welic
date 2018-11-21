@@ -87,7 +87,7 @@ namespace Welic.App.ViewModels
                 try
                 {
                     _image = UserDto.ImagemPerfil;
-                    Identity = $"Id: {UserDto.UserId}";
+                    Identity = $"Id: {UserDto.Id}";
                     Email = UserDto.Email;
                     FirstName = UserDto.FirstName;
                     LastName = UserDto.LastName;                    

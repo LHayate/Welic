@@ -15,6 +15,8 @@ using Registrators;
 using Registrators.Helpers;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Services;
+using Welic.Dominio.Models.Menu.Command;
+using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
@@ -36,6 +38,7 @@ namespace Welic.WebSite.Controllers
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
         private readonly IEmailTemplateService _emailTemplateService;
+        private readonly IServicoMenu _servicoMenu;
         #endregion
 
         #region Properties
@@ -77,9 +80,10 @@ namespace Welic.WebSite.Controllers
         #endregion
 
         #region Constructor
-        public AccountController(IEmailTemplateService emailTemplateService)
+        public AccountController(IEmailTemplateService emailTemplateService, IServicoMenu servicoMenu)
         {
             _emailTemplateService = emailTemplateService;
+            _servicoMenu = servicoMenu;
         }
         #endregion
 
@@ -244,6 +248,18 @@ namespace Welic.WebSite.Controllers
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                //TOdo: Salvar menus padrões para o usuario novo
+
+                var menu = _servicoMenu.GetMenuComplet();
+
+                _servicoMenu.SaveMenuUser(
+                    new CommandMenu
+                    {
+                        MenuUser = menu,
+                        NameUser = model.Email
+                    }
+                    );
+
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -253,19 +269,19 @@ namespace Welic.WebSite.Controllers
                 // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                 // Send Message
-                var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
-                var administrator = roleAdministrator.Users.FirstOrDefault();
+                //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+                //var administrator = roleAdministrator.Users.FirstOrDefault();
 
-                var message = new MessageSendModel()
-                {
-                    UserFrom = administrator.UserId,
-                    UserTo = user.Id,
-                    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
-                    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
+                //var message = new MessageSendModel()
+                //{
+                //    UserFrom = administrator.UserId,
+                //    UserTo = user.Id,
+                //    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
+                //    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
 
-                };
+                //};
 
-                await MessageHelper.SendMessage(message);
+                //await MessageHelper.SendMessage(message);
 
                 // Send an email with this link
                 string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

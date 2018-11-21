@@ -29,19 +29,21 @@ namespace Servicos.Users
             if (userMap != null)
             {                                
                 userMap.Email = userDto.Email;
-                userMap.ImagePerfil = userDto.ImagemPerfil;
+                userMap.ImagePerfil = userDto.ImagePerfil;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
                 userMap.NickName = userDto.NickName;                
                 userMap.PhoneNumber = userDto.PhoneNumber;
-                userMap.Id = userDto.UserId;
+                userMap.Id = userDto.Id;
                 userMap.Guid = new Guid();
                 userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
-                userMap.LastAcess = DateTime.Now;
+                userMap.LastAccessDate = DateTime.Now;
                 userMap.Profession = userDto.Profession;
                 userMap.FirstName = userDto.FirstName;
                 userMap.Identity = userDto.Identity;
                 userMap.LastName = userDto.LastName;
                 userMap.ObjectState = ObjectState.Modified;
+                userMap.Password = userDto.Password;
+                userMap.RegisterDate = DateTime.Now;
                 // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
             }
             else
@@ -50,20 +52,22 @@ namespace Servicos.Users
                 {
                     
                     Email = userDto.Email,
-                    ImagePerfil = userDto.ImagemPerfil,                    
+                    ImagePerfil = userDto.ImagePerfil,                    
                     EmailConfirmed = userDto.EmailConfirmed,
                     NickName = userDto.NickName,                    
                     PhoneNumber = userDto.PhoneNumber,                   
-                    Id = userDto.UserId,
-                    Guid = new Guid(),                                           
+                    Id = Guid.NewGuid().ToString(),
+                    Guid = Guid.NewGuid(), 
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
-                    LastAcess = DateTime.Now,
+                    LastAccessDate = DateTime.Now,
                     Profession = userDto.Profession,
                     FirstName = userDto.FirstName,
                     Identity = userDto.Identity,
                     LastName = userDto.LastName,
                     ObjectState = ObjectState.Added,
-                    //GroupUserMap = new GroupUserMap(GroupUserEnum.None)
+                    Password = userDto.Password,
+                    RegisterDate = DateTime.Now,
+
                 };
             }
 

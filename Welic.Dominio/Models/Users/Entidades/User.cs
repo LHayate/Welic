@@ -8,7 +8,7 @@ namespace Welic.Dominio.Models.Users.Entidades
 {
     public class User 
     {
-        public string UserId { get; set; }
+        public string Id { get; set; }
         public Guid Guid { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -21,7 +21,7 @@ namespace Welic.Dominio.Models.Users.Entidades
         public bool PhoneNumberConfirmed { get; set; }
         public byte[] ImagemPerfil { get; set; }
         public string Identity { get; set; }
-        public DateTime LastAcess { get; set; }
+        public DateTime LastAccessDate { get; set; }
         public string LastAccessIP { get; set; }
         public System.DateTime RegisterDate { get; set; }
         public string RegisterIP { get; set; }
@@ -36,6 +36,7 @@ namespace Welic.Dominio.Models.Users.Entidades
         public int AccessFailedCount { get; set; }
         public bool Disabled { get; set; }
         public double Rating { get; set; }
+               
 
         public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)
         {

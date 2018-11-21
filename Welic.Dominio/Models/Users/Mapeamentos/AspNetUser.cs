@@ -45,7 +45,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public bool PhoneNumberConfirmed { get; set; }
         public byte[] ImagePerfil { get; set; }
         public string Identity { get; set; }
-        public DateTime LastAcess { get; set; }
+        public DateTime LastAccessDate { get; set; }
         public string LastAccessIP { get; set; }
         public System.DateTime RegisterDate { get; set; }
         public string RegisterIP { get; set; }

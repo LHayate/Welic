@@ -8,7 +8,7 @@ namespace Welic.Dominio.Models.Users.Dtos
 {
     public class UserDto : Entity
     {
-        public string UserId { get; set; }
+        public string Id { get; set; }
         public Guid Guid { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
@@ -19,9 +19,9 @@ namespace Welic.Dominio.Models.Users.Dtos
         public string Profession { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
-        public byte[] ImagemPerfil { get; set; }
+        public byte[] ImagePerfil { get; set; }
         public string Identity { get; set; }
-        public DateTime LastAcess { get; set; }
+        public DateTime LastAccessDate { get; set; }
         public string LastAccessIP { get; set; }
         public System.DateTime RegisterDate { get; set; }
         public string RegisterIP { get; set; }
@@ -36,10 +36,11 @@ namespace Welic.Dominio.Models.Users.Dtos
         public int AccessFailedCount { get; set; }
         public bool Disabled { get; set; }
         public double Rating { get; set; }
+        
 
         public UserDto( string id, Guid guid, string email)
         {
-            UserId = id;
+            Id = id;
             Guid = guid;
             Email = email;
         }

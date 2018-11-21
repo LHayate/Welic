@@ -39,7 +39,7 @@ namespace Servicos.Live
 
                 liveEncontrada.Author = new AspNetUser
                 {
-                    Id = liveDto.Author.UserId.ToString(),
+                    Id = liveDto.Author.Id.ToString(),
                     Email = liveDto.Author.Email
                 };                 
             }
@@ -63,7 +63,7 @@ namespace Servicos.Live
                
                 liveEncontrada.Author = new AspNetUser
                 {
-                    Id = liveDto.Author.UserId,
+                    Id = liveDto.Author.Id,
                     Email = liveDto.Author.Email
                 };                    
                 

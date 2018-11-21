@@ -21,13 +21,13 @@ namespace Welic.Infra.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; ;
-            ContextKey = "Welic.Infra.Context.AuthContext";
+            //AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; ;
+            //ContextKey = "Welic.Infra.Context.AuthContext";
 
-            TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
+            //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
         }
 
-        protected override void Seed(Welic.Infra.Context.AuthContext context)
+        protected override void Seed(AuthContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -36,34 +36,132 @@ namespace Welic.Infra.Migrations
             base.Seed(context);
             InstallSettings(context);
             InstallEmailTemplates(context);
-            InstallListingTypes(context);
-
-            InstallCategories(context);
-            InstallCategoryTypes(context);
-            InstallSampleData(context);
-            InstallPictures(context);
+            InstallMenu(context);            
+            //InstallCategories(context);
+            //InstallCategoryTypes(context);
+            //InstallSampleData(context);
+            //InstallPictures(context);
             InstallStripe(context);
             InstallDisqus(context);
-            //InstallMenu(context);
+            //InstallListingTypes(context);
 
+            context.SaveChanges();
         }
 
         private void InstallMenu(AuthContext context)
         {
             //TODO: Criar Menus Automaticos
-            //context.Menus.Add(new MenuMap(){Title = "MarketPlace",IconMenu = "",});
+            context.Menus.AddOrUpdate(
+                new MenuMap()
+                {
+                    Id = 1, Title = "Dashboard", IconMenu = "dashboard",
+                    ObjectState = context.Menus.Count(x => x.Id == 1 && x.Title == "Dashboard") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified, Action = "index", Controller = "Manage", Nivel = "1"
+                },
+                new MenuMap()
+                {
+                    Id = 2, Title = "Marketplace", IconMenu = "local_grocery_store",
+                    ObjectState = context.Menus.Count(x => x.Id == 2 && x.Title == "Marketplace") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,  Action = "index", Controller = "Manage", Nivel = "1"
+                },
+
+                new MenuMap()
+                {
+                    Id = 3, Title = "User", IconMenu = "person",
+                    ObjectState = context.Menus.Count(x => x.Id == 3 && x.Title == "User") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified, Action = "", Controller = "", Nivel = "1"
+                },
+                new MenuMap()
+                {
+                    Id = 4, Title = "Profile", IconMenu = "face",
+                    ObjectState = context.Menus.Count(x => x.Id == 4 && x.Title == "Profile") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "UserProfile", Controller = "Manage", Nivel = "2", DadId = 3
+                },
+                new MenuMap()
+                {
+                    Id = 5, Title = "MailBox", IconMenu = "local_post_office",
+                    ObjectState = context.Menus.Count(x => x.Id == 5 && x.Title == "MailBox") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "Messages", Controller = "Manage", Nivel = "2", DadId = 3
+                },
+                new MenuMap()
+                {
+                    Id = 6, Title = "Change Password", IconMenu = "vpn_key",
+                    ObjectState = context.Menus.Count(x => x.Id == 6 && x.Title == "Change Password") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "ChangePassword", Controller = "Manage", Nivel = "2", DadId = 3
+                },
+
+                new MenuMap()
+                {
+                    Id = 7, Title = "Finanças", IconMenu = "vpn_key", 
+                    ObjectState = context.Menus.Count(x => x.Id == 7 && x.Title == "Finanças") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "",Controller = "", Nivel = "1"
+                },
+                new MenuMap()
+                {
+                    Id = 8, Title = "Payments", IconMenu = "payment",
+                    ObjectState = context.Menus.Count(x => x.Id == 8 && x.Title == "Payments") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "PaymentSetting", Controller = "Payment", Nivel = "2", DadId = 7
+                },
+                new MenuMap()
+                {
+                    Id = 9, Title = "Transaction", IconMenu = "attach_money",
+                    ObjectState = context.Menus.Count(x => x.Id == 9 && x.Title == "Transaction") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "Transaction", Controller = "Payment", Nivel = "2", DadId = 7
+                },
+                new MenuMap()
+                {
+                    Id = 10, Title = "Orders", IconMenu = "shopping_cart",
+                    ObjectState = context.Menus.Count(x => x.Id == 10 && x.Title == "Orders") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "Orders", Controller = "Payment", Nivel = "2", DadId = 7
+                },
+
+                new MenuMap()
+                {
+                    Id = 11, Title = "Suport", IconMenu = "person_pin",
+                    ObjectState = context.Menus.Count(x => x.Id == 11 && x.Title == "Suport") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "suport", Controller = "Manage", Nivel = "1"
+                },
+
+                new MenuMap
+                {
+                    Id = 12, Title = "List of Lives", IconMenu = "",
+                    ObjectState = context.Menus.Count(x => x.Id == 12 && x.Title == "List of Lives") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "index", Controller = "listing", Nivel = "1"
+                }
+            );
         }
 
         private void InstallSettings(AuthContext context)
         {
-                context.Settings.Add(new Setting()
+                context.Settings.AddOrUpdate(new Setting()
                 {
                     ID = 1,
-                    Name = "BeYourMarket",
+                    Name = "Welic",
                     Description = "Create your own peer to peer market place in 5 minutes!",
                     Slogan = "Slogan...",
                     SearchPlaceHolder = "Search...",
-                    EmailContact = "hello@com",
+                    EmailContact = "contato@welic.app",
                     Version = "1.0",
                     Currency = "DKK",
                     TransactionFeePercent = 1,
@@ -77,14 +175,14 @@ namespace Welic.Infra.Migrations
                     ListingReviewMaxPerDay = 5,
                     Created = DateTime.Now,
                     LastUpdated = DateTime.Now,
-                    ObjectState = ObjectState.Added
+                    ObjectState = context.Settings.Count(x => x.ID == 1) <= 0 ? ObjectState.Added: ObjectState.Modified
                 });
             
         }
 
         private void InstallEmailTemplates(AuthContext context)
         {
-            context.EmailTemplates.Add(new EmailTemplate()
+            context.EmailTemplates.AddOrUpdate(new EmailTemplate()
             {
                 Slug = "signup",
                 Subject = "Sign up",
@@ -103,10 +201,10 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = ObjectState.Added
+                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("signup")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
 
-            context.EmailTemplates.Add(new EmailTemplate()
+            context.EmailTemplates.AddOrUpdate(new EmailTemplate()
             {
                 Slug = "forgotpassword",
                 Subject = "Forgot Password",
@@ -124,10 +222,10 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = ObjectState.Added
+                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("forgotpassword")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
 
-            context.EmailTemplates.Add(new EmailTemplate()
+            context.EmailTemplates.AddOrUpdate(new EmailTemplate()
             {
                 Slug = "privatemessage",
                 Subject = "Private Message",
@@ -145,13 +243,14 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = ObjectState.Added
+                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("privatemessage")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
         }
 
+        //TODO: Revisar este processo de Install Samples
         private void InstallSampleData(AuthContext context)
         {
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Preganancy Massage",
                 Description = @"During an hour waiting women be allowed to experience total relaxation and relief of aches. The therapist works gently with the pregnant body to loosen up tight muscles, give peace to the nervous system, increase blood circulation and reduce pain in the body.",
@@ -171,10 +270,10 @@ namespace Welic.Infra.Migrations
                 Enabled = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = ObjectState.Added
+                ObjectState = context.Settings.Count(x => x.ID == 1) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Facial Treatment",
                 Description = @"Classic 45 min Facial treat: Cleaning, skin analysis, AHA-PHA peeling, light deep cleanse...",
@@ -197,7 +296,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "60min Moisturizing face treatment",
                 Description = @"During an hour waiting women be allowed to experience total relaxation and relief of aches. The therapist works gently with the pregnant body to loosen up tight muscles, give peace to the nervous system, increase blood circulation and reduce pain in the body.",
@@ -220,7 +319,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Eyelash extensions",
                 Description = @"Give the lashes fullness and length with eyelash extensions. 50-100 fiber hair attached individually at one's own lashes for a natural look. The treatment takes about 90 minutes.",
@@ -243,7 +342,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "60min Massage for 2 persons - 3 types to choose",
                 Description = @"Take your partner by the arm and enjoy an hour of relaxing parma sage. Choose freely between wellness, Aromatherapy- and hotstone massage. By wellness massage using long, smooth movements of the upper layers of the muscles of mental and physical relaxation. Fragrant oils from flowers and herbs used in Aroma Therapy massage for relaxation and enjoyment. By hotstone massage used heated lava rocks to smoothen the muscles, then loosen tensions and aches.",
@@ -266,7 +365,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "1 hour shiatsu massage",
                 Description = @"Let the body come into focus with an hour shiatsu massage that combines deep pressure and long runs. The treatment allows the body to sink into a relaxed state, and it is therefore suitable for stress-related genes and other long-term imbalances. The massage takes place on a mattress on the floor, and it is important to be dressed in comfortable clothes, so the body can completely relax.",
@@ -289,7 +388,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Hot Stone Massage",
                 Description = @"With heated lava stones are the body's tense muscles supple and ready for a deep massage. The massage works with aches and tension, and brings blood to the muscles for a pain-relieving effect and increased flexibility.",
@@ -312,7 +411,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Facial massage",
                 Description = @"30 mins facial massage",
@@ -335,7 +434,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Listings.Add(new Listing()
+            context.Listings.AddOrUpdate(new Listing()
             {
                 Title = "Waxing",
                 Description = @"Choose one of below for waxing: arms / thighs / Lower armpit / Upper lip / Upper lip and chin",
@@ -361,7 +460,7 @@ namespace Welic.Infra.Migrations
 
         private void InstallListingTypes(AuthContext context)
         {
-            context.ListingTypes.Add(new ListingType()
+            context.ListingTypes.AddOrUpdate(new ListingType()
             {
                 Name = "Offer",
                 ButtonLabel = "Book",
@@ -374,12 +473,12 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.SaveChanges();
+            
         }
 
         private void InstallCategories(AuthContext context)
         {
-            context.Categories.Add(new Category()
+            context.Categories.AddOrUpdate(new Category()
             {
                 Name = "Massage",
                 Description = "Massage",
@@ -389,7 +488,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Categories.Add(new Category()
+            context.Categories.AddOrUpdate(new Category()
             {
                 Name = "Facial",
                 Description = "Facial Care",
@@ -399,7 +498,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.Categories.Add(new Category()
+            context.Categories.AddOrUpdate(new Category()
             {
                 Name = "Skin Care",
                 Description = "Skin Care",
@@ -412,21 +511,21 @@ namespace Welic.Infra.Migrations
 
         private void InstallCategoryTypes(AuthContext context)
         {
-            context.CategoryListingTypes.Add(new CategoryListingType()
+            context.CategoryListingTypes.AddOrUpdate(new CategoryListingType()
             {
                 CategoryID = 1,
                 ListingTypeID = 1,
                 ObjectState = ObjectState.Added
             });
 
-            context.CategoryListingTypes.Add(new CategoryListingType()
+            context.CategoryListingTypes.AddOrUpdate(new CategoryListingType()
             {
                 CategoryID = 2,
                 ListingTypeID = 1,
                 ObjectState = ObjectState.Added
             });
 
-            context.CategoryListingTypes.Add(new CategoryListingType()
+            context.CategoryListingTypes.AddOrUpdate(new CategoryListingType()
             {
                 CategoryID = 3,
                 ListingTypeID = 1,
@@ -438,7 +537,7 @@ namespace Welic.Infra.Migrations
         {
             for (int i = 1; i <= 9; i++)
             {
-                context.Pictures.Add(new Picture()
+                context.Pictures.AddOrUpdate(new Picture()
                 {
                     MimeType = "image/jpeg",
                     ObjectState = ObjectState.Added
@@ -446,7 +545,7 @@ namespace Welic.Infra.Migrations
 
                 context.SaveChanges();
 
-                context.ListingPictures.Add(new ListingPicture()
+                context.ListingPictures.AddOrUpdate(new ListingPicture()
                 {
                     ListingID = i,
                     PictureID = i,
@@ -462,7 +561,7 @@ namespace Welic.Infra.Migrations
 
         private void InstallStripe(AuthContext context)
         {
-            context.SettingDictionaries.Add(new SettingDictionary()
+            context.SettingDictionaries.AddOrUpdate(new SettingDictionary()
             {
                 SettingID = 1,
                 Name = "StripeApiKey",
@@ -472,7 +571,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.SettingDictionaries.Add(new SettingDictionary()
+            context.SettingDictionaries.AddOrUpdate(new SettingDictionary()
             {
                 SettingID = 1,
                 Name = "StripePublishableKey",
@@ -482,7 +581,7 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
 
-            context.SettingDictionaries.Add(new SettingDictionary()
+            context.SettingDictionaries.AddOrUpdate(new SettingDictionary()
             {
                 SettingID = 1,
                 Name = "StripeClientID",
@@ -505,5 +604,6 @@ namespace Welic.Infra.Migrations
                 ObjectState = ObjectState.Added
             });
         }
+        
     }
 }

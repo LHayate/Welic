@@ -31,7 +31,7 @@ namespace Welic.Infra.Mapeamentos
             this.Property(t => t.LastName).HasColumnName("LastName");
             this.Property(t => t.RegisterDate).HasColumnName("RegisterDate");
             this.Property(t => t.RegisterIP).HasColumnName("RegisterIP");
-            this.Property(t => t.LastAcess).HasColumnName("LastAccessDate");
+            this.Property(t => t.LastAccessDate).HasColumnName("LastAccessDate");
             this.Property(t => t.LastAccessIP).HasColumnName("LastAccessIP");
             this.Property(t => t.DateOfBirth).HasColumnName("DateOfBirth");
             this.Property(t => t.AcceptEmail).HasColumnName("AcceptEmail");
