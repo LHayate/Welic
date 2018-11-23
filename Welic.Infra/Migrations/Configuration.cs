@@ -148,6 +148,19 @@ namespace Welic.Infra.Migrations
                         ? ObjectState.Added
                         : ObjectState.Modified,
                     Action = "index", Controller = "listing", Nivel = "1"
+                },
+
+                new MenuMap
+                {
+                    Id = 13,
+                    Title = "Admin",
+                    IconMenu = "",
+                    ObjectState = context.Menus.Count(x => x.Id == 13 && x.Title == "Admin") <= 0
+                        ? ObjectState.Added
+                        : ObjectState.Modified,
+                    Action = "Manage",
+                    Controller = "Admin",
+                    Nivel = "1"
                 }
             );
         }

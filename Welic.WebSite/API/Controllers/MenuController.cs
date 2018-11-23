@@ -34,7 +34,16 @@ namespace Welic.WebSite.API.Controllers
         [Route("GetMenuByUser")]
         public Task<HttpResponseMessage> ListMenuUser([FromBody] UserDto model)
         {
-            return CriaResposta(HttpStatusCode.OK, _servicoMenu.GetMenuByUser(model.FirstName));
+            try
+            {
+                return CriaResposta(HttpStatusCode.OK, _servicoMenu.GetMenuByUser(model.FirstName));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return CriaResposta(HttpStatusCode.OK, $"{e.Message}- {e.InnerException}");
+            }
+            
         }
 
         [HttpPost]        
