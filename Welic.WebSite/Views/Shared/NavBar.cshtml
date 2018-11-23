@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNet.Identity
+
+<div>
+    <nav class="welic z-depth-2" role="navigation">
+        <div class="nav-wrapper container">
+
+            <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
+            @*<form method="get" action="@Url.Action("Search", "Home")" class="navbar-form ">
+                <input type="text" class="form-control trans input-lg" name="SearchText" id="SearchText" placeholder="[[[Search for...]]]">
+                <button type="submit" class="btn trans btn-lg ">
+                    <i class="mdi-action-search"></i>
+                </button>
+            </form>*@
+            <ul class="right hide-on-med-and-down ">
+                <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
+
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <li>@Html.ActionLink("Admin", "Index", "Manage", routeValues: new { email = User.Identity.GetUserName() }, htmlAttributes: new { id = "admin" }) </li>
+
+                        <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new { id = "marketLink" }) </li>
+
+                        <li> @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    }
+                }
+                else
+                {
+                    <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>
+                    <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new { id = "marketLink" }) </li>
+                }
+
+            </ul>
+
+            <ul id="nav-mobile" class="side-nav">
+                <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
+
+                @if (Request.IsAuthenticated)
+                {
+                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <li> @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+
+                        <li>@Html.ActionLink("Admin", "Index", "Manage", routeValues: new { email = User.Identity.GetUserName() }, htmlAttributes: new { email = User.Identity.GetUserName(), id = "loginLink" }) </li>
+
+                        <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new { id = "marketLink" }) </li>
+
+                        <li> <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                    }
+                }
+                else
+                {
+                    <li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <li>@Html.ActionLink("Market", "Market", "Home", routeValues: null, htmlAttributes: new { id = "marketLink" }) </li>
+
+                }
+            </ul>
+            
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+</div>

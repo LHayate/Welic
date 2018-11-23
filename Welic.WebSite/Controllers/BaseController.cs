@@ -35,6 +35,10 @@ namespace Welic.WebSite.Controllers
 
         }
 
+        public PartialViewResult NavBar()
+        {
+            return PartialView();
+        }
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
 

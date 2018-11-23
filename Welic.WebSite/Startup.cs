@@ -21,16 +21,14 @@ namespace Welic.WebSite
 {
     public partial class Startup
     {
-
-
         public void Configuration(IAppBuilder app)
         {            
             HttpConfiguration config = new HttpConfiguration();
-            UnityContainer container = new UnityContainer();  
-            
+            var container = ContainerManager.GetConfiguredContainer();  
+
             ConfigureDependencyInjection(config, container);
-            
-            ConfigureOAuth(app, container.Resolve<IServiceUser>());
+
+            ConfigureOAuth(app, ContainerManager.GetConfiguredContainer().Resolve<IServiceUser>());
             ConfigureAuth(app);
 
             WebApiConfig.Register(config);
@@ -53,15 +51,9 @@ namespace Welic.WebSite
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());            
 
         }
-        public static void ConfigureDependencyInjection(HttpConfiguration config, UnityContainer container)
-        {
-            Registrator.Register(container);
-            FilterProviders.Providers.Remove(FilterProviders.Providers.OfType<FilterAttributeFilterProvider>().First());
-            FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(container));
-
-            
+        public static void ConfigureDependencyInjection(HttpConfiguration config, IUnityContainer container)
+        {            
             config.DependencyResolver = new UnityResolverHelper(container);
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
             EventoDominio.Container = new DomainEventsContainer(config.DependencyResolver);
         }

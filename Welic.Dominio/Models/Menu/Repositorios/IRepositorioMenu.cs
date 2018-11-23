@@ -11,8 +11,8 @@ namespace Welic.Dominio.Models.Menu.Repositorios
     public interface IRepositorioMenu
     {        
         List<MenuMap> GetAllMenu();
-        void SaveMenuUser(int idUser, List<MenuMap> NewMenuUser);
-        List<MenuMap> GetbyIdUser(int idUser);        
+        void SaveMenuUser(string idUser, List<MenuMap> NewMenuUser);
+        List<MenuMap> GetbyIdUser(string idUser);        
         List<MenuMap> GetListbyIdByList(List<int> listaDeIds);
         void Save(MenuMap menuMap);
         MenuMap GetById(int id);

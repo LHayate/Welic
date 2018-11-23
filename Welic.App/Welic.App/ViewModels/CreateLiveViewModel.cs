@@ -1,9 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Welic.App.Models.Live;
+using Welic.App.Models.Usuario;
 using Welic.App.Services;
+using Welic.App.Services.API;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -12,16 +16,20 @@ namespace Welic.App.ViewModels
     public class CreateLiveViewModel : BaseViewModel
     {
 
-        public Command CreatCommand => new Command(async () => CreateNew());
+        public Command CreatCommand => new Command(CreateNew);
+        public Command PickFileCommand => new Command(async () => await PickFile());
+        
 
-       
+        private MediaFile _mediaFile;
+        private string _path;
+
         public string TextButton { get; set; }
         public string TitleNavigation { get; set; }
         public string Icon { get; set; }
 
         private string _title;
 
-        public string Title
+        public new string Title
         {
             get => _title;
             set => SetProperty(ref _title , value);
@@ -57,7 +65,13 @@ namespace Welic.App.ViewModels
             get => _chat;
             set => SetProperty(ref _chat , value);
         }
+        private string _pathFiles;
 
+        public string PathFiles
+        {
+            get { return _pathFiles; }
+            set { SetProperty(ref _pathFiles , value); }
+        }
 
         public CreateLiveViewModel()
         {
@@ -74,7 +88,29 @@ namespace Welic.App.ViewModels
                 if (IsBusy)
                     return;
 
-                this.IsBusy = true;
+                var user = new UserDto().LoadAsync();
+                using (var content = new MultipartFormDataContent())
+                {
+                    using (var stream = new StreamContent(_mediaFile.GetStream()))
+                    {                        
+                        _path = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        content.Add(stream, "file", _path);
+
+                        await WebApi.Current.UploadAsync("uploads/files", content);
+                      
+                        //await WebApi.Current.UploadAsync("uploads/files", content);
+                        
+                        content.Dispose();                        
+                    }                    
+                }
+                IsBusy = true;
+
+                //var content = new MultipartFormDataContent();
+
+                //content.Add(new StreamContent(_mediaFile.GetStream()),
+                //    "\"file\"",
+                //    $"\"{_mediaFile.Path}\"");
+                                                          
                 var live = new LiveDto
                 {
                     Title = _title,
@@ -82,23 +118,39 @@ namespace Welic.App.ViewModels
                     Price = decimal.Parse(_price),
                     Themes = _themes,
                     Chat = _chat,
-                    UrlDestino = "https://www.youtube.com/watch?v=29fejX2UPoQ&list=RDMMcPJUBQd-PNM&index=27",
-
+                    Author = user,
+                    UrlDestino = $"https://www.welic.app/uploads/{PathFiles}",
                 };
 
                 var ret = await (new LiveDto()).Save(live);
 
                 if (ret != null)
                     await NavigationService.NavigateModalToAsync<LiveViewModel>();
-                
             }
             catch (System.Exception e)
             {
                 IsBusy = false;
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro", "Erro ao Criar","OK");
+            }            
+        }
+
+        private async Task PickFile()
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsPickVideoSupported)
+            {
+                await MessageService.ShowOkAsync("No PickVideo", ":( No Pick Available.", "OK");
             }
+
+            _mediaFile = await CrossMedia.Current.PickVideoAsync();
+
+            if (_mediaFile == null)
+                return;
+
             
+            _pathFiles += _mediaFile.Path;
         }
 
     }

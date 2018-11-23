@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Dominio.Models.Users.Servicos;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Utilitarios.Entidades;
 
 namespace Servicos.Users
@@ -26,44 +27,47 @@ namespace Servicos.Users
             var userMap = _repositorioUser.GetByEmail(userDto.Email);
 
             if (userMap != null)
-            {                
-                userMap.Password = Criptografia.Encriptar(userDto.Password);
+            {                                
                 userMap.Email = userDto.Email;
-                userMap.ImagemPerfil = userDto.ImagemPerfil;
+                userMap.ImagePerfil = userDto.ImagePerfil;
                 userMap.EmailConfirmed = userDto.EmailConfirmed;
-                userMap.NickName = userDto.NickName;
-                userMap.FullName = userDto.FullName;
+                userMap.NickName = userDto.NickName;                
                 userMap.PhoneNumber = userDto.PhoneNumber;
                 userMap.Id = userDto.Id;
                 userMap.Guid = new Guid();
                 userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
-                userMap.LastAcess = DateTime.Now;
+                userMap.LastAccessDate = DateTime.Now;
                 userMap.Profession = userDto.Profession;
                 userMap.FirstName = userDto.FirstName;
                 userMap.Identity = userDto.Identity;
                 userMap.LastName = userDto.LastName;
-                userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
+                userMap.ObjectState = ObjectState.Modified;
+                userMap.Password = userDto.Password;
+                userMap.RegisterDate = DateTime.Now;
+                // userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);//TODO: Implementar processo para salvar tipo de perfil
             }
             else
             {
-                userMap = new UserMap
+                userMap = new AspNetUser
                 {
-                    Password = Criptografia.Encriptar(userDto.Password),
+                    
                     Email = userDto.Email,
-                    ImagemPerfil = userDto.ImagemPerfil,                    
+                    ImagePerfil = userDto.ImagePerfil,                    
                     EmailConfirmed = userDto.EmailConfirmed,
-                    NickName = userDto.NickName,
-                    FullName = userDto.FullName,
+                    NickName = userDto.NickName,                    
                     PhoneNumber = userDto.PhoneNumber,                   
-                    Id = userDto.Id,
-                    Guid = new Guid(),                                           
+                    Id = Guid.NewGuid().ToString(),
+                    Guid = Guid.NewGuid(), 
                     PhoneNumberConfirmed = userDto.PhoneNumberConfirmed,
-                    LastAcess = DateTime.Now,
+                    LastAccessDate = DateTime.Now,
                     Profession = userDto.Profession,
                     FirstName = userDto.FirstName,
                     Identity = userDto.Identity,
                     LastName = userDto.LastName,
-                    GroupUserMap = new GroupUserMap(GroupUserEnum.None)
+                    ObjectState = ObjectState.Added,
+                    Password = userDto.Password,
+                    RegisterDate = DateTime.Now,
+
                 };
             }
 
@@ -72,7 +76,7 @@ namespace Servicos.Users
             return GetById(userMap.Id);
         }
 
-        public UserDto GetById(int id)
+        public UserDto GetById(string id)
         {
             return  AdapterUser.ConverterMapParaDto(_repositorioUser.GetById(id));
         }
@@ -82,9 +86,9 @@ namespace Servicos.Users
             return AdapterUser.ConverterMapParaDto(_repositorioUser.GetAll());
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            if (id > 0)
+            if (id != null)
                 return;
             _repositorioUser.Delete(id);
         }

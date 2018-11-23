@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
 using Exception = System.Exception;
 
@@ -23,20 +24,14 @@ namespace Welic.Repositorios.Users
             _contexto = context;
         }
 
-        public void Save(UserMap userMap)
-        {
-            userMap.GroupUserMap = new GroupUserMap(GroupUserEnum.None);
-            var user = GetByEmail(userMap.Email);
-
-            if (user != null && user.Id == 0)
-                throw new Exception("Usuario já existe dentro de nosso sistema");
-
-
-            if (user != null )
+        public void Save(AspNetUser userMap)
+        {                              
+                        //userMap.Id = new Guid().ToString();
+            if(userMap.ObjectState == ObjectState.Modified)            
                 _contexto.Entry(userMap).State = EntityState.Modified;
-            else
-                //_contexto.Entry(userMap).State = EntityState.Added; //   User.Add(userMap);}
-                _contexto.User.Add(userMap);            
+            else                
+                _contexto.User.Add(userMap);    
+            
             try
             {
                 _contexto.SaveChanges();
@@ -49,19 +44,19 @@ namespace Welic.Repositorios.Users
             
         }
 
-        public UserMap GetById(int id)
+        public AspNetUser GetById(string id)
         {
-            return _contexto.User.FirstOrDefault(x => x.Id == id);
+            return _contexto.User.FirstOrDefault(x => x.Id == id.ToString());
         }
 
 
 
-        public List<UserMap> GetAll()
+        public List<AspNetUser> GetAll()
         {
             return _contexto.User.OrderBy(c => c.Id).ToList();
         }
 
-        public void Delete(int id)
+        public void Delete(string id)
         {
             var userMap = GetById(id);
 
@@ -69,19 +64,19 @@ namespace Welic.Repositorios.Users
                 _contexto.User.Remove(userMap);
         }
 
-        public UserMap GetByEmail(string email)
+        public AspNetUser GetByEmail(string email)
         {
             return _contexto.User.FirstOrDefault(x => x.Email == email);
         }
 
-        public UserMap GetByName(string name)
+        public AspNetUser GetByName(string name)
         {
             return _contexto.User.FirstOrDefault(x => x.FullName.Contains(name));
         }
 
         public List<GroupUserMap> GetGroupUser()
         {
-            return _contexto.GroupUser.OrderBy(x=> x.Nivel).ToList();
+            return null; //_contexto.GroupUser.OrderBy(x=> x.Nivel).ToList();
         }
     }
 }

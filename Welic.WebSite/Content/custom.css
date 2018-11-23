@@ -18,9 +18,14 @@
     color:#F05923;    
 }
 
+nav.Welic-laranja {
+    background-color: #F58C1E;
+}
+
 .welic-azul {
     background-color: #053c63;
 }
+
 .welic-menu {
     color: linear-gradient( to bottom, #208CCC, #08446D);
 }
@@ -163,5 +168,224 @@ h1 {
 }
 a.buttonWelic {
     color: #FF7F29;
-    background-color: #0C4F7B;
+    background-color: #0C4F7B;    
+}
+.landing-bg {
+    color: #ffffff;
+    width: 100%;
+    background-position: 50% 50%;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 90%;
+    /* Fallback for browsers do NOT support vh unit */
+    min-height: 90vh;
+    /* These two lines are counted as one :-)       */
+    height: 90vh;
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    /* Safari */
+    align-items: center;
+    -webkit-align-items: center;
+    /* Safari 7.0+ */
+    position: relative;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+.jumbotron {
+    background-color: #eceff1;
+}
+header .navbar-form {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+/* All form elements including input,select,textarea etc.-----------------------------------------------------------------*/
+.form-control {
+    border-width: 1px;
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-color: #F1F1F3 !important;
+    box-shadow: none;
+    border-width: 1px;
+}
+.form-group.has-success label {
+    color: #00a65a;
+}
+.form-group.has-success .form-control {
+    border-color: #00a65a !important;
+    box-shadow: none;
+}
+.form-group.has-warning label {
+    color: #f39c12;
+}
+.form-group.has-warning .form-control {
+    border-color: #f39c12 !important;
+    box-shadow: none;
+}
+.form-group.has-error label {
+    color: #f56954;
+}
+.form-group.has-error .form-control {
+    border-color: #f56954 !important;
+    box-shadow: none;
+}
+/* Input group */
+.input-group .input-group-addon {
+    border-radius: 0;
+    background-color: #f4f4f4;
+}
+/* button groups */
+.btn-group-vertical .btn.btn-flat:first-of-type,
+.btn-group-vertical .btn.btn-flat:last-of-type {
+    border-radius: 0;
+}
+/* Checkbox and radio inputs */
+.checkbox,
+.radio {
+    padding-left: 0;
+}
+
+
+.trans {
+    background: none;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+/* Component:Buttons-------------------------*/
+.btn {
+    font-weight: 500;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    -webkit-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: inset 0px -2px 0px 0px rgba(0, 0, 0, 0.09);
+    box-shadow: inset 0px -1px 0px 0px rgba(0, 0, 0, 0.09);
+    -webkit-transition: opacity 0.5s ease, background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+    transition: opacity 0.5s ease, background-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+}
+
+    .btn.btn-default {
+        background-color: #eceff1;
+        color: #50505f;
+        border-color: #eceff1;
+        border-bottom-color: #eceff1;
+    }
+
+        .btn.btn-default:hover,
+        .btn.btn-default:active,
+        .btn.btn-default.hover {
+            background-color: #eceff1 !important;
+        }
+
+        .btn.btn-default.btn-flat {
+            border-bottom-color: #d9dadc;
+        }
+
+    .btn.btn-primary {
+        background-color: #2196f3;
+        border-color: #2196f3;
+    }
+
+        .btn.btn-primary:hover,
+        .btn.btn-primary:active,
+        .btn.btn-primary.hover {
+            background-color: #367fa9;
+        }
+
+    .btn.btn-success {
+        background-color: #85BB59;
+        border-color: #85BB59;
+    }
+
+        .btn.btn-success:hover,
+        .btn.btn-success:active,
+        .btn.btn-success.hover {
+            background-color: #78B348;
+        }
+
+    .btn.btn-info {
+        background-color: #60B8B8;
+        border-color: #60B8B8;
+    }
+
+        .btn.btn-info:hover,
+        .btn.btn-info:active,
+        .btn.btn-info.hover {
+            background-color: #38A6A6;
+        }
+
+    .btn.btn-danger {
+        background-color: #f56954;
+        border-color: #f4543c;
+    }
+
+        .btn.btn-danger:hover,
+        .btn.btn-danger:active,
+        .btn.btn-danger.hover {
+            background-color: #f4543c;
+        }
+
+    .btn.btn-warning {
+        background-color: #f39c12;
+        border-color: #e08e0b;
+    }
+
+        .btn.btn-warning:hover,
+        .btn.btn-warning:active,
+        .btn.btn-warning.hover {
+            background-color: #e08e0b;
+        }
+
+    .btn.btn-flat {
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border-width: 1px;
+        text-transform: uppercase;
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .btn:active {
+        -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        -moz-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    }
+
+    .btn:focus {
+        outline: none;
+    }
+
+    .btn.btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn.btn-file > input[type='file'] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+.testes {
+    background-size:cover
 }

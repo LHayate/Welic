@@ -1,34 +1,14 @@
-using Microsoft.Practices.Unity.Configuration;
-using Registrators;
-using Servicos.Users;
 using System;
 
 using Unity;
-using Welic.Dominio.Models.Users.Servicos;
 
-namespace Welic.WebSite
+namespace Welic.WebSite.App_Start
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
     /// </summary>
     public static class UnityConfig
-    {
-        #region Unity Container
-        private static Lazy<IUnityContainer> container =
-          new Lazy<IUnityContainer>(() =>
-          {
-              var container = new UnityContainer();
-              Registrator.Register(container);
-              //RegisterTypes(container);
-              return container;
-          });
-
-        /// <summary>
-        /// Configured Unity Container.
-        /// </summary>
-        public static IUnityContainer Container => container.Value;
-        #endregion
-
+    {      
         /// <summary>
         /// Registers the type mappings with the Unity container.
         /// </summary>
@@ -43,11 +23,10 @@ namespace Welic.WebSite
         {
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
-             //container.LoadConfiguration();
+            // container.LoadConfiguration();
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            //container.RegisterType<IServiceUser, ServiceUser>();
         }
     }
 }

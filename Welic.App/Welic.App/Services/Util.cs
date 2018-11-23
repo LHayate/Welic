@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Xamarin.Forms;
@@ -110,6 +111,54 @@ namespace Welic.App.Services
             img.Source = ImagePorSistema("perfil_Padrao");
 
             return ImageToByteArray(img).Result;
+        }
+
+        /// <summary>
+        /// Função que verifica se a string informada “Tes123@#$” will be accepted.
+        /// UMA LETRA MINUSCULA
+        /// UMA LETRA MAIUSCULA
+        /// UM NUMERO
+        /// UM ESPECIAL
+        /// NO MINIMO 8 CARACTERES
+        /// </summary>
+        /// <param name=”password”></param>
+        /// <returns></returns>
+        public static bool IsPasswordStrong(string password)
+        {
+            int tamanhoMinimo = 8;
+            int tamanhoMinusculo = 1;
+            int tamanhoMaiusculo = 1;
+            int tamanhoNumeros = 1;
+            int tamanhoCaracteresEspeciais = 1;
+
+            // Definição de letras minusculas
+            Regex regTamanhoMinusculo = new Regex("[a-z]");
+
+            // Definição de letras minusculas
+            Regex regTamanhoMaiusculo = new Regex("[A-Z]");
+
+            // Definição de letras minusculas
+            Regex regTamanhoNumeros = new Regex("[0-9]");
+
+            // Definição de letras minusculas
+            Regex regCaracteresEspeciais = new Regex("[^a-zA-Z0-9]");
+
+            // Verificando tamanho minimo
+            if (password.Length < tamanhoMinimo) return false;
+
+            // Verificando caracteres minusculos
+            if (regTamanhoMinusculo.Matches(password).Count < tamanhoMinusculo) return false;
+
+            // Verificando caracteres maiusculos
+            if (regTamanhoMaiusculo.Matches(password).Count < tamanhoMaiusculo) return false;
+
+            // Verificando numeros
+            if (regTamanhoNumeros.Matches(password).Count < tamanhoNumeros) return false;
+
+            // Verificando os diferentes
+            if (regCaracteresEspeciais.Matches(password).Count < tamanhoCaracteresEspeciais) return false;
+
+            return true;
         }
     }
 }

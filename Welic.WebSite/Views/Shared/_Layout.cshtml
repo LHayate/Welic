@@ -1,5 +1,14 @@
 ﻿@using Welic.WebSite.Helpers
 @using Microsoft.AspNet.Identity
+@using Registrators
+@using Welic.Core
+@using Welic.WebSite.Extensions
+
+@{
+    var settings = CacheHelper.Settings;
+    var themeCss = string.Format("~/Themes/{0}/Content/theme.css", CacheHelper.Settings.Theme);
+    var themeJs = string.Format("~/Themes/{0}/Scripts/theme.js", CacheHelper.Settings.Theme);
+}
 
 <!DOCTYPE html>
 <html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
@@ -7,15 +16,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,
 
-        initial-scale=1.0">    
+        initial-scale=1.0">
 
     @* CSS Personalizado *@
     @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+
+    <link href="@Url.Content(themeCss)" rel="stylesheet" />
+
     <!--Import Google Icon Font-->
     @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
     <!-- Compiled and minified CSS -->
-    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))    
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
     <link rel="shortcut icon" href="~/Imagens/logo/LogoWelic12x12.png">
     <title>@ViewBag.Title</title>
@@ -23,69 +36,9 @@
 </head>
 <body class="welic-azul-claro">
     <!-- Navibar-->
-    <div>
-        <nav class="welic z-depth-2" role="navigation">
-            <div class="nav-wrapper container">
-
-                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
-
-                <ul class="right hide-on-med-and-down ">
-                    <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
-
-
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new { email = User.Identity.GetUserName()}, htmlAttributes: new { id = "admin" }) </li>
-                            <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                            </li>
-
-
-                            <li>
-                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                            </li>
-                        }
-                    }
-                    else
-                    {
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) </li>*@
-                    }
-
-                </ul>
-
-                <ul id="nav-mobile" class="side-nav">
-                    <li class="waves-effect waves-light"><a> @Html.ActionLink("Inicio", "Index", "Home")</a></li>
-
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                            </li>
-                            <li>@Html.ActionLink("Admin", "Admin", "Admin", routeValues: new { email = User.Identity.GetUserName() }, htmlAttributes: new { email = User.Identity.GetUserName(), id = "loginLink" }) </li>
-                            <li>
-                                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                            </li>
-                        }
-                    }
-                    else
-                    {//TODO: TIrar comentario antes de publicar real
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-
-                    }
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            </div>
-        </nav>
-    </div>
+    @{
+        Html.RenderAction("NavBar", "Base");
+    }
 
     <!--Footer-->
     <div>
@@ -251,7 +204,10 @@
         </div>
     </footer>
     <!--Scripts-->
-    <!-- Jquery Importado via CDN -->
+@RenderSection("scripts", required: false)
+
+    <script src="@Url.Content(themeJs)" type="text/javascript"></script>
+<!-- Jquery Importado via CDN -->
     @Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
 
     <!-- Compiled and minified JavaScript -->
@@ -267,7 +223,7 @@
         gtag('config', 'UA-124613610-1');
     </script>
 
-@* Scripts de ação *@
+    @* Scripts de ação *@
 
     <!--Side NavBar-->
     <script>
@@ -309,9 +265,10 @@
         });
     </script>
 
+
     <!--RD-Station-->
     <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/loader-scripts/37a2a741-89c6-42f6-b8ce-ef262bd8f2fc-loader.js"></script>
-    
+
 
 </body>
 </html>

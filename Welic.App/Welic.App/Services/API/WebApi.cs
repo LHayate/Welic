@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Plugin.FileUploader;
+using Plugin.FileUploader.Abstractions;
 using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
@@ -48,10 +50,12 @@ namespace Welic.App.Services.API
             
             _HttpClient = new HttpClient
             {
-                //BaseAddress = new Uri("http://localhost:16954/")
                 //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
+                //BaseAddress = new Uri("http://192.168.1.7:3000/api/")
                 //BaseAddress = new Uri("https://welic.app/api/")
-                BaseAddress = new Uri("http://192.168.0.10/api/")
+                //BaseAddress = new Uri("http://192.168.0.10/api/")
+                BaseAddress = new Uri("http://192.168.1.7/api/")
+
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -76,9 +80,7 @@ namespace Welic.App.Services.API
             catch (System.Exception)
             {
                 return;
-            }
-            
-
+            }            
         }
 
         public async Task<bool> AuthenticateAsync(UserDto usuario)
@@ -91,7 +93,7 @@ namespace Welic.App.Services.API
                     {
                         new KeyValuePair<string, string>("grant_type", "password"),
                         new KeyValuePair<string, string>("username", usuario.NickName),
-                        new KeyValuePair<string, string>("password", Criptografia.Criptografia.Decriptar(usuario.Password)),
+                        new KeyValuePair<string, string>("password", usuario.Password),
                     };
                     
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
@@ -141,6 +143,7 @@ namespace Welic.App.Services.API
                 throw new System.Exception("Erro ao tentar buscar dados");
             }
         }
+
         internal async Task<ObservableCollection<T>> GetListAsync<T>(string requestUri)
         {
             try
@@ -213,6 +216,26 @@ namespace Welic.App.Services.API
             var response = await httpClient.DeleteAsync($"{uri}{id}");
 
             return response.IsSuccessStatusCode;
+        }
+
+        internal async Task<string> UploadAsync(string uri, MultipartFormDataContent path)
+        {
+            try
+            {                
+                using (var _response = await _HttpClient.PostAsync(uri, path))
+                {
+                    if (!_response.IsSuccessStatusCode)
+                        throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
+                    return await _response.Content.ReadAsStringAsync();
+                    
+                }
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
         }
        
     }

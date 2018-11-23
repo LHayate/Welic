@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Users.Enums;
+using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Users.Mapeamentos
 {
-    public class GroupUserMap
+    public class GroupUserMap : Entity
     {
         public int Id { get; set; }
         public string Description { get; set; }
         public int Nivel { get; set; }
 
-        public ICollection<UserMap> Users { get; set; }
+        public ICollection<AspNetUser> Users { get; set; }
 
         public GroupUserMap(GroupUserEnum Genum)
         {            

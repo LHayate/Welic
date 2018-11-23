@@ -9,6 +9,7 @@ using Welic.Dominio.Models.Schedule.Repositoryes;
 using Welic.Dominio.Models.Schedule.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Servicos.Schedule
 {
@@ -61,15 +62,15 @@ namespace Servicos.Schedule
                 scheduleFinding.Title = scheduleDto.Title;
                 scheduleFinding.UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id);
                 scheduleFinding.Ativo = true;
+                scheduleFinding.ObjectState = ObjectState.Modified;
 
                 foreach (var userDto in scheduleDto.UserClass)
                 {
-                    var userMap = new UserMap
+                    var userMap = new AspNetUser
                     {
                         Id = userDto.Id,
                         Email = userDto.Email,
-                        Guid = userDto.IdGuid,
-                        FullName = userDto.FullName,
+                        Guid = userDto.Guid,                        
                         PhoneNumber = userDto.PhoneNumber,
                         NickName = userDto.NickName
                         
@@ -90,21 +91,22 @@ namespace Servicos.Schedule
                     Private = scheduleDto.Private,
                     Title = scheduleDto.Title,
                     UserTeacher = _repositoryUser.GetById(scheduleDto.UserTeacher.Id),
-                    Ativo = true
+                    Ativo = true,
+                    ObjectState = ObjectState.Added,
+
 
                 };
 
                 if(scheduleDto.UserClass != null)
                     foreach (var userDto in scheduleDto.UserClass)
                     {
-                        var userMap = new UserMap
+                        var userMap = new AspNetUser
                         {
                             Id = userDto.Id,
                             Email = userDto.Email,
-                            Guid = userDto.IdGuid,
-                            FullName = userDto.FullName,
+                            Guid = userDto.Guid,                            
                             PhoneNumber = userDto.PhoneNumber,
-                            NickName = userDto.NickName
+                            NickName = userDto.NickName,                        
                         };
 
                         scheduleFinding.UserClass.Add(userMap);                    

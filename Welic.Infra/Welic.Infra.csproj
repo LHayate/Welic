@@ -63,10 +63,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
@@ -82,17 +84,50 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Mapeamentos\MappingListingReview.cs" />
+    <Compile Include="Mapeamentos\MappingListingStat.cs" />
+    <Compile Include="Mapeamentos\MappingListingType.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetRole.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetUserClaim.cs" />
+    <Compile Include="Mapeamentos\MappingAspNetUserLogin.cs" />
+    <Compile Include="Mapeamentos\MappingCategory.cs" />
+    <Compile Include="Mapeamentos\MappingCategoryListingType.cs" />
+    <Compile Include="Mapeamentos\MappingCategoryStat.cs" />
+    <Compile Include="Mapeamentos\MappingContentPage.cs" />
+    <Compile Include="Mapeamentos\MappingEmailTemplate.cs" />
     <Compile Include="Mapeamentos\MappingGroupUser.cs" />
-    <Compile Include="Mapeamentos\MapeamentoDispositivos.cs" />
-    <Compile Include="Mapeamentos\MapeamentoLive.cs" />
-    <Compile Include="Mapeamentos\MapeamentoSchedule.cs" />
-    <Compile Include="Mapeamentos\MapeamentoUser.cs" />
+    <Compile Include="Mapeamentos\MappingDispositivos.cs" />
+    <Compile Include="Mapeamentos\MappingLive.cs" />
+    <Compile Include="Mapeamentos\MappingSchedule.cs" />
+    <Compile Include="Mapeamentos\MappingUploads.cs" />
+    <Compile Include="Mapeamentos\MappingUser.cs" />
+    <Compile Include="Mapeamentos\MappingListing.cs" />
+    <Compile Include="Mapeamentos\MappingListingMeta.cs" />
+    <Compile Include="Mapeamentos\MappingListingPicture.cs" />
     <Compile Include="Mapeamentos\MappingMenu.cs" />
     <Compile Include="Mapeamentos\MappingNews.cs" />
     <Compile Include="Mapeamentos\MappingProgram.cs" />
     <Compile Include="Mapeamentos\MappingProgramUser.cs" />
+    <Compile Include="Mapeamentos\MappingMessage.cs" />
+    <Compile Include="Mapeamentos\MappingMessageParticipant.cs" />
+    <Compile Include="Mapeamentos\MappingMessageReadState.cs" />
+    <Compile Include="Mapeamentos\MappingMessageThread.cs" />
+    <Compile Include="Mapeamentos\MappingMetaCategory.cs" />
+    <Compile Include="Mapeamentos\MappingMetaField.cs" />
+    <Compile Include="Mapeamentos\MappingOrder.cs" />
+    <Compile Include="Mapeamentos\MappingPicture.cs" />
+    <Compile Include="Mapeamentos\MappingSettingDictionary.cs" />
+    <Compile Include="Mapeamentos\MappingSetting.cs" />
+    <Compile Include="Mapeamentos\MappingStripeConnect.cs" />
+    <Compile Include="Mapeamentos\MappingStripeTransaction.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\ConfigurationInstall.cs" />
+    <Compile Include="Migrations\ConnectionStringHelper.cs" />
+    <Compile Include="Migrations\CreateAndMigrateDatabaseInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StoredProcedures\AuthContext.cs" />
+    <Compile Include="StoredProcedures\IStoredProcedures.cs" />
     <Compile Include="UnidadeTrabalho.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +139,148 @@
       <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
       <Name>Welic.Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagens\Andre.png" />
+    <Content Include="Imagens\backgroundParallax.jpg" />
+    <Content Include="Imagens\Banner1 01.png" />
+    <Content Include="Imagens\Banner2 02.png" />
+    <Content Include="Imagens\Banner2 03.png" />
+    <Content Include="Imagens\Bkg-elearning.jpg" />
+    <Content Include="Imagens\bkg_montanha.jpg" />
+    <Content Include="Imagens\calendario-2018.png" />
+    <Content Include="Imagens\Ederson.jpg" />
+    <Content Include="Imagens\elearning.jpg" />
+    <Content Include="Imagens\Icon_Facebook.png" />
+    <Content Include="Imagens\icon_likedin.png" />
+    <Content Include="Imagens\images\avatar\avatar-1.png" />
+    <Content Include="Imagens\images\avatar\avatar-10.png" />
+    <Content Include="Imagens\images\avatar\avatar-11.png" />
+    <Content Include="Imagens\images\avatar\avatar-12.png" />
+    <Content Include="Imagens\images\avatar\avatar-13.png" />
+    <Content Include="Imagens\images\avatar\avatar-14.png" />
+    <Content Include="Imagens\images\avatar\avatar-15.png" />
+    <Content Include="Imagens\images\avatar\avatar-16.png" />
+    <Content Include="Imagens\images\avatar\avatar-17.png" />
+    <Content Include="Imagens\images\avatar\avatar-2.png" />
+    <Content Include="Imagens\images\avatar\avatar-3.png" />
+    <Content Include="Imagens\images\avatar\avatar-4.png" />
+    <Content Include="Imagens\images\avatar\avatar-5.png" />
+    <Content Include="Imagens\images\avatar\avatar-6.png" />
+    <Content Include="Imagens\images\avatar\avatar-7.png" />
+    <Content Include="Imagens\images\avatar\avatar-8.png" />
+    <Content Include="Imagens\images\avatar\avatar-9.png" />
+    <Content Include="Imagens\images\cards\applewatch.png" />
+    <Content Include="Imagens\images\cards\camara.png" />
+    <Content Include="Imagens\images\cards\headphones-2.png" />
+    <Content Include="Imagens\images\cards\headphones.png" />
+    <Content Include="Imagens\images\cards\ipad.png" />
+    <Content Include="Imagens\images\cards\iphone-8.png" />
+    <Content Include="Imagens\images\cards\iphone.png" />
+    <Content Include="Imagens\images\cards\iphonec.png" />
+    <Content Include="Imagens\images\cards\macbook.png" />
+    <Content Include="Imagens\images\cards\nike.png" />
+    <Content Include="Imagens\images\cards\puma.png" />
+    <Content Include="Imagens\images\cards\reebok.png" />
+    <Content Include="Imagens\images\cards\shoes.png" />
+    <Content Include="Imagens\images\cards\watch.png" />
+    <Content Include="Imagens\images\Community\cover.jpg" />
+    <Content Include="Imagens\images\Community\favicon.jpg" />
+    <Content Include="Imagens\images\Community\logo.png" />
+    <Content Include="Imagens\images\favicon\apple-touch-icon-152x152.png" />
+    <Content Include="Imagens\images\favicon\favicon-32x32.png" />
+    <Content Include="Imagens\images\favicon\mstile-144x144.png" />
+    <Content Include="Imagens\images\favicon\Oapple-touch-icon-152x152.png" />
+    <Content Include="Imagens\images\favicon\Ofavicon-32x32.png" />
+    <Content Include="Imagens\images\favicon\Omstile-144x144.png" />
+    <Content Include="Imagens\images\gallary\1.png" />
+    <Content Include="Imagens\images\gallary\10.png" />
+    <Content Include="Imagens\images\gallary\11.png" />
+    <Content Include="Imagens\images\gallary\12.png" />
+    <Content Include="Imagens\images\gallary\13.png" />
+    <Content Include="Imagens\images\gallary\14.png" />
+    <Content Include="Imagens\images\gallary\15.png" />
+    <Content Include="Imagens\images\gallary\16.png" />
+    <Content Include="Imagens\images\gallary\17.png" />
+    <Content Include="Imagens\images\gallary\18.png" />
+    <Content Include="Imagens\images\gallary\19.png" />
+    <Content Include="Imagens\images\gallary\2.png" />
+    <Content Include="Imagens\images\gallary\20.png" />
+    <Content Include="Imagens\images\gallary\21.png" />
+    <Content Include="Imagens\images\gallary\22.png" />
+    <Content Include="Imagens\images\gallary\23.png" />
+    <Content Include="Imagens\images\gallary\24.png" />
+    <Content Include="Imagens\images\gallary\25.png" />
+    <Content Include="Imagens\images\gallary\26.png" />
+    <Content Include="Imagens\images\gallary\27.png" />
+    <Content Include="Imagens\images\gallary\28.png" />
+    <Content Include="Imagens\images\gallary\29.png" />
+    <Content Include="Imagens\images\gallary\3.png" />
+    <Content Include="Imagens\images\gallary\30.png" />
+    <Content Include="Imagens\images\gallary\31.png" />
+    <Content Include="Imagens\images\gallary\32.png" />
+    <Content Include="Imagens\images\gallary\33.png" />
+    <Content Include="Imagens\images\gallary\4.png" />
+    <Content Include="Imagens\images\gallary\5.png" />
+    <Content Include="Imagens\images\gallary\6.png" />
+    <Content Include="Imagens\images\gallary\7.png" />
+    <Content Include="Imagens\images\gallary\8.png" />
+    <Content Include="Imagens\images\gallary\9.png" />
+    <Content Include="Imagens\images\icon\apple-watch.png" />
+    <Content Include="Imagens\images\icon\bowling.png" />
+    <Content Include="Imagens\images\icon\football.png" />
+    <Content Include="Imagens\images\icon\laptop.png" />
+    <Content Include="Imagens\images\icon\map-marker.png" />
+    <Content Include="Imagens\images\icon\printer.png" />
+    <Content Include="Imagens\images\Listing\00000001.jpg" />
+    <Content Include="Imagens\images\Listing\00000002.jpg" />
+    <Content Include="Imagens\images\Listing\00000003.jpg" />
+    <Content Include="Imagens\images\Listing\00000004.jpg" />
+    <Content Include="Imagens\images\Listing\00000005.jpg" />
+    <Content Include="Imagens\images\Listing\00000006.jpg" />
+    <Content Include="Imagens\images\Listing\00000007.jpg" />
+    <Content Include="Imagens\images\Listing\00000008.jpg" />
+    <Content Include="Imagens\images\Listing\00000009.jpg" />
+    <Content Include="Imagens\images\logo\generic-logo.png" />
+    <Content Include="Imagens\images\logo\login-logo.png" />
+    <Content Include="Imagens\images\logo\materialize-logo-color.png" />
+    <Content Include="Imagens\images\logo\materialize-logo.png" />
+    <Content Include="Imagens\images\misch\home_mockups_1.png" />
+    <Content Include="Imagens\images\misch\signature-scan.png" />
+    <Content Include="Imagens\images\misch\style-typography.png" />
+    <Content Include="Imagens\images\Sample\Community\cover.jpg" />
+    <Content Include="Imagens\images\Sample\Community\favicon.jpg" />
+    <Content Include="Imagens\images\Sample\Community\logo.png" />
+    <Content Include="Imagens\images\Sample\Listing\00000001.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000002.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000003.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000004.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000005.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000006.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000007.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000008.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000009.jpg" />
+    <Content Include="Imagens\images\Sample\Profile\admin.jpg" />
+    <Content Include="Imagens\JJMC1582.JPG" />
+    <Content Include="Imagens\Joel.jpg" />
+    <Content Include="Imagens\logo\Logo Welic - Perfil 2.png" />
+    <Content Include="Imagens\logo\Logo Welic - Perfil 3.png" />
+    <Content Include="Imagens\logo\Logo Welic - Perfil.png" />
+    <Content Include="Imagens\logo\Logo Welic 3.png" />
+    <Content Include="Imagens\logo\Logo Welic.png" />
+    <Content Include="Imagens\logo\LogoWelic1000x1000.png" />
+    <Content Include="Imagens\logo\LogoWelic128x128.png" />
+    <Content Include="Imagens\logo\LogoWelic12x12.png" />
+    <Content Include="Imagens\logo\LogoWelic300x300.png" />
+    <Content Include="Imagens\logo\LogoWelic32x32.png" />
+    <Content Include="Imagens\logo\LogoWelic600x600.png" />
+    <Content Include="Imagens\logo\LogoWelic72x72.png" />
+    <Content Include="Imagens\logo\Logo_Welic.png" />
+    <Content Include="Imagens\logo\Logo_Welic_2.png" />
+    <Content Include="Imagens\Lucas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Imagens\images\Profile\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

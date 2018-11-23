@@ -9,6 +9,7 @@ using Welic.Dominio.Models.News.Dtos;
 using Welic.Dominio.Models.News.Maps;
 using Welic.Dominio.Models.News.Repositoryes;
 using Welic.Dominio.Models.News.Services;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
 namespace Servicos.News
 {
@@ -29,6 +30,7 @@ namespace Servicos.News
                 newsEncontrado.Url = newsDto.Url;
                 newsEncontrado.Description = newsDto.Description;
                 newsEncontrado.Title = newsDto.Title;
+                newsEncontrado.ObjectState = ObjectState.Modified;
             }
             else
             {
@@ -38,7 +40,8 @@ namespace Servicos.News
                     Date = newsDto.Date,
                     Url = newsDto.Url,
                     Description = newsDto.Description,
-                    Title = newsDto.Title
+                    Title = newsDto.Title,
+                    ObjectState = ObjectState.Added,
                 };
             }
 

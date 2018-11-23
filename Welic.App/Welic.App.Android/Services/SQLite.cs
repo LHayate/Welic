@@ -8,12 +8,12 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Welic.App.Droid.Services.SQLite))]
 namespace Welic.App.Droid.Services
 {
-    public class SQLite:ISQLite
+    public class SQLite : ISQLite
     {
         public SQLiteConnection GetConnection()
         {
             SQLitePCL.Batteries.Init();
-            var sqliteFilename = "WelicDb.db3";
+            var sqliteFilename = "Welicdb.db3";
             string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             var path = Path.Combine(documentsPath, sqliteFilename);
             var conn = new SQLiteConnection(path);

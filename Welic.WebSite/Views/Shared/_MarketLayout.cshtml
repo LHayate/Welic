@@ -1,0 +1,64 @@
+﻿@using Microsoft.Practices.Unity;
+@using Microsoft.Practices.Unity.Configuration;
+@using i18n
+@using Microsoft.AspNet.Identity
+@using Registrators
+@using Welic.Core
+@using Welic.WebSite.Extensions
+@using Welic.WebSite.Helpers
+@using Welic.WebSite.Utilities
+
+@{
+    var settings = CacheHelper.Settings;
+    var themeCss = string.Format("~/Themes/{0}/Content/theme.css", CacheHelper.Settings.Theme);
+    var themeJs = string.Format("~/Themes/{0}/Scripts/theme.js", CacheHelper.Settings.Theme);
+}
+
+<!DOCTYPE html>
+<html lang="@CultureHelper.GetCurrentNeutralCulture()" dir="@(CultureHelper.IsRighToLeft() ? "rtl" : "ltr")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,        initial-scale=1.0">
+    @RenderSection("styles", required: false)
+    
+    @* CSS Personalizado *@
+    @Styles.Render("~/Content/custom.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <link href="@Url.Content(themeCss)" rel="stylesheet" />
+    <!--Import Google Icon Font-->
+    @Styles.Render("https://fonts.googleapis.com/icon?family=Material+Icons" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <!-- Compiled and minified CSS -->
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+    <link rel="shortcut icon" href="~/Imagens/logo/LogoWelic12x12.png">
+    <title>@ViewBag.Title</title>
+</head>
+
+<body>
+
+    <!-- Navibar-->
+@{
+    Html.RenderAction("NavBar", "Base");
+}
+
+    <!--Footer-->
+    <div>
+        @RenderBody()
+
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+    @Scripts.Render("~/bundles/js")
+
+    <!-- Include Theme JS -->
+    <script src="@Url.Content(themeJs)" type="text/javascript"></script>
+<script src="~/Scripts/custom.js" type="text/javascript"></script>
+<!-- Jquery Importado via CDN -->
+@Scripts.Render("https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+
+<!-- Compiled and minified JavaScript -->
+@Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js" + (CultureHelper.IsRighToLeft() ? "-rtl" : ""))
+</body>
+</html>

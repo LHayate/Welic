@@ -45,6 +45,7 @@ namespace Welic.App.Droid
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_message = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_message;
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_reinstall = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_reinstall;
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_title = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_title;
+			global::ModernHttpClient.Resource.String.library_name = global::Welic.App.Droid.Resource.String.library_name;
 			global::PCLCrypto.Resource.String.ApplicationName = global::Welic.App.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::Welic.App.Droid.Resource.String.Hello;
 			global::Xamarin.Auth.Resource.Animation.slide_in_right = global::Welic.App.Droid.Resource.Animation.slide_in_right;

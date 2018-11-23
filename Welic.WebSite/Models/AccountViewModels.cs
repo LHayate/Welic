@@ -81,7 +81,13 @@ namespace Welic.WebSite.Models
         public string ConfirmPassword { get; set; }
 
         public GroupUserDto GroupUser { get; set; }
-        public virtual IEnumerable<Dominio.Models.Users.Dtos.GroupUserDto> GroupUserEnum { get; set; }        
+        public virtual IEnumerable<Dominio.Models.Users.Dtos.GroupUserDto> GroupUserEnum { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
     }
 

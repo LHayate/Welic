@@ -12,26 +12,78 @@ using Welic.App.Services.ServiceViews;
 namespace Welic.App.Models.Usuario
 {
     public class UserDto
-    {
-               
+    {               
         [SQLite.PrimaryKey]
-        public int Id { get; set; }
+        public string Id { get; set; }
         public Guid Guid { get; set; }
-        public string Email { get; set; }         
-        public bool EmailConfirmed { get; set; }
+        public string Email { get; set; }                 
         public string NickName { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
-        public string Profession { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PhoneNumberConfirmed { get; set; }                            
+        public string Profession { get; set; }                            
         public byte[] ImagemPerfil { get; set; }        
-        public DateTime LastAcess { get; set; }
+        public DateTime LastAccessDate { get; set; }
+
+        public DateTime RegisterDate { get; set; }
+
+        public string RegisterIP { get; set; }
+        
+        public string LastAccessIP { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
+
+        public bool Disabled { get; set; }
+
+        public bool AcceptEmail { get; set; }
+
+        public string Gender { get; set; }
+
+        public int LeadSourceID { get; set; }
+
+        public double Rating { get; set; }
+        public byte[] ImagePerfil { get; set; }
+        public string Identity { get; set; }
+        
+        /// <summary>True if the email is confirmed, default is false</summary>
+        public virtual bool EmailConfirmed { get; set; }        
+
+        /// <summary>
+        ///     A random value that should change whenever a users credentials have changed (password changed, login removed)
+        /// </summary>
+        public virtual string SecurityStamp { get; set; }
+
+        /// <summary>PhoneNumber for the user</summary>
+        public virtual string PhoneNumber { get; set; }
+
+        /// <summary>
+        ///     True if the phone number is confirmed, default is false
+        /// </summary>
+        public virtual bool PhoneNumberConfirmed { get; set; }
+
+        /// <summary>Is two factor enabled for the user</summary>
+        public virtual bool TwoFactorEnabled { get; set; }
+
+        /// <summary>
+        ///     DateTime in UTC when lockout ends, any time in the past is considered not locked out.
+        /// </summary>
+        public virtual DateTime? LockoutEndDateUtc { get; set; }
+
+        /// <summary>Is lockout enabled for this user</summary>
+        public virtual bool LockoutEnabled { get; set; }
+
+        /// <summary>
+        ///     Used to record failures for the purposes of lockout
+        /// </summary>
+        public virtual int AccessFailedCount { get; set; }
+
+        
+
 
         public bool RememberMe { get; set; } //Apenas para Controle de SQLite
         public bool Synced { get; set; } //false to not sinced - true sinced        
+
 
         private DatabaseManager _dbManager;
         public UserDto()
@@ -42,7 +94,7 @@ namespace Welic.App.Models.Usuario
         public async Task<bool> RegisterUserManager(UserDto user )
         {           
             try
-            {               
+            {
                 //user = userBanco.Result;
 
                 Id = user.Id;
@@ -53,21 +105,19 @@ namespace Welic.App.Models.Usuario
                 FirstName = user.FirstName;
                 LastName = user.LastName;
                 FullName = user.FullName;
-                Profession = user.Profession;                
-                Password = user.Password;                                
+                Profession = user.Profession;
+                Password = user.Password;
                 ImagemPerfil = user.ImagemPerfil;
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed;                  
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed;
                 Synced = false;
-                LastAcess = DateTime.Now;
-                
-                
-                
-                //Insere o registro                
-                
+                LastAccessDate = DateTime.Now;
+                RememberMe = true;
+
+                //Insere o registro                                
                 try
                 {
-                   SaveUser(this);
-                                        
+                    SaveUser(this);
+                    
                     return true;
                 }
                 catch (System.Exception e)
@@ -105,10 +155,10 @@ namespace Welic.App.Models.Usuario
                 {
                     if (!item.Synced)
                     {                        
-                        item.Password = Criptografia.Decriptar(item.Password);
+                        //item.Password = Criptografia.Decriptar(item.Password);
                         var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
 
-                        Synced = true;
+                        Synced = true;                              
                         SaveUser(user);
                     }
                 }
@@ -155,7 +205,7 @@ namespace Welic.App.Models.Usuario
             _dbManager = new DatabaseManager();
             var usu = _dbManager.database.Table<UserDto>()
                 .Where(x => x.RememberMe) 
-                .OrderByDescending(c => c.LastAcess)
+                .OrderByDescending(c => c.LastAccessDate)
                 .ToList();
             return usu.FirstOrDefault();
         }        
@@ -192,7 +242,26 @@ namespace Welic.App.Models.Usuario
         {
             _dbManager = new DatabaseManager();
 
-            _dbManager.database.InsertOrReplace(user);
+            var usersalvo = new UserDto()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                NickName = user.NickName,
+                RememberMe = true,
+                LastName = user.LastName,
+                LastAccessDate = user.LastAccessDate,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                FullName = user.FullName,
+                Guid = user.Guid,
+                ImagemPerfil = user.ImagemPerfil,
+                Password = user.Password,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                Profession = user.Profession,
+                Synced = this.Synced,
+            };                       
+            _dbManager.database.InsertOrReplace(usersalvo);
             _dbManager.database.Close();
         }
 
@@ -200,7 +269,7 @@ namespace Welic.App.Models.Usuario
         {            
             try
             {                                                            
-                var user = await WebApi.Current.PostAsync<UserDto>("user/save", userDto);
+                var user = await WebApi.Current.PostAsync<UserDto>("user/Create", userDto);
 
                 Synced = true;
                 SaveUser(user); 
@@ -213,5 +282,7 @@ namespace Welic.App.Models.Usuario
                 throw new System.Exception("Error: In Register this User");
             }
         }
+
+        
     }  
 }

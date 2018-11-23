@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
+using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Lives.Maps
 {
-    public class LiveMap
+    public class LiveMap : Entity
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -20,7 +21,7 @@ namespace Welic.Dominio.Models.Lives.Maps
         public byte[] Print { get; set; }
         public string UrlDestino { get; set; }
                 
-        public UserMap Author { get; set; }
+        public AspNetUser Author { get; set; }
 
         //public ScheduleMap Lives { get; set; }
     }

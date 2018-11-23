@@ -1,4 +1,5 @@
-﻿using Welic.Dominio.Validacao;
+﻿using Welic.Dominio.Utilitarios.Entidades;
+using Welic.Dominio.Validacao;
 
 namespace Welic.Dominio.Models.Users.Scope
 {
@@ -8,8 +9,8 @@ namespace Welic.Dominio.Models.Users.Scope
         {
             return Validador.SeSatisfazPor(
                 Validador.AssegurarQueIgual(user.Email.ToUpper(), nomeUsuario.ToUpper(),
-                    "Usuário ou Senha inválidos."),
-                Validador.AssegurarQueIgual(user.Password, senha, "Usuário ou Senha inválidos."));
+                    "Usuário inválido."),
+                Validador.AssegurarQueVerdade(Criptografia.VerifyHashedPassword(user.Password,senha), "Senha inválida."));
         }
     }
 }

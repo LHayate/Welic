@@ -28,7 +28,8 @@ namespace Welic.Dominio.Models.Menu.Adapter
                 IconMenu = map.IconMenu,
                 MenuDadId = map.DadId,
                 Controller = map.Controller,
-                Action = map.Action                
+                Action = map.Action,
+                //GroupAcess = map.GroupAcess
             };            
             return dto;
         }
@@ -46,7 +47,8 @@ namespace Welic.Dominio.Models.Menu.Adapter
                 Id = dto.Id,
                 Title = dto.Title,
                 IconMenu = dto.IconMenu,
-                Controller = dto.Controller,                
+                Controller = dto.Controller,   
+                                //GroupAcess = dto.GroupAcess
             };
             
             return entity;

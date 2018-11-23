@@ -25,60 +25,9 @@
 </head>
 <body class="welic-azul-claro">
     <!-- Navibar-->
-    <div>
-        <nav class="welic z-depth-2" role="navigation">
-            <div class="nav-wrapper container">
-
-                <a id="logo-container" href="@Url.Action("Index", "Home")" class="brand-logo center-align"><img src="~/Imagens/logo/Logo_Welic.png" class="container" /></a>
-
-                <ul class="right hide-on-med-and-down ">
-                    <li class="waves-effect waves-light welic-menu"><a> @Html.ActionLink(Resources.Inicio, "Index", "Home")</a></li>
-
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm(@Resources.LogOff, "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <li>
-                                @Html.ActionLink("Hello" + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                            </li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        }
-                    }
-                    else
-                    {
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-                    }
-
-                </ul>
-
-                <ul id="nav-mobile" class="side-nav">
-                    <li class="waves-effect waves-light"><a> @Html.ActionLink(@Resources.Inicio, "Index", "Home")</a></li>
-
-                    @if (Request.IsAuthenticated)
-                    {
-                        using (Html.BeginForm(@Resources.LogOff, "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <li>
-                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                            </li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        }
-                    }
-                    else
-                    {
-
-                        @*<li>@Html.ActionLink(@Resources.Register, "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li>@Html.ActionLink(@Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
-
-                    }
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            </div>
-        </nav>
-    </div>
+@{
+    Html.RenderAction("NavBar", "Base");
+}
 
     @RenderBody()
 

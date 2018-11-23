@@ -1,31 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using ImageProcessor;
+using ImageProcessor.Imaging.Formats;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using PagedList;
+using Registrators;
+using Servicos.MarketPlace;
 using Unity;
+using Welic.Dominio.Core.Web;
+using Welic.Dominio.Enumerables;
+using Welic.Dominio.Models.Marketplaces.Entityes;
+using Welic.Dominio.Models.Marketplaces.Services;
+using Welic.Dominio.Patterns.Pattern.Ef6;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.WebSite.Models;
+using Welic.WebSite.Utilities;
 
 namespace Welic.WebSite.Controllers
 {
     [Authorize]
     public class ManageController : BaseController
     {
+        #region Fields
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
-        {
-        }
+        private readonly ISettingService _settingService;
+        private readonly ISettingDictionaryService _settingDictionaryService;
+        private readonly ICategoryService _categoryService;
+        private readonly IListingService _listingService;
+        private readonly IListingStatService _listingStatservice;
+        private readonly IListingPictureService _ListingPictureservice;
+        private readonly IPictureService _pictureService;
+        private readonly IOrderService _orderService;
+        private readonly ICustomFieldService _customFieldService;
+        private readonly ICustomFieldCategoryService _customFieldCategoryService;
+        private readonly ICustomFieldListingService _customFieldListingService;
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        private readonly IMessageThreadService _messageThreadService;
+        private readonly IMessageService _messageService;
+        private readonly IMessageParticipantService _messageParticipantService;
+        private readonly IMessageReadStateService _messageReadStateService;
+
+        private readonly DataCacheService _dataCacheService;
+        private readonly SqlDbService _sqlDbService;
+
+        private readonly IUnitOfWorkAsync _unitOfWorkAsync;
 
         public ApplicationSignInManager SignInManager
         {
@@ -33,9 +62,9 @@ namespace Welic.WebSite.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -50,7 +79,56 @@ namespace Welic.WebSite.Controllers
                 _userManager = value;
             }
         }
+        #endregion
 
+        #region Constructors
+        public ManageController(
+            IUnitOfWorkAsync unitOfWorkAsync,
+            ISettingService settingService,
+            ICategoryService categoryService,
+            IListingService listingService,
+            IPictureService pictureService,
+            IListingPictureService ListingPictureservice,
+            IOrderService orderService,
+            ICustomFieldService customFieldService,
+            ICustomFieldCategoryService customFieldCategoryService,
+            ICustomFieldListingService customFieldListingService,
+            ISettingDictionaryService settingDictionaryService,
+            IListingStatService listingStatservice,
+            IMessageService messageService,
+            IMessageThreadService messageThreadService,
+            IMessageParticipantService messageParticipantService,
+            IMessageReadStateService messageReadStateService,
+            DataCacheService dataCacheService,
+            SqlDbService sqlDbService)
+        {
+            _settingService = settingService;
+            _settingDictionaryService = settingDictionaryService;
+
+            _categoryService = categoryService;
+            _listingService = listingService;
+            _pictureService = pictureService;
+            _ListingPictureservice = ListingPictureservice;
+            _orderService = orderService;
+
+            _messageService = messageService;
+            _messageThreadService = messageThreadService;
+            _messageParticipantService = messageParticipantService;
+            _messageReadStateService = messageReadStateService;
+
+            _customFieldService = customFieldService;
+            _customFieldCategoryService = customFieldCategoryService;
+            _customFieldListingService = customFieldListingService;
+            _listingStatservice = listingStatservice;
+
+            _dataCacheService = dataCacheService;
+            _sqlDbService = sqlDbService;
+
+            _unitOfWorkAsync = unitOfWorkAsync;
+        }
+        #endregion
+
+        #region Methods - MVC5 default
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -63,6 +141,8 @@ namespace Welic.WebSite.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
+
+            return RedirectToAction("Dashboard");
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
@@ -191,14 +271,12 @@ namespace Welic.WebSite.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", "[[[Failed to verify phone]]]");
             return View(model);
         }
 
         //
-        // POST: /Manage/RemovePhoneNumber
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: /Manage/RemovePhoneNumber
         public async Task<ActionResult> RemovePhoneNumber()
         {
             var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
@@ -307,7 +385,6 @@ namespace Welic.WebSite.Controllers
         public ActionResult LinkLogin(string provider)
         {
             // Request a redirect to the external login provider to link a login for the current user
-            
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
@@ -324,6 +401,170 @@ namespace Welic.WebSite.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
+        /// <summary>
+        /// http://stackoverflow.com/questions/6541302/thread-messaging-system-database-schema-design
+        /// </summary>
+        /// <param name="searchText"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> Messages(string searchText, int? page)
+        {
+            if (searchText != null)
+            {
+                page = 1;
+            }
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
+            var userId = User.Identity.GetUserId();
+            var participants = await _messageParticipantService.Query(x => x.UserID == userId).SelectAsync();
+
+            // Get messages for the current user
+            var threadIds = participants.Select(x => x.MessageThreadID).ToList();
+
+            var messageThreads = await _messageThreadService
+                .Query(x => threadIds.Contains(x.ID))
+                .Include(x => x.Messages)
+                .Include(x => x.Messages.Select(y => y.AspNetUser))
+                .Include(x => x.Messages.Select(y => y.MessageReadStates))
+                .Include(x => x.MessageParticipants)
+                .Include(x => x.MessageParticipants.Select(y => y.AspNetUser))
+                .SelectAsync();
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                messageThreads = messageThreads.Where(x => x.Messages.Where(y => y.Body.Contains(searchText)).Any());
+            }
+
+            messageThreads = messageThreads.OrderByDescending(x => x.Messages.Max(y => y.Created));
+
+            var model = messageThreads.ToPagedList(pageNumber, pageSize);
+
+            return View(model);
+        }
+
+        /// <summary>
+        /// return messages sent from a specific user to the current user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> Message(int threadId)
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+
+            var messageThread = await _messageThreadService
+                .Query(x => x.ID == threadId)
+                .Include(x => x.Messages)
+                .Include(x => x.Messages.Select(y => y.AspNetUser))
+                .Include(x => x.Messages.Select(y => y.MessageReadStates))
+                .Include(x => x.MessageParticipants)
+                .Include(x => x.MessageParticipants.Select(y => y.AspNetUser))
+                .Include(x => x.Listing)
+                .Include(x => x.Listing.ListingReviews)
+                .Include(x => x.Listing.ListingPictures)
+                .Include(x => x.Listing.ListingType)
+                .SelectAsync();
+
+            var model = messageThread.FirstOrDefault();
+
+            // Redirect to inbox if the thread doesn't contain anything
+            if (model == null)
+                return RedirectToAction("Messages");
+
+            // Redirect to inbox if the thread doesn't contain current user
+            if (!model.MessageParticipants.Any(x => x.UserID == userIdCurrent))
+                return RedirectToAction("Messages");
+
+            // Update message read states
+            var messageReadStates = await _messageReadStateService
+                .Query(x => x.UserID == userIdCurrent && !x.ReadDate.HasValue && x.Message.MessageThreadID == threadId)
+                .SelectAsync();
+
+            foreach (var messageReadState in messageReadStates)
+            {
+                messageReadState.ReadDate = DateTime.Now;
+                messageReadState.ObjectState = ObjectState.Modified;
+
+                _messageReadStateService.Update(messageReadState);
+            }
+
+            await _unitOfWorkAsync.SaveChangesAsync();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Message(int threadId, string messageText)
+        {
+            var userIdCurrent = User.Identity.GetUserId();
+
+            var messageParticipants = await _messageParticipantService.Query(x => x.MessageThreadID == threadId).SelectAsync();
+            if (!messageParticipants.Any(x => x.UserID == userIdCurrent))
+                return RedirectToAction("Messages");
+
+            // Add message
+            var message = new Message()
+            {
+                MessageThreadID = threadId,
+                UserFrom = userIdCurrent,
+                Body = messageText,
+                ObjectState = ObjectState.Added,
+                Created = DateTime.Now,
+                LastUpdated = DateTime.Now,
+            };
+
+            _messageService.Insert(message);
+
+            await _unitOfWorkAsync.SaveChangesAsync();
+
+            // Add message readstate
+            foreach (var messageParticipant in messageParticipants.Where(x => x.UserID != userIdCurrent))
+            {
+                _messageReadStateService.Insert(new MessageReadState()
+                {
+                    MessageID = message.ID,
+                    UserID = messageParticipant.UserID,
+                    ObjectState = ObjectState.Added
+                });
+            }
+
+            await _unitOfWorkAsync.SaveChangesAsync();
+
+            TempData[TempDataKeys.UserMessage] = "[[[Message is sent.]]]";
+
+            return RedirectToAction("Message", new { threadId = threadId });
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> MessageAction(List<int> messageIds, int actionType)
+        {
+            var action = (Enum_MessageAction)actionType;
+
+            switch (action)
+            {
+                case Enum_MessageAction.MarkAsRead:
+                    var messageReadStates = await _messageReadStateService
+                        .Query(x => messageIds.Contains(x.MessageID) && !x.ReadDate.HasValue)
+                        .SelectAsync();
+
+                    foreach (var messageReadState in messageReadStates)
+                    {
+                        messageReadState.ReadDate = DateTime.Now;
+                        _messageReadStateService.Update(messageReadState);
+                    }
+
+                    await _unitOfWorkAsync.SaveChangesAsync();
+
+                    break;
+                case Enum_MessageAction.None:
+                default:
+                    break;
+            }
+
+            return RedirectToAction("Messages");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -334,8 +575,85 @@ namespace Welic.WebSite.Controllers
 
             base.Dispose(disposing);
         }
+        #endregion
 
-#region Helpers
+        #region Methods
+        public async Task<ActionResult> Dashboard(string searchText)
+        {
+            var userId = User.Identity.GetUserId();
+            var items = await _listingService.Query(x => x.UserID == userId).Include(x => x.ListingPictures).SelectAsync();
+
+            // Filter string
+            if (!string.IsNullOrEmpty(searchText))
+                items = items.Where(x => x.Title.ToLower().Contains(searchText.ToLower().ToString()));
+
+            var itemsModel = new List<ListingItemModel>();
+            foreach (var item in items.OrderByDescending(x => x.Created))
+            {
+                itemsModel.Add(new ListingItemModel()
+                {
+                    ListingCurrent = item,
+                    UrlPicture = item.ListingPictures.Count == 0 ? ImageHelper.GetListingImagePath(0) : ImageHelper.GetListingImagePath(item.ListingPictures.OrderBy(x => x.Ordering).FirstOrDefault().PictureID)
+                });
+            }
+
+            var model = new ListingModel()
+            {
+                Listings = itemsModel
+            };
+
+            return View(model);
+        }
+
+        public async Task<ActionResult> UserProfile()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var user = await UserManager.FindByIdAsync(userId);
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProfileUpdate(ApplicationUser user, HttpPostedFileBase file)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var userExisting = await UserManager.FindByIdAsync(userId);
+
+            userExisting.FirstName = user.FirstName;
+            userExisting.LastName = user.LastName;
+            userExisting.Gender = user.Gender;
+            userExisting.PhoneNumber = user.PhoneNumber;
+
+            await UserManager.UpdateAsync(userExisting);
+
+            if (file != null)
+            {
+                // Format is automatically detected though can be changed.
+                ISupportedImageFormat format = new JpegFormat { Quality = 90 };
+                Size size = new Size(300, 300);
+
+                //https://naimhamadi.wordpress.com/2014/06/25/processing-images-in-c-easily-using-imageprocessor/
+                // Initialize the ImageFactory using the overload to preserve EXIF metadata.
+                using (ImageFactory imageFactory = new ImageFactory(preserveExifData: true))
+                {
+                    var path = Path.Combine(Server.MapPath("~/images/profile"), string.Format("{0}.{1}", userId, "jpg"));
+
+                    // Load, resize, set the format and quality and save an image.
+                    imageFactory.Load(file.InputStream)
+                        .Resize(size)
+                        .Format(format)
+                        .Save(path);
+                }
+            }
+
+            return RedirectToAction("UserProfile", "Manage");
+        }
+        #endregion
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -386,6 +704,6 @@ namespace Welic.WebSite.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

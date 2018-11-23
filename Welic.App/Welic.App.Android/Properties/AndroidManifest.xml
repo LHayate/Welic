@@ -23,6 +23,7 @@
 	<uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.CAMERA" />
 	<application android:label="Welic App" android:icon="@drawable/LogoWelic72x72">
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"></meta-data>

@@ -16,5 +16,6 @@ namespace Welic.App.Exception
         {
             Content = content;
         }
+        
     }
 }

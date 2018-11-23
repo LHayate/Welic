@@ -15,7 +15,8 @@
                 <Entry Text="{Binding Title}"                                                                                       
                        BackgroundColor="Transparent"
                        ReturnType="Next"
-                       IsSpellCheckEnabled="True">
+                       IsSpellCheckEnabled="True"
+                       x:Name="Title">
                     <Entry.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -33,6 +34,7 @@
                         IsSpellCheckEnabled="True"
                         AutoSize="TextChanges"  
                         MaxLength="200"
+                        x:Name="Description"
                     >
                     <Editor.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
@@ -46,33 +48,59 @@
                 <Entry Placeholder="Price $" BackgroundColor="Transparent" 
                        Keyboard="Numeric" 
                        Text="{Binding Price}"
+                       x:Name="Price"
                        />
                 <!--<BoxView HeightRequest="1" BackgroundColor="#BDBDBD" Margin="0,1,0,1"/>-->
                 <Entry Placeholder="Themes" BackgroundColor="Transparent" 
                        Keyboard="Text" 
                        Text="{Binding Themes}"
+                       x:Name="Theme"
 
                 />
-                <Extends:CheckBox DefaultText="Chat"
-                                  HorizontalOptions="FillAndExpand"
-                                  Checked="{Binding Chat}"
-                                  />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Extends:CheckBox DefaultText="Chat"
+                                      HorizontalOptions="FillAndExpand"
+                                      Checked="{Binding Chat}"
+                                      Grid.Column="0"
+                                      x:Name="Check"
+                    />
+
+                    <Button  x:Name="PickFile"                             
+                             
+                             Command="{Binding PickFileCommand}"
+                             CornerRadius="60" 
+                             Text="+" 
+                             Grid.Column="1"/>
+
+                </Grid>
+
+               <Label Text="{Binding PathFiles}" x:Name="PathFile"/>
+
                 <implements:GradientColorStack StartColor="#C79D1D" 
                                                EndColor="#CE7526" 
                                                HorizontalOptions="CenterAndExpand"
                                                VerticalOptions="CenterAndExpand">
-                    <Button Text="{Binding TextButton}"
+                    <Button x:Name="CreatUpload"
+                            Text="{Binding TextButton}"
                             Command="{Binding CreatCommand}"  
                             VerticalOptions="CenterAndExpand" 
                             HorizontalOptions="CenterAndExpand"                                                        
                             TextColor="#0C4F7B"  
                             BackgroundColor="Transparent"
+                            CornerRadius="5"                            
+                            
                     />
+
                 </implements:GradientColorStack>
+                
                 <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
                                    VerticalOptions="CenterAndExpand" 
                                    HorizontalOptions="CenterAndExpand"/>
-
 
             </StackLayout>
         </ScrollView>
