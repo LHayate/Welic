@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
@@ -66,7 +67,8 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public ICollection<ScheduleMap> SchedulesClass { get; set; }
 
         public ICollection<LiveMap> Lives { get; set; }
-        
+        public ICollection<CursoMap> Cursos { get; set; }
+
         //public GroupUserMap GroupUserMap { get; set; }
         private ICollection<MenuMap> _menus;
 

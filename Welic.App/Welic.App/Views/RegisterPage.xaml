@@ -25,14 +25,31 @@
                         </OnPlatform>
                     </abstractions:CircleImage.HeightRequest>
                 </abstractions:CircleImage>
-
-                <Entry Placeholder="Fisrt Name" Text="{Binding FirstName}" Keyboard="Text"/>
-                <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text"/>
+                <Button Text="Take" FontSize="10"  
+                        HorizontalOptions="CenterAndExpand" 
+                        Clicked="Button_OnClicked"                        
+                        BackgroundColor="Transparent" 
+                        TextColor="DimGray"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Placeholder="Fisrt Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0"/>
+                    <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text" Grid.Column="1"/>
+                </Grid>
+                
                 <Entry Placeholder="Email Adress" Text="{Binding EmailAdress}" Keyboard="Email"/>
                 <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone"/>
-                <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Keyboard="Default"/>
-                <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" Keyboard="Default"/>
-
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Keyboard="Default" Grid.Column="0"/>
+                    <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" Keyboard="Default" Grid.Column="1"/>
+                </Grid>
+                
                 <implements:GradientColorStack StartColor="#C79D1D" 
                                                EndColor="#CE7526" 
                                                HorizontalOptions="CenterAndExpand"

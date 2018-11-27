@@ -42,7 +42,7 @@ namespace Welic.App.Views
                         MenuPages.Add(id, new NavigationPage(new TicketPage()));
                         break;
                     case (int)MenuItemType.Videos:
-                        MenuPages.Add(id, new NavigationPage(new LivePage()));
+                        MenuPages.Add(id, new NavigationPage(new ListLivePage()));
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new ConfigPage()));
@@ -56,6 +56,9 @@ namespace Welic.App.Views
                     case (int)MenuItemType.NewLive:
                         MenuPages.Add(id, new NavigationPage(new CreateLivePage()));
                         break;
+                    case (int)MenuItemType.Cursos:
+                        MenuPages.Add(id, new NavigationPage(new ListOfCoursesPage()));
+                        break;                    
                 }
             }
 

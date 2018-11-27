@@ -28,14 +28,13 @@ namespace Welic.App.ViewModels
         public string Icon { get; set; }
 
         private string _title;
-
         public new string Title
         {
             get => _title;
             set => SetProperty(ref _title , value);
         }
-        private string _description;
 
+        private string _description;
         public string Description
         {
             get => _description;
@@ -43,7 +42,6 @@ namespace Welic.App.ViewModels
         }
 
         private string _price;
-
         public string Price
         {
             get => _price;
@@ -51,7 +49,6 @@ namespace Welic.App.ViewModels
         }
 
         private string _themes;
-
         public string Themes
         {
             get => _themes;
@@ -59,18 +56,17 @@ namespace Welic.App.ViewModels
         }
 
         private bool _chat;
-
         public bool Chat
         {
             get => _chat;
             set => SetProperty(ref _chat , value);
         }
-        private string _pathFiles;
 
+        private string _pathFiles;
         public string PathFiles
         {
-            get { return _pathFiles; }
-            set { SetProperty(ref _pathFiles , value); }
+            get => _pathFiles;
+            set => SetProperty(ref _pathFiles , value);
         }
 
         public CreateLiveViewModel()
@@ -89,22 +85,25 @@ namespace Welic.App.ViewModels
                     return;
 
                 var user = new UserDto().LoadAsync();
+                IsBusy = true;
+
                 using (var content = new MultipartFormDataContent())
                 {
                     using (var stream = new StreamContent(_mediaFile.GetStream()))
-                    {                        
-                        _path = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                    {
+                        _pathFiles = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        //_path = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        _path =_mediaFile.Path;
                         content.Add(stream, "file", _path);
 
-                        await WebApi.Current.UploadAsync("uploads/files", content);
+                        await WebApi.Current.UploadAsync(content);
                       
                         //await WebApi.Current.UploadAsync("uploads/files", content);
                         
                         content.Dispose();                        
-                    }                    
+                    }
                 }
-                IsBusy = true;
-
+                
                 //var content = new MultipartFormDataContent();
 
                 //content.Add(new StreamContent(_mediaFile.GetStream()),
@@ -119,7 +118,7 @@ namespace Welic.App.ViewModels
                     Themes = _themes,
                     Chat = _chat,
                     Author = user,
-                    UrlDestino = $"https://www.welic.app/uploads/{PathFiles}",
+                    UrlDestino = $"https://www.welic.app/uploads/{_path}",
                 };
 
                 var ret = await (new LiveDto()).Save(live);
@@ -150,7 +149,7 @@ namespace Welic.App.ViewModels
                 return;
 
             
-            _pathFiles += _mediaFile.Path;
+            //_pathFiles += _mediaFile.Path.LastOrDefault();
         }
 
     }

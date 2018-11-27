@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using Registrators;
 using Registrators.Helpers;
@@ -21,8 +20,8 @@ using Welic.WebSite.Utilities;
 
 namespace Welic.WebSite.API.Controllers
 {
-    [System.Web.Http.Authorize]
-    [System.Web.Http.RoutePrefix("api/User")]
+    [Authorize]
+    [RoutePrefix("api/User")]
     public class UserController : BaseController
     {
         public readonly IServiceUser _servico;
@@ -77,110 +76,101 @@ namespace Welic.WebSite.API.Controllers
             _servico = servico;
         }
 
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("getall")]
+        [HttpGet]
+        [Route("getall")]
         public Task<HttpResponseMessage> GetAll()
         {
             return CriaResposta(HttpStatusCode.OK, _servico.GetAll());
         }
 
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         //[Route("GetByName/user")]
         public Task<HttpResponseMessage> GetByEmail([FromUri]UserDto user)
         {
             return CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(user.Email));
         }
 
-        [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("GetById/{id}")]
+        [HttpGet]
+        [Route("GetById/{id}")]
         public Task<HttpResponseMessage> GetById(string id)
         {
             return CriaResposta(HttpStatusCode.OK, _servico.GetById(id));
         }
 
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
-        [System.Web.Http.Route("save")]
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("save")]
         public Task<HttpResponseMessage> Save([FromBody] UserDto userDto)
         {
             return CriaResposta(HttpStatusCode.OK, _servico.Save(userDto));
         }
 
-        [System.Web.Http.HttpPost]
-        [System.Web.Http.AllowAnonymous]
-        [System.Web.Http.Route("Create")]
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("Create")]
         public async  Task<HttpResponseMessage> Create([FromBody] AspNetUser model)
-        {
-            try
+        {            
+            var user = new ApplicationUser
             {
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    RegisterDate = DateTime.Now,
-                    RegisterIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
-                    LastAccessDate = DateTime.Now,
-                    LastAccessIP = System.Web.HttpContext.Current.Request.GetVisitorIP()
-                };
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                RegisterDate = DateTime.Now,
+                RegisterIP = HttpContext.Current.Request.GetVisitorIP(),
+                LastAccessDate = DateTime.Now,
+                LastAccessIP = HttpContext.Current.Request.GetVisitorIP()
+            };
 
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-
-                    return await CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(user.Email));
-                    //// Send Message
-                    //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
-                    //var administrator = roleAdministrator.Users.FirstOrDefault();
-
-                    //var message = new MessageSendModel()
-                    //{
-                    //    UserFrom = administrator.UserId,
-                    //    UserTo = user.Id,
-                    //    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
-                    //    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
-
-                    //};
-
-                    //await MessageHelper.SendMessage(message);
-
-                    //// Send an email with this link
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-
-                    //var urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-                    //var callbackUrl = urlHelper.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: System.Web.HttpContext.Current.Request.Url.Scheme);
-
-                    //var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "signup").SelectAsync();
-                    //var emailTemplate = emailTemplateQuery.FirstOrDefault();
-
-                    //if (emailTemplate != null)
-                    //{
-                    //    dynamic email = new Postal.Email("Email");
-                    //    email.To = user.Email;
-                    //    email.From = CacheHelper.Settings.EmailAddress;
-                    //    email.Subject = emailTemplate.Subject;
-                    //    email.Body = emailTemplate.Body;
-                    //    email.CallbackUrl = callbackUrl;
-                    //    EmailHelper.SendEmail(email);
-                    //}
-                }
-
-                string error = string.Empty;
-                foreach (var item in result.Errors)
-                {
-                    error += $"{item} -  ";
-                }
-
-                return await CriaResposta(HttpStatusCode.InternalServerError, error);
-            }
-            catch (Exception e)
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
             {
-                Console.WriteLine(e);
-                throw new Exception($"Erro ao criar usuario.{e.Message}{e.InnerException.Message}");
+                var found = _servico.GetByEmail(model.Email);
+                return await CriaResposta(HttpStatusCode.OK, found );
+                //// Send Message
+                //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+                //var administrator = roleAdministrator.Users.FirstOrDefault();
+                
+                //var message = new MessageSendModel()
+                //{
+                //    UserFrom = administrator.UserId,
+                //    UserTo = user.Id,
+                //    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
+                //    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
+
+                //};
+
+                //await MessageHelper.SendMessage(message);
+
+                //// Send an email with this link
+                //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                //var urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+                //var callbackUrl = urlHelper.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: System.Web.HttpContext.Current.Request.Url.Scheme);
+
+                //var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "signup").SelectAsync();
+                //var emailTemplate = emailTemplateQuery.FirstOrDefault();
+
+                //if (emailTemplate != null)
+                //{
+                //    dynamic email = new Postal.Email("Email");
+                //    email.To = user.Email;
+                //    email.From = CacheHelper.Settings.EmailAddress;
+                //    email.Subject = emailTemplate.Subject;
+                //    email.Body = emailTemplate.Body;
+                //    email.CallbackUrl = callbackUrl;
+                //    EmailHelper.SendEmail(email);
+                //}
             }
-            
+
+            string error = string.Empty;
+            foreach (var item in result.Errors)
+            {
+                error += $"{item} -  ";
+            }
+
+            return await CriaResposta(HttpStatusCode.InternalServerError, error);                        
         }
 
         [System.Web.Http.HttpPost]

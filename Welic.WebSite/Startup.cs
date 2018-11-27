@@ -35,6 +35,7 @@ namespace Welic.WebSite
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);            
             app.UseWebApi(config);
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
         }
         public void ConfigureOAuth(IAppBuilder app, IServiceUser servico)
         {

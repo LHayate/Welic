@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Welic.App.Models.Live;
 using Welic.App.Models.News;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
@@ -59,6 +60,13 @@ namespace Welic.App.ViewModels
             var items = await (new NewsDto().GetList(pageIndex: 0, pageSize: PageSize));
 
             ListNews.AddRange(items);
+        }
+
+        public void OpenLive(NewsDto newsDto)
+        {
+            object[] obj = new[] { newsDto };
+
+            NavigationService.NavigateModalToAsync<NewsViewModel>(obj);
         }
     }
 }

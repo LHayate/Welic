@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cursos\CursoService.cs" />
     <Compile Include="Dispositivos\ServicoDispositivo.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="MarketPlace\CategoryListingTypeService.cs" />

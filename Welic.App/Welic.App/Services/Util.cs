@@ -113,6 +113,7 @@ namespace Welic.App.Services
             return ImageToByteArray(img).Result;
         }
 
+
         /// <summary>
         /// Função que verifica se a string informada “Tes123@#$” will be accepted.
         /// UMA LETRA MINUSCULA
@@ -160,5 +161,6 @@ namespace Welic.App.Services
 
             return true;
         }
+
     }
 }

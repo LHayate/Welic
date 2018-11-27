@@ -20,14 +20,16 @@ namespace Welic.App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+        MainPage RootPage => Application.Current.MainPage as MainPage;
         private readonly List<HomeMenuItem> menuItems;
         private readonly ObservableCollection<GroupHomeMenuItem> GroupMenu;
         private UserDto _userdto;
+
         public MenuPage()
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
+
             //LoadingImage();
 
             //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
@@ -42,6 +44,7 @@ namespace Welic.App.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
                 new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
+                new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse") },
                 new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
                 new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                 new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },
@@ -55,12 +58,20 @@ namespace Welic.App.Views
             
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
-                if (e.SelectedItem == null)
-                    return;
-                
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;               
-                    await RootPage.NavigateFromMenu(id);
+                try
+                {
+                    if (e.SelectedItem == null)
+                        return;
 
+                    var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                    await RootPage.NavigateFromMenu(id);
+                    ListViewMenu.SelectedItem = null;
+                }
+                catch (System.Exception exception)
+                {
+                    Console.WriteLine(exception);
+                }
+                
             };
 
             //ListViewMenuGroup.ItemsSource = GroupMenu;

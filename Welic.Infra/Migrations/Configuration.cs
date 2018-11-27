@@ -35,7 +35,7 @@ namespace Welic.Infra.Migrations
             //  to avoid creating duplicate seed data.
             base.Seed(context);
             InstallSettings(context);
-            InstallEmailTemplates(context);
+            //InstallEmailTemplates(context);
             InstallMenu(context);            
             //InstallCategories(context);
             //InstallCategoryTypes(context);

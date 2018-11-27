@@ -77,7 +77,7 @@ namespace Welic.App.ViewModels
                 {
                     
                     NickName = UserLogin,
-                    Password = Criptografia.Encriptar(Senha),
+                    Password = Senha,
                     Email = UserLogin,                    
                     RememberMe = true
                 };

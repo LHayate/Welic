@@ -10,10 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="2.0.1" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
-    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.10.0" />
+    <PackageReference Include="IdentityModel" Version="3.10.2" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
+    <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.11.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="Plugin.FileUploader" Version="1.4.0" />
@@ -23,11 +23,10 @@
     <PackageReference Include="Xam.Plugin.DeviceInfo" Version="4.0.0.13" />
     <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
     <PackageReference Include="Xam.Plugins.Forms.ImageCircle" Version="3.0.0.5" />
-    <PackageReference Include="Xamarin.Auth" Version="1.6.0.2" />
-    <PackageReference Include="Xamarin.Auth.XamarinForms" Version="1.6.0.2" />
-    <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
+    <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.Auth.XamarinForms" Version="1.6.0.4" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
-    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />  
   </ItemGroup>
 
@@ -36,6 +35,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ConfigPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CourseDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CreateCoursesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CreateLivePage.xaml">
@@ -62,6 +67,9 @@
     <EmbeddedResource Update="Views\InicioPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\ListOfCoursesPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\LoginExternoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -69,6 +77,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ListNewsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\NotificationPage.xaml">
@@ -112,6 +123,12 @@
     <Compile Update="Views\AspectFillLivePage.xaml.cs">
       <DependentUpon>AspectFillLivePage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\COurseDetailPage.xaml.cs">
+      <DependentUpon>CourseDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreateCoursesPage.xaml.cs">
+      <DependentUpon>CreateCoursesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ListEventsPage.xaml.cs">
       <DependentUpon>ListEventsPage.xaml</DependentUpon>
     </Compile>
@@ -123,6 +140,9 @@
     </Compile>
     <Compile Update="Views\InicioPage.xaml.cs">
       <DependentUpon>InicioPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ListOfCoursesPage.xaml.cs">
+      <DependentUpon>ListOfCoursesPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LoginExternoPage.xaml.cs">
       <DependentUpon>LoginExternoPage.xaml</DependentUpon>

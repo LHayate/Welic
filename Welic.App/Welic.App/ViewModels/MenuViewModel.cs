@@ -66,7 +66,7 @@ namespace Welic.App.ViewModels
             _userDto = (new UserDto()).LoadAsync();
 
             _image = _userDto.ImagemPerfil;
-            _nomeCompleto = _userDto.FullName;
+            _nomeCompleto = $"{_userDto.FirstName} {_userDto.LastName}";
             //_cpf = _userDto.Id;
             _email = _userDto.Email ?? _userDto.NickName;
             _lastAcess = _userDto.LastAccessDate.ToString(CultureInfo.InvariantCulture);

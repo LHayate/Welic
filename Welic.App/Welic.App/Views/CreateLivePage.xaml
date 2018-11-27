@@ -7,6 +7,11 @@
              BackgroundColor="#0F5682"
              Icon="LogoWelic72x72.png"
              Title="Create">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddNew}" Order="Secondary" Priority="0" Text="Add"/>
+        <ToolbarItem Command="{Binding AddNew}" Order="Secondary" Priority="0" Text="Add"/>
+        <ToolbarItem Command="{Binding AddNew}" Order="Secondary" Priority="0" Text="Add"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
@@ -79,7 +84,7 @@
 
                 </Grid>
 
-               <Label Text="{Binding PathFiles}" x:Name="PathFile"/>
+               <Label Text="{Binding PathFiles}" x:Name="PathFile" HorizontalOptions="StartAndExpand"/>
 
                 <implements:GradientColorStack StartColor="#C79D1D" 
                                                EndColor="#CE7526" 

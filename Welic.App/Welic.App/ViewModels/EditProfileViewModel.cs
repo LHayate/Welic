@@ -115,6 +115,8 @@ namespace Welic.App.ViewModels
         {
             await NavigationService.ReturnModalToAsync(true);
         }
+
+
         private async Task SaveInfos()
         {
             if (IsBusy)

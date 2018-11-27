@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.Models.Users.Scope;
 using Welic.Dominio.Utilitarios.Entidades;
@@ -44,6 +45,7 @@ namespace Welic.Dominio.Models.Users.Entidades
         }
 
         public GroupUser GroupUser { get; set; }
+        
 
         public List<GroupUser> ListaGroupUser()
         {            

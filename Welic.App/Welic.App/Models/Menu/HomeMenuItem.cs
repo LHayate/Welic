@@ -14,7 +14,8 @@ namespace Welic.App.Models
         Settings,        
         Tickets,
         SignOff,
-        NewLive
+        NewLive,
+        Cursos
 
 
 

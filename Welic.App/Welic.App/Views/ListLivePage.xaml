@@ -53,7 +53,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Label Text="{Binding Title}" 
-                                       FontSize="20" Opacity="20" 
+                                       FontSize="15" Opacity="20" 
                                        TextColor="Black"                                             
                                        HorizontalTextAlignment="Center"
                                        Grid.Row="0"/>
@@ -62,7 +62,7 @@
                                          WidthRequest="1"
                                          Grid.Row="1"/>
                                 <implements:CustomDescriptionLabel Text="{Binding Description}" 
-                                       FontSize="20" Opacity="20" 
+                                       FontSize="15" Opacity="20" 
                                        TextColor="Black"  
                                        HorizontalTextAlignment="Center"    
                                        MaxLength ="50"

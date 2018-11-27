@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
     <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Mapeamentos\MappingCursos.cs" />
     <Compile Include="Mapeamentos\MappingListingReview.cs" />
     <Compile Include="Mapeamentos\MappingListingStat.cs" />
     <Compile Include="Mapeamentos\MappingListingType.cs" />

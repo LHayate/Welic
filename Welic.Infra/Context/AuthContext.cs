@@ -4,6 +4,7 @@ using System.Data.Entity.Validation;
 using System.Text;
 using Welic.Dominio.Core;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
+using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
@@ -79,6 +80,7 @@ namespace Welic.Infra.Context
         public DbSet<StripeConnect> StripeConnects { get; set; }
         public DbSet<StripeTransaction> StripeTransactions { get; set; }
         public DbSet<UploadsMap> Uploads { get; set; }
+        public DbSet<CursoMap> Curso { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -121,10 +123,7 @@ namespace Welic.Infra.Context
             modelBuilder.Configurations.Add(new MappingStripeConnect());
             modelBuilder.Configurations.Add(new MappingStripeTransaction());
             modelBuilder.Configurations.Add(new MappingUploads());
-
-
-
-
+            modelBuilder.Configurations.Add(new MappingCursos());
         }
     }
 }

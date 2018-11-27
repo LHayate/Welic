@@ -50,11 +50,11 @@ namespace Welic.App.Services.API
             
             _HttpClient = new HttpClient
             {
-                //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
+                BaseAddress = new Uri("http://192.168.0.10:3000/api/")
                 //BaseAddress = new Uri("http://192.168.1.7:3000/api/")
-                BaseAddress = new Uri("https://welic.app/api/")
+                //BaseAddress = new Uri("https://welic.app/api/")
                 //BaseAddress = new Uri("http://192.168.0.10/api/")
-                //BaseAddress = new Uri("http://192.168.1.7/api/")
+
 
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -218,14 +218,16 @@ namespace Welic.App.Services.API
             return response.IsSuccessStatusCode;
         }
 
-        internal async Task<string> UploadAsync(string uri, MultipartFormDataContent path)
+        internal async Task<string> UploadAsync(MultipartFormDataContent path)
         {
             try
-            {                
-                using (var _response = await _HttpClient.PostAsync(uri, path))
+            {
+                
+                using (var _response = await _HttpClient.PostAsync("uploads/files", path))
                 {
                     if (!_response.IsSuccessStatusCode)
                         throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
+
                     return await _response.Content.ReadAsStringAsync();
                     
                 }

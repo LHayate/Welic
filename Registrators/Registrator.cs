@@ -2,6 +2,7 @@
 using Registrators.Plugins;
 using Servicos;
 using Servicos.Acesso;
+using Servicos.Cursos;
 using Servicos.Live;
 using Servicos.MarketPlace;
 using Servicos.Menu;
@@ -16,6 +17,8 @@ using Welic.Dominio;
 using Welic.Dominio.Eventos;
 using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
+using Welic.Dominio.Models.Curso.Map;
+using Welic.Dominio.Models.Curso.Service;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Models.Marketplaces.Entityes;
@@ -80,6 +83,7 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<MessageReadState>, Repository<MessageReadState>>()
                 .RegisterType<IRepositoryAsync<MessageThread>, Repository<MessageThread>>()
                 .RegisterType<IRepositoryAsync<UploadsMap>, Repository<UploadsMap>>()
+                .RegisterType<IRepositoryAsync<CursoMap>,Repository<CursoMap>>()
 
                 .RegisterType<ICategoryService, CategoryService>()
                 .RegisterType<ICategoryStatService, CategoryStatService>()
@@ -106,6 +110,7 @@ namespace Registrators
                 .RegisterType<IStoredProcedures, AuthContext>(new PerRequestLifetimeManager())
                 .RegisterType<SqlDbService, SqlDbService>()
                 .RegisterType<IUploadsService, UploadsService>()
+                .RegisterType<ICursoService, CursoService>()
                 ;
 
 

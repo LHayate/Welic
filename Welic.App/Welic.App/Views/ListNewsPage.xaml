@@ -8,7 +8,8 @@
         <StackLayout>
             <ListView x:Name="ListViewNews"
                           HasUnevenRows="True"
-                          ItemsSource="{Binding ListNews}">
+                          ItemsSource="{Binding ListNews}"
+                      ItemTapped="ListViewNews_OnItemTapped">
                 <ListView.Behaviors>
                     <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
                 </ListView.Behaviors>

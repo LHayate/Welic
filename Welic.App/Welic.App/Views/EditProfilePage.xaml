@@ -35,12 +35,27 @@
                     <Label Text="{Binding Identity}" TextColor="AntiqueWhite" HorizontalTextAlignment="Center"/>
 
                     <Entry Placeholder="Nick Name" Text="{Binding NickName}" PlaceholderColor="AntiqueWhite"/>
-                    <Entry Placeholder="First Name" Text="{Binding FirstName}" PlaceholderColor="AntiqueWhite"/>
-                    <Entry Placeholder="Last Name" Text="{Binding LastName}" PlaceholderColor="AntiqueWhite"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Placeholder="First Name" Text="{Binding FirstName}" PlaceholderColor="AntiqueWhite" Grid.Column="0"/>
+                        <Entry Placeholder="Last Name" Text="{Binding LastName}" PlaceholderColor="AntiqueWhite" Grid.Column="1"/>
+                    </Grid>
+                    
                     <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Numeric" PlaceholderColor="AntiqueWhite"/>
                     <Entry Placeholder="E-mail" Text="{Binding Email}" Keyboard="Email" PlaceholderColor="AntiqueWhite"/>
-                    <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" PlaceholderColor="AntiqueWhite"/>
-                    <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" PlaceholderColor="AntiqueWhite"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" PlaceholderColor="AntiqueWhite" Grid.Column="0"/>
+                        <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" PlaceholderColor="AntiqueWhite" Grid.Column="1"/>
+                    </Grid>
+                    
 
                     <Grid>
                         <Grid.ColumnDefinitions >
