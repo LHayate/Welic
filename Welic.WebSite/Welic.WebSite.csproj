@@ -2845,13 +2845,13 @@
     <Content Include="Views\Emails\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\Welic\aspnet-mvc-internationalization\MvcInternationalization\Resources\Resources.csproj">
-      <Project>{251223e9-7f41-4f74-a853-cac5c65fe675}</Project>
-      <Name>Resources</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Registrators\Registrators.csproj">
       <Project>{be83bbdc-4a6e-4fe2-9547-af115c637ed0}</Project>
       <Name>Registrators</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\MvcInternationalization\Resources\Resources.csproj">
+      <Project>{251223e9-7f41-4f74-a853-cac5c65fe675}</Project>
+      <Name>Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Servicos\Welic.Servicos.csproj">
       <Project>{73bebc97-5fca-4949-8715-768f190d9782}</Project>

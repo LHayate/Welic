@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Agenda" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Button_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="Desc_About" xml:space="preserve">
+    <value>Welcome to Welic. We're glad you're here.
+
+Welic was born from a dream, the dream of bringing to all people training and events independent of their location and language. It was also born from the dream of providing specialists with unique knowledge, the tools needed to enable them to monetize their knowledge through a Universal work tool - The Internet.
+
+Our mission is to bring all people unique Trainings and Events in their own language and provide experts with the technological tools necessary to grow your online business.
+
+As Welic's developer and promoter team, we will be fully committed to developing a highly innovative and effective tool, capable of using the online medium as a digital business catalyst.</value>
+  </data>
+  <data name="Desc_André" xml:space="preserve">
+    <value>Bachelor in Information Systems (PUC-Minas / Uniube), electronics technician (State Technical Industrial School Professor Fontes). As an IT Specialist my academic, human and work training focused on the development and implementation of large projects. I have experience in contact with international companies. I am a professional committed to innovation, leadership and teamwork. Recognized throughout my career by professionalism, steep learning curve as well, by the results obtained.</value>
+  </data>
+  <data name="Desc_Contact" xml:space="preserve">
+    <value>Contact us for more details on Welic</value>
+  </data>
+  <data name="Desc_Ederson" xml:space="preserve">
+    <value>Professional with Post-Graduation in Software Engineering by UFMG - Federal University of Minas Gerais and with Graduation in Information Technology by the University Center Newton Paiva.
+
+He has 21 years of experience in large IT projects and startups, working in the commercial and technical areas for clients of the Public Sector and Private Sector. In the commercial area he served as Executive Customers, Pre-Sales and Business Consultant for Application opportunities, infrastructure and products during the full cycle of sales using CRM systems, customer prospecting / business, creating funnel of opportunities and closing deals.
+
+In the technical area, served in delivery as a Project Manager and Support, Engineer, Systems Analyst and Developer, aimed at executing projects / support of applications on the web and client / server. In the academic environment, he acted as Lecturer and IT Professor at Universities, Technical and Preparatory Courses.</value>
+  </data>
+  <data name="Desc_Joel" xml:space="preserve">
+    <value>Joel Serrano has been an entrepreneur for more than 16 years. Graduated in Information Technology and specializing in e-learning. Still, he is a professional with high experience in Consulting and Training of Young and Adults.
+
+During his professional career, he founded several companies in countries such as Portugal, Holland and Germany.
+
+At the moment it coordinates a European project, in 5 European countries, in which it stimulates the entrepreneurship in young people in Europe.
+
+In addition, it owns Marketplaces on the Internet and specializes in Digital Marketing. He is still the CEO of Welic.</value>
+  </data>
+  <data name="Desc_Lucas" xml:space="preserve">
+    <value>Bachelor in systems analysis and development at Uniube - University of Uberaba, Brazil. Mobile and Desktop Development Specialist working in the field since 2015. Participant in the .Net community looking to always help improve this universe of development.
+
+Welic founder member of Welic as CTO.</value>
+  </data>
+  <data name="Inicio" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Lançamento" xml:space="preserve">
+    <value>Launch</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in </value>
+  </data>
+  <data name="Title_About" xml:space="preserve">
+    <value>About Welic</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AgeRequired" xml:space="preserve">
+    <value>Age required</value>
+  </data>
+  <data name="Biography" xml:space="preserve">
+    <value>Biography</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>Email Invalid</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email Required</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="FirstNameLong" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="FirstNameRequired" xml:space="preserve">
+    <value>First Name Required</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="LastNameRequired" xml:space="preserve">
+    <value>Last Name Required</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log Off</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Confirm_Pass" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="New_Account" xml:space="preserve">
+    <value>New Account </value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Lasted_Listing" xml:space="preserve">
+    <value>Lasted Listings</value>
+  </data>
+  <data name="See_All_Listings" xml:space="preserve">
+    <value>See All Listings</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Listings" xml:space="preserve">
+    <value>Listings </value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Publish_Listing" xml:space="preserve">
+    <value>Publish new Listing</value>
+  </data>
+  <data name="My_Listting" xml:space="preserve">
+    <value>My Listings</value>
+  </data>
+  <data name="Search_List" xml:space="preserve">
+    <value>Search your listings...</value>
+  </data>
+</root>
