@@ -6,6 +6,8 @@
              x:Class="Welic.App.Views.ListLivePage"
              Icon="{Binding Home}"
              >
+
+
     <ContentPage.Content>
         <ListView x:Name="ListViewStart"
                       HasUnevenRows="True"
@@ -21,7 +23,6 @@
                     <ViewCell>
                         <Grid Padding="3" BackgroundColor="#0F5682" 
                               >
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
@@ -67,7 +68,6 @@
                                        HorizontalTextAlignment="Center"    
                                        MaxLength ="50"
                                        Grid.Row="2"/>
-
                             </Grid>
                         </Grid>
                     </ViewCell>

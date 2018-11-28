@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Welic.App.Models.Course;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
@@ -10,56 +12,32 @@ using Xamarin.Forms.Extended;
 namespace Welic.App.ViewModels
 {
     public class ListOfCoursesViewModel : BaseViewModel
-    {
-        private const int PageSize = 12;        
+    {        
         public Command AddNewCommand => new Command(AddNew);
+        
+        private ObservableCollection<CourseDto> _listStart;
 
-        public InfiniteScrollCollection<CourseDto> ListStart { get; private set; }
+        public ObservableCollection<CourseDto> ListStart
+        {
+            get => _listStart;
+            set => SetProperty(ref _listStart, value);
+        }
+
 
         public ListOfCoursesViewModel()
         {
-            ListStart = new InfiniteScrollCollection<CourseDto>();
-            GetDados();
-            Download();
+            Atualizando = true;
+
+            SetListCourses();
+
+            Atualizando = false;           
         }
 
-        private async Task GetDados()
+        public async Task SetListCourses()
         {
-            try
-            {
-                ListStart = new InfiniteScrollCollection<CourseDto>
-                {
-                    OnLoadMore = async () =>
-                    {
-                        IsBusy = true;
-
-                        // Ler a proxima pagina
-                        var page = ListStart.Count / PageSize;
-
-                        //Busca os itens
-                        var items = await (new CourseDto().GetList(page, PageSize));
-
-                        IsBusy = false;
-
-                        // Itens que serão adicionados
-                        return items;
-                    }
-                };
-
-            }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                return;
-            }
-
+            ListStart = await new CourseDto().GetList();
         }
-        private async Task Download()
-        {
-            var items = await (new CourseDto().GetList(pageIndex: 0, pageSize: PageSize));
-
-            ListStart.AddRange(items);
-        }
+        
         private void AddNew()
         {
             NavigationService.NavigateModalToAsync<CreateCoursesViewModel>();
@@ -73,6 +51,28 @@ namespace Welic.App.ViewModels
         }
 
 
+        private bool _atualizando = false;
+        public bool Atualizando
+        {
+            get { return _atualizando; }
+            set
+            {
+                SetProperty(ref _atualizando, value);
+            }
+        }
+        public ICommand AtualizarCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    Atualizando = true;
 
+                    await SetListCourses();
+
+                    Atualizando = false;
+                });
+            }
+        }
     }
 }

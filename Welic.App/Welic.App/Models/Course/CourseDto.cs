@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,29 +16,31 @@ namespace Welic.App.Models.Course
         public int IdCurso { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public decimal Prince { get; set; }
+        public decimal Price { get; set; }
         public string Themes { get; set; }
         public byte[] Print { get; set; }
+        public string AuthorId { get; set; }
         public UserDto Author { get; set; }
+
 
         public CourseDto()
         {
             
         }
-        private List<CourseDto> _listItem;
+        private ObservableCollection<CourseDto> _listItem;
 
-        private List<CourseDto> ListItem
+        private ObservableCollection<CourseDto> ListItem
         {
             get => _listItem;
             set => _listItem = value;
         }
 
-        public async Task<List<CourseDto>> GetList(int pageIndex, int pageSize)
+        public async Task<ObservableCollection<CourseDto>> GetList()
         {
             try
             {
-                _listItem = await Current?.GetAsync<List<CourseDto>>("curso/getall");
-                return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                _listItem = await Current?.GetAsync<ObservableCollection<CourseDto>>("curso/getall");
+                return ListItem;
 
             }
             catch (System.Exception e)
@@ -46,6 +49,20 @@ namespace Welic.App.Models.Course
                 return null;
             }
         }
+        //public async Task<List<CourseDto>> GetList(int pageIndex, int pageSize)
+        //{
+        //    try
+        //    {
+        //        _listItem = await Current?.GetAsync<List<CourseDto>>("curso/getall");
+        //        return ListItem.ToList();
+
+        //    }
+        //    catch (System.Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        return null;
+        //    }
+        //}
 
         public async Task<CourseDto> CreateCourses(CourseDto courseDto)
         {

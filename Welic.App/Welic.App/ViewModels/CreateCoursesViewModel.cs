@@ -57,7 +57,7 @@ namespace Welic.App.ViewModels
             _themes = _CourseDto.Themes;
             _title = _CourseDto.Title;
             _description = _CourseDto.Description;
-            _price = _CourseDto.Prince;
+            _price = _CourseDto.Price;
 
         }
 
@@ -77,12 +77,14 @@ namespace Welic.App.ViewModels
                 var user = new UserDto().LoadAsync();
 
                 var course = new CourseDto()
-                {
-                    Author = user,
+                {                    
                     Description = _description,
-                    Prince = _price,
+                    Price = _price,
                     Themes = _themes,
                     Title = _title,
+                    AuthorId = user.Id,
+                    Author = user,
+                    
                 };
 
                 await new CourseDto().CreateCourses(course);

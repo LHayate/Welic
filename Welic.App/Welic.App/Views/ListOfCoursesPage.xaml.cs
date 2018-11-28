@@ -27,5 +27,14 @@ namespace Welic.App.Views
             if (item != null)
                 (BindingContext as ListOfCoursesViewModel)?.OpenCourse(item);
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var items = (BindingContext as ListOfCoursesViewModel)?.SetListCourses();
+
+            //ListViewStart.ItemsSource = items;
+        }
     }
 }

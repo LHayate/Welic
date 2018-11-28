@@ -9,80 +9,65 @@
         <ToolbarItem Command="{Binding ExcluirCourseCommand}" Order="Secondary" Priority="0" Text="Excluir"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <ListView x:Name="ListViewStart"
-                      HasUnevenRows="True"
-                      CachingStrategy="RecycleElement" 
-                      ItemsSource="{Binding ListStart}"
+        <ListView x:Name="ListViewStart"
+                  HasUnevenRows="True"
+                  CachingStrategy="RecycleElement"
+                  ItemsSource="{Binding ListStart}"
                   ItemTapped="ListViewStart_OnItemTapped"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding AtualizarCommand}"
+                  IsRefreshing="{Binding Atualizando}"
             >
-                <ListView.Behaviors>
-                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate >
-                        <ViewCell>
-                            <Grid Padding="3" BackgroundColor="#0F5682" 
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Grid Padding="3" BackgroundColor="#0F5682" 
                               >
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                </Grid.RowDefinitions>
-                                <Image Source="{Binding Print, Converter={StaticResource ByteArrayToImage}}" 
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Print, Converter={StaticResource ByteArrayToImage}}" 
                                    Grid.Column="0"                                                                                                                        
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="FillAndExpand"
                                    MinimumHeightRequest="50"
                                    MinimumWidthRequest="50"
                                  />
-                                <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="1"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Label Text="{Binding Title}" 
+                            <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Title}" 
                                        FontSize="15" 
                                        Opacity="20" 
                                        TextColor="Black"                                             
                                        HorizontalTextAlignment="Center"
                                        Grid.Row="0"/>
-                                    <BoxView BackgroundColor="#0F5682" 
+                                <BoxView BackgroundColor="#0F5682" 
                                          HeightRequest="1" 
                                          WidthRequest="1"
                                          Grid.Row="1"/>
-                                    <implements:CustomDescriptionLabel Text="{Binding Description}" 
+                                <implements:CustomDescriptionLabel Text="{Binding Description}" 
                                        FontSize="15" Opacity="20" 
                                        TextColor="Black"  
                                        HorizontalTextAlignment="Center"    
                                        MaxLength ="50"
                                        Grid.Row="2"/>
-                                </Grid>
                             </Grid>
-                        </ViewCell>
-                    </DataTemplate>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
 
-                </ListView.ItemTemplate>
-                <ListView.Footer>
-                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
-                        <Grid.Triggers>
-                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
-                                <Setter Property="HeightRequest" Value="0" />
-                            </Trigger>
-                        </Grid.Triggers>
-                        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
-                                           Color="#2196F3" VerticalOptions="Center" 
-                                           HorizontalOptions="Center"/>
-                    </Grid>
-                </ListView.Footer>
-            </ListView>
-        </StackLayout>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
