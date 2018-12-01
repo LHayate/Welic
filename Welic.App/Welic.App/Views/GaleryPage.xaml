@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:galery="clr-namespace:Welic.App.Implements.Galery;assembly=Welic.App"
-             xmlns:carousel="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+            
              xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
              x:Class="Welic.App.Views.GaleryPage"
              BackgroundColor="#0F5682"
@@ -10,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout >
 
-            <StackLayout>
+            <!--<StackLayout>
                 <Label Text="Recentes" FontSize="16" TextColor="#DBF6FF"/>
                 <carousel:CarouselView x:Name="RecentesCarouselView" 
                                        Margin="5"       
@@ -37,7 +36,7 @@
                                                          AspectMode="AspectFill"
                                                          Grid.Column="0"
                                 />
-                                <!--<Button Command="{Binding VideoRecenteCommand}" Grid.Column="0" />-->
+                                --><!--<Button Command="{Binding VideoRecenteCommand}" Grid.Column="0" />--><!--
                                 <Label Text="{Binding Title}" FontSize="Small" Grid.Column="1" HorizontalTextAlignment="Center"/>
                             </Grid>
                         </DataTemplate>
@@ -77,7 +76,7 @@
                         </DataTemplate>
                     </carousel:CarouselView.ItemTemplate>
                 </carousel:CarouselView>
-            </StackLayout>
+            </StackLayout>-->
 
         </StackLayout>
         
