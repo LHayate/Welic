@@ -31,7 +31,7 @@ namespace Welic.Dominio.Models.Lives.Adapters
                 Print = map.Print,
                 Themes = map.Themes,
                 UrlDestino = map.UrlDestino,
-                Author = AdapterUser.ConverterMapParaDto(map.Author)
+                //Author = AdapterUser.ConverterMapParaDto(map.Author)
                 
             };
 

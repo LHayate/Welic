@@ -5,15 +5,20 @@ using Welic.Dominio.Models.Lives.Dtos;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
+using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
+using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
+using Welic.Dominio.Patterns.Service.Pattern;
 
 namespace Servicos.Live
 {
-    public class ServiceLive : Servico, IServiceLive
+
+    public class ServiceLive : Service<LiveMap>, IServiceLive
     {
         private readonly IRepositoryLive _repositoryLive;        
-        public ServiceLive(IRepositoryLive repositoryLive, IUnidadeTrabalho unidadeTrabalho) : base(unidadeTrabalho)
+        public ServiceLive(IRepositoryLive repositoryLive, IRepositoryAsync<LiveMap> repository) 
+            : base(repository)
         {
             _repositoryLive = repositoryLive;            
         }
@@ -37,11 +42,11 @@ namespace Servicos.Live
                 if (liveDto.Author == null)
                     throw new System.Exception("É obrigatório o autor");
 
-                liveEncontrada.Author = new AspNetUser
-                {
-                    Id = liveDto.Author.Id.ToString(),
-                    Email = liveDto.Author.Email
-                };                 
+                //liveEncontrada.Author = new AspNetUser
+                //{
+                //    Id = liveDto.Author.Id.ToString(),
+                //    Email = liveDto.Author.Email
+                //};                 
             }
             else
             {
@@ -61,20 +66,15 @@ namespace Servicos.Live
                 if (liveDto.Author == null)
                     throw  new System.Exception("É obrigatório o autor");
                
-                liveEncontrada.Author = new AspNetUser
-                {
-                    Id = liveDto.Author.Id,
-                    Email = liveDto.Author.Email
-                };                    
+                //liveEncontrada.Author = new AspNetUser
+                //{
+                //    Id = liveDto.Author.Id,
+                //    Email = liveDto.Author.Email
+                //};                    
                 
             }
 
-            _repositoryLive.Save(liveEncontrada);
-
-            if (!Commit())
-            {
-                return null;
-            }
+            _repositoryLive.Save(liveEncontrada);           
 
             return GetById(liveEncontrada.Id);
         }
@@ -92,6 +92,11 @@ namespace Servicos.Live
         public ObservableCollection<LiveDto> GetListLive()
         {
             return AdapterLive.ConverterMapParaDto(_repositoryLive.GetListLive());
+        }
+
+        public ObservableCollection<LiveDto> GetListByCourse(int id)
+        {
+            return AdapterLive.ConverterMapParaDto(_repositoryLive.GetListByCourse(id));
         }
 
         public ObservableCollection<LiveDto> GetSearchListLive(string text)

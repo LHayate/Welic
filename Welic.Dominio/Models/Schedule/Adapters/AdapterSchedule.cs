@@ -28,15 +28,16 @@ namespace Welic.Dominio.Models.Schedule.Adapters
                 DateEvent = map.DateEvent,
                 Private = map.Private,
                 UserTeacher = AdapterUser.ConverterMapParaDto(map.UserTeacher),
-                Live = AdapterLive.ConverterMapParaDto(map.Live)
+                //Live = AdapterLive.ConverterMapParaDto(map.Live)
             };
             
-            if(map.UserClass != null)
-            foreach (var userClass in map.UserClass)
-            {
-                dto.UserClass.Add(AdapterUser.ConverterMapParaDto(userClass));
+            //Todo:Schedule corrigir 
+            //if(map.UserClass != null)
+            //foreach (var userClass in map.UserClass)
+            //{
+            //    dto.UserClass.Add(AdapterUser.ConverterMapParaDto(userClass));
                 
-            }
+            //}
 
             
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.Entity.Validation;
 using System.Text;
 using Welic.Dominio.Core;
@@ -80,14 +81,16 @@ namespace Welic.Infra.Context
         public DbSet<StripeConnect> StripeConnects { get; set; }
         public DbSet<StripeTransaction> StripeTransactions { get; set; }
         public DbSet<UploadsMap> Uploads { get; set; }
-        public DbSet<CursoMap> Curso { get; set; }
+        public DbSet<CursoMap> Curso { get; set; }        
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Conventions
-                .Remove<System.Data.Entity.ModelConfiguration.Conventions.OneToManyCascadeDeleteConvention>();
+                .Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions
+                .Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Configurations.Add(new MappingDispositivos());
             modelBuilder.Configurations.Add(new MappingUser());
             modelBuilder.Configurations.Add(new MappingLive());

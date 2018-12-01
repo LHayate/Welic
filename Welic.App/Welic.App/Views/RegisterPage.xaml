@@ -35,7 +35,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Entry Placeholder="Fisrt Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0"/>
+                    <Entry Placeholder="First Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0"/>
                     <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text" Grid.Column="1"/>
                 </Grid>
                 

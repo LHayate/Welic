@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using Welic.Dominio.Models.Lives.Dtos;
+using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Services;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
 namespace Welic.WebSite.API.Controllers
 {
@@ -17,10 +19,12 @@ namespace Welic.WebSite.API.Controllers
     public class LiveController : BaseController
     {
         private IServiceLive _serviceLive;
+        private IUnitOfWorkAsync _unityOfWorkAsync;
 
-        public LiveController(IServiceLive serviceLive)
+        public LiveController(IServiceLive serviceLive, IUnitOfWorkAsync unityOfWorkAsync)
         {
             _serviceLive = serviceLive;
+            _unityOfWorkAsync = unityOfWorkAsync;
         }
 
         //public async void WriteContentToStream(Stream outputStream, HttpContent content, TransportContext transportContext)
@@ -58,7 +62,7 @@ namespace Welic.WebSite.API.Controllers
         //}
         
         [HttpGet]
-        [Route("GetById/{id}")]
+        [Route("GetById/{id:int}")]
         public Task<HttpResponseMessage> GetById(int id)
         {
             return CriaResposta(HttpStatusCode.OK, _serviceLive.GetById(id));
@@ -72,6 +76,13 @@ namespace Welic.WebSite.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetListbyCourse/{id:int}")]
+        public Task<HttpResponseMessage> ListbyCourse(int id)
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.GetListByCourse(id));
+        }
+
+        [HttpGet]
         [Route("GetSearchListLive/{text}")]
         public Task<HttpResponseMessage> ListSearchLive(string text)
         {
@@ -80,17 +91,55 @@ namespace Welic.WebSite.API.Controllers
 
         [HttpPost]
         [Route("save")]
-        public Task<HttpResponseMessage> save([FromBody] LiveDto liveDto)
+        public Task<HttpResponseMessage> save([FromBody] LiveMap liveDto)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.Save(liveDto));
+            try
+            {
+                _serviceLive.Insert(liveDto);
+                _unityOfWorkAsync.SaveChanges();
+                return CriaResposta(HttpStatusCode.OK, _serviceLive.Find(liveDto.Id));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return CriaResposta(HttpStatusCode.BadRequest, $"Erro ao salvar informações{e.Message}-{e.InnerException}");
+            }            
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public Task<HttpResponseMessage> Update([FromBody] LiveMap liveDto)
+        {
+            try
+            {
+                _serviceLive.Update(liveDto);
+                _unityOfWorkAsync.SaveChanges();
+                return CriaResposta(HttpStatusCode.OK, "Atualizado com Sucesso");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return CriaResposta(HttpStatusCode.BadRequest, "Erro ao salvar informações");
+            }
+            
         }
 
         [HttpDelete]
         [Route("delete/{id}")]
         public Task<HttpResponseMessage> Delete(int id)
         {
-            _serviceLive.Delet(id);
-            return CriaResposta(HttpStatusCode.OK, "Sucess Delete");
+            try
+            {
+                _serviceLive.Delet(id);
+                _unityOfWorkAsync.SaveChanges();
+                return CriaResposta(HttpStatusCode.OK, "Sucess Delete");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return CriaResposta(HttpStatusCode.BadRequest, "Erro ao salvar informações");
+            }
+            
         }
         
     }

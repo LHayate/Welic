@@ -24,12 +24,12 @@ namespace Welic.Repositorios.Live
             
             if (live != null)
             {
-                liveMap.Author = _context.User.FirstOrDefault(x => x.Id == live.Author.Id);
+                //liveMap.Author = _context.User.FirstOrDefault(x => x.Id == live.Author.Id);
                 _context.Entry(liveMap).State = EntityState.Modified;
             }
             else
             {
-                liveMap.Author = _context.User.FirstOrDefault(x => x.Id == liveMap.Author.Id);               
+                //liveMap.Author = _context.User.FirstOrDefault(x => x.Id == liveMap.Author.Id);               
                 _context.Live.Add(liveMap);                                 
             }
                 
@@ -52,6 +52,14 @@ namespace Welic.Repositorios.Live
         public List<LiveMap> GetListLive()
         {
             return SelectLive()
+                .OrderBy(x => x.Id)
+                .ToList();
+        }
+
+        public List<LiveMap> GetListByCourse(int id)
+        {
+            return SelectLive()
+                .Where(map => map.CourseId == id)
                 .OrderBy(x => x.Id)
                 .ToList();
         }

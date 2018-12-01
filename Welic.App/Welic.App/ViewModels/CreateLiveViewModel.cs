@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
@@ -41,8 +42,8 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _description , value);
         }
 
-        private string _price;
-        public string Price
+        private decimal _price;
+        public decimal Price
         {
             get => _price;
             set => SetProperty(ref _price , value);
@@ -69,12 +70,22 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _pathFiles , value);
         }
 
+        public CourseDto Dto { get; set; }
+
         public CreateLiveViewModel()
         {
             TitleNavigation = "Creat New Live";
             Icon = Util.ImagePorSistema("LogoWelic72x72.png");
             TextButton = "Criar";
             Chat = true;
+        }
+        public CreateLiveViewModel(params object[] obj)
+        {
+            TitleNavigation = "Creat New Live";
+            Icon = Util.ImagePorSistema("LogoWelic72x72.png");
+            TextButton = "Criar";
+            Chat = true;
+            Dto = (CourseDto) obj[0];
         }
 
         private async void CreateNew()
@@ -91,40 +102,36 @@ namespace Welic.App.ViewModels
                 {
                     using (var stream = new StreamContent(_mediaFile.GetStream()))
                     {
-                        _pathFiles = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
-                        //_path = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
-                        _path =_mediaFile.Path;
+                        //_pathFiles = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        _path = $"{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        var _pathImage = $"{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.jpg";
+                        //_path =_mediaFile.Path;
                         content.Add(stream, "file", _path);
 
                         await WebApi.Current.UploadAsync(content);
-                      
-                        //await WebApi.Current.UploadAsync("uploads/files", content);
-                        
+
+                        var live = new LiveDto
+                        {
+                            Title = _title,
+                            Description = _description,
+                            Price = _price,
+                            Themes = _themes,
+                            Chat = _chat,
+                            UrlDestino = $"https://www.welic.app/Arquivos/Uploads/{_path}",
+                            CourseId = Dto.IdCurso,
+                            TeacherId = user.Id,
+                            Print = $"https://www.welic.app/Arquivos/Uploads/{_pathImage}"
+                        };
+
+                        var ret = await (new LiveDto()).Save(live);
+
+                        if (ret != null)
+                            //await NavigationService.NavigateModalToAsync<LiveViewModel>();
+                            await NavigationService.ReturnModalToAsync(true);
+
                         content.Dispose();                        
                     }
                 }
-                
-                //var content = new MultipartFormDataContent();
-
-                //content.Add(new StreamContent(_mediaFile.GetStream()),
-                //    "\"file\"",
-                //    $"\"{_mediaFile.Path}\"");
-                                                          
-                var live = new LiveDto
-                {
-                    Title = _title,
-                    Description = _description,
-                    Price = decimal.Parse(_price),
-                    Themes = _themes,
-                    Chat = _chat,
-                    Author = user,
-                    UrlDestino = $"https://www.welic.app/uploads/{_path}",
-                };
-
-                var ret = await (new LiveDto()).Save(live);
-
-                if (ret != null)
-                    await NavigationService.NavigateModalToAsync<LiveViewModel>();
             }
             catch (System.Exception e)
             {

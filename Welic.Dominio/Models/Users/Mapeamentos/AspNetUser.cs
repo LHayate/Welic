@@ -31,6 +31,10 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
             this.ListingReviewsUserTo = new List<ListingReview>();
             this.AspNetRoles = new List<AspNetRole>();
             this.Uploads = new List<UploadsMap>();
+            this.SchedulesAluno = new List<ScheduleMap>();
+            this.SchedulesTeacher = new List<ScheduleMap>();
+            this.LivesClass = new List<LiveMap>();
+            this.LivesTeacher = new List<LiveMap>();
         }
         
         public string Id { get; set; }
@@ -61,13 +65,9 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public int AccessFailedCount { get; set; }
         public bool Disabled { get; set; }
         public double Rating { get; set; }
-
-        public ICollection<ScheduleMap> SchedulesTeacher { get; set; }
-
-        public ICollection<ScheduleMap> SchedulesClass { get; set; }
-
-        public ICollection<LiveMap> Lives { get; set; }
-        public ICollection<CursoMap> Cursos { get; set; }
+                
+        public virtual ICollection<CursoMap> TeacherCursos { get; set; }
+        public virtual ICollection<CursoMap> ClassCursos { get; set; }
 
         //public GroupUserMap GroupUserMap { get; set; }
         private ICollection<MenuMap> _menus;
@@ -80,6 +80,8 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         }
 
 
+        public virtual ICollection<ScheduleMap> SchedulesTeacher { get; set; }
+        public virtual ICollection<ScheduleMap> SchedulesAluno { get; set; }
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<Listing> Listings { get; set; }
@@ -92,5 +94,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<ListingReview> ListingReviewsUserTo { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual ICollection<UploadsMap> Uploads { get; set; }
+        public virtual ICollection<LiveMap> LivesTeacher { get; set; }
+        public virtual ICollection<LiveMap> LivesClass { get; set; }
     }
 }

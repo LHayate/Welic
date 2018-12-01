@@ -42,24 +42,34 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnName("DateEvent")
                 .HasColumnType("datetime");
 
+            Property(t => t.TeacherId)
+                .IsRequired()
+                .HasMaxLength(128);
 
+            //Many to Many
             HasMany(p => p.UserClass)
-                .WithMany(c => c.SchedulesClass)
-                .Map(manytoMany => manytoMany
-                    .ToTable("ScheduleClass")
-                    .MapLeftKey("ScheduleId")
-                    .MapRightKey("Id"));
+                .WithMany(c => c.SchedulesAluno)
+                .Map(c =>
+                {
+                    c.MapLeftKey("ScheduleId");
+                    c.MapRightKey("UserId");
+                    c.ToTable("ScheduleClass");
+
+                })
+                ;
 
             //One to Many
-            //HasRequired(c1 => c1.UserTeacher)
-            //    .WithMany(c2 => c2.SchedulesTeacher)
-            //    .WillCascadeOnDelete();
+            HasRequired(c1 => c1.UserTeacher)
+                .WithMany(c2 => c2.SchedulesTeacher)
+                .HasForeignKey(x => x.TeacherId)
+                .WillCascadeOnDelete();
 
             //One to One
             //HasRequired(s => s.Live)
-            //    .WithRequiredPrincipal(c => c.Lives);
-            
-                        
+            //    .WithRequiredPrincipal(t => t.Lives);
+
+
+
 
 
         }

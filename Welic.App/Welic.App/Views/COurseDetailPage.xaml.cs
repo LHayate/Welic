@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Models.Live;
 using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
@@ -26,7 +27,10 @@ namespace Welic.App.Views
 
 	    private void ListViewStart_OnItemTapped(object sender, ItemTappedEventArgs e)
 	    {
-	        throw new NotImplementedException();
-	    }
+	        var item = (LiveDto)e.Item;
+
+	        if (item != null)
+	            (BindingContext as ListLiveViewModel)?.OpenLive(item);
+        }
 	}
 }

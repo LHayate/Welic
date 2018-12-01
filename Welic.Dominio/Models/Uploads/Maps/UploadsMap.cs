@@ -12,6 +12,8 @@ namespace Welic.Dominio.Models.Uploads.Maps
     {
         public Guid UploadId { get; set; }
         public string Path { get; set; }
+
+        public string UserId { get; set; }
         public AspNetUser User { get; set; }
     }
 }

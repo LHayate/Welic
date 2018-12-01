@@ -14,7 +14,7 @@ namespace Welic.Dominio.Models.Lives.Entitys
         public decimal Prince { get; set; }
         public string Themes { get; set; }
         public bool Chat { get; set; }
-        public byte[] Print { get; set; }
+        public string Print { get; set; }
         public string UrlDestino { get; set; }
         public Users.Entidades.User Author { get; set; }
     }

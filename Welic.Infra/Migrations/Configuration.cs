@@ -22,7 +22,7 @@ namespace Welic.Infra.Migrations
         {
             AutomaticMigrationsEnabled = true;
             //AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; ;
-            //ContextKey = "Welic.Infra.Context.AuthContext";
+            ContextKey = "Welic.Infra.Context.AuthContext";
 
             //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
         }

@@ -56,7 +56,7 @@ namespace Servicos.Schedule
                 scheduleFinding.ScheduleId = scheduleDto.ScheduleId;
                 scheduleFinding.DateEvent = scheduleDto.DateEvent;
                 scheduleFinding.Description = scheduleDto.Description;
-                scheduleFinding.Live = _repositoryLive.GetById(scheduleDto.Live.Id);
+                //scheduleFinding.Live = _repositoryLive.GetById(scheduleDto.Live.Id);
                 scheduleFinding.Prince = scheduleDto.Prince;
                 scheduleFinding.Private = scheduleDto.Private;
                 scheduleFinding.Title = scheduleDto.Title;
@@ -75,8 +75,8 @@ namespace Servicos.Schedule
                         NickName = userDto.NickName
                         
                     };
-
-                    scheduleFinding.UserClass.Add(userMap);
+                    
+                    //scheduleFinding.UserClass.Add(userMap);todo: Solucionar 
                 }
             }
             else
@@ -86,7 +86,7 @@ namespace Servicos.Schedule
                     ScheduleId = scheduleDto.ScheduleId,
                     DateEvent = scheduleDto.DateEvent,
                     Description = scheduleDto.Description,
-                    Live = _repositoryLive.GetById(scheduleDto.Live.Id),
+                    //Live = _repositoryLive.GetById(scheduleDto.Live.Id),
                     Prince = scheduleDto.Prince,
                     Private = scheduleDto.Private,
                     Title = scheduleDto.Title,
@@ -109,7 +109,7 @@ namespace Servicos.Schedule
                             NickName = userDto.NickName,                        
                         };
 
-                        scheduleFinding.UserClass.Add(userMap);                    
+                        //scheduleFinding.UserClass.Add(userMap);                    todo SOlucionar
                     }
             }
 

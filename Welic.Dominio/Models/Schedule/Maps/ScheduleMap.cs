@@ -8,6 +8,10 @@ namespace Welic.Dominio.Models.Schedule.Maps
 {
     public class ScheduleMap : Patterns.Pattern.Ef6.Entity
     {
+        public ScheduleMap()
+        {
+            //UserClass = new List<AspNetUser>();
+        }
         public int ScheduleId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -16,8 +20,11 @@ namespace Welic.Dominio.Models.Schedule.Maps
         public bool Private { get; set; }
         public bool Ativo { get; set; }
 
+        public string TeacherId { get; set; }    
         public AspNetUser UserTeacher { get; set; }
-        public ICollection<AspNetUser> UserClass { get; set; }
-        public LiveMap Live { get; set; }
+
+        public virtual ICollection<AspNetUser> UserClass { get; set; }
+        
+        public virtual LiveMap Live { get; set; }
     }
 }

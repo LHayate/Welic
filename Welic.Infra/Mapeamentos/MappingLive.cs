@@ -21,7 +21,8 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.Id)
                 .IsRequired()
                 .HasColumnType("int")
-                .HasColumnName("Id");
+                .HasColumnName("Id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.Title)
                 .IsRequired()
                 .HasColumnType("varchar")
@@ -36,7 +37,7 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnName("Prince");
             Property(x => x.Print)
                 .IsOptional()
-                .HasColumnType("image")
+                .HasColumnType("varchar")
                 .HasColumnName("Print");
             Property(x => x.Themes)
                 .IsRequired()
@@ -51,11 +52,45 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnType("varchar")
                 .HasColumnName("UrlDestino");
 
-            //One to Many
-            HasRequired(c1 => c1.Author)
-                .WithMany(c2 => c2.Lives)
+
+
+            // Properties
+            this.Property(t => t.TeacherId)
+                .IsRequired()
+                .HasMaxLength(128);
+
+
+            //One to One 
+            HasRequired(s => s.Schedules)
+                .WithRequiredPrincipal(ad => ad.Live);
+
+
+           //One to Many            
+            HasRequired(c1 => c1.TeacherUser)
+                .WithMany(c2 => c2.LivesTeacher)
+                .HasForeignKey(x => x.TeacherId)
                 .WillCascadeOnDelete();
 
+
+            //Many to Many
+            HasMany(p => p.ClassUser)
+                .WithMany(c => c.LivesClass)
+                .Map(c =>
+                {
+                    c.MapLeftKey("LiveId");
+                    c.MapRightKey("UserId");
+                    c.ToTable("LiveClass");
+                })
+                ;
+            HasMany(p => p.Courses)
+                .WithMany(c => c.Live)
+                .Map(c =>
+                {
+                    c.MapLeftKey("LiveId");
+                    c.MapRightKey("CourseId");
+                    c.ToTable("CourseLive");
+                })
+                ;
         }
     }
 }

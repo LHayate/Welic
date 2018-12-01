@@ -34,7 +34,7 @@ namespace Servicos.Users
                 userMap.NickName = userDto.NickName;                
                 userMap.PhoneNumber = userDto.PhoneNumber;
                 userMap.Id = userDto.Id;
-                userMap.Guid = new Guid();
+                userMap.Guid = userDto.Guid;
                 userMap.PhoneNumberConfirmed = userDto.PhoneNumberConfirmed;
                 userMap.LastAccessDate = DateTime.Now;
                 userMap.Profession = userDto.Profession;

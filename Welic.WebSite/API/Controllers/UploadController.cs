@@ -13,6 +13,7 @@ using Welic.Dominio.Models.Uploads.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
 
 namespace Welic.WebSite.API.Controllers
@@ -23,10 +24,12 @@ namespace Welic.WebSite.API.Controllers
     {
         private IUploadsService _uploadsService;
         private IAspNetUserService _serviceUser;
-        public UploadController(IUploadsService uploadsService, IAspNetUserService serviceUser)
+        private IUnitOfWorkAsync _unityOfWorkAsync;
+        public UploadController(IUploadsService uploadsService, IAspNetUserService serviceUser, IUnitOfWorkAsync unityOfWorkAsync)
         {
             _serviceUser = serviceUser;
             _uploadsService = uploadsService;
+            _unityOfWorkAsync = unityOfWorkAsync;
         }
         [HttpPost]
         [Route("files")]       
@@ -38,34 +41,57 @@ namespace Welic.WebSite.API.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            // Preparar CustomMultipartFormDataStreamProvider para carga de dados
-            // (veja mais abaixo)
-
-            string fileSaveLocation = HttpContext.Current.Server.MapPath("~/Arquivos/Uploads");
-            CustomMultipartFormDataStreamProvider provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
-            List<string> files = new List<string>();
+            
             try
-            {
+            {   
+                // Preparar CustomMultipartFormDataStreamProvider para carga de dados
+                // (veja mais abaixo)
+                string fileSaveLocation = HttpContext.Current.Server.MapPath("~/Arquivos/Uploads");
+                CustomMultipartFormDataStreamProvider provider = new CustomMultipartFormDataStreamProvider(fileSaveLocation);
+                List<string> files = new List<string>();
+
                 // Ler conteúdo da requisição para CustomMultipartFormDataStreamProvider. 
-                
                 await Request.Content.ReadAsMultipartAsync(provider);
 
                 foreach (MultipartFileData file in provider.FileData)
                 {
+                    
                     files.Add(Path.GetFileName(file.LocalFileName));
-                    File.Move(file.LocalFileName,
-                        Path.Combine(CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName.Split('.').LastOrDefault())),
-                            file.LocalFileName.Split('\\').LastOrDefault()));
+
+                    var path = Path.Combine(
+                        CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads",
+                            file.LocalFileName.Split('.').LastOrDefault())),
+                        file.LocalFileName.Split('/').LastOrDefault());
+
+                   
+
+                    var imagem = HttpContext.Current.Server.MapPath($"~/Arquivos/Uploads")+ $"\\{file.LocalFileName.Split('\\').LastOrDefault().Split('.').FirstOrDefault()}.jpg";
+
+                    //File.Move(file.LocalFileName,
+                    //    path);
+
+                    var path1 = Path.Combine(HttpContext.Current.Server.MapPath("~/ffmpeg/bin/ffmpeg.exe"));
+
+
+                    string executavel = Path.Combine(HttpContext.Current.Server.MapPath("~/ffmpeg/bin/ffmpeg.exe"));
+                    string parametros = " -y -i " + path + " -vframes 1 -ss 00:00:03 -an -vcodec mjpeg -f rawvideo " + imagem;
+                    System.Diagnostics.Process.Start(@executavel, parametros);
+
                     var user = await _serviceUser.FindAsync(
-                        file.LocalFileName.Split('\\').LastOrDefault().Split('_')[1]);
-                    _uploadsService.Insert(new UploadsMap
-                    {
-                        ObjectState = ObjectState.Added,
-                        Path = Path.Combine(CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads", file.LocalFileName.Split('.').LastOrDefault())),
-                            file.LocalFileName.Split('\\').LastOrDefault()),
-                        UploadId = new Guid(),
-                        User = user
-                    });
+                        file.LocalFileName.Split('/').LastOrDefault().Split('_')[1]);
+
+                    //user.ObjectState = ObjectState.Unchanged;
+
+                    //Salvar Uploads
+                    _uploadsService.Insert(
+                        new UploadsMap
+                        {
+                            ObjectState = ObjectState.Added,
+                            Path = path,
+                            UploadId = Guid.NewGuid(),                            
+                            UserId = user.Id
+                        });
+                    _unityOfWorkAsync.SaveChanges();
                 }
                 // OK se tudo deu certo.
                 return Request.CreateResponse(HttpStatusCode.OK, files);

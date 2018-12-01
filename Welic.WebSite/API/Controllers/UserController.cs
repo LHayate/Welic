@@ -10,6 +10,8 @@ using Registrators;
 using Registrators.Helpers;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Services;
+using Welic.Dominio.Models.Menu.Command;
+using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Comandos;
 using Welic.Dominio.Models.Users.Dtos;
@@ -25,6 +27,7 @@ namespace Welic.WebSite.API.Controllers
     public class UserController : BaseController
     {
         public readonly IServiceUser _servico;
+        private readonly IServicoMenu _servicoMenu;
 
         #region Fields
         private ApplicationSignInManager _signInManager;
@@ -71,9 +74,10 @@ namespace Welic.WebSite.API.Controllers
         }
         #endregion
 
-        public UserController(IServiceUser servico)
+        public UserController(IServiceUser servico, IServicoMenu servicoMenu)
         {
             _servico = servico;
+            _servicoMenu = servicoMenu;
         }
 
         [HttpGet]
@@ -110,67 +114,90 @@ namespace Welic.WebSite.API.Controllers
         [AllowAnonymous]
         [Route("Create")]
         public async  Task<HttpResponseMessage> Create([FromBody] AspNetUser model)
-        {            
-            var user = new ApplicationUser
+        {
+            try
             {
-                UserName = model.Email,
-                Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                RegisterDate = DateTime.Now,
-                RegisterIP = HttpContext.Current.Request.GetVisitorIP(),
-                LastAccessDate = DateTime.Now,
-                LastAccessIP = HttpContext.Current.Request.GetVisitorIP()
-            };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    RegisterDate = DateTime.Now,
+                    RegisterIP = HttpContext.Current.Request.GetVisitorIP(),
+                    LastAccessDate = DateTime.Now,
+                    LastAccessIP = HttpContext.Current.Request.GetVisitorIP()
+                };
 
-            var result = await UserManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-                var found = _servico.GetByEmail(model.Email);
-                return await CriaResposta(HttpStatusCode.OK, found );
-                //// Send Message
-                //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
-                //var administrator = roleAdministrator.Users.FirstOrDefault();
-                
-                //var message = new MessageSendModel()
-                //{
-                //    UserFrom = administrator.UserId,
-                //    UserTo = user.Id,
-                //    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
-                //    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var menu = _servicoMenu.GetMenuComplet();
 
-                //};
+                    _servicoMenu.SaveMenuUser(
+                        new CommandMenu
+                        {
+                            MenuUser = menu,
+                            NameUser = model.Email
+                        }
+                    );
 
-                //await MessageHelper.SendMessage(message);
+                    var found = _servico.GetByEmail(model.Email);
+                    return await CriaResposta(HttpStatusCode.OK, found);
+                    //// Send Message
+                    //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+                    //var administrator = roleAdministrator.Users.FirstOrDefault();
 
-                //// Send an email with this link
-                //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var message = new MessageSendModel()
+                    //{
+                    //    UserFrom = administrator.UserId,
+                    //    UserTo = user.Id,
+                    //    Subject = HttpContext.ParseAndTranslate(string.Format("[[[Welcome to {0}!]]]", CacheHelper.Settings.Name)),
+                    //    Body = HttpContext.ParseAndTranslate(string.Format("[[[Hi, Welcome to {0}! I am happy to assist you if you has any questions.]]]", CacheHelper.Settings.Name))
 
-                //var urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
-                //var callbackUrl = urlHelper.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: System.Web.HttpContext.Current.Request.Url.Scheme);
+                    //};
 
-                //var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "signup").SelectAsync();
-                //var emailTemplate = emailTemplateQuery.FirstOrDefault();
+                    //await MessageHelper.SendMessage(message);
 
-                //if (emailTemplate != null)
-                //{
-                //    dynamic email = new Postal.Email("Email");
-                //    email.To = user.Email;
-                //    email.From = CacheHelper.Settings.EmailAddress;
-                //    email.Subject = emailTemplate.Subject;
-                //    email.Body = emailTemplate.Body;
-                //    email.CallbackUrl = callbackUrl;
-                //    EmailHelper.SendEmail(email);
-                //}
+                    //// Send an email with this link
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                    //var urlHelper = new UrlHelper(System.Web.HttpContext.Current.Request.RequestContext);
+                    //var callbackUrl = urlHelper.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: System.Web.HttpContext.Current.Request.Url.Scheme);
+
+                    //var emailTemplateQuery = await _emailTemplateService.Query(x => x.Slug.ToLower() == "signup").SelectAsync();
+                    //var emailTemplate = emailTemplateQuery.FirstOrDefault();
+
+                    //if (emailTemplate != null)
+                    //{
+                    //    dynamic email = new Postal.Email("Email");
+                    //    email.To = user.Email;
+                    //    email.From = CacheHelper.Settings.EmailAddress;
+                    //    email.Subject = emailTemplate.Subject;
+                    //    email.Body = emailTemplate.Body;
+                    //    email.CallbackUrl = callbackUrl;
+                    //    EmailHelper.SendEmail(email);
+                    //}
+                }
+
+                string error = string.Empty;
+                foreach (var item in result.Errors)
+                {
+                    if(item.Contains("is already taken."))
+                        return await CriaResposta(HttpStatusCode.Conflict, error);
+
+                    error += $"{item} -  ";
+                }
+                return await CriaResposta(HttpStatusCode.Unauthorized, error);
             }
-
-            string error = string.Empty;
-            foreach (var item in result.Errors)
+            catch (Exception e)
             {
-                error += $"{item} -  ";
+                Console.WriteLine(e);
+                return await CriaResposta(HttpStatusCode.InternalServerError, e.Message);
             }
+            
 
-            return await CriaResposta(HttpStatusCode.InternalServerError, error);                        
+                              
         }
 
         [System.Web.Http.HttpPost]

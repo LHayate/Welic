@@ -13,7 +13,7 @@ namespace Welic.Infra.Mapeamentos
     {
         public MappingCursos()
         {
-            ToTable("cursos");
+            ToTable("Courses");
             HasKey(x => x.IdCurso);
 
        
@@ -26,7 +26,6 @@ namespace Welic.Infra.Mapeamentos
             Property(x => x.AuthorId)
                 .IsRequired()
                 .HasMaxLength(128);
-
 
             Property(x => x.Title)
                 .IsRequired()
@@ -55,9 +54,21 @@ namespace Welic.Infra.Mapeamentos
             this.Property(t => t.AuthorId).HasColumnName("AuthorId");
 
             //One to Many
-            HasRequired(c1 => c1.AspNetUser)
-                .WithMany(c2 => c2.Cursos)
+            HasRequired(c1 => c1.TeacherUser)
+                .WithMany(c2 => c2.TeacherCursos)
                 .HasForeignKey(s=> s.AuthorId).WillCascadeOnDelete();
+
+            //many to many
+            HasMany(p => p.UserClass)
+                .WithMany(c => c.ClassCursos)
+                .Map(c =>
+                {
+                    c.MapLeftKey("CourseId");
+                    c.MapRightKey("UserId");
+                    c.ToTable("CourseStudent");
+                })
+                ;
+
         }
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using Plugin.FileUploader;
+using Plugin.FileUploader.Abstractions;
 using Plugin.Media.Abstractions;
 using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
@@ -9,14 +12,26 @@ namespace Welic.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CreateLivePage : ContentPage
-	{
-	    private MediaFile _mediaFile;
-	    private string path;
+	{	        
+	   
+	    bool isBusya = false;
         public CreateLivePage ()
 		{
 			InitializeComponent ();
 		    BindingContext = ViewModelLocator.Resolve<CreateLiveViewModel>();
-		}
+		    CrossFileUploader.Current.FileUploadCompleted += Current_FileUploadCompleted;
+		    CrossFileUploader.Current.FileUploadError += Current_FileUploadError;
+		    CrossFileUploader.Current.FileUploadProgress += Current_FileUploadProgress;
+        }
+
+	    public CreateLivePage(params object[] obj)
+	    {
+	        InitializeComponent();
+	        BindingContext = new CreateLiveViewModel(obj);
+	        CrossFileUploader.Current.FileUploadCompleted += Current_FileUploadCompleted;
+	        CrossFileUploader.Current.FileUploadError += Current_FileUploadError;
+	        CrossFileUploader.Current.FileUploadProgress += Current_FileUploadProgress;
+        }
 
 	    private async  void PickFile_OnClicked(object sender, EventArgs e)
 	    {
@@ -38,24 +53,37 @@ namespace Welic.App.Views
 
         }
 
-	    private async void Creat_Upload_OnClicked(object sender, EventArgs e)
+	  
+        private void Current_FileUploadProgress(object sender, FileUploadProgress e)
 	    {
-            //try
-            //{
-            //    var content = new MultipartFormDataContent();
+	        Device.BeginInvokeOnMainThread(() =>
+	        {                
+	            progress.Progress = e.Percentage / 100.0f;
+	        });
+	    }
 
-            //    content.Add(new StreamContent(_mediaFile.GetStream()),
-            //        "\"file\"",
-            //        $"\"{_mediaFile.Path}\"");
+	    private void Current_FileUploadError(object sender, FileUploadResponse e)
+	    {
+	        isBusya = false;
+	        System.Diagnostics.Debug.WriteLine($"{e.StatusCode} - {e.Message}");
+	        Device.BeginInvokeOnMainThread(async () =>
+	        {
+	            await DisplayAlert("File Upload", "Upload Failed", "Ok");
+	            progress.IsVisible = false;
+	            progress.Progress = 0.0f;
+	        });
+	    }
 
-            //    await WebApi.Current.PostAsync("uploads/files", content);
-
-            //}
-            //catch (System.Exception exception)
-            //{
-            //    Console.WriteLine(exception);
-            //    await DisplayAlert("Erro", "Erro ao criar", "OK");
-            //}
-        }
+	    private void Current_FileUploadCompleted(object sender, FileUploadResponse e)
+	    {
+	        isBusya = false;
+	        System.Diagnostics.Debug.WriteLine($"{e.StatusCode} - {e.Message}");
+	        Device.BeginInvokeOnMainThread(async () =>
+	        {
+	            await DisplayAlert("File Upload", "Upload Completed", "Ok");
+	            progress.IsVisible = false;
+	            progress.Progress = 0.0f;
+	        });
+	    }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using Welic.App.Models.Live;
 using Welic.App.Services.API;
@@ -26,7 +27,7 @@ namespace Welic.App.Models.Search
                 ObservableCollection<SearchDto> search = new ObservableCollection<SearchDto>();
                 foreach (LiveDto item in result)
                 {
-                    search.Add(new SearchDto { Image = item.Print, Name = item.Title, Description = item.Description, Location = item.Themes });
+                    search.Add(new SearchDto { Image = File.ReadAllBytes(item.Print), Name = item.Title, Description = item.Description, Location = item.Themes });
                 }
 
                 return search;

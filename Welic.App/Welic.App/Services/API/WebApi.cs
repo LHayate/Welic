@@ -136,7 +136,7 @@ namespace Welic.App.Services.API
                     var _result = await response.Content.ReadAsStringAsync();
 
                     return JsonConvert.DeserializeObject<T>(_result);
-                }                                    
+                }
             }
             catch (System.Exception ex)
             {
@@ -182,7 +182,15 @@ namespace Welic.App.Services.API
                 using (var _response = await _HttpClient.PostAsync(uri, content))
                 {
                     if (!_response.IsSuccessStatusCode)
-                        throw new InvalidOperationException("Verifique os dados informados ou sua conexão com a internet");
+                    {
+                        if(_response.StatusCode == HttpStatusCode.Conflict)
+                            throw new InvalidOperationException("Dados Duplicados");
+                        if(_response.StatusCode == HttpStatusCode.Unauthorized)
+                            throw new InvalidOperationException("Não Autorizado");
+
+                        throw new InvalidOperationException("Erro ao Gravar Informações");
+                    }
+                        
                     var result =  await _response.Content.ReadAsStringAsync();
                     return JsonConvert.DeserializeObject<T>(result);
                 }              
@@ -221,8 +229,7 @@ namespace Welic.App.Services.API
         internal async Task<string> UploadAsync(MultipartFormDataContent path)
         {
             try
-            {
-                
+            {                
                 using (var _response = await _HttpClient.PostAsync("uploads/files", path))
                 {
                     if (!_response.IsSuccessStatusCode)

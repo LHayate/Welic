@@ -40,12 +40,14 @@ namespace Welic.Infra.Mapeamentos
             //Property(x => x.GroupAcess).HasColumnName("GroupAcess");
 
 
-            HasMany(e => e.Usuarios).WithMany(p => p.Menus).Map(ep =>
-            {
-                ep.MapLeftKey("IdMenu");
-                ep.MapRightKey("IdUser");
-                ep.ToTable("MenusUser");
-            });
+            HasMany(e => e.Usuarios)
+                .WithMany(p => p.Menus)
+                .Map(ep =>
+                        {
+                            ep.MapLeftKey("IdMenu");
+                            ep.MapRightKey("UserId");
+                            ep.ToTable("MenusUser");
+                        });
         }
     }
 }

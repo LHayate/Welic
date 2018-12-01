@@ -29,13 +29,13 @@ namespace Welic.Repositorios.Menu
             {
                 try
                 {
-                    string queryDelete = "DELETE FROM MenusUser WHERE IdUser = @IdUser";
-                    _context.Database.ExecuteSqlCommand(queryDelete, new SqlParameter("IdUser", idUser));
+                    string queryDelete = "DELETE FROM MenusUser WHERE UserId = @UserId";
+                    _context.Database.ExecuteSqlCommand(queryDelete, new SqlParameter("UserId", idUser));
 
                     foreach (MenuMap menu in NewMenuUser)
                     {
-                        string query = "INSERT INTO MenusUser (IdUser, IdMenu) VALUES (@IdUser, @IdMenu)";
-                        _context.Database.ExecuteSqlCommand(query, new SqlParameter("IdUser", idUser),
+                        string query = "INSERT INTO MenusUser (UserId, IdMenu) VALUES (@UserId, @IdMenu)";
+                        _context.Database.ExecuteSqlCommand(query, new SqlParameter("UserId", idUser),
                             new SqlParameter("IdMenu", menu.Id));
                     }
                     dbContextTransaction.Commit();

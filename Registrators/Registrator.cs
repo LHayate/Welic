@@ -19,6 +19,7 @@ using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Curso.Service;
+using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Models.Marketplaces.Entityes;
@@ -84,7 +85,10 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<MessageThread>, Repository<MessageThread>>()
                 .RegisterType<IRepositoryAsync<UploadsMap>, Repository<UploadsMap>>()
                 .RegisterType<IRepositoryAsync<CursoMap>,Repository<CursoMap>>()
+                .RegisterType<IRepositoryAsync<LiveMap>,Repository<LiveMap>>()
 
+
+                .RegisterType<IServiceLive, ServiceLive>()
                 .RegisterType<ICategoryService, CategoryService>()
                 .RegisterType<ICategoryStatService, CategoryStatService>()
                 .RegisterType<IListingService, ListingService>()
@@ -182,7 +186,6 @@ namespace Registrators
         private static void RegisterLive(IUnityContainer container)
         {
             container.RegisterType<IRepositoryLive, RepositoryLive>();
-            container.RegisterType<IServiceLive, ServiceLive>();
         }
     }
 }

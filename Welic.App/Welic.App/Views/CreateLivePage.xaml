@@ -86,6 +86,8 @@
 
                <Label Text="{Binding PathFiles}" x:Name="PathFile" HorizontalOptions="StartAndExpand"/>
 
+                <ProgressBar x:Name="progress" Progress="0.0" IsVisible="False" />
+
                 <implements:GradientColorStack StartColor="#C79D1D" 
                                                EndColor="#CE7526" 
                                                HorizontalOptions="CenterAndExpand"

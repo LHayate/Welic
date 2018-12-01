@@ -17,9 +17,12 @@ namespace Welic.App.Models.Live
         public decimal Price { get; set; }
         public string Themes { get; set; }
         public bool Chat { get; set; }
-        public byte[] Print { get; set; }
+        public string Print { get; set; }
         public string UrlDestino { get; set; }
-        public UserDto Author { get; set; }
+        
+        public int CourseId { get; set; }       
+
+        public string TeacherId { get; set; }
 
         public LiveDto()
         {
@@ -32,7 +35,7 @@ namespace Welic.App.Models.Live
         {
             get => _listItem;
             set => _listItem = value;
-        }
+        }       
 
         public async Task<List<LiveDto>> GetList(int pageIndex, int pageSize)
         {
@@ -40,6 +43,19 @@ namespace Welic.App.Models.Live
             {
                 _listItem = await Current?.GetAsync<List<LiveDto>>("live/GetListLive");
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+        public async Task<ObservableCollection<LiveDto>> GetList()
+        {
+            try
+            {
+                var list = await Current?.GetAsync<ObservableCollection<LiveDto>>("live/GetListLive");
+                return list;
 
             }
             catch (System.Exception e)
@@ -52,8 +68,7 @@ namespace Welic.App.Models.Live
         public async Task<LiveDto> Save(LiveDto liveDto)
         {
             try
-            {
-                liveDto.Author = (new UserDto()).LoadAsync();
+            {                
                 return liveDto != null ? await Current?.PostAsync("live/Save", liveDto) : null;
             }
             catch (System.Exception e)
