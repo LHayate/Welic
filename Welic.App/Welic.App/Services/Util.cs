@@ -26,6 +26,20 @@ namespace Welic.App.Services
                     return null;
             }
         }
+        //public static string ImagePorSistema(string nmImage)
+        //{
+        //    switch (Device.RuntimePlatform)
+        //    {
+        //        case Device.iOS:
+        //            return $"{nmImage}.png";
+        //        case Device.Android:
+        //            return $"{nmImage}.png";
+        //        case Device.UWP:
+        //            return "Image/" + nmImage + ".png";
+        //        default:
+        //            return null;
+        //    }
+        //}
         public static string BuscaPrimeiroNome(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))

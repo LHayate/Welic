@@ -6,11 +6,11 @@ namespace Welic.App.Services.ServiceViews
 {
     public class RandomNumberGenerator
     {
-        public static string CreateUniqueId(int length = 64)
-        {
-            var bytes = PCLCrypto.WinRTCrypto.CryptographicBuffer.GenerateRandom(length);
-            return ByteArrayToString(bytes);
-        }
+        //public static string CreateUniqueId(int length = 64)
+        //{
+        //    var bytes = PCLCrypto.WinRTCrypto.CryptographicBuffer.GenerateRandom(length);
+        //    return ByteArrayToString(bytes);
+        //}
 
         private static string ByteArrayToString(byte[] array)
         {

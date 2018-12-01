@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Welic.App.Models.Token;
 using Welic.App.Services.ServicesViewModels;
 using IdentityModel;
-using static PCLCrypto.WinRTCrypto;
+//using static PCLCrypto.WinRTCrypto;
 
 namespace Welic.App.Services.ServiceViews
 {
@@ -34,7 +34,7 @@ namespace Welic.App.Services.ServiceViews
             dic.Add("scope", "openid profile basket orders locations marketing offline_access");
             dic.Add("redirect_uri", GlobalSetting.Instance.IdentityCallback);
             dic.Add("nonce", Guid.NewGuid().ToString("N"));
-            dic.Add("code_challenge", CreateCodeChallenge());
+            //dic.Add("code_challenge", CreateCodeChallenge());
             dic.Add("code_challenge_method", "S256");
 
             // Add CSRF token to protect against cross-site request forgery attacks.
@@ -65,15 +65,15 @@ namespace Welic.App.Services.ServiceViews
             return token;
         }
 
-        private string CreateCodeChallenge()
-        {
-            _codeVerifier = RandomNumberGenerator.CreateUniqueId();
-            var sha256 = HashAlgorithmProvider.OpenAlgorithm(PCLCrypto.HashAlgorithm.Sha256);
-            var challengeBuffer = sha256.HashData(CryptographicBuffer.CreateFromByteArray(Encoding.UTF8.GetBytes(_codeVerifier)));
-            byte[] challengeBytes;
-            CryptographicBuffer.CopyToByteArray(challengeBuffer, out challengeBytes);            
+        //private string CreateCodeChallenge()
+        //{
+        //    _codeVerifier = RandomNumberGenerator.CreateUniqueId();
+        //    var sha256 = HashAlgorithmProvider.OpenAlgorithm(PCLCrypto.HashAlgorithm.Sha256);
+        //    var challengeBuffer = sha256.HashData(CryptographicBuffer.CreateFromByteArray(Encoding.UTF8.GetBytes(_codeVerifier)));
+        //    byte[] challengeBytes;
+        //    CryptographicBuffer.CopyToByteArray(challengeBuffer, out challengeBytes);            
 
-            return Base64Url.Encode(challengeBytes);
-        }
+        //    return Base64Url.Encode(challengeBytes);
+        //}
     }
 }

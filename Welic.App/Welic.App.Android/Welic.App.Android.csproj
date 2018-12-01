@@ -85,9 +85,6 @@
     <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling">
       <Version>1.0.0-preview2</Version>
     </PackageReference>
-    <PackageReference Include="XLabs.Forms">
-      <Version>2.0.5782</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implements\CustomEntryDroid.cs" />

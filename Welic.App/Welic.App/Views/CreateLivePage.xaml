@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:Extends="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             
              xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
              x:Class="Welic.App.Views.CreateLivePage"
              BackgroundColor="#0F5682"
@@ -68,12 +68,12 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Extends:CheckBox DefaultText="Chat"
+                    <!--<Extends:CheckBox DefaultText="Chat"
                                       HorizontalOptions="FillAndExpand"
                                       Checked="{Binding Chat}"
                                       Grid.Column="0"
                                       x:Name="Check"
-                    />
+                    />-->
 
                     <Button  x:Name="PickFile"                             
                              

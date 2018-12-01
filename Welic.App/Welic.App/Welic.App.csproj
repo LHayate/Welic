@@ -15,7 +15,6 @@
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.11.0" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.11.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="PCLCrypto" Version="2.0.147" />
     <PackageReference Include="Plugin.FileUploader" Version="1.4.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Unity" Version="5.8.11" />
@@ -28,7 +27,6 @@
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Forms.CarouselView" Version="2.3.0-pre2" />
     <PackageReference Include="Xamarin.Forms.Extended.InfiniteScrolling" Version="1.0.0-preview2" />
-    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />  
   </ItemGroup>
 
