@@ -37,11 +37,11 @@ namespace Welic.Infra.Context
             }
         }
 
+       
         public AuthContext()
             //: base("WelicDbContext")
             : base("WelicDbContext")
-        {
-
+        {            
         }
 
         public DbSet<DispositivosMap> Dispositivo { get; set; }

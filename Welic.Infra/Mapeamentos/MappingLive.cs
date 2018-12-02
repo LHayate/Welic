@@ -51,6 +51,10 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasColumnName("UrlDestino");
+            Property(x => x.DateRegister)
+                .IsRequired()
+                .HasColumnName("DateRegister")
+                .HasColumnType("datetime");
 
 
 

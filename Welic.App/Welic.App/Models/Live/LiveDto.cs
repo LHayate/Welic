@@ -19,7 +19,8 @@ namespace Welic.App.Models.Live
         public bool Chat { get; set; }
         public string Print { get; set; }
         public string UrlDestino { get; set; }
-        
+        public DateTime DateRegister { get; set; }
+
         public int CourseId { get; set; }       
 
         public string TeacherId { get; set; }
@@ -64,11 +65,40 @@ namespace Welic.App.Models.Live
                 return null;
             }
         }
+        public async Task<ObservableCollection<LiveDto>> GetListRecente()
+        {
+            try
+            {
+                var list = await Current?.GetAsync<ObservableCollection<LiveDto>>("live/GetListRecentes");
+                return list;
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+        public async Task<ObservableCollection<LiveDto>> GetListFavoritos()
+        {
+            try
+            {
+                var list = await Current?.GetAsync<ObservableCollection<LiveDto>>("live/GetLisFavoritos");
+                return list;
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
 
         public async Task<LiveDto> Save(LiveDto liveDto)
         {
             try
             {                
+                liveDto.DateRegister = DateTime.Now;
                 return liveDto != null ? await Current?.PostAsync("live/Save", liveDto) : null;
             }
             catch (System.Exception e)

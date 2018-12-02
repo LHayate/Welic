@@ -30,7 +30,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
                             </Grid.RowDefinitions>
-                            <Image Source="{Binding Print, Converter={StaticResource ByteArrayToImage}}" 
+                            <Image Source="{Binding Print}" 
                                    Grid.Column="0"                                                                                                                        
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="FillAndExpand"

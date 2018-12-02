@@ -129,7 +129,7 @@ namespace Welic.App.ViewModels
                             //await NavigationService.NavigateModalToAsync<LiveViewModel>();
                             await NavigationService.ReturnModalToAsync(true);
 
-                        content.Dispose();                        
+                        //content.Dispose();                        
                     }
                 }
             }

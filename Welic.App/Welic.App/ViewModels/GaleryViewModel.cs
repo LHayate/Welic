@@ -15,25 +15,20 @@ namespace Welic.App.ViewModels
     {        
        
         public GaleryViewModel()
-        {
+        {                     
           
-            SetListCourses();
-          
-        }
+        }      
 
-        private ObservableCollection<LiveDto> _listSource;
-
-        public ObservableCollection<LiveDto> ListSource
+        public async Task<ObservableCollection<LiveDto>> GetListRecente()
         {
-            get => _listSource;
-            set => SetProperty(ref _listSource, value);
+           return await new LiveDto().GetListRecente();
         }
 
-        public async Task SetListCourses()
+        public async Task<ObservableCollection<LiveDto>> GetListFavorite()
         {
-            _listSource = await new LiveDto().GetList();
+            return await new LiveDto().GetListFavoritos();
         }
-             
+
         public void OpenLive(LiveDto live)
         {
             object[] obj = new[] { live };

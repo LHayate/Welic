@@ -65,28 +65,43 @@ namespace Welic.WebSite.API.Controllers
         [Route("GetById/{id:int}")]
         public Task<HttpResponseMessage> GetById(int id)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.GetById(id));
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Find(id));
         }
 
         [HttpGet]
         [Route("GetListLive")]
         public Task<HttpResponseMessage> ListLive()
         {            
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.GetListLive());
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=>x).ToList());
+        }
+
+        [HttpGet]
+        [Route("GetListRecentes")]
+        public Task<HttpResponseMessage> ListLiveRecentes()
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).OrderByDescending(x=> x.DateRegister).ToList());
+        }
+
+        [HttpGet]
+        [Route("GetLisFavoritos")]
+        public Task<HttpResponseMessage> ListLivFavoritas()
+        {
+            //TODO: Implementar Favoritos
+            return CriaResposta(HttpStatusCode.NotImplemented, "Implementar");
         }
 
         [HttpGet]
         [Route("GetListbyCourse/{id:int}")]
         public Task<HttpResponseMessage> ListbyCourse(int id)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.GetListByCourse(id));
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).Where(x=> x.CourseId==id).ToList());
         }
 
         [HttpGet]
         [Route("GetSearchListLive/{text}")]
         public Task<HttpResponseMessage> ListSearchLive(string text)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.GetSearchListLive(text));
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).Where(x=> x.Title.Contains(text) || x.Description.Contains(text)));
         }
 
         [HttpPost]

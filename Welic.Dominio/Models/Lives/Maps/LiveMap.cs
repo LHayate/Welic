@@ -21,6 +21,7 @@ namespace Welic.Dominio.Models.Lives.Maps
         public bool Chat { get; set; }
         public string Print { get; set; }
         public string UrlDestino { get; set; }
+        public DateTime DateRegister { get; set; }
 
         public int CourseId { get; set; }
         public ICollection<CursoMap> Courses { get; set; }

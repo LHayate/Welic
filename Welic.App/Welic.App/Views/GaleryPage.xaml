@@ -1,87 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            
-             xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"                         
              x:Class="Welic.App.Views.GaleryPage"
              BackgroundColor="#0F5682"
              >
     <ContentPage.Content>
-        <StackLayout >
-
-            <!--<StackLayout>
+        <ScrollView>
+            <StackLayout >
                 <Label Text="Recentes" FontSize="16" TextColor="#DBF6FF"/>
-                <carousel:CarouselView x:Name="RecentesCarouselView" 
-                                       Margin="5"       
-                                       HeightRequest="165"
-                                       ItemsSource="{Binding ListSource}"    
-                                       ItemSelected="RecentesCarouselView_OnItemSelected"
-                                       >
-                    <carousel:CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid BackgroundColor="Aqua"
-                                >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="15"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="165"/>
-                                </Grid.RowDefinitions>
-                                
-                                <implements:VideoPlayer  x:Name="videoPlayer"   
-                                                         Grid.Row="0"
-                                                         AutoPlay="False"                                                                        
-                                                         Source="{Binding UrlDestino}" 
-                                                         AspectMode="AspectFill"
-                                                         Grid.Column="0"
-                                />
-                                --><!--<Button Command="{Binding VideoRecenteCommand}" Grid.Column="0" />--><!--
-                                <Label Text="{Binding Title}" FontSize="Small" Grid.Column="1" HorizontalTextAlignment="Center"/>
-                            </Grid>
-                        </DataTemplate>
-                        
-                    </carousel:CarouselView.ItemTemplate>
-                    
-                </carousel:CarouselView>
+                <StackLayout >
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ScrollView Grid.Row="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                            <StackLayout x:Name="StackGallery" Padding="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                            </StackLayout>
+                        </ScrollView>
+                        <Label Grid.Row="1" Text="Found x items" HeightRequest="30"></Label>
+                    </Grid>
+                </StackLayout>
+
+                <Label Text="Favoritos" FontSize="16" TextColor="#DBF6FF"/>
+                <StackLayout >
+                    <Grid RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ScrollView Grid.Row="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                            <StackLayout x:Name="FavoritesGallery" Padding="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                            </StackLayout>
+                        </ScrollView>
+                        <Label Grid.Row="1" Text="Found x items" HeightRequest="30"></Label>
+                    </Grid>
+                </StackLayout>
+
             </StackLayout>
-
-            <StackLayout>
-                <Label Text="Recentes" FontSize="16" TextColor="#DBF6FF"/>
-                <carousel:CarouselView x:Name="FavoriteCarouselView" 
-                                       Margin="5" 
-                                       WidthRequest="200" 
-                                       HeightRequest="200" 
-                                       BackgroundColor="Aqua"
-                                       ItemsSource="{Binding ListSource}"
-                >
-                    <carousel:CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <implements:VideoPlayer  x:Name="videoPlayer"   
-                                                         Grid.Row="0"
-                                                         AutoPlay="False"                                                                        
-                                                         Source="{Binding UrlDestino}" 
-                                                         AspectMode="AspectFill"
-                                                         Grid.Column="0"
-                                />
-                                <Button Command="{Binding VideoFavoriteCommand}" Grid.Column="0" />
-                                <Label Text="{Binding Title}" FontSize="Small" Grid.Column="1"/>
-                            </Grid>
-                        </DataTemplate>
-                    </carousel:CarouselView.ItemTemplate>
-                </carousel:CarouselView>
-            </StackLayout>-->
-
-        </StackLayout>
-        
-        <!--<ScrollView Margin="0,20,0,20">
-            <galery:WrapLayout x:Name="wrapLayout" />
-        </ScrollView>-->
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -21,9 +21,65 @@ namespace Welic.App.Views
 		{
 			InitializeComponent ();
 		    BindingContext = ViewModelLocator.Resolve<GaleryViewModel>();
+            PreecheTela();
 		}
 
+	    private async void PreecheTela()
+	    {
 
+	        var listRecentes = await  (BindingContext as GaleryViewModel)?.GetListRecente();
+
+	        foreach (var item in listRecentes)
+	        {
+	            var grid = new Grid
+	            {
+	                RowDefinitions =
+	                {
+	                    new RowDefinition { Height = 100 },
+	                    new RowDefinition { Height = 15 },	                    
+	                },
+	                ColumnDefinitions =
+	                {
+	                    new ColumnDefinition { Width = 100 }
+	                }
+	            };
+
+	            var img = new Image { Source = ImageSource.FromUri(new Uri(item.Print)), HeightRequest = 150, WidthRequest = 150};
+	            var lblNome = new Label { Text = item.Title, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.Center, HeightRequest = 15};
+	            var btnLive = new Button {  BackgroundColor = Color.Transparent};
+
+	            grid.Children.Add(img, 0, 0);
+	            grid.Children.Add(lblNome, 0, 1);	            
+
+	            StackGallery.Children.Add(grid);
+	        }
+
+	        var listFavorites = await (BindingContext as GaleryViewModel)?.GetListRecente();
+
+	        foreach (var item in listFavorites)
+	        {
+	            var grid = new Grid
+	            {
+	                RowDefinitions =
+	                {
+	                    new RowDefinition { Height = 100 },
+	                    new RowDefinition { Height = 15 },
+	                },
+	                ColumnDefinitions =
+	                {
+	                    new ColumnDefinition { Width = 100 }
+	                }
+	            };
+
+	            var img = new Image { Source = ImageSource.FromUri(new Uri(item.Print)) };
+	            var lblNome = new Label { Text = item.Title };
+
+	            grid.Children.Add(img, 0, 0);
+	            grid.Children.Add(lblNome, 0, 1);
+
+	            StackGallery.Children.Add(grid);
+	        }
+        }
 	    protected override async void OnAppearing()
 	    {
 	        base.OnAppearing();
