@@ -31,11 +31,11 @@ namespace Welic.App.iOS.Services
             }
             string path = Path.Combine(libFolder, sqliteFilename);
             // This is where we copy in the pre-created database
-            if (!File.Exists(path))
-            {
-                var existingDb = NSBundle.MainBundle.PathForResource("Employee", "db");
-                File.Copy(existingDb, path);
-            }
+      //      if (!File.Exists(path))
+     //       {
+    //            var existingDb = NSBundle.MainBundle.PathForResource("Employee", "db");
+   //            File.Copy(existingDb, path);
+   //         }
             //var platform = new SQLitePlatformIOS();
             //var param = new SQLiteConnectionString(path, false);
             var connection = new SQLiteConnection(path);
