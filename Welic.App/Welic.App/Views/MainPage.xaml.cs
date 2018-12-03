@@ -58,6 +58,9 @@ namespace Welic.App.Views
                         break;
                     case (int)MenuItemType.Cursos:
                         MenuPages.Add(id, new NavigationPage(new ListOfCoursesPage()));
+                        break;
+                    case (int)MenuItemType.EBooks:
+                        MenuPages.Add(id, new NavigationPage(new CreateEbookPage()));
                         break;                    
                 }
             }

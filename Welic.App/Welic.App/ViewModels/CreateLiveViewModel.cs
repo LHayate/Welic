@@ -69,6 +69,14 @@ namespace Welic.App.ViewModels
             get => _pathFiles;
             set => SetProperty(ref _pathFiles , value);
         }
+        private bool _MenuVisivel;
+
+        public bool MenuVisivel
+        {
+            get => _MenuVisivel;
+            set => SetProperty(ref _MenuVisivel , value);
+        }
+
 
         public CourseDto Dto { get; set; }
 
@@ -78,6 +86,7 @@ namespace Welic.App.ViewModels
             Icon = Util.ImagePorSistema("LogoWelic72x72.png");
             TextButton = "Criar";
             Chat = true;
+            MenuVisivel = false;
         }
         public CreateLiveViewModel(params object[] obj)
         {
@@ -86,6 +95,7 @@ namespace Welic.App.ViewModels
             TextButton = "Criar";
             Chat = true;
             Dto = (CourseDto) obj[0];
+            MenuVisivel = true;
         }
 
         private async void CreateNew()
@@ -102,10 +112,12 @@ namespace Welic.App.ViewModels
                 {
                     using (var stream = new StreamContent(_mediaFile.GetStream()))
                     {
-                        //_pathFiles = $"\\{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}_{_mediaFile.Path.Split('.').LastOrDefault()}";
-                        _path = $"{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.{_mediaFile.Path.Split('.').LastOrDefault()}";
-                        var _pathImage = $"{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.jpg";
-                        //_path =_mediaFile.Path;
+
+                        _path =
+                            $"Video-{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.{_mediaFile.Path.Split('.').LastOrDefault()}";
+                        var _pathImage =
+                            $"{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.jpg";
+
                         content.Add(stream, "file", _path);
 
                         await WebApi.Current.UploadAsync(content);
@@ -120,7 +132,8 @@ namespace Welic.App.ViewModels
                             UrlDestino = $"https://www.welic.app/Arquivos/Uploads/{_path}",
                             CourseId = Dto.IdCurso,
                             TeacherId = user.Id,
-                            Print = $"https://www.welic.app/Arquivos/Uploads/{_pathImage}"
+                            Print = $"https://www.welic.app/Arquivos/Uploads/{_pathImage}",
+                            DateRegister = DateTime.Now
                         };
 
                         var ret = await (new LiveDto()).Save(live);
@@ -128,6 +141,7 @@ namespace Welic.App.ViewModels
                         if (ret != null)
                             //await NavigationService.NavigateModalToAsync<LiveViewModel>();
                             await NavigationService.ReturnModalToAsync(true);
+
 
                         //content.Dispose();                        
                     }
@@ -137,8 +151,12 @@ namespace Welic.App.ViewModels
             {
                 IsBusy = false;
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro", "Erro ao Criar","OK");
-            }            
+                await MessageService.ShowOkAsync("Erro", "Erro ao Criar", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task PickFile()
@@ -155,9 +173,15 @@ namespace Welic.App.ViewModels
             if (_mediaFile == null)
                 return;
 
-            
+            _pathFiles = $"{_mediaFile.Path.Split('/').LastOrDefault()}";
             //_pathFiles += _mediaFile.Path.LastOrDefault();
         }
 
+        public Command ReturnCommand => new Command(Return);
+
+        private async void Return()
+        {
+            await NavigationService.ReturnModalToAsync(true);
+        }
     }
 }

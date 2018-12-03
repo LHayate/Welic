@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.Lives.Dtos;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
@@ -26,5 +27,6 @@ namespace Welic.Dominio.Models.Schedule.Maps
         public virtual ICollection<AspNetUser> UserClass { get; set; }
         
         public virtual LiveMap Live { get; set; }
+        public EBookMap Ebook { get; set; }
     }
 }

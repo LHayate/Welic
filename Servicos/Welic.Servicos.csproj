@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Cursos\CursoService.cs" />
     <Compile Include="Dispositivos\ServicoDispositivo.cs" />
+    <Compile Include="Ebook\ServiceEbook.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="MarketPlace\CategoryListingTypeService.cs" />
     <Compile Include="MarketPlace\CategoryService.cs" />

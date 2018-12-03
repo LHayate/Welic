@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Welic.Dominio.Models.Curso.Map;
+using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
@@ -96,5 +97,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<UploadsMap> Uploads { get; set; }
         public virtual ICollection<LiveMap> LivesTeacher { get; set; }
         public virtual ICollection<LiveMap> LivesClass { get; set; }
+        public virtual ICollection<EBookMap> EbookTeacher { get; set; }
+        public virtual ICollection<EBookMap> EBookClass { get; set; }
     }
 }

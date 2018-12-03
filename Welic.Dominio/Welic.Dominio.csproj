@@ -142,6 +142,8 @@
     <Compile Include="Models\Dispositivos\Mapeamentos\DispositivosMap.cs" />
     <Compile Include="Models\Dispositivos\Repositorios\IRepositorioDispositivos.cs" />
     <Compile Include="Models\Dispositivos\Servicos\IServicoDispositivo.cs" />
+    <Compile Include="Models\EBook\Map\EBookMap.cs" />
+    <Compile Include="Models\EBook\Services\IServiceEBook.cs" />
     <Compile Include="Models\Home\Dtos\StartDto.cs" />
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />

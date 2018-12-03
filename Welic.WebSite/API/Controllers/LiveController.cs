@@ -91,6 +91,13 @@ namespace Welic.WebSite.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetListTeacher/{id}")]
+        public Task<HttpResponseMessage> ListLivebyTeacher(string id)
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x => x).Where(x=> x.TeacherId == id).ToList());
+        }
+
+        [HttpGet]
         [Route("GetListbyCourse/{id:int}")]
         public Task<HttpResponseMessage> ListbyCourse(int id)
         {

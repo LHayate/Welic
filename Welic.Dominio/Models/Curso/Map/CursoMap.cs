@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Pattern.Ef6;
@@ -27,5 +28,6 @@ namespace Welic.Dominio.Models.Curso.Map
         public ICollection<LiveMap> Live { get; set; }
 
         public virtual ICollection<AspNetUser> UserClass { get; set; }
+        public virtual ICollection<EBookMap> Ebook { get; set; }
     }
 }

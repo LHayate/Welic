@@ -93,6 +93,21 @@ namespace Welic.App.Models.Live
                 return null;
             }
         }
+        public async Task<ObservableCollection<LiveDto>> GetListByUser()
+        {
+            try
+            {
+                var user = new UserDto().LoadAsync();
+                var list = await Current?.GetAsync<ObservableCollection<LiveDto>>($"live/GetListTeacher/{user.Id}");
+                return list;
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
 
         public async Task<LiveDto> Save(LiveDto liveDto)
         {

@@ -63,19 +63,18 @@ namespace Welic.WebSite.API.Controllers
                             file.LocalFileName.Split('.').LastOrDefault())),
                         file.LocalFileName.Split('/').LastOrDefault());
 
-                   
 
-                    var imagem = HttpContext.Current.Server.MapPath($"~/Arquivos/Uploads")+ $"\\{file.LocalFileName.Split('\\').LastOrDefault().Split('.').FirstOrDefault()}.jpg";
-
-                    //File.Move(file.LocalFileName,
-                    //    path);
-
-                    var path1 = Path.Combine(HttpContext.Current.Server.MapPath("~/ffmpeg/bin/ffmpeg.exe"));
+                    if (path.Contains("Video-"))
+                    {
+                        var imagem = HttpContext.Current.Server.MapPath($"~/Arquivos/Uploads") +
+                                     $"\\{file.LocalFileName.Split('\\').LastOrDefault().Split('.').FirstOrDefault()}.jpg";
 
 
-                    string executavel = Path.Combine(HttpContext.Current.Server.MapPath("~/ffmpeg/bin/ffmpeg.exe"));
-                    string parametros = " -y -i " + path + " -vframes 1 -ss 00:00:03 -an -vcodec mjpeg -f rawvideo " + imagem;
-                    System.Diagnostics.Process.Start(@executavel, parametros);
+                        string executavel = Path.Combine(HttpContext.Current.Server.MapPath("~/ffmpeg/bin/ffmpeg.exe"));
+                        string parametros = " -y -i " + path +
+                                            " -vframes 1 -ss 00:00:03 -an -vcodec mjpeg -f rawvideo " + imagem;
+                        System.Diagnostics.Process.Start(@executavel, parametros);
+                    }
 
                     var user = await _serviceUser.FindAsync(
                         file.LocalFileName.Split('/').LastOrDefault().Split('_')[1]);

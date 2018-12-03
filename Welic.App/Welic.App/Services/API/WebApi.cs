@@ -8,8 +8,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Plugin.FileUploader;
-using Plugin.FileUploader.Abstractions;
 using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
@@ -50,10 +48,16 @@ namespace Welic.App.Services.API
             
             _HttpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://192.168.0.10:3000/api/")
-                //BaseAddress = new Uri("http://192.168.1.7:3000/api/")
-                //BaseAddress = new Uri("https://welic.app/api/")
+
+
+#if DEBUG
+                //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
+                //BaseAddress = new Uri("http://192.168.1.3:3000/api/")
                 //BaseAddress = new Uri("http://192.168.0.10/api/")
+                BaseAddress = new Uri("https://welic.app/api/")
+#else
+                BaseAddress = new Uri("https://welic.app/api/")
+#endif
 
 
             };
@@ -129,6 +133,11 @@ namespace Welic.App.Services.API
                         if (response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException(
                                 "Acesso negado, você precisa estar autenticado para realizar essa requisição.");
+
+                        if (response.StatusCode == HttpStatusCode.NotImplemented)
+                            throw new InvalidOperationException(
+                                "Acesso negado, Processo não Implementado.");
+
 
                         throw new System.Exception("Algo de errado não deu certo.");
                     }

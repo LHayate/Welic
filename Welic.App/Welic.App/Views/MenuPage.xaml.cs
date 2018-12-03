@@ -46,6 +46,7 @@ namespace Welic.App.Views
                 new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
                 new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse") },
                 new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
+                new HomeMenuItem {Id = MenuItemType.EBooks, Title="New Video", IconMenu = Util.ImagePorSistema("iAddPdf") },
                 new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                 new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },
                 new HomeMenuItem {Id = MenuItemType.Videos, Title="Videos", IconMenu = Util.ImagePorSistema("iVideos") },

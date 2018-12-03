@@ -6,6 +6,7 @@ using System.Text;
 using Welic.Dominio.Core;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
 using Welic.Dominio.Models.Curso.Map;
+using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
@@ -21,27 +22,33 @@ namespace Welic.Infra.Context
 {
     public partial class AuthContext : DataContext
     {
-        static AuthContext()
-        {
-            // Check if migrate database to latest version automatically (using automatic migration)
-            // AutomaticMigrationDataLossAllowed is disabled by default (can be configred in web.config)
-            // reference: http://stackoverflow.com/questions/10646111/entity-framework-migrations-enable-automigrations-along-with-added-migration
+        //static AuthContext()
+        //{
+        //    // Check if migrate database to latest version automatically (using automatic migration)
+        //    // AutomaticMigrationDataLossAllowed is disabled by default (can be configred in web.config)
+        //    // reference: http://stackoverflow.com/questions/10646111/entity-framework-migrations-enable-automigrations-along-with-added-migration
 
-            if (WelicConfigurationManager.MigrateDatabaseToLatestVersion)
-            {
-                Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
-            }
-            else
-            {
-                Database.SetInitializer<AuthContext>(null);
-            }
-        }
+        //    if (WelicConfigurationManager.MigrateDatabaseToLatestVersion)
+        //    {
+        //        Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
+        //    }
+        //    else
+        //    {
+        //        Database.SetInitializer<AuthContext>(null);
+        //    }
+        //}
 
        
         public AuthContext()
             //: base("WelicDbContext")
             : base("WelicDbContext")
-        {            
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
+        }
+
+        public static AuthContext Create()
+        {
+            return new AuthContext();
         }
 
         public DbSet<DispositivosMap> Dispositivo { get; set; }
@@ -81,7 +88,8 @@ namespace Welic.Infra.Context
         public DbSet<StripeConnect> StripeConnects { get; set; }
         public DbSet<StripeTransaction> StripeTransactions { get; set; }
         public DbSet<UploadsMap> Uploads { get; set; }
-        public DbSet<CursoMap> Curso { get; set; }        
+        public DbSet<CursoMap> Curso { get; set; }
+        public DbSet<EBookMap> EBook { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -127,6 +135,7 @@ namespace Welic.Infra.Context
             modelBuilder.Configurations.Add(new MappingStripeTransaction());
             modelBuilder.Configurations.Add(new MappingUploads());
             modelBuilder.Configurations.Add(new MappingCursos());
+            modelBuilder.Configurations.Add(new MappingEBook());
         }
     }
 }

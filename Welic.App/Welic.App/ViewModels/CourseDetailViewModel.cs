@@ -12,8 +12,18 @@ namespace Welic.App.ViewModels
     {
 
         public Command AddVideoCommand => new Command(AddVideo);
+        public Command ReturnCommand => new Command(ReturnDetail);
+        public Command AddEBookCommand => new Command(AddEbook);
 
-        
+
+        private string _AppTitle;
+
+        public string AppTitle
+        {
+            get => _AppTitle;
+            set => SetProperty(ref _AppTitle , value);
+        }
+
 
         private string _title;
 
@@ -71,7 +81,7 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                
+                _AppTitle = "Detalhe";
                 var course = Dto = (CourseDto)obj[0];
                 _title = course.Title;
                 _description = course.Description;
@@ -138,6 +148,17 @@ namespace Welic.App.ViewModels
         public CourseDetailViewModel()
         {
             
+        }
+
+        private async void ReturnDetail()
+        {
+            await NavigationService.ReturnModalToAsync(true);
+        }
+
+        private void AddEbook()
+        {
+            object[] obj = new[] { Dto };
+            NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
         }
     }
 }

@@ -6,7 +6,7 @@ using Foundation;
 using UIKit;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;
-using Plugin.FileUploader;
+
 
 namespace Welic.App.iOS
 {
@@ -41,7 +41,7 @@ namespace Welic.App.iOS
          */
         public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
         {
-            FileUploadManager.UrlSessionCompletion = completionHandler;
+            
         }
 
     }

@@ -21,89 +21,166 @@ namespace Welic.App.Views
 		{
 			InitializeComponent ();
 		    BindingContext = ViewModelLocator.Resolve<GaleryViewModel>();
-            PreecheTela();
-		}
+		    PreecheTela();
+        }
 
 	    private async void PreecheTela()
 	    {
+            try
+            {
+                //TODO: Resolver para pegar os videos 
+                GetVideosTeacher();
 
-	        var listRecentes = await  (BindingContext as GaleryViewModel)?.GetListRecente();
+                //Get dados para a scroll view de Recentes
+                GetRecentes();
 
-	        foreach (var item in listRecentes)
-	        {
-	            var grid = new Grid
-	            {
-	                RowDefinitions =
-	                {
-	                    new RowDefinition { Height = 100 },
-	                    new RowDefinition { Height = 15 },	                    
-	                },
-	                ColumnDefinitions =
-	                {
-	                    new ColumnDefinition { Width = 100 }
-	                }
-	            };
-
-	            var img = new Image { Source = ImageSource.FromUri(new Uri(item.Print)), HeightRequest = 150, WidthRequest = 150};
-	            var lblNome = new Label { Text = item.Title, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.Center, HeightRequest = 15};
-	            var btnLive = new Button {  BackgroundColor = Color.Transparent};
-
-	            grid.Children.Add(img, 0, 0);
-	            grid.Children.Add(lblNome, 0, 1);	            
-
-	            StackGallery.Children.Add(grid);
-	        }
-
-	        var listFavorites = await (BindingContext as GaleryViewModel)?.GetListRecente();
-
-	        foreach (var item in listFavorites)
-	        {
-	            var grid = new Grid
-	            {
-	                RowDefinitions =
-	                {
-	                    new RowDefinition { Height = 100 },
-	                    new RowDefinition { Height = 15 },
-	                },
-	                ColumnDefinitions =
-	                {
-	                    new ColumnDefinition { Width = 100 }
-	                }
-	            };
-
-	            var img = new Image { Source = ImageSource.FromUri(new Uri(item.Print)) };
-	            var lblNome = new Label { Text = item.Title };
-
-	            grid.Children.Add(img, 0, 0);
-	            grid.Children.Add(lblNome, 0, 1);
-
-	            StackGallery.Children.Add(grid);
-	        }
+                //GET para Scroll View de Favoritos
+                GetFavoritos();
+                
+            }
+            catch (System.Exception e)
+            {
+                DisplayAlert("Erro", e.Message, "OK");                
+            }
+	        
         }
+
+	    private async  void GetFavoritos()
+	    {
+	        var listFavorites = await(BindingContext as GaleryViewModel)?.GetListFavorite();
+
+	        if (listFavorites != null &&   listFavorites.Count > 0)
+	        {
+	            foreach (var item in listFavorites)
+	            {
+	                var grid = new Grid
+	                {
+	                    RowDefinitions =
+	                    {
+	                        new RowDefinition {Height = 100},
+	                        new RowDefinition {Height = 15},
+	                    },
+	                    ColumnDefinitions =
+	                    {
+	                        new ColumnDefinition {Width = 100}
+	                    }
+	                };
+
+	                var img = new Image {Source = ImageSource.FromUri(new Uri(item.Print))};
+	                var lblNome = new Label {Text = item.Title};
+
+	                grid.Children.Add(img, 0, 0);
+	                grid.Children.Add(lblNome, 0, 1);
+
+	                FavoritesGallery.Children.Add(grid);
+	            }
+	        }
+	        else
+	        {
+	            var lblNome = new Label { Text = "Nenhum Favorito :(" };
+                FavoritesGallery.Children.Add(lblNome);
+            }
+	    }
+
+	    private async void GetRecentes()
+	    {
+	        var listRecentes = await (BindingContext as GaleryViewModel)?.GetListRecente();
+
+	        if (listRecentes != null && listRecentes.Count > 0)
+	        {
+	            foreach (var item in listRecentes)
+	            {
+	                var grid = new Grid
+	                {
+	                    RowDefinitions =
+	                    {
+	                        new RowDefinition {Height = 100},
+	                        new RowDefinition {Height = 15},
+	                    },
+	                    ColumnDefinitions =
+	                    {
+	                        new ColumnDefinition {Width = 100}
+	                    }
+	                };
+
+	                var img = new Image
+	                    {Source = ImageSource.FromUri(new Uri(item.Print)), HeightRequest = 150, WidthRequest = 150};
+	                var lblNome = new Label
+	                {
+	                    Text = item.Title, HorizontalOptions = LayoutOptions.End,
+	                    VerticalOptions = LayoutOptions.Center, HeightRequest = 15
+	                };
+	                var btnLive = new Button {BackgroundColor = Color.Transparent};
+
+	                grid.Children.Add(img, 0, 0);
+	                grid.Children.Add(lblNome, 0, 1);
+
+	                StackGallery.Children.Add(grid);
+	            }
+	        }
+	        else
+	        {
+	            var lblNome = new Label { Text = "Nenhum Favorito :(" };
+	            StackGallery.Children.Add(lblNome);
+            }
+	    }
+
+	    private async void GetVideosTeacher()
+	    {
+	       
+            //var images = await GetImageListAsync();
+            //foreach (var photo in images.Photos)
+            //{
+            //    var image = new Image
+            //    {
+            //        Source = ImageSource.FromUri(new Uri(photo + string.Format("?width={0}&height={0}&mode=max", Device.RuntimePlatform == Device.UWP ? 120 : 240)))
+            //    };
+            //    wrapLayout.Children.Add(image);
+            //}
+
+            //var listRecentes = await (BindingContext as GaleryViewModel)?.GetListTeacher();
+
+            //foreach (var item in listRecentes)
+            //{
+            //    var grid = new Grid
+            //    {
+            //        RowDefinitions =
+            //        {
+            //            new RowDefinition { Height = 100 },
+            //            new RowDefinition { Height = 15 },
+            //        },
+            //        ColumnDefinitions =
+            //        {
+            //            new ColumnDefinition { Width = 100 }
+            //        }
+            //    };
+
+            //    var img = new Image { Source = ImageSource.FromUri(new Uri(item.Print)), HeightRequest = 150, WidthRequest = 150 };
+            //    var lblNome = new Label { Text = item.Title, HorizontalOptions = LayoutOptions.End, VerticalOptions = LayoutOptions.Center, HeightRequest = 15 };
+            //    var btnLive = new Button { BackgroundColor = Color.Transparent };
+
+            //    grid.Children.Add(img, 0, 0);
+            //    grid.Children.Add(lblNome, 0, 1);
+
+            //    wrapLayout.Children.Add(grid); 
+            //}
+        }
+
 	    protected override async void OnAppearing()
 	    {
-	        base.OnAppearing();
+	        base.OnAppearing();	        
+        }
 
-	        //var images = await GetImageListAsync();
-	        //foreach (var photo in images.Photos)
-	        //{
-	        //    var image = new Image
-	        //    {
-	        //        Source = ImageSource.FromUri(new Uri(photo + string.Format("?width={0}&height={0}&mode=max", Device.RuntimePlatform == Device.UWP ? 120 : 240)))
-	        //    };
-	        //    //wrapLayout.Children.Add(image);
-	        //}
-	    }
-	    //async Task<ImageList> GetImageListAsync()
-	    //{
-	    //    var requestUri = "https://docs.xamarin.com/demo/stock.json";
-	    //    using (var client = new HttpClient())
-	    //    {
-	    //        var result = await client.GetStringAsync(requestUri);
-	    //        return JsonConvert.DeserializeObject<ImageList>(result);
-	    //    }
-	    //}
-	    private void RecentesCarouselView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async Task<ImageList> GetImageListAsync()
+        {
+            var requestUri = "https://docs.xamarin.com/demo/stock.json";
+            using (var client = new HttpClient())
+            {
+                var result = await client.GetStringAsync(requestUri);
+                return JsonConvert.DeserializeObject<ImageList>(result);
+            }
+        }
+        private void RecentesCarouselView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 	    {
 	        var item = (LiveDto)e.SelectedItem;
 

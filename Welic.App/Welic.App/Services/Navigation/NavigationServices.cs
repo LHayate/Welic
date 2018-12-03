@@ -39,7 +39,7 @@ namespace Welic.App.Services.Navigation
                 Console.WriteLine(e);
                 throw;
             }            
-        }
+        }        
 
         public async  Task ReturnToAsync(bool animation = false) 
         {

@@ -3,6 +3,7 @@ using Registrators.Plugins;
 using Servicos;
 using Servicos.Acesso;
 using Servicos.Cursos;
+using Servicos.Ebook;
 using Servicos.Live;
 using Servicos.MarketPlace;
 using Servicos.Menu;
@@ -19,6 +20,8 @@ using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Curso.Service;
+using Welic.Dominio.Models.EBook.Map;
+using Welic.Dominio.Models.EBook.Services;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
@@ -86,8 +89,9 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<UploadsMap>, Repository<UploadsMap>>()
                 .RegisterType<IRepositoryAsync<CursoMap>,Repository<CursoMap>>()
                 .RegisterType<IRepositoryAsync<LiveMap>,Repository<LiveMap>>()
+                .RegisterType<IRepositoryAsync<EBookMap>, Repository<EBookMap>>()
 
-
+                .RegisterType<IServiceEBook, ServiceEbook>()
                 .RegisterType<IServiceLive, ServiceLive>()
                 .RegisterType<ICategoryService, CategoryService>()
                 .RegisterType<ICategoryStatService, CategoryStatService>()

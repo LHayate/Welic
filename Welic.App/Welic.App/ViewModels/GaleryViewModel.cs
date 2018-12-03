@@ -28,6 +28,10 @@ namespace Welic.App.ViewModels
         {
             return await new LiveDto().GetListFavoritos();
         }
+        public async Task<ObservableCollection<LiveDto>> GetListTeacher()
+        {
+            return await new LiveDto().GetListByUser();
+        }
 
         public void OpenLive(LiveDto live)
         {
