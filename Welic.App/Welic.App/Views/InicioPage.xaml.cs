@@ -7,7 +7,6 @@ using Welic.App.Models.Usuario;
 using Welic.App.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using View = Android.Views.View;
 
 namespace Welic.App.Views
 {

@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Android.App;
 using Welic.App.Models.Course;
 using Welic.App.Models.Usuario;
 using static Welic.App.Services.API.WebApi;
