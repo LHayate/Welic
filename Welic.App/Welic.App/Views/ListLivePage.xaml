@@ -35,16 +35,14 @@
                                 <Image Source="{Binding Print}" 
                                    Grid.Column="0"                                                                                                                        
                                    HorizontalOptions="FillAndExpand"
-                                   VerticalOptions="FillAndExpand"
-                                   MinimumHeightRequest="100"
-                                   MinimumWidthRequest="100"
+                                   VerticalOptions="FillAndExpand"                                   
                                  />
                                 <Image Source="iPlay.png" 
                                    Grid.Column="0"                                                                                                                        
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"
-                                   MinimumHeightRequest="100"
-                                   MinimumWidthRequest="100"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   HeightRequest="30"
+                                       WidthRequest="30"
                                 />
                                 <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
                                     <Grid.ColumnDefinitions>

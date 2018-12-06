@@ -10,6 +10,7 @@ using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.ViewModels.Base;
+using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
@@ -285,7 +286,7 @@ namespace Welic.App.ViewModels
                         //await WebApi.Current.PostAsync<UserDto>($"Account/Register", usuario);
 
                         //var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);
-
+                        Application.Current.MainPage = new MainPage();
                         await NavigationService.NavigateModalToAsync<MainViewModel>();
                     }
                     else

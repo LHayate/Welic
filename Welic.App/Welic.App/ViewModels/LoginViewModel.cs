@@ -8,6 +8,7 @@ using Welic.App.Services.API;
 using Welic.App.Services.Criptografia;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.ViewModels.Base;
+using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
@@ -106,7 +107,8 @@ namespace Welic.App.ViewModels
                             
                             await WebApi.Current.PostAsync<DispositivoDto>("dispositivo/salvar", dis);
 
-                            await NavigationService.NavigateModalToAsync<MainViewModel>();
+                            Application.Current.MainPage = new MainPage();
+                            //await NavigationService.NavigateModalToAsync<MainViewModel>();
                         }
                     }
                     else

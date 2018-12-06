@@ -61,7 +61,10 @@ namespace Welic.App.Views
                         break;
                     case (int)MenuItemType.EBooks:
                         MenuPages.Add(id, new NavigationPage(new CreateEbookPage()));
-                        break;                    
+                        break;
+                    case (int)MenuItemType.Schedule:
+                        MenuPages.Add(id, new NavigationPage(new ListSchedulePage()));
+                        break;
                 }
             }
 

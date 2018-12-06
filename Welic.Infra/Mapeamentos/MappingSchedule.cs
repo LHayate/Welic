@@ -25,7 +25,7 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnName("Description")
                 .HasColumnType("varchar");
-            Property(x => x.Prince)
+            Property(x => x.Price)
                 .IsRequired()
                 .HasColumnName("Prince")
                 .HasColumnType("decimal");

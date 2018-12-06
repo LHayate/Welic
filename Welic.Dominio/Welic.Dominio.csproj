@@ -220,11 +220,7 @@
     <Compile Include="Models\Menu\Servicos\IServicoMenu.cs" />
     <Compile Include="Models\News\Maps\NewsMap.cs" />
     <Compile Include="Models\News\Services\IServiceNews.cs" />
-    <Compile Include="Models\Schedule\Adapters\AdapterSchedule.cs" />
-    <Compile Include="Models\Schedule\Dtos\ScheduleDto.cs" />
-    <Compile Include="Models\Schedule\Entity\Schedule.cs" />
     <Compile Include="Models\Schedule\Maps\ScheduleMap.cs" />
-    <Compile Include="Models\Schedule\Repositoryes\IRepositorySchedule.cs" />
     <Compile Include="Models\Schedule\Services\IServiceSchedule.cs" />
     <Compile Include="Models\Uploads\Maps\UploadsMap.cs" />
     <Compile Include="Models\Uploads\Services\IUploadsService.cs" />

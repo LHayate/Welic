@@ -31,7 +31,7 @@ using Welic.Dominio.Models.Menu.Repositorios;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.News.Maps;
 using Welic.Dominio.Models.News.Services;
-using Welic.Dominio.Models.Schedule.Repositoryes;
+using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Schedule.Services;
 using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Uploads.Services;
@@ -48,7 +48,6 @@ using Welic.Infra.StoredProcedures;
 using Welic.Repositorios.Dispositives;
 using Welic.Repositorios.Live;
 using Welic.Repositorios.Menu;
-using Welic.Repositorios.Schedule;
 using Welic.Repositorios.Users;
 
 
@@ -90,7 +89,9 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<LiveMap>,Repository<LiveMap>>()
                 .RegisterType<IRepositoryAsync<EBookMap>, Repository<EBookMap>>()
                 .RegisterType<IRepositoryAsync<NewsMap>, Repository<NewsMap>>()
+                .RegisterType<IRepositoryAsync<ScheduleMap>,Repository<ScheduleMap>>()
 
+                .RegisterType<IServiceSchedule, ServiceSchedule>()
                 .RegisterType<IServiceNews, ServiceNews>()
                 .RegisterType<IServiceEBook, ServiceEbook>()
                 .RegisterType<IServiceLive, ServiceLive>()
@@ -158,8 +159,8 @@ namespace Registrators
         }
         private static void RegisterSchedule(IUnityContainer container)
         {
-            container.RegisterType<IServiceSchedule, ServiceSchedule>();
-            container.RegisterType<IRepositorySchedule, RepositorySchedule>();
+            
+            
         }        
         private static void RegisterUser(IUnityContainer conteiner)
         {

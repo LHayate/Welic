@@ -51,9 +51,7 @@
                     <Label Text="Date of Birthday" Grid.Column="0"/>
                     <DatePicker HorizontalOptions="FillAndExpand" Grid.Column="1" />
                 </Grid>
-
-                
-
+               
                 <!--Escolher Sexo-->
                 <Picker x:Name="Genero" 
                         HorizontalOptions="FillAndExpand" 

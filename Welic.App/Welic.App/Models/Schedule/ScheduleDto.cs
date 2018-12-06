@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Models.Usuario;
 using Welic.App.Services.API;
 using static Welic.App.Services.API.WebApi;
 
@@ -14,19 +15,20 @@ namespace Welic.App.Models.Schedule
         public int ScheduleId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public decimal Prince { get; set; }
+        public decimal Price { get; set; }
         public DateTime DateEvent { get; set; }
         public bool Private { get; set; }
         public bool Ativo { get; set; }
+        public string TeacherId { get; set; }
 
         public ScheduleDto()
         {
             
         }
 
-        private List<ScheduleDto> _listItem;
+        private ObservableCollection<ScheduleDto> _listItem;
 
-        private List<ScheduleDto> ListItem
+        private ObservableCollection<ScheduleDto> ListItem
         {
             get => _listItem;
             set => _listItem = value;
@@ -50,8 +52,8 @@ namespace Welic.App.Models.Schedule
         {
             try
             {
-                _listItem = await Current?.GetAsync<List<ScheduleDto>>("Schedule/GetList");
-                return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                var list = await Current?.GetAsync<List<ScheduleDto>>("Schedule/GetList");
+                return list.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
             }
             catch (System.Exception e)
@@ -61,6 +63,60 @@ namespace Welic.App.Models.Schedule
             }
         }
 
+        public async Task<ObservableCollection<ScheduleDto>> GetList()
+        {
+            try
+            {
+                _listItem = await Current?.GetAsync<ObservableCollection<ScheduleDto>>("Schedule/GetList");
+                return ListItem;
 
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<ObservableCollection<ScheduleDto>> GetListByUser()
+        {
+            try
+            {
+                var user = new UserDto().LoadAsync();
+                _listItem = await Current?.GetAsync<ObservableCollection<ScheduleDto>>($"Schedule/GetListByUser/{user.Id}");
+                return ListItem;
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<ScheduleDto> Create(ScheduleDto scheduleDto)
+        {
+            try
+            {                
+                return await Current?.PostAsync<ScheduleDto>("schedule/Save", scheduleDto);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(ScheduleDto scheduleDto)
+        {
+            try
+            {
+                return await Current?.DeleteAsync<ScheduleDto>($"schedule/delete/{scheduleDto.ScheduleId}");
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 }

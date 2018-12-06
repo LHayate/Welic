@@ -6,55 +6,54 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
+using Welic.App.Models.Schedule;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
-using Xamarin.Forms.Extended;
 
 namespace Welic.App.ViewModels
 {
-    public class ListOfCoursesViewModel : BaseViewModel
-    {        
-        public Command AddNewCommand => new Command(AddNew);
-        
-        private ObservableCollection<CourseDto> _listStart;
+    public class ListScheduleViewModel : BaseViewModel
+    {
+        public Command AddNewCommand => new Command(AddNew);        
 
-        public ObservableCollection<CourseDto> ListStart
+        private ObservableCollection<ScheduleDto> _listStart;
+
+        public ObservableCollection<ScheduleDto> ListStart
         {
             get => _listStart;
             set => SetProperty(ref _listStart, value);
         }
 
-
-        public ListOfCoursesViewModel()
+        public ListScheduleViewModel()
         {
             Atualizando = true;
 
-            SetListCourses();
+            SetListSchedule();
 
-            Atualizando = false;           
+            Atualizando = false;
         }
 
-        public async Task SetListCourses()
+        public async Task SetListSchedule()
         {
-            ListStart = await new CourseDto().GetListByUser();
+            ListStart = await new ScheduleDto().GetListByUser();
             IsBusy = ListStart.Count <= 0;
         }
-        
+
         private void AddNew()
         {
-            NavigationService.NavigateModalToAsync<CreateCoursesViewModel>();
+            NavigationService.NavigateModalToAsync<CreateScheduleViewModel>();
         }
 
-        public void OpenCourse(CourseDto courseDto)
+        public void OpenSchedule(ScheduleDto Schedule)
         {
-            object[] obj = new[] { courseDto };
+            object[] obj = new[] { Schedule };
 
             NavigationService.NavigateModalToAsync<CourseDetailViewModel>(obj);
         }
 
-        public async void DeleteLive(LiveDto liveDto)
+        public async void Delete(ScheduleDto schedule)
         {
-            await new LiveDto().DeleteAsync(liveDto);
+            await new ScheduleDto().DeleteAsync(schedule);
         }
 
         private bool _atualizando = false;
@@ -74,14 +73,11 @@ namespace Welic.App.ViewModels
                 {
                     Atualizando = true;
 
-                    await SetListCourses();
+                    await SetListSchedule();
 
                     Atualizando = false;
                 });
             }
         }
-
-
-
     }
 }

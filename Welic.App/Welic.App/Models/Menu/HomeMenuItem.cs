@@ -16,7 +16,8 @@ namespace Welic.App.Models
         SignOff,
         NewLive,
         Cursos,
-        EBooks
+        EBooks,
+        Schedule
 
 
 

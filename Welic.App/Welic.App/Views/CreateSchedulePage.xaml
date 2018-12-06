@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Welic.App.Views.CreateSchedulePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout >
+                <StackLayout.Padding>
+                    <OnPlatform
+                    x:TypeArguments="Thickness" Android="10" iOS="25"/>
+                </StackLayout.Padding>
+
+                <!-- header -->
+                <StackLayout BackgroundColor="#0F5682" 
+                         Orientation="Vertical" 
+                         VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand" 
+                         IsVisible="{Binding MenuVisivel}">
+                    <StackLayout.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
+                    </StackLayout.HeightRequest>
+                    <StackLayout.MinimumHeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
+                    </StackLayout.MinimumHeightRequest>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="3,0,0,0">
+                        <ImageButton Source="iReturn.png" 
+                                 Command="{Binding ReturnCommand}" 
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="CenterAndExpand"
+                                 HeightRequest="32"
+                                 WidthRequest="32"
+                                 BackgroundColor="Transparent"
+                    />
+                        <Label Text="{Binding AppTitle, StringFormat='Sign in to {0}'}" FontAttributes="None"
+                           TextColor="#FFFFFF"
+                           HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" FontSize="16" />
+
+                        <ImageButton x:Name="CreatUpload"                                        
+                             Command="{Binding CreatCommand}"                               
+                             HorizontalOptions="End"                                                                                                
+                             BackgroundColor="Transparent"
+                             Source="iSave.png"  
+                             HeightRequest="32"
+                             WidthRequest="32"                             
+                    />
+                    </StackLayout>
+                    <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
+                </StackLayout>
+
+                <StackLayout>
+
+                    <Label Text="Title" HorizontalTextAlignment="Center"/>
+                    <Entry Text="{Binding Title}"                                                                                       
+                       BackgroundColor="Transparent"
+                       ReturnType="Next"
+                       IsSpellCheckEnabled="True"
+                       x:Name="Title">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeWord</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+
+                        </Entry.Keyboard>
+                    </Entry>
+
+                    <Label Text="Descrição" HorizontalTextAlignment="Center" />
+
+                    <Editor Text="{Binding Description}"  
+                            BackgroundColor="Transparent"
+                            HeightRequest="170"
+                            IsSpellCheckEnabled="True"
+                            AutoSize="TextChanges"  
+                            MaxLength="2000"
+                            x:Name="Description"
+                        >
+                        <Editor.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>Suggestions,CapitalizeSentence,Spellcheck</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Editor.Keyboard>
+                    </Editor>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Date" Grid.Column="0"/>
+                        <DatePicker HorizontalOptions="FillAndExpand" Grid.Column="1" Date="{Binding DateEvent}"/>
+                    </Grid>
+                   
+
+                    <Entry Text="{Binding PathFiles}" 
+                           BackgroundColor="Transparent" 
+                           IsEnabled="False" Grid.Column="0"
+                           HorizontalOptions="StartAndExpand"/>
+                    
+
+                    <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
+                                       VerticalOptions="CenterAndExpand" 
+                                       HorizontalOptions="CenterAndExpand"/>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

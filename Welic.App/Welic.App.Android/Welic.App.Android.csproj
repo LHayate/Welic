@@ -661,6 +661,7 @@
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-collapsed-rtl%402x.png" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded.png" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded%402x.png" />
+    <AndroidResource Include="Resources\drawable\iScheduleMenu.png" />
     <Content Include="Resources\drawable\iExpanded.png" />
     <AndroidResource Include="Resources\drawable\iPdf.png" />
   </ItemGroup>
