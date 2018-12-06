@@ -52,7 +52,7 @@ namespace Welic.App.ViewModels
         public Command LoginCommand => new Command(async () => await Login());
 
 
-        private async Task Login()
+        public async Task Login()
         {
             try
             {

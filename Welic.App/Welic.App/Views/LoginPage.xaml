@@ -13,6 +13,10 @@
 
     <ContentPage.Content>
         <Grid >
+            <Grid.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness" Android="0" iOS="25"/>
+            </Grid.Padding>
             <StackLayout VerticalOptions="CenterAndExpand">
                 <StackLayout Padding="10" Margin="20,0,20,0" >
 

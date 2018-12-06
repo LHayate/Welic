@@ -133,6 +133,8 @@
     <Compile Include="Eventos\IUnidadeTrabalho.cs" />
     <Compile Include="Eventos\NotificacaoDominio.cs" />
     <Compile Include="IServico.cs" />
+    <Compile Include="Models\ConfigApp\Map\ConfigAppMap.cs" />
+    <Compile Include="Models\ConfigApp\Service\IConfigAppService.cs" />
     <Compile Include="Models\Curso\Map\CursoMap.cs" />
     <Compile Include="Models\Curso\Service\ICursoService.cs" />
     <Compile Include="Models\Dispositivos\Adaptador\AdapterDispositivos.cs" />
@@ -144,6 +146,8 @@
     <Compile Include="Models\Dispositivos\Servicos\IServicoDispositivo.cs" />
     <Compile Include="Models\EBook\Map\EBookMap.cs" />
     <Compile Include="Models\EBook\Services\IServiceEBook.cs" />
+    <Compile Include="Models\Favorites\Maps\FavoriteMaps.cs" />
+    <Compile Include="Models\Favorites\Services\IFavoriteService.cs" />
     <Compile Include="Models\Home\Dtos\StartDto.cs" />
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />
@@ -214,11 +218,7 @@
     <Compile Include="Models\Menu\Mapeamentos\MenuMap.cs" />
     <Compile Include="Models\Menu\Repositorios\IRepositorioMenu.cs" />
     <Compile Include="Models\Menu\Servicos\IServicoMenu.cs" />
-    <Compile Include="Models\News\Adapters\AdapterNews.cs" />
-    <Compile Include="Models\News\Dtos\NewsDto.cs" />
-    <Compile Include="Models\News\Entityes\News.cs" />
     <Compile Include="Models\News\Maps\NewsMap.cs" />
-    <Compile Include="Models\News\Repositoryes\IRepositoryNews.cs" />
     <Compile Include="Models\News\Services\IServiceNews.cs" />
     <Compile Include="Models\Schedule\Adapters\AdapterSchedule.cs" />
     <Compile Include="Models\Schedule\Dtos\ScheduleDto.cs" />

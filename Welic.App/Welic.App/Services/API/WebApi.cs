@@ -48,18 +48,10 @@ namespace Welic.App.Services.API
             
             _HttpClient = new HttpClient
             {
-
-
-#if DEBUG
                 //BaseAddress = new Uri("http://192.168.0.10:3000/api/")
                 //BaseAddress = new Uri("http://192.168.1.3:3000/api/")
                 //BaseAddress = new Uri("http://192.168.0.10/api/")
                 BaseAddress = new Uri("https://welic.app/api/")
-#else
-                BaseAddress = new Uri("https://welic.app/api/")
-#endif
-
-
             };
             _HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -211,7 +203,7 @@ namespace Welic.App.Services.API
             }            
         }
      
-        internal async Task<bool> PutAsync<T>(int id, T t, string uri)
+        internal async Task<bool> PutAsync<T>(T t, string uri)
         {
             var httpClient = new HttpClient();
 
@@ -221,16 +213,16 @@ namespace Welic.App.Services.API
 
             httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = await httpClient.PutAsync($"{uri}{id}", httpContent);
+            var result = await httpClient.PutAsync($"{uri}", httpContent);
 
             return result.IsSuccessStatusCode;
         }
 
-        internal async Task<bool> DeleteAsync<T>(int id, string uri)
+        internal async Task<bool> DeleteAsync<T>(string uri)
         {
             var httpClient = new HttpClient();
 
-            var response = await httpClient.DeleteAsync($"{uri}{id}");
+            var response = await httpClient.DeleteAsync($"{uri}");
 
             return response.IsSuccessStatusCode;
         }

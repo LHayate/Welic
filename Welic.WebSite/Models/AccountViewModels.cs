@@ -89,6 +89,8 @@ namespace Welic.WebSite.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public string Profession { get; set; }
+
     }
 
     public class ResetPasswordViewModel

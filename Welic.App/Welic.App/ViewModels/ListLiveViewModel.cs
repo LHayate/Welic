@@ -11,6 +11,15 @@ namespace Welic.App.ViewModels
 {
     public class ListLiveViewModel: BaseViewModel
     {
+        private bool _NotFound;
+
+        public bool NotFound
+        {
+            get => _NotFound;
+            set => SetProperty(ref _NotFound, value);
+        }
+
+
         private const int PageSize = 4;
         public InfiniteScrollCollection<LiveDto> ListStart { get; private set; }        
 
@@ -45,8 +54,7 @@ namespace Welic.App.ViewModels
                         // Itens que serão adicionados
                         return items;
                     }
-                };
-
+                };                
             }
             catch (System.Exception e)
             {
@@ -60,6 +68,7 @@ namespace Welic.App.ViewModels
             var items = await (new LiveDto().GetList(pageIndex: 0, pageSize: PageSize));
 
             ListStart.AddRange(items);
+            NotFound = ListStart.Count <= 0;
         }
 
         public void OpenLive(LiveDto liveDto)

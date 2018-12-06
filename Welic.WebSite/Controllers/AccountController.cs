@@ -260,6 +260,27 @@ namespace Welic.WebSite.Controllers
                     }
                     );
 
+
+                switch (model.Profession)
+                {
+                    case "Administrator":
+                        RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString()));
+                        UserManager.AddToRole(user.Id, Enum_UserType.Administrator.ToString());
+                        break;
+                    case "Teacher":
+                        RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Teacher.ToString()));
+                        UserManager.AddToRole(user.Id, Enum_UserType.Teacher.ToString());
+                        break;
+                    case "Student":
+                        RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+                        UserManager.AddToRole(user.Id, Enum_UserType.Student.ToString());
+                        break;
+                    case "AllClass":
+                        RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.AllClass.ToString()));
+                        UserManager.AddToRole(user.Id, Enum_UserType.AllClass.ToString());
+                        break;
+                }
+
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Registrators;
 using Registrators.Helpers;
@@ -126,7 +127,12 @@ namespace Welic.WebSite.API.Controllers
                     RegisterDate = DateTime.Now,
                     RegisterIP = HttpContext.Current.Request.GetVisitorIP(),
                     LastAccessDate = DateTime.Now,
-                    LastAccessIP = HttpContext.Current.Request.GetVisitorIP()
+                    LastAccessIP = HttpContext.Current.Request.GetVisitorIP(),
+                    Guid = Guid.NewGuid(),
+                    DateOfBirth = model.DateOfBirth,
+                    Gender = model.Gender,
+                    Identity = model.Identity,
+                    Profession = model.Profession,                    
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -142,8 +148,33 @@ namespace Welic.WebSite.API.Controllers
                         }
                     );
 
-                    var found = _servico.GetByEmail(model.Email);
-                    return await CriaResposta(HttpStatusCode.OK, found);
+
+                    switch (model.Profession)
+                    {
+                        case "Administrator":
+                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString()));
+                            UserManager.AddToRole(user.Id, Enum_UserType.Administrator.ToString());
+                            break;
+                        case "Teacher":
+                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Teacher.ToString()));
+                            UserManager.AddToRole(user.Id, Enum_UserType.Teacher.ToString());
+                            break;
+                        case "Student":
+                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+                            UserManager.AddToRole(user.Id, Enum_UserType.Student.ToString());
+                            break;
+                        case "AllClass":
+                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.AllClass.ToString()));
+                            UserManager.AddToRole(user.Id, Enum_UserType.AllClass.ToString());
+                            break;
+                        default:
+                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+                            UserManager.AddToRole(user.Id, Enum_UserType.Student.ToString());
+                            break;
+                    }
+                    
+                    
+                    return await CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(model.Email));
                     //// Send Message
                     //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
                     //var administrator = roleAdministrator.Users.FirstOrDefault();

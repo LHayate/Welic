@@ -13,9 +13,17 @@
     <ContentPage.Content>
 <ScrollView>
         <StackLayout >
+            <StackLayout.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness" Android="10" iOS="25"/>
+            </StackLayout.Padding>
+
             <!-- header -->
-            <StackLayout BackgroundColor="#0F5682" Orientation="Vertical" VerticalOptions="StartAndExpand"
-                         HorizontalOptions="FillAndExpand">
+            <StackLayout BackgroundColor="#0F5682" 
+                         Orientation="Vertical" 
+                         VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand" 
+                         IsVisible="{Binding MenuVisivel}">
                 <StackLayout.HeightRequest>
                     <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
                 </StackLayout.HeightRequest>
@@ -36,26 +44,15 @@
                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" FontSize="16" />
 
-                    <Grid HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="32"/>
-                            <ColumnDefinition Width="32"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="32"/>
-                        </Grid.RowDefinitions>
-
-                        <ImageButton x:Name="CreatUpload"                                        
-                                     Command="{Binding CreatCommand}"  
-                                     VerticalOptions="CenterAndExpand" 
-                                     HorizontalOptions="End"                                                                                                
-                                     BackgroundColor="Transparent"
-                                     Source="iSave.png"   
-                                     Grid.Column="0"
-                        />
-                       
-                    </Grid>
-                </StackLayout>
+                    <ImageButton x:Name="CreatUpload"                                        
+                             Command="{Binding CreatCommand}"                               
+                             HorizontalOptions="End"                                                                                                
+                             BackgroundColor="Transparent"
+                             Source="iSave.png"  
+                             HeightRequest="32"
+                             WidthRequest="32"                             
+                    />
+                    </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
             </StackLayout>
 
@@ -96,41 +93,48 @@
                     </Editor.Keyboard>
                 </Editor>
 
-                <Entry Placeholder="Price $" BackgroundColor="Transparent" 
-                           Keyboard="Numeric" 
-                           Text="{Binding Price}"
-                           x:Name="Price"
-                           />
-
-                <Entry Placeholder="Themes" BackgroundColor="Transparent" 
-                           Keyboard="Text" 
-                           Text="{Binding Themes}"
-                           x:Name="Theme"
-
-                    />
-
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition  Width="*"/>
+                        <ColumnDefinition  Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Entry Placeholder="Price $" BackgroundColor="Transparent" 
+                       Keyboard="Numeric" 
+                       Text="{Binding Price}"
+                       x:Name="Price"
+                       Grid.Column="0"
+                />
 
-                    <!--<Extends:CheckBox DefaultText="Chat"
-                                          HorizontalOptions="FillAndExpand"
-                                          Checked="{Binding Chat}"
-                                          Grid.Column="0"
-                                          x:Name="Check"
-                        />-->
+                    <Entry Placeholder="Themes" BackgroundColor="Transparent" 
+                       Keyboard="Text" 
+                       Text="{Binding Themes}"
+                       x:Name="Theme"
+                       Grid.Column="1"
+                />
+                </Grid>
 
-                    <ImageButton  x:Name="PickFile" 
-                                      Command="{Binding PickFileCommand}"
-                                      HeightRequest="32"
-                                      WidthRequest="32"                                    
-                                      Source="iAddFile.png"
-                                      Grid.Column="1"
-                                      HorizontalOptions="CenterAndExpand"
-                                      BackgroundColor="Transparent"
-                                 />
+                <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--<Extends:CheckBox DefaultText="Chat"
+                                      HorizontalOptions="FillAndExpand"
+                                      Checked="{Binding Chat}"
+                                      Grid.Column="0"
+                                      x:Name="Check"
+                    />-->
+
+                <ImageButton  x:Name="PickFile" 
+                                  Command="{Binding PickFileCommand}"
+                                  HeightRequest="32"
+                                  WidthRequest="32"                                    
+                                  Source="iAddFile.png"
+                                  Grid.Column="1"
+                                  HorizontalOptions="CenterAndExpand"
+                                  BackgroundColor="Transparent"
+                             />
 
                 </Grid>
 
@@ -141,10 +145,10 @@
 
                 <Label Text="{Binding PathFiles}" x:Name="PathFile" HorizontalOptions="StartAndExpand"/>
                 
-
                 <ActivityIndicator IsRunning="{Binding IsBusy, Mode=TwoWay}"  IsVisible="{Binding IsBusy}" Color="Blue"
                                        VerticalOptions="CenterAndExpand" 
                                        HorizontalOptions="CenterAndExpand"/>
+
             </StackLayout>
         </StackLayout>
 </ScrollView>

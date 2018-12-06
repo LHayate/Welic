@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Models.Course;
 using Welic.App.Models.Usuario;
 using static Welic.App.Services.API.WebApi;
 
@@ -21,7 +22,7 @@ namespace Welic.App.Models.Live
         public string UrlDestino { get; set; }
         public DateTime DateRegister { get; set; }
 
-        public int CourseId { get; set; }       
+        public int? CourseId { get; set; }       
 
         public string TeacherId { get; set; }
 
@@ -108,19 +109,40 @@ namespace Welic.App.Models.Live
                 return null;
             }
         }
-
-        public async Task<LiveDto> Save(LiveDto liveDto)
+        public async Task<List<LiveDto>> GetListByCourse(CourseDto courseDto, int pageIndex, int pageSize)
         {
             try
-            {                
-                liveDto.DateRegister = DateTime.Now;
-                return liveDto != null ? await Current?.PostAsync("live/Save", liveDto) : null;
+            {
+                var list = await Current?.GetAsync<List<LiveDto>>($"live/GetListbyCourse/{courseDto.IdCurso}");
+                return list.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                                
+
             }
             catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return null;
             }
+        }
+
+
+        public async Task<LiveDto> Save(LiveDto liveDto)
+        {
+            try
+            {                
+                liveDto.DateRegister = DateTime.Now;
+                return await Current?.PostAsync<LiveDto>("live/Save", liveDto) ;
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(LiveDto liveDto)
+        {
+           return await Current?.DeleteAsync<LiveDto>($"live/delete/{liveDto.Id}");
         }
     }
 }

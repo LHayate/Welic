@@ -9,7 +9,12 @@
         <ToolbarItem Command="{Binding ExcluirCourseCommand}" Order="Secondary" Priority="0" Text="Excluir"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="ListViewStart"
+    <StackLayout>
+            <Label Text="Crie ou se ingresse em um novo Curso " 
+               IsVisible="{Binding IsBusy}" 
+               HorizontalOptions="CenterAndExpand"/>
+
+            <ListView x:Name="ListViewStart"
                   HasUnevenRows="True"
                   CachingStrategy="RecycleElement"
                   ItemsSource="{Binding ListStart}"
@@ -18,56 +23,65 @@
                   RefreshCommand="{Binding AtualizarCommand}"
                   IsRefreshing="{Binding Atualizando}"
             >
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <ViewCell>
-                        <Grid Padding="3" BackgroundColor="#0F5682" 
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="OnDelete" 
+                                      Command="{Binding OnDelete}" 
+                                      CommandParameter="{Binding .}"
+                                      Text="Delete" IsDestructive="True" />
+                            </ViewCell.ContextActions>
+                            <Grid Padding="3" BackgroundColor="#0F5682" 
                               >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                            </Grid.RowDefinitions>
-                            <Image Source="{Binding Print}" 
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Print}" 
                                    Grid.Column="0"                                                                                                                        
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="FillAndExpand"
                                    MinimumHeightRequest="50"
                                    MinimumWidthRequest="50"
                                  />
-                            <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="1"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Label Text="{Binding Title}" 
+                                <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="1"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Title}" 
                                        FontSize="15" 
                                        Opacity="20" 
                                        TextColor="Black"                                             
                                        HorizontalTextAlignment="Center"
                                        Grid.Row="0"/>
-                                <BoxView BackgroundColor="#0F5682" 
+                                    <BoxView BackgroundColor="#0F5682" 
                                          HeightRequest="1" 
                                          WidthRequest="1"
                                          Grid.Row="1"/>
-                                <implements:CustomDescriptionLabel Text="{Binding Description}" 
+                                    <implements:CustomDescriptionLabel Text="{Binding Description}" 
                                        FontSize="15" Opacity="20" 
                                        TextColor="Black"  
                                        HorizontalTextAlignment="Center"    
                                        MaxLength ="50"
                                        Grid.Row="2"/>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </ViewCell>
-                </DataTemplate>
+                        </ViewCell>
+                    </DataTemplate>
 
-            </ListView.ItemTemplate>
-        </ListView>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+       
     </ContentPage.Content>
 </ContentPage>

@@ -91,8 +91,8 @@ namespace Welic.App.ViewModels
                 _id = course.IdCurso;
 
                 ListStart = new InfiniteScrollCollection<LiveDto>();
-                GetDados();
-                Download();
+                 GetDados();
+                 Download();
             }
             catch (System.Exception e)
             {
@@ -115,7 +115,7 @@ namespace Welic.App.ViewModels
                         var page = ListStart.Count / PageSize;
 
                         //Busca os itens
-                        var items = await (new LiveDto().GetList(page, PageSize));
+                        var items = await (new LiveDto().GetListByCourse(Dto, page, PageSize));
 
                         IsBusy = false;
 
@@ -134,7 +134,7 @@ namespace Welic.App.ViewModels
         }
         private async Task Download()
         {
-            var items = await (new LiveDto().GetList(pageIndex: 0, pageSize: PageSize));
+            var items = await (new LiveDto().GetListByCourse(Dto, pageIndex: 0, pageSize: PageSize));
 
             ListStart.AddRange(items);
         }
@@ -147,7 +147,7 @@ namespace Welic.App.ViewModels
 
         public CourseDetailViewModel()
         {
-            
+
         }
 
         private async void ReturnDetail()
@@ -159,6 +159,12 @@ namespace Welic.App.ViewModels
         {
             object[] obj = new[] { Dto };
             NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
+        }
+        public void OpenLive(LiveDto liveDto)
+        {
+            object[] obj = new[] { liveDto };
+
+            NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
         }
     }
 }

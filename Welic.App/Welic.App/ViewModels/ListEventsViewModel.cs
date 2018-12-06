@@ -9,6 +9,13 @@ namespace Welic.App.ViewModels
 {
     public class ListEventsViewModel: BaseViewModel
     {
+        private bool _NotFound;
+
+        public bool NotFound
+        {
+            get => _NotFound;
+            set => SetProperty(ref _NotFound, value);
+        }
 
         private const int PageSize = 4;
         public string Schedule{ get; private set; }
@@ -80,6 +87,7 @@ namespace Welic.App.ViewModels
             var items = await (new ScheduleDto().GetList(pageIndex: 0, pageSize: PageSize));
 
             ListSchedule.AddRange(items);
+            NotFound = ListSchedule.Count <= 0;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Welic.App.ViewModels
             _timing = timing;
 
             // Atualiza informações a cada 24 horas
-            Device.StartTimer(TimeSpan.FromHours(24),
+            Device.StartTimer(TimeSpan.FromMinutes(5),
                 Callback);                       
         }
 
@@ -38,5 +38,7 @@ namespace Welic.App.ViewModels
 
             return true;
         }
+
+
     }
 }

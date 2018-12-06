@@ -112,6 +112,7 @@ namespace Welic.App.Models.Usuario
                 Synced = false;
                 LastAccessDate = DateTime.Now;
                 RememberMe = true;
+                
 
                 //Insere o registro                                
                 try
@@ -187,9 +188,7 @@ namespace Welic.App.Models.Usuario
                     user.RememberMe = false;
                     _dbManager.database.Delete(user);
                 }
-                    
-
-                         
+                                             
                 _dbManager.database.DeleteAll<UserToken>();                
                 return true;
             }

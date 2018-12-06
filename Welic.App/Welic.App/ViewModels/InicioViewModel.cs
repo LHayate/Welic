@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Welic.App.Exception;
+using Welic.App.Models.Config;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.ServicesViewModels;
@@ -19,6 +20,7 @@ namespace Welic.App.ViewModels
         public Command LoginFacebookCommand { get; set; }
         public Command LoginGoogleCommand { get; set; }
         public Command CreateAccountCommand => new Command(() => CreateAccount());
+        private DatabaseManager _dbManager;
 
         private void CreateAccount()
         {
@@ -66,8 +68,8 @@ namespace Welic.App.ViewModels
 
         public bool LoadAsync()
         {            
-            DatabaseManager dbManager = new DatabaseManager();
-            var usu = dbManager.database.Table<UserDto>()
+            _dbManager = new DatabaseManager();
+            var usu = _dbManager.database.Table<UserDto>()
                 .Where(x => x.RememberMe)
                 .ToList();
 
@@ -77,6 +79,19 @@ namespace Welic.App.ViewModels
                 return true;
             }
                 
+            return false;
+        }
+
+        public bool ValidaBiometric()
+        {
+            _dbManager = new DatabaseManager();
+            var usu = new UserDto().LoadAsync();
+            var config = _dbManager.database.Table<ConfigDto>()            
+                .Where(x => x.Biometria && x.UserId == usu.Id)
+                .ToList();
+
+            return config.Count > 0;
+            
             return false;
         }
     }

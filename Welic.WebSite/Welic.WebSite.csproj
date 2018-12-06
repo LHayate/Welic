@@ -1164,6 +1164,9 @@
     <Content Include="Imagens\images\cards\reebok.png" />
     <Content Include="Imagens\images\cards\shoes.png" />
     <Content Include="Imagens\images\cards\watch.png" />
+    <Content Include="Imagens\images\Community\cover.jpg" />
+    <Content Include="Imagens\images\Community\favicon.jpg" />
+    <Content Include="Imagens\images\Community\logo.png" />
     <Content Include="Imagens\images\favicon\apple-touch-icon-152x152.png" />
     <Content Include="Imagens\images\favicon\favicon-32x32.png" />
     <Content Include="Imagens\images\favicon\mstile-144x144.png" />
@@ -1209,6 +1212,15 @@
     <Content Include="Imagens\images\icon\laptop.png" />
     <Content Include="Imagens\images\icon\map-marker.png" />
     <Content Include="Imagens\images\icon\printer.png" />
+    <Content Include="Imagens\images\Listing\00000001.jpg" />
+    <Content Include="Imagens\images\Listing\00000002.jpg" />
+    <Content Include="Imagens\images\Listing\00000003.jpg" />
+    <Content Include="Imagens\images\Listing\00000004.jpg" />
+    <Content Include="Imagens\images\Listing\00000005.jpg" />
+    <Content Include="Imagens\images\Listing\00000006.jpg" />
+    <Content Include="Imagens\images\Listing\00000007.jpg" />
+    <Content Include="Imagens\images\Listing\00000008.jpg" />
+    <Content Include="Imagens\images\Listing\00000009.jpg" />
     <Content Include="Imagens\images\logo\generic-logo.png" />
     <Content Include="Imagens\images\logo\login-logo.png" />
     <Content Include="Imagens\images\logo\materialize-logo-color.png" />
@@ -1216,6 +1228,19 @@
     <Content Include="Imagens\images\misch\home_mockups_1.png" />
     <Content Include="Imagens\images\misch\signature-scan.png" />
     <Content Include="Imagens\images\misch\style-typography.png" />
+    <Content Include="Imagens\images\Sample\Community\cover.jpg" />
+    <Content Include="Imagens\images\Sample\Community\favicon.jpg" />
+    <Content Include="Imagens\images\Sample\Community\logo.png" />
+    <Content Include="Imagens\images\Sample\Listing\00000001.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000002.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000003.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000004.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000005.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000006.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000007.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000008.jpg" />
+    <Content Include="Imagens\images\Sample\Listing\00000009.jpg" />
+    <Content Include="Imagens\images\Sample\Profile\admin.jpg" />
     <Content Include="Imagens\JJMC1582.JPG" />
     <Content Include="Imagens\Joel.jpg" />
     <Content Include="Imagens\Bkg-elearning.jpg" />
@@ -2767,6 +2792,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Arquivos\Uploads\" />
+    <Folder Include="Imagens\images\Profile\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Profile\" />
   </ItemGroup>

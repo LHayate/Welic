@@ -105,7 +105,7 @@ namespace Welic.WebSite.Areas.Admin.Controllers
 
         public async Task<ActionResult> Install(InstallModel model)
         {
-            System.Data.Entity.Database.SetInitializer(new WelicDatabaseInitializer(model));
+            //Database.SetInitializer<>(new WelicDatabaseInitializer(model));
 
             //initialize and create database
             using (var context = new AuthContext())

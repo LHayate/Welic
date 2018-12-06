@@ -10,5 +10,6 @@ namespace Welic.Dominio.Models.EBook.Services
 {
     public interface IServiceEBook: IService<EBookMap>
     {
+
     }
 }

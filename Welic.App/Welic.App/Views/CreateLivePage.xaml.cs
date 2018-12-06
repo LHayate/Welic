@@ -5,24 +5,33 @@ using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+#if DEBUG
+
+#endif
 
 namespace Welic.App.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+
 	public partial class CreateLivePage : ContentPage
 	{	        
 	   
 	    bool isBusya = false;
         public CreateLivePage ()
-		{
-			InitializeComponent ();
+        {
+ 
+            InitializeComponent();
+
+            
 		    BindingContext = ViewModelLocator.Resolve<CreateLiveViewModel>();
 		  
         }
 
 	    public CreateLivePage(params object[] obj)
 	    {
-	        InitializeComponent();
+            InitializeComponent();
+
 	        BindingContext = new CreateLiveViewModel(obj);
 	       
         }

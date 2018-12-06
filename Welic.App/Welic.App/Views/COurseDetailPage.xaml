@@ -5,7 +5,6 @@
              xmlns:implements="clr-namespace:Welic.App.Implements;assembly=Welic.App"
              x:Class="Welic.App.Views.CourseDetailPage"
              BackgroundColor="#0F5682"
-
              >
    
     <ContentPage.Content>
@@ -85,6 +84,7 @@
 
             <Label Text="{Binding Themes}"/>
            
+
             <ListView x:Name="ListViewStart"
                       HasUnevenRows="True"
                       CachingStrategy="RecycleElement" 
@@ -149,14 +149,6 @@
                     </DataTemplate>
 
                 </ListView.ItemTemplate>
-
-                <ListView.HeaderTemplate>
-                    <DataTemplate>
-                        <ContentView BackgroundColor="Beige">
-                            <Label Margin="16" HorizontalOptions="CenterAndExpand" Text="{Binding Telefone, StringFormat='Meu Fone: {0}'}" />
-                        </ContentView>
-                    </DataTemplate>
-                </ListView.HeaderTemplate>
 
                 <ListView.Footer>
                     <Grid Padding="6" IsVisible="{Binding IsBusy}">

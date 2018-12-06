@@ -15,7 +15,7 @@
             <StackLayout>
                 <!-- header -->
                 <StackLayout BackgroundColor="#0F5682" Orientation="Vertical" VerticalOptions="StartAndExpand"
-                         HorizontalOptions="FillAndExpand">
+                         HorizontalOptions="FillAndExpand" IsVisible="{Binding MenuVisivel}">
                     <StackLayout.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
                     </StackLayout.HeightRequest>
@@ -37,29 +37,21 @@
                            HorizontalTextAlignment="Center" FontSize="16" 
                                Grid.Column="0"/>
 
-                        <Grid HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="32"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                            </Grid.RowDefinitions>
-
-                            <ImageButton x:Name="CreatUpload"                                        
-                                    Command="{Binding CreateCommand}"  
-                                    VerticalOptions="CenterAndExpand" 
-                                    HorizontalOptions="End"                                                                                                
-                                    BackgroundColor="Transparent"
-                                    CornerRadius="5"   
-                                    Source="iSave.png"                            
-                            />
-                        </Grid>
+                        <ImageButton x:Name="CreatUpload"                                        
+                                     Command="{Binding CreateCommand}"                                      
+                                     HorizontalOptions="End"                                                                                                
+                                     BackgroundColor="Transparent"
+                                     CornerRadius="5"   
+                                     HeightRequest="32"
+                                     WidthRequest="32"
+                                     Source="iSave.png" 
+                        />
+                        
                     </StackLayout>
                     <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
                 </StackLayout>
 
-                <StackLayout VerticalOptions="StartAndExpand">
+                <StackLayout >
                     <Label Text="Title" HorizontalTextAlignment="Center"/>
                     <Entry Text="{Binding Title}"                                                                                       
                            BackgroundColor="Transparent"

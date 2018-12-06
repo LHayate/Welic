@@ -25,7 +25,6 @@ namespace Welic.WebSite.API.Controllers
             _unityOfWorkAsync = unityOfWorkAsync;
         }
 
-
         [HttpGet]
         [Route("GetById/{id:int}")]
         public Task<HttpResponseMessage> GetById(int id)

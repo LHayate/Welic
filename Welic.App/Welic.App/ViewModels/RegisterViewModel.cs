@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
@@ -42,20 +44,7 @@ namespace Welic.App.ViewModels
             get => _emailAdress;
             set => _emailAdress = value;
         }
-        private string _password;
-
-        public string Password
-        {
-            get => _password;
-            set => SetProperty(ref _password , value);
-        }
-        private string _confirmPassword;
-
-        public string ConfirmPassword
-        {
-            get => _confirmPassword;
-            set => SetProperty(ref _confirmPassword, value);
-        }
+        
         private string _phoneNumber;
 
         public string PhoneNumber
@@ -63,7 +52,150 @@ namespace Welic.App.ViewModels
             get => _phoneNumber;
             set => _phoneNumber = value;
         }
-        private string _localization;            
+        private string _localization;
+
+        private List<string> _ItemsRoles;
+
+        public List<string> ItemsRoles
+        {
+            get => _ItemsRoles;
+            set => SetProperty(ref _ItemsRoles , value);
+        }
+
+        private List<string> _ItemsGender;
+
+        public List<string> ItemsGender
+        {
+            get => _ItemsGender;
+            set => SetProperty(ref _ItemsGender, value);
+        }
+
+        private string SelectedGender;       
+
+
+        int genderSelectedIndex;
+        public int GenderSelectedIndex
+        {
+            get => genderSelectedIndex;
+            set
+            {
+                if (genderSelectedIndex == value) return;
+                genderSelectedIndex = value;
+
+                // trigger some action to take such as updating other labels or fields
+                OnPropertyChanged(nameof(GenderSelectedIndex));
+                SelectedGender = _ItemsRoles[genderSelectedIndex];
+            }
+        }
+
+        private string SelectedRole;
+
+
+        int roleSelectedIndex;
+        public int RoleSelectedIndex
+        {
+            get
+            {
+                return roleSelectedIndex;
+            }
+            set
+            {
+                if (roleSelectedIndex != value)
+                {
+                    roleSelectedIndex = value;
+
+                    // trigger some action to take such as updating other labels or fields
+                    OnPropertyChanged(nameof(RoleSelectedIndex));
+                    SelectedGender = _ItemsRoles[roleSelectedIndex];
+                }
+            }
+        }
+
+        private DateTime? _DateBirthday;
+
+        public DateTime? DateBirthday
+        {
+            get => _DateBirthday;
+            set => SetProperty(ref _DateBirthday , value);
+        }
+
+        private string _password;
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                //TODO: Validar as senhas
+                //if (Password.Any(c => char.IsSymbol(c)))
+                //    _CharEspecial = true;
+
+                //if (Password.Any(c => char.IsUpper(c)))
+                //    _CharMaiusculo = true;
+
+                //if (Password.Any(c => char.IsLower(c)))
+                //    _CharMinusculo = true;
+
+                //if (Password.Any(c => char.IsDigit(c)) && Password.Length >= 8)
+                //    _CharNumberLength = true;
+
+                SetProperty(ref _password, value);
+            } 
+        }
+        private string _confirmPassword;
+
+        public string ConfirmPassword
+        {
+            get => _confirmPassword;
+            set
+            {                
+                SetProperty(ref _confirmPassword, value);
+            } 
+        }
+
+        private bool _CharEspecial;
+
+        public bool CharEspecial
+        {
+            get => _CharEspecial;
+            set
+            {                
+                SetProperty(ref _CharEspecial, value);
+            } 
+        }
+
+        private bool _CharMaiusculo;
+
+        public bool CharMaiusculo
+        {
+            get => _CharMaiusculo;
+            set
+            {                
+                SetProperty(ref _CharMaiusculo, value);
+            } 
+        }
+        private bool _CharMinusculo;
+
+        public bool CharMinusculo
+        {
+            get => _CharMinusculo;
+            set
+            {                
+                SetProperty(ref _CharMinusculo, value);
+            } 
+        }
+        private bool _CharNumberLength;
+
+        public bool CharNumberLength
+        {
+            get => _CharNumberLength;
+            set
+            {
+                
+                SetProperty(ref _CharNumberLength, value);
+            } 
+        }
+
 
 
         public Command RegisterCommand => new Command(async () => await Register());
@@ -114,7 +246,6 @@ namespace Welic.App.ViewModels
 
                 this.IsBusy = true;
 
-
                 var usuario = new UserDto
                 {                    
                     NickName = EmailAdress,
@@ -123,10 +254,10 @@ namespace Welic.App.ViewModels
                     FullName = $"{_firstName} {_lastName}" ,
                     PhoneNumber = PhoneNumber,                    
                     FirstName = _firstName,
-                    LastName = _lastName,
-                    RegisterDate = DateTime.Now,
-                    LastAccessDate = DateTime.Now,                             
-
+                    LastName = _lastName,                        
+                    Gender = SelectedGender,
+                    Profession = SelectedRole,
+                    DateOfBirth = DateBirthday,                    
                 };
 
                 if (CrossConnectivity.Current.IsConnected)
@@ -181,7 +312,17 @@ namespace Welic.App.ViewModels
 
         public RegisterViewModel()
         {
-            
+            //add itens roles 
+            ItemsRoles = new List<string>();
+            ItemsRoles.Add("Professor");
+            ItemsRoles.Add("Aluno");
+            ItemsRoles.Add("Aluno e Professor");
+
+            //Add Itens Gender
+            _ItemsGender = new List<string>();
+            _ItemsGender.Add("Masculino");
+            _ItemsGender.Add("Feminino");
+            _ItemsGender.Add("Não quero informar");
         }
     }
 }

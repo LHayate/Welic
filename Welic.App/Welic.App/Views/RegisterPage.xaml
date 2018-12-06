@@ -7,8 +7,12 @@
              BackgroundColor="#0F5682">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <abstractions:CircleImage Source="Logo_Welic.png"               
+            <StackLayout >
+                <StackLayout.Padding>
+                    <OnPlatform
+                        x:TypeArguments="Thickness" Android="0" iOS="25"/>
+                </StackLayout.Padding>
+                <!--<abstractions:CircleImage Source="Logo_Welic.png"               
                                           Aspect="AspectFill" 
                                           x:Name="CircleImage"
                                           MinimumHeightRequest="150"
@@ -24,12 +28,13 @@
                             <On Platform="Android, iOS">160</On>
                         </OnPlatform>
                     </abstractions:CircleImage.HeightRequest>
-                </abstractions:CircleImage>
-                <Button Text="Take" FontSize="10"  
+                </abstractions:CircleImage>-->
+                <!--<Button Text="Take" FontSize="10"  
                         HorizontalOptions="CenterAndExpand" 
                         Clicked="Button_OnClicked"                        
                         BackgroundColor="Transparent" 
-                        TextColor="DimGray"/>
+                        TextColor="DimGray"/>-->
+                <Label  Text="Crie seu registro" TextColor="#CE7526" HorizontalOptions="CenterAndExpand" FontSize="16"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -38,9 +43,66 @@
                     <Entry Placeholder="First Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0"/>
                     <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text" Grid.Column="1"/>
                 </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Date of Birthday" Grid.Column="0"/>
+                    <DatePicker HorizontalOptions="FillAndExpand" Grid.Column="1" />
+                </Grid>
+
                 
+
+                <!--Escolher Sexo-->
+                <Picker x:Name="Genero" 
+                        HorizontalOptions="FillAndExpand" 
+                        Title="Gênero" 
+                        SelectedIndex="{Binding GenderSelectedIndex}" 
+                        ItemsSource="{Binding ItemsGender}"/>
+
+                <!--Escolher Roles-->
+                <Picker x:Name="Role" 
+                        HorizontalOptions="FillAndExpand" 
+                        Title="Eu sou um?" 
+                        SelectedIndex="{Binding RoleSelectedIndex}" 
+                        ItemsSource="{Binding ItemsRoles}"/>
+
                 <Entry Placeholder="Email Adress" Text="{Binding EmailAdress}" Keyboard="Email"/>
                 <Entry Placeholder="Phone Number" Text="{Binding PhoneNumber}" Keyboard="Telephone"/>
+
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Sua senha deve conter:" Grid.Column="0" Grid.Row="0"/>
+
+                    <Label Text="Um caracter especial(@#$!)" Grid.Column="0" Grid.Row="1"/>
+                    <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="1" IsVisible="{Binding CharEspecial}"/>
+
+                    <Label Text="Uma Letra Maiúscula" Grid.Column="0" Grid.Row="2"/>
+                    <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="2" IsVisible="{Binding CharMaiusculo}"/>
+
+                    <Label Text="Uma Letra Minúscula" Grid.Column="0" Grid.Row="3"/>
+                    <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="3" IsVisible="{Binding CharMinusculo}"/>
+
+                    <Label Text="Uma Numero e minimo 8 Caracteres" Grid.Column="0" Grid.Row="4"/>
+                    <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="4" IsVisible="{Binding CharNumberLength}"/>
+
+                </Grid>
+               
+
+
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -49,7 +111,7 @@
                     <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" Keyboard="Default" Grid.Column="0"/>
                     <Entry Placeholder="Confirm Password" Text="{Binding ConfirmPassword}" IsPassword="True" Keyboard="Default" Grid.Column="1"/>
                 </Grid>
-                
+
                 <implements:GradientColorStack StartColor="#C79D1D" 
                                                EndColor="#CE7526" 
                                                HorizontalOptions="CenterAndExpand"

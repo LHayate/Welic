@@ -49,6 +49,21 @@ namespace Welic.App.Models.Course
                 return null;
             }
         }
+        public async Task<ObservableCollection<CourseDto>> GetListByUser()
+        {
+            try
+            {
+                var user = new UserDto().LoadAsync();
+                _listItem = await Current?.GetAsync<ObservableCollection<CourseDto>>($"curso/GetByUser/{user.Id}");
+                return ListItem;
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
         //public async Task<List<CourseDto>> GetList(int pageIndex, int pageSize)
         //{
         //    try

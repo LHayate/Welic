@@ -29,7 +29,7 @@ using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Models.Menu.Repositorios;
 using Welic.Dominio.Models.Menu.Servicos;
-using Welic.Dominio.Models.News.Repositoryes;
+using Welic.Dominio.Models.News.Maps;
 using Welic.Dominio.Models.News.Services;
 using Welic.Dominio.Models.Schedule.Repositoryes;
 using Welic.Dominio.Models.Schedule.Services;
@@ -48,7 +48,6 @@ using Welic.Infra.StoredProcedures;
 using Welic.Repositorios.Dispositives;
 using Welic.Repositorios.Live;
 using Welic.Repositorios.Menu;
-using Welic.Repositorios.News;
 using Welic.Repositorios.Schedule;
 using Welic.Repositorios.Users;
 
@@ -90,7 +89,9 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<CursoMap>,Repository<CursoMap>>()
                 .RegisterType<IRepositoryAsync<LiveMap>,Repository<LiveMap>>()
                 .RegisterType<IRepositoryAsync<EBookMap>, Repository<EBookMap>>()
+                .RegisterType<IRepositoryAsync<NewsMap>, Repository<NewsMap>>()
 
+                .RegisterType<IServiceNews, ServiceNews>()
                 .RegisterType<IServiceEBook, ServiceEbook>()
                 .RegisterType<IServiceLive, ServiceLive>()
                 .RegisterType<ICategoryService, CategoryService>()
@@ -120,7 +121,6 @@ namespace Registrators
                 .RegisterType<IUploadsService, UploadsService>()
                 .RegisterType<ICursoService, CursoService>()
                 ;
-
 
             container
                 .RegisterType<IHookService, HookService>()
@@ -154,9 +154,7 @@ namespace Registrators
             container.RegisterType<IRepositorioMenu, RepositorioMenu>();
         }
         private static void RegisterNews(IUnityContainer container)
-        {
-            container.RegisterType<IServiceNews, ServiceNews>();
-            container.RegisterType<IRepositoryNews, RepositoryNews>();
+        {              
         }
         private static void RegisterSchedule(IUnityContainer container)
         {

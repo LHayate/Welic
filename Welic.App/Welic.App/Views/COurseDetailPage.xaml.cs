@@ -30,7 +30,7 @@ namespace Welic.App.Views
 	        var item = (LiveDto)e.Item;
 
 	        if (item != null)
-	            (BindingContext as ListLiveViewModel)?.OpenLive(item);
+	            (BindingContext as CourseDetailViewModel)?.OpenLive(item);
         }
 	}
 }

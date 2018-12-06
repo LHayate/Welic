@@ -5,6 +5,7 @@ using System.Data.Entity.Validation;
 using System.Text;
 using Welic.Dominio.Core;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
+using Welic.Dominio.Models.ConfigApp.Map;
 using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.Lives.Maps;
@@ -43,6 +44,7 @@ namespace Welic.Infra.Context
             //: base("WelicDbContext")
             : base("WelicDbContext")
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, ConfigurationInstall<AuthContext>>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
         }
 
@@ -90,7 +92,7 @@ namespace Welic.Infra.Context
         public DbSet<UploadsMap> Uploads { get; set; }
         public DbSet<CursoMap> Curso { get; set; }
         public DbSet<EBookMap> EBook { get; set; }
-
+        public DbSet<ConfigAppMap> ConfigApp { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -136,6 +138,7 @@ namespace Welic.Infra.Context
             modelBuilder.Configurations.Add(new MappingUploads());
             modelBuilder.Configurations.Add(new MappingCursos());
             modelBuilder.Configurations.Add(new MappingEBook());
+            modelBuilder.Configurations.Add(new MappingConfigApp());
         }
     }
 }

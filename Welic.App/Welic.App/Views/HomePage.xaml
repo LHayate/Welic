@@ -11,10 +11,11 @@
     </TabbedPage.ToolbarItems>
     <!--Pages can be added as references or inline-->
 
-    <local:FavoritesPage  Icon="{Binding Stars}" />
+    <!--<local:FavoritesPage  Icon="{Binding Stars}" IsEnabled="False" IsVisible="False" />-->
     <local:SearchPage />
-    <local:ListLivePage />
+    <local:ListLivePage  />
+    <local:ListEbookPage  />
     <local:ListEventsPage />
-    <local:ListNewsPage Icon="{Binding News}"/>
+    <!--<local:ListNewsPage Icon="{Binding News}" IsEnabled="False" IsVisible="False"/>-->
     
 </TabbedPage>

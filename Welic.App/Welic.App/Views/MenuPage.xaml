@@ -97,11 +97,55 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!--<ListView x:Name="ListViewMenuGroup"
-                  HasUnevenRows="True"
-                  ItemSelected="ListViewMenu_OnItemSelected"
-                  ItemTapped="ListViewMenu_OnItemTapped"
+
+        <!--<ListView x:Name="ListViewMenu"
+                    HasUnevenRows="True"
+                  IsGroupingEnabled="True"
+                  GroupDisplayBinding="{Binding Title}"
+                  GroupShortNameBinding="{Binding ShortName}"
                   HeightRequest="50">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="32" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                            <Image Source="{Binding Expanded}" Grid.Column="2" HeightRequest="32" WidthRequest="32"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="32" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                            <Image Source="{Binding Expanded}" Grid.Column="2" HeightRequest="32" WidthRequest="32"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+        </ListView>
+
+
+
+
+        <ListView x:Name="ListViewMenuGroup"
+                  HasUnevenRows="True"                
+                  HeightRequest="50"
+                  VerticalOptions="Start"
+                  HorizontalOptions="Start">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ImageCell Text="{Binding Title}"

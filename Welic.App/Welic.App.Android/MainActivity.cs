@@ -10,6 +10,7 @@ using Android.OS;
 using Plugin.CurrentActivity;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Distribute;
+using Plugin.Fingerprint;
 
 namespace Welic.App.Droid
 {
@@ -25,7 +26,7 @@ namespace Welic.App.Droid
             base.OnCreate(savedInstanceState);
 
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            
+            CrossFingerprint.SetCurrentActivityResolver(() => CrossCurrentActivity.Current.Activity);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             CurrentContext = this;
             LoadApplication(new App());

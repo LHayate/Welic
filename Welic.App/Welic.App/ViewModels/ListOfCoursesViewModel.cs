@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Welic.App.Models.Course;
+using Welic.App.Models.Live;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Extended;
@@ -14,7 +15,10 @@ namespace Welic.App.ViewModels
     public class ListOfCoursesViewModel : BaseViewModel
     {        
         public Command AddNewCommand => new Command(AddNew);
+
         
+
+
         private ObservableCollection<CourseDto> _listStart;
 
         public ObservableCollection<CourseDto> ListStart
@@ -35,7 +39,8 @@ namespace Welic.App.ViewModels
 
         public async Task SetListCourses()
         {
-            ListStart = await new CourseDto().GetList();
+            ListStart = await new CourseDto().GetListByUser();
+            IsBusy = ListStart.Count <= 0;
         }
         
         private void AddNew()
@@ -50,6 +55,10 @@ namespace Welic.App.ViewModels
             NavigationService.NavigateModalToAsync<CourseDetailViewModel>(obj);
         }
 
+        public async void DeleteLive(LiveDto liveDto)
+        {
+            await new LiveDto().DeleteAsync(liveDto);
+        }
 
         private bool _atualizando = false;
         public bool Atualizando
@@ -74,5 +83,8 @@ namespace Welic.App.ViewModels
                 });
             }
         }
+
+
+
     }
 }

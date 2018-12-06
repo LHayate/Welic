@@ -81,7 +81,10 @@ namespace Welic.Dominio.Enumerables
     public enum Enum_UserType
     {
         Normal = 0,
-        Administrator = 1
+        Administrator = 1,
+        Teacher = 2,
+        Student = 3,
+        AllClass = 4
     }
 
     public enum Enum_PluginAction

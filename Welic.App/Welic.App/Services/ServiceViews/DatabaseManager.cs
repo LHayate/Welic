@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using Welic.App.Models.Config;
 using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
@@ -21,7 +22,7 @@ namespace Welic.App.Services.ServiceViews
             database = Xamarin.Forms.DependencyService.Get<ISQLite>().GetConnection();
             database.CreateTable<UserDto>();
             database.CreateTable<UserToken>();
+            database.CreateTable<ConfigDto>();
         }
-
     }
 }

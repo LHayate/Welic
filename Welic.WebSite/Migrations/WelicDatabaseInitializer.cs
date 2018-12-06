@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.IO;
 using System.Web;
@@ -6,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Entityes;
+using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
@@ -16,7 +18,7 @@ using Welic.WebSite.Utilities;
 
 namespace Welic.WebSite.Migrations
 {
-    public class WelicDatabaseInitializer : CreateAndMigrateDatabaseInitializer<AuthContext, ConfigurationInstall<AuthContext>>
+    public class WelicDatabaseInitializer : DbMigrationsConfiguration<Welic.Infra.Context.AuthContext>
     {
         #region Fields and properties
         public ApplicationUserManager UserManager
@@ -52,8 +54,14 @@ namespace Welic.WebSite.Migrations
             : base()
         {
             _installModel = installModel;
-            InitializeDatabase(new AuthContext());
+            //InitializeDatabase(new AuthContext());
         }
+
+        public WelicDatabaseInitializer()
+        {
+             AutomaticMigrationsEnabled = true;
+        }
+
         #endregion
 
         #region Methods
@@ -63,6 +71,7 @@ namespace Welic.WebSite.Migrations
             InstallSettings(context);
             InstallEmailTemplates(context);
             InstallListingTypes(context);
+            InstallRoles(context);
 
             var user = CreateUser();
 
@@ -75,6 +84,13 @@ namespace Welic.WebSite.Migrations
                 InstallStripe(context);
                 InstallDisqus(context);
             }
+        }
+        private void InstallRoles(AuthContext context)
+        {            
+            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString()));            
+            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Teacher.ToString()));            
+            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.AllClass.ToString()));
         }
 
         private ApplicationUser CreateUser()

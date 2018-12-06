@@ -21,8 +21,8 @@ namespace Welic.Infra.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true; 
-            ContextKey = "Welic.Infra.Context.AuthContext";
+            //AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; 
+            //ContextKey = "Welic.Infra.Context.AuthContext";
 
             //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
         }
@@ -43,9 +43,70 @@ namespace Welic.Infra.Migrations
             //InstallPictures(context);
             InstallStripe(context);
             InstallDisqus(context);
+            InstallRoles(context);
             //InstallListingTypes(context);
 
             context.SaveChanges();
+        }
+
+        //private AspNetUser CreateUser()
+        //{
+        //    var user = new AspNetUser
+        //    {
+        //        NickName = "Administrator",
+        //        FirstName = "Administrator",
+        //        Email = "admin@welic.app",
+        //        RegisterDate = DateTime.Now,                
+        //        LastAccessDate = DateTime.Now,                
+        //        Rating = 4
+        //    };
+
+        //    using (var context = new AuthContext())
+        //    {
+        //        context.Database.Initialize(true);
+        //        context.SaveChanges();
+
+        //        //var userManager = new ApplicationUserManager(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(context));
+
+        //        // Create role/user and redirect
+        //        var userRole = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString());
+        //        //var roleResult = RoleManager.Create(userRole);
+        //        //var result = userManager.Create(user, _installModel.Password);
+        //        var roleAdded = userManager.AddToRole(user.Id, Enum_UserType.Administrator.ToString());
+        //    }
+
+        //    // Copy profile image
+        //    var pathFrom = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Imagens/images/sample/profile"), "admin.jpg");
+        //    var pathTo = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Imagens/images/profile"), string.Format("{0}.{1}", user.Id, "jpg"));
+        //    File.Copy(pathFrom, pathTo, true);
+
+        //    return user;
+        //}
+
+        private void InstallRoles(AuthContext context)
+        {
+            context.AspNetRoles.AddOrUpdate(
+                new AspNetRole()
+                {
+                    Name = Enum_UserType.Administrator.ToString(),
+                    Id = Guid.NewGuid().ToString(),                    
+                },
+                new AspNetRole()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = Enum_UserType.Teacher.ToString()
+                },
+                new AspNetRole()
+                {
+                    Name = Enum_UserType.Student.ToString(),
+                    Id = Guid.NewGuid().ToString()
+                },
+                new AspNetRole()
+                {
+                    Name = Enum_UserType.AllClass.ToString(),
+                    Id = Guid.NewGuid().ToString()
+                }                
+            );
         }
 
         private void InstallMenu(AuthContext context)
@@ -214,7 +275,7 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("signup")) <= 0 ? ObjectState.Added : ObjectState.Modified
+                //ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("signup")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
 
             context.EmailTemplates.AddOrUpdate(new EmailTemplate()
@@ -235,7 +296,7 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("forgotpassword")) <= 0 ? ObjectState.Added : ObjectState.Modified
+               // ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("forgotpassword")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
 
             context.EmailTemplates.AddOrUpdate(new EmailTemplate()
@@ -256,7 +317,7 @@ namespace Welic.Infra.Migrations
                 SendCopy = true,
                 Created = DateTime.Now,
                 LastUpdated = DateTime.Now,
-                ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("privatemessage")) <= 0 ? ObjectState.Added : ObjectState.Modified
+               // ObjectState = context.EmailTemplates.Count(x => x.Slug.Equals("privatemessage")) <= 0 ? ObjectState.Added : ObjectState.Modified
             });
         }
 

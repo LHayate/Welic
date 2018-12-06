@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Welic.Infra.Context;
 using Welic.WebSite.Migrations;
 
 namespace Welic.WebSite.Models
@@ -88,7 +89,7 @@ namespace Welic.WebSite.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<ApplicationDbContext>(null);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, WelicDatabaseInitializer>());
             base.OnModelCreating(modelBuilder);
         }
     }

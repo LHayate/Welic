@@ -9,14 +9,18 @@ using Welic.App.Services.ServicesViewModels;
 using Welic.App.Services.ServiceViews;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+
 using Welic.App.Views;
 
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
+
 using Device = Xamarin.Forms.Device;
+
+using Xamarin.Forms.Xaml;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Welic.App
@@ -27,8 +31,9 @@ namespace Welic.App
         public App()
         {
             //LiveReload.Init();
-            
+
             InitializeComponent();
+   
 
             RegisterService();
 

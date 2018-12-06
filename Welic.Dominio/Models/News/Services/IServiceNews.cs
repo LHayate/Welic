@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Welic.Dominio.Models.News.Dtos;
+﻿using Welic.Dominio.Models.News.Maps;
+using Welic.Dominio.Patterns.Service.Pattern;
 
 namespace Welic.Dominio.Models.News.Services
 {
-    public interface IServiceNews
+    public interface IServiceNews : IService<NewsMap>
     {
-        NewsDto Save(NewsDto newsDto);
-        NewsDto GetById(int id);
-        List<NewsDto> GetList();
-        bool Delete(int id);
+        
     }
 }
