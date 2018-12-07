@@ -17,26 +17,32 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnName("ScheduleId")
                 .HasColumnType("int")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             Property(x => x.Title)
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasColumnName("Title");
+
             Property(x => x.Description)
                 .IsRequired()
                 .HasColumnName("Description")
                 .HasColumnType("varchar");
+
             Property(x => x.Price)
                 .IsRequired()
-                .HasColumnName("Prince")
+                .HasColumnName("Price")
                 .HasColumnType("decimal");
+
             Property(x => x.Private)
                 .IsRequired()
                 .HasColumnName("Private")
                 .HasColumnType("bit");
+
             Property(x => x.Ativo)
                 .IsRequired()
                 .HasColumnType("bit")
                 .HasColumnName("Ativo");
+
             Property(x => x.DateEvent)
                 .IsRequired()
                 .HasColumnName("DateEvent")
@@ -54,7 +60,6 @@ namespace Welic.Infra.Mapeamentos
                     c.MapLeftKey("ScheduleId");
                     c.MapRightKey("UserId");
                     c.ToTable("ScheduleClass");
-
                 })
                 ;
 
@@ -67,10 +72,6 @@ namespace Welic.Infra.Mapeamentos
             //One to One
             //HasRequired(s => s.Live)
             //    .WithRequiredPrincipal(t => t.Lives);
-
-
-
-
 
         }
     }

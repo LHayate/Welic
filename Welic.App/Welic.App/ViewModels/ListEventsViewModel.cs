@@ -35,22 +35,15 @@ namespace Welic.App.ViewModels
             Download();
         }
 
-        //public async Task GetData()
-        //{
-        //    try
-        //    {
-        //        var list = await (new ScheduleDto()).GetListLive();
-        //        foreach (var scheduleDto in list)
-        //        {
-        //            ListSchedule.Add(scheduleDto);
-        //        }
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        return;
-        //    }
-        //}
+        public void OpenSchedule(ScheduleDto Schedule)
+        {
+            bool editar = false;
+            object[] obj = new object[] { Schedule, editar};
+
+            NavigationService.NavigateModalToAsync<ScheduleDetailViewModel>(obj);
+        }
+
+
         private async Task GetData()
         {
             try

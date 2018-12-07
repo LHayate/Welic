@@ -30,6 +30,6 @@ namespace Welic.Dominio.Models.EBook.Map
         public ICollection<AspNetUser> ClassUser { get; set; }
 
 
-        public virtual ScheduleMap Schedules { get; set; }
+        //public virtual ScheduleMap Schedules { get; set; }
     }
 }

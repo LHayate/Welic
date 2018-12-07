@@ -218,13 +218,33 @@ namespace Welic.App.Services.API
             return result.IsSuccessStatusCode;
         }
 
-        internal async Task<bool> DeleteAsync<T>(string uri)
+        internal async Task<bool> DeleteAsync(string uri)
         {
-            var httpClient = new HttpClient();
+            try
+            {
+                
+                HttpContent content = new StringContent("application/json");
+                using (var _response = await _HttpClient.PostAsync(uri,content))
+                {
+                    if (!_response.IsSuccessStatusCode)
+                    {
+                        if (_response.StatusCode == HttpStatusCode.Conflict)
+                            throw new InvalidOperationException("Dados Duplicados");
+                        if (_response.StatusCode == HttpStatusCode.Unauthorized)
+                            throw new InvalidOperationException("Não Autorizado");
 
-            var response = await httpClient.DeleteAsync($"{uri}");
+                        throw new InvalidOperationException(_response.RequestMessage.ToString());
+                    }
 
-            return response.IsSuccessStatusCode;
+                    return true;
+                }
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw ;
+            }
+            
         }
 
         internal async Task<string> UploadAsync(MultipartFormDataContent path)

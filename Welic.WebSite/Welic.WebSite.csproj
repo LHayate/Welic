@@ -1382,7 +1382,6 @@
     <Content Include="js\timepicker\locales\bootstrap-datepicker.vi.js" />
     <Content Include="js\timepicker\locales\bootstrap-datepicker.zh-CN.js" />
     <Content Include="js\timepicker\locales\bootstrap-datepicker.zh-TW.js" />
-    <Content Include="LVJZ0375.MP4" />
     <Content Include="Parameters.xml" />
     <Content Include=".bin\node.cmd" />
     <Content Include=".bin\git.cmd" />

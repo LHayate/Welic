@@ -60,8 +60,8 @@ namespace Welic.Infra.Mapeamentos
 
 
             //One to One 
-            HasRequired(s => s.Schedules)
-                .WithRequiredPrincipal(ad => ad.Ebook);
+            //HasRequired(s => s.Schedules)
+            //    .WithRequiredPrincipal(ad => ad.Ebook);
 
 
             //One to Many            

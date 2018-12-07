@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Schedule.Services;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
 namespace Welic.WebSite.API.Controllers
 {
@@ -14,17 +15,19 @@ namespace Welic.WebSite.API.Controllers
     public class ScheduleController : BaseController
     {
         private IServiceSchedule _serviceSchedule;
+        private IUnitOfWorkAsync _unityOfWorkAsync;
 
-        public ScheduleController(IServiceSchedule serviceSchedule)
+        public ScheduleController(IServiceSchedule serviceSchedule, IUnitOfWorkAsync unityOfWorkAsync)
         {
             _serviceSchedule = serviceSchedule;
+            _unityOfWorkAsync = unityOfWorkAsync;
         }
 
         [HttpGet]
         [Route("GetById/{id}")]
-        public Task<HttpResponseMessage> GetById(int id)
-        {
-            return CriaResposta(HttpStatusCode.OK, _serviceSchedule.FindAsync(id));
+        public async Task<HttpResponseMessage> GetById(int id)
+        {            
+            return await CriaResposta(HttpStatusCode.OK, _serviceSchedule.Find(id));
         }
 
         [HttpGet]
@@ -33,44 +36,57 @@ namespace Welic.WebSite.API.Controllers
         {
             return CriaResposta(HttpStatusCode.OK, _serviceSchedule.Query().Select(x=> x).ToList());
         }
-       
+        [HttpGet]
+        [Route("GetListByUser/{id}")]
+        public Task<HttpResponseMessage> ListByUser(string id)
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceSchedule.Query().Select(x => x).Where(x=> x.TeacherId == id && x.Ativo).ToList());
+        }
+
         [HttpPost]
         [Route("save")]
-        public Task<HttpResponseMessage> save([FromBody] ScheduleMap scheduleMap)
+        public async  Task<HttpResponseMessage> save([FromBody] ScheduleMap scheduleMap)
         {
             try
             {
                 _serviceSchedule.Insert(scheduleMap);
-                return CriaResposta(HttpStatusCode.OK, _serviceSchedule.Find(scheduleMap.ScheduleId));
+                await _unityOfWorkAsync.SaveChangesAsync();
+                return await CriaResposta(HttpStatusCode.OK, _serviceSchedule.Query().Select(x=> x)
+                    .FirstOrDefault(x=> x.Title == scheduleMap.Title && 
+                                       x.DateEvent == scheduleMap.DateEvent && 
+                                       x.Description == scheduleMap.Description && 
+                                       x.TeacherId == scheduleMap.TeacherId));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return CriaResposta(HttpStatusCode.BadRequest, "Erro ao salvar");
+                return await CriaResposta(HttpStatusCode.BadRequest, "Erro ao salvar");
             }            
         }
 
         [HttpPost]
         [Route("update")]
-        public Task<HttpResponseMessage> Update([FromUri] ScheduleMap scheduleMap)
+        public async Task<HttpResponseMessage> Update([FromBody] ScheduleMap scheduleMap)
         {
             try
             {
                 _serviceSchedule.Update(scheduleMap);
-                return CriaResposta(HttpStatusCode.OK, _serviceSchedule.Find(scheduleMap.ScheduleId));
+                await _unityOfWorkAsync.SaveChangesAsync();
+                return await CriaResposta(HttpStatusCode.OK, _serviceSchedule.Find(scheduleMap.ScheduleId));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return CriaResposta(HttpStatusCode.BadRequest, "Erro ao salvar");
+                return  await CriaResposta(HttpStatusCode.BadRequest);
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("delete/{id}")]
         public Task<HttpResponseMessage> Delete(int id)
         {
             _serviceSchedule.Delete(id);
+            _unityOfWorkAsync.SaveChangesAsync();
             return CriaResposta(HttpStatusCode.OK, "Sucess Delete");
         }
     }

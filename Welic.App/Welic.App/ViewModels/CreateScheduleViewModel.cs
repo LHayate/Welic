@@ -16,7 +16,7 @@ namespace Welic.App.ViewModels
     public class CreateScheduleViewModel: BaseViewModel
     {
 
-        public Command CreatCommand => new Command(CreateNew);        
+        public Command CreatCommand { get; set; }    
 
         
         private string _path;
@@ -53,11 +53,11 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _themes, value);
         }
 
-        private bool _chat;
-        public bool Chat
+        private bool _Ativo;
+        public bool Ativo
         {
-            get => _chat;
-            set => SetProperty(ref _chat, value);
+            get => _Ativo;
+            set => SetProperty(ref _Ativo, value);
         }
 
         private string _pathFiles;
@@ -65,20 +65,29 @@ namespace Welic.App.ViewModels
         {
             get => _pathFiles;
             set => SetProperty(ref _pathFiles, value);
-        }
-        private bool _MenuVisivel;
-
-        public bool MenuVisivel
-        {
-            get => _MenuVisivel;
-            set => SetProperty(ref _MenuVisivel, value);
-        }
-
+        }       
 
         public ScheduleDto Dto { get; set; }
-        public CreateScheduleViewModel()
+        
+
+        public CreateScheduleViewModel(params object[] obj)
         {
-            
+           
+            if (obj.Length <= 0)
+            {
+                CreatCommand = new Command(CreateNew);
+            }
+            else
+            {
+                Dto = (ScheduleDto)obj[0];
+                CreatCommand = new Command(Edit);
+
+                _dateEvent = Dto.DateEvent;
+                _title = Dto.Title;
+                _Ativo = Dto.Ativo;
+                _description = Dto.Description;
+                
+            }
         }
 
         private DateTime _dateEvent;
@@ -109,20 +118,69 @@ namespace Welic.App.ViewModels
                     Title = _title,
                     TeacherId = user.Id,
                     Ativo = true,
-                    DateEvent = _dateEvent,                    
+                    DateEvent = _dateEvent, 
                 };
 
-                await new ScheduleDto().Create(course);
-                await MessageService.ShowOkAsync("Create", "Curso Criado com Sucesso", "OK");
+                var ret = await new ScheduleDto().Create(course);
 
-                App.Current.MainPage = new MainPage();
-                //await NavigationService.ReturnModalToAsync(true);
+
+                if (ret != null)
+                {
+                    await MessageService.ShowOkAsync("Create", "Schedule Criado com Sucesso", "OK");
+
+                    await NavigationService.ReturnModalToAsync(true);
+                }
+                else
+                {
+                    throw new System.Exception();
+                }
+                                   
 
             }
             catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao criar Schedule");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+        private async void Edit()
+        {
+
+            try
+            {
+                if (IsBusy)
+                    return;
+                
+                IsBusy = true;
+
+                Dto.DateEvent = _dateEvent;
+                Dto.Description = Description;
+                Dto.Title = Title;
+                Dto.Ativo = Ativo;                                
+
+                var ret = await new ScheduleDto().Edit(Dto);
+
+
+                if (ret != null)
+                {
+                    await MessageService.ShowOkAsync("Edit", "Schedule Alterado com Sucesso", "OK");
+                    
+                }
+                else
+                {
+                    throw new System.Exception();
+                }
+
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Editar Schedule");
             }
             finally
             {

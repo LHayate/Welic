@@ -92,12 +92,38 @@ namespace Welic.App.Models.Schedule
                 throw;
             }
         }
+        public async Task<ScheduleDto> GetListById(ScheduleDto scheduleDto)
+        {
+            try
+            {                
+                return await Current?.GetAsync<ScheduleDto>($"Schedule/GetById/{scheduleDto.ScheduleId}");                
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public async Task<ScheduleDto> Create(ScheduleDto scheduleDto)
         {
             try
             {                
-                return await Current?.PostAsync<ScheduleDto>("schedule/Save", scheduleDto);
+                return await Current?.PostAsync<ScheduleDto>("schedule/save", scheduleDto);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<ScheduleDto> Edit(ScheduleDto scheduleDto)
+        {
+            try
+            {
+                return await Current?.PostAsync<ScheduleDto>("schedule/update", scheduleDto);
             }
             catch (System.Exception e)
             {
@@ -110,7 +136,7 @@ namespace Welic.App.Models.Schedule
         {
             try
             {
-                return await Current?.DeleteAsync<ScheduleDto>($"schedule/delete/{scheduleDto.ScheduleId}");
+                return await Current?.DeleteAsync($"schedule/delete/{scheduleDto.ScheduleId}");
             }
             catch (System.Exception e)
             {

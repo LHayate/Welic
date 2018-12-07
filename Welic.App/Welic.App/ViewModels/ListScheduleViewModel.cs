@@ -48,7 +48,7 @@ namespace Welic.App.ViewModels
         {
             object[] obj = new[] { Schedule };
 
-            NavigationService.NavigateModalToAsync<CourseDetailViewModel>(obj);
+            NavigationService.NavigateModalToAsync<ScheduleDetailViewModel>(obj);
         }
 
         public async void Delete(ScheduleDto schedule)

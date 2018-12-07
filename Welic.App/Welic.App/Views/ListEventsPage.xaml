@@ -14,7 +14,8 @@
 
             <ListView x:Name="ListViewStart"
                       HasUnevenRows="True"
-                      ItemsSource="{Binding ListSchedule}" >
+                      ItemsSource="{Binding ListSchedule}" 
+                      ItemTapped="ListViewStart_OnItemTapped">
                 <ListView.Behaviors>
                     <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
                 </ListView.Behaviors>

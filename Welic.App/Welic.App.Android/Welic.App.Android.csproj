@@ -14,8 +14,8 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
-    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>   
-	<TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -662,6 +662,9 @@
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded.png" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded%402x.png" />
     <AndroidResource Include="Resources\drawable\iScheduleMenu.png" />
+    <AndroidResource Include="Resources\drawable\iEdit.png" />
+    <AndroidResource Include="Resources\drawable\iDelete.png" />
+    <AndroidResource Include="Resources\drawable\iAdd.png" />
     <Content Include="Resources\drawable\iExpanded.png" />
     <AndroidResource Include="Resources\drawable\iPdf.png" />
   </ItemGroup>

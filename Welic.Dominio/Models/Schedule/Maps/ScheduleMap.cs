@@ -26,7 +26,7 @@ namespace Welic.Dominio.Models.Schedule.Maps
 
         public virtual ICollection<AspNetUser> UserClass { get; set; }
         
-        public virtual LiveMap Live { get; set; }
-        public EBookMap Ebook { get; set; }
+        //public virtual LiveMap Live { get; set; }
+        //public EBookMap Ebook { get; set; }
     }
 }

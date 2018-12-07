@@ -32,6 +32,6 @@ namespace Welic.Dominio.Models.Lives.Maps
         public ICollection<AspNetUser> ClassUser { get; set; }
 
 
-        public virtual ScheduleMap Schedules { get; set; }
+        //public virtual ScheduleMap Schedules { get; set; }
     }
 }

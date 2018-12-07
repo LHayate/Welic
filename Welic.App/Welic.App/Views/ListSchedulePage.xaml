@@ -5,21 +5,23 @@
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="Welic.App.Views.ListSchedulePage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddNewCommand}" Order="Primary" Priority="0" Text="Add"/>
-        <ToolbarItem Command="{Binding DeleteCommand}" Order="Primary" Priority="0" Text="Excluir"/>
+        <ToolbarItem Command="{Binding AddNewCommand}" Order="Primary" Priority="0" Icon="iAdd.png"/>
+        
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Nenhuma Agenda Encontrada"
-                   IsVisible="{Binding NotFound}" 
+                   IsVisible="{Binding IsBusy}" 
                    HorizontalOptions="CenterAndExpand"/>
 
             <ListView x:Name="ListViewStart"
                       HasUnevenRows="True"
-                      ItemsSource="{Binding ListSchedule}" >
-                <ListView.Behaviors>
-                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
-                </ListView.Behaviors>
+                      ItemsSource="{Binding ListStart}"
+                      ItemTapped="ListViewStart_OnItemTapped"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding AtualizarCommand}"
+                      IsRefreshing="{Binding Atualizando}"
+                      >
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
@@ -64,18 +66,6 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-                <ListView.Footer>
-                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
-                        <Grid.Triggers>
-                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
-                                <Setter Property="HeightRequest" Value="0" />
-                            </Trigger>
-                        </Grid.Triggers>
-                        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
-                                       Color="#2196F3" VerticalOptions="Center" 
-                                       HorizontalOptions="Center"/>
-                    </Grid>
-                </ListView.Footer>
             </ListView>
             </StackLayout>
     </ContentPage.Content>

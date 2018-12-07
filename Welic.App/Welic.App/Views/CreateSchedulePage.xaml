@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Welic.App.Views.CreateSchedulePage">
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="Welic.App.Views.CreateSchedulePage"
+             BackgroundColor="#0F5682">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout >
@@ -15,7 +17,7 @@
                          Orientation="Vertical" 
                          VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand" 
-                         IsVisible="{Binding MenuVisivel}">
+                         >
                     <StackLayout.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
                     </StackLayout.HeightRequest>
@@ -91,7 +93,16 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Label Text="Date" Grid.Column="0"/>
-                        <DatePicker HorizontalOptions="FillAndExpand" Grid.Column="1" Date="{Binding DateEvent}"/>
+                        <DatePicker HorizontalOptions="FillAndExpand" Grid.Column="1" Date="{Binding DateEvent}" MinimumDate="{x:Static system:DateTime.Now}">
+                            <DatePicker.Format>dd-MM-yyyy</DatePicker.Format>
+                            <DatePicker.MaximumDate>
+                                <system:DateTime x:FactoryMethod="Parse">
+                                    <x:Arguments>
+                                        <x:String>Dec 31 2050</x:String>
+                                    </x:Arguments>
+                                </system:DateTime>
+                            </DatePicker.MaximumDate>
+                        </DatePicker>
                     </Grid>
                    
 

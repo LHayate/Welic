@@ -142,7 +142,7 @@ namespace Welic.App.Models.Live
 
         public async Task<bool> DeleteAsync(LiveDto liveDto)
         {
-           return await Current?.DeleteAsync<LiveDto>($"live/delete/{liveDto.Id}");
+           return await Current?.DeleteAsync($"live/delete/{liveDto.Id}");
         }
     }
 }
