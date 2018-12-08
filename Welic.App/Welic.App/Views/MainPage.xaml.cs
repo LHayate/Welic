@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Usuario;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Welic.App.Services.ServicesViewModels;
+using Device = Xamarin.Forms.Device;
 
 namespace Welic.App.Views
 {

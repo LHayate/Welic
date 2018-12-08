@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Usuario;

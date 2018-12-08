@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.Connectivity;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;

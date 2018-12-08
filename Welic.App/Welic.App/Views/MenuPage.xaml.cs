@@ -2,6 +2,7 @@
 using Welic.App.Models;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Usuario;

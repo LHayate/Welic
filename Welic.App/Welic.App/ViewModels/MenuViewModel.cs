@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.ServicesViewModels;

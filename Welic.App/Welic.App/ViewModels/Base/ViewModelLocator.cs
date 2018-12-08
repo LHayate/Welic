@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using CommonServiceLocator;
+using Microsoft.AppCenter;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.Services.ServiceViews;
 using Unity;

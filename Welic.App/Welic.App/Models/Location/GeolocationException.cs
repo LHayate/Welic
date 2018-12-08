@@ -18,7 +18,7 @@ namespace Welic.App.Models.Location
             Error = error;
         }
 
-        public GeolocationException(GeolocationError error, AppCenterException innerException)
+        public GeolocationException(GeolocationError error, System.Exception innerException)
             : base("A geolocation error occured: " + error, innerException)
         {
             if (!Enum.IsDefined(typeof(GeolocationError), error))

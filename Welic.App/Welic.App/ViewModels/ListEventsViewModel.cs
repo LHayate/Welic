@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Schedule;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;

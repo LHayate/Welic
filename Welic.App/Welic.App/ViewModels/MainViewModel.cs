@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AppCenter;
 using Plugin.Connectivity;
 using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Services.Timing;
 using Welic.App.ViewModels.Base;
-using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
 
 namespace Welic.App.ViewModels
 {

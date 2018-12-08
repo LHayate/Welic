@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AppCenter;
 using Welic.App.Services;
 using Welic.App.Services.Timing;
 using Welic.App.ViewModels.Base;

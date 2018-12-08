@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.AppCenter;
 using Welic.App.Models.Search;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Services.ServicesViewModels;
 using Xamarin.Forms;
 

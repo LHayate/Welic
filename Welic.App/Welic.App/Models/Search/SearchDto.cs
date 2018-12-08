@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Live;
 using Welic.App.Services.API;
 

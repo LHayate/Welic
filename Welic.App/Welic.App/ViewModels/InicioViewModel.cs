@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Exception;
 using Welic.App.Models.Config;
 using Welic.App.Models.Usuario;
