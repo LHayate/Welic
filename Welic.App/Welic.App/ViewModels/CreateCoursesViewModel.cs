@@ -126,7 +126,7 @@ namespace Welic.App.ViewModels
                 if (ret != null)
                 {
                     await MessageService.ShowOkAsync("Edit", "Curso Alterado com Sucesso", "OK");
-
+                    await NavigationService.ReturnModalToAsync(true);
                 }
                 else
                 {

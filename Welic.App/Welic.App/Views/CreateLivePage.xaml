@@ -7,6 +7,7 @@
              >
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem  Order="Primary" Priority="0"  Text="{Binding AppTitle, StringFormat=' {0}'}" />
         <ToolbarItem Command="{Binding CreatCommand}" Order="Primary" Priority="0"  Icon="iSave.png"/>
     </ContentPage.ToolbarItems>
 

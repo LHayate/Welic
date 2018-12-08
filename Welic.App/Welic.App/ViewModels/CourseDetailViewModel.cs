@@ -26,7 +26,6 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _AppTitle , value);
         }
 
-
         private string _title;
 
         public new string Title
@@ -70,9 +69,9 @@ namespace Welic.App.ViewModels
         public CourseDto Dto { get; set; }
 
         private const int PageSize = 1;
-        private ObservableCollection<CourseDto> _listStart;
+        private ObservableCollection<LiveDto> _listStart;
 
-        public ObservableCollection<CourseDto> ListStart
+        public ObservableCollection<LiveDto> ListStart
         {
             get => _listStart;
             set => SetProperty(ref _listStart, value);
@@ -90,9 +89,6 @@ namespace Welic.App.ViewModels
 
         
         #region Constructor
-
-
-
         
         public CourseDetailViewModel(params object[] obj)
         {
@@ -113,9 +109,7 @@ namespace Welic.App.ViewModels
             {
                 AppCenterLog.Error("Erro in Course",$"{e.Message}-{e.InnerException}");
                 Console.WriteLine(e);                
-            }
-            
-
+            }            
         }
 #endregion
 
@@ -125,11 +119,11 @@ namespace Welic.App.ViewModels
             Dto = courseDto;
 
             _AppTitle = "Detalhe Curso";            
-            _title = courseDto.Title;
-            _description = courseDto.Description;
-            _price = courseDto.Price;
-            _themes = courseDto.Themes;            
-            _id = courseDto.IdCurso;
+            Title = courseDto.Title;
+            Description = courseDto.Description;
+            Price = courseDto.Price;
+            Themes = courseDto.Themes;            
+            Id = courseDto.IdCurso;
                    
         }
 
@@ -140,7 +134,7 @@ namespace Welic.App.ViewModels
 
         public async Task GetListLives()
         {
-            ListStart = await new CourseDto().GetListByUser();
+            ListStart = await new LiveDto().GetListByCourse(Dto);
             IsBusy = ListStart.Count <= 0;
         }
         private bool _atualizando = false;
@@ -204,6 +198,15 @@ namespace Welic.App.ViewModels
                 var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir esta Agenda?",
                     "Sim", "Cancel");
 
+                var live =await new LiveDto().GetListByCourse(Dto);
+
+                if (live.Count > 0)
+                {
+                    await MessageService.ShowOkAsync(
+                        "Não é possivel excluir este Curso pois existe Videos vinculados a ele ainda");                    
+                    return;
+                }
+                          
                 if (result)
                     if (await new CourseDto().DeleteAsync(Dto))
                         await NavigationService.ReturnModalToAsync(true);
@@ -213,9 +216,6 @@ namespace Welic.App.ViewModels
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
             }
-
-
-
         }
 
         public void OpenLive(LiveDto liveDto)

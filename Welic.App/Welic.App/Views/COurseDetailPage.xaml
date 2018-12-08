@@ -6,13 +6,15 @@
              x:Class="Welic.App.Views.CourseDetailPage"
              BackgroundColor="#0F5682"
              >
-   
+
     <ContentPage.Content>
         <StackLayout>
 
             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <!-- header -->
-                <StackLayout BackgroundColor="#0F5682" Orientation="Vertical" VerticalOptions="StartAndExpand"
+                <StackLayout BackgroundColor="#0F5682" 
+                             Orientation="Vertical" 
+                             VerticalOptions="Start"
                              HorizontalOptions="FillAndExpand">
                     <StackLayout.HeightRequest>
                         <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
@@ -34,8 +36,8 @@
                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center" FontSize="16" />
 
-                        
-                                                   
+
+
                         <ImageButton Source="iNewVideo.png" Grid.Column="0"
                                      Command="{Binding AddVideoCommand}"                                                                              
                                      BackgroundColor="Transparent"
@@ -76,41 +78,41 @@
                                      IsEnabled="{Binding BoolModificar}"
                                      IsVisible="{Binding BoolModificar}"
                         />
-                        
+
                     </StackLayout>
                 </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
             </StackLayout>
-                
-            <!--<Image  Source="{Binding Image}" HorizontalOptions="CenterAndExpand" />-->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-                <Label Text="{Binding Title}" HorizontalTextAlignment="Center"
-                       HorizontalOptions="CenterAndExpand"
-                       VerticalOptions="CenterAndExpand"/>
-
-                <Label Text="{Binding Price}"/>
-            </Grid>
-
-            <Label Text="{Binding Description}"  HorizontalTextAlignment="Center" 
-                   HorizontalOptions="CenterAndExpand"
-                   />
-
-            <Label Text="{Binding Themes}"/>
-
 
             <ListView x:Name="ListViewStart"
-                      HasUnevenRows="True"                      
-                      ItemsSource="{Binding ListStart}"
-                      ItemTapped="ListViewStart_OnItemTapped" 
-                      IsPullToRefreshEnabled="True"
-                      RefreshCommand="{Binding AtualizarCommand}"
-                      IsRefreshing="{Binding Atualizando}"
-                      >
+                          HasUnevenRows="True"                      
+                          ItemsSource="{Binding ListStart}"
+                          ItemTapped="ListViewStart_OnItemTapped" 
+                          IsPullToRefreshEnabled="True"
+                          RefreshCommand="{Binding AtualizarCommand}"
+                          IsRefreshing="{Binding Atualizando}"
+                          >
+                <ListView.Header>
+                    <StackLayout Orientation="Vertical">
+
+                        <Label Text="{Binding Title}" 
+                               HorizontalTextAlignment="Center" 
+                               TextColor="AliceBlue"
+                               FontSize="18"
+                        />
+
+                        <Label Text="{Binding Price}" 
+                        />
+
+                        <Label Text="{Binding Description}"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                               HorizontalOptions="CenterAndExpand"
+                        />
+
+                        <Label Text="{Binding Themes}"
+                        />
+
+                    </StackLayout>
+                </ListView.Header>
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
@@ -123,19 +125,19 @@
                                     <RowDefinition Height="100"/>
                                 </Grid.RowDefinitions>
                                 <Image Source="{Binding Print}" 
-                                   Grid.Column="0"                                                                                                                        
-                                   HorizontalOptions="FillAndExpand"
-                                   VerticalOptions="FillAndExpand"
-                                   MinimumHeightRequest="100"
-                                   MinimumWidthRequest="100"
-                                 />
+                                       Grid.Column="0"                                                                                                                        
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="FillAndExpand"
+                                       MinimumHeightRequest="100"
+                                       MinimumWidthRequest="100"
+                                     />
                                 <Image Source="iPlay.png" 
-                                   Grid.Column="0"                                                                                                                        
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="CenterAndExpand"
-                                   MinimumHeightRequest="100"
-                                   MinimumWidthRequest="100"
-                                />
+                                       Grid.Column="0"                                                                                                                        
+                                       HorizontalOptions="CenterAndExpand"
+                                       VerticalOptions="CenterAndExpand"
+                                       MinimumHeightRequest="100"
+                                       MinimumWidthRequest="100"
+                                    />
                                 <Grid Grid.Column="1" BackgroundColor="#EBEBEB"  >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -146,30 +148,28 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Label Text="{Binding Title}" 
-                                       FontSize="15" Opacity="20" 
-                                       TextColor="Black"                                             
-                                       HorizontalTextAlignment="Center"
-                                       Grid.Row="0"/>
+                                           FontSize="15" Opacity="20" 
+                                           TextColor="Black"                                             
+                                           HorizontalTextAlignment="Center"
+                                           Grid.Row="0"/>
                                     <BoxView BackgroundColor="#0F5682" 
-                                         HeightRequest="1" 
-                                         WidthRequest="1"
-                                         Grid.Row="1"/>
+                                             HeightRequest="1" 
+                                             WidthRequest="1"
+                                             Grid.Row="1"/>
                                     <implements:CustomDescriptionLabel Text="{Binding Description}" 
-                                       FontSize="15" Opacity="20" 
-                                       TextColor="Black"  
-                                       HorizontalTextAlignment="Center"    
-                                       MaxLength ="50"
-                                       Grid.Row="2"/>
+                                           FontSize="15" Opacity="20" 
+                                           TextColor="Black"  
+                                           HorizontalTextAlignment="Center"    
+                                           MaxLength ="50"
+                                           Grid.Row="2"/>
                                 </Grid>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
 
                 </ListView.ItemTemplate>
-                
+
             </ListView>
         </StackLayout>
-        
-
     </ContentPage.Content>
 </ContentPage>

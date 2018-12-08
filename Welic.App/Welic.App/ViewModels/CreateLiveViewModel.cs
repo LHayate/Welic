@@ -29,6 +29,14 @@ namespace Welic.App.ViewModels
         public string TitleNavigation { get; set; }
         public string Icon { get; set; }
 
+        private string _AppTitle;
+
+        public string AppTitle
+        {
+            get => _AppTitle;
+            set => SetProperty(ref _AppTitle, value);
+        }
+
         private string _title;
         public new string Title
         {
@@ -84,6 +92,7 @@ namespace Welic.App.ViewModels
         public CreateLiveViewModel(params object[] obj)
         {
             TitleNavigation = "Creat New Live";
+            _AppTitle = "Criar Lives";
             Icon = Util.ImagePorSistema("LogoWelic72x72.png");
             TextButton = "Criar";
             Chat = true;
@@ -177,6 +186,12 @@ namespace Welic.App.ViewModels
             //_pathFiles += _mediaFile.Path.LastOrDefault();
         }
 
-        
+        public Command ReturnCommand => new Command(Return);
+
+        private async void Return()
+        {
+            await NavigationService.ReturnModalToAsync(true);
+        }
+
     }
 }

@@ -12,49 +12,55 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <!-- header -->
-                    <StackLayout BackgroundColor="#0F5682" Orientation="Vertical" VerticalOptions="StartAndExpand"
-                                 HorizontalOptions="FillAndExpand">
-                        <StackLayout.HeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
-                        </StackLayout.HeightRequest>
-                        <StackLayout.MinimumHeightRequest>
-                            <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
-                        </StackLayout.MinimumHeightRequest>
-                        <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="3,0,0,0">
-                            <ImageButton Source="iReturn.png" 
-                                         Command="{Binding ReturnCommand}" 
-                                         HorizontalOptions="Start"
-                                         VerticalOptions="CenterAndExpand"
-                                         HeightRequest="32"
-                                         WidthRequest="32"
-                                         BackgroundColor="Transparent"
-                            />
-                            <Label Text="{Binding AppTitle, StringFormat=' {0}'}" FontAttributes="None"
-                                   TextColor="#FFFFFF"
-                                   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center" FontSize="16" />
+                <StackLayout.Padding>
+                    <OnPlatform
+                        x:TypeArguments="Thickness" Android="10" iOS="25"/>
+                </StackLayout.Padding>
+                <!-- header -->
+                <StackLayout BackgroundColor="#0F5682" 
+                             Orientation="Vertical" 
+                             VerticalOptions="Start"
+                             HorizontalOptions="FillAndExpand"
+                             >
+                    <StackLayout.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
+                    </StackLayout.HeightRequest>
+                    <StackLayout.MinimumHeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double" iOS="64" Android="50" />
+                    </StackLayout.MinimumHeightRequest>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="3,0,0,0">
+                        <ImageButton Source="iReturn.png" 
+                                     Command="{Binding ReturnCommand}" 
+                                     HorizontalOptions="Start"
+                                     VerticalOptions="CenterAndExpand"
+                                     HeightRequest="32"
+                                     WidthRequest="32"
+                                     BackgroundColor="Transparent"
+                        />
+                        <Label Text="{Binding AppTitle, StringFormat=' {0}'}" FontAttributes="None"
+                               TextColor="#FFFFFF"
+                               HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" FontSize="16" />
 
 
 
-                            <ImageButton Source="iSave.png" Grid.Column="0"
-                                         Command="{Binding CreateCommand}"                                                                              
-                                         BackgroundColor="Transparent"
-                                         HeightRequest="32"
-                                         WidthRequest="32"     
-                                         Margin="0,0,10,0"
-                                         IsEnabled="{Binding BoolModificar}"
-                                         IsVisible="{Binding BoolModificar}"
-                            />
-                                                      
-                        </StackLayout>
+                        <ImageButton Source="iSave.png" 
+                                     Command="{Binding CreateCommand}"                                                                              
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="32"
+                                     WidthRequest="32"     
+                                     Margin="0,0,10,0"
+                                     IsEnabled="{Binding BoolModificar}"
+                                     IsVisible="{Binding BoolModificar}"
+                        />
+                                                  
                     </StackLayout>
                     <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
                 </StackLayout>
+                    
+
                 <StackLayout>
-                    <BoxView HeightRequest="1" BackgroundColor="#F58C1E" Margin="0,1,0,1"/>
-                    <Label Text="Title" HorizontalTextAlignment="Center"></Label>
+                    <Label Text="Title" HorizontalTextAlignment="Center"/>
                     <Entry Text="{Binding Title}"                                                                                       
                            BackgroundColor="Transparent"
                            ReturnType="Next"

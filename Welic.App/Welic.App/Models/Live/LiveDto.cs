@@ -125,6 +125,21 @@ namespace Welic.App.Models.Live
                 return null;
             }
         }
+        public async Task<ObservableCollection<LiveDto>> GetListByCourse(CourseDto courseDto)
+        {
+            try
+            {
+                var list = await Current?.GetAsync<ObservableCollection<LiveDto>>($"live/GetListbyCourse/{courseDto.IdCurso}");
+                return list;
+
+
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
 
 
         public async Task<LiveDto> Save(LiveDto liveDto)
