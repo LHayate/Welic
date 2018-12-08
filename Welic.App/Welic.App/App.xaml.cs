@@ -117,7 +117,7 @@ namespace Welic.App
                     _settingsService.Latitude = position.Latitude.ToString();
                     _settingsService.Longitude = position.Longitude.ToString();
                 }
-                catch (System.Exception ex)
+                catch (AppCenterException ex)
                 {
                     Debug.WriteLine(ex);
                 }

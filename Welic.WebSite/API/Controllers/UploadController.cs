@@ -95,7 +95,7 @@ namespace Welic.WebSite.API.Controllers
                 // OK se tudo deu certo.
                 return Request.CreateResponse(HttpStatusCode.OK, files);
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }

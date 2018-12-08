@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.API;
 using static Welic.App.Services.API.WebApi;
@@ -40,7 +41,7 @@ namespace Welic.App.Models.Schedule
                 var list = await WebApi.Current.GetListAsync<ScheduleDto>("Schedule/GetList");
                 return list;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -56,7 +57,7 @@ namespace Welic.App.Models.Schedule
                 return list.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -71,7 +72,7 @@ namespace Welic.App.Models.Schedule
                 return ListItem;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -86,7 +87,7 @@ namespace Welic.App.Models.Schedule
                 return ListItem;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -99,7 +100,7 @@ namespace Welic.App.Models.Schedule
                 return await Current?.GetAsync<ScheduleDto>($"Schedule/GetById/{scheduleDto.ScheduleId}");                
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -112,7 +113,7 @@ namespace Welic.App.Models.Schedule
             {                
                 return await Current?.PostAsync<ScheduleDto>("schedule/save", scheduleDto);
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -125,7 +126,7 @@ namespace Welic.App.Models.Schedule
             {
                 return await Current?.PostAsync<ScheduleDto>("schedule/update", scheduleDto);
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -138,7 +139,7 @@ namespace Welic.App.Models.Schedule
             {
                 return await Current?.DeleteAsync($"schedule/delete/{scheduleDto.ScheduleId}");
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return false;

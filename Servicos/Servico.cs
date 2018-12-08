@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AppCenter;
 using Welic.Dominio;
 using Welic.Dominio.Eventos;
 
@@ -50,7 +51,7 @@ namespace Servicos
                 _unidadeTrabalho.Commit();
                 return true;
             }
-            catch (System.Exception)
+            catch (AppCenterException e)
             {
 
                 return false;

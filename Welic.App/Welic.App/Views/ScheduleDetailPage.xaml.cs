@@ -22,13 +22,7 @@ namespace Welic.App.Views
 	    {
 	        InitializeComponent();
 	        BindingContext = new ScheduleDetailViewModel(obj);
-	    }
-
-	    protected override bool OnBackButtonPressed()
-	    {
-	        return base.OnBackButtonPressed();
-            (BindingContext as ScheduleDetailViewModel)?.LoadTela();
-	    }
+	    }	    
 
 	    protected override void OnAppearing()
 	    {

@@ -97,7 +97,7 @@ namespace Welic.App.ViewModels
                     ConfirmPassword = UserDto.Password;
                     NickName = UserDto.NickName;
                 }
-                catch (System.Exception e)
+                catch (AppCenterException e)
                 {
                     Console.WriteLine(e);
                     throw;

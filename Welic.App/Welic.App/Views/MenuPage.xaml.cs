@@ -67,7 +67,7 @@ namespace Welic.App.Views
                     await  RootPage.NavigateFromMenu(id);
                     ListViewMenu.SelectedItem = null;
                 }
-                catch (System.Exception exception)
+                catch (AppCenterException exception)
                 {
                     Console.WriteLine(exception);
                    
@@ -105,7 +105,7 @@ namespace Welic.App.Views
                     CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil_Padrao"));
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -157,7 +157,7 @@ namespace Welic.App.Views
                 //file.Dispose();
                 //CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
             }
@@ -175,7 +175,7 @@ namespace Welic.App.Views
                     App.Current.MainPage = new NavigationPage(new InicioPage());
                 }
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 return;
             }

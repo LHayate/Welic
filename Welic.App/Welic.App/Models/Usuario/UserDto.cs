@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Token;
 using Welic.App.Services.API;
@@ -121,13 +122,13 @@ namespace Welic.App.Models.Usuario
                     
                     return true;
                 }
-                catch (System.Exception e)
+                catch (AppCenterException e)
                 {
                     Console.WriteLine(e);
-                    throw new System.Exception("Erro ao Gravar o Usuario no SQLite");
+                    throw new AppCenterException("Erro ao Gravar o Usuario no SQLite");
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return false;
@@ -166,10 +167,10 @@ namespace Welic.App.Models.Usuario
                
                 return true;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
-               throw new System.Exception("Error: In Synced this User");
+               throw new AppCenterException("Error: In Synced this User");
             }           
         }
 
@@ -192,7 +193,7 @@ namespace Welic.App.Models.Usuario
                 _dbManager.database.DeleteAll<UserToken>();                
                 return true;
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 return false;
             }
@@ -230,7 +231,7 @@ namespace Welic.App.Models.Usuario
                 user.Synced = false;                
                 return true;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return false;
@@ -275,10 +276,10 @@ namespace Welic.App.Models.Usuario
 
                 return true;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
-                throw new System.Exception("Error: In Register this User");
+                throw new AppCenterException("Error: In Register this User");
             }
         }
 

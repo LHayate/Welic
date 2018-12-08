@@ -8,6 +8,7 @@ using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Microsoft.AppCenter;
 using Welic.App.Droid;
 using Welic.App.Exception;
 using Welic.App.Implements;
@@ -62,7 +63,7 @@ namespace Welic.App.Droid
                 this.StartColor = stack.StartColor;
                 this.EndColor = stack.EndColor;
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 System.Diagnostics.Debug.WriteLine(@"ERROR:", ex.Message);
             }

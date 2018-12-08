@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Welic.App.Models.Course;
@@ -146,7 +147,7 @@ namespace Welic.App.ViewModels
                     }
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 IsBusy = false;
                 Console.WriteLine(e);

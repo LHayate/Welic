@@ -34,17 +34,17 @@ namespace Welic.WebSite.API.Controllers
 
         [HttpGet]
         [Route("GetById/{id}")]
-        public Task<HttpResponseMessage> Get(int id)
+        public async Task<HttpResponseMessage> Get(int id)
         {
-            return CriaResposta(HttpStatusCode.OK, _cursoService.FindAsync(id));
+            return await CriaResposta(HttpStatusCode.OK, _cursoService.Find(id));
         }
 
         [HttpGet]
         [Route("GetByUser/{id}")]
-        public Task<HttpResponseMessage> Get(string id)
+        public async Task<HttpResponseMessage> Get(string id)
         {
             //DB.Places.Include(z => z.Images).Where(x => x.CityId == CityId).ToList();
-            return CriaResposta(HttpStatusCode.OK, _cursoService.Query()                             
+            return await CriaResposta(HttpStatusCode.OK, _cursoService.Query()                             
                 .Select(x => x )                
                 .Where(x=> x.AuthorId == id)
                 .ToList());
@@ -58,27 +58,31 @@ namespace Welic.WebSite.API.Controllers
         {
             _cursoService.Insert(cursoMap);
             await _unityOfWorkAsync.SaveChangesAsync();
-            return  await CriaResposta(HttpStatusCode.OK);
+            return  await CriaResposta(HttpStatusCode.OK, _cursoService
+                .Query()
+                .Select(x=> x)
+                .LastOrDefault(x=> x.Description == cursoMap.Description && 
+                                    x.Title == cursoMap.Title && 
+                                    x.AuthorId == cursoMap.AuthorId));
         }
-
-        // PUT: api/Curso/5
-        [HttpPut]
-        [Route("Edite")]
-        public Task<HttpResponseMessage> Put([FromBody]CursoMap cursoMap)
+        
+        [HttpPost]
+        [Route("Update")]
+        public async Task<HttpResponseMessage> Update([FromBody]CursoMap cursoMap)
         {
             _cursoService.Update(cursoMap);
-            _unityOfWorkAsync.SaveChangesAsync();
-            return CriaResposta(HttpStatusCode.OK);
+            await _unityOfWorkAsync.SaveChangesAsync();
+            return await CriaResposta(HttpStatusCode.OK, _cursoService.Find(cursoMap.IdCurso));
         }
-
-        // DELETE: api/Curso/5
-        [HttpDelete]
+        
+        [HttpPost]
         [Route("Delete/{id}")]
-        public void Delete(int id)  
+        public Task<HttpResponseMessage> Delete(int id)  
         {
             var cursoMap = _cursoService.Find(id);            
             _cursoService.Delete(cursoMap);
             _unityOfWorkAsync.SaveChangesAsync();
+            return CriaResposta(HttpStatusCode.OK);
         }
     }
 }

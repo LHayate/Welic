@@ -22,14 +22,7 @@ namespace Welic.App.Views
             BindingContext = ViewModelLocator.Resolve<ListOfCoursesViewModel>();
 
            
-        }
-        public void OnDelete(object sender, EventArgs e)
-        {
-            var mi = ((LiveDto)sender);
-            if (mi != null)
-                (BindingContext as ListOfCoursesViewModel)?.DeleteLive(mi);
-            
-        }
+        }       
 
         private void ListViewStart_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
@@ -43,9 +36,7 @@ namespace Welic.App.Views
         {
             base.OnAppearing();
 
-            var items = (BindingContext as ListOfCoursesViewModel)?.SetListCourses();
-
-            //ListViewStart.ItemsSource = items;
+            ListViewStart.SendRefreshing();            
         }
     }
 }

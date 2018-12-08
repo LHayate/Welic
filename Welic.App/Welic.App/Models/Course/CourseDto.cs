@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.API;
 using Welic.App.ViewModels;
@@ -43,7 +44,7 @@ namespace Welic.App.Models.Course
                 return ListItem;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -58,12 +59,25 @@ namespace Welic.App.Models.Course
                 return ListItem;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
             }
         }
+        public async Task<CourseDto> GetById(int id)
+        {
+            try
+            {                
+                return await Current?.GetAsync<CourseDto>($"curso/GetById/{id}");                
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
         //public async Task<List<CourseDto>> GetList(int pageIndex, int pageSize)
         //{
         //    try
@@ -72,7 +86,7 @@ namespace Welic.App.Models.Course
         //        return ListItem.ToList();
 
         //    }
-        //    catch (System.Exception e)
+        //    catch (AppCenterException e)
         //    {
         //        Console.WriteLine(e);
         //        return null;
@@ -89,14 +103,38 @@ namespace Welic.App.Models.Course
       
                 return course;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
-                throw new System.Exception("Error: In Synced this User");
+                throw new AppCenterException("Error: In Synced this User");
             }
         }
 
-        
+        public async Task<CourseDto> Edit(CourseDto courseDto)
+        {
+            try
+            {
+                return await Current?.PostAsync<CourseDto>("curso/update", courseDto);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(CourseDto courseDto)
+        {
+            try
+            {
+                return await Current?.DeleteAsync($"curso/delete/{courseDto.IdCurso}");
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+        }
     }
 
 }

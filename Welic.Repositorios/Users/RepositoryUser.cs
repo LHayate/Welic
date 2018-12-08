@@ -11,7 +11,6 @@ using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
-using Exception = System.Exception;
 
 namespace Welic.Repositorios.Users
 {

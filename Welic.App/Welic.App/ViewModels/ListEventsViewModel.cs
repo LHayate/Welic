@@ -68,7 +68,7 @@ namespace Welic.App.ViewModels
                 };
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return;

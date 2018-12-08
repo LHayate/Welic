@@ -29,42 +29,60 @@
                                      WidthRequest="32"
                                      BackgroundColor="Transparent"
                         />
-                        <Label Text="{Binding AppTitle, StringFormat='Sign in to {0}'}" FontAttributes="None"
+                        <Label Text="{Binding AppTitle, StringFormat=' {0}'}" FontAttributes="None"
                                TextColor="#FFFFFF"
                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
                                HorizontalTextAlignment="Center" FontSize="16" />
 
-                        <Grid HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="32"/>
-                                <ColumnDefinition Width="32"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="32"/>
-                            </Grid.RowDefinitions>
+                        
+                                                   
+                        <ImageButton Source="iNewVideo.png" Grid.Column="0"
+                                     Command="{Binding AddVideoCommand}"                                                                              
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="32"
+                                     WidthRequest="32"     
+                                     Margin="0,0,10,0"
+                                     IsEnabled="{Binding BoolModificar}"
+                                     IsVisible="{Binding BoolModificar}"
+                        />
 
-                           
-                            <ImageButton Source="iNewVideo.png" Grid.Column="0"
-                                         Command="{Binding AddVideoCommand}" 
-                                         HorizontalOptions="Center"
-                                         VerticalOptions="StartAndExpand"
-                                         BackgroundColor="Transparent"
-                            />
+                        <ImageButton Source="iAddPdf.png" Grid.Column="1"
+                                     Command="{Binding AddEBookCommand}" 
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="32"
+                                     WidthRequest="32"     
+                                     Margin="0,0,10,0"
+                                     IsEnabled="{Binding BoolModificar}"
+                                     IsVisible="{Binding BoolModificar}"
+                        />
 
-                            <ImageButton Source="iAddPdf.png" Grid.Column="1"
-                                         Command="{Binding AddEBookCommand}" 
-                                         HorizontalOptions="End"
-                                         VerticalOptions="StartAndExpand"
-                                         BackgroundColor="Transparent"
-                            />
-
-                        </Grid>
+                        <ImageButton Source="iEdit.png" 
+                                     Command="{Binding EditCommand}" 
+                                     HorizontalOptions="Center"                                     
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="32"
+                                     WidthRequest="32"     
+                                     Margin="0,0,10,0"
+                                     IsEnabled="{Binding BoolModificar}"
+                                     IsVisible="{Binding BoolModificar}"
+                        />
+                        <ImageButton Source="iDelete.png" 
+                                     Command="{Binding ExcluirCommand}" 
+                                     HorizontalOptions="Center"                                     
+                                     BackgroundColor="Transparent"
+                                     HeightRequest="32"
+                                     WidthRequest="32"   
+                                     Margin="0,0,10,0"
+                                     IsEnabled="{Binding BoolModificar}"
+                                     IsVisible="{Binding BoolModificar}"
+                        />
+                        
                     </StackLayout>
                 </StackLayout>
                 <BoxView HeightRequest="1" BackgroundColor="#CE7526" Margin="0,1,0,1"/>
             </StackLayout>
                 
-            <Image  Source="{Binding Image}" HorizontalOptions="CenterAndExpand" />
+            <!--<Image  Source="{Binding Image}" HorizontalOptions="CenterAndExpand" />-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -83,17 +101,16 @@
                    />
 
             <Label Text="{Binding Themes}"/>
-           
+
 
             <ListView x:Name="ListViewStart"
-                      HasUnevenRows="True"
-                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"                      
                       ItemsSource="{Binding ListStart}"
                       ItemTapped="ListViewStart_OnItemTapped" 
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding AtualizarCommand}"
+                      IsRefreshing="{Binding Atualizando}"
                       >
-                <ListView.Behaviors>
-                    <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />
-                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
@@ -149,19 +166,7 @@
                     </DataTemplate>
 
                 </ListView.ItemTemplate>
-
-                <ListView.Footer>
-                    <Grid Padding="6" IsVisible="{Binding IsBusy}">
-                        <Grid.Triggers>
-                            <Trigger TargetType="Grid" Property="IsVisible" Value="False">
-                                <Setter Property="HeightRequest" Value="0" />
-                            </Trigger>
-                        </Grid.Triggers>
-                        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" 
-                                           Color="#2196F3" VerticalOptions="Center" 
-                                           HorizontalOptions="Center"/>
-                    </Grid>
-                </ListView.Footer>
+                
             </ListView>
         </StackLayout>
         

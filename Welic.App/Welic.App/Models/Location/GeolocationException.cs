@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AppCenter;
 
 namespace Welic.App.Models.Location
 {
-    public class GeolocationException : System.Exception
+    public class GeolocationException : AppCenterException 
     {
         public GeolocationError Error { get; private set; }
 
@@ -17,7 +18,7 @@ namespace Welic.App.Models.Location
             Error = error;
         }
 
-        public GeolocationException(GeolocationError error, System.Exception innerException)
+        public GeolocationException(GeolocationError error, AppCenterException innerException)
             : base("A geolocation error occured: " + error, innerException)
         {
             if (!Enum.IsDefined(typeof(GeolocationError), error))

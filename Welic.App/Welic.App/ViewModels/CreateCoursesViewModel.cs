@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.Models.Usuario;
@@ -15,8 +16,8 @@ namespace Welic.App.ViewModels
 {
     public class CreateCoursesViewModel : BaseViewModel
     {
-        public Command ReturnCommand => new Command(async () => await ReturnToMenu());
-        public Command CreateCommand => new Command(async () => await CreateCourses());
+        
+        public Command CreateCommand { get; set; }
         
         private string _title;
 
@@ -53,24 +54,29 @@ namespace Welic.App.ViewModels
 
         public CreateCoursesViewModel(params object[] obj)
         {
-            _CourseDto = (CourseDto) obj[0];
-            _themes = _CourseDto.Themes;
-            _title = _CourseDto.Title;
-            _description = _CourseDto.Description;
-            _price = _CourseDto.Price;
 
+            if (obj.Length <= 0)
+            {
+                CreateCommand = new Command(CreateCourses);
+            }
+            else
+            {
+                _CourseDto = (CourseDto)obj[0];
+                CreateCommand = new Command(Edit);
+                _themes = _CourseDto.Themes;
+                _title = _CourseDto.Title;
+                _description = _CourseDto.Description;
+                _price = _CourseDto.Price;
+            }
+                        
         }
 
-        public CreateCoursesViewModel()
-        {
-            
-        }
-
+        public Command ReturnCommand => new Command(async () => await ReturnToMenu());
         private async Task ReturnToMenu()
         {
             await NavigationService.ReturnModalToAsync(true);
         }
-        private async Task CreateCourses()
+        private async void CreateCourses()
         {
             try
             {
@@ -93,14 +99,49 @@ namespace Welic.App.ViewModels
                 await NavigationService.ReturnModalToAsync(true);
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao criar curso");
+            }            
+        }
+
+        private async void Edit()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+
+                IsBusy = true;
+                
+                _CourseDto.Description = _description;
+                _CourseDto.Price = _price;
+                _CourseDto.Themes = _themes;
+                _CourseDto.Title = _title;                
+
+                var ret = await new CourseDto().Edit(_CourseDto);
+
+
+                if (ret != null)
+                {
+                    await MessageService.ShowOkAsync("Edit", "Curso Alterado com Sucesso", "OK");
+
+                }
+                else
+                {
+                    throw new AppCenterException("Erro ao editar Curso");
+                }
             }
-            
-
-
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Editar Cursos");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

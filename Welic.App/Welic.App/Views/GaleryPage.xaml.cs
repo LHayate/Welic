@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Newtonsoft.Json;
 using Welic.App.Models.Galery;
 using Welic.App.Models.Live;
@@ -38,7 +39,7 @@ namespace Welic.App.Views
                 GetFavoritos();
                 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 DisplayAlert("Erro", e.Message, "OK");                
             }

@@ -5,8 +5,7 @@
              xmlns:extended="clr-namespace:Xamarin.Forms.Extended;assembly=Xamarin.Forms.Extended.InfiniteScrolling"
              x:Class="Welic.App.Views.ListOfCoursesPage">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding AddNewCommand}" Order="Secondary" Priority="0" Text="Add"/>
-        <ToolbarItem Command="{Binding ExcluirCourseCommand}" Order="Secondary" Priority="0" Text="Excluir"/>
+        <ToolbarItem Command="{Binding AddNewCommand}" Order="Primary" Priority="0" Icon="iAdd.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
     <StackLayout>
@@ -26,12 +25,6 @@
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Clicked="OnDelete" 
-                                      Command="{Binding OnDelete}" 
-                                      CommandParameter="{Binding .}"
-                                      Text="Delete" IsDestructive="True" />
-                            </ViewCell.ContextActions>
                             <Grid Padding="3" BackgroundColor="#0F5682" 
                               >
                                 <Grid.ColumnDefinitions>

@@ -16,7 +16,7 @@ namespace Welic.App.Views
 		public CreateCoursesPage ()
 		{
 			InitializeComponent ();
-		    BindingContext = new CreateCoursesViewModel();
+		    BindingContext = ViewModelLocator.Resolve<CreateCoursesViewModel>();
         }
 
 	    public CreateCoursesPage(params object[] obj)

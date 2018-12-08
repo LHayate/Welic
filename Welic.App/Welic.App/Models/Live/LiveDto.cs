@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Course;
 using Welic.App.Models.Usuario;
 using static Welic.App.Services.API.WebApi;
@@ -46,7 +47,7 @@ namespace Welic.App.Models.Live
                 _listItem = await Current?.GetAsync<List<LiveDto>>("live/GetListLive");
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -60,7 +61,7 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -74,7 +75,7 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -88,7 +89,7 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -103,7 +104,7 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -118,7 +119,7 @@ namespace Welic.App.Models.Live
                                 
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -133,7 +134,7 @@ namespace Welic.App.Models.Live
                 liveDto.DateRegister = DateTime.Now;
                 return await Current?.PostAsync<LiveDto>("live/Save", liveDto) ;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;

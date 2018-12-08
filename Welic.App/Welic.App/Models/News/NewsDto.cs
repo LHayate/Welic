@@ -34,7 +34,7 @@ namespace Welic.App.Models.News
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;

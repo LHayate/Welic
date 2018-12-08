@@ -32,7 +32,7 @@ namespace Welic.App.Models.Search
 
                 return search;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 return null;

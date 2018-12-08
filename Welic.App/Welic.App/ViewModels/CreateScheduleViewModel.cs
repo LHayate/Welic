@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Microsoft.AppCenter;
 using Welic.App.Models.Live;
 using Welic.App.Models.Schedule;
 using Welic.App.Models.Usuario;
@@ -132,12 +133,12 @@ namespace Welic.App.ViewModels
                 }
                 else
                 {
-                    throw new System.Exception();
+                    throw new AppCenterException("Erro ao Criar Schedule");
                 }
                                    
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao criar Schedule");
@@ -172,12 +173,12 @@ namespace Welic.App.ViewModels
                 }
                 else
                 {
-                    throw new System.Exception();
+                    throw new AppCenterException("Erro ao editar Schedule");
                 }
 
 
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao Editar Schedule");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
 using Welic.App.Models.Dispositivos.Dto;
@@ -113,7 +114,7 @@ namespace Welic.App.ViewModels
                     }
                     else
                     {
-                        throw new System.Exception("Erro ao Tentar Autenticar o Usuario");
+                        throw new AppCenterException("Erro ao Tentar Autenticar o Usuario");
                     }
                 }
 
@@ -123,7 +124,7 @@ namespace Welic.App.ViewModels
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }

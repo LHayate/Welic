@@ -45,7 +45,7 @@ namespace Welic.App.Views
 	                CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"));	              
 	            }
             }
-	        catch (System.Exception e)
+	        catch (AppCenterException e)
 	        {
 	            Console.WriteLine(e);
 	            throw;
@@ -89,7 +89,7 @@ namespace Welic.App.Views
 	                return stream;
 	            });
 	        }
-	        catch (System.Exception ex)
+	        catch (AppCenterException ex)
 	        {
 	            await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
 	        }

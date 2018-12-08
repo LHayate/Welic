@@ -86,7 +86,7 @@ namespace Welic.App.ViewModels
                 //return await (new UserDto()).DesconectarUsuario();
                 return true;
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 return false;                
             }

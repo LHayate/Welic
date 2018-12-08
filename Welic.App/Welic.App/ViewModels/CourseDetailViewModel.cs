@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Microsoft.AppCenter;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
+using Welic.App.Services;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Extended;
@@ -11,9 +15,7 @@ namespace Welic.App.ViewModels
     public class CourseDetailViewModel: BaseViewModel
     {
 
-        public Command AddVideoCommand => new Command(AddVideo);
-        public Command ReturnCommand => new Command(ReturnDetail);
-        public Command AddEBookCommand => new Command(AddEbook);
+        #region Fields e Property
 
 
         private string _AppTitle;
@@ -55,14 +57,7 @@ namespace Welic.App.ViewModels
             get => _themes;
             set => SetProperty(ref _themes, value);
         }
-
-        private byte[] _image;
-
-        public byte[] Image
-        {
-            get => _image;
-            set => SetProperty(ref _image, value);
-        }
+        
 
         private int _id;
 
@@ -75,91 +70,154 @@ namespace Welic.App.ViewModels
         public CourseDto Dto { get; set; }
 
         private const int PageSize = 1;
-        public InfiniteScrollCollection<LiveDto> ListStart { get; private set; }
+        private ObservableCollection<CourseDto> _listStart;
 
+        public ObservableCollection<CourseDto> ListStart
+        {
+            get => _listStart;
+            set => SetProperty(ref _listStart, value);
+        }
+
+        private bool _BoolModificar;
+
+        public bool BoolModificar
+        {
+            get => _BoolModificar;
+            set => SetProperty(ref _BoolModificar, value);
+        }
+
+        #endregion
+
+        
+        #region Constructor
+
+
+
+        
         public CourseDetailViewModel(params object[] obj)
         {
             try
             {
-                _AppTitle = "Detalhe";
-                var course = Dto = (CourseDto)obj[0];
-                _title = course.Title;
-                _description = course.Description;
-                _price = course.Price;
-                _themes = course.Themes;
-                _image = course.Print;
-                _id = course.IdCurso;
+                PreencheTela((CourseDto)obj[0]);
 
-                ListStart = new InfiniteScrollCollection<LiveDto>();
-                 GetDados();
-                 Download();
+                if (obj.Length > 1)
+                {
+                    BoolModificar = (bool)obj[1];
+                }
+                else
+                {
+                    BoolModificar = true;
+                }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
+                AppCenterLog.Error("Erro in Course",$"{e.Message}-{e.InnerException}");
                 Console.WriteLine(e);                
             }
             
 
         }
-        private async Task GetDados()
+#endregion
+
+
+        private void PreencheTela(CourseDto courseDto)
         {
-            try
+            Dto = courseDto;
+
+            _AppTitle = "Detalhe Curso";            
+            _title = courseDto.Title;
+            _description = courseDto.Description;
+            _price = courseDto.Price;
+            _themes = courseDto.Themes;            
+            _id = courseDto.IdCurso;
+                   
+        }
+
+        public async void LoadTela()
+        {
+            this.PreencheTela(await new CourseDto().GetById(Dto.IdCurso));
+        }
+
+        public async Task GetListLives()
+        {
+            ListStart = await new CourseDto().GetListByUser();
+            IsBusy = ListStart.Count <= 0;
+        }
+        private bool _atualizando = false;
+        public bool Atualizando
+        {
+            get { return _atualizando; }
+            set
             {
-                ListStart = new InfiniteScrollCollection<LiveDto>
+                SetProperty(ref _atualizando, value);
+            }
+        }
+        public ICommand AtualizarCommand
+        {
+            get
+            {
+                return new Command(async () =>
                 {
-                    OnLoadMore = async () =>
-                    {
-                        IsBusy = true;
+                    Atualizando = true;
 
-                        // Ler a proxima pagina
-                        var page = ListStart.Count / PageSize;
+                    await GetListLives();
 
-                        //Busca os itens
-                        var items = await (new LiveDto().GetListByCourse(Dto, page, PageSize));
-
-                        IsBusy = false;
-
-                        // Itens que serão adicionados
-                        return items;
-                    }
-                };
-
+                    Atualizando = false;
+                });
             }
-            catch (System.Exception e)
-            {
-                Console.WriteLine(e);
-                return;
-            }
-
-        }
-        private async Task Download()
-        {
-            var items = await (new LiveDto().GetListByCourse(Dto, pageIndex: 0, pageSize: PageSize));
-
-            ListStart.AddRange(items);
         }
 
+        public Command AddVideoCommand => new Command(AddVideo);
         private void AddVideo()
         {
             object[] obj = new[] { Dto };
             NavigationService.NavigateModalToAsync<CreateLiveViewModel>(obj);
         }
 
-        public CourseDetailViewModel()
-        {
-
-        }
-
+        public Command ReturnCommand => new Command(ReturnDetail);       
         private async void ReturnDetail()
         {
             await NavigationService.ReturnModalToAsync(true);
         }
 
+        public Command AddEBookCommand => new Command(AddEbook);
         private void AddEbook()
         {
             object[] obj = new[] { Dto };
             NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
         }
+        public Command EditCommand => new Command(Edit);
+
+        private async void Edit()
+        {
+            object[] obj = new[] { Dto };
+
+            await NavigationService.NavigateModalToAsync<CreateCoursesViewModel>(obj);
+        }
+
+        public Command ExcluirCommand => new Command(delete);
+
+        private async void delete()
+        {
+            try
+            {
+                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir esta Agenda?",
+                    "Sim", "Cancel");
+
+                if (result)
+                    if (await new CourseDto().DeleteAsync(Dto))
+                        await NavigationService.ReturnModalToAsync(true);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+            }
+
+
+
+        }
+
         public void OpenLive(LiveDto liveDto)
         {
             object[] obj = new[] { liveDto };

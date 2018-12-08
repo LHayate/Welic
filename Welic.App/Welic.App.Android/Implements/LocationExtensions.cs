@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Microsoft.AppCenter;
 using Welic.App.Models.Location;
 
 namespace Welic.App.Droid.Implements
@@ -42,7 +43,7 @@ namespace Welic.App.Droid.Implements
             {
                 return new DateTimeOffset(Epoch.AddMilliseconds(location.Time));
             }
-            catch (System.Exception)
+            catch (AppCenterException e)
             {
                 return new DateTimeOffset(Epoch);
             }

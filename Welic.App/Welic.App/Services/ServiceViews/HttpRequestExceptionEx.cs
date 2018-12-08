@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using Microsoft.AppCenter;
 
 namespace Welic.App.Services.ServiceViews
 {
@@ -16,7 +17,7 @@ namespace Welic.App.Services.ServiceViews
         {
         }
 
-        public HttpRequestExceptionEx(System.Net.HttpStatusCode code, string message, System.Exception inner) 
+        public HttpRequestExceptionEx(System.Net.HttpStatusCode code, string message, AppCenterException  inner) 
             : base(message,
             inner)
         {

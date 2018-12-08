@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AppCenter;
 using Welic.App.Models.Schedule;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
@@ -89,6 +90,7 @@ namespace Welic.App.ViewModels
         {
            this.PreencheTela(await new ScheduleDto().GetListById(_schedule));
         }
+
         public Command ReturnCommand => new Command(ReturnDetail);
         
         private async void ReturnDetail()
@@ -105,7 +107,6 @@ namespace Welic.App.ViewModels
             await NavigationService.NavigateModalToAsync<CreateScheduleViewModel>(obj);
         }
 
-
         public Command ExcluirCommand => new Command(delete);
 
         private async void delete()
@@ -119,7 +120,7 @@ namespace Welic.App.ViewModels
                     if (await new ScheduleDto().DeleteAsync(_schedule))
                         await NavigationService.ReturnModalToAsync(true);
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro ao Exclur Schedule");

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
@@ -118,7 +119,7 @@ namespace Welic.App.ViewModels
                 _pathName = fileData.FileName;
                 _mediaFile = fileData.DataArray;                            
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 System.Console.WriteLine("Exception choosing file: " + ex.ToString());
             }
@@ -173,7 +174,7 @@ namespace Welic.App.ViewModels
 
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 IsBusy = false;
                 Console.WriteLine(e);

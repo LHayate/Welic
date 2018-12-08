@@ -32,5 +32,11 @@ namespace Welic.App.Views
 	        if (item != null)
 	            (BindingContext as CourseDetailViewModel)?.OpenLive(item);
         }
-	}
+	    protected override void OnAppearing()
+	    {
+	        base.OnAppearing();
+	        (BindingContext as CourseDetailViewModel)?.LoadTela();
+            ListViewStart.SendRefreshing();
+	    }
+    }
 }

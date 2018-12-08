@@ -50,7 +50,7 @@ namespace Welic.App.ViewModels
                 IsBusy = true;
                 return;
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 IsBusy = true;

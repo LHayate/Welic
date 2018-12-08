@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
@@ -73,7 +74,7 @@ namespace Welic.App.Services.API
                         await AuthenticateAsync(user);
                 }
             }
-            catch (System.Exception)
+            catch (AppCenterException e)
             {
                 return;
             }            
@@ -108,7 +109,7 @@ namespace Welic.App.Services.API
                 }
                 return true;
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
                 return false;
             }
@@ -131,7 +132,7 @@ namespace Welic.App.Services.API
                                 "Acesso negado, Processo não Implementado.");
 
 
-                        throw new System.Exception("Algo de errado não deu certo.");
+                        throw new AppCenterException("Algo de errado não deu certo.");
                     }
 
                     var _result = await response.Content.ReadAsStringAsync();
@@ -139,9 +140,9 @@ namespace Welic.App.Services.API
                     return JsonConvert.DeserializeObject<T>(_result);
                 }
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
-                throw new System.Exception("Erro ao tentar buscar dados");
+                throw new AppCenterException("Erro ao tentar buscar dados");
             }
         }
 
@@ -156,7 +157,7 @@ namespace Welic.App.Services.API
                         if (response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
 
-                        throw new System.Exception("Algo de errado não deu certo.");
+                        throw new AppCenterException("Algo de errado não deu certo.");
                     }
 
                     using (var responseStrean = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
@@ -168,9 +169,9 @@ namespace Welic.App.Services.API
                     //return JsonConvert.DeserializeObject<ObservableCollection<T>>(_result);
                 }
             }
-            catch (System.Exception ex)
+            catch (AppCenterException ex)
             {
-                throw new System.Exception("Erro ao tentar buscar dados");
+                throw new AppCenterException("Erro ao tentar buscar dados");
             }
         }
 
@@ -196,7 +197,7 @@ namespace Welic.App.Services.API
                     return JsonConvert.DeserializeObject<T>(result);
                 }              
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;
@@ -239,7 +240,7 @@ namespace Welic.App.Services.API
                     return true;
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw ;
@@ -260,7 +261,7 @@ namespace Welic.App.Services.API
                     
                 }
             }
-            catch (System.Exception e)
+            catch (AppCenterException e)
             {
                 Console.WriteLine(e);
                 throw;

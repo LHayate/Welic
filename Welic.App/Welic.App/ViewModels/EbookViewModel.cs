@@ -5,10 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
 using Welic.App.Implements.PDF.Interfaces;
 using Welic.App.Models.Ebook;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
 
 namespace Welic.App.ViewModels
 {
@@ -63,7 +65,7 @@ namespace Welic.App.ViewModels
 
                             
                             }
-                            catch (System.Exception e)
+                            catch (AppCenterException e)
                             {
                                 Console.WriteLine(e);
                                 throw;
