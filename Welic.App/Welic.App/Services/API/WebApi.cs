@@ -240,7 +240,7 @@ namespace Welic.App.Services.API
                     return true;
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 throw ;

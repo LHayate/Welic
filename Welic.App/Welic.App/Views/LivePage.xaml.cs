@@ -37,5 +37,9 @@ namespace Welic.App.Views
             }
         }
 
+	    private void ButtonFill_OnClicked(object sender, EventArgs e)
+	    {
+	        videoPlayer.Pause();
+	    }
     }
 }

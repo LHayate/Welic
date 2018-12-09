@@ -40,29 +40,33 @@ namespace Welic.App.ViewModels.Base
             
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
             _container.RegisterType<AboutViewModel>();
+            _container.RegisterType<AspectFillLiveViewModel>();
+            _container.RegisterType<ConfigViewModel>();
+            _container.RegisterType<CourseDetailViewModel>();
+            _container.RegisterType<CreateCoursesViewModel>();
+            _container.RegisterType<CreateEbookViewModel>();
+            _container.RegisterType<CreateLiveViewModel>();
+            _container.RegisterType<CreateScheduleViewModel>();
+            _container.RegisterType<EbookViewModel>();
+            _container.RegisterType<EditProfileViewModel>();
+            _container.RegisterType<GaleryViewModel>();
             _container.RegisterType<HomeViewModel>();
             _container.RegisterType<InicioViewModel>();
+            _container.RegisterType<ListEBookViewModel>();
+            _container.RegisterType<ListEventsViewModel>();
+            _container.RegisterType<ListLiveViewModel>();
+            _container.RegisterType<ListNewsViewModel>();
+            _container.RegisterType<ListOfCoursesViewModel>();
+            _container.RegisterType<ListScheduleViewModel>();
+            _container.RegisterType<LiveViewModel>();
+            _container.RegisterType<LoginExternoViewModel>();
             _container.RegisterType<LoginViewModel>();
             _container.RegisterType<MainViewModel>();
-            _container.RegisterType<LoginExternoViewModel>();
             _container.RegisterType<MenuViewModel>();
-            _container.RegisterType<SearchViewModel>();
-            _container.RegisterType<ListLiveViewModel>();
-            _container.RegisterType<ListEventsViewModel>();
-            _container.RegisterType<ListNewsViewModel>();
-            _container.RegisterType<LiveViewModel>();
-            _container.RegisterType<AspectFillLiveViewModel>();
-            _container.RegisterType<CreateCoursesViewModel>();
-            _container.RegisterType<ListOfCoursesViewModel>();
-            _container.RegisterType<CourseDetailViewModel>();
-            _container.RegisterType<GaleryViewModel>();
-            _container.RegisterType<CreateEbookViewModel>();
-            _container.RegisterType<ConfigViewModel>();
-            _container.RegisterType<ListEBookViewModel>();
-            _container.RegisterType<EbookViewModel>();            
-            _container.RegisterType<CreateScheduleViewModel>();            
-            _container.RegisterType<ScheduleDetailViewModel>();            
-            _container.RegisterType<ListScheduleViewModel>();            
+            _container.RegisterType<NewsViewModel>();
+            _container.RegisterType<RegisterViewModel>();
+            _container.RegisterType<ScheduleDetailViewModel>();
+            _container.RegisterType<SearchViewModel>();                                                            
             
 
             // Services - by default, TinyIoC will register interface registrations as singletons.

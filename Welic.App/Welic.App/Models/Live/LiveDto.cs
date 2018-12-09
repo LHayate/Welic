@@ -156,6 +156,20 @@ namespace Welic.App.Models.Live
             }
         }
 
+        public async Task<LiveDto> Update(LiveDto liveDto)
+        {
+            try
+            {
+                liveDto.DateRegister = DateTime.Now;
+                return await Current?.PostAsync<LiveDto>("live/Update", liveDto);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
         public async Task<bool> DeleteAsync(LiveDto liveDto)
         {
            return await Current?.DeleteAsync($"live/delete/{liveDto.Id}");

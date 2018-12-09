@@ -1,5 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Microsoft.AppCenter;
+﻿using System;
+using System.Collections.ObjectModel;
+
 using Welic.Dominio;
 using Welic.Dominio.Models.Lives.Adapters;
 using Welic.Dominio.Models.Lives.Dtos;
@@ -41,7 +42,7 @@ namespace Servicos.Live
                 liveEncontrada.ObjectState = ObjectState.Modified;
 
                 if (liveDto.Author == null)
-                    throw new AppCenterException("É obrigatório o autor");
+                    throw new Exception("É obrigatório o autor");
 
                 //liveEncontrada.Author = new AspNetUser
                 //{
@@ -65,7 +66,7 @@ namespace Servicos.Live
                 };
 
                 if (liveDto.Author == null)
-                    throw  new AppCenterException("É obrigatório o autor");
+                    throw  new Exception("É obrigatório o autor");
                
                 //liveEncontrada.Author = new AspNetUser
                 //{

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.AppCenter;
 using Welic.App.Models.Live;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
+using Xamarin.Forms;
 using Xamarin.Forms.Extended;
 
 namespace Welic.App.ViewModels
@@ -21,7 +23,7 @@ namespace Welic.App.ViewModels
         }
 
 
-        private const int PageSize = 4;
+        private const int PageSize = 6;
         public InfiniteScrollCollection<LiveDto> ListStart { get; private set; }        
 
         public string Home{get ;}
@@ -29,9 +31,8 @@ namespace Welic.App.ViewModels
         public ListLiveViewModel()
         {                        
             Home = Util.ImagePorSistema("iHome");
-            ListStart = new InfiniteScrollCollection<LiveDto>();
-            GetDados();
-            Download();
+            
+            GetListLives();
         }
 
         private async Task GetDados()
@@ -77,6 +78,35 @@ namespace Welic.App.ViewModels
             object[] obj = new[] {liveDto};
 
             NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
+        }
+
+        //private bool _atualizando = false;
+        //public bool Atualizando
+        //{
+        //    get => _atualizando;
+        //    set => SetProperty(ref _atualizando, value);
+        //}
+        //public ICommand AtualizarCommand
+        //{
+        //    get
+        //    {
+        //        return new Command(async () =>
+        //        {
+        //            Atualizando = true;
+
+        //            await GetListLives();
+
+        //            Atualizando = false;
+        //        });
+        //    }
+        //}
+
+        public async Task GetListLives()
+        {
+            ListStart = new InfiniteScrollCollection<LiveDto>();
+            GetDados();
+            Download();
+            NotFound = ListStart.Count <= 0;
         }
     }
 }

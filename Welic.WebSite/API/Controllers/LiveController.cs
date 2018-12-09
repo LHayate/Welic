@@ -87,7 +87,7 @@ namespace Welic.WebSite.API.Controllers
         public Task<HttpResponseMessage> ListLivFavoritas()
         {
             //TODO: Implementar Favoritos
-            return CriaResposta(HttpStatusCode.NotImplemented, "Implementar");
+            return CriaResposta(HttpStatusCode.OK, null);
         }
 
         [HttpGet]
@@ -108,7 +108,7 @@ namespace Welic.WebSite.API.Controllers
         [Route("GetSearchListLive/{text}")]
         public Task<HttpResponseMessage> ListSearchLive(string text)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).Where(x=> x.Title.Contains(text) || x.Description.Contains(text)));
+            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).Where(x=> x.Title.Contains(text) || x.Description.Contains(text)).ToList());
         }
 
         [HttpPost]
@@ -136,7 +136,7 @@ namespace Welic.WebSite.API.Controllers
             {
                 _serviceLive.Update(liveDto);
                 _unityOfWorkAsync.SaveChanges();
-                return CriaResposta(HttpStatusCode.OK, "Atualizado com Sucesso");
+                return CriaResposta(HttpStatusCode.OK, _serviceLive.Find(liveDto.Id));
             }
             catch (Exception e)
             {
@@ -146,13 +146,13 @@ namespace Welic.WebSite.API.Controllers
             
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("delete/{id}")]
         public Task<HttpResponseMessage> Delete(int id)
         {
             try
             {
-                _serviceLive.Delet(id);
+                _serviceLive.Delete(id);
                 _unityOfWorkAsync.SaveChanges();
                 return CriaResposta(HttpStatusCode.OK, "Sucess Delete");
             }

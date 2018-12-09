@@ -18,12 +18,13 @@ namespace Welic.App.ViewModels
     public class CreateLiveViewModel : BaseViewModel
     {
 
-        public Command CreatCommand => new Command(CreateNew);
+        public Command CreatCommand { get; set; }
+    
         public Command PickFileCommand => new Command(async () => await PickFile());
         
 
-        private MediaFile _mediaFile;
-        private string _path;
+            private MediaFile _mediaFile;
+            private string _path;
 
         public string TextButton { get; set; }
         public string TitleNavigation { get; set; }
@@ -87,17 +88,34 @@ namespace Welic.App.ViewModels
         }
 
 
-        public CourseDto Dto { get; set; }
+        public CourseDto courseDto { get; set; }
+
+        public LiveDto liveDto { get; set; }
         
         public CreateLiveViewModel(params object[] obj)
-        {
-            TitleNavigation = "Creat New Live";
-            _AppTitle = "Criar Lives";
-            Icon = Util.ImagePorSistema("LogoWelic72x72.png");
-            TextButton = "Criar";
+        {            
+            
+            if (obj.Length <= 0)
+            {
+                _AppTitle = "Criar Lives";
+                courseDto = (CourseDto)obj[0];
+                CreatCommand = new Command(CreateNew);
+            }
+            else
+            {
+                liveDto = obj.Length > 0 ? (LiveDto)obj[0] : null;
+                MenuVisivel = true;
+                CreatCommand = new Command(Edit);
+                _themes = liveDto.Themes;
+                _title = liveDto.Title;
+                _description = liveDto.Description;
+                _price = liveDto.Price;
+            }
+            
+                        
             Chat = true;
-            Dto = obj.Length > 0 ? (CourseDto) obj[0] : null;
-            MenuVisivel = obj.Length > 0 ;
+            
+            
         }
 
         private async void CreateNew()
@@ -132,14 +150,14 @@ namespace Welic.App.ViewModels
                             Themes = _themes,
                             Chat = _chat,
                             UrlDestino = $"https://welic.app/Arquivos/Uploads/{_path}",
-                            CourseId = Dto!= null ? Dto.IdCurso: (int?)null,
+                            CourseId = courseDto!= null ? courseDto.IdCurso: (int?)null,
                             TeacherId = user.Id,
                             Print = $"https://welic.app/Arquivos/Uploads/{_pathImage}",
                             DateRegister = DateTime.Now
                         };
 
                         var ret = await (new LiveDto()).Save(live);
-                        if (Dto != null)
+                        if (courseDto != null)
                         {
                             await MessageService.ShowOkAsync("Sucesso", "Live Criado com Sucesso ", "OK");
                             if (ret != null)                                
@@ -167,6 +185,74 @@ namespace Welic.App.ViewModels
                 IsBusy = false;
             }
         }
+        private async void Edit()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+
+                IsBusy = true;
+                var user = new UserDto().LoadAsync();
+                
+                    
+                var _pathImage = string.Empty;
+                if (_pathFiles != null)
+                {
+                    var content = new MultipartFormDataContent();
+
+                    var stream = new StreamContent(_mediaFile.GetStream());
+
+                    _path =
+                        $"Video-{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.{_mediaFile.Path.Split('.').LastOrDefault()}"
+                            .Replace(" ", string.Empty);
+                    _pathImage =
+                        $"Video-{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.jpg"
+                            .Replace(" ", string.Empty);
+                    content.Add(stream, "file", _path);
+
+                    await WebApi.Current.UploadAsync(content);
+
+                    liveDto.UrlDestino = $"https://welic.app/Arquivos/Uploads/{_path}";
+                    liveDto.Print = $"https://welic.app/Arquivos/Uploads/{_pathImage}";
+
+                }                        
+
+                liveDto.Title = _title;
+                liveDto.Description = _description;
+                liveDto.Price = _price;
+                liveDto.Themes = _themes;
+                liveDto.Chat = _chat;
+                
+                liveDto.DateRegister = DateTime.Now;
+                
+
+                var ret = await (new LiveDto()).Update(liveDto);
+                if (courseDto != null || liveDto != null)
+                {
+                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso ", "OK");
+                    if (ret != null)
+                        await NavigationService.ReturnModalToAsync(true);
+                }
+                else
+                {
+                    //object[] obj = new[] { ret };
+                    //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
+                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso", "OK");
+                }
+
+                        //content.Dispose();                                                                          
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Editar Video");
+            }
+            finally
+            {               
+                IsBusy = false;
+            }
+        }
 
         private async Task PickFile()
         {
@@ -182,7 +268,7 @@ namespace Welic.App.ViewModels
             if (_mediaFile == null)
                 return;
 
-            _pathFiles = $"{_mediaFile.Path.Split('/').LastOrDefault()}";
+            PathFiles = $"{_mediaFile.Path.Split('/').LastOrDefault()}";
             //_pathFiles += _mediaFile.Path.LastOrDefault();
         }
 

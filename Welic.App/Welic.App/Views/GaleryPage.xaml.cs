@@ -36,7 +36,7 @@ namespace Welic.App.Views
                 GetRecentes();
 
                 //GET para Scroll View de Favoritos
-                GetFavoritos();
+                //GetFavoritos();
                 
             }
             catch (AppCenterException e)

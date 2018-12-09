@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Usuario;
 using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
@@ -15,9 +18,10 @@ namespace Welic.App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
 	public partial class CreateLivePage : ContentPage
-	{	        
-	   
-	    bool isBusya = false;
+	{
+        private MediaFile _mediaFile;
+        
+        
         public CreateLivePage ()
         {
  
@@ -38,21 +42,22 @@ namespace Welic.App.Views
 
 	    private async  void PickFile_OnClicked(object sender, EventArgs e)
 	    {
-         //   await CrossMedia.Current.Initialize();
+            //await CrossMedia.Current.Initialize();
 
-         //   if (!CrossMedia.Current.IsPickVideoSupported)
-         //   {
-         //       await DisplayAlert("No PickVideo", ":( No Pick Available.", "OK");
-         //   }
+            //if (!CrossMedia.Current.IsPickVideoSupported)
+            //{
+            //    await DisplayAlert("No PickVideo", ":( No Pick Available.", "OK");
+            //}
 
-         //   _mediaFile = await CrossMedia.Current.PickVideoAsync();
+            //_mediaFile = await CrossMedia.Current.PickVideoAsync();
 
-         //   if (_mediaFile == null)
-         //       return;
+            //if (_mediaFile == null)
+            //    return;
 
-	        //var user = new UserDto().LoadAsync();
-         //   path = $"\"{user.FirstName}_{user.LastName}\"{_mediaFile.Path.Split('/').LastOrDefault()}\"";
-         //   PathFile.Text += _mediaFile.Path;
+    
+            //PathFile.Text += $"{_mediaFile.Path.Split('/').LastOrDefault()}";
+	        
+	       
 
         }	          
     }

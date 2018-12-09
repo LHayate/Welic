@@ -12,10 +12,11 @@
                    HorizontalOptions="CenterAndExpand"/>
 
             <ListView x:Name="ListViewStart"
-                      HasUnevenRows="True"
-                      CachingStrategy="RecycleElement" 
+                      HasUnevenRows="True"                      
                       ItemsSource="{Binding ListStart}"
-                  ItemTapped="ListViewStart_OnItemTapped"
+                      ItemTapped="ListViewStart_OnItemTapped"
+    
+                                  
             >
                 <ListView.Behaviors>
                     <extended:InfiniteScrollBehavior IsLoadingMore="{Binding IsBusy}" />

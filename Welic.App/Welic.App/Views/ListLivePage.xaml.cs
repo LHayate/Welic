@@ -28,5 +28,12 @@ namespace Welic.App.Views
             if(item != null)
                 (BindingContext as ListLiveViewModel)?.OpenLive(item);
 	    }
+
+	    protected override void OnAppearing()
+	    {
+	        base.OnAppearing();
+	       
+	        //ListViewStart.SendRefreshing();
+	    }
 	}
 }

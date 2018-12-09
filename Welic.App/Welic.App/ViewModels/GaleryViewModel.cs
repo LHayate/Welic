@@ -27,8 +27,9 @@ namespace Welic.App.ViewModels
         public async Task<ObservableCollection<LiveDto>> GetListFavorite()
         {
             return await new LiveDto().GetListFavoritos();
-        }
-        public async Task<ObservableCollection<LiveDto>> GetListTeacher()
+        }        
+
+    public async Task<ObservableCollection<LiveDto>> GetListTeacher()
         {
             return await new LiveDto().GetListByUser();
         }

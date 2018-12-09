@@ -7,12 +7,16 @@
              NavigationPage.HasNavigationBar="False"                       
              >
 
+    <StackLayout Orientation="Horizontal">
+
+   
     <Grid>
         <implements:VideoPlayer  x:Name="videoPlayer"   
                                  Grid.Row="0"
                                  AutoPlay="true"                                         
                                  Source="{Binding UrlDestino}" 
                                  AspectMode="AspectFill"
+                                 
         />
         <ActivityIndicator Color="Gray"
                            IsVisible="False">
@@ -73,4 +77,5 @@
             </Button>
         </Grid>
     </Grid>
+    </StackLayout>
 </ContentPage>
