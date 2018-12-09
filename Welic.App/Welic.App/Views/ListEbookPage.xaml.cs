@@ -25,7 +25,7 @@ namespace Welic.App.Views
 	        var item = (EbookDto)e.Item;
 
 	        if (item != null)
-	            (BindingContext as ListEBookViewModel)?.OpenLive(item);
+	            (BindingContext as ListEBookViewModel)?.OpenBook(item);
         }
 	}
 }

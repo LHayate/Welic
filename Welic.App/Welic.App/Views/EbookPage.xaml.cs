@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.App.Implements.PDF;
 using Welic.App.ViewModels;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
@@ -23,5 +24,6 @@ namespace Welic.App.Views
 	        InitializeComponent();
 	        BindingContext = new EbookViewModel(obj);
 	    }
+	    
     }
 }

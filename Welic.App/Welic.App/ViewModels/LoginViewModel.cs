@@ -124,7 +124,7 @@ namespace Welic.App.ViewModels
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }

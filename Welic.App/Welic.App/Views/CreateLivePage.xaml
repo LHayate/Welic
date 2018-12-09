@@ -40,7 +40,7 @@
                                  WidthRequest="32"
                                  BackgroundColor="Transparent"
                     />
-                    <Label Text="{Binding AppTitle, StringFormat='Sign in to {0}'}" FontAttributes="None"
+                    <Label Text="{Binding AppTitle, StringFormat=' {0}'}" FontAttributes="None"
                            TextColor="#FFFFFF"
                            HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"
                            HorizontalTextAlignment="Center" FontSize="16" />

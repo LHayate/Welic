@@ -6,8 +6,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Welic.App.Implements.PDF;
 using Welic.App.Implements.PDF.Interfaces;
 using Welic.App.Models.Ebook;
+using Welic.App.Models.Usuario;
 using Welic.App.ViewModels.Base;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
@@ -24,74 +26,43 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _urlPdf, value);
         }
 
+        public EbookDto EbookDto { get; set; }
+
+        private bool _BoolModificar;
+
+        public bool BoolModificar
+        {
+            get => _BoolModificar;
+            set => SetProperty(ref _BoolModificar, value);
+        }
+
+        private async void SetEbook(EbookDto ebook)
+        {
+            IsBusy = true;
+
+            if (await FileManager.ExistsAsync(ebook.Title) == false)
+            {
+                await FileManager.DownloadDocumentsAsync(ebook);
+            }
+            UrlPdf = FileManager.GetFilePathFromRoot(ebook.Title);
+
+            IsBusy = false;
+        }
 
         public EbookViewModel(params object[] obj)
         {
-            var book = (EbookDto)obj[0];
 
-            if (book != null)
-            {
-                var localPath = string.Empty;
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    var dependency = DependencyService.Get<ILocalFileProvider>();
+            EbookDto = (EbookDto)obj[0];
+            var user = new UserDto().LoadAsync();
 
-                    if (dependency == null)
-                    {
-                        MessageService.ShowOkAsync("Error loading PDF", "Computer says no", "OK");
-
-                        return;
-                    }
-
-                    var fileName = Guid.NewGuid().ToString();
-
-                   
-                        //// Download PDF locally for viewing
-                        using (var httpClient = new HttpClient())
-                        {
-                            try
-                            {
-
-                                using (MemoryStream mem = new MemoryStream())
-                                {
-                                    ConvertToStream(book.UrlDestino, mem);
-                                    mem.Seek(0, SeekOrigin.Begin);
-
-                                    localPath =
-                                        Task.Run(() => dependency.SaveFileToDisk(mem, $"{fileName}.pdf")).Result;
-
-                            }
-                            //var pdfStream = Task.Run(() => httpClient.GetStreamAsync(book.UrlDestino)).Result;
-
-                            
-                            }
-                            catch (AppCenterException e)
-                            {
-                                Console.WriteLine(e);
-                                throw;
-                            }
-                    }
-
-                        if (string.IsNullOrWhiteSpace(localPath))
-                        {
-                            MessageService.ShowOkAsync("Error loading PDF", "Computer says no", "OK");
-
-                            return;
-                        }
-                    
-                    
-                }
-
-                if (Device.RuntimePlatform == Device.Android)
-                    UrlPdf = 
-                        $"file:///android_asset/pdfjs/web/viewer.html?file={WebUtility.UrlEncode(localPath)}";
-                else
-                    UrlPdf = book.UrlDestino;
-            }
+            if (EbookDto.TeacherId.Equals(user.Id))
+                BoolModificar = true;
             else
-            {
-                NavigationService.ReturnModalToAsync(true);
-            }
+                BoolModificar = false;
+
+
+            SetEbook(EbookDto);
+            
         }
         private static void ConvertToStream(string fileUrl, Stream stream)
         {
@@ -108,6 +79,52 @@ namespace Welic.App.ViewModels
             {
                 response.Close();
             }
+        }
+
+        public Command EditCommand => new Command(Edit);
+
+        private async void Edit()
+        {
+            try
+            {
+                object[] obj = new object[] { EbookDto, _BoolModificar };
+
+                await NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
+            }
+            catch (AppCenterException e)
+            {
+                var msgerro = "Erro ao abrir para edição";
+                AppCenterLog.Error("edit", msgerro);
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync(msgerro);
+            }
+
+        }
+
+        public Command ExcluirCommand => new Command(delete);
+
+        private async void delete()
+        {
+            try
+            {
+                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir este video?",
+                    "Sim", "Cancel");
+
+                if (result)
+                    if (await new EbookDto().DeleteAsync(EbookDto))
+                        await NavigationService.ReturnModalToAsync(true);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+            }
+        }
+        public Command ReturnCommand => new Command(Return);
+
+        private async void Return()
+        {
+            await NavigationService.ReturnModalToAsync(true);
         }
     }
 }

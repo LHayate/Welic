@@ -164,7 +164,7 @@ namespace Welic.App.ViewModels
         public Command AddVideoCommand => new Command(AddVideo);
         private void AddVideo()
         {
-            object[] obj = new[] { Dto };
+            object[] obj = new[] { Dto, null };
             NavigationService.NavigateModalToAsync<CreateLiveViewModel>(obj);
         }
 
@@ -177,7 +177,7 @@ namespace Welic.App.ViewModels
         public Command AddEBookCommand => new Command(AddEbook);
         private void AddEbook()
         {
-            object[] obj = new[] { Dto };
+            object[] obj = { Dto };
             NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
         }
         public Command EditCommand => new Command(Edit);
@@ -220,7 +220,7 @@ namespace Welic.App.ViewModels
 
         public void OpenLive(LiveDto liveDto)
         {
-            object[] obj = new[] { liveDto };
+            object[] obj = { liveDto };
 
             NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
         }

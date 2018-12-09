@@ -75,7 +75,7 @@ namespace Welic.App.ViewModels
             NotFound = ListStart.Count <= 0;
         }
 
-        public void OpenLive(EbookDto ebook)
+        public void OpenBook(EbookDto ebook)
         {
             object[] obj = new[] { ebook };
 

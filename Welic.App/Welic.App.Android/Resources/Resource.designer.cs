@@ -45,6 +45,8 @@ namespace Welic.App.Droid
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_message = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_message;
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_reinstall = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_reinstall;
 			global::Microsoft.AppCenter.Distribute.Resource.String.appcenter_distribute_update_failed_dialog_title = global::Welic.App.Droid.Resource.String.appcenter_distribute_update_failed_dialog_title;
+			global::PCLStorage.Resource.String.ApplicationName = global::Welic.App.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::Welic.App.Droid.Resource.String.Hello;
 			global::Plugin.Fingerprint.Resource.Drawable.fingerprint_white = global::Welic.App.Droid.Resource.Drawable.fingerprint_white;
 			global::Plugin.Fingerprint.Resource.Id.fingerprint_btnCancel = global::Welic.App.Droid.Resource.Id.fingerprint_btnCancel;
 			global::Plugin.Fingerprint.Resource.Id.fingerprint_btnFallback = global::Welic.App.Droid.Resource.Id.fingerprint_btnFallback;

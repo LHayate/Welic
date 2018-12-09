@@ -24,7 +24,7 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _urlDestino , value);
         }
 
-        public LiveDto _liveDto { get; set; }
+        public LiveDto LiveDto { get; set; }
 
         private bool _btnPlay;
         public bool BtnPlay
@@ -43,21 +43,28 @@ namespace Welic.App.ViewModels
 
         public LiveViewModel(params object[] obj)
         {
-            _liveDto = (LiveDto)obj[0];
-            
+            LiveDto = (LiveDto)obj[0];
+
+            var user = new UserDto().LoadAsync();
+
+            if (LiveDto.TeacherId.Equals(user.Id))
+                BoolModificar = true;
+
+
+
             ValidaEditor();
             
 
             UrlDestino = SourceVideo();
-            Title = _liveDto.Title;
-            Description = _liveDto.Description;
+            Title = LiveDto.Title;
+            Description = LiveDto.Description;
         }
 
         private void ValidaEditor()
         {
             var user = new UserDto().LoadAsync();
 
-            if (_liveDto.TeacherId == user.Id)
+            if (LiveDto.TeacherId == user.Id)
             {
                 _BoolModificar = true;
                 return;
@@ -73,7 +80,7 @@ namespace Welic.App.ViewModels
 
         public VideoSource SourceVideo()
         {
-            return VideoSource.FromUri(_liveDto.UrlDestino);
+            return VideoSource.FromUri(LiveDto.UrlDestino);
         }
 
         private async Task AspectFill()
@@ -95,7 +102,7 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                object[] obj = new object[] { _liveDto, _BoolModificar };
+                object[] obj = new object[] {null, LiveDto, _BoolModificar };
 
                 await NavigationService.NavigateModalToAsync<CreateLiveViewModel>(obj);
             }
@@ -119,7 +126,7 @@ namespace Welic.App.ViewModels
                     "Sim", "Cancel");                
 
                 if (result)
-                    if (await new LiveDto().DeleteAsync(_liveDto))
+                    if (await new LiveDto().DeleteAsync(LiveDto))
                         await NavigationService.ReturnModalToAsync(true);
             }
             catch (AppCenterException e)

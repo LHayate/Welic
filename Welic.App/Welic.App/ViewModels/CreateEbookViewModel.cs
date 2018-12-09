@@ -17,6 +17,7 @@ using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.ViewModels.Base;
+using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
@@ -25,7 +26,7 @@ namespace Welic.App.ViewModels
     {
         public string AddPdf { get; set; }
         public Command PickFileCommand => new Command(async () => await PickFile());
-        public Command CreateCommand => new Command(CreateNew);
+        public Command CreateCommand { get; set; }
 
         private byte[] _mediaFile;
         
@@ -87,7 +88,8 @@ namespace Welic.App.ViewModels
             set => SetProperty(ref _pathFiles, value);
         }
 
-        public CourseDto Dto { get; set; }
+        public CourseDto courseDto { get; set; }
+        public EbookDto EbookDto { get; set; }
 
         private bool _MenuVisivel;
 
@@ -102,10 +104,30 @@ namespace Welic.App.ViewModels
         //}
 
         public CreateEbookViewModel(params object[] obj)
-        {
-            MenuVisivel = obj.Length > 0 ;
-            Dto = obj.Length > 0 ? (CourseDto) obj[0] : null;
-            _AppTitle = "Create e-Books";
+        {                                    
+            if (obj.Length <= 0)
+            {
+                _AppTitle = "Criar e-Books";
+                CreateCommand = new Command(CreateNew);
+            }
+            else
+            {                
+                courseDto = obj.Length > 0 ? (CourseDto)obj[0] : null;
+                EbookDto = obj.Length > 0 ? (EbookDto)obj[1] : null;
+                MenuVisivel = true;
+                if (EbookDto == null && courseDto != null)
+                {
+                    _AppTitle = "Criar E-Books";
+                    CreateCommand = new Command(CreateNew);
+                    return;
+                }
+
+                CreateCommand = new Command(Edit);
+                _themes = EbookDto.Themes;
+                _title = EbookDto.Title;
+                _description = EbookDto.Description;
+                _price = EbookDto.Price;
+            }
         }
 
         private async Task PickFile()
@@ -152,14 +174,14 @@ namespace Welic.App.ViewModels
                         Price = _price,
                         Themes = _themes,
                         UrlDestino = $"https://welic.app/Arquivos/Uploads/{_Name}",
-                        CourseId = Dto != null ? Dto.IdCurso : (int?)null ,
+                        CourseId = courseDto != null ? courseDto.IdCurso : (int?)null ,
                         TeacherId = user.Id,
                         DateRegister = DateTime.Now
                     };
 
 
                     var ret = await (new EbookDto()).Save(book);
-                    if (Dto != null)
+                    if (courseDto != null)
                     {
                         await MessageService.ShowOkAsync("Sucesso", "E-Book Criado com Sucesso ", "OK");
                         if (ret != null)
@@ -170,6 +192,7 @@ namespace Welic.App.ViewModels
                         //object[] obj = new[] { ret };
                         //await NavigationService.NavigateModalToAsync<EbookViewModel>(obj);
                         await MessageService.ShowOkAsync("Sucesso", "E-Book Criado com Sucesso ", "OK");
+                        App.Current.MainPage = new MainPage();
                     }
 
                 }
@@ -179,6 +202,67 @@ namespace Welic.App.ViewModels
                 IsBusy = false;
                 Console.WriteLine(e);
                 await MessageService.ShowOkAsync("Erro", "Erro ao Criar", "OK");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+        private async void Edit()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+
+                IsBusy = true;
+                var user = new UserDto().LoadAsync();
+
+
+                var _pathImage = string.Empty;
+                if (_pathFiles != null)
+                {
+                    var content = new MultipartFormDataContent();                    
+
+                    var _Name =
+                        $"Arquivo-{user.LastName}_{user.Id}_{Util.RemoveCaracter(DateTime.Now.ToString())}.{_pathName.Split('.').LastOrDefault()}".Replace(" ", string.Empty);
+
+                    var stream = new StreamContent(new MemoryStream(_mediaFile));
+                    content.Add(stream, "file", _Name);
+
+                    await WebApi.Current.UploadAsync(content);
+
+                    EbookDto.UrlDestino = $"https://welic.app/Arquivos/Uploads/{_Name}";
+                }
+
+                EbookDto.Title = _title;
+                EbookDto.Description = _description;
+                EbookDto.Price = _price;
+                EbookDto.Themes = _themes;
+
+                EbookDto.DateRegister = DateTime.Now;
+
+
+                var ret = await (new EbookDto()).Update(EbookDto);
+                if (courseDto != null || EbookDto != null)
+                {
+                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso ", "OK");
+                    if (ret != null)
+                        await NavigationService.ReturnModalToAsync(true);
+                }
+                else
+                {
+                    //object[] obj = new[] { ret };
+                    //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
+                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso", "OK");
+                }
+
+                //content.Dispose();                                                                          
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                await MessageService.ShowOkAsync("Erro ao Editar Video");
             }
             finally
             {

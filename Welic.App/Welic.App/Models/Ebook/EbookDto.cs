@@ -29,19 +29,7 @@ namespace Welic.App.Models.Ebook
             
         }
 
-        public async Task<EbookDto> Save(EbookDto ebookDto)
-        {
-            try
-            {
-                ebookDto.DateRegister = DateTime.Now;
-                return await Current?.PostAsync<EbookDto>("ebook/Save", ebookDto);
-            }
-            catch (AppCenterException e)
-            {
-                Console.WriteLine(e);
-                return null;
-            }
-        }
+        
 
         private List<EbookDto> _listItem;
 
@@ -130,5 +118,39 @@ namespace Welic.App.Models.Ebook
                 return null;
             }
         }
+
+        public async Task<EbookDto> Save(EbookDto ebookDto)
+        {
+            try
+            {
+                ebookDto.DateRegister = DateTime.Now;
+                return await Current?.PostAsync<EbookDto>("ebook/Save", ebookDto);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<EbookDto> Update(EbookDto ebookDto)
+        {
+            try
+            {
+                ebookDto.DateRegister = DateTime.Now;
+                return await Current?.PostAsync<EbookDto>("ebook/Update", ebookDto);
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(EbookDto ebookDto)
+        {
+            return await Current?.DeleteAsync($"ebook/delete/{ebookDto.Id}");
+        }
+
     }
 }

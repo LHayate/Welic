@@ -11,6 +11,7 @@ using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.ViewModels.Base;
+using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
@@ -92,19 +93,33 @@ namespace Welic.App.ViewModels
 
         public LiveDto liveDto { get; set; }
         
+        /// <summary>
+        /// Lista do Obj 
+        /// 1º Courses
+        /// 2º Lives
+        /// 3º bool
+        /// </summary>
+        /// <param name="obj"></param>
         public CreateLiveViewModel(params object[] obj)
         {            
             
             if (obj.Length <= 0)
             {
-                _AppTitle = "Criar Lives";
-                courseDto = (CourseDto)obj[0];
+                _AppTitle = "Criar Lives";                
                 CreatCommand = new Command(CreateNew);
             }
             else
             {
-                liveDto = obj.Length > 0 ? (LiveDto)obj[0] : null;
+                courseDto = obj.Length > 0 ? (CourseDto)obj[0] : null;
+                liveDto = obj.Length > 0 ? (LiveDto)obj[1] : null;
                 MenuVisivel = true;
+                if (liveDto == null && courseDto != null)
+                {
+                    _AppTitle = "Criar Lives";
+                    CreatCommand = new Command(CreateNew);
+                    return;
+                }
+
                 CreatCommand = new Command(Edit);
                 _themes = liveDto.Themes;
                 _title = liveDto.Title;
@@ -168,6 +183,7 @@ namespace Welic.App.ViewModels
                             //object[] obj = new[] { ret };
                             //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
                             await MessageService.ShowOkAsync("Sucesso", "Live Criado com Sucesso ", "OK");
+                            App.Current.MainPage = new MainPage();
                         }
 
                         //content.Dispose();                        

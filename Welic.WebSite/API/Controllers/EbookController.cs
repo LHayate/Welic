@@ -100,7 +100,7 @@ namespace Welic.WebSite.API.Controllers
             {
                 _serviceEBook.Update(liveDto);
                 _unityOfWorkAsync.SaveChanges();
-                return CriaResposta(HttpStatusCode.OK, "Atualizado com Sucesso");
+                return CriaResposta(HttpStatusCode.OK, _serviceEBook.Find(liveDto.Id));
             }
             catch (Exception e)
             {
@@ -110,7 +110,7 @@ namespace Welic.WebSite.API.Controllers
 
         }
 
-        [HttpDelete]
+        [HttpPost]
         [Route("delete/{id}")]
         public Task<HttpResponseMessage> Delete(int id)
         {
