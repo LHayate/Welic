@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Welic.Dominio.Models.Users.Entidades;
+
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Pattern.Ef6;
 

@@ -14,9 +14,9 @@ using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Models.Menu.Command;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Dominio.Models.Users.Comandos;
-using Welic.Dominio.Models.Users.Dtos;
+
 using Welic.Dominio.Models.Users.Mapeamentos;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.Dominio.ViewModels;
 using Welic.WebSite.Models;
 using Welic.WebSite.Utilities;
@@ -29,6 +29,7 @@ namespace Welic.WebSite.API.Controllers
     {
         public readonly IServiceUser _servico;
         private readonly IServicoMenu _servicoMenu;
+        private IUnitOfWorkAsync _unitOfWorkAsync;
 
         #region Fields
         private ApplicationSignInManager _signInManager;
@@ -75,40 +76,54 @@ namespace Welic.WebSite.API.Controllers
         }
         #endregion
 
-        public UserController(IServiceUser servico, IServicoMenu servicoMenu)
+        public UserController(IServiceUser servico, IServicoMenu servicoMenu, IUnitOfWorkAsync unitOfWorkAsync)
         {
             _servico = servico;
             _servicoMenu = servicoMenu;
+            _unitOfWorkAsync = unitOfWorkAsync;
         }
 
         [HttpGet]
         [Route("getall")]
         public Task<HttpResponseMessage> GetAll()
         {
-            return CriaResposta(HttpStatusCode.OK, _servico.GetAll());
+            return CriaResposta(HttpStatusCode.OK, _servico.Query().Select(x=> x).ToList());
         }
 
         [HttpGet]
-        //[Route("GetByName/user")]
-        public Task<HttpResponseMessage> GetByEmail([FromUri]UserDto user)
+        [Route("getbyEmail/")]
+        public Task<HttpResponseMessage> GetByEmail([FromUri]string email)
         {
-            return CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(user.Email));
+            return CriaResposta(HttpStatusCode.OK, _servico.Query().Select(x=> x).FirstOrDefault(x=> x.Email == email));
         }
 
         [HttpGet]
         [Route("GetById/{id}")]
         public Task<HttpResponseMessage> GetById(string id)
         {
-            return CriaResposta(HttpStatusCode.OK, _servico.GetById(id));
+            return CriaResposta(HttpStatusCode.OK, _servico.Find(id));
         }
 
 
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("save")]
-        public Task<HttpResponseMessage> Save([FromBody] UserDto userDto)
+        [HttpPost]        
+        [Route("Update")]
+        public Task<HttpResponseMessage> Update([FromBody] AspNetUser aspNetUser)
         {
-            return CriaResposta(HttpStatusCode.OK, _servico.Save(userDto));
+            try
+            {
+                _servico.Update(aspNetUser);
+                _unitOfWorkAsync.SaveChanges();
+
+                return CriaResposta(HttpStatusCode.OK, _servico.Query().Select(x => x).FirstOrDefault(x => x.Email == aspNetUser.Email &&
+                                                                                                           x.NickName == aspNetUser.NickName &&
+                                                                                                           x.Id == aspNetUser.Id
+                ));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return CriaResposta(HttpStatusCode.InternalServerError,$"{e.Message} - {e.InnerException.Message}");
+            }            
         }
 
         [HttpPost]
@@ -138,7 +153,7 @@ namespace Welic.WebSite.API.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var menu = _servicoMenu.GetMenuComplet();
+                    var menu = _servicoMenu.Query().Select(x => x).ToList();
 
                     _servicoMenu.SaveMenuUser(
                         new CommandMenu
@@ -174,7 +189,7 @@ namespace Welic.WebSite.API.Controllers
                     }
                     
                     
-                    return await CriaResposta(HttpStatusCode.OK, _servico.GetByEmail(model.Email));
+                    return await CriaResposta(HttpStatusCode.OK, _servico.Query().Select(x=> x).FirstOrDefault(x=> x.Email == model.Email));
                     //// Send Message
                     //var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
                     //var administrator = roleAdministrator.Users.FirstOrDefault();
@@ -215,7 +230,11 @@ namespace Welic.WebSite.API.Controllers
                 foreach (var item in result.Errors)
                 {
                     if(item.Contains("is already taken."))
-                        return await CriaResposta(HttpStatusCode.Conflict, error);
+                        return await CriaResposta(HttpStatusCode.Conflict, result.Errors);
+
+                    if (item.ToLower().Contains("invalid"))
+                        return await CriaResposta(HttpStatusCode.InternalServerError, item);
+
 
                     error += $"{item} -  ";
                 }
@@ -231,11 +250,57 @@ namespace Welic.WebSite.API.Controllers
                               
         }
 
+        //[HttpPost]
+        //[Route("login")]        
+        //public async Task<AspNetUser> Login(LoginViewModel model)
+        //{            
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return null;
+        //    }
+
+        //    //Todo: Resolver Cache
+        //    // Require the user to have a confirmed email before they can log on.
+        //    //if (CacheHelper.Settings.EmailConfirmedRequired)
+        //    //{
+        //    var user = await UserManager.FindByNameAsync(model.Email);
+        //    //if (user != null)
+        //    //{
+        //    //    var roleAdministrator = await RoleManager.FindByNameAsync(Enum_UserType.Administrator.ToString());
+        //    //    var isAdministrator = user.Roles.Any(x => x.RoleId == roleAdministrator.Id);
+
+        //    //    // Skip email check unless it's an administrator
+        //    //    if (!isAdministrator && !await UserManager.IsEmailConfirmedAsync(user.Id))
+        //    //    {
+        //    //        ModelState.AddModelError("", "[[[You must have a confirmed email to log on.]]]");
+        //    //        return View(model);
+        //    //    }
+        //    //}
+        //    //}
+        //    if (user == null)
+        //    {
+        //        ModelState.AddModelError("", "Invalid login attempt.");               
+        //    }
+
+        //    // This doesn't count login failures towards account lockout
+        //    // To enable password failures to trigger account lockout, change to shouldLockout: true
+        //    var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+        //    switch (result)
+        //    {
+        //        case SignInStatus.Success:
+                    
+        //            return _servico.Query().Select(x=> x).FirstOrDefault(x=> x.Email == model.Email);               
+        //        default:
+        //            return null;
+        //    }
+        //}
+
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("delete/{id}")]
         public Task<HttpResponseMessage> Delete(string id)
         {
             _servico.Delete(id);
+            _unitOfWorkAsync.SaveChanges();
             return CriaResposta(HttpStatusCode.OK,"Sucess Delete");
 
         }

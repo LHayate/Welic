@@ -59,9 +59,9 @@ namespace Welic.WebSite.API.Controllers
                     files.Add(Path.GetFileName(file.LocalFileName));
 
                     var path = Path.Combine(
-                        CriarDiretorioSeNaoExistir(Path.Combine("~/Arquivos/Uploads",
-                            file.LocalFileName.Split('.').LastOrDefault())),
-                        file.LocalFileName.Split('/').LastOrDefault());
+                        Path.Combine("~/Arquivos/Uploads",
+                            file.LocalFileName.Split('/').LastOrDefault())
+                        );
 
 
                     if (path.Contains("Video-"))
@@ -77,8 +77,11 @@ namespace Welic.WebSite.API.Controllers
                     }
 
                     var user = await _serviceUser.FindAsync(
-                        file.LocalFileName.Split('/').LastOrDefault().Split('_')[1]);
+                        file.LocalFileName.Split('/').LastOrDefault().Split('_')[1].Split('.').FirstOrDefault());
 
+                    if(user == null)
+                        user = await _serviceUser.FindAsync(
+                            file.LocalFileName.Split('\\').LastOrDefault().Split('_')[1]);
                     //user.ObjectState = ObjectState.Unchanged;
 
                     //Salvar Uploads

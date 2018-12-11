@@ -29,8 +29,7 @@ namespace Welic.App.Views
         {
             InitializeComponent();
             BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
-
-            LoadingImage();
+            
 
             //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
             //{
@@ -90,66 +89,90 @@ namespace Welic.App.Views
             //};
 
         }
-
-        private void LoadingImage()
-        {
-            try
-            {
-                _userdto = (new UserDto()).LoadAsync();
-
-                if (_userdto.ImagemPerfil != null)
-                {
-                    CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(_userdto.ImagemPerfil));
-                }
-                else
-                {
-                    CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil_Padrao"));
-                }
-            }
-            catch (AppCenterException e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-        }
+        
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             try
             {
-                await CrossMedia.Current.Initialize();
+                var select = await DisplayActionSheet("Foto", "Cancel", "OK", new string[] {"Usar Camera", " Selecionar Imagem"});
 
-                if (!CrossMedia.Current.IsTakePhotoSupported || !CrossMedia.Current.IsCameraAvailable)
-                {
-                    await App.Current.MainPage.DisplayAlert("Ops", "Nenhuma câmera detectada.", "OK");
-
+                if (select.Contains("Cancel"))
                     return;
-                }
 
-                var file = await CrossMedia.Current.TakePhotoAsync(
-                    new StoreCameraMediaOptions
+                MediaFile file ;
+
+                if (select.Contains("Camera"))
+                {
+                    await CrossMedia.Current.Initialize();
+
+                    if (!CrossMedia.Current.IsTakePhotoSupported || !CrossMedia.Current.IsCameraAvailable)
                     {
-                        Directory = "Resources",
-                        Name = "Perfil.png",
-                        PhotoSize = PhotoSize.Small,
-                        CompressionQuality = 50,
-                        DefaultCamera = CameraDevice.Front,
-                        AllowCropping = true,
+                        await DisplayAlert("Ops", "Nenhuma câmera detectada.", "OK");
+
+                        return;
+                    }
+
+                    file = await CrossMedia.Current.TakePhotoAsync(
+                        new StoreCameraMediaOptions
+                        {
+                            Directory = "Resources",
+                            Name = "Perfil.png",
+                            PhotoSize = PhotoSize.Small,
+                            CompressionQuality = 50,
+                            DefaultCamera = CameraDevice.Front,
+                            AllowCropping = true,
+                        });
+                    if (file == null)
+                        return;
+
+
+                    //(BindingContext as MenuViewModel)?.AlterPhoto();
+                    //circleImage.Source = ImageSource.FromUri(new Uri(user.ImagePerfil));
+                    circleImage.Source = ImageSource.FromStream(() =>
+                    {
+                        var stream = file.GetStream();                        
+                        return stream;
                     });
 
-                if (file == null)
-                    return;
+                    await (new UserDto()).RegisterPhoto(file);
 
-                await (new UserDto()).RegisterPhoto(file);
+                }
+                else if(select.Contains("Selecionar"))
+                {
+                    if (!CrossMedia.Current.IsPickPhotoSupported)
+                    {
+                        await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+                        return;
+                    }
+
+                    file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                    {
+                        PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
+
+                    });
+                    if (file == null)
+                        return;
+
+                    circleImage.Source = ImageSource.FromStream(() =>
+                    {
+                        var stream = file.GetStream();
+                        
+                        return stream;
+                    });
+
+                    await (new UserDto()).RegisterPhoto(file);
+                }
 
                
-                CircleImage.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
+
+               
+                //CircleImage.Source = ImageSource.FromStream(() =>
+                //{
+                //    var stream = file.GetStream();
+                //    file.Dispose();
+                //    return stream;
+                //});
 
 
                 //var memoryStream = new MemoryStream();
@@ -160,7 +183,7 @@ namespace Welic.App.Views
             }
             catch (AppCenterException ex)
             {
-                await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("Ops", "Erro ao tirar fotos." + ex.Message, "OK");
             }
         }               
 
@@ -180,6 +203,12 @@ namespace Welic.App.Views
             {
                 return;
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            
         }
     }
 }

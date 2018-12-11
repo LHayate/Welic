@@ -90,7 +90,8 @@ namespace Welic.Infra.Mapeamentos
             //    .HasColumnName("PhoneNumberConfirmed");
             Property(x => x.ImagePerfil)
                 .HasColumnName("ImagePerfil")
-                .HasColumnType("varbinary");
+                .HasColumnType("varchar")
+                ;
             Property(x => x.Identity)
                 .HasColumnType("varchar");
             //Property(x => x.LastAcess)

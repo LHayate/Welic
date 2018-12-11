@@ -18,15 +18,11 @@ using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Models.Menu.Command;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Dominio.Models.Users.Comandos;
-using Welic.Dominio.Models.Users.Dtos;
-using Welic.Dominio.Models.Users.Entidades;
-using Welic.Dominio.Models.Users.Enums;
 using Welic.Dominio.ViewModels;
 using Welic.Infra.Context;
 using Welic.WebSite.Models;
 using Welic.WebSite.Utilities;
-using GroupUserDto = Welic.Dominio.Models.Users.Dtos.GroupUserDto;
+
 
 namespace Welic.WebSite.Controllers
 {
@@ -250,7 +246,7 @@ namespace Welic.WebSite.Controllers
             {
                 //TOdo: Salvar menus padrões para o usuario novo
 
-                var menu = _servicoMenu.GetMenuComplet();
+                var menu = _servicoMenu.Query().Select(x=> x).ToList();
 
                 _servicoMenu.SaveMenuUser(
                     new CommandMenu

@@ -389,6 +389,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\PermissionProvider.cs" />
     <Compile Include="Provider\SimpleAuthorizationServerProvider.cs" />
+    <Compile Include="Query.Designer.cs">
+      <DependentUpon>Query.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="Themes\ThemeableRazorViewEngine.cs" />
     <Compile Include="Utilities\EmailHelper.cs" />
@@ -3039,6 +3044,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Query.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Query.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

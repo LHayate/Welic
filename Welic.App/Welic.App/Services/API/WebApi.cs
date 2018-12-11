@@ -74,7 +74,7 @@ namespace Welic.App.Services.API
                         await AuthenticateAsync(user);
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 return;
             }            
@@ -96,7 +96,11 @@ namespace Welic.App.Services.API
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
                     {
                         if (!_response.IsSuccessStatusCode)
+                        {
+
                             return false;
+                        }
+                            
 
                         var result = await _response.Content.ReadAsStringAsync();
 
@@ -109,8 +113,9 @@ namespace Welic.App.Services.API
                 }
                 return true;
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }
@@ -140,7 +145,7 @@ namespace Welic.App.Services.API
                     return JsonConvert.DeserializeObject<T>(_result);
                 }
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 throw new AppCenterException("Erro ao tentar buscar dados");
             }
@@ -169,9 +174,9 @@ namespace Welic.App.Services.API
                     //return JsonConvert.DeserializeObject<ObservableCollection<T>>(_result);
                 }
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
-                throw new AppCenterException("Erro ao tentar buscar dados");
+                throw new System.Exception("Erro ao tentar buscar dados");
             }
         }
 
@@ -186,9 +191,13 @@ namespace Welic.App.Services.API
                     if (!_response.IsSuccessStatusCode)
                     {
                         if(_response.StatusCode == HttpStatusCode.Conflict)
-                            throw new InvalidOperationException("Dados Duplicados");
+                            throw new InvalidOperationException(_response.Content.ReadAsStringAsync().Result);
                         if(_response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException("Não Autorizado");
+                        if (_response.StatusCode == HttpStatusCode.InternalServerError)
+                            throw new InvalidOperationException(_response.Content.ReadAsStringAsync().Result);
+                        
+
 
                         throw new InvalidOperationException("Erro ao Gravar Informações");
                     }
@@ -197,10 +206,10 @@ namespace Welic.App.Services.API
                     return JsonConvert.DeserializeObject<T>(result);
                 }              
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                throw new System.Exception("Erro ao tentar salvar dados"); ;
             }            
         }
      
@@ -243,7 +252,7 @@ namespace Welic.App.Services.API
             catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw ;
+                throw new System.Exception("Erro ao tentar Deletar dados"); ;
             }
             
         }
@@ -261,10 +270,10 @@ namespace Welic.App.Services.API
                     
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                throw new System.Exception("Erro ao tentar subir os  dados"); ;
             }
 
         }

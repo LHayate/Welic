@@ -80,8 +80,8 @@ namespace Welic.WebSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public GroupUserDto GroupUser { get; set; }
-        public virtual IEnumerable<Dominio.Models.Users.Dtos.GroupUserDto> GroupUserEnum { get; set; }
+        //public GroupUserDto GroupUser { get; set; }
+        //public virtual IEnumerable<Dominio.Models.Users.Dtos.GroupUserDto> GroupUserEnum { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

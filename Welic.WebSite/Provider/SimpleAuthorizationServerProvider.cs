@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -7,10 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Dominio.Models.Users.Comandos;
-using Welic.Dominio.Models.Users.Dtos;
-using Welic.Dominio.Models.Users.Entidades;
 using Welic.Infra.Context;
 using Welic.Repositorios.Login;
 using Welic.WebSite.Models;
@@ -78,10 +77,11 @@ namespace Welic.WebSite.Provider
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            ComandUser usuarioComando = new ComandUser(context.UserName.ToLower(), context.Password, context.UserName);
-            User user = _servico.Autenticar(usuarioComando);
+            AspNetUser user = _servico.Query().Select(x => x).FirstOrDefault(x => x.Email == context.UserName);
+            var valido = user.ValidarNomeUsuarioESenha(context.UserName, context.Password) ? user : null;
+            
 
-            if (user == null)
+            if (valido == null)
             {
                 context.SetError("invalid_grant", "Usuário ou senha inválidos");
                 return;

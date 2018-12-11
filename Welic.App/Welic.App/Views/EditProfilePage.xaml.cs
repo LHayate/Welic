@@ -26,33 +26,9 @@ namespace Welic.App.Views
 		{
 			InitializeComponent ();
             BindingContext = ViewModelLocator.Resolve<EditProfileViewModel>();
-            //LoadingImage();
+            
 		}
-
-	    private void LoadingImage()
-	    {
-	        try
-	        {
-	            _userdto = (new UserDto()).LoadAsync();	            
-	           
-	            if (_userdto.ImagemPerfil != null)
-	            {
-	                CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(
-	                    _userdto.ImagemPerfil                       
-	                    ));
-                }
-                else
-	            {
-	                CircleImage.Source = ImageSource.FromResource(Util.ImagePorSistema("perfil"));	              
-	            }
-            }
-	        catch (AppCenterException e)
-	        {
-	            Console.WriteLine(e);
-	            throw;
-	        }
-           
-        }
+	    
 
 	    private async  void Button_OnClicked(object sender, EventArgs e)
 	    {

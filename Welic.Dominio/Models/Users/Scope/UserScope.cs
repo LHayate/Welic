@@ -1,11 +1,12 @@
-﻿using Welic.Dominio.Utilitarios.Entidades;
+﻿using Welic.Dominio.Models.Users.Mapeamentos;
+using Welic.Dominio.Utilitarios.Entidades;
 using Welic.Dominio.Validacao;
 
 namespace Welic.Dominio.Models.Users.Scope
 {
     public static class UserScope
     {
-        public static bool ValidarEscopoNomeUsuarioESenha(this Entidades.User user, string nomeUsuario, string senha)
+        public static bool ValidarEscopoNomeUsuarioESenha(this AspNetUser user, string nomeUsuario, string senha)
         {
             return Validador.SeSatisfazPor(
                 Validador.AssegurarQueIgual(user.Email.ToUpper(), nomeUsuario.ToUpper(),

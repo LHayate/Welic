@@ -86,7 +86,7 @@ namespace Welic.App.ViewModels
 
                 // trigger some action to take such as updating other labels or fields
                 OnPropertyChanged(nameof(GenderSelectedIndex));
-                SelectedGender = _ItemsRoles[genderSelectedIndex];
+                SelectedGender = _ItemsGender[genderSelectedIndex];
             }
         }
 
@@ -108,7 +108,7 @@ namespace Welic.App.ViewModels
 
                     // trigger some action to take such as updating other labels or fields
                     OnPropertyChanged(nameof(RoleSelectedIndex));
-                    SelectedGender = _ItemsRoles[roleSelectedIndex];
+                    SelectedRole = _ItemsRoles[roleSelectedIndex];
                 }
             }
         }
@@ -128,20 +128,29 @@ namespace Welic.App.ViewModels
             get => _password;
             set
             {
-                //TODO: Validar as senhas
-                //if (Password.Any(c => char.IsSymbol(c)))
-                //    _CharEspecial = true;
-
-                //if (Password.Any(c => char.IsUpper(c)))
-                //    _CharMaiusculo = true;
-
-                //if (Password.Any(c => char.IsLower(c)))
-                //    _CharMinusculo = true;
-
-                //if (Password.Any(c => char.IsDigit(c)) && Password.Length >= 8)
-                //    _CharNumberLength = true;
+                CharEspecial = false;
+                CharMaiusculo = false;
+                CharMinusculo = false;
+                CharNumberLength = false;
 
                 SetProperty(ref _password, value);
+
+                if (Password != null || Password.Length < 0)
+                {
+                    //TODO: Validar as senhas
+                    //if (Regex.IsMatch(Password, (@"[!""#$%&'()*+,-./:;?@[\\\]_`{|}~]")))
+                    if (Regex.IsMatch(Password, (@"[^a-zA-Z0-9]")))
+                        CharEspecial = true;
+
+                    if (Regex.IsMatch(Password, (@"[A-Z]")))
+                        CharMaiusculo = true;
+
+                    if (Regex.IsMatch(Password, (@"[a-z]")))
+                        CharMinusculo = true;
+
+                    if (Regex.IsMatch(Password, (@"[0-9]")) && Password.Length >= 8)
+                        CharNumberLength = true;
+                }
             } 
         }
         private string _confirmPassword;
@@ -259,7 +268,7 @@ namespace Welic.App.ViewModels
                     LastName = _lastName,                        
                     Gender = SelectedGender,
                     Profession = SelectedRole,
-                    DateOfBirth = DateBirthday,                    
+                    DateOfBirth = DateBirthday,                         
                 };
 
                 if (CrossConnectivity.Current.IsConnected)
@@ -287,8 +296,7 @@ namespace Welic.App.ViewModels
                         //await WebApi.Current.PostAsync<UserDto>($"Account/Register", usuario);
 
                         //var user = await WebApi.Current.PostAsync<UserDto>($"User/save",usuario);
-                        Application.Current.MainPage = new MainPage();
-                        await NavigationService.NavigateModalToAsync<MainViewModel>();
+                        Application.Current.MainPage = new MainPage();                        
                     }
                     else
                     {

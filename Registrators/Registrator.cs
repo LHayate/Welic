@@ -27,6 +27,7 @@ using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Marketplaces.Services;
+using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Menu.Repositorios;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.News.Maps;
@@ -37,7 +38,7 @@ using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Uploads.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Dominio.Models.Users.Repositorios;
+
 using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.DataContext;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
@@ -48,7 +49,7 @@ using Welic.Infra.StoredProcedures;
 using Welic.Repositorios.Dispositives;
 using Welic.Repositorios.Live;
 using Welic.Repositorios.Menu;
-using Welic.Repositorios.Users;
+
 
 
 namespace Registrators
@@ -90,7 +91,10 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<EBookMap>, Repository<EBookMap>>()
                 .RegisterType<IRepositoryAsync<NewsMap>, Repository<NewsMap>>()
                 .RegisterType<IRepositoryAsync<ScheduleMap>,Repository<ScheduleMap>>()
+                .RegisterType<IRepositoryAsync<MenuMap>,Repository<MenuMap>>()
+                
 
+                .RegisterType<IServiceUser, ServiceUser>()
                 .RegisterType<IServiceSchedule, ServiceSchedule>()
                 .RegisterType<IServiceNews, ServiceNews>()
                 .RegisterType<IServiceEBook, ServiceEbook>()
@@ -127,14 +131,12 @@ namespace Registrators
                 .RegisterType<IHookService, HookService>()
                 .RegisterType<IPluginFinder, PluginFinder>();
 
-            RegisterUser(container);
+            
             RegistrarUnidadeDeTrabalho(container);
             RegistrarServico(container);
             RegistrarNotificacaoDominio(container);     
             RegisterDispositivos(container);
-            RegisterLive(container);
-            RegisterSchedule(container);
-            RegisterNews(container);
+            RegisterLive(container);          
             RegisterMenu(container);
             RegisterSetting(container);
             RegisterDataCacheService(container);
@@ -152,21 +154,9 @@ namespace Registrators
         private static void RegisterMenu(IUnityContainer container)
         {
             container.RegisterType<IServicoMenu, ServicoMenu>();
-            container.RegisterType<IRepositorioMenu, RepositorioMenu>();
+            container.RegisterType<IRepositorioMenu, RepositorioMenu>();           
         }
-        private static void RegisterNews(IUnityContainer container)
-        {              
-        }
-        private static void RegisterSchedule(IUnityContainer container)
-        {
-            
-            
-        }        
-        private static void RegisterUser(IUnityContainer conteiner)
-        {
-            conteiner.RegisterType<IServiceUser, ServiceUser>();
-            conteiner.RegisterType<IRepositorioUser, RepositoryUser>();
-        }
+                  
         private static void RegistrarUnidadeDeTrabalho(IUnityContainer container)
         {
             container.RegisterType<IUnidadeTrabalho, UnidadeTrabalho>();

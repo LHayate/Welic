@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -7,8 +8,9 @@ using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Welic.Dominio.Models.Menu.Servicos;
-using Welic.Dominio.Models.Users.Comandos;
+
 using Welic.Dominio.Models.Users.Servicos;
+using Welic.Repositorios;
 using Welic.WebSite.Helpers;
 
 namespace Welic.WebSite.Controllers
@@ -29,8 +31,13 @@ namespace Welic.WebSite.Controllers
         }
         
         public ActionResult Menu(string email)
-        {            
-            var list = _servicoMenu.GetMenuByUser(email);
+        {
+            string query = Query.Q001;
+
+            var usuario = _serviceUser.Query().Select(x => x).FirstOrDefault(x => x.Email == email);
+
+            var list = _servicoMenu.SelectQuery(query, new SqlParameter("IdUser", usuario.Id)).ToList();
+                                    
             return PartialView(list);
 
         }

@@ -10,11 +10,11 @@ namespace Welic.Dominio.Models.Menu.Repositorios
 {
     public interface IRepositorioMenu
     {        
-        List<MenuMap> GetAllMenu();
+        //List<MenuMap> GetAllMenu();
         void SaveMenuUser(string idUser, List<MenuMap> NewMenuUser);
-        List<MenuMap> GetbyIdUser(string idUser);        
-        List<MenuMap> GetListbyIdByList(List<int> listaDeIds);
-        void Save(MenuMap menuMap);
-        MenuMap GetById(int id);
+        //List<MenuMap> GetbyIdUser(string idUser);        
+        //List<MenuMap> GetListbyIdByList(List<int> listaDeIds);
+        //void Save(MenuMap menuMap);
+        //MenuMap GetById(int id);
     }
 }

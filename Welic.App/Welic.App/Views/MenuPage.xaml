@@ -15,18 +15,19 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="1" />
             </Grid.RowDefinitions>
-            <abstractions:CircleImage Source="{Binding Image, Converter={StaticResource ByteArrayToImage}}" 
+            <abstractions:CircleImage Source="{Binding Image}" 
+                                      
                                       Aspect="AspectFill" 
                                       Grid.Column="0" 
-                                      x:Name="CircleImage" >
+                                      x:Name="circleImage" >
                 <abstractions:CircleImage.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">120</On>
+                        <On Platform="Android, iOS">100</On>
                     </OnPlatform>
                 </abstractions:CircleImage.WidthRequest>
                 <abstractions:CircleImage.HeightRequest>
                     <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">120</On>
+                        <On Platform="Android, iOS">100</On>
                     </OnPlatform>
                 </abstractions:CircleImage.HeightRequest>
             </abstractions:CircleImage>

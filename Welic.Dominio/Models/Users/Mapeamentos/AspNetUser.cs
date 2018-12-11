@@ -11,6 +11,7 @@ using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Uploads.Maps;
+using Welic.Dominio.Models.Users.Scope;
 using Welic.Dominio.Patterns.Pattern.Ef6;
 
 namespace Welic.Dominio.Models.Users.Mapeamentos
@@ -50,7 +51,8 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public string Profession { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
-        public byte[] ImagePerfil { get; set; }
+        [DefaultValue("https://welic.app/Arquivos/Icons/perfil_Padrao.png")]
+        public string ImagePerfil { get; set; }
         public string Identity { get; set; }
         public DateTime LastAccessDate { get; set; }
         public string LastAccessIP { get; set; }
@@ -100,6 +102,11 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<LiveMap> LivesClass { get; set; }
         public virtual ICollection<EBookMap> EbookTeacher { get; set; }
         public virtual ICollection<EBookMap> EBookClass { get; set; }
-        
+
+
+        public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)
+        {
+            return this.ValidarEscopoNomeUsuarioESenha(nomeUsuario, password);
+        }
     }
 }

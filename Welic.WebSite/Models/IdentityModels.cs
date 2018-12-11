@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -40,7 +41,9 @@ namespace Welic.WebSite.Models
         public Guid Guid { get; set; }
                 
         public string Profession { get; set; }
-        public byte[] ImagePerfil { get; set; }
+
+        [DefaultValue("https://welic.app/Arquivos/Icons/perfil_Padrao.png")]
+        public string ImagePerfil { get; set; }
         public string Identity { get; set; }        
 
 

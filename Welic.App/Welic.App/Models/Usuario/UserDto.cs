@@ -1,14 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Live;
 using Welic.App.Models.Token;
+using Welic.App.Services;
 using Welic.App.Services.API;
 using Welic.App.Services.Criptografia;
 using Welic.App.Services.ServiceViews;
+using Welic.App.Views;
 
 namespace Welic.App.Models.Usuario
 {
@@ -23,8 +27,7 @@ namespace Welic.App.Models.Usuario
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
-        public string Profession { get; set; }                            
-        public byte[] ImagemPerfil { get; set; }        
+        public string Profession { get; set; }                                    
         public DateTime LastAccessDate { get; set; }
 
         public DateTime RegisterDate { get; set; }
@@ -44,7 +47,7 @@ namespace Welic.App.Models.Usuario
         public int LeadSourceID { get; set; }
 
         public double Rating { get; set; }
-        public byte[] ImagePerfil { get; set; }
+        public string ImagePerfil { get; set; }
         public string Identity { get; set; }
         
         /// <summary>True if the email is confirmed, default is false</summary>
@@ -97,28 +100,16 @@ namespace Welic.App.Models.Usuario
             try
             {
                 //user = userBanco.Result;
-
-                Id = user.Id;
-                Guid = user.Guid;
-                NickName = user.NickName;
-                Email = user.Email;
-                EmailConfirmed = user.EmailConfirmed;
-                FirstName = user.FirstName;
-                LastName = user.LastName;
-                FullName = user.FullName;
-                Profession = user.Profession;
-                Password = user.Password;
-                ImagemPerfil = user.ImagemPerfil;
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed;
-                Synced = false;
-                LastAccessDate = DateTime.Now;
-                RememberMe = true;
+               
+                user.Synced = false;
+                user.LastAccessDate = DateTime.Now;
+                user.RememberMe = true;
                 
 
                 //Insere o registro                                
                 try
                 {
-                    SaveUser(this);
+                    SaveUser(user);
                     
                     return true;
                 }
@@ -138,7 +129,7 @@ namespace Welic.App.Models.Usuario
         public async Task<UserDto> GetUserbyServer(string email)
         {
             //Faço a atualização do Servidor para Atualizar o Mando SQLite
-            var userDto = await  WebApi.Current.GetAsync<UserDto>($"user/GetByEmail?Email={email}");
+            var userDto = await  WebApi.Current.GetAsync<UserDto>($"user/GetByEmail/?email={email}");
             return userDto;
         }
 
@@ -158,7 +149,7 @@ namespace Welic.App.Models.Usuario
                     if (!item.Synced)
                     {                        
                         //item.Password = Criptografia.Decriptar(item.Password);
-                        var user = await WebApi.Current.PostAsync<UserDto>("user/save", item);
+                        var user = await WebApi.Current.PostAsync<UserDto>("user/update", item);
 
                         Synced = true;                              
                         SaveUser(user);
@@ -210,31 +201,49 @@ namespace Welic.App.Models.Usuario
             return usu.FirstOrDefault();
         }        
 
-        internal async Task<bool> RegisterPhoto(MediaFile file)
+        internal async Task<UserDto> RegisterPhoto(MediaFile file)
         {
-
-            
-
-            var user = this.LoadAsync();
-            using (var memoryStream = new MemoryStream())
-            {
-                file.GetStream().CopyTo(memoryStream);
-                file.Dispose();
-                user.ImagemPerfil =  memoryStream.ToArray();                
-            }
-            
-            //Insere o registro
-
-            SaveUser(user);
             try
-            {                
+            {
+                var user = this.LoadAsync();                
+
+
+                using (var content = new MultipartFormDataContent())
+                {
+                    var memoryStream = new MemoryStream();
+
+                    file.GetStream().CopyTo(memoryStream);
+                    file.Dispose();
+                                
+                    ByteArrayContent baContent = new ByteArrayContent(memoryStream.ToArray());
+                    
+                                   
+
+                    //var stream = new StreamContent(memoryStream);                
+                    var _path =
+                        $"Perfil-{user.LastName}_{user.Id}.jpg".Replace(" ", string.Empty);
+
+                    content.Add(baContent, "File", _path);
+                    //content.Add(stream, "file", _path);
+
+                    await WebApi.Current.UploadAsync(content);
+                    user.ImagePerfil = $"https://welic.app/Arquivos/Uploads/{_path}";                        
+                    
+                }            
+
+                var ret = await WebApi.Current.PostAsync<UserDto>("user/update", user);
+
+                //Insere o registro
+
+                SaveUser(ret);
+                          
                 user.Synced = false;                
-                return true;
+                return user;
             }
             catch (AppCenterException e)
             {
                 Console.WriteLine(e);
-                return false;
+                return null;
             }
         }
 
@@ -254,13 +263,28 @@ namespace Welic.App.Models.Usuario
                 EmailConfirmed = user.EmailConfirmed,
                 FullName = user.FullName,
                 Guid = user.Guid,
-                ImagemPerfil = user.ImagemPerfil,
+                ImagePerfil = user.ImagePerfil,
                 Password = user.Password,
                 PhoneNumber = user.PhoneNumber,
                 PhoneNumberConfirmed = user.PhoneNumberConfirmed,
                 Profession = user.Profession,
                 Synced = this.Synced,
-            };                       
+                AcceptEmail = user.AcceptEmail,
+                AccessFailedCount = user.AccessFailedCount,
+                DateOfBirth = user.DateOfBirth,
+                Disabled = user.Disabled,
+                Gender = user.Gender,
+                Identity = user.Identity,
+                LastAccessIP = user.LastAccessIP,
+                LeadSourceID = user.LeadSourceID,
+                LockoutEnabled = user.LockoutEnabled,
+                LockoutEndDateUtc = user.LockoutEndDateUtc,
+                Rating = user.Rating,
+                RegisterDate = user.RegisterDate,
+                RegisterIP = user.RegisterIP,
+                SecurityStamp = user.SecurityStamp,
+                TwoFactorEnabled = user.TwoFactorEnabled,
+            };                      
             _dbManager.database.InsertOrReplace(usersalvo);
             _dbManager.database.Close();
         }

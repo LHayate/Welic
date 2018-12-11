@@ -152,10 +152,6 @@
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />
     <Compile Include="Models\Home\Servico\IServiceStart.cs" />
-    <Compile Include="Models\Lives\Adapters\AdapterLive.cs" />
-    <Compile Include="Models\Lives\Dtos\LiveDto.cs" />
-    <Compile Include="Models\Lives\Entitys\DescriptionLive.cs" />
-    <Compile Include="Models\Lives\Entitys\Live.cs" />
     <Compile Include="Models\Lives\Maps\LiveMap.cs" />
     <Compile Include="Models\Lives\Repositoryes\IRepositoryLive.cs" />
     <Compile Include="Models\Lives\Services\IServiceLive.cs" />
@@ -224,18 +220,6 @@
     <Compile Include="Models\Schedule\Services\IServiceSchedule.cs" />
     <Compile Include="Models\Uploads\Maps\UploadsMap.cs" />
     <Compile Include="Models\Uploads\Services\IUploadsService.cs" />
-    <Compile Include="Models\Users\Adapters\AdapterUser.cs" />
-    <Compile Include="Models\Users\Comandos\ComandUser.cs" />
-    <Compile Include="Models\Users\Dtos\GroupUserDto.cs" />
-    <Compile Include="Models\Users\Dtos\ProgramDto.cs" />
-    <Compile Include="Models\Users\Dtos\ProgramGroupUserDto.cs" />
-    <Compile Include="Models\Users\Dtos\ProgramUserDto.cs" />
-    <Compile Include="Models\Users\Dtos\UserDto.cs" />
-    <Compile Include="Models\Users\Entidades\GroupUser.cs" />
-    <Compile Include="Models\Users\Entidades\Program.cs" />
-    <Compile Include="Models\Users\Entidades\ProgramGroupUser.cs" />
-    <Compile Include="Models\Users\Entidades\ProgramUser.cs" />
-    <Compile Include="Models\Users\Entidades\User.cs" />
     <Compile Include="Models\Users\Mapeamentos\AspNetRole.cs" />
     <Compile Include="Models\Users\Mapeamentos\AspNetUser.cs" />
     <Compile Include="Models\Users\Mapeamentos\AspNetUserClaim.cs" />
@@ -269,7 +253,6 @@
     <Compile Include="Models\Users\Mapeamentos\ProgramGroupUserMap.cs" />
     <Compile Include="Models\Users\Mapeamentos\ProgramsMap.cs" />
     <Compile Include="Models\Users\Mapeamentos\ProgramUserMap.cs" />
-    <Compile Include="Models\Users\Repositorios\IRepositorioUser.cs" />
     <Compile Include="Models\Users\Scope\UserScope.cs" />
     <Compile Include="Models\Users\Servicos\IServicoUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Welic.Dominio.Models.EBook.Map;
-using Welic.Dominio.Models.Lives.Dtos;
+
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
 

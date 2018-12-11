@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Threading.Tasks;
-using Welic.Dominio.Models.Users.Dtos;
+using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Infra.Context;
 
 namespace Welic.Repositorios.Login
@@ -19,7 +19,7 @@ namespace Welic.Repositorios.Login
             _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
         }
 
-        public async Task<IdentityResult> RegisterUser(UserDto userDto)
+        public async Task<IdentityResult> RegisterUser(AspNetUser userDto)
         {
             IdentityUser user = new IdentityUser
             {

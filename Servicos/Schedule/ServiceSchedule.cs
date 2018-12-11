@@ -5,7 +5,6 @@ using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Schedule.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
-using Welic.Dominio.Models.Users.Repositorios;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;

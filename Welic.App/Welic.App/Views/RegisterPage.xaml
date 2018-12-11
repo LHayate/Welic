@@ -40,8 +40,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Entry Placeholder="First Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0"/>
-                    <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text" Grid.Column="1"/>
+                    <Entry Placeholder="First Name" Text="{Binding FirstName}" Keyboard="Text" Grid.Column="0" PlaceholderColor="AntiqueWhite"/>
+                    <Entry Placeholder="Last Name" Text="{Binding LastName}" Keyboard="Text" Grid.Column="1" PlaceholderColor="AntiqueWhite"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -82,20 +82,19 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Text="Sua senha deve conter:" Grid.Column="0" Grid.Row="0"/>
+                    <Label Text="Sua senha deve conter:" Grid.Column="0" Grid.Row="0" TextColor="AntiqueWhite"/>
 
-                    <Label Text="Um caracter especial(@#$!)" Grid.Column="0" Grid.Row="1"/>
+                    <Label Text="Um caracter especial(@#$!)" Grid.Column="0" Grid.Row="1" TextColor="AntiqueWhite"/>
                     <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="1" IsVisible="{Binding CharEspecial}"/>
 
-                    <Label Text="Uma Letra Maiúscula" Grid.Column="0" Grid.Row="2"/>
+                    <Label Text="Uma Letra Maiúscula" Grid.Column="0" Grid.Row="2" TextColor="AntiqueWhite"/>
                     <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="2" IsVisible="{Binding CharMaiusculo}"/>
 
-                    <Label Text="Uma Letra Minúscula" Grid.Column="0" Grid.Row="3"/>
+                    <Label Text="Uma Letra Minúscula" Grid.Column="0" Grid.Row="3" TextColor="AntiqueWhite"/>
                     <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="3" IsVisible="{Binding CharMinusculo}"/>
 
-                    <Label Text="Uma Numero e minimo 8 Caracteres" Grid.Column="0" Grid.Row="4"/>
+                    <Label Text="Uma Numero e minimo 8 Caracteres" Grid.Column="0" Grid.Row="4" TextColor="AntiqueWhite"/>
                     <Image HeightRequest="15" WidthRequest="15" Source="iCheck.png" Grid.Column="1" Grid.Row="4" IsVisible="{Binding CharNumberLength}"/>
-
                 </Grid>
                
 
