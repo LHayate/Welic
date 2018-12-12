@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using Android;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -48,34 +49,34 @@ namespace Welic.App.Views
 
 
             //TODO: Quando for implementado algo modificar menu para apresentar o menu
-            //menuItems = new ObservableCollection<HomeMenuItem>
-            //{
-            //    new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome"), Category = new Category { CategoryId = 1, Title = "Home" }},
-            //    new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-            //    new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-            //    new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-            //    new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-            //    new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery"), Category = new Category { CategoryId = 3, Title = "Galeria" } },                                
-            //    //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
-            //    //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
-            //    new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings"), Category = new Category { CategoryId = 4, Title = "Settings" } },
-            //    new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout"), Category = new Category { CategoryId = 4, Title = "About" } }
-            //};
+            menuItems = new ObservableCollection<HomeMenuItem>
+            {
+                new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome"), Category = new Category { CategoryId = 1, Title = "Home" }},
+                new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery"), Category = new Category { CategoryId = 3, Title = "Galeria" } },                                
+                //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+                //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
+                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings"), Category = new Category { CategoryId = 4, Title = "Settings" } },
+                new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout"), Category = new Category { CategoryId = 4, Title = "About" } }
+            };
 
 
             //var group = menuItems.OrderBy(x => x.Category.CategoryId)
             //    .GroupBy(x => x.Category)
             //    .Select(x => new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-            //        new SelectedHeaderViewModel{IsSelected = false, Menu = x.Key}, x));
-                
-                
-                
-            //MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>();
-            //group.ForEach(x=> MyCharts.Add(x));
+            //        new SelectedHeaderViewModel { IsSelected = false, Menu = x.Key }, x));
 
-            //ListViewMenu.ItemsSource = MyCharts;
-            //ListViewMenu.ItemsSource = menuItems;
-            
+
+
+            //MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>();
+            //group.ForEach(x => MyCharts.Add(x));
+
+            ListViewMenu.ItemsSource = menuItems;
+            ListViewMenu.ItemsSource = menuItems;
+
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 try
