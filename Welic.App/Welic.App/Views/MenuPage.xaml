@@ -98,6 +98,36 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <!--<ListView ItemsSource       ="{Binding MyCharts}"
+                  CachingStrategy   ="RecycleElement"
+                  IsGroupingEnabled ="True"                  
+                  x:Name            ="Charts">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView>
+                            <Label Text            ="{Binding Key.Category.Title}"
+                                   FontAttributes  ="Bold"
+                                   FontSize        ="Medium"
+                                   VerticalOptions ="Center"/>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ShowCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </ContentView.GestureRecognizers>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView>
+                            <Label Text="{Binding ChartName}"/>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
 
         <!--<ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"

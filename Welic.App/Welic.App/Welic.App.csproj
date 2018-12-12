@@ -123,7 +123,6 @@
 
   <ItemGroup>
     <Folder Include="Models\API\" />
-    <Folder Include="Models\NewFolder\" />
   </ItemGroup>
 
   <ItemGroup>

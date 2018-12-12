@@ -21,7 +21,7 @@ namespace Welic.Dominio.Models.Curso.Map
         public string Description { get; set; }        
         public decimal Prince { get; set; }
         public string Themes { get; set; }        
-        public byte[] Print { get; set; }
+        public string Print { get; set; }
 
         public string AuthorId { get; set; }
         public AspNetUser TeacherUser { get; set; }

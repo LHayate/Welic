@@ -41,7 +41,7 @@ namespace Welic.Infra.Mapeamentos
                 .HasColumnName("Prince");
             Property(x => x.Print)
                 .IsOptional()
-                .HasColumnType("image")
+                .HasColumnType("string")
                 .HasColumnName("Print");
             Property(x => x.Themes)
                 .IsRequired()

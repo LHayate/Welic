@@ -101,7 +101,6 @@ namespace Welic.App.Services.API
                             return false;
                         }
                             
-
                         var result = await _response.Content.ReadAsStringAsync();
 
                         var tokenResult = JsonConvert.DeserializeObject<UserToken>(result);

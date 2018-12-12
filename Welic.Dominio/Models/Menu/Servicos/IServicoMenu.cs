@@ -11,11 +11,11 @@ using Welic.Dominio.Patterns.Service.Pattern;
 namespace Welic.Dominio.Models.Menu.Servicos
 {
     public interface IServicoMenu : IService<MenuMap>
-    {        
+    {
 
         //List<MenuDto> GetMenuComplet();
-        //List<MenuDto> GetMenuByUser(string email);
-        //List<MenuDto> GetMenuByUserId(string id);
+        List<MenuDto> GetMenuByUser(string email);
+        List<MenuDto> GetMenuByUserId(string id);
         void SaveMenuUser(CommandMenu menuUser);
         //void SaveMenu(MenuDto menuDto);
         //MenuDto GetbyId(int id);

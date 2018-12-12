@@ -1,4 +1,7 @@
-﻿using Welic.Dominio.Models.Lives.Maps;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Welic.Dominio.Models.Lives.Maps;
+using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
@@ -9,14 +12,12 @@ namespace Servicos.Live
     public class ServiceLive : Service<LiveMap>, IServiceLive
     {
 
-        public ServiceLive(IRepositoryAsync<LiveMap> repository) : base(repository)
+        public ServiceLive(IRepositoryAsync<LiveMap> repository, IRepositoryLive repositoryLive) : base(repository)
         {
+            _repositoryLive = repositoryLive;
         }
 
-
-
-
-        // private readonly IRepositoryLive _repositoryLive;        
+         private readonly IRepositoryLive _repositoryLive;        
 
 
         //public LiveDto Save(LiveDto liveDto)
@@ -95,10 +96,10 @@ namespace Servicos.Live
         //    return AdapterLive.ConverterMapParaDto(_repositoryLive.GetListByCourse(id));
         //}
 
-        //public ObservableCollection<LiveDto> GetSearchListLive(string text)
-        //{
-        //    return AdapterLive.ConverterMapParaDto(_repositoryLive.GetSearchListLive(text));
-        //}
+        public List<LiveMap> GetSearchListLive(string text)
+        {
+            return _repositoryLive.GetSearchListLive(text);
+        }
 
     }
 }

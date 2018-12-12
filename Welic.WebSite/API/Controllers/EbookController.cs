@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -72,7 +73,9 @@ namespace Welic.WebSite.API.Controllers
         [Route("GetSearchList/{text}")]
         public Task<HttpResponseMessage> ListSearchLive(string text)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceEBook.Query().Select(x => x).Where(x => x.Title.Contains(text) || x.Description.Contains(text)));
+            var list = _serviceEBook.SearchBooks(text);
+            return CriaResposta(HttpStatusCode.OK, list);
+            
         }
 
         [HttpPost]

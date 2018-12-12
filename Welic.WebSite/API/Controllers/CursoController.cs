@@ -49,7 +49,13 @@ namespace Welic.WebSite.API.Controllers
                 .Where(x=> x.AuthorId == id)
                 .ToList());
         }
-        
+        [HttpGet]
+        [Route("GetSearchListCurso/{text}")]
+        public Task<HttpResponseMessage> ListSearch(string text)
+        {
+            var list = _cursoService.SearchBooks(text);//.Query().Select(x => x).Where(x => x.Title.Contains(text)).ToList(); //SqlQuery(Query.Q002, new SqlParameter("text", text)).ToList();
+            return CriaResposta(HttpStatusCode.OK, list);
+        }
 
         // POST: api/Curso
         [HttpPost]

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Welic.Repositorios {
+namespace Welic.WebSite {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Welic.Repositorios {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Welic.Repositorios.Query", typeof(Query).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Welic.WebSite.Query", typeof(Query).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -77,6 +77,28 @@ namespace Welic.Repositorios {
         internal static string Q001 {
             get {
                 return ResourceManager.GetString("Q001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select  l.title, l.Description, l.UrlDestino, l.Id, l.Prince, l.[Print], l.theme
+        ///  from dbo.lives as l
+        /// where (l.Title LIKE &apos;%&apos;+@text+&apos;%&apos;) or (l.Description like &apos;%&apos;+@text+&apos;%&apos;) or (l.Theme like &apos;%&apos;+@text+&apos;%&apos;).
+        /// </summary>
+        internal static string Q002 {
+            get {
+                return ResourceManager.GetString("Q002", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select E.Title, E.Description, E.UrlDestino, E.Prince, E.[Print]
+        ///from dbo.Ebooks E
+        ///where (E.Title Like  &apos;%&apos;+@text+&apos;%&apos;) or (E.Description like &apos;%&apos;+@text+&apos;%&apos;) or (E.Theme like &apos;%&apos;+@text+&apos;%&apos;).
+        /// </summary>
+        internal static string Q003 {
+            get {
+                return ResourceManager.GetString("Q003", resourceCulture);
             }
         }
     }

@@ -17,6 +17,6 @@ namespace Welic.Dominio.Models.Lives.Services
         //LiveDto GetById(int id);
         //ObservableCollection<LiveDto> GetListLive();
         //ObservableCollection<LiveDto> GetListByCourse(int id);
-        //ObservableCollection<LiveDto> GetSearchListLive(string text);
+        List<LiveMap> GetSearchListLive(string text);
     }
 }

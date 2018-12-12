@@ -7,13 +7,24 @@ using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.EBook.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
+using Welic.Infra.Context;
 
 namespace Servicos.Ebook
 {
     public class ServiceEbook: Service<EBookMap>, IServiceEBook
     {
-        public ServiceEbook(IRepositoryAsync<EBookMap> repository) : base(repository)
+        private AuthContext _context;
+        public ServiceEbook(IRepositoryAsync<EBookMap> repository, AuthContext context) : base(repository)
         {
+            _context = context;
+        }
+
+        public List<EBookMap> SearchBooks(string text)
+        {
+            return _context.EBook
+                .Where(map => map.Title.Contains(text))
+                .OrderBy(x => x.Title)
+                .ToList();
         }
     }
 }

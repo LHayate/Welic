@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -108,7 +109,8 @@ namespace Welic.WebSite.API.Controllers
         [Route("GetSearchListLive/{text}")]
         public Task<HttpResponseMessage> ListSearchLive(string text)
         {
-            return CriaResposta(HttpStatusCode.OK, _serviceLive.Query().Select(x=> x).Where(x=> x.Title.Contains(text) || x.Description.Contains(text)).ToList());
+            var list = _serviceLive.GetSearchListLive(text); //.Query().Select(x => x).Where(x => x.Title.Contains(text)).ToList(); //SqlQuery(Query.Q002, new SqlParameter("text", text)).ToList();
+            return CriaResposta(HttpStatusCode.OK, list);
         }
 
         [HttpPost]

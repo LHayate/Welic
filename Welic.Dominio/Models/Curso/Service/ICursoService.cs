@@ -9,6 +9,7 @@ using Welic.Dominio.Patterns.Service.Pattern;
 namespace Welic.Dominio.Models.Curso.Service
 {
     public interface ICursoService: IService<CursoMap>
-    {        
+    {
+        List<CursoMap> SearchBooks(string text);
     }
 }

@@ -130,5 +130,18 @@
                WHERE Mu.IdUser = @IdUser
                ORDER BY M.Nivel
     </value>
+    <comment>Selecionar Menus </comment>
+  </data>
+  <data name="Q002" xml:space="preserve">
+    <value>Select  l.title, l.Description, l.UrlDestino, l.Id, l.Prince, l.[Print], l.theme
+  from dbo.lives as l
+ where (l.Title LIKE '%'+@text+'%') or (l.Description like '%'+@text+'%') or (l.Theme like '%'+@text+'%')</value>
+    <comment>Search Live com like </comment>
+  </data>
+  <data name="Q003" xml:space="preserve">
+    <value>select E.Title, E.Description, E.UrlDestino, E.Prince, E.[Print]
+from dbo.Ebooks E
+where (E.Title Like  '%'+@text+'%') or (E.Description like '%'+@text+'%') or (E.Theme like '%'+@text+'%')</value>
+    <comment>Search EBook com like</comment>
   </data>
 </root>

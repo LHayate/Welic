@@ -45,11 +45,11 @@ namespace Welic.WebSite.API.Controllers
         public Task<HttpResponseMessage> ListMenuUser([FromBody] AspNetUser model)
         {
 
-            string query = Query.Q001;
+            //string query = Query.Q001;
 
             var usuario = _serviceUser.Query().Select(x => x).FirstOrDefault(x => x.Email == model.Email);            
 
-            return CriaResposta(HttpStatusCode.OK, _servicoMenu.SelectQuery(query, new SqlParameter("IdUser", usuario.Id)).ToList());                        
+            return CriaResposta(HttpStatusCode.OK, _servicoMenu.GetMenuByUserId(usuario.Id));                        
         }
 
         [HttpPost]        

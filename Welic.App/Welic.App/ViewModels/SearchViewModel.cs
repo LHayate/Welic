@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter;
+using Welic.App.Models.Course;
 using Welic.App.Models.Search;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
@@ -30,7 +32,7 @@ namespace Welic.App.ViewModels
             try
             {
                 SearchFind.Clear();
-                IsBusy = false;                
+                IsBusy = true;                
                 var searchResults = await (new SearchDto()).SearchClient(text);
 
                 if (searchResults.Count > 0)
@@ -39,6 +41,7 @@ namespace Welic.App.ViewModels
                     {
                         SearchFind.Add(new SearchDto {Image = search.Image, Name = search.Name, Description = search.Description, Location = search.Location});
                     }
+                    
                 }
                 else
                 {
@@ -48,13 +51,13 @@ namespace Welic.App.ViewModels
             catch (FormatException ex)
             {
                 Console.WriteLine(ex);
-                IsBusy = true;
+                IsBusy = false;
                 return;
             }
             catch (AppCenterException e)
             {
                 Console.WriteLine(e);
-                IsBusy = true;
+                IsBusy = false;
                 return;
             }
         }
@@ -62,6 +65,40 @@ namespace Welic.App.ViewModels
         {
             SearchFind.Clear();
             IsBusy = false;
+        }
+
+        public async Task<ObservableCollection<SearchDto>> SearchCursos(string text)
+        {
+            try
+            {
+                SearchFind.Clear();
+                IsBusy = true;
+                return await (new SearchDto()).SearchCursos(text);
+
+                //if (searchResults.Count > 0)
+                //{
+                //    foreach (SearchDto search in searchResults)
+                //    {
+                //        SearchFind.Add(new SearchDto { Image = search.Image, Name = search.Name, Description = search.Description, Location = search.Location });
+                //    }
+
+                //    return SearchFind;
+                //}
+
+                //return null;                                    
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex);
+                IsBusy = false;
+                return null;
+            }
+            catch (AppCenterException e)
+            {
+                Console.WriteLine(e);
+                IsBusy = false;
+                return null;
+            }
         }
     }
 }

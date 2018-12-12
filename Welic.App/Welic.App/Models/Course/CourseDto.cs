@@ -19,7 +19,7 @@ namespace Welic.App.Models.Course
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Themes { get; set; }
-        public byte[] Print { get; set; }
+        public string Print { get; set; }
         public string AuthorId { get; set; }
         public UserDto Author { get; set; }
 

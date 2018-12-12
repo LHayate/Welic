@@ -1,10 +1,12 @@
 ﻿using System;
 using Welic.App.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Menu;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.ViewModels;
@@ -21,6 +23,8 @@ namespace Welic.App.Views
         MainPage RootPage => Application.Current.MainPage as MainPage;
         List<HomeMenuItem> menuItems;
 
+        //public ObservableCollection<Grouping<SelectedHeaderViewModel, LocalChart>> MyCharts { get; }
+        
         //private readonly ObservableCollection<GroupHomeMenuItem> GroupMenu;
 
         private UserDto _userdto;

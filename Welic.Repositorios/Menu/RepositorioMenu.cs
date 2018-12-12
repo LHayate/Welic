@@ -49,24 +49,24 @@ namespace Welic.Repositorios.Menu
         }
 
         //public List<MenuMap> GetbyIdUser(int idUser)
-        //{ 
-        //    string query = Query.Q001;
-                                    
-        //    var result =  _context.Database.SqlQuery<MenuMap>(query, new SqlParameter("IdUser", idUser)).ToList();
-
-        //    return result;                                       
-        //}
-
-        //public List<MenuMap> GetbyIdUser(string nameUser)
         //{
         //    string query = Query.Q001;
-        //    return _context.Database.SqlQuery<MenuMap>(query, new SqlParameter("IdUser", nameUser)).ToList();
+
+        //    var result = _context.Database.SqlQuery<MenuMap>(query, new SqlParameter("IdUser", idUser)).ToList();
+
+        //    return result;
         //}
 
-        //public List<MenuMap> GetListbyIdByList(List<int> listaDeIds)
-        //{
-        //    return _context.Menus.Where(m => listaDeIds.Contains(m.Id)).ToList();
-        //}
+        public List<MenuMap> GetbyIdUser(string nameUser)
+        {
+            string query = Query.Q001;
+            return _context.Database.SqlQuery<MenuMap>(query, new SqlParameter("IdUser", nameUser)).ToList();
+        }
+
+        public List<MenuMap> GetListbyIdByList(List<int> listaDeIds)
+        {
+            return _context.Menus.Where(m => listaDeIds.Contains(m.Id)).ToList();
+        }
 
         //public void Save(MenuMap menuMap)
         //{

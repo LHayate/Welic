@@ -67,47 +67,23 @@ namespace Servicos.Menu
         //    return menuCompleto;
         //}
 
-        //public List<MenuDto> GetMenuByUser(string email)
-        //{
-        //    var usuario = _repositorioUser.GetByEmail(email);
+        public List<MenuDto> GetMenuByUser(string email)
+        {
+            var usuario = _serviceUser.Query().Select().FirstOrDefault(x=> x.Email == email);
 
-        //    if (usuario == null)
-        //    {
-        //        Rollback("Usuário não identificado.");
-        //        return null;
-        //    }
+            List<MenuMap> listaMenu = _repositorioMenu.GetbyIdUser(usuario.Id);
+           
+            return AdapterMenu.ConverterMapParaDto(listaMenu);
+        }
 
-        //    List<MenuMap> listaMenu = _repositorioMenu.GetbyIdUser(usuario.Id);
+        public List<MenuDto> GetMenuByUserId(string id)
+        {
+            var usuario = _serviceUser.Find(id);          
 
-        //    if (listaMenu.Count == 0)
-        //    {
-        //        Rollback("Menu de acesso não encontrado.");
-        //        return null;
-        //    }
+            List<MenuMap> listaMenu = _repositorioMenu.GetbyIdUser(usuario.Id);            
 
-        //    return AdapterMenu.ConverterMapParaDto(listaMenu);
-        //}
-
-        //public List<MenuDto> GetMenuByUserId(string id)
-        //{
-        //    var usuario = _repositorioUser.GetById(id);
-
-        //    if (usuario == null)
-        //    {
-        //        Rollback("Usuário não identificado.");
-        //        return null;
-        //    }
-
-        //    List<MenuMap> listaMenu = _repositorioMenu.GetbyIdUser(usuario.Id);
-
-        //    if (listaMenu.Count == 0)
-        //    {
-        //        Rollback("Menu de acesso não encontrado.");
-        //        return null;
-        //    }
-
-        //    return AdapterMenu.ConverterMapParaDto(listaMenu);
-        //}
+            return AdapterMenu.ConverterMapParaDto(listaMenu);
+        }
 
 
 

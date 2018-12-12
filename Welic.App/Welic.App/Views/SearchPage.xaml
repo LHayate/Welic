@@ -19,8 +19,22 @@
                     <Label Text="No data found" 
                            IsVisible="{Binding IsBusy}" 
                            HorizontalOptions="CenterAndExpand"/>
-                    
 
+                    <Label Text="Cursos" FontSize="16" TextColor="#DBF6FF"/>
+                    <StackLayout HeightRequest="150" >
+                        <Grid RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ScrollView Grid.Row="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                                <StackLayout x:Name="StackGallery" Padding="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                </StackLayout>
+                            </ScrollView>
+                        </Grid>
+                    </StackLayout>
+
+                    <Label Text="Videos e e-Books" FontSize="16" TextColor="#DBF6FF"/>
                     <ListView ItemsSource="{Binding SearchFind}" 
                               HasUnevenRows="true" 
                               ItemTapped="OnListViewItemTapped" 
