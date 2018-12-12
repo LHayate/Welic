@@ -27,6 +27,8 @@ namespace Welic.App.ViewModels.Base
             set { SetProperty(ref isBusy, value); }
         }
 
+        public bool IsBusyStatus() => !IsBusy;
+
         string title = string.Empty;
         public string Title
         {

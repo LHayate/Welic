@@ -13,5 +13,10 @@ namespace Welic.App.Models.Menu
             foreach (var item in items)
                 Add(item);
         }
+        public Grouping(TK key, T item)
+        {
+            Key = key;            
+                Add(item);
+        }
     }
 }

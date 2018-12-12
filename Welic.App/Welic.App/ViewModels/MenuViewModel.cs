@@ -1,17 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Models;
+using Welic.App.Models.Menu;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.ServicesViewModels;
 using Welic.App.ViewModels.Base;
+using Welic.App.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Welic.App.ViewModels
 {
+    public class SelectedHeaderViewModel
+    {
+        public bool IsSelected { get; set; }
+
+        public Category Category { get; set; }
+
+        public HomeMenuItem Menu { get; set; }
+    }
     public class MenuViewModel : BaseViewModel
     {
         //public Command EditProfileCommand { get; set; }
@@ -74,12 +89,103 @@ namespace Welic.App.ViewModels
             //_cpf = _userDto.Id;
             _email = _userDto.Email ?? _userDto.NickName;
             _lastAcess = _userDto.LastAccessDate.ToString(CultureInfo.InvariantCulture);
+
+
+           // MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>();
+           // menuItems = new ObservableCollection<HomeMenuItem>
+           // {
+           //     //new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome"), Category = new Category { CategoryId = 1, Title = "Home" }},
+           //     new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+           //     new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+           //     new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+           //     new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+           //     new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery"), Category = new Category { CategoryId = 3, Title = "Galeria" } },                                
+           //     //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+           //     //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
+           //     //new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings"), Category = new Category { CategoryId = 4, Title = "Settings" } },
+           //     //new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout"), Category = new Category { CategoryId = 4, Title = "About" } }
+           // };
+
+           // var menuSimples = new ObservableCollection<HomeMenuItem>
+           // {
+           //     new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
+           //     new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings"), Category = new Category { CategoryId = 4, Title = "Settings" } },
+           //     new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout"), Category = new Category { CategoryId = 4, Title = "About" } }
+           // };
+
+           //MyCharts.Add(
+           //    new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+           //        new SelectedHeaderViewModel()
+           //        {
+           //            IsSelected = true,
+           //            Menu = new HomeMenuItem { Id = MenuItemType.Browse, Title = "Home", IconMenu = Util.ImagePorSistema("iHome") },
+           //        },
+           //        new HomeMenuItem { Id = MenuItemType.Browse, Title = "Home", IconMenu = Util.ImagePorSistema("iHome") }
+           //            )
+                               
+           //    );
+
+           
+
+            //var group = menuItems.OrderBy(x => x.Category.CategoryId)
+            //    .GroupBy(x => x.Category)
+            //    .Select(x => new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+            //        new SelectedHeaderViewModel { IsSelected = false, Category = x.Key }, x));
+            
+
+            //group.ForEach(x => MyCharts.Add(x));
+
+
+            //ChartSelectedCommand = new AsyncCommand<HomeMenuItem>(ExecuteSelectedChartCommand, IsBusyStatus);
+            ShowCommand = new Command<Grouping<SelectedHeaderViewModel, HomeMenuItem>>(ExecuteShowCommand);
         }
         private async Task SendToEditProfile()
         {
             if (_userDto.Email != null)
                 await NavigationService.NavigateModalToAsync<EditProfileViewModel>();
         }
+
+        public ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>> MyCharts { get; }
+        ObservableCollection<HomeMenuItem> menuItems;
+
+        public Command<Grouping<SelectedHeaderViewModel, HomeMenuItem>> ShowCommand { get; }
+
+        public Command ChartSelectedCommand { get; }
+       
+
+        void ExecuteShowCommand(Grouping<SelectedHeaderViewModel, HomeMenuItem> obj)
+        {
+            if (obj is null) return;
+
+            obj.Key.IsSelected = !obj.Key.IsSelected;
+
+            if (obj.Count == 0)
+                menuItems.Where(x => (x.Category.CategoryId.Equals(obj.Key.Category.CategoryId))).ForEach(obj.Add);
+            else
+                obj.Clear();
+        }
+        //async Task ExecuteSelectedChartCommand(HomeMenuItem url)
+        //{
+        //    if (!IsBusy)
+        //    {
+        //        try
+        //        {
+                    
+        //            var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+        //            await RootPage.NavigateFromMenu(id);
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            await DisplayAlert("Erro", $"Erro:{ex.Message}", "Ok");
+        //        }
+        //        finally
+        //        {
+        //            IsBusy = false;
+        //        }
+        //    }
+        //    return;
+        //}
 
         public async Task<bool> Deslogar()
         {
@@ -100,107 +206,6 @@ namespace Welic.App.ViewModels
         {
             _userDto = (new UserDto()).LoadAsync();
             Image = _userDto.ImagePerfil;
-        }
-        //public Command TakeFotoCommand =>
-
-        //public async  Task TakeFoto()
-        //{
-        //    try
-        //    {
-        //        var select = await App.Current.MainPage.DisplayActionSheet("Foto", "Cancel", "OK", new string[] { "Usar Camera", " Selecionar Imagem" });
-
-        //        if (select.Contains("Cancel"))
-        //            return;
-
-        //        MediaFile file;
-
-        //        if (select.Contains("Camera"))
-        //        {
-        //            await CrossMedia.Current.Initialize();
-
-        //            if (!CrossMedia.Current.IsTakePhotoSupported || !CrossMedia.Current.IsCameraAvailable)
-        //            {
-        //                await MessageService.ShowOkAsync("Ops", "Nenhuma câmera detectada.", "OK");
-
-        //                return;
-        //            }
-
-        //            file = await CrossMedia.Current.TakePhotoAsync(
-        //                new StoreCameraMediaOptions
-        //                {
-        //                    Directory = "Resources",
-        //                    Name = "Perfil.png",
-        //                    PhotoSize = PhotoSize.Small,
-        //                    CompressionQuality = 50,
-        //                    DefaultCamera = CameraDevice.Front,
-        //                    AllowCropping = true,
-        //                });
-        //            if (file == null)
-        //                return;
-
-        //            await(new UserDto()).RegisterPhoto(file);
-
-        //            _userDto = (new UserDto()).LoadAsync();
-
-        //            Image = _userDto.ImagePerfil;
-        //            //circleImage.Source = ImageSource.FromStream(() =>
-        //            //{
-        //            //    var stream = file.GetStream();
-        //            //    file.Dispose();
-        //            //    return stream;
-        //            //});
-
-        //        }
-        //        else if (select.Contains("Selecionar"))
-        //        {
-        //            if (!CrossMedia.Current.IsPickPhotoSupported)
-        //            {
-        //                await MessageService.ShowOkAsync("Photos Not Supported", ":( Permission not granted to photos.", "OK");
-        //                return;
-        //            }
-
-        //            file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
-        //            {
-        //                PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
-
-        //            });
-        //            if (file == null)
-        //                return;
-
-        //            await(new UserDto()).RegisterPhoto(file);
-        //            _userDto = (new UserDto()).LoadAsync();
-
-        //            Image = _userDto.ImagePerfil;
-
-        //            //circleImage.Source = ImageSource.FromStream(() =>
-        //            //{
-        //            //    var stream = file.GetStream();
-        //            //    file.Dispose();
-        //            //    return stream;
-        //            //});
-        //        }
-
-
-
-
-        //        //CircleImage.Source = ImageSource.FromStream(() =>
-        //        //{
-        //        //    var stream = file.GetStream();
-        //        //    file.Dispose();
-        //        //    return stream;
-        //        //});
-
-
-        //        //var memoryStream = new MemoryStream();
-
-        //        //file.GetStream().CopyTo(memoryStream);
-        //        //file.Dispose();
-        //        //CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
-        //    }
-        //    catch (AppCenterException ex)
-        //    {
-        //        await App.Current.MainPage.DisplayAlert("Ops", "Erro ao tirar fotos." + ex.Message, "OK");
-        //    }
-        //}
+        }        
     }
 }

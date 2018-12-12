@@ -4,7 +4,8 @@
              x:Class="Welic.App.Views.MenuPage"             
              xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              Title="Menu"
-             BackgroundColor="#EBEBEB">
+             BackgroundColor="#EBEBEB"
+             x:Name="Page">
     <StackLayout >
         <Grid Margin="0,0,0,0" >
             <Grid.ColumnDefinitions>
@@ -80,8 +81,36 @@
         
         <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"
-                
+                  ItemsSource       ="{Binding MyCharts}"
+                  CachingStrategy   ="RecycleElement"
+                  IsGroupingEnabled ="True"                               
                   HeightRequest="50">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="32" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                                <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                                <Label Text            ="{Binding Key.Category.Title}"
+                                       FontAttributes  ="Bold"
+                                       FontSize        ="Medium"
+                                       VerticalOptions ="Center"/>
+                            </Grid>
+                           
+
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ShowCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </ContentView.GestureRecognizers>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -98,36 +127,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!--<ListView ItemsSource       ="{Binding MyCharts}"
-                  CachingStrategy   ="RecycleElement"
-                  IsGroupingEnabled ="True"                  
-                  x:Name            ="Charts">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ContentView>
-                            <Label Text            ="{Binding Key.Category.Title}"
-                                   FontAttributes  ="Bold"
-                                   FontSize        ="Medium"
-                                   VerticalOptions ="Center"/>
-                            <ContentView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ShowCommand}"
-                                                      CommandParameter="{Binding .}"/>
-                            </ContentView.GestureRecognizers>
-                        </ContentView>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ContentView>
-                            <Label Text="{Binding ChartName}"/>
-                        </ContentView>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
+       
 
         <!--<ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"

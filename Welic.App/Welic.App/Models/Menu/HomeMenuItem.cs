@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Java.Util;
 
 namespace Welic.App.Models
 {
@@ -28,5 +29,13 @@ namespace Welic.App.Models
 
         public string Title { get; set; }
         public string IconMenu { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public class Category
+    {
+        public int CategoryId { get; set; }
+
+        public string Title { get; set; }
     }
 }
