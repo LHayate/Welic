@@ -112,7 +112,7 @@
                 </ImageButton>
 
 
-                <ImageButton Grid.Row="0" 
+                <!--<ImageButton Grid.Row="0" 
                             BackgroundColor="Transparent"
                             HorizontalOptions="End"  
                             VerticalOptions="Start"
@@ -121,7 +121,7 @@
                             WidthRequest="25"
                              Clicked="ButtonFill_OnClicked"
                             Source="iFill.png"                        
-                >
+                >-->
 
                 </ImageButton>
             </Grid>

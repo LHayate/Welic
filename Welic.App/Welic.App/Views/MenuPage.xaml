@@ -113,12 +113,12 @@
                                     <ColumnDefinition Width="32" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
-                                <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
-                                <Label Text            ="{Binding Key.Category.Title}"
+                                <Image Source="{Binding Key.Menu.IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                                <Label Text="{Binding Key.Menu.Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                                --><!--<Label Text            ="{Binding Key.Category.Title}"
                                        FontAttributes  ="Bold"
                                        FontSize        ="Medium"
-                                       VerticalOptions ="Center"/>
+                                       VerticalOptions ="Center"/>--><!--
                             </Grid>
                            
 

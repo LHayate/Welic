@@ -15,8 +15,8 @@ namespace Welic.App.Models.Menu
         }
         public Grouping(TK key, T item)
         {
-            Key = key;            
-                Add(item);
+            Key = key;           
+            Add(item);
         }
     }
 }
