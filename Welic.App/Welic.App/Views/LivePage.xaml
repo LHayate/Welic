@@ -121,9 +121,9 @@
                             WidthRequest="25"
                              Clicked="ButtonFill_OnClicked"
                             Source="iFill.png"                        
-                >-->
+                >
 
-                </ImageButton>
+                </ImageButton>-->
             </Grid>
             <StackLayout >
                 <Label Text="{Binding Title}" HorizontalTextAlignment="Center"/>
