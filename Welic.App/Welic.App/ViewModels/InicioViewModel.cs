@@ -67,7 +67,7 @@ namespace Welic.App.ViewModels
            
         }
 
-        public bool LoadAsync()
+        public async Task<bool> LoadAsync()
         {            
             _dbManager = new DatabaseManager();
             var usu = _dbManager.database.Table<UserDto>()
@@ -76,7 +76,7 @@ namespace Welic.App.ViewModels
 
             if (usu.Count > 0)
             {
-                (new UserDto()).SyncedUser();
+                await (new UserDto()).SyncedUser();
                 return true;
             }
                 

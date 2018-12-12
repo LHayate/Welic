@@ -49,7 +49,7 @@ namespace Welic.App.Views
              //   else
              //   {
                     var usuario = ViewModel.LoadAsync();
-                    if (usuario)
+                    if (usuario.Result)
                         App.Current.MainPage = new MainPage();
                 //}
 
