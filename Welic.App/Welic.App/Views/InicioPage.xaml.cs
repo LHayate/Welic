@@ -20,7 +20,7 @@ namespace Welic.App.Views
 		    BindingContext = new InicioViewModel();
 		}
 
-	    protected override void OnAppearing()
+	    protected async override void OnAppearing()
 	    {
 	        base.OnAppearing();
 	        if (ViewModel != null)
@@ -48,8 +48,8 @@ namespace Welic.App.Views
              //   }
              //   else
              //   {
-                    var usuario = ViewModel.LoadAsync();
-                    if (usuario.Result)
+                    var usuario = await ViewModel.LoadAsync();
+                    if (usuario)
                         App.Current.MainPage = new MainPage();
                 //}
 
