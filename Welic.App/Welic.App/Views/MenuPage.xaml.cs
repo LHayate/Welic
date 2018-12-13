@@ -3,7 +3,6 @@ using Welic.App.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using Android;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
