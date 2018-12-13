@@ -39,7 +39,7 @@ namespace Welic.App.Views
                 //GetFavoritos();
                 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 DisplayAlert("Erro", e.Message, "OK");                
             }

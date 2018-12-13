@@ -19,7 +19,7 @@ namespace Welic.App.Models.Course
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string Themes { get; set; }
-        public string Print { get; set; }
+        public string UrlPrint { get; set; }
         public string AuthorId { get; set; }
         public UserDto Author { get; set; }
 
@@ -44,9 +44,9 @@ namespace Welic.App.Models.Course
                 return ListItem;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("CourseGetList", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -59,9 +59,9 @@ namespace Welic.App.Models.Course
                 return ListItem;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("CourseGetListByUser", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -71,9 +71,9 @@ namespace Welic.App.Models.Course
             {                
                 return await Current?.GetAsync<CourseDto>($"curso/GetById/{id}");                
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("CourseGetById", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -86,7 +86,7 @@ namespace Welic.App.Models.Course
         //        return ListItem.ToList();
 
         //    }
-        //    catch (AppCenterException e)
+        //    catch (System.Exception e)
         //    {
         //        Console.WriteLine(e);
         //        return null;
@@ -103,10 +103,10 @@ namespace Welic.App.Models.Course
       
                 return course;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
-                throw new AppCenterException("Error: In Synced this User");
+                AppCenterLog.Error("CourseCreateCourses", $"{ex.Message}-{ex.InnerException.Message}");
+                throw new System.Exception("Error: In Synced this User");
             }
         }
 
@@ -116,9 +116,9 @@ namespace Welic.App.Models.Course
             {
                 return await Current?.PostAsync<CourseDto>("curso/update", courseDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("CourseEdit", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -129,9 +129,9 @@ namespace Welic.App.Models.Course
             {
                 return await Current?.DeleteAsync($"curso/delete/{courseDto.IdCurso}");
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("CourseDelete", $"{ex.Message}-{ex.InnerException.Message}");
                 return false;
             }
         }

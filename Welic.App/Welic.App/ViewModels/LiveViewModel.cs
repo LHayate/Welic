@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Live;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.VideoPlayer;
@@ -106,7 +107,7 @@ namespace Welic.App.ViewModels
 
                 await NavigationService.NavigateModalToAsync<CreateLiveViewModel>(obj);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 var msgerro = "Erro ao abrir para edição";
                 AppCenterLog.Error("edit", msgerro);
@@ -122,17 +123,17 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir este video?",
-                    "Sim", "Cancel");                
+                var result = await MessageService.ShowOkAsync(AppResources.Confirm, $"{AppResources.Confirm_Delete} {AppResources.Video}",
+                    AppResources.Yes, AppResources.No);                
 
                 if (result)
                     if (await new LiveDto().DeleteAsync(LiveDto))
                         await NavigationService.ReturnModalToAsync(true);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+                await MessageService.ShowOkAsync(AppResources.Error_Deleting);
             }
         }
     }

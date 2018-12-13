@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Welic.App.Views.MenuPage"             
              xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             
              Title="Menu"
              BackgroundColor="#EBEBEB"
              x:Name="Page">
@@ -78,7 +79,7 @@
             <Image Source=""/>
         </Grid>
 
-        <ListView x:Name="ListViewMenu"
+        <!--<ListView x:Name="ListViewMenu"
                   HasUnevenRows="True"
                 
                   HeightRequest="50">
@@ -96,13 +97,14 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
-        <!--<ListView x:Name="ListViewMenu"
+        <ListView x:Name="ListViewMenu"
                     HasUnevenRows="True"
                   ItemsSource       ="{Binding MyCharts}"
                   CachingStrategy   ="RecycleElement"
-                  IsGroupingEnabled ="True"                               
+                  IsGroupingEnabled ="True"      
+                  ItemTapped="Menu_ItemTapped"
                   HeightRequest="50">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
@@ -115,10 +117,9 @@
                                 </Grid.ColumnDefinitions>
                                 <Image Source="{Binding Key.Menu.IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
                                 <Label Text="{Binding Key.Menu.Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
-                                --><!--<Label Text            ="{Binding Key.Category.Title}"
-                                       FontAttributes  ="Bold"
-                                       FontSize        ="Medium"
-                                       VerticalOptions ="Center"/>--><!--
+                                <Image Source="{Binding Key.Category.IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
+                                <Label Text="{Binding Key.Category.Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                                
                             </Grid>
                            
 
@@ -136,15 +137,16 @@
                         <Grid Padding="10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="32" />
+                                <ColumnDefinition Width="32" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="{Binding IconMenu}" Grid.Column="0" HeightRequest="32" WidthRequest="32"/>
-                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="1" BackgroundColor="Transparent"/>
+                            <Image Source="{Binding IconMenu}" Grid.Column="1" HeightRequest="32" WidthRequest="32"/>
+                            <Label Text="{Binding Title}" FontSize="20" Opacity="20" TextColor="Black" Grid.Column="2" BackgroundColor="Transparent"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>-->
+        </ListView>
        
     </StackLayout>
 

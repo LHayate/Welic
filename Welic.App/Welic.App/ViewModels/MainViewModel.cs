@@ -31,7 +31,7 @@ namespace Welic.App.ViewModels
                     _timing.SincDatas();
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 MessageService.ShowOkAsync("Dados Não Sincronizados!");

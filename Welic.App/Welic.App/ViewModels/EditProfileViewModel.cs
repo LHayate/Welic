@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Connectivity;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
 using Welic.App.Services.Criptografia;
@@ -222,15 +223,15 @@ namespace Welic.App.ViewModels
         {
             //add itens roles 
             ItemsRoles = new List<string>();
-            ItemsRoles.Add("Professor");
-            ItemsRoles.Add("Aluno");
-            ItemsRoles.Add("Aluno e Professor");
+            ItemsRoles.Add(AppResources.Teacher);
+            ItemsRoles.Add(AppResources.Student);
+            ItemsRoles.Add($"{AppResources.Student} {AppResources.And} {AppResources.Teacher}");
 
             //Add Itens Gender
             _ItemsGender = new List<string>();
-            _ItemsGender.Add("Masculino");
-            _ItemsGender.Add("Feminino");
-            _ItemsGender.Add("Não quero informar");
+            _ItemsGender.Add(AppResources.Male);
+            _ItemsGender.Add(AppResources.Female);
+            _ItemsGender.Add(AppResources.Undefined);
 
             Image = null;
             if (LoadingUser())
@@ -251,10 +252,10 @@ namespace Welic.App.ViewModels
                     SelectedGender = UserDto.Gender ;
                     SelectedRole = UserDto.Profession;
                 }
-                catch (AppCenterException e)
+                catch (System.Exception e)
                 {
                     Console.WriteLine(e);
-                    throw;
+                    return;
                 }
             }
         }        
@@ -282,38 +283,38 @@ namespace Welic.App.ViewModels
             {
                 if (string.IsNullOrEmpty(Password))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Password", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Password, "OK");
                     return;
                 }
                 if (!Password.Equals(ConfirmPassword))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Senhas não Coincidem", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Password_not_Match, "OK");
                     return;
                 }
 
                 if (!Util.IsPasswordStrong(Password))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Senha complexa", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Password_Weak, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(FirstName))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the First Name", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_FirstName, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(LastName))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Last Name", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_LastName, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(Email))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary inform the E-mail Adress", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Email, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(PhoneNumber))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Phone Number", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Requite_phone, "OK");
                     return;
                 }
 
@@ -333,7 +334,7 @@ namespace Welic.App.ViewModels
                 
                 await UserDto.RegisterUserManager(UserDto);
 
-                await MessageService.ShowOkAsync("Dados salvo com Sucesso");
+                await MessageService.ShowOkAsync(AppResources.Success_Change);
 
                 await NavigationService.ReturnModalToAsync(true);
             }

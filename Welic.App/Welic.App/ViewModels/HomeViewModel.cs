@@ -39,10 +39,10 @@ namespace Welic.App.ViewModels
                 _star = Util.ImagePorSistema("iStar");               
                 _news = Util.ImagePorSistema("iNew");              
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return;
             }
             
         }        

@@ -47,9 +47,9 @@ namespace Welic.App.Models.Live
                 _listItem = await Current?.GetAsync<List<LiveDto>>("live/GetListLive");
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetList", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -61,9 +61,9 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetList", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -75,9 +75,9 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetListRecente", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -89,9 +89,9 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetListFavorite", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -104,9 +104,9 @@ namespace Welic.App.Models.Live
                 return list;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetListByUser", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -119,9 +119,9 @@ namespace Welic.App.Models.Live
                                 
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetListByCoursea", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -134,9 +134,9 @@ namespace Welic.App.Models.Live
 
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveGetListByCourseb", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -149,9 +149,9 @@ namespace Welic.App.Models.Live
                 liveDto.DateRegister = DateTime.Now;
                 return await Current?.PostAsync<LiveDto>("live/Save", liveDto) ;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveSave", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -163,9 +163,9 @@ namespace Welic.App.Models.Live
                 liveDto.DateRegister = DateTime.Now;
                 return await Current?.PostAsync<LiveDto>("live/Update", liveDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("LiveUpdate", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }

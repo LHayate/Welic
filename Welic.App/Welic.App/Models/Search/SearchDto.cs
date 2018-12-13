@@ -43,7 +43,7 @@ namespace Welic.App.Models.Search
 
                 return search;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -59,12 +59,12 @@ namespace Welic.App.Models.Search
                 ObservableCollection<SearchDto> search = new ObservableCollection<SearchDto>();
                 foreach (CourseDto item in resultLive)
                 {
-                    search.Add(new SearchDto { Image = item.Print, Name = item.Title, Description = item.Description, Location = item.Themes });
+                    search.Add(new SearchDto { Image = item.UrlPrint, Name = item.Title, Description = item.Description, Location = item.Themes });
                 }
 
                 return search;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return null;

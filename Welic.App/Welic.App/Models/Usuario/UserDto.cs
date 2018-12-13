@@ -113,13 +113,13 @@ namespace Welic.App.Models.Usuario
                     
                     return true;
                 }
-                catch (AppCenterException e)
+                catch (System.Exception e)
                 {
                     Console.WriteLine(e);
-                    throw new AppCenterException("Erro ao Gravar o Usuario no SQLite");
+                    throw new System.Exception("Erro ao Gravar o Usuario no SQLite");
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return false;
@@ -158,10 +158,10 @@ namespace Welic.App.Models.Usuario
                
                 return true;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-               throw new AppCenterException("Error: In Synced this User");
+               throw new System.Exception("Error: In Synced this User");
             }           
         }
 
@@ -184,7 +184,7 @@ namespace Welic.App.Models.Usuario
                 _dbManager.database.DeleteAll<UserToken>();                
                 return true;
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 return false;
             }
@@ -240,7 +240,7 @@ namespace Welic.App.Models.Usuario
                 user.Synced = false;                
                 return user;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return null;
@@ -300,10 +300,10 @@ namespace Welic.App.Models.Usuario
 
                 return true;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw new AppCenterException("Error: In Register this User");
+                throw new System.Exception("Error: In Register this User");
             }
         }
 

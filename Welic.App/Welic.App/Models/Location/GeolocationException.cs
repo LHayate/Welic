@@ -5,7 +5,7 @@ using Microsoft.AppCenter;
 
 namespace Welic.App.Models.Location
 {
-    public class GeolocationException : AppCenterException 
+    public class GeolocationException : System.Exception 
     {
         public GeolocationError Error { get; private set; }
 

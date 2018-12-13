@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.API;
@@ -60,13 +61,13 @@ namespace Welic.App.ViewModels
             {
                 if (string.IsNullOrEmpty(userLogin))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar o E-mail", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Email, "OK");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(Senha))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessário Informar a Senha", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Password, "OK");
                     return;
                 }
 
@@ -114,7 +115,7 @@ namespace Welic.App.ViewModels
                     }
                     else
                     {
-                        throw new AppCenterException("Erro ao Tentar Autenticar o Usuario");
+                        throw new System.Exception(AppResources.Error_Authenticate_user);
                     }
                 }
 

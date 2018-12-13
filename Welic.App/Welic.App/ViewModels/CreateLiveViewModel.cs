@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.Models.Usuario;
@@ -105,7 +106,7 @@ namespace Welic.App.ViewModels
             
             if (obj.Length <= 0)
             {
-                _AppTitle = "Criar Lives";                
+                _AppTitle = $"{AppResources.Create} {AppResources.Video}";                
                 CreatCommand = new Command(CreateNew);
             }
             else
@@ -115,11 +116,11 @@ namespace Welic.App.ViewModels
                 MenuVisivel = true;
                 if (liveDto == null && courseDto != null)
                 {
-                    _AppTitle = "Criar Lives";
+                    _AppTitle = $"{AppResources.Create} {AppResources.Video}";
                     CreatCommand = new Command(CreateNew);
                     return;
                 }
-
+                _AppTitle = $"{AppResources.Change} {AppResources.Video}";
                 CreatCommand = new Command(Edit);
                 _themes = liveDto.Themes;
                 _title = liveDto.Title;
@@ -139,6 +140,24 @@ namespace Welic.App.ViewModels
             {
                 if (IsBusy)
                     return;
+                if (Title == null)
+                {
+                    await MessageService.ShowOkAsync(AppResources.Require_Title);
+                    return;
+                }
+
+                if (Description == null)
+                {
+                    await MessageService.ShowOkAsync(AppResources.Require_Description);
+                    return;
+                }
+                
+                if (_mediaFile == null)
+                {
+                    await MessageService.ShowOkAsync($"{AppResources.Require_Add} {AppResources.Video}!");
+                    return;
+                }
+
 
                 var user = new UserDto().LoadAsync();
                 IsBusy = true;
@@ -174,7 +193,7 @@ namespace Welic.App.ViewModels
                         var ret = await (new LiveDto()).Save(live);
                         if (courseDto != null)
                         {
-                            await MessageService.ShowOkAsync("Sucesso", "Live Criado com Sucesso ", "OK");
+                            await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Video} {AppResources.Success_Create}", "OK");
                             if (ret != null)                                
                                 await NavigationService.ReturnModalToAsync(true);
                         }
@@ -182,7 +201,7 @@ namespace Welic.App.ViewModels
                         {
                             //object[] obj = new[] { ret };
                             //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
-                            await MessageService.ShowOkAsync("Sucesso", "Live Criado com Sucesso ", "OK");
+                            await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Video} {AppResources.Success_Create}", "OK");
                             App.Current.MainPage = new MainPage();
                         }
 
@@ -190,11 +209,11 @@ namespace Welic.App.ViewModels
                     }
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 IsBusy = false;
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro", "Erro ao Criar", "OK");
+                await MessageService.ShowOkAsync(AppResources.Error, $"{AppResources.Error_Create} {AppResources.Video}", "OK");
             }
             finally
             {
@@ -246,7 +265,7 @@ namespace Welic.App.ViewModels
                 var ret = await (new LiveDto()).Update(liveDto);
                 if (courseDto != null || liveDto != null)
                 {
-                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso ", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Video} {AppResources.Success_Change}", "OK");
                     if (ret != null)
                         await NavigationService.ReturnModalToAsync(true);
                 }
@@ -254,15 +273,15 @@ namespace Welic.App.ViewModels
                 {
                     //object[] obj = new[] { ret };
                     //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
-                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Video} {AppResources.Success_Change}", "OK");
                 }
 
                         //content.Dispose();                                                                          
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Editar Video");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Change} {AppResources.Video}");
             }
             finally
             {               

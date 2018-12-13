@@ -3,6 +3,7 @@ using Welic.App.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using Android;
 using Microsoft.AppCenter;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
@@ -43,41 +44,41 @@ namespace Welic.App.Views
             //    },
             //};
             //TODO: Quando for implementado algo modificar menu para apresentar o menu
-            menuItems = new List<HomeMenuItem>
-            {
-                new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
-                new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse") },
-                new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
-                new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf") },
-                new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu") },
-                new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },                                
-                //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
-                //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
-                new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout") }
-            };
+            //menuItems = new List<HomeMenuItem>
+            //{
+            //    new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
+            //    new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse") },
+            //    new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
+            //    new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf") },
+            //    new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu") },
+            //    new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },                                
+            //    //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+            //    //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
+            //    new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },
+            //    new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout") }
+            //};
 
-            ListViewMenu.ItemsSource = menuItems;
+            //ListViewMenu.ItemsSource = menuItems;
             //ListViewMenu.ItemsSource = menuItems;
 
-            ListViewMenu.ItemSelected += async (sender, e) =>
-            {
-                try
-                {
-                    if (e.SelectedItem == null)
-                        return;
+            //ListViewMenu.ItemSelected += async (sender, e) =>
+            //{
+            //    try
+            //    {
+            //        if (e.SelectedItem == null)
+            //            return;
 
-                    var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-                    await RootPage.NavigateFromMenu(id);
-                    ListViewMenu.SelectedItem = null;
-                }
-                catch (AppCenterException exception)
-                {
-                    Console.WriteLine(exception);
+            //        var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+            //        await RootPage.NavigateFromMenu(id);
+            //        ListViewMenu.SelectedItem = null;
+            //    }
+            //    catch (System.Exception exception)
+            //    {
+            //        Console.WriteLine(exception);
 
-                }
+            //    }
 
-            };
+            //};
 
             //ListViewMenuGroup.ItemsSource = GroupMenu;
             ////ListViewMenu.ItemsSource = menuItems;
@@ -94,12 +95,22 @@ namespace Welic.App.Views
 
         }
 
+        async void  Menu_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item is HomeMenuItem lc)                                      
+                await RootPage.NavigateFromMenu((int)lc.Id);
+
+            ((ListView)sender).SelectedItem = null;
+        }
 
         private async void Button_OnClicked(object sender, EventArgs e)
         {
             try
             {
                 var select = await DisplayActionSheet("Foto", "Cancel", "OK", new string[] { "Usar Camera", " Selecionar Imagem" });
+
+                if (select == null)
+                    return;
 
                 if (select.Contains("Cancel"))
                     return;
@@ -185,8 +196,9 @@ namespace Welic.App.Views
                 //file.Dispose();
                 //CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
+                AppCenterLog.Error("FotoMenu", $"{ex.Message}-{ex.InnerException.Message}");
                 await App.Current.MainPage.DisplayAlert("Ops", "Erro ao tirar fotos." + ex.Message, "OK");
             }
         }
@@ -203,8 +215,9 @@ namespace Welic.App.Views
                     App.Current.MainPage = new NavigationPage(new InicioPage());
                 }
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
+                AppCenterLog.Error("LogOff", $"{ex.Message}-{ex.InnerException.Message}");
                 return;
             }
         }

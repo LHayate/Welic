@@ -592,6 +592,9 @@
     <PackageReference Include="Plugin.Fingerprint">
       <Version>1.4.7</Version>
     </PackageReference>
+    <PackageReference Include="Plugin.Multilingual">
+      <Version>1.0.2</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
     </PackageReference>
@@ -724,6 +727,7 @@
     <Content Include="Content\pdfjs\web\viewer.css" />
     <Content Include="Content\pdfjs\web\viewer.html" />
     <Content Include="Content\pdfjs\web\viewer.js" />
+    <Content Include="Helpers\TranslateExtension.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

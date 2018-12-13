@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Connectivity;
 using Plugin.DeviceInfo;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Dispositivos.Dto;
 using Welic.App.Models.Usuario;
 using Welic.App.Services;
@@ -217,40 +218,40 @@ namespace Welic.App.ViewModels
             {
                 if (string.IsNullOrEmpty(Password))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Password", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Password, "OK");
                     return;
                 }
                 if (!Password.Equals(ConfirmPassword))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Senhas não Coincidem", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Password_not_Match, "OK");
                     return;
-                }                
+                }
 
                 if (!Util.IsPasswordStrong(Password))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Senha complexa", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Password_Weak, "OK");
                     return;
-                }                    
+                }
                 if (string.IsNullOrEmpty(FirstName))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the First Name", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_FirstName, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(LastName))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Last Name", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_LastName, "OK");
                     return;
                 }
                 if (string.IsNullOrEmpty(EmailAdress))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary inform the E-mail Adress", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Require_Email, "OK");
                     return;
-                }                               
+                }
                 if (string.IsNullOrEmpty(PhoneNumber))
                 {
-                    await App.Current.MainPage.DisplayAlert("Welic", "Necessary Inform the Phone Number", "OK");
+                    await App.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.Requite_phone, "OK");
                     return;
-                }               
+                }
 
                 if (IsBusy)
                     return;
@@ -300,7 +301,7 @@ namespace Welic.App.ViewModels
                     }
                     else
                     {
-                        throw new AppCenterException("Erro ao Tentar Autenticar o Usuario");
+                        throw new System.Exception("Erro ao Tentar Autenticar o Usuario");
                     }
                 }
 
@@ -310,7 +311,7 @@ namespace Welic.App.ViewModels
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 await MessageService.ShowOkAsync(ex.Message);
             }
@@ -324,15 +325,15 @@ namespace Welic.App.ViewModels
         {
             //add itens roles 
             ItemsRoles = new List<string>();
-            ItemsRoles.Add("Professor");
-            ItemsRoles.Add("Aluno");
-            ItemsRoles.Add("Aluno e Professor");
+            ItemsRoles.Add(AppResources.Teacher);
+            ItemsRoles.Add(AppResources.Student);
+            ItemsRoles.Add($"{AppResources.Student} {AppResources.And} {AppResources.Teacher}");
 
             //Add Itens Gender
             _ItemsGender = new List<string>();
-            _ItemsGender.Add("Masculino");
-            _ItemsGender.Add("Feminino");
-            _ItemsGender.Add("Não quero informar");
+            _ItemsGender.Add(AppResources.Male);
+            _ItemsGender.Add(AppResources.Female);
+            _ItemsGender.Add(AppResources.Undefined);
         }
     }
 }

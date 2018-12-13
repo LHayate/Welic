@@ -17,7 +17,7 @@ namespace Welic.App.Services.ServiceViews
         {
         }
 
-        public HttpRequestExceptionEx(System.Net.HttpStatusCode code, string message, AppCenterException  inner) 
+        public HttpRequestExceptionEx(System.Net.HttpStatusCode code, string message, System.Exception  inner) 
             : base(message,
             inner)
         {

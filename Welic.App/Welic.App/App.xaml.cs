@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
+using System.Resources;
 using System.Threading.Tasks;
 using Welic.App.Models.Location;
 using Welic.App.Models.Usuario;
@@ -16,7 +18,8 @@ using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.AppCenter.Distribute;
-
+using Plugin.Multilingual;
+using Welic.App.Helpers.Resources;
 using Device = Xamarin.Forms.Device;
 
 using Xamarin.Forms.Xaml;
@@ -27,13 +30,19 @@ namespace Welic.App
 {
     public partial class App : Application
     {
+
+       
+
+
         ISettingsService _settingsService;
+        
+
         public App()
         {
             //LiveReload.Init();
 
             InitializeComponent();
-   
+            AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             RegisterService();
 
@@ -117,7 +126,7 @@ namespace Welic.App
                     _settingsService.Latitude = position.Latitude.ToString();
                     _settingsService.Longitude = position.Longitude.ToString();
                 }
-                catch (AppCenterException ex)
+                catch (System.Exception ex)
                 {
                     Debug.WriteLine(ex);
                 }

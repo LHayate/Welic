@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Implements.PDF;
 using Welic.App.Implements.PDF.Interfaces;
 using Welic.App.Models.Ebook;
@@ -91,7 +92,7 @@ namespace Welic.App.ViewModels
 
                 await NavigationService.NavigateModalToAsync<CreateEbookViewModel>(obj);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 var msgerro = "Erro ao abrir para edição";
                 AppCenterLog.Error("edit", msgerro);
@@ -107,17 +108,17 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir este video?",
-                    "Sim", "Cancel");
+                var result = await MessageService.ShowOkAsync(AppResources.Delete, $"{AppResources.Confirm_Delete} {AppResources.EBook}?",
+                    AppResources.Yes, AppResources.No);
 
                 if (result)
                     if (await new EbookDto().DeleteAsync(EbookDto))
                         await NavigationService.ReturnModalToAsync(true);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+                await MessageService.ShowOkAsync(AppResources.Error_Deleting);
             }
         }
         public Command ReturnCommand => new Command(Return);

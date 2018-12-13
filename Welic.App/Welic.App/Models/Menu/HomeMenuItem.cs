@@ -36,5 +36,6 @@ namespace Welic.App.Models
         public int CategoryId { get; set; }
 
         public string Title { get; set; }
+        public string IconMenu { get; set; }
     }
 }

@@ -8,7 +8,7 @@
             <Label x:Name="lbAutenticado" Text="Usar Biometria" 
                    VerticalOptions="Center" 
                    HorizontalOptions="Center" />
-            <Grid>
+            <!--<Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -16,7 +16,7 @@
                 <Label Text="Native Views Demo" FontAttributes="Bold" HorizontalOptions="Center" Grid.Column="0"/>
                 <Switch IsToggled="{Binding IsOwned, Mode=TwoWay}" Grid.Column="1"
                         Toggled="Handle_Toggled" />
-            </Grid>
+            </Grid>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

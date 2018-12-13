@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Live;
 using Welic.App.Models.Schedule;
 using Welic.App.Models.Usuario;
@@ -127,21 +128,21 @@ namespace Welic.App.ViewModels
 
                 if (ret != null)
                 {
-                    await MessageService.ShowOkAsync("Create", "Schedule Criado com Sucesso", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Schedule} {AppResources.Success_Create}", "OK");
 
                     await NavigationService.ReturnModalToAsync(true);
                 }
                 else
                 {
-                    throw new AppCenterException("Erro ao Criar Schedule");
+                    throw new System.Exception($"{AppResources.Error_Create} {AppResources.Schedule}");
                 }
                                    
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao criar Schedule");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Create} {AppResources.Schedule}");
             }
             finally
             {
@@ -168,20 +169,20 @@ namespace Welic.App.ViewModels
 
                 if (ret != null)
                 {
-                    await MessageService.ShowOkAsync("Edit", "Schedule Alterado com Sucesso", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.Video} {AppResources.Success_Change}", "OK");
                     
                 }
                 else
                 {
-                    throw new AppCenterException("Erro ao editar Schedule");
+                    throw new System.Exception($"{AppResources.Error_Change} {AppResources.Schedule}");
                 }
 
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Editar Schedule");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Change} {AppResources.Schedule}");
             }
             finally
             {

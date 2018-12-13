@@ -41,10 +41,10 @@ namespace Welic.App.Models.Schedule
                 var list = await WebApi.Current.GetListAsync<ScheduleDto>("Schedule/GetList");
                 return list;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("ScheduleGetListLive", $"{ex.Message}-{ex.InnerException.Message}");
+                return null;
             }
         }
 
@@ -57,10 +57,10 @@ namespace Welic.App.Models.Schedule
                 return list.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("ScheduleGetList", $"{e.Message}-{e.InnerException.Message}");
+                return null;
             }
         }
 
@@ -72,10 +72,10 @@ namespace Welic.App.Models.Schedule
                 return ListItem;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("ScheduleGetLista", $"{e.Message}-{e.InnerException.Message}");
+                return null;
             }
         }
         public async Task<ObservableCollection<ScheduleDto>> GetListByUser()
@@ -87,10 +87,10 @@ namespace Welic.App.Models.Schedule
                 return ListItem;
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("ScheduleGetListUser", $"{e.Message}-{e.InnerException.Message}");
+                return null;
             }
         }
         public async Task<ScheduleDto> GetListById(ScheduleDto scheduleDto)
@@ -100,10 +100,10 @@ namespace Welic.App.Models.Schedule
                 return await Current?.GetAsync<ScheduleDto>($"Schedule/GetById/{scheduleDto.ScheduleId}");                
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("ScheduleGetListById", $"{e.Message}-{e.InnerException.Message}");
+                return null;
             }
         }
 
@@ -113,9 +113,9 @@ namespace Welic.App.Models.Schedule
             {                
                 return await Current?.PostAsync<ScheduleDto>("schedule/save", scheduleDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("ScheduleCreate", $"{e.Message}-{e.InnerException.Message}");
                 return null;
             }
         }
@@ -126,9 +126,9 @@ namespace Welic.App.Models.Schedule
             {
                 return await Current?.PostAsync<ScheduleDto>("schedule/update", scheduleDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("ScheduleEdit", $"{e.Message}-{e.InnerException.Message}");
                 return null;
             }
         }
@@ -139,9 +139,10 @@ namespace Welic.App.Models.Schedule
             {
                 return await Current?.DeleteAsync($"schedule/delete/{scheduleDto.ScheduleId}");
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("ScheduleFeleteAsync", $"{e.Message}-{e.InnerException.Message}");
+
                 return false;
             }
         }

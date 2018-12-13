@@ -21,7 +21,7 @@
     </NuGetPackageImportStamp>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64</AndroidSupportedAbis>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Keystores\MeuKeyStore.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>@Welic123</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>WelicAppAlphaAppCenter</AndroidSigningKeyAlias>
@@ -32,8 +32,7 @@
     <DebugType>portable</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidEnableSGenConcurrent>false</AndroidEnableSGenConcurrent>
@@ -75,6 +74,9 @@
     </PackageReference>
     <PackageReference Include="Plugin.Fingerprint">
       <Version>1.4.7</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Multilingual">
+      <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.5.231</Version>
@@ -680,6 +682,7 @@
     <AndroidResource Include="Resources\drawable\iEdit.png" />
     <AndroidResource Include="Resources\drawable\iDelete.png" />
     <AndroidResource Include="Resources\drawable\iAdd.png" />
+    <Content Include="Helpers\TranslateExtension.txt" />
     <Content Include="Resources\drawable\iExpanded.png" />
     <AndroidResource Include="Resources\drawable\iPdf.png" />
   </ItemGroup>

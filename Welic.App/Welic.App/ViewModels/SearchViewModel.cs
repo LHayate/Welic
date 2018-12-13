@@ -54,7 +54,7 @@ namespace Welic.App.ViewModels
                 IsBusy = false;
                 return;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 IsBusy = false;
@@ -93,7 +93,7 @@ namespace Welic.App.ViewModels
                 IsBusy = false;
                 return null;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 IsBusy = false;

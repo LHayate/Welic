@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.Models.Usuario;
@@ -94,15 +95,15 @@ namespace Welic.App.ViewModels
                 };
 
                 await new CourseDto().CreateCourses(course);
-                await MessageService.ShowOkAsync("Create", "Curso Criado com Sucesso", "OK");
+                await MessageService.ShowOkAsync(AppResources.Create, $"{AppResources.Course} {AppResources.Success_Create}", "OK");
 
                 await NavigationService.ReturnModalToAsync(true);
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao criar curso");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Create} {AppResources.Course}");
             }            
         }
 
@@ -125,18 +126,18 @@ namespace Welic.App.ViewModels
 
                 if (ret != null)
                 {
-                    await MessageService.ShowOkAsync("Edit", "Curso Alterado com Sucesso", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Edit, $"{AppResources.Course} {AppResources.Success_Create}", "OK");
                     await NavigationService.ReturnModalToAsync(true);
                 }
                 else
                 {
-                    throw new AppCenterException("Erro ao editar Curso");
+                    throw new System.Exception($"{AppResources.Error_Change} {AppResources.Course}");
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Editar Cursos");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Change} {AppResources.Course}");
             }
             finally
             {

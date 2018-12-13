@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.Services;
@@ -105,7 +106,7 @@ namespace Welic.App.ViewModels
                     BoolModificar = true;
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 AppCenterLog.Error("Erro in Course",$"{e.Message}-{e.InnerException}");
                 Console.WriteLine(e);                
@@ -118,7 +119,7 @@ namespace Welic.App.ViewModels
         {
             Dto = courseDto;
 
-            _AppTitle = "Detalhe Curso";            
+            _AppTitle = AppResources.Detail_course;            
             Title = courseDto.Title;
             Description = courseDto.Description;
             Price = courseDto.Price;
@@ -195,15 +196,15 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir esta Agenda?",
-                    "Sim", "Cancel");
+                var result = await MessageService.ShowOkAsync(AppResources.Delete, AppResources.Confirm_Delete + AppResources.Schedule,
+                    AppResources.Yes, AppResources.No);
 
                 var live =await new LiveDto().GetListByCourse(Dto);
 
                 if (live.Count > 0)
                 {
                     await MessageService.ShowOkAsync(
-                        "Não é possivel excluir este Curso pois existe Videos vinculados a ele ainda");                    
+                        AppResources.Not_Delete_Courses);                    
                     return;
                 }
                           
@@ -211,10 +212,10 @@ namespace Welic.App.ViewModels
                     if (await new CourseDto().DeleteAsync(Dto))
                         await NavigationService.ReturnModalToAsync(true);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+                await MessageService.ShowOkAsync(AppResources.Error_Deleting);
             }
         }
 

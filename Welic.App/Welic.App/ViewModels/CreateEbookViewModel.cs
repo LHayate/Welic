@@ -10,6 +10,7 @@ using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Course;
 using Welic.App.Models.Ebook;
 using Welic.App.Models.Live;
@@ -107,7 +108,7 @@ namespace Welic.App.ViewModels
         {                                    
             if (obj.Length <= 0)
             {
-                _AppTitle = "Criar e-Books";
+                _AppTitle = $"{AppResources.Create} {AppResources.EBook}";
                 CreateCommand = new Command(CreateNew);
             }
             else
@@ -117,11 +118,12 @@ namespace Welic.App.ViewModels
                 MenuVisivel = true;
                 if (EbookDto == null && courseDto != null)
                 {
-                    _AppTitle = "Criar E-Books";
+                    _AppTitle = $"{AppResources.Create} {AppResources.EBook}";
                     CreateCommand = new Command(CreateNew);
                     return;
                 }
 
+                _AppTitle = $"{AppResources.Edit} {AppResources.EBook}";
                 CreateCommand = new Command(Edit);
                 _themes = EbookDto.Themes;
                 _title = EbookDto.Title;
@@ -141,7 +143,7 @@ namespace Welic.App.ViewModels
                 _pathName = fileData.FileName;
                 _mediaFile = fileData.DataArray;                            
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 System.Console.WriteLine("Exception choosing file: " + ex.ToString());
             }
@@ -183,7 +185,7 @@ namespace Welic.App.ViewModels
                     var ret = await (new EbookDto()).Save(book);
                     if (courseDto != null)
                     {
-                        await MessageService.ShowOkAsync("Sucesso", "E-Book Criado com Sucesso ", "OK");
+                        await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.EBook} {AppResources.Success_Create}", "OK");
                         if (ret != null)
                             await NavigationService.ReturnModalToAsync(true);
                     }
@@ -191,17 +193,17 @@ namespace Welic.App.ViewModels
                     {
                         //object[] obj = new[] { ret };
                         //await NavigationService.NavigateModalToAsync<EbookViewModel>(obj);
-                        await MessageService.ShowOkAsync("Sucesso", "E-Book Criado com Sucesso ", "OK");
+                        await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.EBook} {AppResources.Success_Create}", "OK");
                         App.Current.MainPage = new MainPage();
                     }
 
                 }
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 IsBusy = false;
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro", "Erro ao Criar", "OK");
+                await MessageService.ShowOkAsync(AppResources.Error, $"{AppResources.Error_Create} {AppResources.EBook}", "OK");
             }
             finally
             {
@@ -246,7 +248,7 @@ namespace Welic.App.ViewModels
                 var ret = await (new EbookDto()).Update(EbookDto);
                 if (courseDto != null || EbookDto != null)
                 {
-                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso ", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.EBook} {AppResources.Success_Change}", "OK");
                     if (ret != null)
                         await NavigationService.ReturnModalToAsync(true);
                 }
@@ -254,15 +256,15 @@ namespace Welic.App.ViewModels
                 {
                     //object[] obj = new[] { ret };
                     //await NavigationService.NavigateModalToAsync<LiveViewModel>(obj);
-                    await MessageService.ShowOkAsync("Sucesso", "Video Alterado com Sucesso", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Success, $"{AppResources.EBook} {AppResources.Success_Change}", "OK");
                 }
 
                 //content.Dispose();                                                                          
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Editar Video");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Change} {AppResources.EBook}");
             }
             finally
             {

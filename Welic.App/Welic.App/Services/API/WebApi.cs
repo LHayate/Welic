@@ -136,7 +136,7 @@ namespace Welic.App.Services.API
                                 "Acesso negado, Processo não Implementado.");
 
 
-                        throw new AppCenterException("Algo de errado não deu certo.");
+                        throw new System.Exception("Algo de errado não deu certo.");
                     }
 
                     var _result = await response.Content.ReadAsStringAsync();
@@ -146,7 +146,7 @@ namespace Welic.App.Services.API
             }
             catch (System.Exception ex)
             {
-                throw new AppCenterException("Erro ao tentar buscar dados");
+                throw new System.Exception("Erro ao tentar buscar dados");
             }
         }
 
@@ -161,7 +161,7 @@ namespace Welic.App.Services.API
                         if (response.StatusCode == HttpStatusCode.Unauthorized)
                             throw new InvalidOperationException("Acesso negado, você precisa estar autenticado para realizar essa requisição.");
 
-                        throw new AppCenterException("Algo de errado não deu certo.");
+                        throw new System.Exception("Algo de errado não deu certo.");
                     }
 
                     using (var responseStrean = await response.Content.ReadAsStreamAsync().ConfigureAwait(true))
@@ -272,7 +272,7 @@ namespace Welic.App.Services.API
             catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw new System.Exception("Erro ao tentar subir os  dados"); ;
+                throw new System.Exception("Erro ao tentar subir os  dados");
             }
 
         }

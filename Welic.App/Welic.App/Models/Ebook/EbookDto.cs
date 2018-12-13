@@ -46,9 +46,9 @@ namespace Welic.App.Models.Ebook
                 _listItem = await Current?.GetAsync<List<EbookDto>>("ebook/GetList");
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EbookGetList", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -59,9 +59,9 @@ namespace Welic.App.Models.Ebook
                 var list = await Current?.GetAsync<ObservableCollection<EbookDto>>("ebook/GetList");
                 return list;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EbookGetList", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -72,9 +72,9 @@ namespace Welic.App.Models.Ebook
                 var list = await Current?.GetAsync<ObservableCollection<EbookDto>>("ebook/GetListRecentes");
                 return list;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EbookGetListRecente", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -85,9 +85,9 @@ namespace Welic.App.Models.Ebook
                 var list = await Current?.GetAsync<ObservableCollection<EbookDto>>("ebook/GetLisFavoritos");
                 return list;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EbookGetListFavorite", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -99,9 +99,9 @@ namespace Welic.App.Models.Ebook
                 var list = await Current?.GetAsync<ObservableCollection<EbookDto>>($"ebook/GetListTeacher/{user.Id}");
                 return list;
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EBookGetListByUser", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -112,9 +112,9 @@ namespace Welic.App.Models.Ebook
                 var list = await Current?.GetAsync<List<EbookDto>>($"ebook/GetListbyCourse/{courseDto.IdCurso}");
                 return list.Skip(pageIndex * pageSize).Take(pageSize).ToList();
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EBookGetListByCourse", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -126,9 +126,9 @@ namespace Welic.App.Models.Ebook
                 ebookDto.DateRegister = DateTime.Now;
                 return await Current?.PostAsync<EbookDto>("ebook/Save", ebookDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EbookSave", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }
@@ -140,9 +140,9 @@ namespace Welic.App.Models.Ebook
                 ebookDto.DateRegister = DateTime.Now;
                 return await Current?.PostAsync<EbookDto>("ebook/Update", ebookDto);
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
+                AppCenterLog.Error("EBookUpdate", $"{ex.Message}-{ex.InnerException.Message}");
                 return null;
             }
         }

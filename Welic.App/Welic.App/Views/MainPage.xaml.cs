@@ -94,7 +94,7 @@ namespace Welic.App.Views
                     App.Current.MainPage = new NavigationPage(new InicioPage());
                 }
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 return;
             }

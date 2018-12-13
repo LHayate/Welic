@@ -66,7 +66,7 @@ namespace Welic.App.Views
 	                return stream;
 	            });
 	        }
-	        catch (AppCenterException ex)
+	        catch (System.Exception ex)
 	        {
 	            await App.Current.MainPage.DisplayAlert("Ops", "Erro ao Tentar abrir a camera." + ex.Message, "OK");
 	        }

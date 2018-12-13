@@ -35,13 +35,17 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnType("varchar")
                 .HasColumnName("Description");
-            Property(x => x.Prince)
+            Property(x => x.Price)
                 .IsRequired()
                 .HasColumnType("decimal")
-                .HasColumnName("Prince");
+                .HasColumnName("Price");
+            Property(x => x.UrlPrint)
+                .IsOptional()
+                .HasColumnType("varchar")
+                .HasColumnName("UrlPrint");
             Property(x => x.Print)
                 .IsOptional()
-                .HasColumnType("string")
+                .HasColumnType("image")
                 .HasColumnName("Print");
             Property(x => x.Themes)
                 .IsRequired()

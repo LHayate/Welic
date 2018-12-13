@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Schedule;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
@@ -30,7 +31,7 @@ namespace Welic.App.ViewModels
         {
             Schedule = Util.ImagePorSistema("iSchedule");
             ImageUrl = Util.ImagePorSistema("iScheduleList");
-            Title = "Schedule";
+            Title = AppResources.Schedule;
             ListSchedule = new InfiniteScrollCollection<ScheduleDto>();
             GetData();
             Download();
@@ -69,7 +70,7 @@ namespace Welic.App.ViewModels
                 };
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
                 return;

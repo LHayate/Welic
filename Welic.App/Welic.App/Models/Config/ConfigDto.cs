@@ -25,11 +25,5 @@ namespace Welic.App.Models.Config
             _dbManager.database.InsertOrReplace(configDto);
             _dbManager.database.Close();
         }
-
-
-
-
-
-
     }
 }

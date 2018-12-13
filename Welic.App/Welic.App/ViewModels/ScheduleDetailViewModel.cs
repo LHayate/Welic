@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AppCenter;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Schedule;
 using Welic.App.Services;
 using Welic.App.ViewModels.Base;
@@ -79,7 +80,7 @@ namespace Welic.App.ViewModels
         {
             _schedule = scheduleDto;
             Image = Util.ImagePorSistema("iScheduleList");
-            _AppTitle = "Schedule";            
+            _AppTitle = AppResources.Schedule;            
 
             _description = scheduleDto.Description;
             _title = scheduleDto.Title;
@@ -113,17 +114,17 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync("Excluir", "Tem certeza que deseja excluir esta Agenda?",
-                    "Sim", "Cancel");
+                var result = await MessageService.ShowOkAsync(AppResources.Delete, $"{AppResources.Confirm_Delete} {AppResources.Schedule}",
+                    AppResources.Yes, AppResources.No);
 
                 if (result)
                     if (await new ScheduleDto().DeleteAsync(_schedule))
                         await NavigationService.ReturnModalToAsync(true);
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                await MessageService.ShowOkAsync("Erro ao Exclur Schedule");
+                await MessageService.ShowOkAsync($"{AppResources.Error_Deleting} {AppResources.Schedule}");
             }
             
 

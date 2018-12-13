@@ -31,7 +31,7 @@ namespace Welic.App.Services.Timing
            
                 if (_dbManager.database.Table<UserDto>().Where(dto => dto.Synced == false).ToList().Count > 0)
                     if(!await (new UserDto()).SyncedUser())
-                        throw  new AppCenterException("Dados de Usuario não Sincronizados");                        
+                        throw  new System.Exception("Dados de Usuario não Sincronizados");                        
             
         }
     }

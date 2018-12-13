@@ -35,10 +35,10 @@ namespace Welic.App.Models.News
                 return ListItem.Skip(pageIndex * pageSize).Take(pageSize).ToList();
 
             }
-            catch (AppCenterException e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                AppCenterLog.Error("NewsGetList", $"{ex.Message}-{ex.InnerException.Message}");
+                return null;
             }
         }
     }

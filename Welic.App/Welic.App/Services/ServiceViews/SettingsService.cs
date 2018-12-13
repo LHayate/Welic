@@ -104,7 +104,7 @@ namespace Welic.App.Services.ServiceViews
             {
                 await Application.Current.SavePropertiesAsync();
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 Console.WriteLine("Unable to save: " + key, " Message: " + ex.Message);
             }
@@ -130,7 +130,7 @@ namespace Welic.App.Services.ServiceViews
                     await Application.Current.SavePropertiesAsync();
                 }
             }
-            catch (AppCenterException ex)
+            catch (System.Exception ex)
             {
                 Console.WriteLine("Unable to remove: " + key, " Message: " + ex.Message);
             }

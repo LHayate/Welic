@@ -35,10 +35,10 @@ namespace Welic.App.Services.Navigation
             {
                 await Application.Current.MainPage.Navigation.PushAsync(CreatePage(typeof(TViewModel)));
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return;
             }            
         }        
 
@@ -53,10 +53,10 @@ namespace Welic.App.Services.Navigation
             {
                 await Application.Current.MainPage.Navigation.PushModalAsync(CreatePage(typeof(TViewModel)));
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return;
             }
 
         }
@@ -136,10 +136,10 @@ namespace Welic.App.Services.Navigation
                     var viewType = Type.GetType(viewAssemblyName);
                     return viewType;
                 }
-                catch (AppCenterException e)
+                catch (System.Exception e)
                 {
                     Console.WriteLine(e);
-                    throw;
+                    return null;
                 }
                
             }
@@ -153,16 +153,16 @@ namespace Welic.App.Services.Navigation
                 Type pageType = GetPageTypeForViewModel(viewModelType);
                 if (pageType == null)
                 {
-                    throw new AppCenterException($"Não encontrado a pagina Solicitada {viewModelType}");
+                    throw new System.Exception($"Não encontrado a pagina Solicitada {viewModelType}");
                 }
 
                 Page page = Activator.CreateInstance(pageType,parameter) as Page;                
                 return page;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);                
-                throw;
+                return null;
             }
            
         }
@@ -173,16 +173,16 @@ namespace Welic.App.Services.Navigation
                 Type pageType = GetPageTypeForViewModel(viewModelType);
                 if (pageType == null)
                 {
-                    throw new AppCenterException($"Não encontrado a pagina Solicitada {viewModelType}");
+                    throw new System.Exception($"Não encontrado a pagina Solicitada {viewModelType}");
                 }
 
                 Page page = Activator.CreateInstance(pageType) as Page;
                 return page;
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return null;
             }
 
         }

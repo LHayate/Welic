@@ -109,10 +109,10 @@ namespace Welic.App.ViewModels.Base
             {
                 return _container.Resolve<T>();
             }
-            catch (AppCenterException e)
+            catch (System.Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                return null;
             }            
         }
 
