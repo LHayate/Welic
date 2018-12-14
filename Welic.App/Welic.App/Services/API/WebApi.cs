@@ -9,6 +9,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
+using Plugin.Connectivity;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Token;
 using Welic.App.Models.Usuario;
 using Welic.App.Services.ServicesViewModels;
@@ -80,10 +82,24 @@ namespace Welic.App.Services.API
             }            
         }
 
+        private bool NaoConectado()
+        {
+            if (!CrossConnectivity.Current.IsConnected)
+            {
+                App.Current.MainPage.DisplayAlert(AppResources.Connection, AppResources.Not_Connected, AppResources.OK,
+                    AppResources.Cancel);
+                return true;
+            }
+            return false;
+        }
+
         public async Task<bool> AuthenticateAsync(UserDto usuario)
         {
             try
             {
+                if (NaoConectado())
+                    return false;
+                
                 if (_HttpClient.DefaultRequestHeaders.Authorization == null)
                 {
                     var _args = new List<KeyValuePair<string, string>>()
@@ -92,7 +108,7 @@ namespace Welic.App.Services.API
                         new KeyValuePair<string, string>("username", usuario.NickName),
                         new KeyValuePair<string, string>("password", usuario.Password),
                     };
-                    
+
                     using (var _response = await _HttpClient.PostAsync("token", new FormUrlEncodedContent(_args)))
                     {
                         if (!_response.IsSuccessStatusCode)
@@ -100,17 +116,19 @@ namespace Welic.App.Services.API
 
                             return false;
                         }
-                            
+
                         var result = await _response.Content.ReadAsStringAsync();
 
                         var tokenResult = JsonConvert.DeserializeObject<UserToken>(result);
 
                         tokenResult.RegisterToken(tokenResult);
 
-                        this._HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenResult.TokenType, tokenResult.AccessToken);
-                    }                  
+                        this._HttpClient.DefaultRequestHeaders.Authorization =
+                            new AuthenticationHeaderValue(tokenResult.TokenType, tokenResult.AccessToken);
+                    }
                 }
-                return true;
+
+                return true;                
             }
             catch (System.Exception ex)
             {
@@ -122,7 +140,10 @@ namespace Welic.App.Services.API
         internal async Task<T> GetAsync<T>(string requestUri)
         {
             try
-            {                
+            {
+                if (NaoConectado())
+                    return default(T);
+
                 using (var response = await _HttpClient.GetAsync(requestUri))
                 {
                     if (!response.IsSuccessStatusCode)
@@ -154,6 +175,9 @@ namespace Welic.App.Services.API
         {
             try
             {
+                if (NaoConectado())
+                    return new ObservableCollection<T>();
+
                 using (var response = await _HttpClient.GetAsync(requestUri))
                 {
                     if (!response.IsSuccessStatusCode)
@@ -183,6 +207,9 @@ namespace Welic.App.Services.API
         {
             try
             {
+                if (NaoConectado())
+                    return default(T);
+
                 string json = JsonConvert.SerializeObject(obj);
                 HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 using (var _response = await _HttpClient.PostAsync(uri, content))
@@ -214,6 +241,9 @@ namespace Welic.App.Services.API
      
         internal async Task<bool> PutAsync<T>(T t, string uri)
         {
+            if (NaoConectado())
+                return false;
+
             var httpClient = new HttpClient();
 
             var json = JsonConvert.SerializeObject(t);
@@ -231,7 +261,9 @@ namespace Welic.App.Services.API
         {
             try
             {
-                
+                if (NaoConectado())
+                    return false;
+
                 HttpContent content = new StringContent("application/json");
                 using (var _response = await _HttpClient.PostAsync(uri,content))
                 {

@@ -16,6 +16,7 @@ namespace Welic.WebSite.Provider
             _servico = servico;
         }
 
+
         public override bool IsUserInRole(string username, string roleName)
         {
             throw new NotImplementedException();

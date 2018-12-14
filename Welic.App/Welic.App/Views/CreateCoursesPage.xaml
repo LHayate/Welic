@@ -82,8 +82,8 @@
                             HeightRequest="170"
                             IsSpellCheckEnabled="True"
                             AutoSize="TextChanges"  
-                            MaxLength="200"
-                            x:Name="Description"
+                            MaxLength="200"                            
+                            x:Name="Description"                            
                         >
                         <Editor.Keyboard>
                             <Keyboard x:FactoryMethod="Create">

@@ -468,4 +468,25 @@ Welic founder member of Welic as CTO.</value>
   <data name="Detail_course" xml:space="preserve">
     <value>Detail Course</value>
   </data>
+  <data name="Not_Connected" xml:space="preserve">
+    <value>Your application is not connected to the internet.</value>
+  </data>
+  <data name="Connection" xml:space="preserve">
+    <value>connection</value>
+  </data>
+  <data name="Not_course" xml:space="preserve">
+    <value>There is no course for the selected object.</value>
+  </data>
+  <data name="Not_Change" xml:space="preserve">
+    <value>Unedited, please try again</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Detail</value>
+  </data>
+  <data name="Adm" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="StudentAndTeacher" xml:space="preserve">
+    <value>Student and Teacher</value>
+  </data>
 </root>

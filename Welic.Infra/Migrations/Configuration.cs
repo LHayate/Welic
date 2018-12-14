@@ -85,28 +85,7 @@ namespace Welic.Infra.Migrations
 
         private void InstallRoles(AuthContext context)
         {
-            context.AspNetRoles.AddOrUpdate(
-                new AspNetRole()
-                {
-                    Name = Enum_UserType.Administrator.ToString(),
-                    Id = Guid.NewGuid().ToString(),                    
-                },
-                new AspNetRole()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = Enum_UserType.Teacher.ToString()
-                },
-                new AspNetRole()
-                {
-                    Name = Enum_UserType.Student.ToString(),
-                    Id = Guid.NewGuid().ToString()
-                },
-                new AspNetRole()
-                {
-                    Name = Enum_UserType.AllClass.ToString(),
-                    Id = Guid.NewGuid().ToString()
-                }                
-            );
+            
         }
 
         private void InstallMenu(AuthContext context)

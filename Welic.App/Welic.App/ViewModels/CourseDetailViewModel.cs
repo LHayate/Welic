@@ -119,7 +119,7 @@ namespace Welic.App.ViewModels
         {
             Dto = courseDto;
 
-            _AppTitle = AppResources.Detail_course;            
+            _AppTitle = $"{AppResources.Detail} {courseDto.Title}";
             Title = courseDto.Title;
             Description = courseDto.Description;
             Price = courseDto.Price;
@@ -196,7 +196,7 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync(AppResources.Delete, AppResources.Confirm_Delete + AppResources.Schedule,
+                var result = await MessageService.ShowOkAsync(AppResources.Delete, $"AppResources.Confirm_Delete + AppResources.Course",
                     AppResources.Yes, AppResources.No);
 
                 var live =await new LiveDto().GetListByCourse(Dto);

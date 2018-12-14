@@ -16,6 +16,18 @@ using Welic.App.Views;
 
 namespace Welic.App.Models.Usuario
 {
+
+    public enum GroupUserEnum
+    {
+        Normal = 0,
+        Administrator = 1,
+        Teacher = 2,
+        Student = 3,
+        AllClass = 4
+
+    }
+
+
     public class UserDto
     {               
         [SQLite.PrimaryKey]
@@ -27,7 +39,7 @@ namespace Welic.App.Models.Usuario
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
-        public string Profession { get; set; }                                    
+        public int Profession { get; set; }                                    
         public DateTime LastAccessDate { get; set; }
 
         public DateTime RegisterDate { get; set; }

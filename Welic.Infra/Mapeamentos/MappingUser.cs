@@ -100,7 +100,7 @@ namespace Welic.Infra.Mapeamentos
             //    .HasColumnName("LastAcess");
             Property(x => x.Profession)
                 .HasColumnName("Profession")
-                .HasColumnType("varchar");
+                .HasColumnType("int");
 
 
             //HasRequired(x => x.GroupUserMap)

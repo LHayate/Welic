@@ -187,7 +187,7 @@ namespace Welic.App.ViewModels
             }
         }
 
-        private string SelectedRole;
+        private int SelectedRole;
 
 
         int roleSelectedIndex;
@@ -205,7 +205,7 @@ namespace Welic.App.ViewModels
 
                     // trigger some action to take such as updating other labels or fields
                     OnPropertyChanged(nameof(RoleSelectedIndex));
-                    SelectedRole = _ItemsRoles[roleSelectedIndex];
+                    SelectedRole = roleSelectedIndex;
                 }
             }
         }

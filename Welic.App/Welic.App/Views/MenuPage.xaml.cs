@@ -20,77 +20,12 @@ namespace Welic.App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
-        MainPage RootPage => Application.Current.MainPage as MainPage;
-        List<HomeMenuItem> menuItems;
-
-        //public ObservableCollection<Grouping<SelectedHeaderViewModel, LocalChart>> MyCharts { get; }
-
-        //private readonly ObservableCollection<GroupHomeMenuItem> GroupMenu;
-
-        private UserDto _userdto;
+        MainPage RootPage => Application.Current.MainPage as MainPage;        
 
         public MenuPage()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();
-
-
-            //GroupMenu = new ObservableCollection<GroupHomeMenuItem>
-            //{
-            //    new GroupHomeMenuItem("Add Conteudo",Util.ImagePorSistema("iGalery"))
-            //    {
-            //        new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },
-            //    },
-            //};
-            //TODO: Quando for implementado algo modificar menu para apresentar o menu
-            //menuItems = new List<HomeMenuItem>
-            //{
-            //    new HomeMenuItem{Id = MenuItemType.Browse, Title="Home", IconMenu = Util.ImagePorSistema("iHome")},
-            //    new HomeMenuItem {Id = MenuItemType.Cursos, Title="Cursos", IconMenu = Util.ImagePorSistema("iIPathCourse") },
-            //    new HomeMenuItem {Id = MenuItemType.NewLive, Title="New Video", IconMenu = Util.ImagePorSistema("iNewVideo") },
-            //    new HomeMenuItem {Id = MenuItemType.EBooks, Title="New e-Book", IconMenu = Util.ImagePorSistema("iAddPdf") },
-            //    new HomeMenuItem {Id = MenuItemType.Schedule, Title="Nova Agenda", IconMenu = Util.ImagePorSistema("iScheduleMenu") },
-            //    new HomeMenuItem {Id = MenuItemType.Galery, Title="Galery", IconMenu = Util.ImagePorSistema("iGalery") },                                
-            //    //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
-            //    //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },               
-            //    new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings", IconMenu = Util.ImagePorSistema("iSettings") },
-            //    new HomeMenuItem {Id = MenuItemType.About, Title="About", IconMenu = Util.ImagePorSistema("iAbout") }
-            //};
-
-            //ListViewMenu.ItemsSource = menuItems;
-            //ListViewMenu.ItemsSource = menuItems;
-
-            //ListViewMenu.ItemSelected += async (sender, e) =>
-            //{
-            //    try
-            //    {
-            //        if (e.SelectedItem == null)
-            //            return;
-
-            //        var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-            //        await RootPage.NavigateFromMenu(id);
-            //        ListViewMenu.SelectedItem = null;
-            //    }
-            //    catch (System.Exception exception)
-            //    {
-            //        Console.WriteLine(exception);
-
-            //    }
-
-            //};
-
-            //ListViewMenuGroup.ItemsSource = GroupMenu;
-            ////ListViewMenu.ItemsSource = menuItems;
-
-            //ListViewMenuGroup.ItemSelected += async (sender, e) =>
-            //{
-            //    if (e.SelectedItem == null)
-            //        return;
-
-            //    //var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-            //    //await RootPage.NavigateFromMenu(id);
-
-            //};
+            BindingContext = ViewModelLocator.Resolve<MenuViewModel>();// new MenuViewModel();          
 
         }
 
@@ -176,24 +111,7 @@ namespace Welic.App.Views
                     });
 
                     await (new UserDto()).RegisterPhoto(file);
-                }
-
-
-
-
-                //CircleImage.Source = ImageSource.FromStream(() =>
-                //{
-                //    var stream = file.GetStream();
-                //    file.Dispose();
-                //    return stream;
-                //});
-
-
-                //var memoryStream = new MemoryStream();
-
-                //file.GetStream().CopyTo(memoryStream);
-                //file.Dispose();
-                //CircleImage.Source = ImageSource.FromStream(() => new MemoryStream(memoryStream.ToArray()));
+                }              
             }
             catch (System.Exception ex)
             {
@@ -219,12 +137,6 @@ namespace Welic.App.Views
                 AppCenterLog.Error("LogOff", $"{ex.Message}-{ex.InnerException.Message}");
                 return;
             }
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-        }
+        }        
     }
 }

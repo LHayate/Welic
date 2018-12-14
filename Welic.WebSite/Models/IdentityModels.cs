@@ -40,7 +40,7 @@ namespace Welic.WebSite.Models
         public double Rating { get; set; }
         public Guid Guid { get; set; }
                 
-        public string Profession { get; set; }
+        public int Profession { get; set; }
 
         [DefaultValue("https://welic.app/Arquivos/Icons/perfil_Padrao.png")]
         public string ImagePerfil { get; set; }
@@ -87,6 +87,13 @@ namespace Welic.WebSite.Models
 
         public static ApplicationDbContext Create()
         {
+
+
+
+
+
+
+
             return new ApplicationDbContext();
         }
 

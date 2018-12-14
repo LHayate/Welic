@@ -114,7 +114,7 @@ namespace Welic.App.ViewModels
             else
             {                
                 courseDto = obj.Length > 0 ? (CourseDto)obj[0] : null;
-                EbookDto = obj.Length > 0 ? (EbookDto)obj[1] : null;
+                EbookDto = obj.Length > 1 ? (EbookDto)obj[1] : null;
                 MenuVisivel = true;
                 if (EbookDto == null && courseDto != null)
                 {

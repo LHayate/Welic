@@ -163,27 +163,33 @@ namespace Welic.WebSite.API.Controllers
                         }
                     );
 
+                    
 
-                    switch (model.Profession)
+                    switch ((Enum_UserType)model.Profession)
                     {
-                        case "Administrator":
-                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString()));
+                        case Enum_UserType.Administrator:
+                            if(!await RoleManager.RoleExistsAsync(Enum_UserType.Administrator.ToString()))
+                                RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Administrator.ToString()));
                             UserManager.AddToRole(user.Id, Enum_UserType.Administrator.ToString());
                             break;
-                        case "Teacher":
-                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Teacher.ToString()));
+                        case Enum_UserType.Teacher:
+                            if (!await RoleManager.RoleExistsAsync(Enum_UserType.Teacher.ToString()))
+                                RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Teacher.ToString()));
                             UserManager.AddToRole(user.Id, Enum_UserType.Teacher.ToString());
                             break;
-                        case "Student":
-                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+                        case Enum_UserType.Student:
+                            if (!await RoleManager.RoleExistsAsync(Enum_UserType.Student.ToString()))
+                                RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
                             UserManager.AddToRole(user.Id, Enum_UserType.Student.ToString());
                             break;
-                        case "AllClass":
-                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.AllClass.ToString()));
+                        case Enum_UserType.AllClass:
+                            if (!await RoleManager.RoleExistsAsync(Enum_UserType.AllClass.ToString()))
+                                RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.AllClass.ToString()));
                             UserManager.AddToRole(user.Id, Enum_UserType.AllClass.ToString());
                             break;
                         default:
-                            RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
+                            if (!await RoleManager.RoleExistsAsync(Enum_UserType.Student.ToString()))
+                                RoleManager.Create(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole(Enum_UserType.Student.ToString()));
                             UserManager.AddToRole(user.Id, Enum_UserType.Student.ToString());
                             break;
                     }

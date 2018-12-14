@@ -91,7 +91,7 @@ namespace Welic.App.ViewModels
             _email = _userDto.Email ?? _userDto.NickName;
             _lastAcess = _userDto.LastAccessDate.ToString(CultureInfo.InvariantCulture);
 
-
+            
            // MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>();
             menuItems = new ObservableCollection<HomeMenuItem>
             {                
@@ -103,7 +103,18 @@ namespace Welic.App.ViewModels
                 //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                 //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
             };
-            
+
+            menuItems = new ObservableCollection<HomeMenuItem>
+            {
+                new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                
+                //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+                //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
+            };
+
 
             MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>
             {

@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Plugin.Connectivity;
+using Welic.App.Helpers.Resources;
 using Welic.App.Models.Course;
 using Welic.App.Models.Live;
 using Welic.App.ViewModels.Base;
@@ -36,8 +38,14 @@ namespace Welic.App.ViewModels
 
         public async Task SetListCourses()
         {
-            ListStart = await new CourseDto().GetListByUser();
-            IsBusy = ListStart.Count <= 0;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                ListStart = await new CourseDto().GetListByUser();
+                IsBusy = ListStart.Count <= 0;
+                return;
+            }
+
+            await MessageService.ShowOkAsync(AppResources.Not_Connected);
         }
         
         private void AddNew()
@@ -47,7 +55,19 @@ namespace Welic.App.ViewModels
 
         public void OpenCourse(CourseDto courseDto)
         {
+            if (courseDto == null)
+            {
+                MessageService.ShowOkAsync(AppResources.Not_course);
+                return;
+            }
+
             object[] obj = new[] { courseDto };
+
+            if (obj.Length <= 0)
+            {
+                MessageService.ShowOkAsync(AppResources.Not_course);
+                return;
+            }
 
             NavigationService.NavigateModalToAsync<CourseDetailViewModel>(obj);
         }

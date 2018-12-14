@@ -48,7 +48,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }        
-        public string Profession { get; set; }
+        public int Profession { get; set; }
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         [DefaultValue("https://welic.app/Arquivos/Icons/perfil_Padrao.png")]

@@ -111,9 +111,8 @@ namespace Welic.WebSite
         {
         }
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
-        {
-            var roleStore = new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>());
-            return new ApplicationRoleManager(roleStore);
+        {            
+            return new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
         }
     }
 

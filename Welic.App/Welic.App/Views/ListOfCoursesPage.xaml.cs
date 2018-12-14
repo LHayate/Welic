@@ -36,7 +36,7 @@ namespace Welic.App.Views
         {
             base.OnAppearing();
 
-            ListViewStart.SendRefreshing();            
+            ListViewStart.SendRefreshing();
         }
     }
 }

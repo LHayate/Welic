@@ -91,7 +91,7 @@ namespace Welic.App.ViewModels
             }
         }
 
-        private string SelectedRole;
+        private int SelectedRole;
 
 
         int roleSelectedIndex;
@@ -109,7 +109,7 @@ namespace Welic.App.ViewModels
 
                     // trigger some action to take such as updating other labels or fields
                     OnPropertyChanged(nameof(RoleSelectedIndex));
-                    SelectedRole = _ItemsRoles[roleSelectedIndex];
+                    SelectedRole = roleSelectedIndex;
                 }
             }
         }
@@ -268,9 +268,22 @@ namespace Welic.App.ViewModels
                     FirstName = _firstName,
                     LastName = _lastName,                        
                     Gender = SelectedGender,
-                    Profession = SelectedRole,
+
+                    
                     DateOfBirth = DateBirthday,                         
                 };
+                switch (SelectedRole)
+                {
+                    case 0:
+                        usuario.Profession = 2;
+                        break;                   
+                    case 2:
+                        usuario.Profession = 4;
+                        break;
+                    default:                    
+                        usuario.Profession = 3;
+                        break;
+                }
 
                 if (CrossConnectivity.Current.IsConnected)
                 {

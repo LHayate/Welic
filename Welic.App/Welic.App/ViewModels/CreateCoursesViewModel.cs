@@ -131,7 +131,7 @@ namespace Welic.App.ViewModels
                 }
                 else
                 {
-                    throw new System.Exception($"{AppResources.Error_Change} {AppResources.Course}");
+                    throw new System.Exception($"{AppResources.Course} {AppResources.Not_Change}");
                 }
             }
             catch (System.Exception e)

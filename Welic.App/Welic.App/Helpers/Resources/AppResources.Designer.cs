@@ -79,6 +79,15 @@ namespace Welic.App.Helpers.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administrator.
+        /// </summary>
+        public static string Adm {
+            get {
+                return ResourceManager.GetString("Adm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Age.
         /// </summary>
         public static string Age {
@@ -192,6 +201,15 @@ namespace Welic.App.Helpers.Resources {
         public static string Confirm_Password {
             get {
                 return ResourceManager.GetString("Confirm_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to connection.
+        /// </summary>
+        public static string Connection {
+            get {
+                return ResourceManager.GetString("Connection", resourceCulture);
             }
         }
         
@@ -332,6 +350,15 @@ namespace Welic.App.Helpers.Resources {
         public static string Description {
             get {
                 return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detail.
+        /// </summary>
+        public static string Detail {
+            get {
+                return ResourceManager.GetString("Detail", resourceCulture);
             }
         }
         
@@ -678,6 +705,33 @@ namespace Welic.App.Helpers.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unedited, please try again.
+        /// </summary>
+        public static string Not_Change {
+            get {
+                return ResourceManager.GetString("Not_Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your application is not connected to the internet..
+        /// </summary>
+        public static string Not_Connected {
+            get {
+                return ResourceManager.GetString("Not_Connected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no course for the selected object..
+        /// </summary>
+        public static string Not_course {
+            get {
+                return ResourceManager.GetString("Not_course", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to It is not possible to delete this Course because there are Videos linked to it yet.
         /// </summary>
         public static string Not_Delete_Courses {
@@ -971,6 +1025,15 @@ namespace Welic.App.Helpers.Resources {
         public static string Student {
             get {
                 return ResourceManager.GetString("Student", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Student and Teacher.
+        /// </summary>
+        public static string StudentAndTeacher {
+            get {
+                return ResourceManager.GetString("StudentAndTeacher", resourceCulture);
             }
         }
         

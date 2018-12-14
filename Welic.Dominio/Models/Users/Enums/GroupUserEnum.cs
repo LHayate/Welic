@@ -8,7 +8,7 @@ namespace Welic.Dominio.Models.Users.Enums
 {
     public enum GroupUserEnum
     {
-        None,
+        Adm,
         Teacher,
         Student,
         TeacherStudent
