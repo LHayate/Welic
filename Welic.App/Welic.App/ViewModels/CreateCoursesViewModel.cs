@@ -126,7 +126,7 @@ namespace Welic.App.ViewModels
 
                 if (ret != null)
                 {
-                    await MessageService.ShowOkAsync(AppResources.Edit, $"{AppResources.Course} {AppResources.Success_Create}", "OK");
+                    await MessageService.ShowOkAsync(AppResources.Edit, $"{AppResources.Course} {AppResources.Success_Change}", "OK");
                     await NavigationService.ReturnModalToAsync(true);
                 }
                 else

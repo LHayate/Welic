@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.App;
+using Android.Content;
 using Newtonsoft.Json.Linq;
 using Welic.App.Droid;
 using Welic.App.Models.Usuario;
@@ -13,12 +14,12 @@ namespace Welic.App.Droid
 {
     public class LoginPageRenderer : PageRenderer
     {        
-        public LoginPageRenderer()
+        public LoginPageRenderer(Context context) :base(context)
         {
             var activity = this.Context as Activity;
 
             var auth = new OAuth2Authenticator(
-                clientId: "1500267916942625", // your OAuth2 client id
+                clientId: "528237220950003", // your OAuth2 client id
                 scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
                 authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
                 redirectUrl: new Uri("http://www.facebook.com/connect/login_success.html"));

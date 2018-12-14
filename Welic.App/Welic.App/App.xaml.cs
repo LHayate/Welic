@@ -48,7 +48,41 @@ namespace Welic.App
 
             if (Device.RuntimePlatform == Device.UWP)
             {
-                MainPage = new NavigationPage(new InicioPage());
+
+                //Verifica se o dispositivo já está registrado e habilitado
+
+                //var temLeitor = CrossFingerprint.Current.GetAvailabilityAsync();
+
+                //   if (temLeitor.Result != FingerprintAvailability.Unknown)
+                //{
+                //    if (ViewModel.ValidaBiometric())
+                //    {
+
+                //        if (ValidaFingerprint().Result.Authenticated)
+                //        {
+                //            (BindingContext as LoginViewModel)?.Login();	                                                 
+                //        }
+                //    }
+                //    else
+                //    {
+                //        var usuario = ViewModel.LoadAsync();
+                //        if (usuario)
+                //            App.Current.MainPage = new MainPage();
+                //       }
+                //   }
+                //   else
+                //   {
+
+                //}
+
+                if (UserLogado())
+                {
+                    MainPage = new MainPage();
+                }
+                else
+                {
+                    MainPage = new NavigationPage(new InicioPage());
+                }               
             }                     
         }
         
@@ -74,7 +108,12 @@ namespace Welic.App
 
             if (Device.RuntimePlatform != Device.UWP)
             {
-                MainPage = new NavigationPage(new InicioPage());
+                if (UserLogado())
+                {
+                    MainPage = new MainPage();
+                }
+                else
+                    MainPage = new NavigationPage(new InicioPage());
             }
 
             if (_settingsService.AllowGpsLocation && !_settingsService.UseFakeLocation)
@@ -102,7 +141,7 @@ namespace Welic.App
         }
         public static async Task NavigateToProfile(UserDto userDto, string message = null)
         {
-            await App.Current.MainPage.Navigation.PushAsync(new MainPage());
+            App.Current.MainPage = new MainPage();
         }
         public static Action HideLoginView
         {
@@ -188,6 +227,23 @@ namespace Welic.App
 
             // Return true if you are using your own dialog, false otherwise
             return true;
+        }
+
+        private DatabaseManager _dbManager;
+        private bool UserLogado()
+        {
+            _dbManager = new DatabaseManager();
+            var usu = _dbManager.database.Table<UserDto>()
+                .ToList();                        
+               
+            if (usu.Count > 0)
+            {
+                return true;
+                //await (new UserDto()).SyncedUser();
+               
+            }
+
+            return false;
         }
     }
 }

@@ -25,34 +25,7 @@ namespace Welic.App.Views
 	        base.OnAppearing();
 	        if (ViewModel != null)
 	        {
-	            //Verifica se o dispositivo já está registrado e habilitado
-                
-	            //var temLeitor = CrossFingerprint.Current.GetAvailabilityAsync();
-
-             //   if (temLeitor.Result != FingerprintAvailability.Unknown)
-	            //{
-	            //    if (ViewModel.ValidaBiometric())
-	            //    {
-	                    
-	            //        if (ValidaFingerprint().Result.Authenticated)
-	            //        {
-	            //            (BindingContext as LoginViewModel)?.Login();	                                                 
-	            //        }
-	            //    }
-	            //    else
-	            //    {
-	            //        var usuario = ViewModel.LoadAsync();
-	            //        if (usuario)
-	            //            App.Current.MainPage = new MainPage();
-             //       }
-             //   }
-             //   else
-             //   {
-                    var usuario = await ViewModel.LoadAsync();
-                    if (usuario)
-                        App.Current.MainPage = new MainPage();
-                //}
-
+	            
 	           
 	        }
         }

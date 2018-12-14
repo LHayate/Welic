@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using Microsoft.AppCenter;
 using Welic.App.Helpers.Resources;
-using Welic.App.Models.Live;
 using Welic.App.Models.Schedule;
 using Welic.App.Models.Usuario;
-using Welic.App.Services;
-using Welic.App.Services.API;
 using Welic.App.ViewModels.Base;
-using Welic.App.Views;
 using Xamarin.Forms;
 
 namespace Welic.App.ViewModels
