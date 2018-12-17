@@ -7,7 +7,7 @@
             BackgroundColor="#0F5682"                
             >
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Name="MenuItemRefresh" Order="Primary" Icon="LogoWelic72x72.png" />
+        <ToolbarItem Name="MenuItemRefresh" Order="Primary" Icon="logoWelicBranco.png" />
     </TabbedPage.ToolbarItems>
     <!--Pages can be added as references or inline-->
 

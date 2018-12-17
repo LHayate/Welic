@@ -340,7 +340,7 @@ namespace Welic.App.ViewModels
             ItemsRoles = new List<string>();
             ItemsRoles.Add(AppResources.Teacher);
             ItemsRoles.Add(AppResources.Student);
-            ItemsRoles.Add($"{AppResources.Student} {AppResources.And} {AppResources.Teacher}");
+            //ItemsRoles.Add($"{AppResources.Student} {AppResources.And} {AppResources.Teacher}");
 
             //Add Itens Gender
             _ItemsGender = new List<string>();

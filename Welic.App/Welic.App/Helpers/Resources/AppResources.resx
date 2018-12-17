@@ -489,4 +489,7 @@ Welic founder member of Welic as CTO.</value>
   <data name="StudentAndTeacher" xml:space="preserve">
     <value>Student and Teacher</value>
   </data>
+  <data name="My_Content" xml:space="preserve">
+    <value>My Content</value>
+  </data>
 </root>

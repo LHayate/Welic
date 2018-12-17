@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AppCenter;
 using Plugin.Media.Abstractions;
+using Welic.App.Models.Config;
 using Welic.App.Models.Live;
 using Welic.App.Models.Token;
 using Welic.App.Services;
@@ -194,6 +195,7 @@ namespace Welic.App.Models.Usuario
                 }
                                              
                 _dbManager.database.DeleteAll<UserToken>();                
+                _dbManager.database.DeleteAll<ConfigDto>();                
                 return true;
             }
             catch (System.Exception ex)

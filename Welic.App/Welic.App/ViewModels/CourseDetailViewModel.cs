@@ -196,7 +196,7 @@ namespace Welic.App.ViewModels
         {
             try
             {
-                var result = await MessageService.ShowOkAsync(AppResources.Delete, $"AppResources.Confirm_Delete + AppResources.Course",
+                var result = await MessageService.ShowOkAsync(AppResources.Delete, $"{AppResources.Confirm_Delete} {AppResources.Course}",
                     AppResources.Yes, AppResources.No);
 
                 var live =await new LiveDto().GetListByCourse(Dto);

@@ -152,6 +152,7 @@
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />
     <Compile Include="Models\Home\Servico\IServiceStart.cs" />
+    <Compile Include="Models\Lives\Maps\FavoriteLiveMap.cs" />
     <Compile Include="Models\Lives\Maps\LiveMap.cs" />
     <Compile Include="Models\Lives\Repositoryes\IRepositoryLive.cs" />
     <Compile Include="Models\Lives\Services\IServiceLive.cs" />

@@ -422,8 +422,6 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable\xamarin_logo.png" />
-    <AndroidResource Include="Resources\drawable\LoginBackGround.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Splash.png" />
@@ -432,43 +430,10 @@
     <AndroidResource Include="Resources\XML\file_paths.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\LogoWelic72x72.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\LogoWelic.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Welic.App\Welic.App.csproj">
       <Project>{87128651-0de5-410b-aafc-396591865ecb}</Project>
       <Name>Welic.App</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\linkedin_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\skype_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\twitter_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Email_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\facebook_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Google_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Login_BackGround.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\LineHorizontal.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\LineHorizontalMenu.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\Splash.png" />
@@ -480,115 +445,12 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\Splash.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\LogoWelic.png">
+    <AndroidResource Include="Resources\drawable-hdpi\Welic.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\LogoWelic.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\LogoWelic.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\LogoWelic.png">
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\News_Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\perfil_Padrao.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iNotification.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iSettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iTicket.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iVideos.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iAbout.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iExit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iGalery.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iHome.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iStar.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iFind.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iSchedule.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iNew.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iScheduleList.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iPlay.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iLives.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iNewVideo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iFill.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iFullExit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\New_User.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Logo_Welic.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iIPathCourse.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iAddPdf.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iReturn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iAddFile.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iSave.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\iCheck.png" />
     <AndroidAsset Include="Assets\pdfjs\build\pdf.js" />
     <AndroidAsset Include="Assets\pdfjs\build\pdf.worker.js" />
     <AndroidAsset Include="Assets\pdfjs\web\compatibility.js" />
@@ -681,13 +543,37 @@
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-collapsed-rtl%402x.png" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded.png" />
     <AndroidAsset Include="Assets\pdfjs\web\images\treeitem-expanded%402x.png" />
-    <AndroidResource Include="Resources\drawable\iScheduleMenu.png" />
-    <AndroidResource Include="Resources\drawable\iEdit.png" />
-    <AndroidResource Include="Resources\drawable\iDelete.png" />
-    <AndroidResource Include="Resources\drawable\iAdd.png" />
     <Content Include="Helpers\TranslateExtension.txt" />
-    <Content Include="Resources\drawable\iExpanded.png" />
+    <AndroidResource Include="Resources\drawable\Welic.png" />
+    <AndroidResource Include="Resources\drawable\Splash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Welic.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Welic.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Welic.png" />
+    <AndroidResource Include="Resources\drawable\iReturn.png" />
+    <AndroidResource Include="Resources\drawable\iAdd.png" />
+    <AndroidResource Include="Resources\drawable\iAddFile.png" />
+    <AndroidResource Include="Resources\drawable\iAddPdf.png" />
+    <AndroidResource Include="Resources\drawable\iEdit.png" />
+    <AndroidResource Include="Resources\drawable\iHome.png" />
+    <AndroidResource Include="Resources\drawable\iFind.png" />
     <AndroidResource Include="Resources\drawable\iPdf.png" />
+    <AndroidResource Include="Resources\drawable\iPlay.png" />
+    <AndroidResource Include="Resources\drawable\iSave.png" />
+    <AndroidResource Include="Resources\drawable\iSchedule.png" />
+    <AndroidResource Include="Resources\drawable\logoWelicBranco.png" />
+    <AndroidResource Include="Resources\drawable\iExit.png" />
+    <AndroidResource Include="Resources\drawable\iVideos.png" />
+    <AndroidResource Include="Resources\drawable\iNewVideo.png" />
+    <AndroidResource Include="Resources\drawable\iDelete.png" />
+    <AndroidResource Include="Resources\drawable\LoginBackGround.png" />
+    <AndroidResource Include="Resources\drawable\LogoWelic.png" />
+    <AndroidResource Include="Resources\drawable\LineHorizontalMenu.png" />
+    <AndroidResource Include="Resources\drawable\LineHorizontal.png" />
+    <AndroidResource Include="Resources\drawable\Google_icon.png" />
+    <AndroidResource Include="Resources\drawable\Email_icon.png" />
+    <AndroidResource Include="Resources\drawable\facebook_icon.png" />
+    <AndroidResource Include="Resources\drawable\iScheduleList.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

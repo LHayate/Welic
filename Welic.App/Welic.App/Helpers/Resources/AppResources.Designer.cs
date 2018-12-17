@@ -651,6 +651,15 @@ namespace Welic.App.Helpers.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Content.
+        /// </summary>
+        public static string My_Content {
+            get {
+                return ResourceManager.GetString("My_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to My Listings.
         /// </summary>
         public static string My_Listting {
