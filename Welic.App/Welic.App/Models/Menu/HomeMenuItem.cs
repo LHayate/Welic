@@ -17,7 +17,11 @@ namespace Welic.App.Models
         NewLive,
         Cursos,
         EBooks,
-        Schedule
+        Schedule,
+        ListVideos,
+        ListEbook,
+        ListCourses,
+        ListSchedule
 
 
 

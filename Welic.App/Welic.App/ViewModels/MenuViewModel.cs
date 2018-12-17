@@ -159,10 +159,10 @@ namespace Welic.App.ViewModels
                 case GroupUserEnum.Student:
                     menuItems = new ObservableCollection<HomeMenuItem>
                     {
-                        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse") },
-                        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo") },
-                        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf") },
-                        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu") },
+                        new HomeMenuItem {Id = MenuItemType.ListCourses, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListVideos, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iVideoB"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListEbook, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iPdf"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListSchedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
                 
                         //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                         //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
@@ -175,97 +175,6 @@ namespace Welic.App.ViewModels
                                 IsSelected = true,
                                 Menu = new HomeMenuItem
                                     {Id = MenuItemType.Browse, Title = AppResources.Home, IconMenu = Util.ImagePorSistema("iHouse") },
-                            }
-                        ),
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel
-                            {
-                                IsSelected = false,
-                                Category = new Category
-                                {
-                                    CategoryId = 2,
-                                    Title =  AppResources.My_Content,
-                                    IconMenu =  Util.ImagePorSistema("iFolde")
-                                }
-                            },
-                            menuItems
-                        ),
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel()
-                            {
-                                IsSelected = true,
-                                Menu = new HomeMenuItem
-                                    {Id = MenuItemType.Galery, Title=AppResources.Galery, IconMenu = Util.ImagePorSistema("iGalery") },
-                            }
-                        ),
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel()
-                            {
-                                IsSelected = true,
-                                Menu = new HomeMenuItem
-                                    {Id = MenuItemType.Settings, Title=AppResources.Setting, IconMenu = Util.ImagePorSistema("iSettings") },
-                            }
-                        ),
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel()
-                            {
-                                IsSelected = true,
-                                Menu = new HomeMenuItem
-                                    {Id = MenuItemType.About, Title=AppResources.About, IconMenu = Util.ImagePorSistema("iAbout") }
-                            }
-                        ),
-                    };
-                    break;
-                case GroupUserEnum.AllClass:
-                    menuItems = new ObservableCollection<HomeMenuItem>
-                    {
-                        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-                        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-                        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-                        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
-                
-                        //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
-                        //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
-                    };
-                    menuItems2 = new ObservableCollection<HomeMenuItem>
-                    {
-                        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
-                        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
-                        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
-                        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
-                
-                        //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
-                        //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
-                    };
-                    MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>
-                    {
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel()
-                            {
-                                IsSelected = true,
-                                Menu = new HomeMenuItem
-                                    {Id = MenuItemType.Browse, Title = AppResources.Home, IconMenu = Util.ImagePorSistema("iHouse") },
-                            }
-                        ),
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel
-                            {
-                                IsSelected = false,
-                                Category = new Category
-                                {
-                                    CategoryId = 2,
-                                    Title =  AppResources.Create,
-                                    IconMenu =  Util.ImagePorSistema("iAdd")
-                                }
-                            },
-                            menuItems
-                        ),                       
-                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
-                            new SelectedHeaderViewModel()
-                            {
-                                IsSelected = true,
-                                Menu = new HomeMenuItem
-                                    {Id = MenuItemType.Galery, Title=AppResources.Galery, IconMenu = Util.ImagePorSistema("iGalery") },
                             }
                         ),
                         new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
@@ -279,7 +188,15 @@ namespace Welic.App.ViewModels
                                     IconMenu =  Util.ImagePorSistema("iFolde")
                                 }
                             },
-                            menuItems2
+                            menuItems
+                        ),
+                        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                            new SelectedHeaderViewModel()
+                            {
+                                IsSelected = true,
+                                Menu = new HomeMenuItem
+                                    {Id = MenuItemType.Galery, Title=AppResources.Galery, IconMenu = Util.ImagePorSistema("iGalery") },
+                            }
                         ),
                         new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
                             new SelectedHeaderViewModel()
@@ -299,13 +216,96 @@ namespace Welic.App.ViewModels
                         ),
                     };
                     break;
+                //case GroupUserEnum.AllClass:
+                //    menuItems = new ObservableCollection<HomeMenuItem>
+                //    {
+                //        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                //        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                //        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                //        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 2, Title = "Criar" } },
+                
+                //        //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+                //        //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
+                //    };
+                //    menuItems2 = new ObservableCollection<HomeMenuItem>
+                //    {
+                //        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
+                //        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
+                //        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
+                //        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 7, Title = AppResources.My_Content } },
+                
+                //        //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
+                //        //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
+                //    };
+                //    MyCharts = new ObservableCollection<Grouping<SelectedHeaderViewModel, HomeMenuItem>>
+                //    {
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel()
+                //            {
+                //                IsSelected = true,
+                //                Menu = new HomeMenuItem
+                //                    {Id = MenuItemType.Browse, Title = AppResources.Home, IconMenu = Util.ImagePorSistema("iHouse") },
+                //            }
+                //        ),
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel
+                //            {
+                //                IsSelected = false,
+                //                Category = new Category
+                //                {
+                //                    CategoryId = 2,
+                //                    Title =  AppResources.Create,
+                //                    IconMenu =  Util.ImagePorSistema("iAdd")
+                //                }
+                //            },
+                //            menuItems
+                //        ),                       
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel()
+                //            {
+                //                IsSelected = true,
+                //                Menu = new HomeMenuItem
+                //                    {Id = MenuItemType.Galery, Title=AppResources.Galery, IconMenu = Util.ImagePorSistema("iGalery") },
+                //            }
+                //        ),
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel
+                //            {
+                //                IsSelected = false,
+                //                Category = new Category
+                //                {
+                //                    CategoryId = 7,
+                //                    Title =  AppResources.My_Content,
+                //                    IconMenu =  Util.ImagePorSistema("iFolde")
+                //                }
+                //            },
+                //            menuItems2
+                //        ),
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel()
+                //            {
+                //                IsSelected = true,
+                //                Menu = new HomeMenuItem
+                //                    {Id = MenuItemType.Settings, Title=AppResources.Setting, IconMenu = Util.ImagePorSistema("iSettings") },
+                //            }
+                //        ),
+                //        new Grouping<SelectedHeaderViewModel, HomeMenuItem>(
+                //            new SelectedHeaderViewModel()
+                //            {
+                //                IsSelected = true,
+                //                Menu = new HomeMenuItem
+                //                    {Id = MenuItemType.About, Title=AppResources.About, IconMenu = Util.ImagePorSistema("iAbout") }
+                //            }
+                //        ),
+                //    };
+                //    break;
                 default:
                     menuItems = new ObservableCollection<HomeMenuItem>
                     {
-                        new HomeMenuItem {Id = MenuItemType.Cursos, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 7, Title = "Content" } },
-                        new HomeMenuItem {Id = MenuItemType.NewLive, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iNewVideo"), Category = new Category { CategoryId = 7, Title = "Content" } },
-                        new HomeMenuItem {Id = MenuItemType.EBooks, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iAddPdf"), Category = new Category { CategoryId = 7, Title = "Content" } },
-                        new HomeMenuItem {Id = MenuItemType.Schedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 7, Title = "Content" } },
+                        new HomeMenuItem {Id = MenuItemType.ListCourses, Title=AppResources.Course, IconMenu = Util.ImagePorSistema("iIPathCourse"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListVideos, Title=AppResources.Video, IconMenu = Util.ImagePorSistema("iVideoB"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListEbook, Title=AppResources.EBook, IconMenu = Util.ImagePorSistema("iPdf"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
+                        new HomeMenuItem {Id = MenuItemType.ListSchedule, Title=AppResources.Schedule, IconMenu = Util.ImagePorSistema("iScheduleMenu"), Category = new Category { CategoryId = 7, Title =  AppResources.My_Content } },
                 
                         //new HomeMenuItem {Id = MenuItemType.Notifications, Title="Notifications", IconMenu = Util.ImagePorSistema("iNotification") },
                         //new HomeMenuItem {Id = MenuItemType.Tickets, Title="Tickets", IconMenu = Util.ImagePorSistema("iTicket") },                               
@@ -326,7 +326,7 @@ namespace Welic.App.ViewModels
                                 IsSelected = false,
                                 Category = new Category
                                 {
-                                    CategoryId = 2,
+                                    CategoryId = 7,
                                     Title =  AppResources.My_Content,
                                     IconMenu =  Util.ImagePorSistema("iFolde")
                                 }
@@ -397,9 +397,9 @@ namespace Welic.App.ViewModels
                         menuItems.Where(x => (x.Category.CategoryId.Equals(obj.Key.Category.CategoryId)))
                             .ForEach(obj.Add);
 
-                        if(menuItems2 != null)
-                            menuItems2.Where(x => (x.Category.CategoryId.Equals(obj.Key.Category.CategoryId)))
-                                .ForEach(obj.Add);
+                        //if(menuItems2 != null)
+                        //    menuItems2.Where(x => (x.Category.CategoryId.Equals(obj.Key.Category.CategoryId)))
+                        //        .ForEach(obj.Add);
                     }
                     else
                         obj.Clear();

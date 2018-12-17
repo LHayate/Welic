@@ -573,6 +573,7 @@
     <AndroidResource Include="Resources\drawable\Email_icon.png" />
     <AndroidResource Include="Resources\drawable\facebook_icon.png" />
     <AndroidResource Include="Resources\drawable\iScheduleList.png" />
+    <AndroidResource Include="Resources\drawable\iCheck.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

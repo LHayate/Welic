@@ -67,6 +67,18 @@ namespace Welic.App.Views
                     case (int)MenuItemType.Schedule:
                         MenuPages.Add(id, new NavigationPage(new ListSchedulePage()));
                         break;
+                    case (int)MenuItemType.ListSchedule:
+                        MenuPages.Add(id, new NavigationPage(new ListEventsPage()));
+                        break;
+                    case (int)MenuItemType.ListCourses:
+                        MenuPages.Add(id, new NavigationPage(new ListOfCoursesPage()));
+                        break;
+                    case (int)MenuItemType.ListEbook:
+                        MenuPages.Add(id, new NavigationPage(new ListEbookPage()));
+                        break;
+                    case (int)MenuItemType.ListVideos:
+                        MenuPages.Add(id, new NavigationPage(new ListLivePage()));
+                        break;
                 }
             }
 

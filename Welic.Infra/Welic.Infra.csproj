@@ -88,6 +88,7 @@
     <Compile Include="Mapeamentos\MappingConfigApp.cs" />
     <Compile Include="Mapeamentos\MappingCursos.cs" />
     <Compile Include="Mapeamentos\MappingEBook.cs" />
+    <Compile Include="Mapeamentos\MappingFavoriteLive.cs" />
     <Compile Include="Mapeamentos\MappingListingReview.cs" />
     <Compile Include="Mapeamentos\MappingListingStat.cs" />
     <Compile Include="Mapeamentos\MappingListingType.cs" />
