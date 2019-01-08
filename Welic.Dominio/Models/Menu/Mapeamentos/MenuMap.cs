@@ -21,8 +21,7 @@ namespace Welic.Dominio.Models.Menu.Mapeamentos
         public string Action { get; set; }
         public string Controller { get; set; }
         public int? DadId { get; set; }
-        //TODO: Criar Group de Acesso e Ordem
-        //public int? GroupAcess { get; set; }
+        
         public MenuMap Dad { get; private set; }
 
         private ICollection<AspNetUser> _usuarios;

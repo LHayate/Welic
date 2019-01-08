@@ -238,7 +238,8 @@ namespace Welic.WebSite.Controllers
                 RegisterDate = DateTime.Now,
                 RegisterIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
                 LastAccessDate = DateTime.Now,
-                LastAccessIP = System.Web.HttpContext.Current.Request.GetVisitorIP()
+                LastAccessIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
+                
             };
 
             var result = await UserManager.CreateAsync(user, model.Password);

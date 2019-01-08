@@ -1,0 +1,282 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Drawing;
+
+namespace System.Windows.Forms.Uniube
+{
+    [ToolboxBitmap(@"S:\Sistemas dotNet\Figuras\iMasktextbox.ico")]
+    public partial class MaskedTextBoxUniube : MaskedTextBox
+    {
+        public MaskedTextBoxUniube()
+        {
+            InitializeComponent();
+            this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            if (base.ReadOnly)
+                base.BackColor = Color.FromArgb(231, 231, 231);
+        }
+
+        public MaskedTextBoxUniube(IContainer container)
+        {
+            container.Add(this);
+
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Nome da coluna no DataTable, utilizado pelo método PreencherCampos(ControlCollection controls, DataTable dtDados)
+        /// </summary>
+        private string _NomeCampoDadosDataTable;
+        public string NomeCampoDadosDataTable
+        {
+            get { return _NomeCampoDadosDataTable; }
+            set
+            { _NomeCampoDadosDataTable = value; }
+        }
+
+        public enum CTipoCampo { Normal, Chave, ChaveAutoIncremento, Obrigatorio };
+        private CTipoCampo _tipoCampo = CTipoCampo.Normal;
+        public CTipoCampo TipoCampo
+        {
+            get { return _tipoCampo; }
+            set
+            {
+                _tipoCampo = value;
+                if (!base.ReadOnly)
+                {
+                    if (_tipoCampo != CTipoCampo.Normal)
+                        base.BackColor = Color.FromArgb(221, 236, 255);
+                    else
+                        base.BackColor = Color.White;
+                }
+                else
+                    base.BackColor = Color.FromArgb(231, 231, 231);
+            }
+        }
+
+        private bool _limpaCampo = true;
+
+        public bool LimpaCampo
+        {
+            get { return _limpaCampo; }
+            set { _limpaCampo = value; }
+        }
+
+        /// <summary>
+        /// Quando setado, força o conteúdo ser uma data válida caso a mask seja 99/99/9999 ou 00/00/0000
+        /// </summary>
+        private bool _mascaraData;
+        public bool _MascaraData
+        {
+            get { return _mascaraData; }
+            set
+            {
+                _mascaraData = value;
+                if (_mascaraData)
+                    this.Mask = "99/99/9999";
+            }
+        }
+        //No caso de problema, descomentar a linha abaixo e comentar a propriedade acima, visto que há telas utilizando a propriedade e esta está no designer.
+        //public bool _MascaraData = false;
+
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            base.OnGotFocus(e);
+            if (!base.ReadOnly)
+                base.BackColor = Color.LemonChiffon;
+            else
+                base.BackColor = Color.FromArgb(231, 231, 231);
+
+            //base.ShortcutsEnabled = true;
+        }
+
+        protected override void OnLeave(EventArgs e)
+        {
+            base.OnLeave(e);
+            if (!base.ReadOnly)
+            {
+                if (_tipoCampo != CTipoCampo.Normal)
+                    base.BackColor = Color.FromArgb(221, 236, 255);
+                else
+                    base.BackColor = Color.White;
+            }
+            else
+                base.BackColor = Color.FromArgb(231, 231, 231);
+            ValidaMask();
+            if (_mascaraData && this.MaskFull && (this.Mask.Equals("99/99/9999") || this.Mask.Equals("00/00/0000")))
+            {
+                DateTime d;
+                if (!DateTime.TryParse(this.Text, out d))
+                {
+                    MessageBox.Show("Data inválida. Por favor, verifique.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    base.Focus();
+                    return;
+                }
+            }
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            base.OnTextChanged(e);
+            //if (base.MaskFull == true)
+            //SendKeys.Send("{TAB}");
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+            ExecutaTabPressionaEnter(e);
+        }
+
+        protected void ValidaMask()
+        {
+            var Digitos = "0123456789";
+            for (int i = 0; i < base.Text.Length; i++)
+            {
+                string stv = base.Text.Substring(i, 1);
+                if (stv != " " || string.IsNullOrEmpty(base.Text))
+                {
+                    if (Digitos.IndexOf(stv) >= 0)
+                    {
+                        if (base.MaskFull == false)
+                        {
+                            MessageBox.Show("Favor informe o campo completo.", "Atenção!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            base.Focus();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ExecutaTabPressionaEnter(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send((e.Shift ? "+" : "") + "{TAB}");
+            }
+        }
+
+        protected override void OnEnabledChanged(EventArgs e)
+        {
+            base.OnEnabledChanged(e);
+            if (!base.ReadOnly)
+            {
+                if (base.Enabled == false)
+                    base.BackColor = Color.FromArgb(231, 231, 231);
+                else
+                {
+                    if (_tipoCampo != CTipoCampo.Normal)
+                        base.BackColor = Color.FromArgb(221, 236, 255);
+                    else
+                        base.BackColor = Color.White;
+                }
+            }
+            else
+                base.BackColor = Color.FromArgb(231, 231, 231);
+        }
+
+        protected override void OnReadOnlyChanged(EventArgs e)
+        {
+            base.OnReadOnlyChanged(e);
+            if (base.ReadOnly)
+                base.BackColor = Color.FromArgb(231, 231, 231);
+            else
+            {
+                if (_tipoCampo != CTipoCampo.Normal)
+                    base.BackColor = Color.FromArgb(221, 236, 255);
+                else
+                    base.BackColor = Color.White;
+            }
+        }
+
+
+
+        // Exibir icone de Pesquisa do campo
+        private bool _ExibirIconePesquisa;
+        public bool ExibirIconePesquisa
+        {
+            get
+            {
+                return _ExibirIconePesquisa;
+            }
+            set
+            {
+                _ExibirIconePesquisa = value;
+                // executa o AtualizarIconeLupa no set para exibir/remover o icone no Design ainda no visual studio ou caso a propriedade seja alterada em tempo de execução
+                this.AtualizarIconeLupa();
+            }
+        }
+
+        private PictureBox pb;
+        private void AtualizarIconeLupa()
+        {
+            if (this._ExibirIconePesquisa && this.pb == null)
+            {
+                this.pb = new PictureBox();
+                this.pb.Size = new Size(16, this.ClientSize.Height + 2);
+                this.pb.Cursor = Cursors.Hand;
+                this.pb.Image = Properties.Resources.iBusca16;
+                this.pb.Click += pb_Click;
+            }
+
+            if (this._ExibirIconePesquisa && !this.Controls.Contains(pb))
+            {
+                this.Controls.Add(pb);
+                this.TextAlign = HorizontalAlignment.Left;
+                // Utilizado para que o texto digitado não fique atrás do ícone
+                SendMessage(this.Handle, 0xd3, (IntPtr)2, (IntPtr)(this.pb.Width << 16));
+            }
+
+            if (this._ExibirIconePesquisa)
+                this.pb.Dock = DockStyle.Right;//this.pb.Location = new Point(this.ClientSize.Width - this.pb.Width + 2, -1);
+            else if (!this._ExibirIconePesquisa && this.Controls.Contains(pb))
+                this.Controls.Remove(pb);
+        }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+
+        private void pb_Click(object sender, EventArgs e)
+        {
+            this.Focus();
+
+            //verifica se está focado após o Focus() para prever caso a validação de outro campo impeça o Focus().
+            if (this.Focused && !this.ReadOnly)
+                SendKeys.Send("{F3}");
+        }
+
+        protected override void OnSizeChanged(EventArgs e)
+        {
+            base.OnSizeChanged(e);
+
+            if (this._ExibirIconePesquisa)
+                // Utilizado para que o texto digitado não fique atrás do ícone
+                SendMessage(this.Handle, 0xd3, (IntPtr)2, (IntPtr)(this.pb.Width << 16));
+        }
+        protected override void OnLocationChanged(EventArgs e)
+        {
+            base.OnLocationChanged(e);
+
+            if (this._ExibirIconePesquisa)
+                // Utilizado para que o texto digitado não fique atrás do ícone
+                SendMessage(this.Handle, 0xd3, (IntPtr)2, (IntPtr)(this.pb.Width << 16));
+        }
+        protected override void OnTextAlignChanged(EventArgs e)
+        {
+            base.OnTextAlignChanged(e);
+
+            if (this._ExibirIconePesquisa)
+            {
+                this.TextAlign = HorizontalAlignment.Left;
+                // Utilizado para que o texto digitado não fique atrás do ícone
+                SendMessage(this.Handle, 0xd3, (IntPtr)2, (IntPtr)(this.pb.Width << 16));
+            }
+        }
+
+    }
+}

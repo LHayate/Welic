@@ -3,8 +3,10 @@ using System.IO;
 using System.Web;
 using Welic.Dominio.Core;
 using Welic.Dominio.Enumerables;
+using Welic.Dominio.Models.Empresa.Map;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
+using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Infra.Context;
@@ -34,6 +36,9 @@ namespace Welic.Infra.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             base.Seed(context);
+            InstallEmpresa(context);
+            InstallProgramas(context);
+            InstallPermission(context);
             InstallSettings(context);
             //InstallEmailTemplates(context);
             InstallMenu(context);            
@@ -47,6 +52,96 @@ namespace Welic.Infra.Migrations
             //InstallListingTypes(context);
 
             context.SaveChanges();
+        }
+
+        private void InstallProgramas(AuthContext context)
+        {
+            context.Prograns.AddOrUpdate(
+                new ProgransMap()
+                {
+                    IdProgram = 1,
+                    Description = "Cadastro de Pessoas", 
+                    Type = TypeProgram.Cadastro,
+                    Active = true,     
+                    ObjectState = context.Prograns.Count(x=> x.IdProgram == 1) <= 0 ? ObjectState.Added
+                        : ObjectState.Modified
+                },
+                new ProgransMap()
+                {
+                    IdProgram = 2,
+                    Description = @"Cadastro de Estacionamento",
+                    Type = TypeProgram.Cadastro,
+                    Active = true,
+                    ObjectState = context.Prograns.Count(x => x.IdProgram == 2) <= 0 ? ObjectState.Added
+                        : ObjectState.Modified
+                },
+                new ProgransMap()
+                {
+                    IdProgram = 3,
+                    Description = @"Cadastro de Vagas de Estacionamento",
+                    Type = TypeProgram.Cadastro,
+                    Active = true,
+                    ObjectState = context.Prograns.Count(x => x.IdProgram == 3) <= 0 ? ObjectState.Added
+                        : ObjectState.Modified
+                }
+                );
+            context.SaveChanges();
+        }
+
+        private void InstallPermission(AuthContext context)
+        {
+            var users = context.User.Select(x => x).Where(x => x.Development).ToList();
+            var programs = context.Prograns.Select(x => x).Where(x => x.Active).ToList();
+
+            foreach (var user in users)
+            {
+                var permissions = context.Permission.Select(x => x).Where(x => x.IdUser == user.Id).ToList();
+                permissions.ForEach(x=> x.ObjectState = ObjectState.Deleted);
+                context.Permission.RemoveRange(permissions);
+
+                context.SaveChanges();
+
+                var permissions1 = context.Permission.Select(x => x).Where(x => x.IdUser == user.Id).ToList();
+                foreach (var program in programs)
+                {                    
+                    context.Permission.Add(
+                        new PermissionMap()
+                        {
+                            Active = true,
+                            All = true,
+                            Delete = true,
+                            IdProgram = program.IdProgram,
+                            IdUser = user.Id,
+                            Insert = true,
+                            Read = true,
+                            Update = true,  
+                            ObjectState = ObjectState.Added
+                        }
+                    );
+                }
+               
+            }
+        }
+
+        private void InstallEmpresa(AuthContext context)
+        {
+            context.Empresa.AddOrUpdate(new EmpresaMap()
+            {
+                Cep = "00000000",
+                Cidade = "Uberaba",
+                Email = "lucasrr59@gmail.com",
+                Endereco = "Inicial para ter na Welic",
+                Cnpj = "Ainda não criado ",
+                Fone = 991996194,
+                Fone1 = 991996194,
+                ConfigMailEnableSsl = true,
+                FoneFax = null,
+                Ie = "000123132",
+                Uf = "MG",
+                RazaoSocial = "WElic",
+                //ObjectState = context.Empresa.Count(x => x.Ie == "000123132" && x.RazaoSocial == "WElic") <= 0 ? ObjectState.Added
+                //: ObjectState.Modified
+            });
         }
 
         //private AspNetUser CreateUser()

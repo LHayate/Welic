@@ -1,0 +1,861 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using Classes.Uteis;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Threading;
+using System.IO;
+using System.Windows.Forms.Uniube;
+
+
+namespace System.Windows.Forms.Uniube
+{
+    public partial class FormRelatorio : FormUniube
+    {
+        public FormRelatorio()
+        {
+            InitializeComponent();
+            ChangeToolBar();
+        }
+
+        /// <summary>
+        /// Construtor com bloqueio para múltiplas instâncias do formulário
+        /// </summary>
+        /// <param name="frmP">Formulário principal do projeto.</param>
+        public FormRelatorio(Form frmP) : base(frmP)
+        {
+            InitializeComponent();
+            ChangeToolBar();
+        }
+
+        public enum CTipoFolha { A3, A4, A5, Carta, Oficio };
+        private CTipoFolha _tipoFolha = CTipoFolha.A4;
+
+        public CTipoFolha TipoFolha
+        {
+            get { return _tipoFolha; }
+            set { _tipoFolha = value; }
+        }
+
+        public enum CTipoRelatorio { Retrato, Paisagem };
+        private CTipoRelatorio _tipoRelatorio = CTipoRelatorio.Retrato;
+
+        public CTipoRelatorio TipoRelatorio
+        {
+            get { return _tipoRelatorio; }
+            set { _tipoRelatorio = value; }
+        }
+
+        #region Declaração Varivaeis Globais
+        //int PgNavegacao = 1;
+        //int pgContTotal = 0;
+        //int pgBusca = 0;
+        //bool valid = true;
+        bool valid2 = true;
+        //int numberOfPages = 0;
+        //Thread threadContPaginaRel;
+        protected bool PrintLayout = true;
+        #endregion
+
+        #region Evento FormLoad
+        private void FormRelatorio_Load(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Evento RenderingComplete
+        private void relUniube_RenderingComplete(object sender, Microsoft.Reporting.WinForms.RenderingCompleteEventArgs e)
+        {
+            if (valid2 == true)
+            {
+                valid2 = false;
+                if (PrintLayout)
+                    rptUniube.SetDisplayMode(DisplayMode.PrintLayout);                
+                rptUniube.ZoomMode = ZoomMode.PageWidth;
+
+                //ThreadStart contPaginaRel = new ThreadStart(contaPaginaAcessoTela);
+                //threadContPaginaRel = new Thread(contPaginaRel);
+                //threadContPaginaRel.Start();
+            }
+        }
+        #endregion
+        //private void contapagina()
+        //{
+        //    this.Invoke(new MethodInvoker(AlimentarTela));
+        //}
+
+        //private void contaPaginaAcessoTela()
+        //{
+        //    LocalReport report = rptUniube.LocalReport;
+        //    if (_tipoRelatorio == CTipoRelatorio.Retrato)
+        //    {
+        //        if (_tipoFolha == CTipoFolha.A3)
+        //            Count(report, "29,7cm", "42cm", "1.5cm", "0.5cm", "0.5cm", "1.5cm");
+        //        if (_tipoFolha == CTipoFolha.A4)
+        //            Count(report, "21cm", "29.7cm", "1.5cm", "0.5cm", "0.5cm", "1.5cm");
+        //        if (_tipoFolha == CTipoFolha.A5)
+        //            Count(report, "14,8cm", "21cm", "1.5cm", "0.5cm", "0.5cm", "1.5cm");
+        //        if (_tipoFolha == CTipoFolha.Carta)
+        //            Count(report, "21,59cm", "27,94cm", "1.5cm", "0.5cm", "0.5cm", "1.5cm");
+        //        if (_tipoFolha == CTipoFolha.Oficio)
+        //            Count(report, "21,59cm", "35,56cm", "1.5cm", "0.5cm", "0.5cm", "1.5cm");
+        //    }
+        //    else
+        //    {
+        //        if (_tipoFolha == CTipoFolha.A3)
+        //            Count(report, "42cm", "29,7cm", "1cm", "0.5cm", "0.5cm", "1cm");
+        //        if (_tipoFolha == CTipoFolha.A4)
+        //            Count(report, "29.7cm", "21cm", "1cm", "0.5cm", "0.5cm", "1cm");
+        //        if (_tipoFolha == CTipoFolha.A5)
+        //            Count(report, "21cm", "14,8cm", "1cm", "0.5cm", "0.5cm", "1cm");
+        //        if (_tipoFolha == CTipoFolha.Carta)
+        //            Count(report, "27,94cm", "21,59cm", "1cm", "0.5cm", "0.5cm", "1cm");
+        //        if (_tipoFolha == CTipoFolha.Carta)
+        //            Count(report, "35,56cm", "21,59cm", "1cm", "0.5cm", "0.5cm", "1cm");
+        //    }
+        //    contapagina();
+        //}
+
+        //private void AlimentarTela()
+        //{
+        //    toolStriptxtPg.Enabled = true;
+        //    toolStripBtnPriviewPrint.Enabled = true;
+        //    toolStripButtonUltimo.Enabled = true;
+        //    toolStriplblPg.Text = "de " + numberOfPages.ToString();
+        //    pgContTotal = numberOfPages;
+        //    //toolStriptxtPg.Text = "1";
+
+        //    if (numberOfPages == 1)
+        //    {
+        //        toolStripBtnAnterior.Enabled = false;
+        //        toolStripBtnInicio.Enabled = false;
+        //        toolStripBtnProximo.Enabled = false;
+        //        toolStripButtonUltimo.Enabled = false;
+        //    }
+        //    else
+        //    {
+        //        toolStripBtnAnterior.Enabled = false;
+        //        toolStripBtnInicio.Enabled = false;
+        //        toolStripBtnProximo.Enabled = true;
+        //        toolStripButtonUltimo.Enabled = true; 
+        //    }
+
+        //    if (rptUniube.CurrentPage != 1)
+        //    {
+        //        toolStripBtnAnterior.Enabled = true;
+        //        toolStripBtnInicio.Enabled = true;
+        //    }
+
+        //}
+        //#endregion
+
+        //#region Button Proximo
+        //private void toolStripBtnProximo_Click(object sender, EventArgs e)
+        //{
+        //    ModoImpressao();
+        //    try
+        //    {
+        //        rptUniube.CurrentPage = rptUniube.CurrentPage + 1;
+        //        toolStriptxtPg.Text = rptUniube.CurrentPage.ToString();
+        //        toolStripBtnAnterior.Enabled = true;
+        //        toolStripBtnInicio.Enabled = true;
+        //    }
+        //    catch
+        //    {
+        //        toolStripBtnProximo.Enabled = false;
+        //        toolStripBtnAnterior.Enabled = true;
+        //        toolStripBtnInicio.Enabled = true;
+        //        if (numberOfPages != 0)
+        //        {
+        //            toolStripButtonUltimo.Enabled = true;
+        //        }
+        //    }
+        //}        
+        //#endregion
+
+        private void ModoImpressao()
+        {
+            if (PrintLayout == false)
+            {
+                rptUniube.SetDisplayMode(DisplayMode.PrintLayout);
+                rptUniube.ZoomMode = ZoomMode.PageWidth;
+                PrintLayout = true;
+                //toolStripTxtPesquisa.Text = "";
+                //EnabledOpcoesPesquisa(false);
+            }
+        }
+
+        //#region Button Ultimo
+        //private void toolStripButtonUltimo_Click(object sender, EventArgs e)
+        //{
+        //    /*Posiciona o cursor na ultima pagina do relatorio*/
+        //    ModoImpressao();
+        //    if (numberOfPages != 0)
+        //    {
+        //        pgContTotal = numberOfPages;
+        //        toolStripBtnProximo.Enabled = false;
+        //        toolStripButtonUltimo.Enabled = false;
+        //        PgNavegacao = pgContTotal;
+        //        toolStriptxtPg.Text = pgContTotal.ToString();
+        //        rptUniube.CurrentPage = pgContTotal;
+        //        toolStripBtnAnterior.Enabled = true;
+        //        toolStripBtnInicio.Enabled = true;
+        //    }
+           
+        //}
+        //#endregion
+
+        //#region Button Anterior
+        //private void toolStripBtnAnterior_Click(object sender, EventArgs e)
+        //{
+        //    ModoImpressao();
+        //    try
+        //    {
+        //        rptUniube.CurrentPage = rptUniube.CurrentPage - 1;
+        //        toolStriptxtPg.Text = rptUniube.CurrentPage.ToString();
+        //        toolStripBtnProximo.Enabled = true;
+        //        if (numberOfPages != 0)
+        //        {
+        //            toolStripButtonUltimo.Enabled = true;
+        //        }
+        //        if (rptUniube.CurrentPage == 1)
+        //        {
+        //            toolStripBtnAnterior.Enabled = false;
+        //            toolStripBtnInicio.Enabled = false;
+        //            toolStripBtnProximo.Enabled = true;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        toolStripBtnAnterior.Enabled = false;
+        //        toolStripBtnInicio.Enabled = false;
+        //        toolStripBtnProximo.Enabled = true;
+        //        if (numberOfPages != 0)
+        //        {
+        //            toolStripButtonUltimo.Enabled = true;
+        //        }
+        //    }
+        //}
+        //#endregion
+
+        //#region Button Inicio
+        //private void toolStripBtnInicio_Click(object sender, EventArgs e)
+        //{
+        //    /*Posiona o curso na primeira pagina do relatorio*/
+        //    ModoImpressao();
+        //    toolStripBtnAnterior.Enabled = false;
+        //    toolStripBtnInicio.Enabled = false;
+        //    toolStriptxtPg.Text = "1";
+        //    rptUniube.CurrentPage = 1;
+        //    PgNavegacao = 1;
+        //    toolStripBtnProximo.Enabled = true;
+        //    if (numberOfPages != 0)
+        //    {
+        //        toolStripButtonUltimo.Enabled = true;
+        //    }
+        //    if (rptUniube.CurrentPage == 1)
+        //    {
+        //        toolStripBtnAnterior.Enabled = false;
+        //        toolStripBtnInicio.Enabled = false;
+        //        toolStripBtnProximo.Enabled = true;
+        //    }
+        //}
+        //#endregion
+
+        #region ExportaPDF
+        private void toolStripBtnPDF_Click(object sender, EventArgs e)
+        {
+            // Abre janela para usuario escolher onde salvar o PDF
+
+            SaveFileDialog vAbreArq = new SaveFileDialog();
+
+            // Definição do tipo de Arquivo
+
+            vAbreArq.Filter = "PDF|*.pdf";
+            String fileName = "";
+
+            vAbreArq.Title = "Salvar como";
+            if (vAbreArq.ShowDialog() == DialogResult.OK)
+            {
+                // Caminho do arquivo
+                fileName = vAbreArq.FileName;
+            }
+
+            // Verfica se o valor que retorno e diferente de vazio 
+            if (fileName != "")
+            {
+                /*Chamada da classe que exporta para PDF*/
+                LocalReport report = rptUniube.LocalReport;
+                ExportarReport(report, rptFormat.PDF, fileName);
+                Process.Start(fileName);
+            }
+        }
+        #endregion
+
+        //#region Exporta Imagem
+        //private void toolStripBtnImagem_Click(object sender, EventArgs e)
+        //{
+        //    // Abre janela para usuÃ¡rio escolher o PDF
+
+        //    SaveFileDialog vAbreArq = new SaveFileDialog();
+
+
+        //    // Verifica se o usuÃ¡rio clicou em ok ou cancelar na janela de seleÃ§Ã£o da pasta
+
+        //    vAbreArq.Filter = "JPG|*.jpg";
+        //    String fileName = "";
+
+        //    vAbreArq.Title = "Selecione o Arquivo";
+        //    if (vAbreArq.ShowDialog() == DialogResult.OK)
+        //    {
+        //        // Caminho do arquivo
+        //        fileName = vAbreArq.FileName;
+        //    }
+
+        //    if (fileName != "")
+        //    {
+        //        LocalReport report = rptUniube.LocalReport;
+        //        ExportarReport(report, rptFormat.Image, fileName);
+        //        Process.Start(fileName);
+        //    }
+        //}
+        //#endregion
+
+        #region Imprime Relatorio
+        private void toolStripBtnImpressora_Click(object sender, EventArgs e)
+        {
+            /*Comando aciona o PrintDialog*/
+
+            rptUniube.PrintDialog();
+        }
+        #endregion
+
+        //#region Evento onChanged txtPg
+        //private void toolStriptxtPg_TextChanged(object sender, EventArgs e)
+        //{
+        //    bool success;
+        //    string s1 = toolStriptxtPg.Text;
+        //    int result = 0;
+
+        //    //Verifica se o valor digitado e numero (Retorna Verdadeiro ou Falso)
+        //    success = Int32.TryParse(s1, out result);
+
+        //    if (success == false)
+        //    {
+        //        toolStriptxtPg.Text = "";
+        //    }
+        //}
+        //#endregion
+
+        //#region Eventon KeyDown txtPg
+        //private void toolStriptxtPg_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (toolStriptxtPg.Text != "")
+        //        {
+        //            pgBusca = Convert.ToInt32(toolStriptxtPg.Text);
+
+        //            if (pgBusca <= 1)
+        //            {
+        //                toolStriptxtPg.Text = "1";
+        //                rptUniube.CurrentPage = 1;
+        //                toolStripBtnProximo.Enabled = true;
+        //                toolStripButtonUltimo.Enabled = true;
+        //                toolStripBtnAnterior.Enabled = false;
+        //                toolStripBtnInicio.Enabled = false;
+        //            }
+        //            else
+        //            {
+
+        //                if (pgBusca >= pgContTotal)
+        //                {
+
+        //                    toolStripBtnProximo.Enabled = false;
+        //                    toolStripButtonUltimo.Enabled = false;
+        //                    toolStriptxtPg.Text = pgContTotal.ToString();
+        //                    rptUniube.CurrentPage = pgContTotal;
+        //                    toolStripBtnAnterior.Enabled = true;
+        //                    toolStripBtnInicio.Enabled = true;
+        //                }
+        //                else
+        //                {
+        //                    rptUniube.CurrentPage = pgBusca;
+        //                    toolStripBtnAnterior.Enabled = true;
+        //                    toolStripBtnInicio.Enabled = true;
+        //                    toolStripBtnProximo.Enabled = true;
+        //                    toolStripButtonUltimo.Enabled = true;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            toolStriptxtPg.Text = "";
+        //        }
+        //    }
+        //}
+        //#endregion
+
+        //private void toolStripButtonZoomMore_Click(object sender, EventArgs e)
+        //{
+        //    if (rptUniube.ZoomPercent < 500)
+        //    {
+        //        rptUniube.ZoomMode = ZoomMode.Percent;
+        //        rptUniube.ZoomPercent += 25;
+        //        toolStripComboBoxZoom.Text = rptUniube.ZoomPercent.ToString() + "%";
+        //    }
+        //}
+
+        //private void toolStripButtonZoomLess_Click(object sender, EventArgs e)
+        //{
+        //    if (rptUniube.ZoomPercent > 25)
+        //    {
+        //        if (toolStripComboBoxZoom.Text == "Página Inteira")
+        //        {
+        //            rptUniube.ZoomMode = ZoomMode.Percent;
+        //            rptUniube.ZoomPercent = 25;
+        //            toolStripComboBoxZoom.Text = rptUniube.ZoomPercent.ToString() + "%";
+        //        }
+        //        else
+        //        {
+        //            rptUniube.ZoomMode = ZoomMode.Percent;
+        //            rptUniube.ZoomPercent -= 25;
+        //            toolStripComboBoxZoom.Text = rptUniube.ZoomPercent.ToString() + "%";
+        //        }
+        //    }
+        //}
+
+        //private void toolStripComboBoxZoom_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string valorSelecionado = toolStripComboBoxZoom.SelectedItem.ToString();
+
+        //    if ((valorSelecionado != "Largura da Página") && (valorSelecionado != "Página Inteira"))
+        //    {
+        //        rptUniube.ZoomMode = ZoomMode.Percent;
+        //        rptUniube.ZoomPercent = int.Parse(toolStripComboBoxZoom.SelectedItem.ToString().PadLeft(4, '0').Substring(0, 3));
+        //    }
+        //    else
+        //    {
+        //        if (valorSelecionado == "Largura da Página")
+        //        {
+        //            rptUniube.ZoomMode = ZoomMode.PageWidth;
+        //        }
+        //        else
+        //        {
+        //            rptUniube.ZoomMode = ZoomMode.FullPage;
+        //        }
+        //    }
+        //}
+
+        //private void toolStripbtnPesq_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (toolStripTxtPesquisa.Text != "")
+        //        {
+        //            toolStripbtnPesqProximo.Enabled = true;
+        //            this.rptUniube.Find(toolStripTxtPesquisa.Text, 1);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Campos de busca se encontra vazio");
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Pesquisa concluida no documento. Não foi encontrada nenhuma ocorrência.");
+        //    }
+        //}
+
+        //private void toolStripbtnPesqProximo_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        rptUniube.FindNext();
+        //        toolStriptxtPg.Text = rptUniube.CurrentPage.ToString();
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Pesquisa concluida no documento. Não foi encontrada mais nenhuma ocorrência.");
+        //    }
+        //}
+
+        //private void toolStripTxtPesquisa_TextChanged(object sender, EventArgs e)
+        //{
+        //    toolStripbtnPesqProximo.Enabled = false;
+        //}
+
+        private void toolStripBtnPriviewPrint_Click(object sender, EventArgs e)
+        {
+            if (PrintLayout == true)
+            {
+                rptUniube.SetDisplayMode(DisplayMode.Normal);
+                rptUniube.ZoomMode = ZoomMode.PageWidth;
+                PrintLayout = false;
+                //toolStripTxtPesquisa.Text = "";
+                //EnabledOpcoesPesquisa(true);
+            }
+            else
+            {
+                rptUniube.SetDisplayMode(DisplayMode.PrintLayout);
+                rptUniube.ZoomMode = ZoomMode.PageWidth;
+                PrintLayout = true;
+                //toolStripbtnPesqProximo.Enabled = false;
+                //toolStripTxtPesquisa.Text = "";
+                //EnabledOpcoesPesquisa(false);
+                //toolStripComboBoxZoom.Text = "Largura da Página";
+            }
+        }
+
+        //private void EnabledOpcoesPesquisa(bool flag)
+        //{
+        //    toolStripTxtPesquisa.Enabled = flag;
+        //    toolStriptxtBusca.Enabled = flag;
+        //}
+
+        //public void Count(LocalReport report, string PageWidth, string PageHeight, string MarginTop, string MarginLeft, string MarginRight, string MarginBottom)
+        //{
+        //    try
+        //    {
+        //        string deviceInfo =
+        //      "<DeviceInfo>" +
+        //      "  <OutputFormat>EMF</OutputFormat>" +
+        //      "  <PageWidth>" + PageWidth + "</PageWidth>" +
+        //      "  <PageHeight>" + PageHeight + "</PageHeight>" +
+        //      "  <MarginTop>" + MarginTop + "</MarginTop>" +
+        //      "  <MarginLeft>" + MarginLeft + "</MarginLeft>" +
+        //      "  <MarginRight>" + MarginRight + "</MarginRight>" +
+        //      "  <MarginBottom>" + MarginBottom + "</MarginBottom>" +
+        //      "</DeviceInfo>";
+        //        Warning[] warnings;
+        //        report.Render("Image", deviceInfo, CreateStream, out warnings);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        report.Dispose();
+        //    }
+        //}
+
+        //private Stream CreateStream(string name, string fileNameExtension, Encoding encoding, string mimeType, bool willSeek)
+        //{
+        //    MemoryStream stream = new MemoryStream();
+        //    numberOfPages++;
+        //    this.Invoke(new MethodInvoker(AlimentarTela));
+        //    return stream;
+        //}
+        
+        //private void toolStripTxtPesquisa_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        if (toolStripTxtPesquisa.Text != "")
+        //        {
+        //            toolStripbtnPesq_Click(toolStripTxtPesquisa, e);
+        //        }
+        //    }
+        //}
+
+        //private void rptUniube_PageNavigation(object sender, PageNavigationEventArgs e)
+        //{
+        //    ModoImpressao();
+        //    rptUniube.CurrentPage = e.NewPage;
+        //    toolStriptxtPg.Text = rptUniube.CurrentPage.ToString();
+
+        //    if (rptUniube.CurrentPage == 1)
+        //    {
+        //        toolStripBtnAnterior.Enabled = false;
+        //        toolStripBtnInicio.Enabled = false;
+        //    }
+        //    else
+        //    {
+        //        toolStripBtnAnterior.Enabled = true;
+        //        toolStripBtnInicio.Enabled = true;
+        //    }
+
+        //    if (numberOfPages != 0)
+        //    {
+        //        if (rptUniube.CurrentPage == numberOfPages)
+        //        {
+        //            toolStripBtnProximo.Enabled = false;
+        //            toolStripButtonUltimo.Enabled = false;
+        //        }
+        //        else
+        //        {
+        //            toolStripBtnProximo.Enabled = true;
+        //            toolStripButtonUltimo.Enabled = true;
+        //        }
+        //    }
+        //}
+
+        private void FormRelatorio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            LocalReport report = rptUniube.LocalReport;
+            report.Dispose();
+            rptUniube.Reset();
+            rptUniube.Dispose();
+            //if (threadContPaginaRel != null)
+            //{
+            //    if (threadContPaginaRel.IsAlive)
+            //    {
+            //        threadContPaginaRel.Abort();
+            //    }
+            //}
+        }
+
+        public enum rptFormat
+        {
+            Excel,
+            PDF,
+            Image,
+        }
+
+        private rptFormat _tipoExportacao;
+
+        public rptFormat TipoExportacao
+        {
+            get { return _tipoExportacao; }
+            set { _tipoExportacao = value; }
+        }
+
+        public void ExportarReport(LocalReport report, rptFormat rptFormat, string filePath)
+        {
+            Warning[] warnings = null;
+            string[] streamids = null;
+            string mimeType;
+            string encoding;
+            string extension;
+
+
+            byte[] bytes = report.Render(rptFormat.ToString(), null, out mimeType, out encoding, out extension, out streamids, out warnings);
+
+            switch (rptFormat)
+            {
+                case rptFormat.Excel:
+                    filePath = Path.ChangeExtension(filePath, "xls");
+                    break;
+                case rptFormat.Image:
+                    filePath = Path.ChangeExtension(filePath, "jpg");
+                    break;
+                case rptFormat.PDF:
+                    filePath = Path.ChangeExtension(filePath, "pdf");
+                    break;
+            }
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Create))
+            {
+                fs.Write(bytes, 0, bytes.Length);
+                fs.Close();
+            }
+
+            bytes = null;
+        }
+        //private void toolStripBtnExcel_Click(object sender, EventArgs e)
+        //{
+        //    // Abre janela para usuario escolher onde salvar o PDF
+
+        //    SaveFileDialog vAbreArq = new SaveFileDialog();
+
+        //    // Definição do tipo de Arquivo
+
+        //    vAbreArq.Filter = "XLS|*.xls";
+        //    String fileName = "";
+
+        //    vAbreArq.Title = "Salvar como";
+        //    if (vAbreArq.ShowDialog() == DialogResult.OK)
+        //    {
+        //        // Caminho do arquivo
+        //        fileName = vAbreArq.FileName;
+        //    }
+
+        //    // Verfica se o valor que retorno e diferente de vazio 
+        //    if (fileName != "")
+        //    {
+        //        /*Chamada da classe que exporta para Excel*/
+
+        //        LocalReport report = rptUniube.LocalReport;
+        //        ExportarReport(report, rptFormat.Excel, fileName);
+        //        Process.Start(fileName);
+        //    }
+        //}
+
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    int tamanho = toolStriplblPg.Text.Length;
+
+        //    if (tamanho == 13 || tamanho == 22)
+        //    {
+        //        if (toolStriplblPg.Text == "Carregando...")
+        //        {
+        //            toolStriplblPg.Text = "                      ";
+        //        }
+        //        else
+        //        {
+        //            toolStriplblPg.Text = "Carregando...";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        timer1.Enabled = false;
+        //    }
+        //}
+
+        private void toolStripBtnExcelDados_Click(object sender, EventArgs e)
+        {
+            // Abre janela para usuario escolher onde salvar o Excel
+
+            SaveFileDialog vAbreArq = new SaveFileDialog();
+
+            // Definição do tipo de Arquivo
+
+            vAbreArq.Filter = "Excel|*.xls|Pasta de Trabalho do Excel|*.xlsx";
+            String fileName = "";
+
+            vAbreArq.Title = "Salvar como";
+            if (vAbreArq.ShowDialog() == DialogResult.OK)
+            {
+                // Caminho do arquivo
+                fileName = vAbreArq.FileName;
+            }
+
+            // Verfica se o valor que retorno e diferente de vazio 
+            if (fileName != "")
+            {
+                DataTable dtexportaExcelDados = (DataTable)rptUniube.LocalReport.DataSources[0].Value;
+                Classes.Uteis.ExportaExcel.ExportaParaExcel(dtexportaExcelDados, fileName, true);
+            }
+        }
+
+        protected ToolStripButton toolStripBtnExcel = new ToolStripButton();
+        protected ToolStripButton toolStripBtnPDF = new ToolStripButton();
+        protected ToolStripButton toolStripBtnImpressora = new ToolStripButton();
+        protected ToolStripButton toolStripBtnPreviewer = new ToolStripButton();        
+        private void ChangeToolBar()
+        {
+            Image img;
+            //EXCEL
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iExcelDados22.png");
+            toolStripBtnExcel = new ToolStripButton("", img, toolStripBtnExcelDados_Click);
+            toolStripBtnExcel.Visible = true;
+            toolStripBtnExcel.Enabled = true;
+            toolStripBtnExcel.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnExcel.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnExcel.AutoSize = true;
+            toolStripBtnExcel.Height = img.Height;
+            toolStripBtnExcel.Width = img.Width;
+            toolStripBtnExcel.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnExcel.ToolTipText = "Modo Folha de Dados";
+
+            //PDF
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iPdf22.png");
+            toolStripBtnPDF = new ToolStripButton("", img, toolStripBtnPDF_Click);
+            toolStripBtnPDF.Visible = true;
+            toolStripBtnPDF.Enabled = true;
+            toolStripBtnPDF.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnPDF.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnPDF.AutoSize = true;
+            toolStripBtnPDF.Height = img.Height;
+            toolStripBtnPDF.Width = img.Width;
+            toolStripBtnPDF.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnPDF.ToolTipText = "PDF";
+
+            //IMPRESSORA
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iImprimir22.png");
+            toolStripBtnImpressora = new ToolStripButton("", img, toolStripBtnImpressora_Click);
+            toolStripBtnImpressora.Visible = true;
+            toolStripBtnImpressora.Enabled = true;
+            toolStripBtnImpressora.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnImpressora.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnImpressora.AutoSize = true;
+            toolStripBtnImpressora.Height = img.Height;
+            toolStripBtnImpressora.Width = img.Width;
+            toolStripBtnImpressora.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnImpressora.ToolTipText = "Imprimir";
+
+            //VISUALIZAR IMPRESSAO
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iPreview24.png");
+            toolStripBtnPreviewer = new ToolStripButton("", img, toolStripBtnPriviewPrint_Click);
+            toolStripBtnPreviewer.Visible = true;
+            toolStripBtnPreviewer.Enabled = true;
+            toolStripBtnPreviewer.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnPreviewer.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnPreviewer.AutoSize = true;
+            toolStripBtnPreviewer.Height = img.Height;
+            toolStripBtnPreviewer.Width = img.Width;
+            toolStripBtnPreviewer.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnPreviewer.ToolTipText = "Visualizar impressão";
+
+            //VOLTAR
+            //img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iVoltar24.png");
+            //toolStripBtnVoltar = new ToolStripButton("", img, toolStripButtonVoltar_Click);
+            //toolStripBtnVoltar.Visible = true;
+            //toolStripBtnVoltar.Enabled = true;
+            //toolStripBtnVoltar.ImageAlign = ContentAlignment.MiddleCenter;
+            //toolStripBtnVoltar.ImageScaling = ToolStripItemImageScaling.None;
+            //toolStripBtnVoltar.AutoSize = true;
+            //toolStripBtnVoltar.Height = img.Height;
+            //toolStripBtnVoltar.Width = img.Width;
+            //toolStripBtnVoltar.Alignment = ToolStripItemAlignment.Right;
+            //toolStripBtnVoltar.ToolTipText = "Voltar";
+
+            //Adiciona novos botões e altera ordem da barra de menu          
+            ToolStrip ts = new ToolStrip();
+            ts = FindToolStrip<ToolStrip>(this.rptUniube);
+
+            int index = 0;
+            ToolStripItem[] listOptions = new ToolStripItem[ts.Items.Count + 6];
+            listOptions[index++] = toolStripBtnImpressora;
+            listOptions[index++] = new ToolStripSeparator();
+            listOptions[index++] = toolStripBtnExcel;
+            listOptions[index++] = toolStripBtnPDF;
+            listOptions[index++] = new ToolStripSeparator();
+
+            for (int i = 0; i < ts.Items.Count; i++)
+            {
+                listOptions[index++] = ts.Items[i];
+            }
+
+            listOptions[index++] = toolStripBtnPreviewer;
+            //listOptions[index++] = new ToolStripSeparator();
+            //listOptions[index++] = toolStripBtnVoltar;
+
+            ts.Items.Clear();
+            ts.Items.AddRange(listOptions);
+        }
+
+        private T FindToolStrip<T>(Control control) where T : System.Windows.Forms.Control
+        {
+            if (control == null)
+            {
+                return null;
+            }
+            else if (control is T)
+            {
+                //muda a cor da barra
+                control.BackColor = Color.FromArgb(195, 217, 241);
+                return (T)control;
+            }
+            else
+            {
+                T result = null;
+
+                foreach (Control embedded in control.Controls)
+                {
+                    if (result == null)
+                    {
+                        result = FindToolStrip<T>(embedded);
+                    }
+                }
+
+                return result;
+            }
+        }
+    }
+}

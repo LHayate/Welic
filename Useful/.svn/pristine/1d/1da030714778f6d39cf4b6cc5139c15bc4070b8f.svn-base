@@ -1,0 +1,169 @@
+﻿namespace System.Windows.Forms.Uniube.RecursosGenericos
+{
+    partial class Intervalo2
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkTitulo = new System.Windows.Forms.Uniube.CheckBoxUniube(this.components);
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.lblFinal = new System.Windows.Forms.Uniube.LabelUniube();
+            this.txtInicial = new System.Windows.Forms.Uniube.TextBoxUniube();
+            this.txtFinal = new System.Windows.Forms.Uniube.TextBoxUniube();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel1.Controls.Add(this.chkTitulo);
+            this.panel1.Controls.Add(this.panel12);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(155, 19);
+            this.panel1.TabIndex = 0;
+            // 
+            // chkTitulo
+            // 
+            this.chkTitulo.AutoSize = true;
+            this.chkTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.chkTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkTitulo.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTitulo.LimpaCampo = true;
+            this.chkTitulo.Location = new System.Drawing.Point(3, 0);
+            this.chkTitulo.Name = "chkTitulo";
+            this.chkTitulo.NomeCampoDadosDataTable = null;
+            this.chkTitulo.Size = new System.Drawing.Size(152, 19);
+            this.chkTitulo.TabIndex = 0;
+            this.chkTitulo.Text = "<titulo>";
+            this.chkTitulo.UseVisualStyleBackColor = false;
+            this.chkTitulo.CheckedChanged += new System.EventHandler(this.chkTitulo_CheckedChanged);
+            this.chkTitulo.EnabledChanged += new System.EventHandler(this.chkTitulo_EnabledChanged);
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(3, 19);
+            this.panel12.TabIndex = 1149;
+            // 
+            // lblFinal
+            // 
+            this.lblFinal.AutoSize = true;
+            this.lblFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinal.Location = new System.Drawing.Point(70, 25);
+            this.lblFinal.Name = "lblFinal";
+            this.lblFinal.Size = new System.Drawing.Size(15, 13);
+            this.lblFinal.TabIndex = 1149;
+            this.lblFinal.Text = "à";
+            // 
+            // txtInicial
+            // 
+            this.txtInicial._RecursosGenericosSqlF3 = null;
+            this.txtInicial._RecursosGenericosSqlLeave = null;
+            this.txtInicial.BackColor = System.Drawing.Color.White;
+            this.txtInicial.ExibirIconePesquisa = false;
+            this.txtInicial.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInicial.InformacaoToolTipCaminho = null;
+            this.txtInicial.InformacaoToolTipDescricao = null;
+            this.txtInicial.LimpaCampo = true;
+            this.txtInicial.Location = new System.Drawing.Point(3, 22);
+            this.txtInicial.MaxLength = 15;
+            this.txtInicial.Name = "txtInicial";
+            this.txtInicial.NomeCampoDadosDataTable = "";
+            this.txtInicial.ParteDecimal = 0;
+            this.txtInicial.ParteInteira = 0;
+            this.txtInicial.Size = new System.Drawing.Size(66, 21);
+            this.txtInicial.TabIndex = 1146;
+            this.txtInicial.TipoCampo = System.Windows.Forms.Uniube.TextBoxUniube.CTipoCampo.Normal;
+            this.txtInicial.TipoValor = System.Windows.Forms.Uniube.TextBoxUniube.CTipoValor.Numerico;
+            this.txtInicial.TextChanged += new System.EventHandler(this.txtInicial_TextChanged);
+            this.txtInicial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInicial_KeyDown);
+            this.txtInicial.Leave += new System.EventHandler(this.txtInicial_Leave);
+            this.txtInicial.MouseEnter += new System.EventHandler(this.txtInicial_MouseEnter);
+            this.txtInicial.MouseLeave += new System.EventHandler(this.txtInicial_MouseLeave);
+            // 
+            // txtFinal
+            // 
+            this.txtFinal._RecursosGenericosSqlF3 = null;
+            this.txtFinal._RecursosGenericosSqlLeave = null;
+            this.txtFinal.BackColor = System.Drawing.Color.White;
+            this.txtFinal.ExibirIconePesquisa = false;
+            this.txtFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFinal.InformacaoToolTipCaminho = null;
+            this.txtFinal.InformacaoToolTipDescricao = null;
+            this.txtFinal.LimpaCampo = true;
+            this.txtFinal.Location = new System.Drawing.Point(86, 22);
+            this.txtFinal.MaxLength = 15;
+            this.txtFinal.Name = "txtFinal";
+            this.txtFinal.NomeCampoDadosDataTable = "";
+            this.txtFinal.ParteDecimal = 0;
+            this.txtFinal.ParteInteira = 0;
+            this.txtFinal.Size = new System.Drawing.Size(66, 21);
+            this.txtFinal.TabIndex = 1146;
+            this.txtFinal.TipoCampo = System.Windows.Forms.Uniube.TextBoxUniube.CTipoCampo.Normal;
+            this.txtFinal.TipoValor = System.Windows.Forms.Uniube.TextBoxUniube.CTipoValor.Numerico;
+            this.txtFinal.TextChanged += new System.EventHandler(this.txtFinal_TextChanged);
+            this.txtFinal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFinal_KeyDown);
+            this.txtFinal.Leave += new System.EventHandler(this.txtFinal_Leave);
+            this.txtFinal.MouseEnter += new System.EventHandler(this.txtFinal_MouseEnter);
+            this.txtFinal.MouseLeave += new System.EventHandler(this.txtFinal_MouseLeave);
+            // 
+            // Intervalo2
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.GhostWhite;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.lblFinal);
+            this.Controls.Add(this.txtInicial);
+            this.Controls.Add(this.txtFinal);
+            this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(178, 47);
+            this.Name = "Intervalo2";
+            this.Size = new System.Drawing.Size(155, 45);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Uniube.CheckBoxUniube chkTitulo;
+        public System.Windows.Forms.Uniube.TextBoxUniube txtInicial;
+        public System.Windows.Forms.Uniube.TextBoxUniube txtFinal;
+        private System.Windows.Forms.Panel panel12;
+        public LabelUniube lblFinal;
+    }
+}

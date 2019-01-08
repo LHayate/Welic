@@ -1,0 +1,320 @@
+﻿namespace System.Windows.Forms.Uniube.RecursosGenericos
+{
+    partial class Intervalo1
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.chkTitulo = new System.Windows.Forms.Uniube.CheckBoxUniube(this.components);
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlInicial = new System.Windows.Forms.Panel();
+            this.txtInicial = new System.Windows.Forms.Uniube.TextBoxUniube();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.lblInicial = new System.Windows.Forms.Uniube.LabelUniube();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.pnlFinal = new System.Windows.Forms.Panel();
+            this.txtFinal = new System.Windows.Forms.Uniube.TextBoxUniube();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.lblFinal = new System.Windows.Forms.Uniube.LabelUniube();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.pnlInicial.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.pnlFinal.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel1.Controls.Add(this.chkTitulo);
+            this.panel1.Controls.Add(this.panel12);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(127, 19);
+            this.panel1.TabIndex = 0;
+            // 
+            // chkTitulo
+            // 
+            this.chkTitulo.AutoSize = true;
+            this.chkTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.chkTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chkTitulo.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkTitulo.LimpaCampo = true;
+            this.chkTitulo.Location = new System.Drawing.Point(3, 0);
+            this.chkTitulo.Name = "chkTitulo";
+            this.chkTitulo.NomeCampoDadosDataTable = null;
+            this.chkTitulo.Size = new System.Drawing.Size(124, 19);
+            this.chkTitulo.TabIndex = 0;
+            this.chkTitulo.Text = "<titulo>";
+            this.chkTitulo.UseVisualStyleBackColor = false;
+            this.chkTitulo.CheckedChanged += new System.EventHandler(this.chkTitulo_CheckedChanged);
+            this.chkTitulo.EnabledChanged += new System.EventHandler(this.chkTitulo_EnabledChanged);
+            // 
+            // panel12
+            // 
+            this.panel12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(3, 19);
+            this.panel12.TabIndex = 1149;
+            // 
+            // panel3
+            // 
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 19);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(127, 3);
+            this.panel3.TabIndex = 7;
+            // 
+            // pnlInicial
+            // 
+            this.pnlInicial.Controls.Add(this.txtInicial);
+            this.pnlInicial.Controls.Add(this.panel2);
+            this.pnlInicial.Controls.Add(this.panel6);
+            this.pnlInicial.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlInicial.Location = new System.Drawing.Point(0, 22);
+            this.pnlInicial.Name = "pnlInicial";
+            this.pnlInicial.Size = new System.Drawing.Size(127, 27);
+            this.pnlInicial.TabIndex = 8;
+            // 
+            // txtInicial
+            // 
+            this.txtInicial._RecursosGenericosSqlF3 = null;
+            this.txtInicial._RecursosGenericosSqlLeave = null;
+            this.txtInicial.BackColor = System.Drawing.Color.White;
+            this.txtInicial.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInicial.ExibirIconePesquisa = false;
+            this.txtInicial.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInicial.InformacaoToolTipCaminho = null;
+            this.txtInicial.InformacaoToolTipDescricao = null;
+            this.txtInicial.LimpaCampo = true;
+            this.txtInicial.Location = new System.Drawing.Point(58, 0);
+            this.txtInicial.MaxLength = 15;
+            this.txtInicial.Name = "txtInicial";
+            this.txtInicial.NomeCampoDadosDataTable = "";
+            this.txtInicial.ParteDecimal = 0;
+            this.txtInicial.ParteInteira = 0;
+            this.txtInicial.SegurancaCCusto = System.Windows.Forms.Uniube.TextBoxUniube.CSegurancaCentroCusto.NaoUtilizado;
+            this.txtInicial.Size = new System.Drawing.Size(66, 21);
+            this.txtInicial.TabIndex = 1146;
+            this.txtInicial.TipoCampo = System.Windows.Forms.Uniube.TextBoxUniube.CTipoCampo.Normal;
+            this.txtInicial.TipoValor = System.Windows.Forms.Uniube.TextBoxUniube.CTipoValor.Numerico;
+            this.txtInicial.TextChanged += new System.EventHandler(this.txtInicial_TextChanged);
+            this.txtInicial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInicial_KeyDown);
+            this.txtInicial.Leave += new System.EventHandler(this.txtInicial_Leave);
+            this.txtInicial.MouseEnter += new System.EventHandler(this.txtInicial_MouseEnter);
+            this.txtInicial.MouseLeave += new System.EventHandler(this.txtInicial_MouseLeave);
+            // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(124, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(3, 27);
+            this.panel2.TabIndex = 1149;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.lblInicial);
+            this.panel6.Controls.Add(this.panel13);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(58, 27);
+            this.panel6.TabIndex = 1145;
+            // 
+            // lblInicial
+            // 
+            this.lblInicial.AutoSize = true;
+            this.lblInicial.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblInicial.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInicial.Location = new System.Drawing.Point(0, 3);
+            this.lblInicial.Name = "lblInicial";
+            this.lblInicial.Size = new System.Drawing.Size(52, 13);
+            this.lblInicial.TabIndex = 1149;
+            this.lblInicial.Text = "Inicial:";
+            // 
+            // panel13
+            // 
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel13.Location = new System.Drawing.Point(52, 3);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(6, 24);
+            this.panel13.TabIndex = 1150;
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(58, 3);
+            this.panel7.TabIndex = 1148;
+            // 
+            // pnlFinal
+            // 
+            this.pnlFinal.Controls.Add(this.txtFinal);
+            this.pnlFinal.Controls.Add(this.panel4);
+            this.pnlFinal.Controls.Add(this.panel9);
+            this.pnlFinal.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFinal.Location = new System.Drawing.Point(0, 49);
+            this.pnlFinal.Name = "pnlFinal";
+            this.pnlFinal.Size = new System.Drawing.Size(127, 21);
+            this.pnlFinal.TabIndex = 9;
+            // 
+            // txtFinal
+            // 
+            this.txtFinal._RecursosGenericosSqlF3 = null;
+            this.txtFinal._RecursosGenericosSqlLeave = null;
+            this.txtFinal.BackColor = System.Drawing.Color.White;
+            this.txtFinal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFinal.ExibirIconePesquisa = false;
+            this.txtFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFinal.InformacaoToolTipCaminho = null;
+            this.txtFinal.InformacaoToolTipDescricao = null;
+            this.txtFinal.LimpaCampo = true;
+            this.txtFinal.Location = new System.Drawing.Point(58, 0);
+            this.txtFinal.MaxLength = 15;
+            this.txtFinal.Name = "txtFinal";
+            this.txtFinal.NomeCampoDadosDataTable = "";
+            this.txtFinal.ParteDecimal = 0;
+            this.txtFinal.ParteInteira = 0;
+            this.txtFinal.SegurancaCCusto = System.Windows.Forms.Uniube.TextBoxUniube.CSegurancaCentroCusto.NaoUtilizado;
+            this.txtFinal.Size = new System.Drawing.Size(66, 21);
+            this.txtFinal.TabIndex = 1146;
+            this.txtFinal.TipoCampo = System.Windows.Forms.Uniube.TextBoxUniube.CTipoCampo.Normal;
+            this.txtFinal.TipoValor = System.Windows.Forms.Uniube.TextBoxUniube.CTipoValor.Numerico;
+            this.txtFinal.TextChanged += new System.EventHandler(this.txtFinal_TextChanged);
+            this.txtFinal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFinal_KeyDown);
+            this.txtFinal.Leave += new System.EventHandler(this.txtFinal_Leave);
+            this.txtFinal.MouseEnter += new System.EventHandler(this.txtFinal_MouseEnter);
+            this.txtFinal.MouseLeave += new System.EventHandler(this.txtFinal_MouseLeave);
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel4.Location = new System.Drawing.Point(124, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(3, 21);
+            this.panel4.TabIndex = 1150;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.lblFinal);
+            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Controls.Add(this.panel11);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(58, 21);
+            this.panel9.TabIndex = 1145;
+            // 
+            // lblFinal
+            // 
+            this.lblFinal.AutoSize = true;
+            this.lblFinal.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lblFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinal.Location = new System.Drawing.Point(9, 3);
+            this.lblFinal.Name = "lblFinal";
+            this.lblFinal.Size = new System.Drawing.Size(43, 13);
+            this.lblFinal.TabIndex = 1149;
+            this.lblFinal.Text = "Final:";
+            // 
+            // panel10
+            // 
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel10.Location = new System.Drawing.Point(52, 3);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(6, 18);
+            this.panel10.TabIndex = 1150;
+            // 
+            // panel11
+            // 
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(58, 3);
+            this.panel11.TabIndex = 1148;
+            // 
+            // Intervalo1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.GhostWhite;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.pnlFinal);
+            this.Controls.Add(this.pnlInicial);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(800, 75);
+            this.Name = "Intervalo1";
+            this.Size = new System.Drawing.Size(127, 73);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.pnlInicial.ResumeLayout(false);
+            this.pnlInicial.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.pnlFinal.ResumeLayout(false);
+            this.pnlFinal.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        public System.Windows.Forms.Uniube.CheckBoxUniube chkTitulo;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Panel panel7;
+        public System.Windows.Forms.Uniube.TextBoxUniube txtInicial;
+        public System.Windows.Forms.Uniube.TextBoxUniube txtFinal;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel11;
+        public System.Windows.Forms.Panel pnlInicial;
+        public System.Windows.Forms.Panel pnlFinal;
+        public System.Windows.Forms.Uniube.LabelUniube lblInicial;
+        public System.Windows.Forms.Uniube.LabelUniube lblFinal;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel12;
+    }
+}

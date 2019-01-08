@@ -1,0 +1,328 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
+using Classes.Uteis;
+using System.Diagnostics;
+using System.Threading;
+using System.IO;
+using Classes.Entity;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
+
+namespace System.Windows.Forms.Uniube
+{
+    public partial class FormRelatorioCompletoCrystal : FormUniube
+    {
+        #region Declaração Varivaeis Globais
+        TabPage TabBuscaRelatorio;
+        TabPage TabVisualizarRelatorio;
+
+        public enum rptFormat
+        {
+            Excel,
+            PDF,
+            Image,
+        }
+
+        protected ToolStripButton toolStripBtnExcel = new ToolStripButton();
+        protected ToolStripButton toolStripBtnPDF = new ToolStripButton();
+        protected ToolStripButton toolStripBtnImpressora = new ToolStripButton();
+        protected ToolStripButton toolStripBtnVoltar = new ToolStripButton();
+
+        protected DataTable dtReportData = new DataTable();
+        #endregion
+        
+        public FormRelatorioCompletoCrystal()
+        {
+            InitializeComponent();
+            ChangeToolBar();
+        }
+
+        /// <summary>
+        /// Construtor com bloqueio para múltiplas instâncias do formulário
+        /// </summary>
+        /// <param name="frmP">Formulário principal do projeto.</param>
+        public FormRelatorioCompletoCrystal(Form frmP)
+            : base(frmP)
+        {
+            InitializeComponent();
+            ChangeToolBar();
+        }
+
+        private void btnLimparCampos_Click(object sender, EventArgs e)
+        {
+            LimpaCampos(this.Controls);
+        }
+
+        private void btCancel_Click(object sender, EventArgs e)
+        {
+            FormRelatorioCompleto FormRelatorioCompleto = new FormRelatorioCompleto();
+            FormRelatorioCompleto.Close();
+        }
+
+        private void btnPermissao_Click(object sender, EventArgs e)
+        {
+            frmManutencaoPermissoes frmMP = new frmManutencaoPermissoes();
+            frmMP.UsuarioLogado = Globals.Usuario;
+            frmMP.CodPrograma = this.CodigoSeguranca;
+            frmMP.ShowDialog();
+        }
+
+        private void FormRelatorioCompleto_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.myDispose();
+        }
+
+        private void FormRelatorioCompleto_Load(object sender, EventArgs e)
+        {
+            LiberaTelaPermissao();            
+        }
+
+        protected void LiberaTelaPermissao()
+        {
+            if (string.IsNullOrEmpty(this.CodigoSeguranca))
+                btnPermissao.Visible = false;
+            else
+                btnPermissao.Visible = true;
+        }
+
+        public void DesabilitarGuias()
+        {
+            /*Armazenando todas guia em variaveis globais, pois apos remover a guia perde sua referencia*/
+            TabVisualizarRelatorio = tbpRelatorio;
+            this.tbcRelUniube.TabPages.Remove(tbpRelatorio);
+        }
+
+        public void HabilitarPreviewRelatorio()
+        {
+            TabBuscaRelatorio = tbpBusca;
+            this.tbcRelUniube.TabPages.Remove(tbpBusca);
+            this.tbcRelUniube.TabPages.Add(tbpRelatorio);          
+        }
+
+        private void toolStripButtonVoltar_Click(object sender, EventArgs e)
+        {         
+            HabilitarBuscaRelatorio();
+            WindowState = FormWindowState.Normal;
+            this.myDispose();
+        }
+
+        private void myDispose()
+        {
+            this.dtReportData.Dispose();
+            ReportDocument cryRpt = (ReportDocument)this.crystalRptUniube.ReportSource;
+            if (cryRpt != null)
+                cryRpt.Dispose();
+            this.crystalRptUniube.Refresh();
+        }
+
+        public void HabilitarBuscaRelatorio()
+        {
+            TabVisualizarRelatorio = tbpRelatorio;
+            this.tbcRelUniube.TabPages.Remove(tbpRelatorio);
+            this.tbcRelUniube.TabPages.Add(tbpBusca);
+        }
+
+        private void toolStripBtnPDF_Click(object sender, EventArgs e)
+        {
+            String fileName = getLocalSave("PDF|*.pdf");
+            // Verfica se o valor que retorno e diferente de vazio 
+            if (fileName != "")
+            {
+                CreateDocument(fileName, ExportFormatType.PortableDocFormat);
+            }        
+        }
+
+        private void CreateDocument(string fileName, ExportFormatType tipoDocumento)
+        {
+            try
+            {
+                ReportDocument cryRpt = (ReportDocument)this.crystalRptUniube.ReportSource;
+                ExportOptions CrExportOptions;
+                DiskFileDestinationOptions CrDiskFileDestinationOptions = new DiskFileDestinationOptions();
+
+                ExportFormatOptions CrFormatTypeOptions = null;
+
+                switch (tipoDocumento)
+                {
+                    case ExportFormatType.Excel:
+                        CrFormatTypeOptions = new ExcelFormatOptions();
+                        break;
+                    
+                    case ExportFormatType.PortableDocFormat:
+                        CrFormatTypeOptions = new PdfRtfWordFormatOptions();
+                        break;                    
+                }
+
+                if (CrFormatTypeOptions == null)
+                    throw new Exception("Tipo de documento inválido para exportar!");
+                
+                ExcelFormatOptions tr = new ExcelFormatOptions();
+                
+                CrDiskFileDestinationOptions.DiskFileName = fileName;
+                CrExportOptions = cryRpt.ExportOptions;
+                {
+                    CrExportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+                    CrExportOptions.ExportFormatType = tipoDocumento;
+                    CrExportOptions.DestinationOptions = CrDiskFileDestinationOptions;
+                    CrExportOptions.FormatOptions = CrFormatTypeOptions;
+                }
+                cryRpt.Export();
+
+                ExportaExcel.AbrirExcel(fileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao criar arquivo PDF. " + ex.Message);
+            }
+        }
+
+        private void toolStripBtnExcel_Click(object sender, EventArgs e)
+        {
+            String fileName = getLocalSave("Excel|*.xls|Pasta de Trabalho do Excel|*.xlsx");
+            
+            // Verfica se o valor que retorno e diferente de vazio 
+            if (fileName != "")
+            {
+                Classes.Uteis.ExportaExcel.ExportaParaExcel(dtReportData, fileName, true);
+            }        
+        }
+
+        private string getLocalSave(string filter)
+        {
+            // Abre janela para usuario escolher onde salvar o Excel
+            SaveFileDialog vAbreArq = new SaveFileDialog();
+
+            // Definição do tipo de Arquivo
+            vAbreArq.Filter = filter;
+            String fileName = "";
+
+            vAbreArq.Title = "Salvar como";
+            if (vAbreArq.ShowDialog() == DialogResult.OK)
+            {
+                // Caminho do arquivo
+                fileName = vAbreArq.FileName;
+            }
+
+            return fileName;
+        }
+
+        private void toolStripBtnImpressora_Click(object sender, EventArgs e)
+        {
+            this.crystalRptUniube.PrintReport();
+        }
+ 
+        private void ChangeToolBar()
+        {
+            Image img;
+            //EXCEL
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iExcelDados22.png");
+            toolStripBtnExcel = new ToolStripButton("", img, toolStripBtnExcel_Click);
+            toolStripBtnExcel.Visible = true;
+            toolStripBtnExcel.Enabled = true;
+            toolStripBtnExcel.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnExcel.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnExcel.AutoSize = true;
+            toolStripBtnExcel.Height = img.Height;
+            toolStripBtnExcel.Width = img.Width;
+            toolStripBtnExcel.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnExcel.ToolTipText = "Modo Folha de Dados";
+
+            //PDF
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iPdf22.png");
+            toolStripBtnPDF = new ToolStripButton("", img, toolStripBtnPDF_Click);
+            toolStripBtnPDF.Visible = true;
+            toolStripBtnPDF.Enabled = true;
+            toolStripBtnPDF.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnPDF.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnPDF.AutoSize = true;
+            toolStripBtnPDF.Height = img.Height;
+            toolStripBtnPDF.Width = img.Width;
+            toolStripBtnPDF.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnPDF.ToolTipText = "PDF";
+
+            //IMPRESSORA
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iImprimir22.png");
+            toolStripBtnImpressora = new ToolStripButton("", img, toolStripBtnImpressora_Click);
+            toolStripBtnImpressora.Visible = true;
+            toolStripBtnImpressora.Enabled = true;
+            toolStripBtnImpressora.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnImpressora.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnImpressora.AutoSize = true;
+            toolStripBtnImpressora.Height = img.Height;
+            toolStripBtnImpressora.Width = img.Width;
+            toolStripBtnImpressora.Alignment = ToolStripItemAlignment.Left;
+            toolStripBtnImpressora.ToolTipText = "Imprimir";
+            
+            //VOLTAR
+            img = Image.FromFile("S:\\Sistemas dotNet\\Figuras\\iVoltar24.png");
+            toolStripBtnVoltar = new ToolStripButton("", img, toolStripButtonVoltar_Click);
+            toolStripBtnVoltar.Visible = true;
+            toolStripBtnVoltar.Enabled = true;
+            toolStripBtnVoltar.ImageAlign = ContentAlignment.MiddleCenter;
+            toolStripBtnVoltar.ImageScaling = ToolStripItemImageScaling.None;
+            toolStripBtnVoltar.AutoSize = true;
+            toolStripBtnVoltar.Height = img.Height;
+            toolStripBtnVoltar.Width = img.Width;
+            toolStripBtnVoltar.Alignment = ToolStripItemAlignment.Right;
+            toolStripBtnVoltar.ToolTipText = "Voltar";
+
+            //Adiciona novos botões e altera ordem da barra de menu          
+            ToolStrip ts = new ToolStrip();
+            ts = FindToolStrip<ToolStrip>(this.crystalRptUniube);
+
+            int index = 0;
+            ToolStripItem[] listOptions = new ToolStripItem[ts.Items.Count + 7];
+            listOptions[index++] = toolStripBtnImpressora;
+            listOptions[index++] = new ToolStripSeparator();
+            listOptions[index++] = toolStripBtnExcel;
+            listOptions[index++] = toolStripBtnPDF;
+            listOptions[index++] = new ToolStripSeparator();
+
+            for (int i = 0; i < ts.Items.Count; i++)
+            {
+                listOptions[index++] = ts.Items[i];
+            }
+
+            listOptions[index++] = new ToolStripSeparator();
+            listOptions[index++] = toolStripBtnVoltar;
+
+            ts.Items.Clear();
+            ts.Items.AddRange(listOptions);
+        }
+
+        private T FindToolStrip<T>(Control control) where T : System.Windows.Forms.Control
+        {
+            if (control == null)
+            {
+                return null;
+            }
+            else if (control is T)
+            {
+                //muda a cor da barra
+                control.BackColor = Color.FromArgb(195, 217, 241);
+                return (T)control;
+            }
+            else
+            {
+                T result = null;
+
+                foreach (Control embedded in control.Controls)
+                {
+                    if (result == null)
+                    {
+                        result = FindToolStrip<T>(embedded);
+                    }
+                }
+
+                return result;
+            }
+        }
+    }
+}

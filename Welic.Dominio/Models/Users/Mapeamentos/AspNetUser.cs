@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Welic.Dominio.Models.ConfigApp.Map;
 using Welic.Dominio.Models.Curso.Map;
+using Welic.Dominio.Models.Departamento.Map;
 using Welic.Dominio.Models.EBook.Map;
+using Welic.Dominio.Models.Empresa.Map;
+using Welic.Dominio.Models.Estacionamento.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Schedule.Maps;
+using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Users.Scope;
 using Welic.Dominio.Patterns.Pattern.Ef6;
@@ -69,6 +74,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public int AccessFailedCount { get; set; }
         public bool Disabled { get; set; }
         public double Rating { get; set; }
+        public bool Development { get; set; }
                 
         public virtual ICollection<CursoMap> TeacherCursos { get; set; }
         public virtual ICollection<CursoMap> ClassCursos { get; set; }
@@ -102,6 +108,18 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<LiveMap> LivesClass { get; set; }
         public virtual ICollection<EBookMap> EbookTeacher { get; set; }
         public virtual ICollection<EBookMap> EBookClass { get; set; }
+        public virtual ICollection<FavoriteLiveMap> FavoriteUserLive { get; set; }
+        [ForeignKey("EmpresaId")]
+        public  virtual EmpresaMap Empresa { get; set; }
+        [DefaultValue(3)]
+        public int? EmpresaId { get; set; }
+        public virtual ICollection<PermissionMap> Permission { get; set; }
+        public virtual ICollection<DepartamentoMap> Departamentos { get; set; }
+        public virtual ICollection<SolicitacoesVagasMap> SolicitacoesVagasCadastro { get; set; }
+        public virtual ICollection<SolicitacoesVagasMap> SolicitacoesVagasCancel { get; set; }
+        public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
+        public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadasCancel { get; set; }
+        public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadasSuspensao { get; set; }
 
 
         public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)

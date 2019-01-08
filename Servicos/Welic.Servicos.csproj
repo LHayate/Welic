@@ -50,10 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="City\ServiceCity.cs" />
     <Compile Include="ConfigApp\ServiceConfigApp.cs" />
     <Compile Include="Cursos\CursoService.cs" />
+    <Compile Include="Departamento\ServiceDepartamento.cs" />
     <Compile Include="Dispositivos\ServicoDispositivo.cs" />
     <Compile Include="Ebook\ServiceEbook.cs" />
+    <Compile Include="Empresa\ServiceEmpresa.cs" />
+    <Compile Include="Estacionamento\ServiceEstacionamento.cs" />
+    <Compile Include="Estacionamento\ServiceEstacionamentoVagas.cs" />
+    <Compile Include="Estacionamento\ServiceSolicitacoesEstacionamento.cs" />
+    <Compile Include="Estacionamento\ServiceSolicitacoesVagas.cs" />
+    <Compile Include="Estacionamento\ServiceVeiculo.cs" />
+    <Compile Include="Live\ServiceFavoriteLive.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="MarketPlace\CategoryListingTypeService.cs" />
     <Compile Include="MarketPlace\CategoryService.cs" />
@@ -79,8 +88,10 @@
     <Compile Include="MarketPlace\SqlDbService.cs" />
     <Compile Include="Menu\ServicoMenu.cs" />
     <Compile Include="News\ServiceNews.cs" />
+    <Compile Include="Pessoa\ServicePessoa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule\ServiceSchedule.cs" />
+    <Compile Include="Seguranca\ServicePermission.cs" />
     <Compile Include="Servico.cs" />
     <Compile Include="Uploads\UploadsService.cs" />
     <Compile Include="Users\AspNetRoleService.cs" />

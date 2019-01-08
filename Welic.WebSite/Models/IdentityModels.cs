@@ -44,8 +44,9 @@ namespace Welic.WebSite.Models
 
         [DefaultValue("https://welic.app/Arquivos/Icons/perfil_Padrao.png")]
         public string ImagePerfil { get; set; }
-        public string Identity { get; set; }        
+        public string Identity { get; set; }
 
+        public int EmpresaId { get; set; } = 3;
 
         [NotMapped]
         public bool RoleAdministrator { get; set; }

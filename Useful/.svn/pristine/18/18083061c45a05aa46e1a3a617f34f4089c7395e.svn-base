@@ -1,0 +1,145 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
+
+namespace System.Windows.Forms.Uniube
+{
+    public partial class FormMensagem : Form
+    {
+        //Para criar o formulario com cantos arredondados:
+        //http://bytes.com/topic/c-sharp/answers/256570-how-do-i-create-windows-forms-rounded-corners
+
+        //a propriedade Opacity varia de 0.00 a 1.00
+        //menos opacidade significa maior transparência
+        private const double ValorDecrescimentoOpacidade = 0.02;
+
+        //tempo em milisegundos para diminuir a opacidade do form
+        private const int FrequenciaDecrescimentoOpacidade = 40;
+
+        //tempo a ser aguardado antes de começar a diminuir a opacidade do form (em milisegundos)
+        private const int DelayInicial = 1000;
+
+
+        private bool PosicionarFormNoCursor { get; set; }
+
+        private string mensagem;
+        public Icon icone { get; set; }
+        public Color? backColor { get; set; }
+        public Color? foreColor { get; set; }
+        public Font FonteMensagem { get; set; }
+
+        public FormMensagem(string mensagem)
+        {
+            InitializeComponent();
+            PosicionarFormNoCursor = true;
+            this.mensagem = mensagem;
+        }
+
+
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect, // x-coordinate of upper-left corner
+            int nTopRect, // y-coordinate of upper-left corner
+            int nRightRect, // x-coordinate of lower-right corner
+            int nBottomRect, // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+        );
+
+        Timer tmrDelayInicial;
+        Timer tmrDecaimentoOpacidade;
+
+        private void FormMensagem_Load(object sender, EventArgs e)
+        {
+            this.Opacity = 1.00;
+
+            this.ShowInTaskbar = false;
+
+            if (PosicionarFormNoCursor)
+                this.Location = Windows.Forms.Cursor.Position;
+
+            if (this.icone == null)
+                icone = SystemIcons.Information;
+            if (this.backColor == null)
+                this.backColor = Color.FromArgb(192, 255, 192);
+            if (this.foreColor == null)
+                this.foreColor = Color.FromArgb(0, 64, 0);
+            if (this.FonteMensagem == null)
+                this.FonteMensagem = lblMensagem.Font;
+
+            lblMensagem.Text = mensagem;
+            pictureBoxPersonalizado1.Image = this.icone.ToBitmap();
+            this.BackColor = this.backColor.Value;
+            lblMensagem.ForeColor = this.foreColor.Value;
+            lblMensagem.Font = this.FonteMensagem;
+
+            this.Size = new Drawing.Size(pictureBoxPersonalizado1.Width + lblMensagem.Width + 45, this.Size.Height);
+
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width - 10, Height - 10, 20, 20)); // adjust these parameters to get the look you want.
+
+
+            tmrDelayInicial = new Timer();
+            tmrDelayInicial.Tick += new EventHandler(tmrDelayInicial_Tick);
+            tmrDelayInicial.Interval = DelayInicial;
+            tmrDelayInicial.Enabled = true;
+        }
+
+        void tmrDelayInicial_Tick(object sender, EventArgs e)
+        {
+            //chama o outro timer (para iniciar o desaparecimento do form)
+            tmrDecaimentoOpacidade = new Timer();
+            tmrDecaimentoOpacidade.Tick += new EventHandler(tmrDecaimentoOpacidade_Tick);
+            tmrDecaimentoOpacidade.Interval = FrequenciaDecrescimentoOpacidade;
+            tmrDecaimentoOpacidade.Enabled = true;
+
+            //desabilita o timer inicial
+            tmrDelayInicial.Enabled = false;
+        }
+
+        void tmrDecaimentoOpacidade_Tick(object sender, EventArgs e)
+        {
+            if (!this.Bounds.Contains(Windows.Forms.Cursor.Position))
+            {
+                //quando a opacidade chegar no valor minimo, fecha o form
+                if (this.Opacity > ValorDecrescimentoOpacidade)
+                {
+                    this.Opacity -= ValorDecrescimentoOpacidade;
+                }
+                else
+                {
+                    this.Dispose();
+                }
+            }
+        }
+
+        private void FormMensagem_MouseEnter(object sender, EventArgs e)
+        {
+            //cancela o desaparecimento
+            if (tmrDecaimentoOpacidade != null)
+            {
+                tmrDecaimentoOpacidade.Enabled = false;
+                Opacity = 1.00;
+            }
+        }
+
+        private void FormMensagem_MouseLeave(object sender, EventArgs e)
+        {
+            //reinicia o processo
+            PosicionarFormNoCursor = false;
+
+            if (tmrDelayInicial != null)
+                tmrDelayInicial.Enabled = false;
+            if (tmrDecaimentoOpacidade != null)
+                tmrDecaimentoOpacidade.Enabled = false;
+
+            FormMensagem_Load(null, null);
+        }
+    }
+}

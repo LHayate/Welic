@@ -1,0 +1,237 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Classes.Dal;
+using Classes.Entity;
+
+namespace System.Windows.Forms.Uniube
+{
+    public partial class frmManutencaoPermissoesEditarGrupo : FormUniube
+    {
+        private int _grupo;
+
+        public frmManutencaoPermissoesEditarGrupo(string grupo)
+        {
+            InitializeComponent();
+
+            this._grupo = int.Parse(grupo);
+        }
+
+        private void PreencherGridUsuariosGrupo()
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append(@"
+            SELECT u.usuario AS usuario,
+                   TRIM(u.nome) AS nome,
+                   TRIM(c.cargo) AS cargo,
+                   trim(CAST(c.centro_custo || ' - ' || c.descricao_ccust AS VARCHAR2(115))) AS centro_custo,
+                   decode(u.master, 0, 'Não', 1, 'Sim', '') AS master,
+                   decode(ug.admin, 0, 'Não', 1, 'Sim', '') AS admin
+              FROM seg.usuarios u
+              LEFT JOIN mtd.vw_colaboradores c ON (c.matricula = u.usuario)
+              JOIN seg.usuarios_grupos ug ON (ug.grupo = " + this._grupo + @" AND ug.usuario = u.usuario)
+             WHERE u.situacao <> 0
+             ORDER BY u.nome");
+            Conexao dal = new Conexao(Globals.GetStringConnection(), 2);
+            DataTable dtUsuariosGrupo = dal.ExecuteQuery(sql.ToString());
+
+            dgvUsuariosGrupo.DataSource = dtUsuariosGrupo;
+            dgvUsuariosGrupo.Refresh();
+            dgvUsuariosGrupo.ClearSelection();
+        }
+
+        private void frmManutencaoPermissoesEditarGrupo_Load(object sender, EventArgs e)
+        {
+            Conexao dal = new Conexao(Globals.GetStringConnection(), 2);
+            StringBuilder sql = new StringBuilder();
+
+            #region Verificar se o usuário é administrador do grupo
+            sql.Clear();
+            sql.Append(@"
+            SELECT ug.admin
+              FROM seg.usuarios_grupos ug
+             WHERE ug.grupo = " + this._grupo + @"
+               AND ug.usuario = " + Globals.Usuario);
+            DataTable dtUsuario = dal.ExecuteQuery(sql.ToString());
+
+            if (!dtUsuario.Rows[0][0].ToString().Equals("1"))
+            {
+                MessageBox.Show("Apenas os administradores do grupo têm acesso a este recurso.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Dispose();
+            }
+            #endregion
+
+            #region Preencher descrição do grupo
+            sql.Clear();
+            sql.Append(@"
+            SELECT g.grupo,
+                   g.descricao
+              FROM seg.grupos g
+             WHERE g.grupo = " + this._grupo);
+            DataTable dtGrupo = dal.ExecuteQuery(sql.ToString());
+
+            lblCodGrupo.Text = this._grupo.ToString();
+            lblDescricaoGrupo.Text = dtGrupo.Rows[0]["descricao"].ToString();
+            #endregion
+
+            PreencherGridUsuariosGrupo();
+        }
+
+        private void dgvUsuariosGrupo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!(e.RowIndex == -1))
+            {
+                string coluna = dgvUsuariosGrupo.Columns[e.ColumnIndex].Name;
+                if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colLog"))
+                {
+                    string usuario = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Value.ToString();
+                    frmAuditoriaFormulario frmAuditoriaFormulario = new frmAuditoriaFormulario("USUARIOS_GRUPOS", "SEG", "GRUPO;USUARIO", this._grupo + ";'" + usuario + "'");
+                    if (frmAuditoriaFormulario.DialogResult == System.Windows.Forms.DialogResult.OK)
+                    {
+                        frmAuditoriaFormulario.ShowDialog();
+                    }
+                }
+                if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colExcluir"))
+                {
+                    if (dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colMaster"].Value.ToString().ToLower().Equals("sim".ToLower()) ||
+                        dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colAdmin"].Value.ToString().ToLower().Equals("sim".ToLower()))
+                    {
+                        MessageBox.Show("Ação negada. Não é possível excluir um usuário Master ou Administrador.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
+                    string usuario = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Value.ToString();
+                    string usuarioNome = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuarioNome"].Value.ToString();
+
+                    if ((MessageBox.Show("Confirma a exclusão do usuário " + usuario + " - " + usuarioNome.ToUpper() + " do grupo?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes))
+                    {
+                        string sql = (@"
+                        DELETE FROM seg.usuarios_grupos ug
+                         WHERE ug.grupo = " + this._grupo + @"
+                           AND ug.usuario = " + usuario);
+                        Conexao dal = new Conexao(Globals.GetStringConnection(), 2);
+                        dal.ExecuteNonQuery(sql);
+
+                        PreencherGridUsuariosGrupo();
+                    }
+                }
+            }
+        }
+        private void dgvUsuariosGrupo_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colExcluir"))
+                {
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colExcluir"].Style.BackColor = Color.IndianRed;
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colExcluir"].Style.SelectionBackColor = Color.IndianRed;
+                }
+                else if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colLog"))
+                {
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colLog"].Style.BackColor = Color.Gold;
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colLog"].Style.SelectionBackColor = Color.Gold;
+                }
+            }
+        }
+        private void dgvUsuariosGrupo_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colExcluir"))
+                {
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colExcluir"].Style.BackColor = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Style.BackColor;
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colExcluir"].Style.SelectionBackColor = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Style.SelectionBackColor;
+                }
+                else if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colLog"))
+                {
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colLog"].Style.BackColor = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Style.BackColor;
+                    dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colLog"].Style.SelectionBackColor = dgvUsuariosGrupo.Rows[e.RowIndex].Cells["colUsuario"].Style.SelectionBackColor;
+                }
+            }
+        }
+        private void dgvUsuariosGrupo_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                if (dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colLog") ||
+                    dgvUsuariosGrupo.Columns[e.ColumnIndex].Name.Equals("colExcluir"))
+                {
+                    this.Cursor = Cursors.Hand;
+                }
+                else
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+            else
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        private void dgvUsuariosGrupo_MouseLeave(object sender, EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+        private void btnAddUsuario_Click(object sender, EventArgs e)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append(@"
+            SELECT SUBSTR(U.NOME,1,30) AS NOME, 
+			       U.USUARIO AS USUARIO,  
+			       CAST(CL.CENTRO_CUSTO || ' - ' || SUBSTR(CC.DESCRICAO,1,70) AS VARCHAR2(85)) AS CENTRO_CUSTO,       
+			       (SELECT MAX(UG.GRUPO) FROM SEG.USUARIOS_GRUPOS UG WHERE UG.USUARIO = U.USUARIO) AS GRUPO, 
+			       (SELECT MAX(G.DESCRICAO)   
+			                  FROM (SELECT MAX(GRUPO) AS GRUPO,UG.USUARIO FROM SEG.USUARIOS_GRUPOS UG GROUP BY UG.USUARIO) UG   
+			                    INNER JOIN SEG.GRUPOS G ON(G.GRUPO = UG.GRUPO) WHERE UG.USUARIO = U.USUARIO GROUP BY G.DESCRICAO) AS NOMEGRUPO ,  
+			       (SELECT DECODE(COUNT(*),1,'1 PARTICIPANTE',COUNT(*) ||' PARTICIPANTES') FROM SEG.USUARIOS_GRUPOS UG    
+			      		             WHERE  UG.GRUPO = (SELECT MAX(UG.GRUPO) FROM SEG.USUARIOS_GRUPOS UG WHERE UG.USUARIO = U.USUARIO) ) AS PARTICIPANTES_GRUPO   
+			FROM SEG.USUARIOS U 
+			     LEFT  JOIN BHORA.COLABORADORES_CONTRATO CCO ON(CCO.MATRICULA = U.USUARIO) 
+			     LEFT  JOIN BHORA.COLABORADORES_LOTACAO CL ON(CL.MATRICULA = U.USUARIO) 
+			     LEFT  JOIN MTD.CENTROS_CUSTO CC ON(CC.CODIGO = CL.CENTRO_CUSTO) 
+			WHERE U.USUARIO NOT IN(SELECT UG.USUARIO FROM SEG.USUARIOS_GRUPOS UG   
+			                                INNER JOIN SEG.GRUPOS_PROGRAMAS GP ON(GP.GRUPO = UG.GRUPO) WHERE GP.PROGRAMA = 'LOGIN')  
+			      AND U.USUARIO NOT IN(SELECT UP.USUARIO FROM SEG.USUARIOS_PERMISSOES UP WHERE UP.PROGRAMA = 'LOGIN')        
+                  AND u.usuario NOT IN (SELECT usuario
+                                          FROM seg.usuarios_grupos ug
+                                         WHERE ug.grupo = " + this._grupo + @"
+                                           AND ug.usuario = u.usuario)
+			      AND U.SITUACAO <> 0 ");
+
+            FormBusca fb = new FormBusca(sql.ToString(), new List<System.Data.OracleClient.OracleParameter>(), false, "Busca por usuários", "NOME", "", "Nenhum Registro Encontrado");
+            fb.ShowDialog();
+
+
+            if (fb.retorno != null)
+            {
+                int usuario = int.Parse(fb.retorno["USUARIO"].ToString());
+
+                try
+                {
+                    sql.Clear();
+                    sql.Append(@"
+                    INSERT INTO seg.usuarios_grupos ug
+                      (ug.grupo, ug.usuario, ug.admin)
+                    VALUES
+                      (" + this._grupo + ", " + usuario + ", 0)");
+
+                    Conexao dal = new Conexao(Globals.GetStringConnection(), 2);
+                    dal.ExecuteNonQuery(sql.ToString());
+
+                    PreencherGridUsuariosGrupo();
+                    MessageBox.Show("Usuário adicionado com sucesso.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível gravar o registro.\nMotivo: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+    }
+}

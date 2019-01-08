@@ -1,0 +1,690 @@
+﻿namespace System.Windows.Forms.Uniube
+{
+    partial class FormRelatorioCompletoOld
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRelatorioCompletoOld));
+            this.tbcRelUniube = new System.Windows.Forms.TabControl();
+            this.tbpBusca = new System.Windows.Forms.TabPage();
+            this.pnlFiltro = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnPermissao = new System.Windows.Forms.Button();
+            this.btCancel = new System.Windows.Forms.Button();
+            this.btnLimparCampos = new System.Windows.Forms.Button();
+            this.btnGeraRel = new System.Windows.Forms.Button();
+            this.pnlTituloFiltro = new System.Windows.Forms.Panel();
+            this.labelUniube2 = new System.Windows.Forms.Uniube.LabelUniube();
+            this.pnlOrdenacao = new System.Windows.Forms.Panel();
+            this.pnlTituloOrdenacao = new System.Windows.Forms.Panel();
+            this.labelUniube1 = new System.Windows.Forms.Uniube.LabelUniube();
+            this.pnlModelo = new System.Windows.Forms.Panel();
+            this.pnlTituloModelo = new System.Windows.Forms.Panel();
+            this.lblModelo = new System.Windows.Forms.Uniube.LabelUniube();
+            this.tbpRelatorio = new System.Windows.Forms.TabPage();
+            this.rptUniube = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.toolStripOpcoes = new System.Windows.Forms.ToolStrip();
+            this.toolStripBtnImpressora = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparatorOpcoes = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnExcelDados = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnExcel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnPDF = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnImagem = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnInicio = new System.Windows.Forms.ToolStripButton();
+            this.toolStripBtnAnterior = new System.Windows.Forms.ToolStripButton();
+            this.toolStriptxtPg = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStriplblPg = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripBtnProximo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonUltimo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonVoltar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonZoomMore = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBoxZoom = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripButtonZoomLess = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripBtnPriviewPrint = new System.Windows.Forms.ToolStripButton();
+            this.toolStripTxtPesquisa = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStriptxtBusca = new System.Windows.Forms.ToolStripButton();
+            this.toolStripbtnPesqProximo = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tbcRelUniube.SuspendLayout();
+            this.tbpBusca.SuspendLayout();
+            this.pnlFiltro.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.pnlTituloFiltro.SuspendLayout();
+            this.pnlOrdenacao.SuspendLayout();
+            this.pnlTituloOrdenacao.SuspendLayout();
+            this.pnlModelo.SuspendLayout();
+            this.pnlTituloModelo.SuspendLayout();
+            this.tbpRelatorio.SuspendLayout();
+            this.toolStripOpcoes.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // tbcRelUniube
+            // 
+            this.tbcRelUniube.Controls.Add(this.tbpBusca);
+            this.tbcRelUniube.Controls.Add(this.tbpRelatorio);
+            this.tbcRelUniube.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbcRelUniube.Location = new System.Drawing.Point(0, 0);
+            this.tbcRelUniube.Name = "tbcRelUniube";
+            this.tbcRelUniube.SelectedIndex = 0;
+            this.tbcRelUniube.Size = new System.Drawing.Size(749, 475);
+            this.tbcRelUniube.TabIndex = 0;
+            // 
+            // tbpBusca
+            // 
+            this.tbpBusca.BackColor = System.Drawing.Color.GhostWhite;
+            this.tbpBusca.Controls.Add(this.pnlFiltro);
+            this.tbpBusca.Controls.Add(this.pnlOrdenacao);
+            this.tbpBusca.Controls.Add(this.pnlModelo);
+            this.tbpBusca.Location = new System.Drawing.Point(4, 22);
+            this.tbpBusca.Name = "tbpBusca";
+            this.tbpBusca.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpBusca.Size = new System.Drawing.Size(741, 449);
+            this.tbpBusca.TabIndex = 0;
+            this.tbpBusca.Text = "Pesquisa Relatorio";
+            // 
+            // pnlFiltro
+            // 
+            this.pnlFiltro.BackColor = System.Drawing.Color.GhostWhite;
+            this.pnlFiltro.Controls.Add(this.panel3);
+            this.pnlFiltro.Controls.Add(this.pnlTituloFiltro);
+            this.pnlFiltro.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFiltro.Location = new System.Drawing.Point(3, 111);
+            this.pnlFiltro.Name = "pnlFiltro";
+            this.pnlFiltro.Size = new System.Drawing.Size(735, 335);
+            this.pnlFiltro.TabIndex = 6;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.btnPermissao);
+            this.panel3.Controls.Add(this.btCancel);
+            this.panel3.Controls.Add(this.btnLimparCampos);
+            this.panel3.Controls.Add(this.btnGeraRel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 298);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(735, 37);
+            this.panel3.TabIndex = 14;
+            // 
+            // btnPermissao
+            // 
+            this.btnPermissao.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnPermissao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPermissao.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPermissao.Image = ((System.Drawing.Image)(resources.GetObject("btnPermissao.Image")));
+            this.btnPermissao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPermissao.Location = new System.Drawing.Point(2, 2);
+            this.btnPermissao.Name = "btnPermissao";
+            this.btnPermissao.Size = new System.Drawing.Size(44, 30);
+            this.btnPermissao.TabIndex = 6;
+            this.btnPermissao.UseVisualStyleBackColor = true;
+            this.btnPermissao.Click += new System.EventHandler(this.btnPermissao_Click);
+            // 
+            // btCancel
+            // 
+            this.btCancel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCancel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCancel.Image = ((System.Drawing.Image)(resources.GetObject("btCancel.Image")));
+            this.btCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCancel.Location = new System.Drawing.Point(625, 2);
+            this.btCancel.Name = "btCancel";
+            this.btCancel.Size = new System.Drawing.Size(106, 30);
+            this.btCancel.TabIndex = 5;
+            this.btCancel.Text = "     Cancelar";
+            this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Visible = false;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
+            // 
+            // btnLimparCampos
+            // 
+            this.btnLimparCampos.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnLimparCampos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimparCampos.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimparCampos.Image = ((System.Drawing.Image)(resources.GetObject("btnLimparCampos.Image")));
+            this.btnLimparCampos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLimparCampos.Location = new System.Drawing.Point(509, 2);
+            this.btnLimparCampos.Name = "btnLimparCampos";
+            this.btnLimparCampos.Size = new System.Drawing.Size(114, 30);
+            this.btnLimparCampos.TabIndex = 4;
+            this.btnLimparCampos.Text = "Limpar";
+            this.btnLimparCampos.UseVisualStyleBackColor = true;
+            this.btnLimparCampos.Click += new System.EventHandler(this.btnLimparCampos_Click);
+            // 
+            // btnGeraRel
+            // 
+            this.btnGeraRel.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnGeraRel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGeraRel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGeraRel.Image = ((System.Drawing.Image)(resources.GetObject("btnGeraRel.Image")));
+            this.btnGeraRel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGeraRel.Location = new System.Drawing.Point(392, 2);
+            this.btnGeraRel.Name = "btnGeraRel";
+            this.btnGeraRel.Size = new System.Drawing.Size(114, 30);
+            this.btnGeraRel.TabIndex = 3;
+            this.btnGeraRel.Text = "Emitir";
+            this.btnGeraRel.UseVisualStyleBackColor = true;
+            this.btnGeraRel.Click += new System.EventHandler(this.btnGeraRel_Click);
+            // 
+            // pnlTituloFiltro
+            // 
+            this.pnlTituloFiltro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.pnlTituloFiltro.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTituloFiltro.Controls.Add(this.labelUniube2);
+            this.pnlTituloFiltro.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTituloFiltro.Location = new System.Drawing.Point(0, 0);
+            this.pnlTituloFiltro.Name = "pnlTituloFiltro";
+            this.pnlTituloFiltro.Size = new System.Drawing.Size(735, 18);
+            this.pnlTituloFiltro.TabIndex = 3;
+            // 
+            // labelUniube2
+            // 
+            this.labelUniube2.AutoSize = true;
+            this.labelUniube2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUniube2.Location = new System.Drawing.Point(3, 2);
+            this.labelUniube2.Name = "labelUniube2";
+            this.labelUniube2.Size = new System.Drawing.Size(53, 13);
+            this.labelUniube2.TabIndex = 0;
+            this.labelUniube2.Text = "Filtros:";
+            // 
+            // pnlOrdenacao
+            // 
+            this.pnlOrdenacao.BackColor = System.Drawing.Color.GhostWhite;
+            this.pnlOrdenacao.Controls.Add(this.pnlTituloOrdenacao);
+            this.pnlOrdenacao.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlOrdenacao.Location = new System.Drawing.Point(3, 57);
+            this.pnlOrdenacao.Name = "pnlOrdenacao";
+            this.pnlOrdenacao.Size = new System.Drawing.Size(735, 54);
+            this.pnlOrdenacao.TabIndex = 5;
+            // 
+            // pnlTituloOrdenacao
+            // 
+            this.pnlTituloOrdenacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.pnlTituloOrdenacao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTituloOrdenacao.Controls.Add(this.labelUniube1);
+            this.pnlTituloOrdenacao.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTituloOrdenacao.Location = new System.Drawing.Point(0, 0);
+            this.pnlTituloOrdenacao.Name = "pnlTituloOrdenacao";
+            this.pnlTituloOrdenacao.Size = new System.Drawing.Size(735, 18);
+            this.pnlTituloOrdenacao.TabIndex = 2;
+            // 
+            // labelUniube1
+            // 
+            this.labelUniube1.AutoSize = true;
+            this.labelUniube1.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUniube1.Location = new System.Drawing.Point(3, 2);
+            this.labelUniube1.Name = "labelUniube1";
+            this.labelUniube1.Size = new System.Drawing.Size(148, 13);
+            this.labelUniube1.TabIndex = 0;
+            this.labelUniube1.Text = "Opções de Ordenação";
+            // 
+            // pnlModelo
+            // 
+            this.pnlModelo.BackColor = System.Drawing.Color.GhostWhite;
+            this.pnlModelo.Controls.Add(this.pnlTituloModelo);
+            this.pnlModelo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlModelo.Location = new System.Drawing.Point(3, 3);
+            this.pnlModelo.Name = "pnlModelo";
+            this.pnlModelo.Size = new System.Drawing.Size(735, 54);
+            this.pnlModelo.TabIndex = 4;
+            // 
+            // pnlTituloModelo
+            // 
+            this.pnlTituloModelo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.pnlTituloModelo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlTituloModelo.Controls.Add(this.lblModelo);
+            this.pnlTituloModelo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlTituloModelo.Location = new System.Drawing.Point(0, 0);
+            this.pnlTituloModelo.Name = "pnlTituloModelo";
+            this.pnlTituloModelo.Size = new System.Drawing.Size(735, 18);
+            this.pnlTituloModelo.TabIndex = 1;
+            // 
+            // lblModelo
+            // 
+            this.lblModelo.AutoSize = true;
+            this.lblModelo.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModelo.Location = new System.Drawing.Point(3, 2);
+            this.lblModelo.Name = "lblModelo";
+            this.lblModelo.Size = new System.Drawing.Size(116, 13);
+            this.lblModelo.TabIndex = 0;
+            this.lblModelo.Text = "Modelo Relátorio";
+            // 
+            // tbpRelatorio
+            // 
+            this.tbpRelatorio.Controls.Add(this.rptUniube);
+            this.tbpRelatorio.Controls.Add(this.toolStripOpcoes);
+            this.tbpRelatorio.Location = new System.Drawing.Point(4, 22);
+            this.tbpRelatorio.Name = "tbpRelatorio";
+            this.tbpRelatorio.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpRelatorio.Size = new System.Drawing.Size(741, 449);
+            this.tbpRelatorio.TabIndex = 1;
+            this.tbpRelatorio.Text = "Visualizar Relatorio";
+            this.tbpRelatorio.UseVisualStyleBackColor = true;
+            // 
+            // rptUniube
+            // 
+            this.rptUniube.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rptUniube.Location = new System.Drawing.Point(3, 34);
+            this.rptUniube.Name = "rptUniube";
+            this.rptUniube.ShowBackButton = false;
+            this.rptUniube.ShowContextMenu = false;
+            this.rptUniube.ShowCredentialPrompts = false;
+            this.rptUniube.ShowDocumentMapButton = false;
+            this.rptUniube.ShowExportButton = false;
+            this.rptUniube.ShowFindControls = false;
+            this.rptUniube.ShowPageNavigationControls = false;
+            this.rptUniube.ShowParameterPrompts = false;
+            this.rptUniube.ShowPrintButton = false;
+            this.rptUniube.ShowProgress = false;
+            this.rptUniube.ShowPromptAreaButton = false;
+            this.rptUniube.ShowRefreshButton = false;
+            this.rptUniube.ShowStopButton = false;
+            this.rptUniube.ShowToolBar = false;
+            this.rptUniube.ShowZoomControl = false;
+            this.rptUniube.Size = new System.Drawing.Size(735, 412);
+            this.rptUniube.TabIndex = 8;
+            this.rptUniube.PageNavigation += new Microsoft.Reporting.WinForms.PageNavigationEventHandler(this.rptUniube_PageNavigation);
+            this.rptUniube.RenderingComplete += new Microsoft.Reporting.WinForms.RenderingCompleteEventHandler(this.rptUniube_RenderingComplete);
+            // 
+            // toolStripOpcoes
+            // 
+            this.toolStripOpcoes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.toolStripOpcoes.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripOpcoes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripBtnImpressora,
+            this.toolStripSeparatorOpcoes,
+            this.toolStripBtnExcelDados,
+            this.toolStripBtnExcel,
+            this.toolStripBtnPDF,
+            this.toolStripBtnImagem,
+            this.toolStripSeparator1,
+            this.toolStripBtnInicio,
+            this.toolStripBtnAnterior,
+            this.toolStriptxtPg,
+            this.toolStriplblPg,
+            this.toolStripBtnProximo,
+            this.toolStripButtonUltimo,
+            this.toolStripButtonVoltar,
+            this.toolStripSeparator2,
+            this.toolStripButtonZoomMore,
+            this.toolStripComboBoxZoom,
+            this.toolStripButtonZoomLess,
+            this.toolStripSeparator3,
+            this.toolStripBtnPriviewPrint,
+            this.toolStripTxtPesquisa,
+            this.toolStriptxtBusca,
+            this.toolStripbtnPesqProximo,
+            this.toolStripSeparator4});
+            this.toolStripOpcoes.Location = new System.Drawing.Point(3, 3);
+            this.toolStripOpcoes.Name = "toolStripOpcoes";
+            this.toolStripOpcoes.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStripOpcoes.Size = new System.Drawing.Size(735, 31);
+            this.toolStripOpcoes.Stretch = true;
+            this.toolStripOpcoes.TabIndex = 7;
+            this.toolStripOpcoes.Text = "toolStripOpcoes";
+            // 
+            // toolStripBtnImpressora
+            // 
+            this.toolStripBtnImpressora.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnImpressora.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnImpressora.Image")));
+            this.toolStripBtnImpressora.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnImpressora.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnImpressora.Name = "toolStripBtnImpressora";
+            this.toolStripBtnImpressora.Size = new System.Drawing.Size(26, 28);
+            this.toolStripBtnImpressora.Text = "Impressora";
+            this.toolStripBtnImpressora.ToolTipText = "Impressora";
+            this.toolStripBtnImpressora.Click += new System.EventHandler(this.toolStripBtnImpressora_Click);
+            // 
+            // toolStripSeparatorOpcoes
+            // 
+            this.toolStripSeparatorOpcoes.Name = "toolStripSeparatorOpcoes";
+            this.toolStripSeparatorOpcoes.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripBtnExcelDados
+            // 
+            this.toolStripBtnExcelDados.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnExcelDados.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnExcelDados.Image")));
+            this.toolStripBtnExcelDados.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnExcelDados.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnExcelDados.Name = "toolStripBtnExcelDados";
+            this.toolStripBtnExcelDados.Size = new System.Drawing.Size(26, 28);
+            this.toolStripBtnExcelDados.Text = "toolStripButton1";
+            this.toolStripBtnExcelDados.ToolTipText = "Modo Folha de Dados";
+            this.toolStripBtnExcelDados.Click += new System.EventHandler(this.toolStripBtnExcelDados_Click);
+            // 
+            // toolStripBtnExcel
+            // 
+            this.toolStripBtnExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnExcel.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnExcel.Image")));
+            this.toolStripBtnExcel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnExcel.Name = "toolStripBtnExcel";
+            this.toolStripBtnExcel.Size = new System.Drawing.Size(26, 28);
+            this.toolStripBtnExcel.Text = "Microsoft Excel";
+            this.toolStripBtnExcel.ToolTipText = "Microsoft Excel";
+            this.toolStripBtnExcel.Click += new System.EventHandler(this.toolStripBtnExcel_Click);
+            // 
+            // toolStripBtnPDF
+            // 
+            this.toolStripBtnPDF.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnPDF.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnPDF.Image")));
+            this.toolStripBtnPDF.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnPDF.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnPDF.Name = "toolStripBtnPDF";
+            this.toolStripBtnPDF.Size = new System.Drawing.Size(26, 28);
+            this.toolStripBtnPDF.Text = "PDF";
+            this.toolStripBtnPDF.ToolTipText = "PDF";
+            this.toolStripBtnPDF.Click += new System.EventHandler(this.toolStripBtnPDF_Click);
+            // 
+            // toolStripBtnImagem
+            // 
+            this.toolStripBtnImagem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnImagem.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnImagem.Image")));
+            this.toolStripBtnImagem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnImagem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnImagem.Name = "toolStripBtnImagem";
+            this.toolStripBtnImagem.Size = new System.Drawing.Size(26, 28);
+            this.toolStripBtnImagem.Text = "Imagem";
+            this.toolStripBtnImagem.ToolTipText = "Imagem";
+            this.toolStripBtnImagem.Click += new System.EventHandler(this.toolStripBtnImagem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripBtnInicio
+            // 
+            this.toolStripBtnInicio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnInicio.Enabled = false;
+            this.toolStripBtnInicio.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnInicio.Image")));
+            this.toolStripBtnInicio.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnInicio.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnInicio.Name = "toolStripBtnInicio";
+            this.toolStripBtnInicio.Size = new System.Drawing.Size(28, 28);
+            this.toolStripBtnInicio.Text = "Início";
+            this.toolStripBtnInicio.Click += new System.EventHandler(this.toolStripBtnInicio_Click);
+            // 
+            // toolStripBtnAnterior
+            // 
+            this.toolStripBtnAnterior.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnAnterior.Enabled = false;
+            this.toolStripBtnAnterior.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnAnterior.Image")));
+            this.toolStripBtnAnterior.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnAnterior.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnAnterior.Name = "toolStripBtnAnterior";
+            this.toolStripBtnAnterior.Size = new System.Drawing.Size(28, 28);
+            this.toolStripBtnAnterior.Text = "Anterior";
+            this.toolStripBtnAnterior.Click += new System.EventHandler(this.toolStripBtnAnterior_Click);
+            // 
+            // toolStriptxtPg
+            // 
+            this.toolStriptxtPg.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStriptxtPg.Name = "toolStriptxtPg";
+            this.toolStriptxtPg.Size = new System.Drawing.Size(40, 31);
+            this.toolStriptxtPg.Text = "1";
+            this.toolStriptxtPg.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolStriptxtPg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStriptxtPg_KeyDown);
+            this.toolStriptxtPg.TextChanged += new System.EventHandler(this.toolStriptxtPg_TextChanged);
+            // 
+            // toolStriplblPg
+            // 
+            this.toolStriplblPg.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStriplblPg.Name = "toolStriplblPg";
+            this.toolStriplblPg.Size = new System.Drawing.Size(96, 28);
+            this.toolStriplblPg.Text = "Carregando...";
+            // 
+            // toolStripBtnProximo
+            // 
+            this.toolStripBtnProximo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnProximo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnProximo.Image")));
+            this.toolStripBtnProximo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnProximo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnProximo.Name = "toolStripBtnProximo";
+            this.toolStripBtnProximo.Size = new System.Drawing.Size(28, 28);
+            this.toolStripBtnProximo.Text = "Próximo";
+            this.toolStripBtnProximo.Click += new System.EventHandler(this.toolStripBtnProximo_Click);
+            // 
+            // toolStripButtonUltimo
+            // 
+            this.toolStripButtonUltimo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUltimo.Enabled = false;
+            this.toolStripButtonUltimo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUltimo.Image")));
+            this.toolStripButtonUltimo.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonUltimo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUltimo.Name = "toolStripButtonUltimo";
+            this.toolStripButtonUltimo.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonUltimo.Text = "Ultimo";
+            this.toolStripButtonUltimo.Click += new System.EventHandler(this.toolStripButtonUltimo_Click);
+            // 
+            // toolStripButtonVoltar
+            // 
+            this.toolStripButtonVoltar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButtonVoltar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonVoltar.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonVoltar.Image")));
+            this.toolStripButtonVoltar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonVoltar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonVoltar.Name = "toolStripButtonVoltar";
+            this.toolStripButtonVoltar.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonVoltar.Text = "Voltar";
+            this.toolStripButtonVoltar.Click += new System.EventHandler(this.toolStripButtonVoltar_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButtonZoomMore
+            // 
+            this.toolStripButtonZoomMore.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonZoomMore.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonZoomMore.Image")));
+            this.toolStripButtonZoomMore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonZoomMore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonZoomMore.Name = "toolStripButtonZoomMore";
+            this.toolStripButtonZoomMore.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonZoomMore.Text = "Zoom +";
+            this.toolStripButtonZoomMore.Click += new System.EventHandler(this.toolStripButtonZoomMore_Click);
+            // 
+            // toolStripComboBoxZoom
+            // 
+            this.toolStripComboBoxZoom.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripComboBoxZoom.Items.AddRange(new object[] {
+            "Página Inteira",
+            "Largura da Página",
+            "25%",
+            "50%",
+            "75%",
+            "100%",
+            "125%",
+            "150%",
+            "175%",
+            "200%",
+            "500%"});
+            this.toolStripComboBoxZoom.Name = "toolStripComboBoxZoom";
+            this.toolStripComboBoxZoom.Size = new System.Drawing.Size(130, 31);
+            this.toolStripComboBoxZoom.Text = "Página Inteira";
+            this.toolStripComboBoxZoom.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxZoom_SelectedIndexChanged);
+            // 
+            // toolStripButtonZoomLess
+            // 
+            this.toolStripButtonZoomLess.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonZoomLess.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonZoomLess.Image")));
+            this.toolStripButtonZoomLess.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButtonZoomLess.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonZoomLess.Name = "toolStripButtonZoomLess";
+            this.toolStripButtonZoomLess.Size = new System.Drawing.Size(28, 28);
+            this.toolStripButtonZoomLess.Text = "Zoom -";
+            this.toolStripButtonZoomLess.Click += new System.EventHandler(this.toolStripButtonZoomLess_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripBtnPriviewPrint
+            // 
+            this.toolStripBtnPriviewPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripBtnPriviewPrint.Enabled = false;
+            this.toolStripBtnPriviewPrint.Image = ((System.Drawing.Image)(resources.GetObject("toolStripBtnPriviewPrint.Image")));
+            this.toolStripBtnPriviewPrint.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripBtnPriviewPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripBtnPriviewPrint.Name = "toolStripBtnPriviewPrint";
+            this.toolStripBtnPriviewPrint.Size = new System.Drawing.Size(28, 28);
+            this.toolStripBtnPriviewPrint.Text = "toolStripButton3";
+            this.toolStripBtnPriviewPrint.ToolTipText = "Visualizar Impressão";
+            this.toolStripBtnPriviewPrint.Click += new System.EventHandler(this.toolStripBtnPriviewPrint_Click);
+            // 
+            // toolStripTxtPesquisa
+            // 
+            this.toolStripTxtPesquisa.Enabled = false;
+            this.toolStripTxtPesquisa.Name = "toolStripTxtPesquisa";
+            this.toolStripTxtPesquisa.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTxtPesquisa.ToolTipText = "Pesquisa Texto Relatorio";
+            this.toolStripTxtPesquisa.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTxtPesquisa_KeyDown);
+            this.toolStripTxtPesquisa.TextChanged += new System.EventHandler(this.toolStripTxtPesquisa_TextChanged);
+            // 
+            // toolStriptxtBusca
+            // 
+            this.toolStriptxtBusca.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStriptxtBusca.Enabled = false;
+            this.toolStriptxtBusca.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStriptxtBusca.Image = ((System.Drawing.Image)(resources.GetObject("toolStriptxtBusca.Image")));
+            this.toolStriptxtBusca.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStriptxtBusca.Name = "toolStriptxtBusca";
+            this.toolStriptxtBusca.Size = new System.Drawing.Size(76, 18);
+            this.toolStriptxtBusca.Text = "Pesquisar";
+            this.toolStriptxtBusca.ToolTipText = "Pesquisar Texto Relatorio";
+            this.toolStriptxtBusca.Click += new System.EventHandler(this.toolStriptxtBusca_Click);
+            // 
+            // toolStripbtnPesqProximo
+            // 
+            this.toolStripbtnPesqProximo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripbtnPesqProximo.Enabled = false;
+            this.toolStripbtnPesqProximo.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripbtnPesqProximo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripbtnPesqProximo.Image")));
+            this.toolStripbtnPesqProximo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripbtnPesqProximo.Name = "toolStripbtnPesqProximo";
+            this.toolStripbtnPesqProximo.Size = new System.Drawing.Size(66, 18);
+            this.toolStripbtnPesqProximo.Text = "Proximo";
+            this.toolStripbtnPesqProximo.ToolTipText = "Continuar Pesquisa Relatorio";
+            this.toolStripbtnPesqProximo.Click += new System.EventHandler(this.toolStripbtnPesqProximo_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // FormRelatorioCompleto
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(749, 475);
+            this.Controls.Add(this.tbcRelUniube);
+            this.Name = "FormRelatorioCompleto";
+            this.Text = "FormRelatorioCompleto";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRelatorioCompleto_FormClosed);
+            this.Load += new System.EventHandler(this.FormRelatorioCompleto_Load);
+            this.tbcRelUniube.ResumeLayout(false);
+            this.tbpBusca.ResumeLayout(false);
+            this.pnlFiltro.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.pnlTituloFiltro.ResumeLayout(false);
+            this.pnlTituloFiltro.PerformLayout();
+            this.pnlOrdenacao.ResumeLayout(false);
+            this.pnlTituloOrdenacao.ResumeLayout(false);
+            this.pnlTituloOrdenacao.PerformLayout();
+            this.pnlModelo.ResumeLayout(false);
+            this.pnlTituloModelo.ResumeLayout(false);
+            this.pnlTituloModelo.PerformLayout();
+            this.tbpRelatorio.ResumeLayout(false);
+            this.tbpRelatorio.PerformLayout();
+            this.toolStripOpcoes.ResumeLayout(false);
+            this.toolStripOpcoes.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private TabControl tbcRelUniube;
+        private TabPage tbpRelatorio;
+        private ToolStrip toolStripOpcoes;
+        private ToolStripSeparator toolStripSeparatorOpcoes;
+        private ToolStripSeparator toolStripSeparator1;
+        public ToolStripTextBox toolStriptxtPg;
+        public Microsoft.Reporting.WinForms.ReportViewer rptUniube;
+        public TabPage tbpBusca;
+        public ToolStripButton toolStripButtonVoltar;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripTextBox toolStripTxtPesquisa;
+        private ToolStripButton toolStriptxtBusca;
+        private ToolStripButton toolStripbtnPesqProximo;
+        private ToolStripSeparator toolStripSeparator4;
+        public Panel pnlTituloModelo;
+        public LabelUniube lblModelo;
+        public Panel pnlModelo;
+        public Panel pnlFiltro;
+        public Panel pnlTituloFiltro;
+        public LabelUniube labelUniube2;
+        public Panel pnlOrdenacao;
+        public Panel pnlTituloOrdenacao;
+        public LabelUniube labelUniube1;
+        public Panel panel3;
+        public Button btnLimparCampos;
+        public Button btnGeraRel;
+        private Timer timer1;
+        public Button btCancel;
+        public ToolStripButton toolStripBtnImpressora;
+        public ToolStripButton toolStripBtnExcel;
+        public ToolStripButton toolStripBtnPDF;
+        public ToolStripButton toolStripBtnImagem;
+        public ToolStripButton toolStripBtnInicio;
+        public ToolStripButton toolStripBtnAnterior;
+        public ToolStripLabel toolStriplblPg;
+        public ToolStripButton toolStripBtnProximo;
+        public ToolStripButton toolStripButtonUltimo;
+        public ToolStripButton toolStripButtonZoomMore;
+        public ToolStripButton toolStripButtonZoomLess;
+        public ToolStripButton toolStripBtnPriviewPrint;
+        public ToolStripComboBox toolStripComboBoxZoom;
+        public ToolStripButton toolStripBtnExcelDados;
+        public Button btnPermissao;
+    }
+}

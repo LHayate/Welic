@@ -359,7 +359,6 @@ namespace Welic.App.ViewModels
                         ),
                     };
                     break;
-
             }            
                                    
             ShowCommand = new Command<Grouping<SelectedHeaderViewModel, HomeMenuItem>>(ExecuteShowCommand);

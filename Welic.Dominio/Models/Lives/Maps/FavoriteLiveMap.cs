@@ -11,7 +11,7 @@ namespace Welic.Dominio.Models.Lives.Maps
     public class FavoriteLiveMap: Entity
     {
         public int IdFavorite { get; set; }
-        public int IdUser { get; set; }
+        public string IdUser { get; set; }
         public int IdLive { get; set; }
 
 

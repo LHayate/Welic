@@ -1,18 +1,20 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Data.Entity.Validation;
-using System.Text;
-using Welic.Dominio.Core;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
+using Welic.Dominio.Models.City.Map;
+using Welic.Dominio.Models.Client.Map;
 using Welic.Dominio.Models.ConfigApp.Map;
 using Welic.Dominio.Models.Curso.Map;
+using Welic.Dominio.Models.Departamento.Map;
 using Welic.Dominio.Models.EBook.Map;
+using Welic.Dominio.Models.Empresa.Map;
+using Welic.Dominio.Models.Estacionamento.Map;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.News.Maps;
 using Welic.Dominio.Models.Schedule.Maps;
+using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Pattern.Ef6;
@@ -53,15 +55,14 @@ namespace Welic.Infra.Context
             return new AuthContext();
         }
 
+
         public DbSet<DispositivosMap> Dispositivo { get; set; }
         public DbSet<AspNetUser> User { get; set; }
         public DbSet<LiveMap> Live { get; set; }
         public DbSet<ScheduleMap> Schedule { get; set; }
-
         public DbSet<NewsMap> News { get; set; }
-
-        //public DbSet<GroupUserMap> GroupUser { get; set; }
-        public DbSet<ProgramsMap> Programs { get; set; }
+        public DbSet<PermissionMap> Permission { get; set; }
+        public DbSet<ProgransMap> Prograns { get; set; }
         public DbSet<MenuMap> Menus { get; set; }
         public DbSet<AspNetRole> AspNetRoles { get; set; }
         public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
@@ -93,6 +94,19 @@ namespace Welic.Infra.Context
         public DbSet<CursoMap> Curso { get; set; }
         public DbSet<EBookMap> EBook { get; set; }
         public DbSet<ConfigAppMap> ConfigApp { get; set; }
+        public DbSet<FavoriteLiveMap> FavoriteLive { get; set; }
+        public DbSet<PessoaMap> Pessoa { get; set; }
+        public DbSet<CityMap> City { get; set; }
+        public DbSet<EmpresaMap> Empresa { get; set; }
+        public DbSet<DepartamentoMap> Departamento { get; set; }
+        public DbSet<DepartamentoUsuario> DepartamentoUsuario { get; set; }
+        public DbSet<EstacionamentoMap> Estacionamento { get; set; }
+        public DbSet<EstacionamentoVagasMap> EstacionamentoVagas { get; set; }
+        public DbSet<SolicitacoesVagasMap> SolicitacoesVagas { get; set; }
+        public DbSet<VeiculosMap> Veiculos { get; set; }
+        public DbSet<SolicitacoesEstacionamentoMap> SolicitacoesEstacionamento { get; set; }
+        public DbSet<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -105,8 +119,7 @@ namespace Welic.Infra.Context
             modelBuilder.Configurations.Add(new MappingUser());
             modelBuilder.Configurations.Add(new MappingLive());
             modelBuilder.Configurations.Add(new MappingSchedule());
-            modelBuilder.Configurations.Add(new MappingNews());
-            //modelBuilder.Configurations.Add(new MappingGroupUser());
+            modelBuilder.Configurations.Add(new MappingNews());            
             modelBuilder.Configurations.Add(new MappingProgram());
             modelBuilder.Configurations.Add(new MappingMenu());
             modelBuilder.Configurations.Add(new MappingAspNetRole());
@@ -139,6 +152,19 @@ namespace Welic.Infra.Context
             modelBuilder.Configurations.Add(new MappingCursos());
             modelBuilder.Configurations.Add(new MappingEBook());
             modelBuilder.Configurations.Add(new MappingConfigApp());
+            modelBuilder.Configurations.Add(new MappingFavoriteLive());
+            modelBuilder.Configurations.Add(new MappingPessoa());
+            modelBuilder.Configurations.Add(new MappingCity());
+            modelBuilder.Configurations.Add(new MappingEmpresa());
+            modelBuilder.Configurations.Add(new MappingPermission());
+            modelBuilder.Configurations.Add(new MappingDepartamento());
+            modelBuilder.Configurations.Add(new MappingEstacionamento());
+            modelBuilder.Configurations.Add(new MappingSolicitacoesVagas());
+            modelBuilder.Configurations.Add(new MappingVeiculos());
+            modelBuilder.Configurations.Add(new MappingSolicitacoesEstacionamento());
+            modelBuilder.Configurations.Add(new MappingSolicitacoesVagasLiberadas());
+
+
         }
     }
 }

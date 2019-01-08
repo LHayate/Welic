@@ -4,19 +4,20 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Users.Mapeamentos;
 
 namespace Welic.Infra.Mapeamentos
 {
     public class MappingProgram
-    : EntityTypeConfiguration<ProgramsMap>
+    : EntityTypeConfiguration<ProgransMap>
     {
         public MappingProgram()
         {
             ToTable("Programs");
-            HasKey(x => x.Id);
+            HasKey(x => x.IdProgram);
 
-            Property(x => x.Id)
+            Property(x => x.IdProgram)
                 .IsRequired()
                 .HasColumnName("Id")
                 .HasColumnType("int");
@@ -30,6 +31,9 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasColumnName("Description")
                 .HasColumnType("varchar");
+            Property(x => x.Type)
+                .IsRequired()
+                .HasColumnName("Type");
         }
     }
 }

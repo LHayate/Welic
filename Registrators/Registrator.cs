@@ -2,13 +2,19 @@
 using Registrators.Plugins;
 using Servicos;
 using Servicos.Acesso;
+using Servicos.City;
 using Servicos.Cursos;
+using Servicos.Departamento;
 using Servicos.Ebook;
+using Servicos.Empresa;
+using Servicos.Estacionamento;
 using Servicos.Live;
 using Servicos.MarketPlace;
 using Servicos.Menu;
 using Servicos.News;
+using Servicos.Pessoa;
 using Servicos.Schedule;
+using Servicos.Seguranca;
 using Servicos.Uploads;
 using Servicos.Users;
 using Unity;
@@ -18,10 +24,20 @@ using Welic.Dominio;
 using Welic.Dominio.Eventos;
 using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
+using Welic.Dominio.Models.City.Map;
+using Welic.Dominio.Models.City.Service;
+using Welic.Dominio.Models.Client.Map;
+using Welic.Dominio.Models.Client.Service;
 using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Curso.Service;
+using Welic.Dominio.Models.Departamento.Map;
+using Welic.Dominio.Models.Departamento.Service;
 using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.EBook.Services;
+using Welic.Dominio.Models.Empresa.Map;
+using Welic.Dominio.Models.Empresa.Service;
+using Welic.Dominio.Models.Estacionamento.Map;
+using Welic.Dominio.Models.Estacionamento.Services;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
 using Welic.Dominio.Models.Lives.Services;
@@ -34,6 +50,8 @@ using Welic.Dominio.Models.News.Maps;
 using Welic.Dominio.Models.News.Services;
 using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Schedule.Services;
+using Welic.Dominio.Models.Segurança.Map;
+using Welic.Dominio.Models.Segurança.Service;
 using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Uploads.Services;
 using Welic.Dominio.Models.Users.Mapeamentos;
@@ -92,8 +110,26 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<NewsMap>, Repository<NewsMap>>()
                 .RegisterType<IRepositoryAsync<ScheduleMap>,Repository<ScheduleMap>>()
                 .RegisterType<IRepositoryAsync<MenuMap>,Repository<MenuMap>>()
+                .RegisterType<IRepositoryAsync<CityMap>,Repository<CityMap>>()
+                .RegisterType<IRepositoryAsync<PessoaMap>,Repository<PessoaMap>>()
+                .RegisterType<IRepositoryAsync<DepartamentoMap>,Repository<DepartamentoMap>>()
+                .RegisterType<IRepositoryAsync<PermissionMap>,Repository<PermissionMap>>()
+                .RegisterType<IRepositoryAsync<EstacionamentoMap>,Repository<EstacionamentoMap>>()
+                .RegisterType<IRepositoryAsync<EstacionamentoVagasMap>,Repository<EstacionamentoVagasMap>>()
+                .RegisterType<IRepositoryAsync<EmpresaMap>,Repository<EmpresaMap>>()
+                .RegisterType<IRepositoryAsync<SolicitacoesVagasMap>,Repository<SolicitacoesVagasMap>>()
+                .RegisterType<IRepositoryAsync<VeiculosMap>,Repository<VeiculosMap>>()
                 
 
+                .RegisterType<IServiceVeiculo, ServiceVeiculo>()
+                .RegisterType<IServiceSolicitacoesVagas, ServiceSolicitacoesVagas>()
+                .RegisterType<IServiceEmpresa, ServiceEmpresa>()
+                .RegisterType<IServiceEstacionamentoVagas, ServiceEstacionamentoVagas>()
+                .RegisterType<IServiceEstacionamento, ServiceEstacionamento>()
+                .RegisterType<IServicePermission, ServicePermission>()
+                .RegisterType<IServiceDepartamento, ServiceDepartamento>()
+                .RegisterType<IServicePessoa, ServicePessoa>()
+                .RegisterType<IServiceCity, ServiceCity>()
                 .RegisterType<IServiceUser, ServiceUser>()
                 .RegisterType<IServiceSchedule, ServiceSchedule>()
                 .RegisterType<IServiceNews, ServiceNews>()

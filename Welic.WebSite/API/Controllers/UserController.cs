@@ -98,6 +98,13 @@ namespace Welic.WebSite.API.Controllers
         }
 
         [HttpGet]
+        [Route("getbyNome/{nome}")]
+        public Task<HttpResponseMessage> GetByNome(string nome)
+        {
+            return CriaResposta(HttpStatusCode.OK, _servico.Query().Select(x => x).FirstOrDefault(x => x.FullName.Contains(nome)));
+        }
+
+        [HttpGet]
         [Route("GetById/{id}")]
         public Task<HttpResponseMessage> GetById(string id)
         {
@@ -124,6 +131,40 @@ namespace Welic.WebSite.API.Controllers
                 Console.WriteLine(e);
                 return CriaResposta(HttpStatusCode.InternalServerError,$"{e.Message} - {e.InnerException.Message}");
             }            
+        }
+
+        [HttpPost]
+        [Route("ResetPassword/{token}")]
+        public async Task<HttpResponseMessage> ResetPassword([FromBody] AspNetUser model, [FromUri] string token)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await CriaResposta(HttpStatusCode.NotFound, "Erro de validação!");
+            }
+            var user = await UserManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist
+                return await CriaResposta(HttpStatusCode.NotFound, "Usuario não encontrado ou não confirmado!");
+            }
+            var result = await UserManager.ResetPasswordAsync(user.Id, token, model.Password);
+            if (result.Succeeded)
+            {
+                return await CriaResposta(HttpStatusCode.OK, "Alterado com Sucesso!");
+            }
+            string error = string.Empty;
+            foreach (var item in result.Errors)
+            {
+                if (item.Contains("is already taken."))
+                    return await CriaResposta(HttpStatusCode.Conflict, result.Errors);
+
+                if (item.ToLower().Contains("invalid"))
+                    return await CriaResposta(HttpStatusCode.InternalServerError, item);
+
+
+                error += $"{item} -  ";
+            }
+            return await CriaResposta(HttpStatusCode.Unauthorized, error);
         }
 
         [HttpPost]

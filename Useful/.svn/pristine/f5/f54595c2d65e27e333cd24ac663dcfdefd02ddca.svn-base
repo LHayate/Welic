@@ -1,0 +1,83 @@
+﻿namespace System.Windows.Forms.Uniube
+{
+    partial class FormRelatorio
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.rptUniube = new Microsoft.Reporting.WinForms.ReportViewer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.SuspendLayout();
+            // 
+            // rptUniube
+            // 
+            this.rptUniube.AutoScroll = true;
+            this.rptUniube.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.rptUniube.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rptUniube.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rptUniube.Location = new System.Drawing.Point(0, 0);
+            this.rptUniube.Name = "rptUniube";
+            this.rptUniube.ShowBackButton = false;
+            this.rptUniube.ShowContextMenu = false;
+            this.rptUniube.ShowCredentialPrompts = false;
+            this.rptUniube.ShowDocumentMapButton = false;
+            this.rptUniube.ShowExportButton = false;
+            this.rptUniube.ShowParameterPrompts = false;
+            this.rptUniube.ShowPrintButton = false;
+            this.rptUniube.ShowPromptAreaButton = false;
+            this.rptUniube.ShowRefreshButton = false;
+            this.rptUniube.ShowStopButton = false;
+            this.rptUniube.Size = new System.Drawing.Size(765, 487);
+            this.rptUniube.TabIndex = 7;
+            this.rptUniube.ZoomMode = Microsoft.Reporting.WinForms.ZoomMode.FullPage;
+            this.rptUniube.RenderingComplete += new Microsoft.Reporting.WinForms.RenderingCompleteEventHandler(this.relUniube_RenderingComplete);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            // 
+            // FormRelatorioNew
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(765, 487);
+            this.Controls.Add(this.rptUniube);
+            this.Name = "FormRelatorioNew";
+            this.Text = "";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRelatorio_FormClosed);
+            this.Load += new System.EventHandler(this.FormRelatorio_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        public Microsoft.Reporting.WinForms.ReportViewer rptUniube;
+        private Timer timer1;
+    }
+}

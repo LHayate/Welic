@@ -1,0 +1,98 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Windows.Forms.Uniube;
+using System.Windows.Forms.Uniube.RecursosGenericos;
+
+
+namespace System.Windows.Forms.Uniube.RecursosGenericos
+{
+    [ToolboxBitmap(@"S:\Sistemas dotNet\Figuras\intervalo.ico")]
+    public partial class IntervaloData1 : UserControl
+    {        
+        /// <summary>
+        /// Retorna true caso os dois campos (txtInicial e txtFinal) contenham valor, e false se pelo menos um dos campos for vazio
+        /// O retorno true está condicionado também ao CheckBox estar marcado.
+        /// </summary>
+        public bool Preenchido()
+        {
+            bool retorno = false;
+
+            if (chkTitulo.Checked &&
+                txtInicial.MaskFull &&
+                txtFinal.MaskFull)
+                retorno = true;
+
+            return retorno;
+        }
+
+        private string _textChk = "<titulo>";
+        public string TextCheck
+        {
+            get { chkTitulo.Text = _textChk; return _textChk; }
+            set { chkTitulo.Text = value; _textChk = value; }
+        }
+        
+        public IntervaloData1()
+        {
+            InitializeComponent();
+
+            chkTitulo.Checked = false;
+            txtInicial.Enabled = chkTitulo.Checked;
+            txtFinal.Enabled = chkTitulo.Checked;
+        }
+
+        public Intervalo GetIntervalo()
+        {
+            Intervalo itv = new Intervalo(null, null);
+
+            if (chkTitulo.Checked)
+            {
+                object min = null;
+                object max = null;
+
+                if (!txtInicial.Text.Replace("/", "").Trim().Equals(""))
+                    min = txtInicial.Text.Trim();
+
+                if (!txtFinal.Text.Replace("/", "").Trim().Equals(""))
+                    max = txtFinal.Text.Trim();
+
+                itv = new Intervalo(min, max);
+            }
+
+            return itv;
+        }
+
+        private void txtInicial_TextChanged(object sender, EventArgs e)
+        {
+            if (txtInicial.Text.Trim().Equals(""))
+            {
+                txtFinal.Text = "";
+                txtInicial.Focus();
+            }            
+        }
+        
+        private void chkTitulo_CheckedChanged(object sender, EventArgs e)
+        {
+            txtInicial.Enabled = chkTitulo.Checked;
+            txtFinal.Enabled = chkTitulo.Checked;
+
+            if (chkTitulo.Checked)
+            {
+                txtInicial.Focus();
+                txtInicial.SelectAll();
+            }            
+        }
+
+        private void txtFinal_Enter(object sender, EventArgs e)
+        {
+            if (txtInicial.MaskFull)
+                txtFinal.Text = txtInicial.Text;
+        }
+    }
+}

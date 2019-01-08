@@ -85,9 +85,13 @@
   <ItemGroup>
     <Compile Include="Context\AuthContext.cs" />
     <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Mapeamentos\MappingCity.cs" />
     <Compile Include="Mapeamentos\MappingConfigApp.cs" />
     <Compile Include="Mapeamentos\MappingCursos.cs" />
+    <Compile Include="Mapeamentos\MappingDepartamento.cs" />
     <Compile Include="Mapeamentos\MappingEBook.cs" />
+    <Compile Include="Mapeamentos\MappingEmpresa.cs" />
+    <Compile Include="Mapeamentos\MappingEstacionamento.cs" />
     <Compile Include="Mapeamentos\MappingFavoriteLive.cs" />
     <Compile Include="Mapeamentos\MappingListingReview.cs" />
     <Compile Include="Mapeamentos\MappingListingStat.cs" />
@@ -100,10 +104,14 @@
     <Compile Include="Mapeamentos\MappingCategoryStat.cs" />
     <Compile Include="Mapeamentos\MappingContentPage.cs" />
     <Compile Include="Mapeamentos\MappingEmailTemplate.cs" />
-    <Compile Include="Mapeamentos\MappingGroupUser.cs" />
     <Compile Include="Mapeamentos\MappingDispositivos.cs" />
     <Compile Include="Mapeamentos\MappingLive.cs" />
+    <Compile Include="Mapeamentos\MappingPermission.cs" />
+    <Compile Include="Mapeamentos\MappingPessoa.cs" />
     <Compile Include="Mapeamentos\MappingSchedule.cs" />
+    <Compile Include="Mapeamentos\MappingSolicitacoesEstacionamento.cs" />
+    <Compile Include="Mapeamentos\MappingSolicitacoesVagas.cs" />
+    <Compile Include="Mapeamentos\MappingSolicitacoesVagasLiberadas.cs" />
     <Compile Include="Mapeamentos\MappingUploads.cs" />
     <Compile Include="Mapeamentos\MappingUser.cs" />
     <Compile Include="Mapeamentos\MappingListing.cs" />
@@ -112,7 +120,6 @@
     <Compile Include="Mapeamentos\MappingMenu.cs" />
     <Compile Include="Mapeamentos\MappingNews.cs" />
     <Compile Include="Mapeamentos\MappingProgram.cs" />
-    <Compile Include="Mapeamentos\MappingProgramUser.cs" />
     <Compile Include="Mapeamentos\MappingMessage.cs" />
     <Compile Include="Mapeamentos\MappingMessageParticipant.cs" />
     <Compile Include="Mapeamentos\MappingMessageReadState.cs" />
@@ -125,6 +132,7 @@
     <Compile Include="Mapeamentos\MappingSetting.cs" />
     <Compile Include="Mapeamentos\MappingStripeConnect.cs" />
     <Compile Include="Mapeamentos\MappingStripeTransaction.cs" />
+    <Compile Include="Mapeamentos\MappingVeiculos.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\ConfigurationInstall.cs" />
     <Compile Include="Migrations\ConnectionStringHelper.cs" />
@@ -136,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

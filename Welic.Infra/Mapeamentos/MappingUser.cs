@@ -24,6 +24,9 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasMaxLength(256);
 
+            this.Property(x => x.EmpresaId)
+                .IsRequired();
+
             // Table & Column Mappings
             this.ToTable("AspNetUsers");
             this.Property(t => t.Id).HasColumnName("Id");
@@ -50,6 +53,7 @@ namespace Welic.Infra.Mapeamentos
             this.Property(t => t.NickName).HasColumnName("UserName");
             this.Property(t => t.Disabled).HasColumnName("Disabled");
             this.Property(t => t.Rating).HasColumnName("Rating");
+            this.Property(t => t.EmpresaId).HasColumnName("EmpresaId");
             //ToTable("AspNetUser", "dbo");
             //HasKey(x => x.Id);            
 

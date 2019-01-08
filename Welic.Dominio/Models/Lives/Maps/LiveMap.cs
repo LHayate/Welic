@@ -30,6 +30,7 @@ namespace Welic.Dominio.Models.Lives.Maps
         public AspNetUser TeacherUser { get; set; }
 
         public ICollection<AspNetUser> ClassUser { get; set; }
+        public ICollection<FavoriteLiveMap> Favorites { get; set; }
 
 
         //public virtual ScheduleMap Schedules { get; set; }

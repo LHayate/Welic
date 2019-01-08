@@ -1,0 +1,271 @@
+﻿namespace IntervaloCampos
+{
+    partial class IntervaloCampos
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTitulo = new UseFul.Forms.Welic.CheckBoxWelic(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.txtFinal = new UseFul.Forms.Welic.TextBoxWelic();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.lbFinal = new UseFul.Forms.Welic.LabelWelic();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.txtInicial = new UseFul.Forms.Welic.TextBoxWelic();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.lbInicial = new UseFul.Forms.Welic.LabelWelic();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.lblTitulo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(136, 19);
+            this.panel1.TabIndex = 0;
+            // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitulo.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.LimpaCampo = true;
+            this.lblTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.NomeCampoDadosDataTable = null;
+            this.lblTitulo.Size = new System.Drawing.Size(136, 19);
+            this.lblTitulo.TabIndex = 0;
+            this.lblTitulo.Text = "Inter. Campo";
+            this.lblTitulo.UseVisualStyleBackColor = false;
+            this.lblTitulo.CheckedChanged += new System.EventHandler(this.chkTitulo_CheckedChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 19);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(136, 74);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.txtFinal);
+            this.panel6.Controls.Add(this.panel10);
+            this.panel6.Controls.Add(this.panel8);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 42);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(136, 32);
+            this.panel6.TabIndex = 3;
+            // 
+            // txtFinal
+            // 
+            this.txtFinal._RecursosGenericosSqlF3 = null;
+            this.txtFinal._RecursosGenericosSqlLeave = null;
+            this.txtFinal.BackColor = System.Drawing.Color.White;
+            this.txtFinal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFinal.InformacaoToolTipCaminho = null;
+            this.txtFinal.InformacaoToolTipDescricao = null;
+            this.txtFinal.LimpaCampo = true;
+            this.txtFinal.Location = new System.Drawing.Point(49, 0);
+            this.txtFinal.Name = "txtFinal";
+            this.txtFinal.NomeCampoDadosDataTable = null;
+            this.txtFinal.ParteDecimal = 0;
+            this.txtFinal.ParteInteira = 0;
+            this.txtFinal.Size = new System.Drawing.Size(81, 21);
+            this.txtFinal.TabIndex = 2;
+            this.txtFinal.TipoCampo = UseFul.Forms.Welic.TextBoxWelic.CTipoCampo.Normal;
+            this.txtFinal.TipoValor = UseFul.Forms.Welic.TextBoxWelic.CTipoValor.Geral;
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.lbFinal);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(49, 32);
+            this.panel10.TabIndex = 1;
+            // 
+            // lbFinal
+            // 
+            this.lbFinal.AutoSize = true;
+            this.lbFinal.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lbFinal.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbFinal.Location = new System.Drawing.Point(6, 0);
+            this.lbFinal.Name = "lbFinal";
+            this.lbFinal.Size = new System.Drawing.Size(43, 13);
+            this.lbFinal.TabIndex = 0;
+            this.lbFinal.Text = "Final:";
+            // 
+            // panel8
+            // 
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel8.Location = new System.Drawing.Point(130, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(6, 32);
+            this.panel8.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.txtInicial);
+            this.panel5.Controls.Add(this.panel9);
+            this.panel5.Controls.Add(this.panel7);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 5);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(136, 30);
+            this.panel5.TabIndex = 2;
+            // 
+            // txtInicial
+            // 
+            this.txtInicial._RecursosGenericosSqlF3 = null;
+            this.txtInicial._RecursosGenericosSqlLeave = null;
+            this.txtInicial.BackColor = System.Drawing.Color.White;
+            this.txtInicial.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtInicial.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInicial.InformacaoToolTipCaminho = null;
+            this.txtInicial.InformacaoToolTipDescricao = null;
+            this.txtInicial.LimpaCampo = true;
+            this.txtInicial.Location = new System.Drawing.Point(49, 0);
+            this.txtInicial.Name = "txtInicial";
+            this.txtInicial.NomeCampoDadosDataTable = null;
+            this.txtInicial.ParteDecimal = 0;
+            this.txtInicial.ParteInteira = 0;
+            this.txtInicial.Size = new System.Drawing.Size(81, 21);
+            this.txtInicial.TabIndex = 2;
+            this.txtInicial.TipoCampo = UseFul.Forms.Welic.TextBoxWelic.CTipoCampo.Normal;
+            this.txtInicial.TipoValor = UseFul.Forms.Welic.TextBoxWelic.CTipoValor.Geral;
+            this.txtInicial.Leave += new System.EventHandler(this.txtInicial_Leave);
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.lbInicial);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(49, 30);
+            this.panel9.TabIndex = 1;
+            // 
+            // lbInicial
+            // 
+            this.lbInicial.AutoSize = true;
+            this.lbInicial.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lbInicial.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInicial.Location = new System.Drawing.Point(0, 0);
+            this.lbInicial.Name = "lbInicial";
+            this.lbInicial.Size = new System.Drawing.Size(52, 13);
+            this.lbInicial.TabIndex = 0;
+            this.lbInicial.Text = "Inicial:";
+            // 
+            // panel7
+            // 
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel7.Location = new System.Drawing.Point(130, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(6, 30);
+            this.panel7.TabIndex = 0;
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 1);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(136, 4);
+            this.panel4.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(136, 1);
+            this.panel3.TabIndex = 0;
+            // 
+            // IntervaloCampos
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.GhostWhite;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
+            this.Name = "IntervaloCampos";
+            this.Size = new System.Drawing.Size(136, 93);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel9;
+        private UseFul.Forms.Welic.LabelWelic lbInicial;
+        private UseFul.Forms.Welic.LabelWelic lbFinal;
+        public UseFul.Forms.Welic.TextBoxWelic txtFinal;
+        public UseFul.Forms.Welic.TextBoxWelic txtInicial;
+        public UseFul.Forms.Welic.CheckBoxWelic lblTitulo;
+    }
+}

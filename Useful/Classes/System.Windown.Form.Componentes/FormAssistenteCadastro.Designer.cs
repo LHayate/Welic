@@ -1,0 +1,360 @@
+﻿using System.Windows.Forms;
+
+namespace UseFul.Forms.Welic
+{
+    partial class FormAssistenteCadastro
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAssistenteCadastro));
+            this.dgv = new UseFul.Forms.Welic.InheritableDataGridView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pnlFiltros = new System.Windows.Forms.Panel();
+            this.pnlBuscar = new System.Windows.Forms.Panel();
+            this.btnBuscar = new UseFul.Forms.Welic.ButtonWelic();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnPermissao = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.pnlFiltrosBottom = new System.Windows.Forms.Panel();
+            this.btnNovoRegistro = new UseFul.Forms.Welic.ButtonWelic();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lblContagemItensGrid = new UseFul.Forms.Welic.LabelWelic();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.pnlFiltros.SuspendLayout();
+            this.pnlBuscar.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel7.SuspendLayout();
+            this.pnlFiltrosBottom.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // dgv
+            // 
+            this.dgv._UtilizarShift = false;
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
+            this.dgv.AllowUserToResizeRows = false;
+            this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv.BackgroundColor = System.Drawing.Color.White;
+            this.dgv.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgv.ColumnHeadersHeight = 17;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LemonChiffon;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgv.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgv.EnableHeadersVisualStyles = false;
+            this.dgv.HabilitarColunasInvisiveisExportarExcel = false;
+            this.dgv.LimpaCampo = false;
+            this.dgv.Location = new System.Drawing.Point(3, 34);
+            this.dgv.MultiSelect = false;
+            this.dgv.Name = "dgv";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.LemonChiffon;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgv.RowHeadersVisible = false;
+            this.dgv.RowHeadersWidth = 17;
+            this.dgv.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv.Size = new System.Drawing.Size(847, 217);
+            this.dgv.TabIndex = 1028;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.pnlFiltros);
+            this.splitContainer1.Panel1MinSize = 10;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgv);
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.pnlFiltrosBottom);
+            this.splitContainer1.Panel2.Controls.Add(this.panel9);
+            this.splitContainer1.Panel2.Controls.Add(this.panel5);
+            this.splitContainer1.Size = new System.Drawing.Size(857, 404);
+            this.splitContainer1.SplitterDistance = 101;
+            this.splitContainer1.TabIndex = 1101;
+            // 
+            // pnlFiltros
+            // 
+            this.pnlFiltros.Controls.Add(this.pnlBuscar);
+            this.pnlFiltros.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlFiltros.Location = new System.Drawing.Point(0, 0);
+            this.pnlFiltros.Name = "pnlFiltros";
+            this.pnlFiltros.Size = new System.Drawing.Size(853, 97);
+            this.pnlFiltros.TabIndex = 1028;
+            // 
+            // pnlBuscar
+            // 
+            this.pnlBuscar.Controls.Add(this.btnBuscar);
+            this.pnlBuscar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBuscar.Location = new System.Drawing.Point(0, 63);
+            this.pnlBuscar.Name = "pnlBuscar";
+            this.pnlBuscar.Size = new System.Drawing.Size(853, 34);
+            this.pnlBuscar.TabIndex = 1099;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btnBuscar.Image")));
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(352, 3);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(132, 29);
+            this.btnBuscar.TabIndex = 0;
+            this.btnBuscar.Text = "      Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel7);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(3, 251);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(847, 44);
+            this.panel2.TabIndex = 1105;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.btnPermissao);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel7.Location = new System.Drawing.Point(0, 3);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(847, 38);
+            this.panel7.TabIndex = 1101;
+            // 
+            // btnPermissao
+            // 
+            this.btnPermissao.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnPermissao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPermissao.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPermissao.Image = ((System.Drawing.Image)(resources.GetObject("btnPermissao.Image")));
+            this.btnPermissao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPermissao.Location = new System.Drawing.Point(3, 3);
+            this.btnPermissao.Name = "btnPermissao";
+            this.btnPermissao.Size = new System.Drawing.Size(44, 30);
+            this.btnPermissao.TabIndex = 3;
+            this.btnPermissao.UseVisualStyleBackColor = true;
+            this.btnPermissao.Click += new System.EventHandler(this.btnPermissao_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(847, 3);
+            this.panel4.TabIndex = 1100;
+            // 
+            // panel6
+            // 
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 41);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(847, 3);
+            this.panel6.TabIndex = 1098;
+            // 
+            // pnlFiltrosBottom
+            // 
+            this.pnlFiltrosBottom.Controls.Add(this.btnNovoRegistro);
+            this.pnlFiltrosBottom.Controls.Add(this.panel1);
+            this.pnlFiltrosBottom.Controls.Add(this.panel8);
+            this.pnlFiltrosBottom.Controls.Add(this.panel3);
+            this.pnlFiltrosBottom.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlFiltrosBottom.Location = new System.Drawing.Point(3, 0);
+            this.pnlFiltrosBottom.Name = "pnlFiltrosBottom";
+            this.pnlFiltrosBottom.Size = new System.Drawing.Size(847, 34);
+            this.pnlFiltrosBottom.TabIndex = 1104;
+            // 
+            // btnNovoRegistro
+            // 
+            this.btnNovoRegistro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(195)))), ((int)(((byte)(217)))), ((int)(((byte)(241)))));
+            this.btnNovoRegistro.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNovoRegistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovoRegistro.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNovoRegistro.Image = ((System.Drawing.Image)(resources.GetObject("btnNovoRegistro.Image")));
+            this.btnNovoRegistro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNovoRegistro.Location = new System.Drawing.Point(693, 3);
+            this.btnNovoRegistro.Name = "btnNovoRegistro";
+            this.btnNovoRegistro.Size = new System.Drawing.Size(154, 28);
+            this.btnNovoRegistro.TabIndex = 1099;
+            this.btnNovoRegistro.Text = "         Novo Registro";
+            this.btnNovoRegistro.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnNovoRegistro.UseVisualStyleBackColor = true;
+            this.btnNovoRegistro.Click += new System.EventHandler(this.btnNovoRegistro_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(145, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(702, 3);
+            this.panel1.TabIndex = 1100;
+            // 
+            // panel8
+            // 
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(145, 31);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(702, 3);
+            this.panel8.TabIndex = 1098;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.lblContagemItensGrid);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(145, 34);
+            this.panel3.TabIndex = 1097;
+            // 
+            // lblContagemItensGrid
+            // 
+            this.lblContagemItensGrid.AutoSize = true;
+            this.lblContagemItensGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblContagemItensGrid.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblContagemItensGrid.Location = new System.Drawing.Point(0, 21);
+            this.lblContagemItensGrid.Name = "lblContagemItensGrid";
+            this.lblContagemItensGrid.Size = new System.Drawing.Size(136, 13);
+            this.lblContagemItensGrid.TabIndex = 1088;
+            this.lblContagemItensGrid.Text = "Total de itens: 9999";
+            this.lblContagemItensGrid.Visible = false;
+            // 
+            // panel9
+            // 
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(3, 295);
+            this.panel9.TabIndex = 1103;
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel5.Location = new System.Drawing.Point(850, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(3, 295);
+            this.panel5.TabIndex = 1101;
+            // 
+            // FormAssistenteCadastro
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(857, 404);
+            this.Controls.Add(this.splitContainer1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FormAssistenteCadastro";
+            this.Text = "FormAssistente";
+            this.Load += new System.EventHandler(this.FormAssistente_Load);
+            this.SizeChanged += new System.EventHandler(this.FormAssistente_SizeChanged);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.pnlFiltros.ResumeLayout(false);
+            this.pnlBuscar.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
+            this.pnlFiltrosBottom.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        public InheritableDataGridView dgv;
+        public Panel pnlFiltros;
+        public Panel pnlBuscar;
+        public ButtonWelic btnBuscar;
+        public Panel pnlFiltrosBottom;
+        public ButtonWelic btnNovoRegistro;
+        public Panel panel8;
+        public Panel panel3;
+        public LabelWelic lblContagemItensGrid;
+        public Panel panel9;
+        public SplitContainer splitContainer1;
+        public Panel panel2;
+        public Panel panel4;
+        public Panel panel6;
+        public Panel panel1;
+        public Panel panel5;
+        public Panel panel7;
+        public Button btnPermissao;
+
+
+
+
+    }
+}

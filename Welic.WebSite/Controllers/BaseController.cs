@@ -36,7 +36,7 @@ namespace Welic.WebSite.Controllers
 
             var usuario = _serviceUser.Query().Select(x => x).FirstOrDefault(x => x.Email == email);
 
-            var list = _servicoMenu.SelectQuery(query, new SqlParameter("IdUser", usuario.Id)).ToList();
+            var list = _servicoMenu.SelectQuery(query, new SqlParameter("UserId", usuario.Id)).ToList();
                                     
             return PartialView(list);
 

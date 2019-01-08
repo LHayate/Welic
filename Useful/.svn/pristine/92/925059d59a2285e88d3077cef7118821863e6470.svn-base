@@ -1,0 +1,79 @@
+﻿namespace System.Windows.Forms.Uniube
+{
+    partial class FormRelatorioCrystal
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.crystalRptUniube = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
+            this.SuspendLayout();
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            // 
+            // crystalRptUniube
+            // 
+            this.crystalRptUniube.ActiveViewIndex = -1;
+            this.crystalRptUniube.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crystalRptUniube.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crystalRptUniube.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crystalRptUniube.Location = new System.Drawing.Point(0, 0);
+            this.crystalRptUniube.Name = "crystalRptUniube";
+            this.crystalRptUniube.ShowCloseButton = false;
+            this.crystalRptUniube.ShowCopyButton = false;
+            this.crystalRptUniube.ShowExportButton = false;
+            this.crystalRptUniube.ShowGroupTreeButton = false;
+            this.crystalRptUniube.ShowLogo = false;
+            this.crystalRptUniube.ShowParameterPanelButton = false;
+            this.crystalRptUniube.ShowPrintButton = false;
+            this.crystalRptUniube.ShowRefreshButton = false;
+            this.crystalRptUniube.Size = new System.Drawing.Size(765, 487);
+            this.crystalRptUniube.TabIndex = 0;
+            this.crystalRptUniube.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
+            // 
+            // FormRelatorioCrystal
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(765, 487);
+            this.Controls.Add(this.crystalRptUniube);
+            this.Name = "FormRelatorioCrystal";
+            this.Text = "";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormRelatorio_FormClosed);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private Timer timer1;
+        protected CrystalDecisions.Windows.Forms.CrystalReportViewer crystalRptUniube;
+    }
+}

@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A89510E1-C88F-481D-9530-4636DCEC52EE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System.Windows.Forms.Uniube</RootNamespace>
+    <AssemblyName>System.Windows.Forms.Uniube</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Uniube_FW_32_32.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Classes.Autenticacao, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Sistemas dotNet\Classes\Autenticacao\Vs 2010\Versão 4.0\Classes.Autenticacao.dll</HintPath>
+    </Reference>
+    <Reference Include="Classes.Dal, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Sistemas dotNet\Classes\Dal\Vs 2010\Versao 4.0\Classes.Dal.dll</HintPath>
+    </Reference>
+    <Reference Include="Classes.Entity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Sistemas dotNet\Classes\Entity\Vs 2010\Versao 7.0\Classes.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Sistemas dotNet\Classes\DLLs que faltam no VS 2013\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>S:\Sistemas dotNet\Classes\DLLs que faltam no VS 2013\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ButtonUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ButtonUniube.Designer.cs">
+      <DependentUpon>ButtonUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CheckBoxUniube.Designer.cs">
+      <DependentUpon>CheckBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Competencia.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Competencia.designer.cs">
+      <DependentUpon>Competencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ComboBoxFiltroUniube.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComboBoxFiltroUniube.designer.cs">
+      <DependentUpon>ComboBoxFiltroUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBuscaPaginacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBuscaPaginacao.designer.cs">
+      <DependentUpon>FormBuscaPaginacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExtratorDados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExtratorDados.designer.cs">
+      <DependentUpon>frmExtratorDados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExtratorDadosConsulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExtratorDadosConsulta.designer.cs">
+      <DependentUpon>frmExtratorDadosConsulta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\Intervalo2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\Intervalo2.designer.cs">
+      <DependentUpon>Intervalo2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\FormBusca3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\FormBusca3.designer.cs">
+      <DependentUpon>FormBusca3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\IntervaloData1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\IntervaloData1.designer.cs">
+      <DependentUpon>IntervaloData1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\Entidades.cs" />
+    <Compile Include="RecursosGenericos\FormBusca2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\FormBusca2.designer.cs">
+      <DependentUpon>FormBusca2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\Intervalo1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\Intervalo1.designer.cs">
+      <DependentUpon>Intervalo1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaskedTextBoxFoneUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MaskedTextBoxFoneUniube.Designer.cs">
+      <DependentUpon>MaskedTextBoxFoneUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorioCrystal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorioCrystal.Designer.cs">
+      <DependentUpon>FormRelatorioCrystal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBusca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBusca.designer.cs">
+      <DependentUpon>FormBusca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorio.Designer.cs">
+      <DependentUpon>FormRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAssistenteGenerico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAssistenteGenerico.Designer.cs">
+      <DependentUpon>FormAssistenteGenerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorioCompletoCrystal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorioCompletoCrystal.Designer.cs">
+      <DependentUpon>FormRelatorioCompletoCrystal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBuscaInformacaoGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBuscaInformacaoGrid.designer.cs">
+      <DependentUpon>frmBuscaInformacaoGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFundoPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFundoPrincipal.designer.cs">
+      <DependentUpon>FormFundoPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmOrdenacaoGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOrdenacaoGrid.designer.cs">
+      <DependentUpon>frmOrdenacaoGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumericUpDownUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="NumericUpDownUniube.Designer.cs">
+      <DependentUpon>NumericUpDownUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RecursosGenericos\ListaCampos1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecursosGenericos\ListaCampos1.designer.cs">
+      <DependentUpon>ListaCampos1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabControlUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TabControlUniube.Designer.cs">
+      <DependentUpon>TabControlUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InheritableDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ComboBoxUniube.Designer.cs">
+      <DependentUpon>ComboBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAssistenteCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAssistenteCadastro.Designer.cs">
+      <DependentUpon>FormAssistenteCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorioCompleto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorioCompleto.Designer.cs">
+      <DependentUpon>FormRelatorioCompleto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCampoData2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCampoData2.designer.cs">
+      <DependentUpon>IntervaloCampoData2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataGridViewUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataGridViewUniube.Designer.cs">
+      <DependentUpon>DataGridViewUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DateTimePickerUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DateTimePickerUniube.Designer.cs">
+      <DependentUpon>DateTimePickerUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCadastro.Designer.cs">
+      <DependentUpon>FormCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCadastroRapido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCadastroRapido.Designer.cs">
+      <DependentUpon>FormCadastroRapido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConsulta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsulta.Designer.cs">
+      <DependentUpon>FormConsulta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMensagem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMensagem.Designer.cs">
+      <DependentUpon>FormMensagem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProcesso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcesso.Designer.cs">
+      <DependentUpon>FormProcesso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAssistenteRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAssistenteRelatorio.Designer.cs">
+      <DependentUpon>FormAssistenteRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorioOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorioOld.Designer.cs">
+      <DependentUpon>FormRelatorioOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormRelatorioCompletoOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelatorioCompletoOld.Designer.cs">
+      <DependentUpon>FormRelatorioCompletoOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUniube.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUniube.Designer.cs">
+      <DependentUpon>FormUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLoginDesenvolvedor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoginDesenvolvedor.designer.cs">
+      <DependentUpon>FormLoginDesenvolvedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInputBox.designer.cs">
+      <DependentUpon>FormInputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAguarde.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAguarde.designer.cs">
+      <DependentUpon>frmAguarde.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAuditoriaFormulario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuditoriaFormulario.designer.cs">
+      <DependentUpon>frmAuditoriaFormulario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManutencaoPermissoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManutencaoPermissoes.designer.cs">
+      <DependentUpon>frmManutencaoPermissoes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManutencaoPermissoesEditarGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManutencaoPermissoesEditarGrupo.Designer.cs">
+      <DependentUpon>frmManutencaoPermissoesEditarGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GroupBoxUniube.Designer.cs">
+      <DependentUpon>GroupBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCampoData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCampoData.designer.cs">
+      <DependentUpon>IntervaloCampoData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCampos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCampos.designer.cs">
+      <DependentUpon>IntervaloCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCampos2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCampos2.designer.cs">
+      <DependentUpon>IntervaloCampos2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCampos3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCampos3.designer.cs">
+      <DependentUpon>IntervaloCampos3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCamposCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCamposCheck.designer.cs">
+      <DependentUpon>IntervaloCamposCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IntervaloCompetencias.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IntervaloCompetencias.designer.cs">
+      <DependentUpon>IntervaloCompetencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelGroupUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LabelGroupUniube.Designer.cs">
+      <DependentUpon>LabelGroupUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LabelUniube.Designer.cs">
+      <DependentUpon>LabelUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListaCampos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListaCampos.designer.cs">
+      <DependentUpon>ListaCampos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ListBoxUniube.Designer.cs">
+      <DependentUpon>ListBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaskedTextBoxDataUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MaskedTextBoxDataUniube.Designer.cs">
+      <DependentUpon>MaskedTextBoxDataUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaskedTextBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MaskedTextBoxUniube.Designer.cs">
+      <DependentUpon>MaskedTextBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelUniube.Designer.cs">
+      <DependentUpon>PanelUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RadioButtonUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RadioButtonUniube.Designer.cs">
+      <DependentUpon>RadioButtonUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextBoxUniube.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextBoxUniube.Designer.cs">
+      <DependentUpon>TextBoxUniube.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TypesUniube.cs" />
+    <Compile Include="WaitWindow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Competencia.resx">
+      <DependentUpon>Competencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ComboBoxFiltroUniube.resx">
+      <DependentUpon>ComboBoxFiltroUniube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBuscaPaginacao.resx">
+      <DependentUpon>FormBuscaPaginacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExtratorDados.resx">
+      <DependentUpon>frmExtratorDados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExtratorDadosConsulta.resx">
+      <DependentUpon>frmExtratorDadosConsulta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\Intervalo2.resx">
+      <DependentUpon>Intervalo2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\FormBusca3.resx">
+      <DependentUpon>FormBusca3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\IntervaloData1.resx">
+      <DependentUpon>IntervaloData1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\FormBusca2.resx">
+      <DependentUpon>FormBusca2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorioCrystal.resx">
+      <DependentUpon>FormRelatorioCrystal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBusca.resx">
+      <DependentUpon>FormBusca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorio.resx">
+      <DependentUpon>FormRelatorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAssistenteGenerico.resx">
+      <DependentUpon>FormAssistenteGenerico.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAssistenteCadastro.resx">
+      <DependentUpon>FormAssistenteCadastro.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorioCompleto.resx">
+      <DependentUpon>FormRelatorioCompleto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorioCompletoCrystal.resx">
+      <DependentUpon>FormRelatorioCompletoCrystal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBuscaInformacaoGrid.resx">
+      <DependentUpon>frmBuscaInformacaoGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFundoPrincipal.resx">
+      <DependentUpon>FormFundoPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOrdenacaoGrid.resx">
+      <DependentUpon>frmOrdenacaoGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\Intervalo1.resx">
+      <DependentUpon>Intervalo1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCampoData2.resx">
+      <DependentUpon>IntervaloCampoData2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCadastro.resx">
+      <DependentUpon>FormCadastro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCadastroRapido.resx">
+      <DependentUpon>FormCadastroRapido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConsulta.resx">
+      <DependentUpon>FormConsulta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMensagem.resx">
+      <DependentUpon>FormMensagem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcesso.resx">
+      <DependentUpon>FormProcesso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAssistenteRelatorio.resx">
+      <DependentUpon>FormAssistenteRelatorio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorioOld.resx">
+      <DependentUpon>FormRelatorioOld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelatorioCompletoOld.resx">
+      <DependentUpon>FormRelatorioCompletoOld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUniube.resx">
+      <DependentUpon>FormUniube.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoginDesenvolvedor.resx">
+      <DependentUpon>FormLoginDesenvolvedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInputBox.resx">
+      <DependentUpon>FormInputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAguarde.resx">
+      <DependentUpon>frmAguarde.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAuditoriaFormulario.resx">
+      <DependentUpon>frmAuditoriaFormulario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManutencaoPermissoes.resx">
+      <DependentUpon>frmManutencaoPermissoes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManutencaoPermissoesEditarGrupo.resx">
+      <DependentUpon>frmManutencaoPermissoesEditarGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCampoData.resx">
+      <DependentUpon>IntervaloCampoData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCampos.resx">
+      <DependentUpon>IntervaloCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCampos2.resx">
+      <DependentUpon>IntervaloCampos2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCampos3.resx">
+      <DependentUpon>IntervaloCampos3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCamposCheck.resx">
+      <DependentUpon>IntervaloCamposCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IntervaloCompetencias.resx">
+      <DependentUpon>IntervaloCompetencias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelGroupUniube.resx">
+      <DependentUpon>LabelGroupUniube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LabelUniube.resx">
+      <DependentUpon>LabelUniube.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListaCampos.resx">
+      <DependentUpon>ListaCampos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaskedTextBoxFoneUniube.resx">
+      <DependentUpon>MaskedTextBoxFoneUniube.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecursosGenericos\ListaCampos1.resx">
+      <DependentUpon>ListaCampos1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxUniube.resx">
+      <DependentUpon>TextBoxUniube.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Uniube_FW_32_32.ico" />
+    <None Include="Resources\ajax-loader.gif" />
+    <None Include="Resources\barra_escura.gif" />
+    <Content Include="Resources\botao.gif" />
+    <None Include="Resources\botao1.gif" />
+    <None Include="Resources\botao2.gif" />
+    <Content Include="Resources\botao_fechar.gif" />
+    <None Include="Resources\botao_fechar1.gif" />
+    <Content Include="Resources\botao_fechar_vermelho.gif" />
+    <None Include="Resources\botao_fechar_vermelho1.gif" />
+    <None Include="Resources\botao_fechar_vermelho11.gif" />
+    <Content Include="Resources\botao_minimizar.gif" />
+    <None Include="Resources\botao_minimizar1.gif" />
+    <Content Include="Resources\botao_ok.jpg" />
+    <None Include="Resources\botao_ok1.jpg" />
+    <None Include="Resources\botao_ok2.jpg" />
+    <Content Include="Resources\button_cancel16.png" />
+    <Content Include="Resources\button_cancel22.png" />
+    <Content Include="Resources\button_cancel24.png" />
+    <None Include="Resources\button_cancel241.png" />
+    <Content Include="Resources\button_cancel32.png" />
+    <Content Include="Resources\file-manager32.png" />
+    <Content Include="Resources\fundo_azul.jpg" />
+    <None Include="Resources\fundo_azul1.jpg" />
+    <Content Include="Resources\fundo_login_titulo.jpg" />
+    <Content Include="Resources\fundo_sistemas.png" />
+    <Content Include="Resources\gtk-refresh32.png" />
+    <None Include="Resources\login_inteiro.jpg" />
+    <None Include="Resources\loader_azul.gif" />
+    <None Include="Resources\loading11.gif" />
+    <None Include="Resources\loading42.gif" />
+    <None Include="Resources\loading52.gif" />
+    <None Include="Resources\icone_lupa.png" />
+    <None Include="Resources\Search-icon.png" />
+    <None Include="Resources\iBusca16.png" />
+    <Content Include="Resources\senha.jpg" />
+    <Content Include="Resources\senha.png" />
+    <None Include="Resources\senha1.jpg" />
+    <None Include="Resources\senha11.jpg" />
+    <Content Include="Resources\tela_login.gif" />
+    <Content Include="Resources\tela_login2.jpg" />
+    <None Include="Resources\tela_login21.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Uteis\Classes.Uteis.csproj">
+      <Project>{c7bcbaf6-f33b-4bc5-aff6-5d7279502b9e}</Project>
+      <Name>Classes.Uteis</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
