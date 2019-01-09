@@ -34,34 +34,7 @@ namespace UseFul.Forms.Welic
 
         private void ChecarVersaoSistema()
         {
-#if (!DEBUG)
 
-            Timer timerUpdater = new Timer
-            {
-                Interval = 2 * 60 * 1000,
-                SynchronizingObject = this
-            };
-
-            timerUpdater.Elapsed += delegate
-            {
-                string autoUpdateUrl = ConfigurationManager.AppSettings.Get("AutoUpdateUrl");
-                AutoUpdater.Start(autoUpdateUrl);
-            };
-            timerUpdater.Start();
-
-            if (SGCApplication.MainForm.UsuarioLogin.VersaoSistema != SGCApplication.VersaoSistema)
-            {
-                new SobreForm().ShowDialog();
-            }
-
-            Task<HttpResponseMessage> requisicaoRegistrarAtividade = ClienteApi.Instance.RequisicaoPostAsync(
-                "usuarios/registrar-atividade",
-                new ComandoRegistroAtividadeUsuario
-                {
-                    VersaoSistema = SGCApplication.VersaoSistema,
-                    NomeDispositivo = Environment.MachineName
-                });
-#endif
         }
 
         private void ConfigurarMenu()
@@ -109,13 +82,7 @@ namespace UseFul.Forms.Welic
         {
             try
             {
-                //radLabelElementServidor.Text = ConnectionStringUtil.Instance.ServerName;
-                //radLabelElementBancoDeDados.Text = ConnectionStringUtil.Instance.DataBaseName;
-                //radLabelElementUsuario.Text = string.IsNullOrWhiteSpace(UsuarioLogin.Id)
-                //    ? "Não definido"
-                //    : UsuarioLogin.Usuario;
-                //radLabelElementLogadoEm.Text = DateTime.Now.ToString("dd/MM/yy HH:mm:ss");
-                //radLabelElementVersao.Text = SGCApplication.VersaoSistema;
+               
             }
             catch (Exception exception)
             {

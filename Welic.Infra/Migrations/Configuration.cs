@@ -38,7 +38,7 @@ namespace Welic.Infra.Migrations
             base.Seed(context);
             InstallEmpresa(context);
             InstallProgramas(context);
-            InstallPermission(context);
+            //InstallPermission(context);
             InstallSettings(context);
             //InstallEmailTemplates(context);
             InstallMenu(context);            
@@ -127,6 +127,7 @@ namespace Welic.Infra.Migrations
         {
             context.Empresa.AddOrUpdate(new EmpresaMap()
             {
+                IdEmpresa = 1,
                 Cep = "00000000",
                 Cidade = "Uberaba",
                 Email = "lucasrr59@gmail.com",
@@ -139,8 +140,7 @@ namespace Welic.Infra.Migrations
                 Ie = "000123132",
                 Uf = "MG",
                 RazaoSocial = "WElic",
-                //ObjectState = context.Empresa.Count(x => x.Ie == "000123132" && x.RazaoSocial == "WElic") <= 0 ? ObjectState.Added
-                //: ObjectState.Modified
+                ObjectState = context.Empresa.Any(x => x.IdEmpresa == 1) ? ObjectState.Added : ObjectState.Modified
             });
         }
 

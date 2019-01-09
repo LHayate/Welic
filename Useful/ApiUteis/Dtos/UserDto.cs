@@ -187,32 +187,7 @@ namespace UseFul.ClientApi.Dtos
             return usuarioConsultado;
         }
 
-        //public UserDto ConsultaUsuarioPorUsuarioESenha(string usuario, string senha)
-        //{
-        //    //Primeira tentativa com a senha enviada
-        //    var usuarioConsultado =
-        //        SGCEntities.Instance.Usuarios.Include("Departamentos")
-        //            .FirstOrDefault(u => u.Usuario == usuario && u.Senha == senha);
-        //    if (usuarioConsultado == null)
-        //    {
-        //        //Segunda tentativa decriptando a senha
-        //        string senhaDecriptada = CryptographyUtil.DecryptString(senha);
-
-        //        usuarioConsultado =
-        //            SGCEntities.Instance.Usuarios.Include("Departamentos")
-        //                .FirstOrDefault(u => u.Usuario == usuario && u.Senha == senhaDecriptada);
-
-        //        if (usuarioConsultado == null)
-        //        {
-        //            throw CustomErro.Erro("Usuário ou senha inválidos.");
-        //        }
-        //    }
-        //    if (usuarioConsultado.Situacao == "INATIVO")
-        //    {
-        //        throw CustomErro.Erro("O usuário não possui permissões de acesso ao sistema.");
-        //    }
-        //    return usuarioConsultado;
-        //}
+       
         public List<int> ConsultaPermissoesUsuario(string idUsuario)
         {
             List<int> permissoes =
@@ -259,15 +234,7 @@ namespace UseFul.ClientApi.Dtos
 
             return listaUsuarios;
         }
-
-        //public void Update(UserDto usuario, int idDepartamento)
-        //{
-        //    var  usuarioUpdate = Context.User.First(u => u.Id == usuario.Id);
-        //    usuarioUpdate.Departamentos =
-        //        Context.Departamento.First(d => d.IdDepartamento == idDepartamento);
-        //    SGCEntities.Instance.AttachUpdated(usuario);
-        //    SGCEntities.Instance.SaveChanges();
-        //}
+        
 
         public void Delete(string idUsuario)
         {

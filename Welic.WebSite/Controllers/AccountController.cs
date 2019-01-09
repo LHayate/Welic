@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using i18n;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Registrators;
-using Registrators.Helpers;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Models.Menu.Command;
 using Welic.Dominio.Models.Menu.Servicos;
+using Welic.Dominio.Models.Segurança.Map;
+using Welic.Dominio.Models.Segurança.Service;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Dominio.ViewModels;
-using Welic.Infra.Context;
+using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
+using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.WebSite.Models;
 using Welic.WebSite.Utilities;
 
@@ -35,6 +31,11 @@ namespace Welic.WebSite.Controllers
         private ApplicationRoleManager _roleManager;
         private readonly IEmailTemplateService _emailTemplateService;
         private readonly IServicoMenu _servicoMenu;
+        private readonly IServiceUser _serviceUser;
+        private readonly IServiceProgram _serviceProgram;
+        private readonly IServicePermission _servicePermission;
+        private readonly IUnitOfWorkAsync _unitOfWorkAsync;
+        
         #endregion
 
         #region Properties
@@ -76,10 +77,19 @@ namespace Welic.WebSite.Controllers
         #endregion
 
         #region Constructor
-        public AccountController(IEmailTemplateService emailTemplateService, IServicoMenu servicoMenu)
+        public AccountController(IEmailTemplateService emailTemplateService, 
+            IServicoMenu servicoMenu, 
+            IServiceUser serviceUser, 
+            IServiceProgram serviceProgram, 
+            IServicePermission servicePermission,
+            IUnitOfWorkAsync unitOfWorkAsync)
         {
             _emailTemplateService = emailTemplateService;
+            _serviceUser = serviceUser;
+            _serviceProgram = serviceProgram;
+            _servicePermission = servicePermission;
             _servicoMenu = servicoMenu;
+            _unitOfWorkAsync = unitOfWorkAsync;
         }
         #endregion
 
@@ -239,13 +249,46 @@ namespace Welic.WebSite.Controllers
                 RegisterIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
                 LastAccessDate = DateTime.Now,
                 LastAccessIP = System.Web.HttpContext.Current.Request.GetVisitorIP(),
+                Development = false,
                 
             };
 
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                //TOdo: Salvar menus padrões para o usuario novo
+                var users = _serviceUser.Query().Select(x => x).Where(x => x.Development).ToList();
+                var programs = _serviceProgram.Query().Select(x => x).Where(x => x.Active).ToList();
+
+                foreach (var us in users)
+                {
+                    var permissions = _servicePermission.Query().Select(x => x).Where(x => x.IdUser == user.Id).ToList();
+                    permissions.ForEach(x => x.ObjectState = ObjectState.Deleted);
+                    foreach (var permission in permissions)
+                    {
+                        _servicePermission.Delete(permission);
+                        await _unitOfWorkAsync.SaveChangesAsync();
+                    }
+                                                            
+                    foreach (var program in programs)
+                    {
+                        _servicePermission.Insert(
+                            new PermissionMap()
+                            {
+                                Active = true,
+                                All = true,
+                                Delete = true,
+                                IdProgram = program.IdProgram,
+                                IdUser = user.Id,
+                                Insert = true,
+                                Read = true,
+                                Update = true,
+                                ObjectState = ObjectState.Added
+                            }
+                        );
+                    }
+
+                }
+
 
                 var menu = _servicoMenu.Query().Select(x=> x).ToList();
 

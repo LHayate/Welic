@@ -16,16 +16,24 @@ namespace Welic.WebSite.API.Controllers
     {               
 
         private readonly IServiceSolicitacoesVagas _serviceSolicitacoesVagas;
-        public IServiceEstacionamentoVagas _serviceEstacionamentoVagas;
+        private readonly IServiceEstacionamentoVagas _serviceEstacionamentoVagas;
+        private readonly IServiceSolicitacoesVagasLiberada _serviceSolicitacoesVagasLiberada;
+        private readonly IServiceSolicitacoesEstacionamento _serviceSolicitacoesEstacionamento;
         private readonly IServiceVeiculo _serviceVeiculo;
         private readonly IUnitOfWorkAsync _unitOfWorkAsync;
-        public SolicitacaoVagaController(IServiceSolicitacoesVagas serviceSolicitacoesVagas, IUnitOfWorkAsync unitOfWorkAsync, IServiceVeiculo serviceVeiculo, IServiceEstacionamentoVagas serviceEstacionamentoVagas)
+        public SolicitacaoVagaController(IServiceSolicitacoesVagas serviceSolicitacoesVagas, 
+            IUnitOfWorkAsync unitOfWorkAsync, IServiceVeiculo serviceVeiculo, IServiceEstacionamentoVagas serviceEstacionamentoVagas, 
+            IServiceSolicitacoesVagasLiberada solicitacoesVagasLiberada, IServiceSolicitacoesEstacionamento serviceSolicitacoesEstacionamento)
         {
             _serviceSolicitacoesVagas = serviceSolicitacoesVagas;
             _serviceEstacionamentoVagas = serviceEstacionamentoVagas;
+            _serviceSolicitacoesVagasLiberada = solicitacoesVagasLiberada;
+            _serviceSolicitacoesEstacionamento = serviceSolicitacoesEstacionamento;
             _serviceVeiculo = serviceVeiculo;
             _unitOfWorkAsync = unitOfWorkAsync;
         }
+
+        #region Solicitacoes Vagas 
 
         [HttpGet]
         [Route("Get/")]
@@ -98,7 +106,6 @@ namespace Welic.WebSite.API.Controllers
         }
 
 
-
         [HttpPost]
         [Route("save")]
         public async Task<HttpResponseMessage> Post([FromBody]SolicitacoesVagasMap solicitacoes)
@@ -115,6 +122,7 @@ namespace Welic.WebSite.API.Controllers
                                     x.DtSolicitacao == solicitacoes.DtSolicitacao && 
                                     x.IdUser == solicitacoes.IdUser));
         }
+        
 
         [HttpPost]
         [Route("Update")]
@@ -146,6 +154,191 @@ namespace Welic.WebSite.API.Controllers
             _unitOfWorkAsync.SaveChangesAsync();
             return CriaResposta(HttpStatusCode.OK);
         }
+        #endregion
 
+        #region Solicitacoes VagasLiberadas       
+
+        [HttpGet]
+        [Route("GetVagasLiberadas/")]
+        public Task<HttpResponseMessage> GetVagasLiberadas()
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada.Query().Select(x => x).ToList());
+        }
+
+        [HttpGet]
+        [Route("GetVagasLiberadasById/{id:int}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadas(int id)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada.Find(id));
+        }
+
+        [HttpGet]
+        [Route("GetVagasLiberadasByUser/{id}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadas(string id)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada.Query().Select(x => x).Where(x => x.IdUser == id).OrderBy(x => x.Vaga));
+        }
+
+        [HttpGet]
+        [Route("GetVagasLiberadasByDate/{date}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadasByDate(DateTime date)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada
+                .Query()
+                .Select(x => x)
+                .Where(x => x.DtLiberacao == date)
+                .OrderBy(x => x.Vaga));
+        }
+
+        [HttpGet]
+        [Route("GetVagasLiberadasByEstacionamento/{estacionamento}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadasByPessoa(int estacionamento)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada
+                .Query()
+                .Select(x => x)
+                .Where(x => x.IdEstacionamento == estacionamento)
+                .OrderBy(x => x.Vaga));
+        }
+
+        
+
+        [HttpGet]
+        [Route("GetVagasLiberadasByPlaca/{placa}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadasByPlaca(string placa)
+        {
+            var veiculo = _serviceVeiculo.Query().Select(s => s).FirstOrDefault(t => t.Placa == placa);
+
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada
+                .Query()
+                .Select(x => x)
+                .Where(x => x.IdVeiculo == veiculo?.IdVeiculo)
+                );
+        }               
+
+
+        [HttpPost]
+        [Route("saveVagasLiberadas")]
+        public async Task<HttpResponseMessage> Post([FromBody]SolicitacoesVagasLiberadasMap solicitacoes)
+        {
+            _serviceSolicitacoesVagasLiberada.Insert(solicitacoes);
+            await _unitOfWorkAsync.SaveChangesAsync();
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagasLiberada
+                .Query()
+                .Select(x => x)
+                .LastOrDefault(x => x.IdEstacionamento == solicitacoes.IdEstacionamento &&
+                                    x.IdVeiculo == solicitacoes.IdVeiculo &&
+                                    x.Situacao == solicitacoes.Situacao &&
+                                    x.Vaga == solicitacoes.Vaga));
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public async Task<HttpResponseMessage> Update([FromBody]SolicitacoesVagasLiberadasMap solicitacoes)
+        {
+            _serviceSolicitacoesVagasLiberada.Update(solicitacoes);
+            await _unitOfWorkAsync.SaveChangesAsync();
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesVagas.Find(solicitacoes.Vaga));
+        }
+
+        [HttpPost]
+        [Route("CancelarVagasLiberadas/{id}")]
+        public Task<HttpResponseMessage> CancelarVagasLiberadas(int id)
+        {
+            var cursoMap = _serviceSolicitacoesVagasLiberada.Find(id);            
+            _serviceSolicitacoesVagasLiberada.Update(cursoMap);
+            _unitOfWorkAsync.SaveChangesAsync();
+            return CriaResposta(HttpStatusCode.OK);
+        }
+
+
+        [HttpPost]
+        [Route("DeleteVagasLiberadas/{id}")]
+        public Task<HttpResponseMessage> DeleteVagasLiberadas(int id)
+        {
+            var cursoMap = _serviceSolicitacoesVagas.Find(id);
+            _serviceSolicitacoesVagas.Delete(cursoMap);
+            _unitOfWorkAsync.SaveChangesAsync();
+            return CriaResposta(HttpStatusCode.OK);
+        }
+        #endregion
+
+        #region SolicitacoesEstacionamento
+
+        [HttpGet]
+        [Route("GetSolicitacoesEstacionamento/")]
+        public Task<HttpResponseMessage> GetSolicitacoesEstacionamento()
+        {
+            return CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento.Query().Select(x => x).ToList());
+        }
+
+        [HttpGet]
+        [Route("GetSolicitacoesEstacionamentoById/{id:int}")]
+        public async Task<HttpResponseMessage> GetSolicitacoesEstacionamento(int id)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento.Find(id));
+        }            
+
+        [HttpGet]
+        [Route("GetSolicitacoesEstacionamentoByEstacionamento/{estacionamento}")]
+        public async Task<HttpResponseMessage> GetSolicitacoesEstacionamentoByEstacionamento(int estacionamento)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento
+                .Query()
+                .Select(x => x)
+                .Where(x => x.Estacionamento == estacionamento)
+                .OrderBy(x => x.Vaga));
+        }
+
+        [HttpGet]
+        [Route("GetSolicitacoesEstacionamentoByEstacionamento/{estacionamento}/{solicitacao}")]
+        public async Task<HttpResponseMessage> GetVagasLiberadasByEstacionamento(int estacionamento, int solicitacao)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento
+                .Query()
+                .Select(x => x)
+                .Where(x => x.Estacionamento == estacionamento && x.Solicitacao == solicitacao)
+                .OrderBy(x => x.Vaga));
+        }
+
+        [HttpPost]
+        [Route("SaveEstacionamento")]
+        public async Task<HttpResponseMessage> Post([FromBody]SolicitacoesEstacionamentoMap solicitacoes)
+        {
+            _serviceSolicitacoesEstacionamento.Insert(solicitacoes);
+            await _unitOfWorkAsync.SaveChangesAsync();
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento
+                .Query()
+                .Select(x => x)
+                .LastOrDefault(x => x.Estacionamento == solicitacoes.Estacionamento &&
+                                    x.Situacao == solicitacoes.Situacao &&
+                                    x.Vaga == solicitacoes.Vaga &&
+                                    x.Solicitacao == solicitacoes.Solicitacao));
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public async Task<HttpResponseMessage> Update([FromBody]SolicitacoesEstacionamentoMap solicitacoes)
+        {
+            _serviceSolicitacoesEstacionamento.Update(solicitacoes);
+            await _unitOfWorkAsync.SaveChangesAsync();
+            return await CriaResposta(HttpStatusCode.OK, _serviceSolicitacoesEstacionamento.Find(solicitacoes.Vaga));
+        }        
+
+
+        [HttpPost]
+        [Route("DeleteSolicitacoesEstacionamento/{id}")]
+        public Task<HttpResponseMessage> DeleteSolicitacoesEstacionamento(int id)
+        {
+            var cursoMap = _serviceSolicitacoesEstacionamento.Find(id);
+            _serviceSolicitacoesEstacionamento.Delete(cursoMap);
+            _unitOfWorkAsync.SaveChangesAsync();
+            return CriaResposta(HttpStatusCode.OK);
+        }
+
+        #endregion
+
+
+        
     }
 }

@@ -10,7 +10,7 @@ using Welic.Infra.Migrations;
 
 namespace UseFul.ClientApi.Dtos
 {
-    public class IndicacaoEstacionamento
+    public class IndicacaoEstacionamento : BaseDto<IndicacaoEstacionamento>
     {
         public int IdEstacionamento { get; set; }
         public string DescricaoEstacionamento { get; set; }
@@ -23,25 +23,22 @@ namespace UseFul.ClientApi.Dtos
         public int Situacao { get; set; }
         public string SituacaoDescricao { get; set; }
         public long? Vaga { get; set; }
-        public string  Solicitacao { get; set; }
+        public string  Solicitacao { get; set; }       
 
-        public AuthContext _AuthContext { get; set; }
-
-        public IndicacaoEstacionamento(AuthContext authContext)
-        {
-            _AuthContext = authContext;
-
+        public IndicacaoEstacionamento()
+        {            
         }
+
         public IndicacaoEstacionamento BuscaIndicacaoEstacionamento(int solicitacao)
         {
-            var result = _AuthContext.SolicitacoesEstacionamento
-                .Join(_AuthContext.Estacionamento, se => se.Estacionamento, e => e.IdEstacionamento,
+            var result = Context.SolicitacoesEstacionamento
+                .Join(Context.Estacionamento, se => se.Estacionamento, e => e.IdEstacionamento,
                     (se, e) => new {se, e})
-                .Join(_AuthContext.EstacionamentoVagas, @t => @t.e.IdEstacionamento, ev => ev.IdEstacionamento,
+                .Join(Context.EstacionamentoVagas, @t => @t.e.IdEstacionamento, ev => ev.IdEstacionamento,
                     (@t, ev) => new {@t, ev})
-                .Join(_AuthContext.SolicitacoesVagas, @t => @t.@t.se.Solicitacao, sv => sv.IdSolicitacao,
+                .Join(Context.SolicitacoesVagas, @t => @t.@t.se.Solicitacao, sv => sv.IdSolicitacao,
                     (@t, sv) => new {@t, sv})
-                .Join(_AuthContext.Veiculos, @t => @t.sv.IdVeiculo, v => v.IdVeiculo,                 
+                .Join(Context.Veiculos, @t => @t.sv.IdVeiculo, v => v.IdVeiculo,                 
                     (@t, v) => new {@t, v})
                 .Select(x => new
                 {

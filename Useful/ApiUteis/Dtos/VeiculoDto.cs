@@ -15,6 +15,10 @@ namespace UseFul.ClientApi.Dtos
         public string Cor { get; set; }
         public string Placa { get; set; }
         public int IdPessoa { get; set; }
-        public string Chassi { get; set; }
+        public string Chassi { get; set; }        
+        public string CNH { get; set; }
+        public string Categoria { get; set; }
+        public DateTime ExpedicaoCnh { get; set; }
+        public DateTime VencimentoCnh { get; set; }
     }
 }

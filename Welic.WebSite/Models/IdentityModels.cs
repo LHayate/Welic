@@ -46,7 +46,9 @@ namespace Welic.WebSite.Models
         public string ImagePerfil { get; set; }
         public string Identity { get; set; }
 
-        public int EmpresaId { get; set; } = 3;
+        public int EmpresaId { get; set; } = 1;
+
+        public bool Development { get; set; }
 
         [NotMapped]
         public bool RoleAdministrator { get; set; }

@@ -139,6 +139,8 @@
     <Compile Include="Models\Client\Service\IServicePessoa.cs" />
     <Compile Include="Models\ConfigApp\Map\ConfigAppMap.cs" />
     <Compile Include="Models\ConfigApp\Service\IConfigAppService.cs" />
+    <Compile Include="Models\Contratos\Map\ContratosMap.cs" />
+    <Compile Include="Models\Contratos\Service\IServiceContratos.cs" />
     <Compile Include="Models\Curso\Map\CursoMap.cs" />
     <Compile Include="Models\Curso\Service\ICursoService.cs" />
     <Compile Include="Models\Departamento\Map\DepartamentoMap.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Models\Estacionamento\Services\IServiceEstacionamentoVagas.cs" />
     <Compile Include="Models\Estacionamento\Services\IServiceSolicitacoesEstacionamento.cs" />
     <Compile Include="Models\Estacionamento\Services\IServiceSolicitacoesVagas.cs" />
+    <Compile Include="Models\Estacionamento\Services\IServiceSolicitacoesVagasLiberada.cs" />
     <Compile Include="Models\Estacionamento\Services\IServiceVeiculo.cs" />
     <Compile Include="Models\Favorites\Maps\FavoriteMaps.cs" />
     <Compile Include="Models\Favorites\Services\IFavoriteService.cs" />
@@ -243,6 +246,7 @@
     <Compile Include="Models\Segurança\Map\PermissionMap.cs" />
     <Compile Include="Models\Segurança\Map\ProgransMap.cs" />
     <Compile Include="Models\Segurança\Service\IServicePermission.cs" />
+    <Compile Include="Models\Segurança\Service\IServiceProgram.cs" />
     <Compile Include="Models\Uploads\Maps\UploadsMap.cs" />
     <Compile Include="Models\Uploads\Services\IUploadsService.cs" />
     <Compile Include="Models\Users\Mapeamentos\AspNetRole.cs" />

@@ -58,7 +58,9 @@
     <Compile Include="Dtos\PermissionDto.cs" />
     <Compile Include="Dtos\PessoaDto.cs" />
     <Compile Include="Dtos\ProgramDto.cs" />
-    <Compile Include="Dtos\SolicitacoesDto.cs" />
+    <Compile Include="Dtos\SolicitacoesVagasDto.cs" />
+    <Compile Include="Dtos\SolicitacoesEstacionamentoDto.cs" />
+    <Compile Include="Dtos\SolicitacoesVagasLiberadasDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Dtos\VeiculoDto.cs" />
     <Compile Include="Enums\NivelAprovacao.cs" />

@@ -92,6 +92,7 @@
     <Compile Include="Mapeamentos\MappingEBook.cs" />
     <Compile Include="Mapeamentos\MappingEmpresa.cs" />
     <Compile Include="Mapeamentos\MappingEstacionamento.cs" />
+    <Compile Include="Mapeamentos\MappingEstacionamentoVagas.cs" />
     <Compile Include="Mapeamentos\MappingFavoriteLive.cs" />
     <Compile Include="Mapeamentos\MappingListingReview.cs" />
     <Compile Include="Mapeamentos\MappingListingStat.cs" />

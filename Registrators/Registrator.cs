@@ -119,8 +119,10 @@ namespace Registrators
                 .RegisterType<IRepositoryAsync<EmpresaMap>,Repository<EmpresaMap>>()
                 .RegisterType<IRepositoryAsync<SolicitacoesVagasMap>,Repository<SolicitacoesVagasMap>>()
                 .RegisterType<IRepositoryAsync<VeiculosMap>,Repository<VeiculosMap>>()
+                .RegisterType<IRepositoryAsync<ProgransMap>,Repository<ProgransMap>>()
                 
 
+                .RegisterType<IServiceProgram, ServiceProgram>()
                 .RegisterType<IServiceVeiculo, ServiceVeiculo>()
                 .RegisterType<IServiceSolicitacoesVagas, ServiceSolicitacoesVagas>()
                 .RegisterType<IServiceEmpresa, ServiceEmpresa>()

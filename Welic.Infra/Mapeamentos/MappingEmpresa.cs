@@ -17,8 +17,7 @@ namespace Welic.Infra.Mapeamentos
                 .ToTable("Empresa", "dbo");
 
             Property(p => p.IdEmpresa)
-                .IsRequired()
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .IsRequired()                
                 .HasColumnType("int");
 
             Property(p => p.RazaoSocial)

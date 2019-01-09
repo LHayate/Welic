@@ -66,9 +66,9 @@ namespace Welic.WinForm
                 Seguranca.BuscaAutenticacaoUsuario(txtUsuario.Text, txtSenha.Text);
                 CarregarSistema();
             }
-            catch (CustomException sgcException)
+            catch (CustomException exception)
             {
-                ProcessMessage(sgcException.Message, MessageType.Error);                
+                ProcessMessage(exception.Message, MessageType.Error);                
             }
             catch (Exception exception)
             {

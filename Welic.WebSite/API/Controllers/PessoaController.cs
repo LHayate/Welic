@@ -36,7 +36,14 @@ namespace Welic.WebSite.API.Controllers
         public async Task<HttpResponseMessage> Get(int id)
         {
             return await CriaResposta(HttpStatusCode.OK, _servicePessoa.Find(id));
-        }       
+        }
+
+        [HttpGet]
+        [Route("GetByCpf/{cpf}")]
+        public async Task<HttpResponseMessage> GetByCpf(long cpf)
+        {
+            return await CriaResposta(HttpStatusCode.OK, _servicePessoa.Query().Select(x=> x).FirstOrDefault(x=> x.Cpf == cpf));
+        }
 
         // POST: api/Curso
         [HttpPost]

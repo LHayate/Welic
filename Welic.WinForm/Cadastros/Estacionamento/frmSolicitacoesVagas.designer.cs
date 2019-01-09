@@ -41,7 +41,9 @@
             this.labelWelic3 = new UseFul.Forms.Welic.LabelWelic();
             this.labelWelic4 = new UseFul.Forms.Welic.LabelWelic();
             this.txtSolicitacao = new UseFul.Forms.Welic.TextBoxWelic();
+            this.BindingSolicitacao = new System.Windows.Forms.BindingSource(this.components);
             this.txtCPFNome = new UseFul.Forms.Welic.TextBoxWelic();
+            this.BindingPessoa = new System.Windows.Forms.BindingSource(this.components);
             this.pnlContratos = new UseFul.Forms.Welic.PanelWelic(this.components);
             this.labelWelic5 = new UseFul.Forms.Welic.LabelWelic();
             this.dgvContratos = new UseFul.Forms.Welic.DataGridViewWelic();
@@ -64,6 +66,7 @@
             this.colHora2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHora3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHora4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BindingContrato = new System.Windows.Forms.BindingSource(this.components);
             this.pnlEstacionamentosIndicados = new UseFul.Forms.Welic.PanelWelic(this.components);
             this.btnSugerirEstacionamento = new UseFul.Forms.Welic.ButtonWelic();
             this.btnAdicionarEstacionamento = new UseFul.Forms.Welic.ButtonWelic();
@@ -82,9 +85,11 @@
             this.colVagaLiberada = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExcluir = new System.Windows.Forms.DataGridViewImageColumn();
             this.colSolicitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BindingIndicacaoEstacionamento = new System.Windows.Forms.BindingSource(this.components);
             this.btnLiberarVaga = new UseFul.Forms.Welic.ButtonWelic();
             this.mtxtData = new UseFul.Forms.Welic.MaskedTextBoxWelic(this.components);
             this.mtxtPlaca = new UseFul.Forms.Welic.MaskedTextBoxWelic(this.components);
+            this.BindingVeiculo = new System.Windows.Forms.BindingSource(this.components);
             this.btnVeiculos = new UseFul.Forms.Welic.ButtonWelic();
             this.mtxtCPF = new UseFul.Forms.Welic.MaskedTextBoxWelic(this.components);
             this.grpCNH = new UseFul.Forms.Welic.GroupBoxWelic(this.components);
@@ -105,18 +110,19 @@
             this.txtUsuarioCancel = new UseFul.Forms.Welic.TextBoxWelic();
             this.labelWelic13 = new UseFul.Forms.Welic.LabelWelic();
             this.txtColaborador = new UseFul.Forms.Welic.TextBoxWelic();
-            this.BindingSolicitacao = new System.Windows.Forms.BindingSource(this.components);
-            this.BindingVeiculo = new System.Windows.Forms.BindingSource(this.components);
-            this.BindingIndicacaoEstacionamento = new System.Windows.Forms.BindingSource(this.components);
+            this.mskDataValidade = new UseFul.Forms.Welic.MaskedTextBoxWelic(this.components);
+            this.labelWelic14 = new UseFul.Forms.Welic.LabelWelic();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSolicitacao)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingPessoa)).BeginInit();
             this.pnlContratos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContratos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingContrato)).BeginInit();
             this.pnlEstacionamentosIndicados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstacionamentosIndicados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingIndicacaoEstacionamento)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingVeiculo)).BeginInit();
             this.grpCNH.SuspendLayout();
             this.grpSituacao.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingSolicitacao)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingVeiculo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingIndicacaoEstacionamento)).BeginInit();
             this.SuspendLayout();
             // 
             // labelWelic1
@@ -164,6 +170,7 @@
             this.txtSolicitacao._RecursosGenericosSqlF3 = null;
             this.txtSolicitacao._RecursosGenericosSqlLeave = null;
             this.txtSolicitacao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.txtSolicitacao.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "IdSolicitacao", true));
             this.txtSolicitacao.ExibirIconePesquisa = false;
             this.txtSolicitacao.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSolicitacao.InformacaoToolTipCaminho = null;
@@ -181,15 +188,16 @@
             this.txtSolicitacao.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtSolicitacao.TipoCampo = UseFul.Forms.Welic.TextBoxWelic.CTipoCampo.ChaveAutoIncremento;
             this.txtSolicitacao.TipoValor = UseFul.Forms.Welic.TextBoxWelic.CTipoValor.Numerico;
-            this.txtSolicitacao.TextChanged += new System.EventHandler(this.txtSolicitacao_TextChanged);
-            this.txtSolicitacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSolicitacao_KeyDown);
-            this.txtSolicitacao.Leave += new System.EventHandler(this.txtSolicitacao_Leave);
+            //this.txtSolicitacao.TextChanged += new System.EventHandler(this.txtSolicitacao_TextChanged);
+            //this.txtSolicitacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSolicitacao_KeyDown);
+            //this.txtSolicitacao.Leave += new System.EventHandler(this.txtSolicitacao_Leave);
             // 
             // txtCPFNome
             // 
             this.txtCPFNome._RecursosGenericosSqlF3 = null;
             this.txtCPFNome._RecursosGenericosSqlLeave = null;
             this.txtCPFNome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+            this.txtCPFNome.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingPessoa, "Nome", true));
             this.txtCPFNome.ExibirIconePesquisa = false;
             this.txtCPFNome.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCPFNome.InformacaoToolTipCaminho = null;
@@ -207,6 +215,10 @@
             this.txtCPFNome.TabStop = false;
             this.txtCPFNome.TipoCampo = UseFul.Forms.Welic.TextBoxWelic.CTipoCampo.Normal;
             this.txtCPFNome.TipoValor = UseFul.Forms.Welic.TextBoxWelic.CTipoValor.Geral;
+            // 
+            // BindingPessoa
+            // 
+            this.BindingPessoa.DataSource = typeof(UseFul.ClientApi.Dtos.PessoaDto);
             // 
             // pnlContratos
             // 
@@ -236,6 +248,7 @@
             this.dgvContratos.AllowUserToDeleteRows = false;
             this.dgvContratos.AllowUserToResizeColumns = false;
             this.dgvContratos.AllowUserToResizeRows = false;
+            this.dgvContratos.AutoGenerateColumns = false;
             this.dgvContratos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvContratos.BackgroundColor = System.Drawing.Color.White;
             this.dgvContratos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -268,6 +281,7 @@
             this.colHora2,
             this.colHora3,
             this.colHora4});
+            this.dgvContratos.DataSource = this.BindingContrato;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -295,7 +309,7 @@
             this.dgvContratos.Size = new System.Drawing.Size(902, 106);
             this.dgvContratos.TabIndex = 5;
             this.dgvContratos.TabStop = false;
-            this.dgvContratos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContratos_CellClick);
+            //this.dgvContratos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContratos_CellClick);
             // 
             // colMatricula
             // 
@@ -524,7 +538,7 @@
             this.btnSugerirEstacionamento.Text = "      Sugerir Estacionamento";
             this.btnSugerirEstacionamento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSugerirEstacionamento.UseVisualStyleBackColor = true;
-            this.btnSugerirEstacionamento.Click += new System.EventHandler(this.btnSugerirEstacionamento_Click);
+            //this.btnSugerirEstacionamento.Click += new System.EventHandler(this.btnSugerirEstacionamento_Click);
             // 
             // btnAdicionarEstacionamento
             // 
@@ -539,7 +553,7 @@
             this.btnAdicionarEstacionamento.Text = "      Adicionar Estacionamento";
             this.btnAdicionarEstacionamento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdicionarEstacionamento.UseVisualStyleBackColor = true;
-            this.btnAdicionarEstacionamento.Click += new System.EventHandler(this.btnAdicionarEstacionamento_Click);
+            //this.btnAdicionarEstacionamento.Click += new System.EventHandler(this.btnAdicionarEstacionamento_Click);
             // 
             // labelWelic6
             // 
@@ -558,6 +572,7 @@
             this.dgvEstacionamentosIndicados.AllowUserToDeleteRows = false;
             this.dgvEstacionamentosIndicados.AllowUserToResizeColumns = false;
             this.dgvEstacionamentosIndicados.AllowUserToResizeRows = false;
+            this.dgvEstacionamentosIndicados.AutoGenerateColumns = false;
             this.dgvEstacionamentosIndicados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvEstacionamentosIndicados.BackgroundColor = System.Drawing.Color.White;
             this.dgvEstacionamentosIndicados.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -584,6 +599,7 @@
             this.colVagaLiberada,
             this.colExcluir,
             this.colSolicitacao});
+            this.dgvEstacionamentosIndicados.DataSource = this.BindingIndicacaoEstacionamento;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -611,7 +627,7 @@
             this.dgvEstacionamentosIndicados.Size = new System.Drawing.Size(682, 141);
             this.dgvEstacionamentosIndicados.TabIndex = 6;
             this.dgvEstacionamentosIndicados.TabStop = false;
-            this.dgvEstacionamentosIndicados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstacionamentosIndicados_CellClick);
+           // this.dgvEstacionamentosIndicados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstacionamentosIndicados_CellClick);
             // 
             // colEstacionamento
             // 
@@ -753,12 +769,13 @@
             this.btnLiberarVaga.Text = "      Liberar Vaga";
             this.btnLiberarVaga.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLiberarVaga.UseVisualStyleBackColor = true;
-            this.btnLiberarVaga.Click += new System.EventHandler(this.btnLiberarVaga_Click);
+         //   this.btnLiberarVaga.Click += new System.EventHandler(this.btnLiberarVaga_Click);
             // 
             // mtxtData
             // 
             this.mtxtData._MascaraData = false;
             this.mtxtData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.mtxtData.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "DtSolicitacao", true));
             this.mtxtData.ExibirIconePesquisa = false;
             this.mtxtData.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtData.LimpaCampo = true;
@@ -769,15 +786,16 @@
             this.mtxtData.Size = new System.Drawing.Size(100, 21);
             this.mtxtData.TabIndex = 1;
             this.mtxtData.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxWelic.CTipoCampo.Chave;
-            this.mtxtData.Click += new System.EventHandler(this.mtxtData_Click);
-            this.mtxtData.TextChanged += new System.EventHandler(this.mtxtData_TextChanged);
-            this.mtxtData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtData_KeyDown);
-            this.mtxtData.Leave += new System.EventHandler(this.mtxtData_Leave);
+            //this.mtxtData.Click += new System.EventHandler(this.mtxtData_Click);
+            //this.mtxtData.TextChanged += new System.EventHandler(this.mtxtData_TextChanged);
+            //this.mtxtData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtData_KeyDown);
+            //this.mtxtData.Leave += new System.EventHandler(this.mtxtData_Leave);
             // 
             // mtxtPlaca
             // 
             this.mtxtPlaca._MascaraData = false;
             this.mtxtPlaca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.mtxtPlaca.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingVeiculo, "Placa", true));
             this.mtxtPlaca.ExibirIconePesquisa = false;
             this.mtxtPlaca.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtPlaca.LimpaCampo = true;
@@ -789,11 +807,15 @@
             this.mtxtPlaca.TabIndex = 3;
             this.mtxtPlaca.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.mtxtPlaca.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxWelic.CTipoCampo.Chave;
-            this.mtxtPlaca.Click += new System.EventHandler(this.mtxtPlaca_Click);
-            this.mtxtPlaca.TextChanged += new System.EventHandler(this.mtxtPlaca_TextChanged);
-            this.mtxtPlaca.Enter += new System.EventHandler(this.mtxtPlaca_Enter);
-            this.mtxtPlaca.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtPlaca_KeyDown);
-            this.mtxtPlaca.Leave += new System.EventHandler(this.mtxtPlaca_Leave);
+            //this.mtxtPlaca.Click += new System.EventHandler(this.mtxtPlaca_Click);
+            //this.mtxtPlaca.TextChanged += new System.EventHandler(this.mtxtPlaca_TextChanged);
+            //this.mtxtPlaca.Enter += new System.EventHandler(this.mtxtPlaca_Enter);
+            //this.mtxtPlaca.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtPlaca_KeyDown);
+            //this.mtxtPlaca.Leave += new System.EventHandler(this.mtxtPlaca_Leave);
+            // 
+            // BindingVeiculo
+            // 
+            this.BindingVeiculo.DataSource = typeof(UseFul.ClientApi.Dtos.VeiculoDto);
             // 
             // btnVeiculos
             // 
@@ -808,12 +830,14 @@
             this.btnVeiculos.Text = "Veículos";
             this.btnVeiculos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVeiculos.UseVisualStyleBackColor = true;
-            this.btnVeiculos.Click += new System.EventHandler(this.btnPlacas_Click);
+         //   this.btnVeiculos.Click += new System.EventHandler(this.btnPlacas_Click);
             // 
             // mtxtCPF
             // 
             this.mtxtCPF._MascaraData = false;
             this.mtxtCPF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.mtxtCPF.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingPessoa, "Cpf", true));
+            this.mtxtCPF.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingPessoa, "Cpf", true));
             this.mtxtCPF.ExibirIconePesquisa = false;
             this.mtxtCPF.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtCPF.LimpaCampo = true;
@@ -826,10 +850,10 @@
             this.mtxtCPF.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mtxtCPF.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.mtxtCPF.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxWelic.CTipoCampo.Chave;
-            this.mtxtCPF.Click += new System.EventHandler(this.mtxtCPF_Click);
-            this.mtxtCPF.TextChanged += new System.EventHandler(this.mtxtCPF_TextChanged);
-            this.mtxtCPF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtCPF_KeyDown);
-            this.mtxtCPF.Leave += new System.EventHandler(this.mtxtCPF_Leave);
+            //this.mtxtCPF.Click += new System.EventHandler(this.mtxtCPF_Click);
+            //this.mtxtCPF.TextChanged += new System.EventHandler(this.mtxtCPF_TextChanged);
+            //this.mtxtCPF.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtxtCPF_KeyDown);
+            //this.mtxtCPF.Leave += new System.EventHandler(this.mtxtCPF_Leave);
             // 
             // grpCNH
             // 
@@ -851,6 +875,8 @@
             // mtxtCNHData
             // 
             this.mtxtCNHData.BackColor = System.Drawing.Color.White;
+            this.mtxtCNHData.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingVeiculo, "ExpedicaoCnh", true));
+            this.mtxtCNHData.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingVeiculo, "ExpedicaoCnh", true));
             this.mtxtCNHData.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtCNHData.LimpaCampo = true;
             this.mtxtCNHData.Location = new System.Drawing.Point(56, 41);
@@ -860,11 +886,13 @@
             this.mtxtCNHData.Size = new System.Drawing.Size(98, 21);
             this.mtxtCNHData.TabIndex = 8;
             this.mtxtCNHData.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxDataWelic.CTipoCampo.Normal;
-            this.mtxtCNHData.Click += new System.EventHandler(this.mtxtCNHData_Click);
+         //   this.mtxtCNHData.Click += new System.EventHandler(this.mtxtCNHData_Click);
             // 
             // mtxtCNHVencimento
             // 
             this.mtxtCNHVencimento.BackColor = System.Drawing.Color.White;
+            this.mtxtCNHVencimento.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingVeiculo, "VencimentoCnh", true));
+            this.mtxtCNHVencimento.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingVeiculo, "VencimentoCnh", true));
             this.mtxtCNHVencimento.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtCNHVencimento.LimpaCampo = true;
             this.mtxtCNHVencimento.Location = new System.Drawing.Point(212, 39);
@@ -874,13 +902,15 @@
             this.mtxtCNHVencimento.Size = new System.Drawing.Size(79, 21);
             this.mtxtCNHVencimento.TabIndex = 9;
             this.mtxtCNHVencimento.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxDataWelic.CTipoCampo.Normal;
-            this.mtxtCNHVencimento.Click += new System.EventHandler(this.mtxtCNHVencimento_Click);
+         //   this.mtxtCNHVencimento.Click += new System.EventHandler(this.mtxtCNHVencimento_Click);
             // 
             // txtCNHNumero
             // 
             this.txtCNHNumero._RecursosGenericosSqlF3 = null;
             this.txtCNHNumero._RecursosGenericosSqlLeave = null;
             this.txtCNHNumero.BackColor = System.Drawing.Color.White;
+            this.txtCNHNumero.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingVeiculo, "CNH", true));
+            this.txtCNHNumero.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingVeiculo, "CNH", true));
             this.txtCNHNumero.ExibirIconePesquisa = false;
             this.txtCNHNumero.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCNHNumero.InformacaoToolTipCaminho = null;
@@ -904,6 +934,8 @@
             this.txtCNHCategoria._RecursosGenericosSqlLeave = null;
             this.txtCNHCategoria.BackColor = System.Drawing.Color.White;
             this.txtCNHCategoria.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtCNHCategoria.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingVeiculo, "Categoria", true));
+            this.txtCNHCategoria.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingVeiculo, "Categoria", true));
             this.txtCNHCategoria.ExibirIconePesquisa = false;
             this.txtCNHCategoria.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCNHCategoria.InformacaoToolTipCaminho = null;
@@ -985,6 +1017,8 @@
             // mtxtInicio
             // 
             this.mtxtInicio.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+            this.mtxtInicio.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "DtInicio", true));
+            this.mtxtInicio.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingSolicitacao, "DtInicio", true));
             this.mtxtInicio.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtInicio.LimpaCampo = true;
             this.mtxtInicio.Location = new System.Drawing.Point(213, 11);
@@ -1020,6 +1054,8 @@
             // mtxtDataCancel
             // 
             this.mtxtDataCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+            this.mtxtDataCancel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "DtCancel", true));
+            this.mtxtDataCancel.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingSolicitacao, "DtCancel", true));
             this.mtxtDataCancel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mtxtDataCancel.LimpaCampo = true;
             this.mtxtDataCancel.Location = new System.Drawing.Point(115, 453);
@@ -1037,6 +1073,8 @@
             this.txtUsuarioCancel._RecursosGenericosSqlF3 = null;
             this.txtUsuarioCancel._RecursosGenericosSqlLeave = null;
             this.txtUsuarioCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(231)))), ((int)(((byte)(231)))));
+            this.txtUsuarioCancel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "UserCancel", true));
+            this.txtUsuarioCancel.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.BindingSolicitacao, "UserCancel", true));
             this.txtUsuarioCancel.ExibirIconePesquisa = false;
             this.txtUsuarioCancel.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsuarioCancel.InformacaoToolTipCaminho = null;
@@ -1071,6 +1109,7 @@
             this.txtColaborador._RecursosGenericosSqlF3 = null;
             this.txtColaborador._RecursosGenericosSqlLeave = null;
             this.txtColaborador.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.txtColaborador.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingPessoa, "IdPessoa", true));
             this.txtColaborador.ExibirIconePesquisa = false;
             this.txtColaborador.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtColaborador.InformacaoToolTipCaminho = null;
@@ -1086,23 +1125,43 @@
             this.txtColaborador.TabIndex = 3;
             this.txtColaborador.TipoCampo = UseFul.Forms.Welic.TextBoxWelic.CTipoCampo.Chave;
             this.txtColaborador.TipoValor = UseFul.Forms.Welic.TextBoxWelic.CTipoValor.Numerico;
-            this.txtColaborador.TextChanged += new System.EventHandler(this.txtColaborador_TextChanged);
-            this.txtColaborador.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColaborador_KeyDown);
-            this.txtColaborador.Leave += new System.EventHandler(this.txtColaborador_Leave);
+            //this.txtColaborador.TextChanged += new System.EventHandler(this.txtColaborador_TextChanged);
+            //this.txtColaborador.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtColaborador_KeyDown);
+            //this.txtColaborador.Leave += new System.EventHandler(this.txtColaborador_Leave);
             // 
-            // BindingSolicitacao
+            // mskDataValidade
             // 
-            this.BindingSolicitacao.DataSource = typeof(UseFul.ClientApi.Dtos.SolicitacoesDto);
+            this.mskDataValidade._MascaraData = false;
+            this.mskDataValidade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            this.mskDataValidade.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.BindingSolicitacao, "DtSolicitacao", true));
+            this.mskDataValidade.ExibirIconePesquisa = false;
+            this.mskDataValidade.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mskDataValidade.LimpaCampo = true;
+            this.mskDataValidade.Location = new System.Drawing.Point(479, 41);
+            this.mskDataValidade.Mask = "00/00/0000";
+            this.mskDataValidade.Name = "mskDataValidade";
+            this.mskDataValidade.NomeCampoDadosDataTable = null;
+            this.mskDataValidade.Size = new System.Drawing.Size(100, 21);
+            this.mskDataValidade.TabIndex = 1028;
+            this.mskDataValidade.TipoCampo = UseFul.Forms.Welic.MaskedTextBoxWelic.CTipoCampo.Chave;
             // 
-            // BindingVeiculo
+            // labelWelic14
             // 
-            this.BindingVeiculo.DataSource = typeof(UseFul.ClientApi.Dtos.VeiculoDto);
+            this.labelWelic14.AutoSize = true;
+            this.labelWelic14.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWelic14.Location = new System.Drawing.Point(412, 44);
+            this.labelWelic14.Name = "labelWelic14";
+            this.labelWelic14.Size = new System.Drawing.Size(67, 13);
+            this.labelWelic14.TabIndex = 1029;
+            this.labelWelic14.Text = "Validade:";
             // 
             // frmSolicitacoesVagas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 518);
+            this.Controls.Add(this.mskDataValidade);
+            this.Controls.Add(this.labelWelic14);
             this.Controls.Add(this.txtColaborador);
             this.Controls.Add(this.grpCNH);
             this.Controls.Add(this.labelWelic13);
@@ -1145,19 +1204,23 @@
             this.Controls.SetChildIndex(this.labelWelic13, 0);
             this.Controls.SetChildIndex(this.grpCNH, 0);
             this.Controls.SetChildIndex(this.txtColaborador, 0);
+            this.Controls.SetChildIndex(this.labelWelic14, 0);
+            this.Controls.SetChildIndex(this.mskDataValidade, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.BindingSolicitacao)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingPessoa)).EndInit();
             this.pnlContratos.ResumeLayout(false);
             this.pnlContratos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContratos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingContrato)).EndInit();
             this.pnlEstacionamentosIndicados.ResumeLayout(false);
             this.pnlEstacionamentosIndicados.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstacionamentosIndicados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingIndicacaoEstacionamento)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingVeiculo)).EndInit();
             this.grpCNH.ResumeLayout(false);
             this.grpCNH.PerformLayout();
             this.grpSituacao.ResumeLayout(false);
             this.grpSituacao.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingSolicitacao)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingVeiculo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingIndicacaoEstacionamento)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1237,5 +1300,9 @@
         private System.Windows.Forms.BindingSource BindingSolicitacao;
         private System.Windows.Forms.BindingSource BindingVeiculo;
         private System.Windows.Forms.BindingSource BindingIndicacaoEstacionamento;
+        private System.Windows.Forms.BindingSource BindingContrato;
+        private System.Windows.Forms.BindingSource BindingPessoa;
+        private UseFul.Forms.Welic.MaskedTextBoxWelic mskDataValidade;
+        private UseFul.Forms.Welic.LabelWelic labelWelic14;
     }
 }

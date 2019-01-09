@@ -61,6 +61,7 @@
     <Compile Include="Estacionamento\ServiceEstacionamentoVagas.cs" />
     <Compile Include="Estacionamento\ServiceSolicitacoesEstacionamento.cs" />
     <Compile Include="Estacionamento\ServiceSolicitacoesVagas.cs" />
+    <Compile Include="Estacionamento\ServiceSolicitacoesVagasLiberadas.cs" />
     <Compile Include="Estacionamento\ServiceVeiculo.cs" />
     <Compile Include="Live\ServiceFavoriteLive.cs" />
     <Compile Include="Live\ServiceLive.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule\ServiceSchedule.cs" />
     <Compile Include="Seguranca\ServicePermission.cs" />
+    <Compile Include="Seguranca\ServiceProgram.cs" />
     <Compile Include="Servico.cs" />
     <Compile Include="Uploads\UploadsService.cs" />
     <Compile Include="Users\AspNetRoleService.cs" />

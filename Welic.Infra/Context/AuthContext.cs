@@ -4,6 +4,7 @@ using Welic.Dominio.Models.Acesso.Mapeamentos;
 using Welic.Dominio.Models.City.Map;
 using Welic.Dominio.Models.Client.Map;
 using Welic.Dominio.Models.ConfigApp.Map;
+using Welic.Dominio.Models.Contratos.Map;
 using Welic.Dominio.Models.Curso.Map;
 using Welic.Dominio.Models.Departamento.Map;
 using Welic.Dominio.Models.EBook.Map;
@@ -106,6 +107,7 @@ namespace Welic.Infra.Context
         public DbSet<VeiculosMap> Veiculos { get; set; }
         public DbSet<SolicitacoesEstacionamentoMap> SolicitacoesEstacionamento { get; set; }
         public DbSet<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
+        public DbSet<ContratosMap> Contratos { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
