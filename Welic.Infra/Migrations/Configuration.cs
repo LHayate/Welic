@@ -9,24 +9,24 @@ using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
-using Welic.Infra.Context;
+using Infra.Context;
 
-namespace Welic.Infra.Migrations
+namespace Infra.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Welic.Infra.Context.AuthContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Infra.Context.AuthContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
             //AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed; 
-            //ContextKey = "Welic.Infra.Context.AuthContext";
+            //ContextKey = "Infra.Context.AuthContext";
 
-            //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");
+            //TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("ConnectionDbContext");
         }
 
         protected override void Seed(AuthContext context)
@@ -36,8 +36,8 @@ namespace Welic.Infra.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             base.Seed(context);
-            InstallEmpresa(context);
-            InstallProgramas(context);
+            //InstallEmpresa(context);
+            //InstallProgramas(context);
             //InstallPermission(context);
             InstallSettings(context);
             //InstallEmailTemplates(context);
@@ -46,9 +46,9 @@ namespace Welic.Infra.Migrations
             //InstallCategoryTypes(context);
             //InstallSampleData(context);
             //InstallPictures(context);
-            InstallStripe(context);
-            InstallDisqus(context);
-            InstallRoles(context);
+            //InstallStripe(context);
+            //InstallDisqus(context);
+            //InstallRoles(context);
             //InstallListingTypes(context);
 
             context.SaveChanges();

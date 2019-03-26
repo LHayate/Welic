@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class IndexViewModel
     {

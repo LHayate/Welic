@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Welic.Dominio.Models.Marketplaces.Entityes;
-using Welic.WebSite.Extensions;
+using WebApi.Extensions;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class NavigationSideModel
     {

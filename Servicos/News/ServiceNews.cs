@@ -6,7 +6,7 @@ using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.News
+namespace Services.News
 {
     public class ServiceNews : Service<NewsMap>, IServiceNews
     {

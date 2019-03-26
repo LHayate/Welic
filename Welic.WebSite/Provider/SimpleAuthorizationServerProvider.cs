@@ -4,18 +4,14 @@ using Microsoft.Owin.Security.OAuth;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Infra.Context;
-using Welic.Repositorios.Login;
-using Welic.WebSite.Models;
+using WebApi.Models;
 
 
-namespace Welic.WebSite.Provider
+namespace WebApi.Provider
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

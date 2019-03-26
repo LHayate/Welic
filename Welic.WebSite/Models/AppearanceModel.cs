@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class AppearanceModel
     {

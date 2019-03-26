@@ -16,11 +16,11 @@ using Welic.Dominio.Models.Segurança.Service;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
-using Welic.WebSite.Models;
-using Welic.WebSite.Utilities;
+using WebApi.Models;
+using WebApi.Utilities;
 
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     [Authorize]
     public class AccountController : BaseController

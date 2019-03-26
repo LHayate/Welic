@@ -1,11 +1,9 @@
 ﻿@using i18n
-@using Microsoft.Practices.Unity;
-@using Microsoft.Practices.Unity.Configuration;
 @using Microsoft.AspNet.Identity
 @using Welic.Core
-@using Welic.WebSite.Extensions
+@using WebApi.Extensions
 
-@model Welic.WebSite.Models.ListingItemModel
+@model WebApi.Models.ListingItemModel
 
 @{
     ViewBag.Title = Model.ListingCurrent.Title;
@@ -132,7 +130,7 @@
                                         }
                                         else
                                         {
-                                            <img style="width: 100%" src="@Welic.WebSite.Utilities.ImageHelper.GetListingImagePath(0)" />
+                                            <img style="width: 100%" src="@WebApi.Utilities.ImageHelper.GetListingImagePath(0)" />
                                         }
                                     </div>
                                     <!---Pictures-->
@@ -260,7 +258,7 @@
 
                                 <div class="panel panel-default panel-body mrg-t text-center">
                                     <a href="@Url.Action("Profile", "Listing", new { id = Model.User.Id })">
-                                        <img class="img-circle profile-picture" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(Model.User.Id)" />
+                                        <img class="img-circle profile-picture" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(Model.User.Id)" />
                                     </a>
                                     <h5>@Model.User.FullName</h5>
                                     <p class="text-lighten">
@@ -354,7 +352,7 @@
             <script type="text/javascript">
                 function initMap() {
                     var myLatlng = new google.maps.LatLng(@Model.ListingCurrent.Latitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture), @Model.ListingCurrent.Longitude.Value.ToString(System.Globalization.CultureInfo.InvariantCulture));
-                    var isDraggable = $(document).width() > 480 ? true : false; // If document (your website) is wider than 480px, isDraggable = true, else isDraggable = false
+                    var isDraggable = $(document).width() > 480 ? true : false; // If document (your WebApi) is wider than 480px, isDraggable = true, else isDraggable = false
 
                     var mapOptions = {
                         draggable: isDraggable,

@@ -8,7 +8,7 @@ using Welic.Dominio.Models.City.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.City
+namespace Services.City
 {
     public class ServiceCity :Service<CityMap>, IServiceCity
     {

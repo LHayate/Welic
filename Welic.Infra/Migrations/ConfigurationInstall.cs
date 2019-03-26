@@ -2,7 +2,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using Welic.Dominio.Core;
 
-namespace Welic.Infra.Migrations
+namespace Infra.Migrations
 {
     public sealed class ConfigurationInstall<T> : DbMigrationsConfiguration<T> where T: DbContext
     {
@@ -10,9 +10,9 @@ namespace Welic.Infra.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = WelicConfigurationManager.AutomaticMigrationDataLossAllowed;
-            ContextKey = "Welic.Infra.Context.AuthContext";
+            ContextKey = "Infra.Context.AuthContext";
 
-            TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("WelicDbContext");            
+            TargetDatabase = new System.Data.Entity.Infrastructure.DbConnectionInfo("ConnectionDesenv");            
         }
 
         protected override void Seed(T context)

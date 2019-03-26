@@ -27,7 +27,7 @@
                                 <div class="col-md-3 col-xs-12">
                                     <div class="">
                                         <a href="@Url.Action("Profile", "Listing", new { id = Model.AspNetUserTo.Id })">
-                                            <img class="img-circle profile-picture" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(Model.AspNetUserTo.Id)" />
+                                            <img class="img-circle profile-picture" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(Model.AspNetUserTo.Id)" />
                                         </a>
                                         <h5>@Model.AspNetUserTo.FullName</h5>
                                         <p class="text-lighten">
@@ -60,7 +60,7 @@
 
                                 <div class="media">
                                     <a href="@Url.Action("Profile", "Listing", new { id = User.Identity.GetUserId() })" class="pull-left">
-                                        <img class="pull-left media-object img-circle thumb-sm m-t-10" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
+                                        <img class="pull-left media-object img-circle thumb-sm m-t-10" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
                                     </a>
                                     <div class="media-body">
                                         <form action="@Url.Action("Review", "Listing")" method="post" role="form">

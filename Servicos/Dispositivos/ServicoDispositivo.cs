@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Welic.Dominio;
 using Welic.Dominio.Models.Acesso.Adaptador;
 using Welic.Dominio.Models.Acesso.Dtos;
@@ -11,7 +7,7 @@ using Welic.Dominio.Models.Acesso.Repositorios;
 using Welic.Dominio.Models.Acesso.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 
-namespace Servicos.Acesso
+namespace Services.Dispositivos
 {
     public class ServicoDispositivo : Servico, IServicoDispositivo
     {

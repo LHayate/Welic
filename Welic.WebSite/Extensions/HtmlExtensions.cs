@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace Welic.WebSite.Extensions
+namespace WebApi.Extensions
 {
     public static class HtmlExtensions
     {

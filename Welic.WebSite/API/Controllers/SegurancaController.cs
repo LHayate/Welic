@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Models.Segurança.Service;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/seguranca")]

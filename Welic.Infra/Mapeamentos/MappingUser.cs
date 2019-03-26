@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration;
 using Welic.Dominio.Models.Users.Mapeamentos;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingUser
         : EntityTypeConfiguration<AspNetUser>
@@ -24,8 +24,8 @@ namespace Welic.Infra.Mapeamentos
                 .IsRequired()
                 .HasMaxLength(256);
 
-            this.Property(x => x.EmpresaId)
-                .IsRequired();
+            //this.Property(x => x.EmpresaId)
+            //    .IsRequired();
 
             // Table & Column Mappings
             this.ToTable("AspNetUsers");
@@ -53,7 +53,7 @@ namespace Welic.Infra.Mapeamentos
             this.Property(t => t.NickName).HasColumnName("UserName");
             this.Property(t => t.Disabled).HasColumnName("Disabled");
             this.Property(t => t.Rating).HasColumnName("Rating");
-            this.Property(t => t.EmpresaId).HasColumnName("EmpresaId");
+            //this.Property(t => t.EmpresaId).HasColumnName("EmpresaId");
             //ToTable("AspNetUser", "dbo");
             //HasKey(x => x.Id);            
 

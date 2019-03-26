@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Estacionamento.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingEstacionamentoVagas : EntityTypeConfiguration<EstacionamentoVagasMap>
     {

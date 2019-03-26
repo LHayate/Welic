@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Segurança.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Seguranca
+namespace Services.Seguranca
 {
     public class ServicePermission : Service<PermissionMap>,IServicePermission
     {

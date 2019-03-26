@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Users
+namespace Services.Users
 {
     public class AspNetRoleService : Service<AspNetRole>, IAspNetRoleService
     {

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Welic.Dominio.Models.News.Maps;
-using Welic.Infra.Context;
-
-namespace Welic.Repositorios.News
+﻿namespace Repositorios.News
 {
     //public class RepositoryNews : IRepositoryNews
     //{

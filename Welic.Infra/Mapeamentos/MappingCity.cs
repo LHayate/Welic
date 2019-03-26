@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.City.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingCity : EntityTypeConfiguration<CityMap>
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using PagedList;
 using Welic.Dominio.Models.Marketplaces.Entityes;
-using Welic.WebSite.Models.Grids;
+using WebApi.Models.Grids;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class SearchListingModel : SortViewModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class TextFileModel
     {

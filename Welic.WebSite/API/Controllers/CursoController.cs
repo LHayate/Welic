@@ -10,7 +10,7 @@ using Welic.Dominio.Models.Curso.Service;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/curso")]

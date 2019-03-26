@@ -4,7 +4,7 @@ using System;
 using Welic.Dominio;
 using Welic.Dominio.Eventos;
 
-namespace Servicos
+namespace Services
 {
     public class Servico : IServico
     {

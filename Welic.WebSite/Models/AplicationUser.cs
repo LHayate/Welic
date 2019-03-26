@@ -7,7 +7,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     
 }

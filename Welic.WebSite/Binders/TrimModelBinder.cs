@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Welic.WebSite.Binders
+namespace WebApi.Binders
 {
     //http://stackoverflow.com/questions/1718501/asp-net-mvc-best-way-to-trim-strings-after-data-entry-should-i-create-a-custo
     public class TrimModelBinder : IModelBinder

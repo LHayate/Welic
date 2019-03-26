@@ -1,4 +1,4 @@
-﻿@model Welic.WebSite.Models.ListingItemModel
+﻿@model WebApi.Models.ListingItemModel
 
 <div class="card">
     <div class="card-image">
@@ -13,7 +13,7 @@
 
     <div class="card-content">
         <a href="@Url.Action("Profile", "Listing", new { id = Model.ListingCurrent.UserID })">
-            <img class="thumb-md img-profile-card img-circle" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(Model.ListingCurrent.UserID)" />            
+            <img class="thumb-md img-profile-card img-circle" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(Model.ListingCurrent.UserID)" />            
         </a>
 
         <a href="@Url.Action("Listing", "Listing", new { id = Model.ListingCurrent.ID })">

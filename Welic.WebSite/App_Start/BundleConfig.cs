@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public class BundleConfig
     {

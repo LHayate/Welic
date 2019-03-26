@@ -15,7 +15,7 @@ using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Menu
+namespace Services.Menu
 {
     public class ServicoMenu : Service<MenuMap>, IServicoMenu
     {

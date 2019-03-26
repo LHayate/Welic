@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Infra.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Welic.Infra.Context;
-using Welic.WebSite.Migrations;
+using WebApi.Migrations;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -46,7 +46,7 @@ namespace Welic.WebSite.Models
         public string ImagePerfil { get; set; }
         public string Identity { get; set; }
 
-        public int EmpresaId { get; set; } = 1;
+        //public int EmpresaId { get; set; } = 1;
 
         public bool Development { get; set; }
 
@@ -83,7 +83,7 @@ namespace Welic.WebSite.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("WelicDbContext", throwIfV1Schema: false)
+            : base("ConnectionDesenv", throwIfV1Schema: false)
             //: base("WelicDbContext")
         {           
         }

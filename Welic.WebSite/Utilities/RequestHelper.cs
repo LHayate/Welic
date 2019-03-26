@@ -1,6 +1,6 @@
 ﻿using System.Web;
 
-namespace Welic.WebSite.Utilities
+namespace WebApi.Utilities
 {
     public static class RequestHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class LanguageSelectorModel
     {

@@ -6,7 +6,7 @@ using System.Web.Http.Dependencies;
 using Unity;
 using Unity.Exceptions;
 
-namespace Welic.WebSite.Helpers
+namespace WebApi.Helpers
 {
     public class UnityResolverHelper : IDependencyResolver
     {

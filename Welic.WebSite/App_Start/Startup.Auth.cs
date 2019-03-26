@@ -3,14 +3,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Welic.Infra.Context;
-using Welic.WebSite.Models;
-using Welic.WebSite.Provider;
+using WebApi.Models;
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public partial class Startup
     {

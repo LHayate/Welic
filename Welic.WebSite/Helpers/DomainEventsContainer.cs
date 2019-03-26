@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http.Dependencies;
 using Welic.Dominio.Eventos;
 
-namespace Welic.WebSite.Helpers
+namespace WebApi.Helpers
 {
     public class DomainEventsContainer : IContainer
     {

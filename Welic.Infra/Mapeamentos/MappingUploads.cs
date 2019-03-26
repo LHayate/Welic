@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Welic.Dominio.Models.Uploads.Maps;
 
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     class MappingUploads:EntityTypeConfiguration<UploadsMap>
     {

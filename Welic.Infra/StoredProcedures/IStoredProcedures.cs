@@ -1,4 +1,4 @@
-﻿namespace Welic.Infra.StoredProcedures
+﻿namespace Infra.StoredProcedures
 {
     public interface IStoredProcedures
     {

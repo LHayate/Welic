@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class ContactModel
     {

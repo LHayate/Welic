@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Welic.Repositorios {
+namespace Repositorios {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Welic.Repositorios {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Welic.Repositorios.Query", typeof(Query).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Repositorios.Query", typeof(Query).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -4,7 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Diagnostics.Contracts;
 using System.Linq;
 
-namespace Welic.Infra.Migrations
+namespace Infra.Migrations
 {
     //http://stackoverflow.com/questions/15796115/how-to-create-initializer-to-create-and-migrate-mysql-database
     //http://stackoverflow.com/questions/5559043/entity-framework-code-first-two-foreign-keys-from-same-table

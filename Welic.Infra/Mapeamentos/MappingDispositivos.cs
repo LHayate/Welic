@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingDispositivos
         : EntityTypeConfiguration<DispositivosMap>

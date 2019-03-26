@@ -1,6 +1,6 @@
-﻿using Welic.Infra.StoredProcedures;
+﻿using Infra.StoredProcedures;
 
-namespace Servicos.MarketPlace
+namespace Welic.Service.MarketPlace
 {
     public class SqlDbService
     {        

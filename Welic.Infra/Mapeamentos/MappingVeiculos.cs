@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.ModelConfiguration;
 using Welic.Dominio.Models.Estacionamento.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingVeiculos : EntityTypeConfiguration<VeiculosMap>
     {

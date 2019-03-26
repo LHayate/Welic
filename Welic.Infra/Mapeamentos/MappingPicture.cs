@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingPicture : EntityTypeConfiguration<Picture>
     {

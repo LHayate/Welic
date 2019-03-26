@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Departamento.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Departamento
+namespace Services.Departamento
 {
     public class ServiceDepartamento: Service<DepartamentoMap>,IServiceDepartamento
     {

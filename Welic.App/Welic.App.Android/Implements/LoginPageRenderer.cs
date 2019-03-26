@@ -19,7 +19,7 @@ namespace Welic.App.Droid
             var activity = this.Context as Activity;
 
             var auth = new OAuth2Authenticator(
-                clientId: "528237220950003", // your OAuth2 client id
+                clientId: "2151075064975934", // your OAuth2 client id
                 scope: "", // the scopes for the particular API you're accessing, delimited by "+" symbols
                 authorizeUrl: new Uri("https://m.facebook.com/dialog/oauth/"),
                 redirectUrl: new Uri("http://www.facebook.com/connect/login_success.html"));
@@ -50,7 +50,7 @@ namespace Welic.App.Droid
                 }
                 else
                 {
-                    App.Current.MainPage.DisplayAlert("Login","Usuário Cancelou o login","OK");
+                    await App.Current.MainPage.DisplayAlert("Login", "Usuário Cancelou o login", "OK");
                 }
             };
 

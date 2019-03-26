@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Registrators;
 
-namespace Welic.WebSite.Themes
+namespace WebApi.Themes
 {
     /// <summary>
     /// ThemeableRazorViewEngine (inspired by NopCommerce)

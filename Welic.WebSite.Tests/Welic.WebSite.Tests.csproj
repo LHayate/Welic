@@ -89,9 +89,9 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Welic.WebSite\Welic.WebSite.csproj">
+    <ProjectReference Include="..\Welic.WebSite\WebApi.csproj">
       <Project>{E3BEEFA0-22BF-4D27-A8F3-4494F2468709}</Project>
-      <Name>Welic.WebSite</Name>
+      <Name>WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 @using Microsoft.AspNet.Identity
 @using PagedList.Mvc
-@using Welic.WebSite.Extensions
+@using WebApi.Extensions
 
 
 @{
@@ -70,7 +70,7 @@
 
                                                 <tr class="@(unRead ? "active" : "")">
                                                     <td width="200">
-                                                        <img class="img-circle thumb-sm m-r-5 pull-left" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(participant.AspNetUser.Id)" />
+                                                        <img class="img-circle thumb-sm m-r-5 pull-left" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(participant.AspNetUser.Id)" />
                                                         <div>
                                                             <a class="text-xs" href="@Url.Action("Profile", "Listing", new { id = participant.AspNetUser.Id })">@participant.AspNetUser.FullName</a>
                                                             <br />

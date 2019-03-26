@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Configuration;
 
-namespace Welic.Infra.Migrations
+namespace Infra.Migrations
 {
     //http://www.codeproject.com/Articles/118532/Saving-Connection-Strings-to-app-config
     public class ConnectionStringHelper
@@ -47,7 +47,7 @@ namespace Welic.Infra.Migrations
         {
             var configuration = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
 
-            var connectionString = configuration.ConnectionStrings.ConnectionStrings["WelicDbContext"];
+            var connectionString = configuration.ConnectionStrings.ConnectionStrings["ConnectionDbContext"];
 
             return connectionString == null ? string.Empty : connectionString.ConnectionString;
         }

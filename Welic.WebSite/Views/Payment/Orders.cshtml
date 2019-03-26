@@ -3,7 +3,7 @@
 @using Microsoft.AspNet.Identity
 @using Welic.Dominio.Enumerables
 
-@model Welic.WebSite.Models.OrderModel
+@model WebApi.Models.OrderModel
 
 @{
     ViewBag.Title = "[[[Orders]]]";
@@ -70,7 +70,7 @@
     var user = userId == order.AspNetUserProvider.Id ? order.AspNetUserReceiver : order.AspNetUserProvider;
 
     <a href="@Url.Action("Profile", "Listing", new { id = user.Id})">
-        <img src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(user.Id)" class="img-circle thumb-sm" alt="img">
+        <img src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(user.Id)" class="img-circle thumb-sm" alt="img">
         <span class="text-xs">@user.FullName</span>
     </a>
 }

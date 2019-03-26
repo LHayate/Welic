@@ -11,7 +11,7 @@ using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Segurança.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/permission")]

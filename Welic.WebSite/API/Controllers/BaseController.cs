@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Eventos;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     public class BaseController : ApiController
     {

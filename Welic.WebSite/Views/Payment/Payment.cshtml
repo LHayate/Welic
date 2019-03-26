@@ -1,10 +1,8 @@
-﻿@using Microsoft.Practices.Unity;
-@using Microsoft.Practices.Unity.Configuration;
-@using Welic.Core
+﻿@using Welic.Core
 @using Welic.Dominio.Enumerables
-@using Welic.WebSite.Extensions
+@using WebApi.Extensions
 
-@model Welic.WebSite.Models.PaymentModel
+@model WebApi.Models.PaymentModel
 
 @{
     ViewBag.Title = "[[[Payment]]]";
@@ -29,11 +27,11 @@
                     <div class="col-md-6">
                         @if (Model.ListingOrder.Listing.ListingPictures.Count > 0)
                         {
-                            <img style="width: 100%" src="@Welic.WebSite.Utilities.ImageHelper.GetListingImagePath(Model.ListingOrder.Listing.ListingPictures.FirstOrDefault().ID)" />
+                            <img style="width: 100%" src="@WebApi.Utilities.ImageHelper.GetListingImagePath(Model.ListingOrder.Listing.ListingPictures.FirstOrDefault().ID)" />
                         }
                         else
                         {
-                            <img style="width: 100%" src="@Welic.WebSite.Utilities.ImageHelper.GetListingImagePath(0)" />
+                            <img style="width: 100%" src="@WebApi.Utilities.ImageHelper.GetListingImagePath(0)" />
                         }
                     </div>
 

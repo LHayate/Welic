@@ -12,23 +12,22 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Registrators;
 using Registrators.Helpers;
-using Servicos.MarketPlace;
 using Unity;
 using Welic.Dominio.Core.Web;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Marketplaces.Enuns;
 using Welic.Dominio.Models.Marketplaces.Services;
-using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.Dominio.ViewModels;
-using Welic.WebSite.Extensions;
-using Welic.WebSite.Models;
-using Welic.WebSite.Utilities;
+using Welic.Service.MarketPlace;
+using WebApi.Extensions;
+using WebApi.Models;
+using WebApi.Utilities;
 using CacheHelper = Registrators.CacheHelper;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     [Authorize]
     public class ListingController : Controller

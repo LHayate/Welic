@@ -9,22 +9,21 @@ using Microsoft.AspNet.Identity.Owin;
 using Registrators;
 using Registrators.Helpers;
 using Registrators.Plugins;
-using Servicos.MarketPlace;
 using Unity;
 using Welic.Dominio.Core.Controllers;
 using Welic.Dominio.Core.Web;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Marketplaces.Services;
-using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.Dominio.ViewModels;
-using Welic.WebSite.Extensions;
-using Welic.WebSite.Models;
-using Welic.WebSite.Models.Grids;
+using Welic.Service.MarketPlace;
+using WebApi.Extensions;
+using WebApi.Models;
+using WebApi.Models.Grids;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     [Authorize]
     public class PaymentController : Controller

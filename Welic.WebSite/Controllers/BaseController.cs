@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading;
-using System.Web;
 using System.Web.Mvc;
+using WebApi;
 using Welic.Dominio.Models.Menu.Servicos;
 
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Repositorios;
-using Welic.WebSite.Helpers;
+using WebApi.Helpers;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     public class BaseController : Controller
     {

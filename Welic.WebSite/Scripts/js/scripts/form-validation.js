@@ -39,7 +39,7 @@ $(function() {
         required: "Enter a username",
         minlength: "Enter at least 5 characters"
       },
-      curl: "Enter your website",
+      curl: "Enter your WebApi",
     },
     errorElement: 'div',
     errorPlacement: function(error, element) {

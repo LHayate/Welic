@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public class RouteConfig
     {
@@ -28,7 +28,7 @@ namespace Welic.WebSite
                 culture = "pt-BR"
             },
             constraints: new { culture = "[a-z]{2}-[A-Z]{2}" },
-            namespaces: new[] { "Welic.WebSite.Controllers" }
+            namespaces: new[] { "WebApi.Controllers" }
             );
             routes.LowercaseUrls = true;
 
@@ -36,7 +36,7 @@ namespace Welic.WebSite
                 name: "Page",
                 url: "page/{id}",
                 defaults: new { controller = "Home", action = "ContentPage", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "Welic.WebSite.Controllers" }
+                namespaces: new[] { "WebApi.Controllers" }
 
             );
 
@@ -44,14 +44,14 @@ namespace Welic.WebSite
                 name: "Listings",
                 url: "listings/{id}",
                 defaults: new { controller = "Listing", action = "Listing", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "Welic.WebSite.Controllers" }
+                namespaces: new[] { "WebApi.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, culture = "pt-BR" },
-                namespaces: new[] { "Welic.WebSite.Controllers" }
+                namespaces: new[] { "WebApi.Controllers" }
             );
 
             //routes.MapHttpRoute(

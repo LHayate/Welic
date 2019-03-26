@@ -29,11 +29,7 @@ using Xamarin.Forms.Xaml;
 namespace Welic.App
 {
     public partial class App : Application
-    {
-
-       
-
-
+    {       
         ISettingsService _settingsService;
         
 

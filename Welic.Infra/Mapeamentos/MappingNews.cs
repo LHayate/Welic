@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.News.Maps;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingNews
         : EntityTypeConfiguration<NewsMap>

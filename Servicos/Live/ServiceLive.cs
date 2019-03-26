@@ -6,7 +6,7 @@ using Welic.Dominio.Models.Lives.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Live
+namespace Services.Live
 {
 
     public class ServiceLive : Service<LiveMap>, IServiceLive

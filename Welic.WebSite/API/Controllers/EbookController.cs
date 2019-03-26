@@ -11,7 +11,7 @@ using Welic.Dominio.Models.EBook.Services;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/ebook")]

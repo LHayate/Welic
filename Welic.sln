@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.28407.52
+VisualStudioVersion = 16.0.28714.193
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{E457E313-1CCB-4BB8-AA97-618E1A672DCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSite", "WebSite", "{27D17E96-8751-4EFD-BA87-6719FF58F256}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.Dominio", "Welic.Dominio\Welic.Dominio.csproj", "{434B42F2-13D5-4FB9-A973-C6D8342A8784}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Welic.Dominio\Dominio.csproj", "{434B42F2-13D5-4FB9-A973-C6D8342A8784}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.Repositorios", "Welic.Repositorios\Welic.Repositorios.csproj", "{F5045C53-082C-46F3-9277-A1AE37FE34BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Welic.Repositorios\Repositorios.csproj", "{F5045C53-082C-46F3-9277-A1AE37FE34BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domains", "Domains", "{BFC0C107-A38B-49AB-8B86-1633C90F8A52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{72793908-6808-413A-8608-BE58DC989F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.Infra", "Welic.Infra\Welic.Infra.csproj", "{F0003DA5-1307-44D9-A6CC-69F2CDBC1FC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Welic.Infra\Infra.csproj", "{F0003DA5-1307-44D9-A6CC-69F2CDBC1FC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.Servicos", "Servicos\Welic.Servicos.csproj", "{73BEBC97-5FCA-4949-8715-768F190D9782}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Servicos\Services.csproj", "{73BEBC97-5FCA-4949-8715-768F190D9782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{ADAC1747-5E30-48ED-A01A-2F97365AFF29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.WebSite", "Welic.WebSite\Welic.WebSite.csproj", "{E3BEEFA0-22BF-4D27-A8F3-4494F2468709}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "Welic.WebSite\WebApi.csproj", "{E3BEEFA0-22BF-4D27-A8F3-4494F2468709}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welic.WebSite.Tests", "Welic.WebSite.Tests\Welic.WebSite.Tests.csproj", "{6FBF0079-D2D9-4ED5-89C5-7CD4C4CA39D9}"
 EndProject

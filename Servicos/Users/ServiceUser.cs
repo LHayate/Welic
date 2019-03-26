@@ -10,7 +10,7 @@ using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 using Welic.Dominio.Utilitarios.Entidades;
 
-namespace Servicos.Users
+namespace Services.Users
 {
     public class ServiceUser : Service<AspNetUser>, IServiceUser
     {

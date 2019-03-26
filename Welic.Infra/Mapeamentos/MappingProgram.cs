@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Users.Mapeamentos;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingProgram
     : EntityTypeConfiguration<ProgransMap>

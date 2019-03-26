@@ -10,7 +10,7 @@ using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     
     [RoutePrefix("api/empresas")]
@@ -47,7 +47,7 @@ namespace Welic.WebSite.API.Controllers
         public Task<HttpResponseMessage> ValidaEmpresa(int id, string email)
         {
             
-            return CriaResposta(HttpStatusCode.OK, _serviceUser.Query().Select(x=> x).Any(x=> x.Email == email && x.EmpresaId == id));
+            return CriaResposta(HttpStatusCode.OK, _serviceUser.Query().Select(x=> x).Any(x=> x.Email == email /*&& x.EmpresaId == id*/));
         }
 
         //[HttpGet]

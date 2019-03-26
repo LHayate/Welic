@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infra.Context;
 using Welic.Dominio.Models.EBook.Map;
 using Welic.Dominio.Models.EBook.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
-using Welic.Infra.Context;
 
-namespace Servicos.Ebook
+namespace Services.Ebook
 {
     public class ServiceEbook: Service<EBookMap>, IServiceEBook
     {

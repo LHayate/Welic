@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Departamento.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingDepartamento : EntityTypeConfiguration<DepartamentoMap>
     {

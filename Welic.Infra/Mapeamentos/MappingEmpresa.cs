@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Empresa.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingEmpresa : EntityTypeConfiguration<EmpresaMap>
     {
@@ -92,9 +92,9 @@ namespace Welic.Infra.Mapeamentos
             Property(p => p.ConfigMailEnableSsl)
                 .HasColumnType("bit");
 
-            HasMany(p => p.Usuarios)
-                .WithRequired(c => c.Empresa)
-                .HasForeignKey(p => p.EmpresaId);
+            //HasMany(p => p.Usuarios)
+            //    .WithRequired(c => c.Empresa)
+            //    .HasForeignKey(p => p.EmpresaId);
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Welic.WebSite.Models.Grids;
+﻿using WebApi.Models.Grids;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class OrderModel
     {

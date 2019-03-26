@@ -6,10 +6,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Welic.Infra.Context;
-using Welic.WebSite.Models;
+using WebApi.Models;
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public class EmailService : IIdentityMessageService
     {
@@ -52,9 +51,9 @@ namespace Welic.WebSite
             {
                 RequiredLength = 6,
                 RequireNonLetterOrDigit = false,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
 
             // Configure user lockout defaults

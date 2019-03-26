@@ -2,10 +2,10 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Threading.Tasks;
+using Infra.Context;
 using Welic.Dominio.Models.Users.Mapeamentos;
-using Welic.Infra.Context;
 
-namespace Welic.Repositorios.Login
+namespace Repositorios.Login
 {
     public class AuthRepository : IDisposable
     {

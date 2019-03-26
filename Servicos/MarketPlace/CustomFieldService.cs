@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Marketplaces.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.MarketPlace
+namespace Services.MarketPlace
 {
     public class CustomFieldService : Service<MetaField>, ICustomFieldService
     {

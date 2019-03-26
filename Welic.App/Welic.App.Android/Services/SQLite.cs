@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using SQLite;
-using Welic.App.Services;
 using Welic.App.Services.ServicesViewModels;
 using Xamarin.Forms;
 

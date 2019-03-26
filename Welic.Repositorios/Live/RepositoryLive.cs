@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infra.Context;
 using Welic.Dominio.Models.Lives.Maps;
 using Welic.Dominio.Models.Lives.Repositoryes;
-using Welic.Infra.Context;
 
-namespace Welic.Repositorios.Live
+namespace Repositorios.Live
 {
     public class RepositoryLive: IRepositoryLive
     {

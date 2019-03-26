@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
-using Welic.Dominio.Models.Menu.Dtos;
+using Infra.Context;
+using Repositorios;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Menu.Repositorios;
-using Welic.Infra.Context;
 
-namespace Welic.Repositorios.Menu
+namespace Repositorios.Menu
 {
     public class RepositorioMenu : IRepositorioMenu
     {

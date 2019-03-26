@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     public class MarketplaceController : Controller
     {

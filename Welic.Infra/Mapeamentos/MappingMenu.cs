@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Welic.Dominio.Models.Menu.Entidades;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingMenu
         : EntityTypeConfiguration<MenuMap>

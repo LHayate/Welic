@@ -7,7 +7,7 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using JsonSerializer = Microsoft.ApplicationInsights.Extensibility.Implementation.JsonSerializer;
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public static class WebApiConfig
     {

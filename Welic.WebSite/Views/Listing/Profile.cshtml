@@ -1,7 +1,4 @@
-﻿@using Microsoft.Practices.Unity;
-@using Microsoft.Practices.Unity.Configuration;
-
-@model Welic.WebSite.Models.ProfileModel
+﻿@model WebApi.Models.ProfileModel
 
 @{
     ViewBag.Title = "[[[Profile]]]";
@@ -18,7 +15,7 @@
     <div class="section panel-header ">
         <div class="container-fluid">
             <div class="col-md-12 text-center-sm">
-                <img class="pull-left-md img-circle profile-picture m-r-10" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(Model.User.Id)" />
+                <img class="pull-left-md img-circle profile-picture m-r-10" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(Model.User.Id)" />
 
                 <h4>@Model.User.FullName</h4>
                 <p>

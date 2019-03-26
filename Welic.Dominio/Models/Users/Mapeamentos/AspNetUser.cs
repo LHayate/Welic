@@ -109,10 +109,10 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public virtual ICollection<EBookMap> EbookTeacher { get; set; }
         public virtual ICollection<EBookMap> EBookClass { get; set; }
         public virtual ICollection<FavoriteLiveMap> FavoriteUserLive { get; set; }
-        [ForeignKey("EmpresaId")]
-        public  virtual EmpresaMap Empresa { get; set; }
-        [DefaultValue(3)]
-        public int? EmpresaId { get; set; }
+        //[ForeignKey("EmpresaId")]
+        //public  virtual EmpresaMap Empresa { get; set; }
+        //[DefaultValue(3)]
+        //public int? EmpresaId { get; set; }
         public virtual ICollection<PermissionMap> Permission { get; set; }
         public virtual ICollection<DepartamentoMap> Departamentos { get; set; }
         public virtual ICollection<SolicitacoesVagasMap> SolicitacoesVagasCadastro { get; set; }

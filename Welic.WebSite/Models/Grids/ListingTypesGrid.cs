@@ -2,7 +2,7 @@
 using GridMvc;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 
-namespace Welic.WebSite.Models.Grids
+namespace WebApi.Models.Grids
 {
     public class ListingTypesGrid : Grid<ListingType>
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading;
@@ -10,18 +9,16 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using i18n;
+using Infra.Context;
+using Infra.Migrations;
 using Registrators;
 using Unity;
-using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.DataContext;
-using Welic.Infra.Context;
-using Welic.Infra.Migrations;
-using Welic.WebSite.Binders;
-using Welic.WebSite.Themes;
-using Welic.WebSite.Utilities;
+using WebApi.Binders;
+using WebApi.Themes;
 
 
-namespace Welic.WebSite
+namespace WebApi
 {
     public class MvcApplication : HttpApplication
     {
@@ -64,52 +61,54 @@ namespace Welic.WebSite
             // ensure database is installed            
             if (!ConnectionStringHelper.IsDatabaseInstalled())
             {
-                HttpContextBase context = new HttpContextWrapper(HttpContext.Current);
-                RouteData rd = RouteTable.Routes.GetRouteData(context);
+                //TODO REvisar
+                //HttpContextBase context = new HttpContextWrapper(HttpContext.Current);
+                //RouteData rd = RouteTable.Routes.GetRouteData(context);
 
-                //http://stackoverflow.com/questions/16819585/get-absolute-url-path-of-an-action-from-within-global-asax
-                // Check if the current controller is Install
-                if (rd != null)
-                {
-                    string controllerName = rd.Values.ContainsKey("controller") ? rd.GetRequiredString("controller") : string.Empty;
-                    string actionName = rd.Values.ContainsKey("action") ? rd.GetRequiredString("action") : string.Empty;
+                ////http://stackoverflow.com/questions/16819585/get-absolute-url-path-of-an-action-from-within-global-asax
+                //// Check if the current controller is Install
+                //if (rd != null)
+                //{
+                //    string controllerName = rd.Values.ContainsKey("controller") ? rd.GetRequiredString("controller") : string.Empty;
+                //    string actionName = rd.Values.ContainsKey("action") ? rd.GetRequiredString("action") : string.Empty;
 
-                    // check if it's bundles or content or set language
-                    if (!(controllerName.Equals("bundles", StringComparison.InvariantCultureIgnoreCase) ||
-                        controllerName.Equals("content", StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        if (!controllerName.Equals("install", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            Response.RedirectToRoute("Install");
-                        }
-                    }
-                }
+                //    // check if it's bundles or content or set language
+                //    if (!(controllerName.Equals("bundles", StringComparison.InvariantCultureIgnoreCase) ||
+                //        controllerName.Equals("content", StringComparison.InvariantCultureIgnoreCase)))
+                //    {
+                //        if (!controllerName.Equals("install", StringComparison.InvariantCultureIgnoreCase))
+                //        {
+                //            Response.RedirectToRoute("Install");
+                //        }
+                //    }
+                //}
             }
 
+            //TODO: Revisar
             // ensure database is installed            
-            if (!ConnectionStringHelper.IsDatabaseInstalled())
-            {
-                HttpContextBase context = new HttpContextWrapper(HttpContext.Current);
-                RouteData rd = RouteTable.Routes.GetRouteData(context);
+            //if (!ConnectionStringHelper.IsDatabaseInstalled())
+            //{
+            //    HttpContextBase context = new HttpContextWrapper(HttpContext.Current);
+            //    RouteData rd = RouteTable.Routes.GetRouteData(context);
 
-                //http://stackoverflow.com/questions/16819585/get-absolute-url-path-of-an-action-from-within-global-asax
-                // Check if the current controller is Install
-                if (rd != null)
-                {
-                    string controllerName = rd.Values.ContainsKey("controller") ? rd.GetRequiredString("controller") : string.Empty;
-                    string actionName = rd.Values.ContainsKey("action") ? rd.GetRequiredString("action") : string.Empty;
+            //    //http://stackoverflow.com/questions/16819585/get-absolute-url-path-of-an-action-from-within-global-asax
+            //    // Check if the current controller is Install
+            //    if (rd != null)
+            //    {
+            //        string controllerName = rd.Values.ContainsKey("controller") ? rd.GetRequiredString("controller") : string.Empty;
+            //        string actionName = rd.Values.ContainsKey("action") ? rd.GetRequiredString("action") : string.Empty;
 
-                    // check if it's bundles or content or set language
-                    if (!(controllerName.Equals("bundles", StringComparison.InvariantCultureIgnoreCase) ||
-                        controllerName.Equals("content", StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        if (!controllerName.Equals("install", StringComparison.InvariantCultureIgnoreCase))
-                        {
-                            Response.RedirectToRoute("Install");
-                        }
-                    }
-                }
-            }
+            //        // check if it's bundles or content or set language
+            //        if (!(controllerName.Equals("bundles", StringComparison.InvariantCultureIgnoreCase) ||
+            //            controllerName.Equals("content", StringComparison.InvariantCultureIgnoreCase)))
+            //        {
+            //            if (!controllerName.Equals("install", StringComparison.InvariantCultureIgnoreCase))
+            //            {
+            //                Response.RedirectToRoute("Install");
+            //            }
+            //        }
+            //    }
+            //}
 
             if (ConnectionStringHelper.IsDatabaseInstalled())
             {
@@ -129,15 +128,15 @@ namespace Welic.WebSite
                     Thread.CurrentThread.CurrentUICulture = culture;
                 }
 
-                // Check if language from the url is enabled, if not, redirect to the default language
-                if (!LanguageHelper.AvailableLanguges.Languages.Any(x => x.Culture == language && x.Enabled))
-                {
-                    var returnUrl = LocalizedApplication.Current.UrlLocalizerForApp.SetLangTagInUrlPath(
-                        Request.RequestContext.HttpContext, Request.Url.PathAndQuery, UriKind.RelativeOrAbsolute,
-                        string.IsNullOrEmpty(LanguageHelper.DefaultCulture) ? null : LanguageHelper.DefaultCulture).ToString();
+                //// Check if language from the url is enabled, if not, redirect to the default language
+                //if (!LanguageHelper.AvailableLanguges.Languages.Any(x => x.Culture == language && x.Enabled))
+                //{
+                //    var returnUrl = LocalizedApplication.Current.UrlLocalizerForApp.SetLangTagInUrlPath(
+                //        Request.RequestContext.HttpContext, Request.Url.PathAndQuery, UriKind.RelativeOrAbsolute,
+                //        string.IsNullOrEmpty(LanguageHelper.DefaultCulture) ? null : LanguageHelper.DefaultCulture).ToString();
 
-                    Response.Redirect(returnUrl);
-                }
+                //    Response.Redirect(returnUrl);
+                //}
             }
         }
         protected void Application_Error(object sender, EventArgs e)

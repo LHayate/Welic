@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Welic.Dominio.Models.Users.Enums;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class GroupUserDto
     {

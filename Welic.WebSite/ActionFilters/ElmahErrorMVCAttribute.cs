@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Welic.WebSite.ActionFilters
+namespace WebApi.ActionFilters
 {
     public class ElmahErrorMVCAttribute : IExceptionFilter
     {

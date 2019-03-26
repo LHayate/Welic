@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Users.Mapeamentos;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     class MappingAspNetUserLogin : EntityTypeConfiguration<AspNetUserLogin>
     {

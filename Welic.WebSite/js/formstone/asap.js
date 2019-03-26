@@ -81,7 +81,7 @@
 	 * @name load
 	 * @description Loads new page
 	 * @param opts [url] <''> "URL to load"
-	 * @example $.asap("load", "http://website.com/page/");
+	 * @example $.asap("load", "http://WebApi.com/page/");
 	 */
 
 	/**

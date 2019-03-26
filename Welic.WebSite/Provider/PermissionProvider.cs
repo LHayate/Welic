@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using Welic.Dominio.Models.Users.Servicos;
 
-namespace Welic.WebSite.Provider
+namespace WebApi.Provider
 {
     public class PermissionProvider :  RoleProvider
     {

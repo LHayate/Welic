@@ -8,7 +8,7 @@ using Welic.Dominio.Models.ConfigApp.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.ConfigApp
+namespace Services.ConfigApp
 {
     public class ServiceConfigApp: Service<ConfigAppMap>, IConfigAppService
     {

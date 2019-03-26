@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Registrators.HookServices;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     public class HookController : Controller
     {

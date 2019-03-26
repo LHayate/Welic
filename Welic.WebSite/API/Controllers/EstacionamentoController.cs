@@ -7,7 +7,7 @@ using Welic.Dominio.Models.Estacionamento.Map;
 using Welic.Dominio.Models.Estacionamento.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/estacionamento")]

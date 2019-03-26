@@ -10,7 +10,7 @@ using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.MarketPlace
+namespace Services.MarketPlace
 {
     public class SettingDictionaryService : Service<SettingDictionary>, ISettingDictionaryService
     {

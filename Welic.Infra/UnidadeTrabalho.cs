@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio;
-using Welic.Infra.Context;
+using Infra.Context;
 
-namespace Welic.Infra
+namespace Infra
 {
     public class UnidadeTrabalho : IUnidadeTrabalho
     {

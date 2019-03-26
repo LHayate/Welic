@@ -9,7 +9,7 @@ using Welic.Dominio.Models.City.Map;
 using Welic.Dominio.Models.City.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/City")]

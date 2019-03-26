@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Servicos.MarketPlace;
+using Services.MarketPlace;
 using Unity;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;

@@ -13,19 +13,17 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PagedList;
 using Registrators;
-using Servicos.MarketPlace;
-using Unity;
 using Welic.Dominio.Core.Web;
 using Welic.Dominio.Enumerables;
 using Welic.Dominio.Models.Marketplaces.Entityes;
 using Welic.Dominio.Models.Marketplaces.Services;
-using Welic.Dominio.Patterns.Pattern.Ef6;
 using Welic.Dominio.Patterns.Repository.Pattern.Infrastructure;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
-using Welic.WebSite.Models;
-using Welic.WebSite.Utilities;
+using Welic.Service.MarketPlace;
+using WebApi.Models;
+using WebApi.Utilities;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     [Authorize]
     public class ManageController : BaseController
@@ -144,16 +142,16 @@ namespace Welic.WebSite.Controllers
 
             return RedirectToAction("Dashboard");
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+            //var userId = User.Identity.GetUserId();
+            //var model = new IndexViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+            //    Logins = await UserManager.GetLoginsAsync(userId),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            //};
+            //return View(model);
         }
 
         //

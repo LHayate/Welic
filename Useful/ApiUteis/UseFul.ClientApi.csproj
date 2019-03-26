@@ -105,13 +105,13 @@
     <Folder Include="Comandos\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Welic.Dominio\Welic.Dominio.csproj">
+    <ProjectReference Include="..\..\Welic.Dominio\Dominio.csproj">
       <Project>{434b42f2-13d5-4fb9-a973-c6d8342a8784}</Project>
-      <Name>Welic.Dominio</Name>
+      <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Welic.Infra\Welic.Infra.csproj">
+    <ProjectReference Include="..\..\Welic.Infra\Infra.csproj">
       <Project>{f0003da5-1307-44d9-a6cc-69f2cdbc1fc3}</Project>
-      <Name>Welic.Infra</Name>
+      <Name>Infra</Name>
     </ProjectReference>
     <ProjectReference Include="..\Classes\Uteis\UseFul.Uteis.csproj">
       <Project>{c7bcbaf6-f33b-4bc5-aff6-5d7279502b9e}</Project>

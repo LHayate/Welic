@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace Welic.WebSite.Helpers
+namespace WebApi.Helpers
 {
     public static class CultureHelper
     {

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Welic.WebSite.Controllers
+namespace WebApi.Controllers
 {
     public class ErrorController : BaseController
     {

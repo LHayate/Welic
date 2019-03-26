@@ -19,10 +19,10 @@ using Welic.Dominio.Models.Segurança.Map;
 using Welic.Dominio.Models.Uploads.Maps;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Pattern.Ef6;
-using Welic.Infra.Mapeamentos;
-using Welic.Infra.Migrations;
+using Infra.Mapeamentos;
+using Infra.Migrations;
 
-namespace Welic.Infra.Context
+namespace Infra.Context
 {
     public partial class AuthContext : DataContext
     {
@@ -44,8 +44,8 @@ namespace Welic.Infra.Context
 
        
         public AuthContext()
-            //: base("WelicDbContext")
-            : base("WelicDbContext")
+            //: base("ConnectionDbContext")
+            : base("ConnectionDesenv")
         {
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, ConfigurationInstall<AuthContext>>());
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
@@ -107,7 +107,7 @@ namespace Welic.Infra.Context
         public DbSet<VeiculosMap> Veiculos { get; set; }
         public DbSet<SolicitacoesEstacionamentoMap> SolicitacoesEstacionamento { get; set; }
         public DbSet<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
-        public DbSet<ContratosMap> Contratos { get; set; }
+        //public DbSet<ContratosMap> Contratos { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

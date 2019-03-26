@@ -40,7 +40,7 @@
                                 <div class="panel-body p-t-10 p-b-10">
                                     <div class="col-md-2">
                                         <a href="@Url.Action("Listing", "Listing", new { id = Model.ListingID })">
-                                            <img class="thumb-lg img-circle" src="@Welic.WebSite.Utilities.ImageHelper.GetListingImagePath(Model.Listing.DefaultPictureID)" />
+                                            <img class="thumb-lg img-circle" src="@WebApi.Utilities.ImageHelper.GetListingImagePath(Model.Listing.DefaultPictureID)" />
                                         </a>
                                     </div>
 
@@ -70,7 +70,7 @@
                             <div class="panel-body p-t-10 p-b-10">
                                 <div class="media">
                                     <a href="@Url.Action("Profile", "Listing", new { id = User.Identity.GetUserId() })" class="pull-left">
-                                        <img class="pull-left media-object img-circle thumb-sm" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
+                                        <img class="pull-left media-object img-circle thumb-sm" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
                                     </a>
                                     <div class="media-body">
                                         <form action="@Url.Action("Message", "Manage")" method="post" role="form">
@@ -92,7 +92,7 @@
                                                 <td class="col-md-2">
                                                     <div class="media">
                                                         <a href="@Url.Action("Profile", "Listing", new { id = message.AspNetUser.Id })" cla class="pull-left">
-                                                            <img class="pull-left media-object img-circle thumb-sm" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(message.AspNetUser.Id)" />
+                                                            <img class="pull-left media-object img-circle thumb-sm" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(message.AspNetUser.Id)" />
                                                         </a>
                                                         <small class="text-muted">@message.AspNetUser.FullName</small>
                                                     </div> <!-- media -->

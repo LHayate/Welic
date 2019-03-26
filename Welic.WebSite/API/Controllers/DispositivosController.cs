@@ -5,7 +5,7 @@ using System.Web.Http;
 using Welic.Dominio.Models.Acesso.Dtos;
 using Welic.Dominio.Models.Acesso.Servicos;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Dispositivo")]

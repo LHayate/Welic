@@ -1,4 +1,4 @@
-﻿@model Welic.WebSite.Models.ListingItemModel
+﻿@model WebApi.Models.ListingItemModel
 @using Microsoft.AspNet.Identity
 @using Registrators
 
@@ -16,7 +16,7 @@
                     <div class="panel-body">
                         <div class="media">
                             <a href="@Url.Action("Profile", "Listing", new { id = User.Identity.GetUserId() })" class="pull-left">
-                                <img class="pull-left media-object img-circle thumb-sm m-t-10" src="@Welic.WebSite.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
+                                <img class="pull-left media-object img-circle thumb-sm m-t-10" src="@WebApi.Utilities.ImageHelper.GetUserProfileImagePath(User.Identity.GetUserId())" />
                             </a>
                             <div class="media-body">
                                 <form action="@Url.Action("ReviewListing", "Listing")" method="post" role="form">

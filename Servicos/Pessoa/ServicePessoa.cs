@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Client.Service;
 using Welic.Dominio.Patterns.Repository.Pattern.Repositories;
 using Welic.Dominio.Patterns.Service.Pattern;
 
-namespace Servicos.Pessoa
+namespace Services.Pessoa
 {
     public class ServicePessoa: Service<PessoaMap>, IServicePessoa
     {

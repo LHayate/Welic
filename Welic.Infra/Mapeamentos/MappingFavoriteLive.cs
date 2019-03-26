@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Lives.Maps;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     public class MappingFavoriteLive : EntityTypeConfiguration<FavoriteLiveMap>
     {

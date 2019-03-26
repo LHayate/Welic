@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Welic.Dominio.Models.Segurança.Map;
 
-namespace Welic.Infra.Mapeamentos
+namespace Infra.Mapeamentos
 {
     class MappingPermission : EntityTypeConfiguration<PermissionMap>
     {

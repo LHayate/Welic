@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Welic.Dominio.Models.Marketplaces.Entityes;
-using Welic.Infra.Context;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class ListingUpdateModel
     {

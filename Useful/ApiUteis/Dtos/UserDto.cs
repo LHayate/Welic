@@ -70,51 +70,51 @@ namespace UseFul.ClientApi.Dtos
                 
                         
         }
-        public void AssociarPermissaoUsuario(string idUsuario, List<int> listIdDepartamento)
-        {
-            var deletedeDepartamentos =
-                AdaptadorGeneric<Welic.Dominio.Models.Departamento.Map.DepartamentoUsuario, DepartamentoUsuario>(
-                        Context.DepartamentoUsuario.Select(x => x).Where(p => p.UserId == idUsuario).ToList());
-            foreach (var deletePermissaoDepartamentos in from item in deletedeDepartamentos
-                let idUsuarioLet = item.UserId
-                let idDepartamento =
-                    item.IdDepartamento
-                select
-                    Context.DepartamentoUsuario
-                        .First(
-                            p =>
-                                p
-                                    .IdDepartamento ==
-                                idDepartamento &&
-                                p.UserId ==
-                                idUsuarioLet))
-            {
-                Context.DepartamentoUsuario.Remove(deletePermissaoDepartamentos);
-            }
-            foreach (int departamentoChecado in listIdDepartamento)
-            {
-                Context.DepartamentoUsuario.Add(
-                    AdaptadorGeneric<DepartamentoUsuario, Welic.Dominio.Models.Departamento.Map.DepartamentoUsuario
-                        >(new DepartamentoUsuario()
-                        {
-                            IdDepartamento = departamentoChecado,
-                            UserId = idUsuario
-                        }));
-            }
-            Context.SaveChanges();
-        }
+        //public void AssociarPermissaoUsuario(string idUsuario, List<int> listIdDepartamento)
+        //{
+        //    var deletedeDepartamentos =
+        //        AdaptadorGeneric<Welic.Dominio.Models.Departamento.Map.DepartamentoUsuario, DepartamentoUsuario>(
+        //                Context.DepartamentoUsuario.Select(x => x).Where(p => p.UserId == idUsuario).ToList());
+        //    foreach (var deletePermissaoDepartamentos in from item in deletedeDepartamentos
+        //        let idUsuarioLet = item.UserId
+        //        let idDepartamento =
+        //            item.IdDepartamento
+        //        select
+        //            Context.DepartamentoUsuario
+        //                .First(
+        //                    p =>
+        //                        p
+        //                            .IdDepartamento ==
+        //                        idDepartamento &&
+        //                        p.UserId ==
+        //                        idUsuarioLet))
+        //    {
+        //        Context.DepartamentoUsuario.Remove(deletePermissaoDepartamentos);
+        //    }
+        //    foreach (int departamentoChecado in listIdDepartamento)
+        //    {
+        //        Context.DepartamentoUsuario.Add(
+        //            AdaptadorGeneric<DepartamentoUsuario, Welic.Dominio.Models.Departamento.Map.DepartamentoUsuario
+        //                >(new DepartamentoUsuario()
+        //                {
+        //                    IdDepartamento = departamentoChecado,
+        //                    UserId = idUsuario
+        //                }));
+        //    }
+        //    Context.SaveChanges();
+        //}
         public bool ExisteUsuarioPorUsuario(string usuario)
         {
             return Context.User.Any(u => u.Id == usuario);
         }
 
-        public List<int> ConsultaPermissoesIdDepartamentoIdPorUsuario(string idUsuario)
-        {
-            return Context.DepartamentoUsuario.Where(
-                    p => p.UserId == idUsuario)
-                .Select(
-                    p => p.IdDepartamento).ToList();
-        }
+        //public List<int> ConsultaPermissoesIdDepartamentoIdPorUsuario(string idUsuario)
+        //{
+        //    return Context.DepartamentoUsuario.Where(
+        //            p => p.UserId == idUsuario)
+        //        .Select(
+        //            p => p.IdDepartamento).ToList();
+        //}
 
         public UserDto ConsultaUsuarioPorIdUsuario(string idUsuario, bool somenteAtivos = true)
         {
@@ -188,30 +188,30 @@ namespace UseFul.ClientApi.Dtos
         }
 
        
-        public List<int> ConsultaPermissoesUsuario(string idUsuario)
-        {
-            List<int> permissoes =
-                Context.DepartamentoUsuario.Where(
-                        p => p.UserId == idUsuario)
-                    .Select(p => p.IdDepartamento)
-                    .ToList();
-            if (permissoes.Count == 0)
-            {
-                throw CustomErro.Erro("Usuário não possui permissões para outros departamentos.");
-            }
-            return permissoes;
-        }
+        //public List<int> ConsultaPermissoesUsuario(string idUsuario)
+        //{
+        //    List<int> permissoes =
+        //        Context.DepartamentoUsuario.Where(
+        //                p => p.UserId == idUsuario)
+        //            .Select(p => p.IdDepartamento)
+        //            .ToList();
+        //    if (permissoes.Count == 0)
+        //    {
+        //        throw CustomErro.Erro("Usuário não possui permissões para outros departamentos.");
+        //    }
+        //    return permissoes;
+        //}
 
-        public bool VerificaUsuarioPossuiDepartamentoPermissao(string idUsuario, string descricaoDepartamento)
-        {
-            int idDepartamento = DepartamentoDto.Instance.BuscaCodigoDepartamentoPorDescricao(descricaoDepartamento);
-            var usuarioPermissao = Context.DepartamentoUsuario
-                .FirstOrDefault(
-                    p =>
-                        p.IdDepartamento == idDepartamento &&
-                        p.UserId == idUsuario);
-            return usuarioPermissao != null;
-        }
+        //public bool VerificaUsuarioPossuiDepartamentoPermissao(string idUsuario, string descricaoDepartamento)
+        //{
+        //    int idDepartamento = DepartamentoDto.Instance.BuscaCodigoDepartamentoPorDescricao(descricaoDepartamento);
+        //    var usuarioPermissao = Context.DepartamentoUsuario
+        //        .FirstOrDefault(
+        //            p =>
+        //                p.IdDepartamento == idDepartamento &&
+        //                p.UserId == idUsuario);
+        //    return usuarioPermissao != null;
+        //}
 
         public void AdicionarUsuario(UserDto usuario)
         {

@@ -1,6 +1,6 @@
 ﻿using Welic.Dominio.Enumerables;
 
-namespace Welic.WebSite.Models
+namespace WebApi.Models
 {
     public class SortViewModel
     {

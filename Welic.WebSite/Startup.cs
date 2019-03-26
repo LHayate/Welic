@@ -2,22 +2,18 @@
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
-using System.Linq;
 using System.Web.Http;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security.Cookies;
 using Registrators;
 using Unity;
-using Unity.AspNet.Mvc;
+using WebApi;
 using Welic.Dominio.Eventos;
 using Welic.Dominio.Models.Users.Servicos;
-using Welic.Infra.Context;
-using Welic.WebSite.Helpers;
-using Welic.WebSite.Provider;
+using WebApi.Helpers;
+using WebApi.Provider;
 
-[assembly: OwinStartup(typeof(Welic.WebSite.Startup))]
-namespace Welic.WebSite
+//[assembly: OwinStartup(typeof(Startup))]
+[assembly: OwinStartupAttribute("StartupConfig", typeof(Startup))]
+namespace WebApi
 {
     public partial class Startup
     {

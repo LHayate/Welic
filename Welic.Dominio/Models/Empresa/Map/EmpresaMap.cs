@@ -29,6 +29,6 @@ namespace Welic.Dominio.Models.Empresa.Map
         public string Cidade { get; set; }
         public string Uf { get; set; }
         public bool? ConfigMailEnableSsl { get; set; }
-        public ICollection<AspNetUser> Usuarios { get; set; }
+        //public ICollection<AspNetUser> Usuarios { get; set; }
     }
 }

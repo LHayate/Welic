@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Welic.Dominio.Models.Menu.Command;
-using Welic.Dominio.Models.Menu.Dtos;
 using Welic.Dominio.Models.Menu.Mapeamentos;
 using Welic.Dominio.Models.Menu.Servicos;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
-using Welic.Repositorios;
 
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Menu")]

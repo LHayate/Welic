@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using GridMvc;
 
-namespace Welic.WebSite.Models.Grids
+namespace WebApi.Models.Grids
 {
     public class ListingModelGrid : Grid<ListingItemModel>
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Postal;
 using Registrators;
 
-namespace Welic.WebSite.Utilities
+namespace WebApi.Utilities
 {
     public static class EmailHelper
     {

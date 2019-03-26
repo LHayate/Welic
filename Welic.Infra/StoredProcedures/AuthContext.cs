@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Welic.Infra.StoredProcedures;
+using Infra.StoredProcedures;
 
-namespace Welic.Infra.Context
+namespace Infra.Context
 {
     public partial class AuthContext : IStoredProcedures
     {

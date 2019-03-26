@@ -7,10 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Welic.Infra.Context;
-using Welic.WebSite.Models;
+using WebApi.Models;
 
-namespace Welic.WebSite.Extensions
+namespace WebApi.Extensions
 {
     public class TreeItem<T>
     {

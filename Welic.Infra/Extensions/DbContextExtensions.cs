@@ -5,7 +5,7 @@ using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
-namespace Welic.Infra.Extensions
+namespace Infra.Extensions
 {
     public static class DbContextExtensions
     {

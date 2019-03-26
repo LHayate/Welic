@@ -67,7 +67,7 @@ For example: `4.0/basic`, `4.0.1/standard`. This convention was changed in CKEdi
 
 The editor comes with a few sample pages that can be used to verify if the installation succeeded. Take a look at the `samples` directory.
 
-To test your installation, just call the following page for your website:
+To test your installation, just call the following page for your WebApi:
 
 	http://<your site>/<CKEditor installation path>/samples/index.html
 

@@ -3,7 +3,7 @@
 ## About ##
 
 Flot is a Javascript plotting library for jQuery.  
-Read more at the website: <http://www.flotcharts.org/>
+Read more at the WebApi: <http://www.flotcharts.org/>
 
 Take a look at the the examples in examples/index.html; they should give a good
 impression of what Flot can do, and the source code of the examples is probably

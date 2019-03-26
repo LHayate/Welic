@@ -8,7 +8,7 @@ using Welic.Dominio.Models.Schedule.Maps;
 using Welic.Dominio.Models.Schedule.Services;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/schedule")]

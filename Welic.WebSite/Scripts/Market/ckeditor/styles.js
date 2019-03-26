@@ -11,7 +11,7 @@
 //
 // If you don't have plugins that depend on this file, you can simply ignore it.
 // Otherwise it is strongly recommended to customize this file to match your
-// website requirements and design properly.
+// WebApi requirements and design properly.
 
 CKEDITOR.stylesSet.add( 'default', [
 	/* Block Styles */

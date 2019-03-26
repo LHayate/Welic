@@ -18,10 +18,10 @@ using Welic.Dominio.Models.Users.Servicos;
 using Welic.Dominio.Models.Users.Mapeamentos;
 using Welic.Dominio.Patterns.Repository.Pattern.UnitOfWork;
 using Welic.Dominio.ViewModels;
-using Welic.WebSite.Models;
-using Welic.WebSite.Utilities;
+using WebApi.Models;
+using WebApi.Utilities;
 
-namespace Welic.WebSite.API.Controllers
+namespace WebApi.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/User")]
@@ -188,7 +188,8 @@ namespace Welic.WebSite.API.Controllers
                     DateOfBirth = model.DateOfBirth,
                     Gender = model.Gender,
                     Identity = model.Identity,
-                    Profession = model.Profession,                    
+                    Profession = model.Profession,    
+                    PasswordHash = model.Password
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -290,7 +291,12 @@ namespace Welic.WebSite.API.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return await CriaResposta(HttpStatusCode.InternalServerError, e.Message);
+                if (e.InnerException != null)
+                    return await CriaResposta(HttpStatusCode.InternalServerError,
+                        e.Message + " InnerException:" + e.InnerException.InnerException.Message);
+                else
+                    return await CriaResposta(HttpStatusCode.InternalServerError,
+                        e.Message);
             }
             
 
