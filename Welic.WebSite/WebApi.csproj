@@ -1412,8 +1412,6 @@
     <Content Include="Scripts\js\custom-script.js" />
     <Content Include="Scripts\js\custom-script.min.js" />
     <Content Include="Scripts\js\materialize-plugin\animation.js" />
-    <Content Include="Scripts\js\materialize-plugin\bin\materialize.js" />
-    <Content Include="Scripts\js\materialize-plugin\bin\materialize.min.js" />
     <Content Include="Scripts\js\materialize-plugin\buttons.js" />
     <Content Include="Scripts\js\materialize-plugin\cards.js" />
     <Content Include="Scripts\js\materialize-plugin\carousel.js" />
@@ -2810,6 +2808,7 @@
   <ItemGroup>
     <Folder Include="Arquivos\Uploads\" />
     <Folder Include="Imagens\images\Profile\" />
+    <Folder Include="Scripts\js\materialize-plugin\bin\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Profile\" />
   </ItemGroup>
