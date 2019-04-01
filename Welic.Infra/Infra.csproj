@@ -94,6 +94,7 @@
     <Compile Include="Mapeamentos\MappingEstacionamento.cs" />
     <Compile Include="Mapeamentos\MappingEstacionamentoVagas.cs" />
     <Compile Include="Mapeamentos\MappingFavoriteLive.cs" />
+    <Compile Include="Mapeamentos\MappingFazendas.cs" />
     <Compile Include="Mapeamentos\MappingListingReview.cs" />
     <Compile Include="Mapeamentos\MappingListingStat.cs" />
     <Compile Include="Mapeamentos\MappingListingType.cs" />

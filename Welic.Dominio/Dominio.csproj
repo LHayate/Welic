@@ -96,25 +96,25 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Abstractions.dll</HintPath>
+      <HintPath>..\packages\Unity.Abstractions.3.3.1\lib\net46\Unity.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Configuration, Version=5.2.5.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Configuration.dll</HintPath>
+      <HintPath>..\packages\Unity.Configuration.5.2.5\lib\net46\Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Container, Version=5.8.13.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Container.dll</HintPath>
+      <HintPath>..\packages\Unity.Container.5.8.13\lib\net46\Unity.Container.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception, Version=5.5.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Interception.dll</HintPath>
+      <HintPath>..\packages\Unity.Interception.5.5.5\lib\net46\Unity.Interception.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Interception.Configuration, Version=5.1.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.Interception.Configuration.dll</HintPath>
+      <HintPath>..\packages\Unity.Interception.Configuration.5.1.7\lib\net46\Unity.Interception.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RegistrationByConvention, Version=2.1.9.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
+      <HintPath>..\packages\Unity.RegistrationByConvention.2.1.9\lib\net46\Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ServiceLocation, Version=2.1.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.8.13\lib\net46\Unity.ServiceLocation.dll</HintPath>
+      <HintPath>..\packages\Unity.ServiceLocation.2.1.2\lib\net46\Unity.ServiceLocation.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -171,6 +171,8 @@
     <Compile Include="Models\Estacionamento\Services\IServiceVeiculo.cs" />
     <Compile Include="Models\Favorites\Maps\FavoriteMaps.cs" />
     <Compile Include="Models\Favorites\Services\IFavoriteService.cs" />
+    <Compile Include="Models\Fazenda\Map\FazendasMap.cs" />
+    <Compile Include="Models\Fazenda\Service\IServiceFazenda.cs" />
     <Compile Include="Models\Home\Dtos\StartDto.cs" />
     <Compile Include="Models\Home\Entidade\Start.cs" />
     <Compile Include="Models\Home\Map\StartMap.cs" />

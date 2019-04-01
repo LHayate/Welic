@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Dominio.Models.Fazenda.Map;
 using Welic.Dominio.Models.Acesso.Mapeamentos;
 using Welic.Dominio.Models.City.Map;
 using Welic.Dominio.Models.Client.Map;
@@ -108,6 +109,7 @@ namespace Infra.Context
         public DbSet<SolicitacoesEstacionamentoMap> SolicitacoesEstacionamento { get; set; }
         public DbSet<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
         //public DbSet<ContratosMap> Contratos { get; set; }
+        public DbSet<FazendasMap> Fazendas { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -165,6 +167,7 @@ namespace Infra.Context
             modelBuilder.Configurations.Add(new MappingVeiculos());
             modelBuilder.Configurations.Add(new MappingSolicitacoesEstacionamento());
             modelBuilder.Configurations.Add(new MappingSolicitacoesVagasLiberadas());
+            modelBuilder.Configurations.Add(new MappingFazendas());
 
 
         }

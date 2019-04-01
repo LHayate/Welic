@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Dominio.Models.Fazenda.Map;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Welic.Dominio.Models.ConfigApp.Map;
 using Welic.Dominio.Models.Curso.Map;
@@ -120,7 +121,7 @@ namespace Welic.Dominio.Models.Users.Mapeamentos
         public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadas { get; set; }
         public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadasCancel { get; set; }
         public ICollection<SolicitacoesVagasLiberadasMap> SolicitacoesVagasLiberadasSuspensao { get; set; }
-
+        public ICollection<FazendasMap> FazendasMap { get; set; }
 
         public bool ValidarNomeUsuarioESenha(string nomeUsuario, string password)
         {

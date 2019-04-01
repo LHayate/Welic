@@ -313,6 +313,7 @@
     <Compile Include="API\Controllers\EmpresaController.cs" />
     <Compile Include="API\Controllers\EstacionamentoController.cs" />
     <Compile Include="API\Controllers\FavoritesController.cs" />
+    <Compile Include="API\Controllers\FazendaController.cs" />
     <Compile Include="API\Controllers\LiveController.cs" />
     <Compile Include="API\Controllers\MarketplaceController.cs" />
     <Compile Include="API\Controllers\MenuController.cs" />

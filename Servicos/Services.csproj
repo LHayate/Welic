@@ -63,6 +63,7 @@
     <Compile Include="Estacionamento\ServiceSolicitacoesVagas.cs" />
     <Compile Include="Estacionamento\ServiceSolicitacoesVagasLiberadas.cs" />
     <Compile Include="Estacionamento\ServiceVeiculo.cs" />
+    <Compile Include="Fazenda\ServiceFazenda.cs" />
     <Compile Include="Live\ServiceFavoriteLive.cs" />
     <Compile Include="Live\ServiceLive.cs" />
     <Compile Include="MarketPlace\CategoryListingTypeService.cs" />

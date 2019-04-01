@@ -127,7 +127,8 @@ namespace Infra.Mapeamentos
             //this.Property(t => t.Disabled).HasColumnName("Disabled");
             //this.Property(t => t.Rating).HasColumnName("Rating");
 
+
         }
-        
+
     }
 }

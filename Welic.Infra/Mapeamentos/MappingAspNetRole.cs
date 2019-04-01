@@ -38,6 +38,9 @@ namespace Infra.Mapeamentos
                     m.MapLeftKey("RoleId");
                     m.MapRightKey("UserId");
                 });
+
+
+
         }
     }
 }
